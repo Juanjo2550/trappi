@@ -24,14 +24,20 @@ public class MainProveedores {
         });
 
         //Probando Listar Proveedores
-        List<Proveedor> prov = db.getProveedores();
-        prov.forEach(pr -> {
+        ListaProveedores prov = new ListaProveedores();
+        
+        //List<Proveedor> prov = db.getProveedores();
+        prov.getListaDeProveedores().forEach(pr -> {
             System.out.println(pr.getRuc() + ";" + pr.getRazonSocial() + ";" + pr.getDireccion());
         });
 
         /*//Probando agregar Producto
         Proveedor prove = new Proveedor("1772561566001", "Super Aqui", "Quito, Ecuador");
         Producto pro = new Producto("Doritos, picantes", 3.75, prove);
-        db.setProductos(pro);*/
+        db.setProductos(pro);
+        
+        //Probando agregar Proveedores
+        Proveedor prove = new Proveedor("1772561566001", "Super Aqui", "Quito, Ecuador");
+        db.setProveedores(prove);*/
     }
 }

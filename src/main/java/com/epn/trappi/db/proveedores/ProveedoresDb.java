@@ -16,10 +16,6 @@ public class ProveedoresDb {
     String provFilename = "src/main/java/com/epn/trappi/db/proveedores/proveedores.csv";
     Archivo p = new Archivo();
 
-    public ProveedoresDb() {
-
-    }
-
     public List<Producto> getProductos() {
         try {
             seleccionarProductos();
@@ -98,12 +94,15 @@ public class ProveedoresDb {
     }
 
     private Proveedor reformarProveedor(String[] str) {
-        Proveedor nprov = new Proveedor(str[0], str[1], str[2]);
+        Proveedor nprov = new Proveedor(str[0], str[1], str[2], str[3]);
         return nprov;
     }
 
     private Proveedor obtenerProveedor(String ruc) {
-        Proveedor prov = new Proveedor(ruc, ruc, ruc);
+
+        //Proveedor prov = new Proveedor(ruc, ruc, ruc, ruc);
+        int indice = this.proveedores.indexOf(ruc);
+        Proveedor prov = this.proveedores.get(indice);
         return prov;
     }
 
