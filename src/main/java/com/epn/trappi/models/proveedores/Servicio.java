@@ -8,6 +8,10 @@ package com.epn.trappi.models.proveedores;
 
 public class Servicio extends Bien {
 
+    public Servicio(String nombre, double precio, Proveedor proveeedor) {
+        super(nombre, precio, proveeedor);
+    }
+
     @Override
     public void registrar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
