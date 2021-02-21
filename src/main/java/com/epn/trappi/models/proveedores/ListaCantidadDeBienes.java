@@ -18,20 +18,23 @@ public class ListaCantidadDeBienes {
     public ArrayList<CantidadDeBien> getListaCantidadDeBienes() {
         return listaCantidadDeBienes;
     }
-    
-    public ArrayList getlistaCantidadDeBienes(){
-        return listaCantidadDeBienes;
+
+    public void setListaCantidadDeBienes(ArrayList<CantidadDeBien> listaCantidadDeBienes) {
+        this.listaCantidadDeBienes = listaCantidadDeBienes;
     }
     
+    
+    //recibimos el bien y la cantidad y se hace el objeto CantidadDeBien
     public void añadirBien(Bien bien,int cantidadDelNuevoBien) {
         CantidadDeBien nuevoBien = new CantidadDeBien(bien, cantidadDelNuevoBien);
         listaCantidadDeBienes.add(nuevoBien);
     }
 
     //tomo un objeto cantidad de bien, es decir debe ingresarse 
-    public void quitarBien(CantidadDeBien bienARetirar) {
-        int indiceARetirar=listaCantidadDeBienes.indexOf(bienARetirar);
-        listaCantidadDeBienes.remove(indiceARetirar);
+    public void quitarBien(Bien bienARetirar) {
+        for (CantidadDeBien cantidadBien : listaCantidadDeBienes)
+            if(cantidadBien.getBien()==bienARetirar)
+                listaCantidadDeBienes.remove(cantidadBien);
     }
     
     

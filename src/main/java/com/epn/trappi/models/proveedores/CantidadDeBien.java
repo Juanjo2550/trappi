@@ -13,6 +13,12 @@ public class CantidadDeBien {
     private Bien bien;
     private int cantidad;
 
+    
+    public CantidadDeBien(Bien bien, int cantidad) {
+        this.bien = bien;
+        this.cantidad = cantidad;
+    }
+    
     public Bien getBien() {
         return bien;
     }
@@ -21,11 +27,16 @@ public class CantidadDeBien {
         return cantidad;
     }
 
-    
-    public CantidadDeBien(Bien bien, int cantidad) {
-        this.bien = bien;
+    public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+
+    public void aumentarCantidad(int cantidadAAumentar){
+        cantidad-=cantidadAAumentar;
+    }
     
+    public void disminuirCantidad(int cantidadADisminuir){
+        cantidad-=cantidadADisminuir;
+    }
     
 }
