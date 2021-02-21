@@ -11,18 +11,18 @@ package com.epn.trappi.models.proveedores;
  */
 public class Inventario {
 
-    private ListaCantidadDeBienes listaDeBienes;
+    private ListaCantidadDeBienes listaCantidadDeBienes;
 
-    public ListaCantidadDeBienes getListaDeBienes() {
-        return listaDeBienes;
+    public ListaCantidadDeBienes getListaCantidadDeBienes() {
+        return listaCantidadDeBienes;
     }
 
-    public void setListaDeBienes(ListaCantidadDeBienes listaDeBienes) {
-        this.listaDeBienes = listaDeBienes;
+    public void setListaCantidadDeBienes(ListaCantidadDeBienes listaDeBienes) {
+        this.listaCantidadDeBienes = listaDeBienes;
     }
 
     public Inventario(ListaCantidadDeBienes listaDeBienes) {
-        this.listaDeBienes = listaDeBienes;
+        this.listaCantidadDeBienes = listaDeBienes;
     }
 
     public boolean verificarStock() {

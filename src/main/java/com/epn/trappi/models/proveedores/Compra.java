@@ -11,5 +11,5 @@ package com.epn.trappi.models.proveedores;
  */
 public class Compra {
     Inventario inventario;
-    ListaCantidadDeBienes listaDeBienes;
+    ListaCantidadDeBienes listaCantidadDeBienes;
 }
