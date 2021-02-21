@@ -13,6 +13,14 @@ public class CantidadDeBien {
     private Bien bien;
     private int cantidad;
 
+    public Bien getBien() {
+        return bien;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
     
     public CantidadDeBien(Bien bien, int cantidad) {
         this.bien = bien;
