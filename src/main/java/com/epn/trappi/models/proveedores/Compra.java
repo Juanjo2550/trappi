@@ -9,11 +9,7 @@ package com.epn.trappi.models.proveedores;
  *
  * @author franc
  */
-public class Analizador {
-
+public class Compra {
     Inventario inventario;
-
-    private void analizarStock() {
-
-    }
+    ListaCantidadDeBienes listaDeBienes;
 }
