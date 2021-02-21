@@ -15,11 +15,24 @@ public class ListaCantidadDeBienes {
 
     private ArrayList<CantidadDeBien> listaCantidadDeBienes = new ArrayList<CantidadDeBien>();
 
-    public void añadirBien() {
-
+    public ArrayList<CantidadDeBien> getListaCantidadDeBienes() {
+        return listaCantidadDeBienes;
+    }
+    
+    public ArrayList getlistaCantidadDeBienes(){
+        return listaCantidadDeBienes;
+    }
+    
+    public void añadirBien(Bien bien,int cantidadDelNuevoBien) {
+        CantidadDeBien nuevoBien = new CantidadDeBien(bien, cantidadDelNuevoBien);
+        listaCantidadDeBienes.add(nuevoBien);
     }
 
-    public void quitarBien(Bien bien) {
-
+    //tomo un objeto cantidad de bien, es decir debe ingresarse 
+    public void quitarBien(CantidadDeBien bienARetirar) {
+        int indiceARetirar=listaCantidadDeBienes.indexOf(bienARetirar);
+        listaCantidadDeBienes.remove(indiceARetirar);
     }
+    
+    
 }
