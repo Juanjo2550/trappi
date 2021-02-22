@@ -1,4 +1,4 @@
-package com.epn.trappi.models.logistico;
+package com.epn.trappi.models.rrhh;
 
 /**
  *
