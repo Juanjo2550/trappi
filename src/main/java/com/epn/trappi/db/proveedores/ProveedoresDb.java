@@ -80,8 +80,8 @@ public class ProveedoresDb {
         return compras;
     }
 
-    public void setCompras(List<Compra> compras) {
-        this.compras = compras;
+    public void setCompras(String nombreProducto, String Proveedor, int cantidad, String estado, double montoTotal) {
+        agregarCompra(transformarCompra(nombreProducto, Proveedor, cantidad, estado, montoTotal));
     }
 
     private void seleccionarProductos() {
@@ -147,9 +147,10 @@ public class ProveedoresDb {
         return s.getNombre() + ";" + s.getPrecio() + ";" + s.getProveeedor().getRuc();
     }
 
-    /*private String transformarCompra(Proveedor p) {
-        return p.getRuc() + ";" + p.getRazonSocial() + ";" + p.getDireccion();
-    }*/
+    private String transformarCompra(String nombreProducto, String Proveedor, int cantidad, String estado, double montoTotal) {
+        return nombreProducto + ";" + Proveedor + ";" + cantidad + ";" + estado+";"+montoTotal;
+    }
+
     private Producto reformarProducto(String[] str) {
         Producto np = new Producto(str[0], Double.parseDouble(str[1]), obtenerProveedor(str[2]));
         return np;
@@ -204,11 +205,11 @@ public class ProveedoresDb {
         }
     }
 
-    /*private void agregarCompra(String nuevaCompra) {
+    private void agregarCompra(String nuevaCompra) {
         try {
             p.writeArchivoCSV(compFilename, nuevaCompra);
         } catch (IOException ex) {
             Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }*/
+    }
 }
