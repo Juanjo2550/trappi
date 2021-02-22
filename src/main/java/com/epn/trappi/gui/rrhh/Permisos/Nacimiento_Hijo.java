@@ -21,6 +21,7 @@ public class Nacimiento_Hijo implements Permiso {
        public int numeroDias;
     public Fecha fechaFin;
        public String tipo;
+       
     @Override
     public void Calcular_Afectacion_Sueldo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -28,7 +29,7 @@ public class Nacimiento_Hijo implements Permiso {
 
     @Override
     public void Calcular_Numero_Dias_Permiso() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
 }
