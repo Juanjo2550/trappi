@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class Inventario {
 
     private ListaCantidadDeBienes listaCantidadDeBienes;
+    private AnalizadorDeInventario analizador=new AnalizadorDeInventario();
     
     public Inventario(ListaCantidadDeBienes listaDeBienes) {
         this.listaCantidadDeBienes = listaDeBienes;
@@ -49,6 +50,7 @@ public class Inventario {
                 listaCantidadDeBienes.setListaCantidadDeBienes(aux);
             }
         }
+        analizador.analizarStock();
     }
     
     //el parámetro es la cantidad de productos a disminuir a la cantidad existente y el bien
@@ -62,5 +64,6 @@ public class Inventario {
                 listaCantidadDeBienes.setListaCantidadDeBienes(aux);
             }
         }
+        analizador.analizarStock();
     }
 }
