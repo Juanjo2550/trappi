@@ -10,9 +10,9 @@ package com.epn.trappi.models.proveedores;
  * @author franc
  */
 abstract public class Bien {
-    private String nombre;
-    private double precio;
-    private Proveedor proveeedor;
+    protected String nombre;
+    protected double precio;
+    protected Proveedor proveeedor;
 
     public String getNombre() {
         return nombre;
