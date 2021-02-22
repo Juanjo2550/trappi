@@ -16,17 +16,20 @@ public class AnalizadorDeInventario {
 
     Inventario inventario;
 
-    private void analizarStock() {
+    /*private void analizarStock() {
         boolean proveedor;
-        ListaDeCompras solicitud = new ListaDeCompras();
-        for (int i=0;i<inventario.getListaCantidadDeBienes().getlistaCantidadDeBienes.size ;i++) {
-            if(inventario.getListaCantidadDeBienes().getlistaCantidadDeBienes.get(i).cantidad<3){
+        SolicitudDeCompras solicitud = new SolicitudDeCompras();
+        for (int i=0;i<inventario.getListaCantidadDeBienes().getListaCantidadDeBienes().size() ;i++) {
+            if(inventario.getListaCantidadDeBienes().getlistaCantidadDeBienes().get(i).getCantidad() <3){
                 proveedor=false;
                 for (int j=0;j<solicitud.compras.size();j++) {
-                    if(inventario.getListaCantidadDeBienes().getlistaCantidadDeBienes.get(i).bien.proveedor.equals(
-                       solicitud.compras.get(j).listaCantidadDeBienes.))
+                    if(inventario.getListaCantidadDeBienes().getlistaCantidadDeBienes().get(i).getBien.proveedor.equals(
+                       solicitud.getCompras.get(j).getListaCantidadDeBienes.get(0).getBien.proveedor){
+                        solicitud.getCompras.get(j).getListaCantidadDeBienes.añadirBien(
+                        );
+                    }
                 }
             }
         } 
-    }
+    }*/
 }

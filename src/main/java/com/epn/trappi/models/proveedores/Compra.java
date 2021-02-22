@@ -11,9 +11,9 @@ package com.epn.trappi.models.proveedores;
  * @author franc
  */
 abstract public class Compra {
-    private Inventario inventario;
-    private ListaCantidadDeBienes listaBienesAComprar;
-    private String estado;
+    protected Inventario inventario;
+    protected ListaCantidadDeBienes listaBienesAComprar;
+    protected String estado;
 
     public Compra(Inventario inventario, ListaCantidadDeBienes listaBienesAComprar, String estado) {
         this.inventario = inventario;
