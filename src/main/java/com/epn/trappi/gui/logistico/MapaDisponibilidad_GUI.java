@@ -37,14 +37,15 @@ public class MapaDisponibilidad_GUI extends javax.swing.JFrame {
         }
         //modelo.addRow(filas);
         
-        //Mostrar Nombres de conductores 
-        DefaultTableModel modelo1 = new DefaultTableModel();
-        tbConductores.setModel(modelo1);
-        modelo1.addColumn("Nombre");
-        for(Conductor a: conductores.listaConductores){
-            filas[0]=a.getNombre();
-            modelo1.addRow(filas);
-        }
+        //Mostrar Nombres de conductores------------------------ 
+            DefaultTableModel modelo1 = new DefaultTableModel();
+            tbConductores.setModel(modelo1);
+            modelo1.addColumn("Nombre");
+            for(Conductor a: conductores.listaConductores){
+                filas[0]=a.getNombre();
+                modelo1.addRow(filas);
+            }
+        //Fin de mostrar Nombres de Conductores----------------- 
     }
 
     /**
