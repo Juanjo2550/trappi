@@ -7,5 +7,9 @@ public class ListaConductores {
 
     public ListaConductores() {
         this.listaConductores = new ArrayList<Conductor>();
+        listaConductores.add(new Conductor("Kevin",true));
+        listaConductores.add(new Conductor("Jose",true));
+        listaConductores.add(new Conductor("Carlos",true));
+        listaConductores.add(new Conductor("Andres",true));
     }
 }

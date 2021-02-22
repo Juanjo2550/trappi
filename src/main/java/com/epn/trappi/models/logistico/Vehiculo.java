@@ -10,14 +10,25 @@ package com.epn.trappi.models.logistico;
  * @author Erick
  */
 public class Vehiculo {
-    private Estado estado;
+    private Habilitado estado;
     private Posicion posicion;
-    private String matricula;
+    private int matricula;
     private String tipo;
     private double kilometraje;
     private FichaTecnica fichaTecnica;
     
-    public void actualizarEstado(Estado estado){
+    public Vehiculo(Habilitado estado, int matricula){
+        estado.setEstado(true);
+        this.matricula = matricula;
+    }
+
+    public int getMatricula() {
+        return matricula;
+    }
+    
+    
+    
+    public void actualizarEstado(Habilitado estado){
         this.estado = estado;
     }
     public void actualizarFicha(){

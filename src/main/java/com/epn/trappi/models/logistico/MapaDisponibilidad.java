@@ -14,7 +14,12 @@ import java.util.ArrayList;
 public class MapaDisponibilidad {
     private ArrayList<Vehiculo> vehiculos;
     private ArrayList<Conductor> conductores;
-    
+
+    public MapaDisponibilidad(ArrayList<Vehiculo> vehiculos, ArrayList<Conductor> conductores) {
+        this.vehiculos = vehiculos;
+        this.conductores = conductores;
+    }
+      
     public void actualizarMapaDisponibilidad(){
         
     }
