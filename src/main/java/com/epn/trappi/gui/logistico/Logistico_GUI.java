@@ -150,6 +150,8 @@ public class Logistico_GUI extends javax.swing.JFrame {
             }
         });
 
+        jPanel4.setBackground(new java.awt.Color(51, 51, 51));
+
         jButton6.setText("Ficha Técnica");
 
         jButton7.setText("Lista de Vehículos");
@@ -174,6 +176,8 @@ public class Logistico_GUI extends javax.swing.JFrame {
                 .addComponent(jButton7)
                 .addContainerGap(37, Short.MAX_VALUE))
         );
+
+        jPanel5.setBackground(new java.awt.Color(51, 51, 51));
 
         jButton8.setText("Lista de Mantenimientos");
 
