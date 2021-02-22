@@ -17,13 +17,13 @@ public class Vehiculo {
     private double kilometraje;
     private FichaTecnica fichaTecnica;
     
-    public void actualizarEstado(){
-        
+    public void actualizarEstado(Estado estado){
+        this.estado = estado;
     }
     public void actualizarFicha(){
         
     }
-    public void notificarPosicion(){
-        
+    public Posicion notificarPosicion(){
+        return this.posicion;
     }
 }

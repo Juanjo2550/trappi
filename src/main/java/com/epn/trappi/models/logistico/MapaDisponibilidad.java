@@ -5,13 +5,15 @@
  */
 package com.epn.trappi.models.logistico;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Erick
  */
 public class MapaDisponibilidad {
-    private ListaVehiculos vehiculos;
-    private ListaConductores conductores;
+    private ArrayList<Vehiculo> vehiculos;
+    private ArrayList<Conductor> conductores;
     
     public void actualizarMapaDisponibilidad(){
         

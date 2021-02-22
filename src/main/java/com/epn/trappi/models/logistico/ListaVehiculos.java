@@ -5,17 +5,19 @@
  */
 package com.epn.trappi.models.logistico;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Erick
  */
 public class ListaVehiculos {
-    private ListaVehiculos vehiculos;
+    private ArrayList<Vehiculo> vehiculos;
     
-    public void agregarVehiculo(){
-        
+    public void agregarVehiculo(Vehiculo vehiculo){
+        vehiculos.add(vehiculo);
     }
-    public void eliminarVehiculo(){
+    public void eliminarVehiculo(Vehiculo vehiculo){
         
     }
 }
