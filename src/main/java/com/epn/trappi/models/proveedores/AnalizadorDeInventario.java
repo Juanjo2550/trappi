@@ -18,7 +18,7 @@ public class AnalizadorDeInventario {
 
     private void analizarStock() {
         boolean proveedor;
-        SolicitudDeCompras solicitud = new SolicitudDeCompras();
+        ListaDeCompras solicitud = new ListaDeCompras();
         for (int i=0;i<inventario.getListaCantidadDeBienes().getlistaCantidadDeBienes.size ;i++) {
             if(inventario.getListaCantidadDeBienes().getlistaCantidadDeBienes.get(i).cantidad<3){
                 proveedor=false;
