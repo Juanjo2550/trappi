@@ -150,8 +150,12 @@ public class Logistico_GUI extends javax.swing.JFrame {
             }
         });
 
+        jPanel4.setBackground(new java.awt.Color(51, 51, 51));
+
+        jButton6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton6.setText("Ficha Técnica");
 
+        jButton7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton7.setText("Lista de Vehículos");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -168,13 +172,15 @@ public class Logistico_GUI extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jButton6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton7)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
+        jPanel5.setBackground(new java.awt.Color(51, 51, 51));
+
+        jButton8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton8.setText("Lista de Mantenimientos");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -189,9 +195,8 @@ public class Logistico_GUI extends javax.swing.JFrame {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jButton8)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addGap(0, 77, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -232,9 +237,9 @@ public class Logistico_GUI extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
