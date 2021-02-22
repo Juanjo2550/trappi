@@ -25,16 +25,26 @@ public class MapaDisponibilidad_GUI extends javax.swing.JFrame {
         DefaultTableModel modelo = new DefaultTableModel();
         tbVehiculos.setModel(modelo);
         modelo.addColumn("Matricula");
-        Object[] filas = new Object[4];
+        Object[] filas = new Object[1];
         /*for(int i =0; i<vehiculos.vehiculos.size();i++){
             filas[i]=vehiculos.vehiculos.get(i).getMatricula();
         }*/
-        int i=0;
+        //int i=0;
         for(Vehiculo a: vehiculos.vehiculos){
-            filas[i]=a.getMatricula();
-            i++;
+            filas[0]=a.getMatricula();
+            //i++;
+            modelo.addRow(filas);
         }
-        modelo.addRow(filas);
+        //modelo.addRow(filas);
+        
+        //Mostrar Nombres de conductores 
+        DefaultTableModel modelo1 = new DefaultTableModel();
+        tbConductores.setModel(modelo1);
+        modelo1.addColumn("Nombre");
+        for(Conductor a: conductores.listaConductores){
+            filas[0]=a.getNombre();
+            modelo1.addRow(filas);
+        }
     }
 
     /**
