@@ -10,5 +10,6 @@ package com.epn.trappi.gui.rrhh.Permisos;
  * @author stali
  */
 public interface Permiso {
-    
+    public void Calcular_Afectacion_Sueldo();
+    public void Calcular_Numero_Dias_Permiso();
 }

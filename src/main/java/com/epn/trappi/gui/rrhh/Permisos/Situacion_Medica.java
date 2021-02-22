@@ -5,10 +5,28 @@
  */
 package com.epn.trappi.gui.rrhh.Permisos;
 
+import com.epn.trappi.models.rrhh.Fecha;
+
 /**
  *
  * @author stali
  */
-public class Situacion_Medica {
+public class Situacion_Medica implements Permiso {
+
+    public Situacion_Medica() {
+    }
+ public double proporcional;
+    public  Fecha fechaInicio;
+       public int numeroDias;
+     public Fecha fechaFin;
+    @Override
+    public void Calcular_Afectacion_Sueldo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void Calcular_Numero_Dias_Permiso() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
