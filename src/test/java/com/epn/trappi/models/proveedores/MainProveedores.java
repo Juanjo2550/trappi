@@ -25,10 +25,14 @@ public class MainProveedores {
 
         //Probando Listar Proveedores
         ListaProveedores prov = new ListaProveedores();
-        
-        //List<Proveedor> prov = db.getProveedores();
         prov.getListaDeProveedores().forEach(pr -> {
-            System.out.println(pr.getRuc() + ";" + pr.getRazonSocial() + ";" + pr.getDireccion());
+            System.out.println(pr.getRuc() + ";" + pr.getRazonSocial() + ";" + pr.getDireccion() + ";" + pr.getCuenta());
+        });
+
+        //Probando Listar Servicios
+        List<Servicio> serv = db.getServicios();
+        serv.forEach(pr -> {
+            System.out.println(pr.getNombre() + ";" + pr.getPrecio() + ";" + pr.getProveeedor().getRuc());
         });
 
         /*//Probando agregar Producto

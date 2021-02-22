@@ -17,7 +17,7 @@ public class Producto extends Bien {
 
     @Override
     public void registrar() {
-        Producto prod = new Producto(super.getNombre(), super.getPrecio(), super.getProveeedor());
+        Producto prod = new Producto(nombre, precio, proveeedor);
         db.setProductos(prod);
     }
 
