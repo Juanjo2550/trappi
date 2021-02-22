@@ -16,20 +16,21 @@ public class AnalizadorDeInventario {
 
     Inventario inventario;
 
-    /*private void analizarStock() {
+    private void analizarStock() {
         boolean proveedor;
-        SolicitudDeCompras solicitud = new SolicitudDeCompras();
+        ListaDeCompras solicitud = new ListaDeCompras(new ArrayList<Compra>());
         for (int i=0;i<inventario.getListaCantidadDeBienes().getListaCantidadDeBienes().size() ;i++) {
-            if(inventario.getListaCantidadDeBienes().getlistaCantidadDeBienes().get(i).getCantidad() <3){
+            if(inventario.getListaCantidadDeBienes().getListaCantidadDeBienes().get(i).getCantidad() <3){
                 proveedor=false;
-                for (int j=0;j<solicitud.compras.size();j++) {
-                    if(inventario.getListaCantidadDeBienes().getlistaCantidadDeBienes().get(i).getBien.proveedor.equals(
-                       solicitud.getCompras.get(j).getListaCantidadDeBienes.get(0).getBien.proveedor){
-                        solicitud.getCompras.get(j).getListaCantidadDeBienes.añadirBien(
-                        );
+                for (int j=0;j<solicitud.getCompras().size() ;j++) {
+                    if(inventario.getListaCantidadDeBienes().getListaCantidadDeBienes().get(i).getBien().getProveeedor().equals(
+                       solicitud.getCompras().get(j).getListaCantidadDeBienes().getListaCantidadDeBienes().get(j).getBien().getProveeedor())){
+                        solicitud.getCompras().get(j).getListaCantidadDeBienes().añadirBien(
+                                inventario.getListaCantidadDeBienes().getListaCantidadDeBienes().get(i).getBien(), 10);
+                        
                     }
                 }
             }
         } 
-    }*/
+    }
 }
