@@ -16,10 +16,10 @@ public class ListaVehiculos {
     
     public ListaVehiculos(){
         vehiculos = new ArrayList<Vehiculo>();
-        vehiculos.add(new Vehiculo(new Habilitado(),1234));
-        vehiculos.add(new Vehiculo(new Habilitado(),1235));
-        vehiculos.add(new Vehiculo(new Habilitado(),1236));
-        vehiculos.add(new Vehiculo(new Habilitado(),1237));
+       for (int i=0; i<5; i++){
+           Vehiculo v= new Vehiculo(123+i);
+           vehiculos.add(v);
+       } 
     }
 
     public ArrayList<Vehiculo> getVehiculos() {

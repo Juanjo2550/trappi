@@ -11,10 +11,20 @@ import com.epn.trappi.gui.logistico.*;
  *
  * @author cristhian.munoz
  */
-public interface Estado {
- 
-    //public String estadoVehiculo; 
+public abstract class Estado {
     
-    public void verificarVehiculo();
+    Vehiculo vehiculo;
+ 
+
+    Estado(Vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
+    }
+    
+    //public abstract void verificarVehiculo();
+    
+    public abstract String enEntrega();
+    public abstract String enMantenimiento();
+    public abstract String enAccidente();
+    public abstract String enPicoPlaca();
     
 }

@@ -6,33 +6,47 @@
 package com.epn.trappi.models.logistico;
 
 import com.epn.trappi.gui.logistico.*;
+import com.epn.trappi.models.logistico.Vehiculo;
 
 /**
  *
  * @author cristhian.munoz
  */
-public class Inhabilitado implements Estado{
+public class Inhabilitado extends Estado{
 
     private boolean estado; 
     private static String nomestado ="InHabilitado";  
+
+    public Inhabilitado(Vehiculo vehiculo) {
+        super( vehiculo);
+    }
+
+    @Override
+    public String enEntrega() {
+        return null;
+    }
     
     @Override
-    public void  verificarVehiculo() {
-        
-        
+    public String enMantenimiento() {
+        vehiculo.actualizarEstado(new EnEspera(vehiculo));
+        return "Se mando a Mantenimeinto";
     }
 
-    public boolean isEstado() {
-        return estado;
+    @Override
+    public String enAccidente() {
+        return null;
     }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    @Override
+    public String enPicoPlaca() {
+        vehiculo.actualizarEstado(new Habilitado(vehiculo));
+        return "No hay restricción Vehicular";
     }
-
-    public static String getNomestado() {
-        return nomestado;
-    }
+    
+    
+    
+    
+    
     
     
 }
