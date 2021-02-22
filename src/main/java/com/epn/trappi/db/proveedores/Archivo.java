@@ -22,10 +22,11 @@ public class Archivo {
 
     public static final String SEPARATOR = ";";
     public static final String QUOTE = "\"";
-    static List<String[]> contenido = new ArrayList<String[]>();
 
     public List<String[]> leerArchivoCSV(String name) throws IOException {
+        List<String[]> contenido = new ArrayList<String[]>();
         BufferedReader br = null;
+
         try {
 
             br = new BufferedReader(new FileReader(name));
@@ -49,6 +50,7 @@ public class Archivo {
                 br.close();
             }
         }
+
         return null;
     }
 

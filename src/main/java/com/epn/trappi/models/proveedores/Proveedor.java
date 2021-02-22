@@ -44,7 +44,7 @@ public class Proveedor {
     }
 
     public String getCuenta() {
-        return direccion;
+        return cuenta;
     }
 
     public void setCuenta(String cuenta) {

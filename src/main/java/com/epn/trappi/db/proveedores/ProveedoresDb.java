@@ -1,7 +1,6 @@
 package com.epn.trappi.db.proveedores;
 
-import com.epn.trappi.models.proveedores.Producto;
-import com.epn.trappi.models.proveedores.Proveedor;
+import com.epn.trappi.models.proveedores.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +11,12 @@ public class ProveedoresDb {
 
     private List<Producto> productos;
     private List<Proveedor> proveedores;
+    private List<Servicio> servicios;
+    private List<Compra> compras;
     String prodFilename = "src/main/java/com/epn/trappi/db/proveedores/productos.csv";
     String provFilename = "src/main/java/com/epn/trappi/db/proveedores/proveedores.csv";
+    String servFilename = "src/main/java/com/epn/trappi/db/proveedores/servicios.csv";
+    String compFilename = "src/main/java/com/epn/trappi/db/proveedores/compras.csv";
     Archivo p = new Archivo();
 
     public List<Producto> getProductos() {
@@ -27,12 +30,12 @@ public class ProveedoresDb {
 
     public void setProductos(List<Producto> productos) {
         productos.forEach(npr -> {
-            agregarProductos(transformarProducto(npr));
+            agregarProducto(transformarProducto(npr));
         });
     }
 
     public void setProductos(Producto producto) {
-        agregarProductos(transformarProducto(producto));
+        agregarProducto(transformarProducto(producto));
     }
 
     public List<Proveedor> getProveedores() {
@@ -54,6 +57,33 @@ public class ProveedoresDb {
         agregarProveedor(transformarProveedor(proveedor));
     }
 
+    public List<Servicio> getServicios() {
+        try {
+            seleccionarServicios();
+        } catch (Exception ex) {
+            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return servicios;
+    }
+
+    public void setServicios(List<Servicio> servicios) {
+        servicios.forEach(ser -> {
+            agregarServicio(transformarServicio(ser));
+        });
+    }
+
+    public void setServicios(Servicio servicio) {
+        agregarServicio(transformarServicio(servicio));
+    }
+
+    public List<Compra> getCompras() {
+        return compras;
+    }
+
+    public void setCompras(List<Compra> compras) {
+        this.compras = compras;
+    }
+
     private void seleccionarProductos() {
         try {
             List<String[]> prod = p.leerArchivoCSV(this.prodFilename);
@@ -69,9 +99,9 @@ public class ProveedoresDb {
 
     private void seleccionarProveedores() {
         try {
-            List<String[]> prod = p.leerArchivoCSV(this.provFilename);
+            List<String[]> prov = p.leerArchivoCSV(this.provFilename);
             List<Proveedor> pp = new ArrayList<Proveedor>();
-            prod.forEach(pr -> {
+            prov.forEach(pr -> {
                 pp.add(reformarProveedor(pr));
             });
             this.proveedores = pp;
@@ -80,14 +110,46 @@ public class ProveedoresDb {
         }
     }
 
+    private void seleccionarServicios() {
+        try {
+            List<String[]> serv = p.leerArchivoCSV(this.servFilename);
+            List<Servicio> ss = new ArrayList<Servicio>();
+            serv.forEach(pr -> {
+                ss.add(reformarServicio(pr));
+            });
+            this.servicios = ss;
+        } catch (IOException ex) {
+            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /*private void seleccionarCompras() {
+        try {
+            List<String[]> prov = p.leerArchivoCSV(this.provFilename);
+            List<Compra> cc = new ArrayList<Compra>();
+            prov.forEach(pr -> {
+                cc.add(reformarCompra(pr));
+            });
+            this.compras = cc;
+        } catch (IOException ex) {
+            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }*/
     private String transformarProducto(Producto p) {
         return p.getNombre() + ";" + p.getPrecio() + ";" + p.getProveeedor().getRuc();
     }
 
     private String transformarProveedor(Proveedor p) {
-        return p.getRuc() + ";" + p.getRazonSocial() + ";" + p.getDireccion();
+        return p.getRuc() + ";" + p.getRazonSocial() + ";" + p.getDireccion() + ";" + p.getCuenta();
     }
 
+    private String transformarServicio(Servicio s) {
+        return s.getNombre() + ";" + s.getPrecio() + ";" + s.getProveeedor().getRuc();
+    }
+
+    /*private String transformarCompra(Proveedor p) {
+        return p.getRuc() + ";" + p.getRazonSocial() + ";" + p.getDireccion();
+    }*/
     private Producto reformarProducto(String[] str) {
         Producto np = new Producto(str[0], Double.parseDouble(str[1]), obtenerProveedor(str[2]));
         return np;
@@ -98,15 +160,27 @@ public class ProveedoresDb {
         return nprov;
     }
 
-    private Proveedor obtenerProveedor(String ruc) {
-
-        //Proveedor prov = new Proveedor(ruc, ruc, ruc, ruc);
-        int indice = this.proveedores.indexOf(ruc);
-        Proveedor prov = this.proveedores.get(indice);
-        return prov;
+    private Servicio reformarServicio(String[] str) {
+        Servicio nprov = new Servicio(str[0], Double.parseDouble(str[1]), obtenerProveedor(str[2]));
+        return nprov;
     }
 
-    private void agregarProductos(String nuevoProducto) {
+    /*private Compra reformarCompra(String[] str) {
+        return null;
+    }*/
+    private Proveedor obtenerProveedor(String ruc) {
+        seleccionarProveedores();
+        Proveedor resultado = null;
+        for (Proveedor proveedor : this.proveedores) {
+            if (proveedor.getRuc().equals(ruc)) {
+                resultado = proveedor;
+                break;
+            }
+        }
+        return resultado;
+    }
+
+    private void agregarProducto(String nuevoProducto) {
         try {
             p.writeArchivoCSV(prodFilename, nuevoProducto);
         } catch (IOException ex) {
@@ -121,4 +195,20 @@ public class ProveedoresDb {
             Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    private void agregarServicio(String nuevoServicio) {
+        try {
+            p.writeArchivoCSV(servFilename, nuevoServicio);
+        } catch (IOException ex) {
+            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /*private void agregarCompra(String nuevaCompra) {
+        try {
+            p.writeArchivoCSV(compFilename, nuevaCompra);
+        } catch (IOException ex) {
+            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }*/
 }
