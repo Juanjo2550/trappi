@@ -18,7 +18,7 @@ public class Empleado {
     private String departamento;
     private String cuentaBancaria;
     private String banco; //TODO decidir si se saca a banco como una clase
-    private ListaRegistrosAsistencias asistencias; //TODO: Verificar si esto está bien
+    private ListaRegistrosAsistencias asistencias; //TODO: Preguntar si esto está bien
     private Sueldo sueldo; //TODO implementar la clase Sueldo
     private String estado;
     private char sexo;

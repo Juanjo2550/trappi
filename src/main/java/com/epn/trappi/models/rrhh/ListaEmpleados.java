@@ -27,9 +27,9 @@ public class ListaEmpleados {
         return temp;
     }
     
-    public Empleado agregar (Empleado nuevoRol) {
-        this.lista.put(nuevoRol.getCedula(), nuevoRol);
-        return nuevoRol;
+    public Empleado agregar (Empleado nuevoEmpleado) {
+        this.lista.put(nuevoEmpleado.getCedula(), nuevoEmpleado);
+        return nuevoEmpleado;
     }
     
     public Empleado buscarUno(int numero) {

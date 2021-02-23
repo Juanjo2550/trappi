@@ -15,7 +15,7 @@ public class Administrativo extends Empleado {
     public Administrativo() {
     }
 
-    public Administrativo(String nombres, String apellidos, Integer cedula, String cargo, String departamento, String cuentaBancaria, String banco, RegistroAsistencia asistencia, Sueldo sueldo, String estado) {
-        super(nombres, apellidos, cedula, cargo, departamento, cuentaBancaria, banco, asistencia, sueldo, estado);
-    }      
+    public Administrativo(String nombres, String apellidos, Integer cedula, String cargo, String departamento, String cuentaBancaria, String banco, ListaRegistrosAsistencias asistencias, Sueldo sueldo, String estado, char sexo) {
+        super(nombres, apellidos, cedula, cargo, departamento, cuentaBancaria, banco, asistencias, sueldo, estado, sexo);
+    }
 }
