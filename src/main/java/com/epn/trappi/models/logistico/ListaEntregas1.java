@@ -2,6 +2,9 @@ package com.epn.trappi.models.logistico;
 
 import java.util.ArrayList;
 
+
+
+
 import com.epn.trappi.models.logistico.Entrega;
 
 public class ListaEntregas1 {

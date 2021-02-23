@@ -19,6 +19,9 @@ public class MapaDisponibilidad_GUI extends javax.swing.JFrame {
      */
     public MapaDisponibilidad_GUI() {
         initComponents();
+        
+        
+        
         ListaVehiculos vehiculos = new ListaVehiculos();
         ListaConductores conductores = new ListaConductores();
         
