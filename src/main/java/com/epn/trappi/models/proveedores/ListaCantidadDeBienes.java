@@ -1,5 +1,6 @@
 package com.epn.trappi.models.proveedores;
 
+import com.epn.trappi.db.proveedores.ProveedoresDb;
 import java.util.ArrayList;
 
 /*
@@ -13,28 +14,34 @@ import java.util.ArrayList;
  */
 public class ListaCantidadDeBienes {
 
-    private ArrayList<CantidadDeBien> listaCantidadDeBienes = new ArrayList<CantidadDeBien>();
+    private ArrayList<CantidadDeBien> listaCantidadDeBienes;
+    private ProveedoresDb db = new ProveedoresDb();
 
     public ArrayList<CantidadDeBien> getListaCantidadDeBienes() {
         return listaCantidadDeBienes;
     }
 
+    public ArrayList<CantidadDeBien> getListaCantidadDeBienesDb() {
+        return db.getListaCantidadBienes();
+    }
+
     public void setListaCantidadDeBienes(ArrayList<CantidadDeBien> listaCantidadDeBienes) {
         this.listaCantidadDeBienes = listaCantidadDeBienes;
     }
-    
+
     //recibimos el bien y la cantidad y se hace el objeto CantidadDeBien
-    public void añadirBien(Bien bien,int cantidadDelNuevoBien) {
+    public void añadirBien(Bien bien, int cantidadDelNuevoBien) {
         CantidadDeBien nuevoBien = new CantidadDeBien(bien, cantidadDelNuevoBien);
         listaCantidadDeBienes.add(nuevoBien);
     }
 
     //tomo un objeto cantidad de bien, es decir debe ingresarse 
     public void quitarBien(Bien bienARetirar) {
-        for (CantidadDeBien cantidadBien : listaCantidadDeBienes)
-            if(cantidadBien.getBien()==bienARetirar)
+        for (CantidadDeBien cantidadBien : listaCantidadDeBienes) {
+            if (cantidadBien.getBien() == bienARetirar) {
                 listaCantidadDeBienes.remove(cantidadBien);
+            }
+        }
     }
-    
-    
+
 }

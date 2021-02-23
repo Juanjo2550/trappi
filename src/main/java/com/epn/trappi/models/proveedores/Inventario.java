@@ -7,7 +7,6 @@ import java.util.ArrayList;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author franc
@@ -15,10 +14,11 @@ import java.util.ArrayList;
 public class Inventario {
 
     private ListaCantidadDeBienes listaCantidadDeBienes;
-    private AnalizadorDeInventario analizador=new AnalizadorDeInventario();
-    
-    public Inventario(ListaCantidadDeBienes listaDeBienes) {
-        this.listaCantidadDeBienes = listaDeBienes;
+    private AnalizadorDeInventario analizador = new AnalizadorDeInventario();
+
+    public Inventario() {
+        this.listaCantidadDeBienes = new ListaCantidadDeBienes();
+        this.listaCantidadDeBienes.setListaCantidadDeBienes(listaCantidadDeBienes.getListaCantidadDeBienesDb());
     }
 
     public ListaCantidadDeBienes getListaCantidadDeBienes() {
@@ -31,9 +31,9 @@ public class Inventario {
 
     //recibe una cantidad de un producto y verifica que exista esa cantidad o sea igual a la existente
     public boolean verificarStock(int cantidadAVerificar, Bien bienAVerificar) {
-        for (CantidadDeBien cantidadBien : listaCantidadDeBienes.getListaCantidadDeBienes()){
-            if(cantidadBien.getBien()==bienAVerificar){
-               return cantidadBien.getCantidad()<=cantidadAVerificar;
+        for (CantidadDeBien cantidadBien : listaCantidadDeBienes.getListaCantidadDeBienes()) {
+            if (cantidadBien.getBien() == bienAVerificar) {
+                return cantidadBien.getCantidad() <= cantidadAVerificar;
             }
         }
         return false;
@@ -41,8 +41,8 @@ public class Inventario {
 
     //el parámetro es la cantidad de productos nuevos para añadir a la cantidad existente y el bien
     public void aumentarStock(int cantidadDeProductosNuevos, Bien bienAAumentar) {
-        for (CantidadDeBien cantidadBien : listaCantidadDeBienes.getListaCantidadDeBienes()){
-            if(cantidadBien.getBien()==bienAAumentar){
+        for (CantidadDeBien cantidadBien : listaCantidadDeBienes.getListaCantidadDeBienes()) {
+            if (cantidadBien.getBien() == bienAAumentar) {
                 ArrayList<CantidadDeBien> aux = listaCantidadDeBienes.getListaCantidadDeBienes();
                 int indice = aux.indexOf(cantidadBien);
                 cantidadBien.aumentarCantidad(cantidadDeProductosNuevos);
@@ -52,11 +52,11 @@ public class Inventario {
         }
         analizador.analizarStock();
     }
-    
+
     //el parámetro es la cantidad de productos a disminuir a la cantidad existente y el bien
     public void disminuirStock(int cantidadDeProductosRetirados, Bien bienADisminuir) {
-        for (CantidadDeBien cantidadBien : listaCantidadDeBienes.getListaCantidadDeBienes()){
-            if(cantidadBien.getBien()==bienADisminuir){
+        for (CantidadDeBien cantidadBien : listaCantidadDeBienes.getListaCantidadDeBienes()) {
+            if (cantidadBien.getBien() == bienADisminuir) {
                 ArrayList<CantidadDeBien> aux = listaCantidadDeBienes.getListaCantidadDeBienes();
                 int indice = aux.indexOf(cantidadBien);
                 cantidadBien.disminuirCantidad(cantidadDeProductosRetirados);
