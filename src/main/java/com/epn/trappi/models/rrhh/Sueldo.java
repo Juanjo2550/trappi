@@ -14,6 +14,14 @@ public class Sueldo {
     private double valor;
     private double descuentos;
 
+    public double getValor() {
+        return valor;
+    }
+
+    public double getDescuentos() {
+        return descuentos;
+    }
+
     public Sueldo(double valor, double descuentos) {
         this.valor = valor;
         this.descuentos = descuentos;

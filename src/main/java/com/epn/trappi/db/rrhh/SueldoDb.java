@@ -1,0 +1,50 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package com.epn.trappi.db.rrhh;
+
+import com.epn.trappi.models.rrhh.Empleado;
+import com.epn.trappi.models.rrhh.ListaEmpleados;
+import com.epn.trappi.models.rrhh.Sueldo;
+
+import java.sql.*;
+import java.util.concurrent.ThreadLocalRandom;
+
+/**
+ * 
+ * @author Juan Jaramillo <juanjodev02 at juan.jaramillo02@epn.edu.ec>
+ */
+public class SueldoDb {
+    public Sueldo obtenerPorEmpleado (int Cedulaempleado){
+        String sql = "SELECT * FROM sueldo WHERE sueldo.cedulaEmpleado = ?";
+        try {
+            Connection conn = Connect.connect();
+            PreparedStatement pstmt  = conn.prepareStatement(sql);
+            pstmt.setInt(1, Cedulaempleado);
+            ResultSet rs  = pstmt.executeQuery();
+            return new Sueldo(Integer.parseInt(rs.getString("valor")), Integer.parseInt(rs.getString("descuentos")));
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return new Sueldo(0,0);
+    }
+
+    public boolean addOne(Empleado empleado, Sueldo sueldo) {
+        String sql = "INSERT INTO sueldo (cedulaEmpleado, valor, desceuntos ) VALUES(?)";
+
+        try (Connection conn = Connect.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, empleado.getCedula());
+            pstmt.setString(2, sueldo.getValor() + "");
+            pstmt.setString(3, sueldo.getDescuentos() + "");
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+}
