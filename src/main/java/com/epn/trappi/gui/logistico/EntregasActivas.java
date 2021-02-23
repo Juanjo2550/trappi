@@ -4,6 +4,8 @@ import com.epn.trappi.models.logistico.ListaEntregas1;
 import com.epn.trappi.models.logistico.ListaVehiculos;
 import com.epn.trappi.models.logistico.Conductor;
 import com.epn.trappi.models.logistico.Vehiculo;
+import java.awt.Color;
+import java.awt.Font;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,6 +19,10 @@ public class EntregasActivas extends javax.swing.JPanel {
         ListaConductores conductores = new ListaConductores();
         ListaEntregas1 entregas = new ListaEntregas1();      
         DefaultTableModel modelo = new DefaultTableModel();
+        jTEntregasDatos.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12) {
+        });
+        jTEntregasDatos.getTableHeader().setOpaque(false);
+        jTEntregasDatos.getTableHeader().setBackground(Color.BLACK);
         jTEntregasDatos.setModel(modelo);
         modelo.addColumn("ID_Entrega");
         modelo.addColumn("Cliente");
@@ -60,6 +66,9 @@ public class EntregasActivas extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1048, 660));
 
+        jTEntregasDatos.setBackground(new java.awt.Color(230, 181, 31));
+        jTEntregasDatos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jTEntregasDatos.setForeground(new java.awt.Color(255, 255, 255));
         jTEntregasDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -71,6 +80,13 @@ public class EntregasActivas extends javax.swing.JPanel {
                 "ID_Entrega", "Cliente", "Conductor", "Vehiculo", "Destino"
             }
         ));
+        jTEntregasDatos.setFocusable(false);
+        jTEntregasDatos.setGridColor(new java.awt.Color(0, 0, 0));
+        jTEntregasDatos.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        jTEntregasDatos.setRowHeight(25);
+        jTEntregasDatos.setSelectionBackground(new java.awt.Color(0, 0, 0));
+        jTEntregasDatos.setShowVerticalLines(false);
+        jTEntregasDatos.getTableHeader().setReorderingAllowed(false);
         jTEntregasDatos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTEntregasDatosMouseClicked(evt);
@@ -172,7 +188,13 @@ public class EntregasActivas extends javax.swing.JPanel {
         String nombreConductor = (String)jTEntregasDatos.getValueAt(fila,2);
         jTAInformacionConductor.setText("Nombre:\n" + nombreConductor + "\nDirección destino:\n" + destino);
     }//GEN-LAST:event_jTEntregasDatosMouseClicked
-
+    private String mapeoDireccionIdPlace(String direccion){
+        String Id_destino="";
+        return Id_destino;
+    }
+    private void trazarRuta(String origen,String destino){
+        
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
