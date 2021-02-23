@@ -5,7 +5,12 @@
  */
 package com.epn.trappi.models.rrhh;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Locale;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,7 +35,7 @@ public class Fecha {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
-        
+
     }
 
     //Constructor con parametros
@@ -87,6 +92,57 @@ public class Fecha {
                 diaCorrecto = dia >= 1 && dia <= 31;
         }
         return diaCorrecto && mesCorrecto && añoCorrecto;
+    }
+
+    public String compararFechaActual() {
+        Calendar c1 = Calendar.getInstance();
+
+        String dia = null;
+        String mes = null;
+        String año = null;
+        if (c1.get(Calendar.DATE) <= 9) {
+            dia = "0" + Integer.toString(c1.get(Calendar.DATE));
+        } else {
+            dia = Integer.toString(c1.get(Calendar.DATE));
+        }
+
+        if ((c1.get(Calendar.MONTH) + 1) <= 9) {
+            mes = "0" + Integer.toString(c1.get(Calendar.MONTH) + 1);
+        } else {
+            mes = Integer.toString(c1.get(Calendar.MONTH) + 1);
+        }
+
+        año = Integer.toString(c1.get(Calendar.YEAR));
+
+        //SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy/MM/dd");
+        String date = dia + "-" + mes + "-" + año;
+        return date;
+
+    }
+
+    public boolean esValidaFecha(String fechax) throws ParseException {
+        String fechActual = compararFechaActual();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        try {
+            formatoFecha.setLenient(false);
+            formatoFecha.parse(fechax);
+            if (formatoFecha.parse(fechax).equals(formatoFecha.parse(fechActual)) || formatoFecha.parse(fechax).before(formatoFecha.parse(fechActual))) {
+                if (formatoFecha.parse(fechax).after(formatoFecha.parse("2000-01-01"))) {
+                    return true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "El formato es AAAA-MM-DD");
+                    return false;
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Formato de fecha no válido");
+                return false;
+            }
+        } catch (ParseException e) {
+            return false;
+
+        }
+
     }
 
     //Método privado para comprobar si el año es bisiesto
