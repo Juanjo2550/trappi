@@ -7,25 +7,149 @@ package com.epn.trappi.gui.rrhh;
 
 
 import com.epn.trappi.*;
+import com.epn.trappi.db.rrhh.Connect;
+import com.epn.trappi.gui.rrhh.Permisos.Calamidad_Domestica;
+import com.epn.trappi.models.rrhh.Empleado;
+import com.epn.trappi.models.rrhh.Fecha;
+import com.epn.trappi.models.rrhh.ListaEmpleados;
+import com.epn.trappi.models.rrhh.TextPrompt;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author stali
  */
 public class Gestor_Permiso extends javax.swing.JFrame {
-
+Calamidad_Domestica calamidad = new Calamidad_Domestica();
+Fecha fecha = new Fecha();
+    
     /*
      * Creates new form Ejemplo_GUI
      */
+
+    
+
     public Gestor_Permiso() {
-        initComponents();
-       
-        txtnombreEmpleado.setEnabled(false);
-        txtCedula.setEnabled(false);
-        txtfechaFinPermiso.setEnabled(false);
         
-        btnGuardarPermiso.setEnabled(false);
+        initComponents();
+        ListarEmpleado();
+       
+        
+       
+        cmbnombreEmpleado.setEnabled(true);
+        txtCedula.setEnabled(true);
+        txtfechaFinPermiso.setEnabled(true);
+        
+        btnGuardarPermiso.setEnabled(true);
+        TextPrompt buscarProveedor = new TextPrompt("yyyy-MM-dd", txtfechaInicioPermiso);
+    }
+       public void tipoPermiso(){
+        String PerCalamidad = (String) cmbPermiso.getSelectedItem();
+        if("Calamidad Domestica".equals(PerCalamidad)){
+       cmbTipoPermiso.addItem("Seleccione");
+       cmbTipoPermiso.addItem("muerte de padres, hermanos, hijos, cónyuge");
+       cmbTipoPermiso.addItem("muerte de nietos, padres del cónyuge o hermanos de la pareja");
+       cmbTipoPermiso.addItem("enfermedad de hijos o conyuge");
+       cmbTipoPermiso.addItem("enfermedad de padres o hermanos");
+        }
+    
+    }
+           
+ 
+    
+    public void  ListarEmpleado(){
+        String sql = "SELECT nombres FROM empleados";
+       // ListaEmpleados temEmpleados = new ListaEmpleados();
+        try {
+            Connection conn = Connect.connect("juanjo.db");
+            Statement stmt  = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            // loop through the result set
+            cmbnombreEmpleado.addItem("seleccione");
+            while (rs.next()) {
+                String nombre = rs.getString("nombres");
+              cmbnombreEmpleado.addItem(nombre);
+            }
+           
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }   
+    }
+     
+    public void  ObtenerCedula(){
+        
+        String sql = "SELECT cedula FROM empleados where nombres = '"+(String) cmbnombreEmpleado.getSelectedItem()+"'" ;
+        
+       // ListaEmpleados temEmpleados = new ListaEmpleados();
+        try {
+            Connection conn = Connect.connect("juanjo.db");
+            Statement stmt  = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            // loop through the result set
+            
+                String CI = rs.getString("cedula");
+                txtCedula.setText(CI);
+                //txtCedula.setVisible(false);
+           
+            
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }   
+    }
+    
+    public void  fechaInicio() throws ParseException{
+        try{
+             String dia;
+        String mes;
+        String anio;
+        String fechaInicio = txtfechaInicioPermiso.getText();
+        boolean res ;
+        
+        String[] arreglo  = fechaInicio.split("-");
+        anio = arreglo[0];
+        mes = arreglo[1];
+        dia = arreglo[2];
+       Fecha clasefecha = new Fecha(Integer.parseInt(dia), Integer.parseInt(mes), Integer.parseInt(anio));
+        res= clasefecha.fechaCorrecta();
+        if (res ==true){
+            String FinPermiso= sumarDiasAFecha(fechaInicio, Integer.parseInt(txtnumDias.getText()));
+            txtfechaFinPermiso.setText(FinPermiso);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Fecha Ingresada no Valida");
+        }
+        }catch(Exception e){
+            
+        }
+        
+    }
+     public String sumarDiasAFecha(String fecha, int dias) {
+        if(dias == 0){
+            return fecha;
+        }
+
+        String[] f = fecha.split("-");
+        Calendar calendar = Calendar.getInstance();
+        //calendar.setTime(new Date(Integer.parseInt(f[0]), Integer.parseInt(f[1]), Integer.parseInt(f[2])));
+        calendar.set(Integer.parseInt(f[0]), Integer.parseInt(f[1])-1, Integer.parseInt(f[2]));
+
+        calendar.add(Calendar.DAY_OF_MONTH, dias);
+        SimpleDateFormat fe = new SimpleDateFormat("YYYY-MM-dd");
+        return fe.format(calendar.getTime());
+
     }
     
     /**
@@ -48,7 +172,6 @@ public class Gestor_Permiso extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         PanelAspirante = new javax.swing.JPanel();
         lblCedula = new javax.swing.JLabel();
-        txtnombreEmpleado = new javax.swing.JTextField();
         btnGuardarPermiso = new javax.swing.JButton();
         btnNuevoPermiso = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
@@ -57,7 +180,7 @@ public class Gestor_Permiso extends javax.swing.JFrame {
         txtCedula = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbTipoPermiso = new javax.swing.JComboBox<>();
         lblnombreEmpleado1 = new javax.swing.JLabel();
         lblfechaInicioPermiso1 = new javax.swing.JLabel();
         lblfechaInicioPermiso2 = new javax.swing.JLabel();
@@ -68,6 +191,13 @@ public class Gestor_Permiso extends javax.swing.JFrame {
         lblfechaInicioPermiso4 = new javax.swing.JLabel();
         lblfechaInicioPermiso5 = new javax.swing.JLabel();
         txtfechaInicioPermiso = new javax.swing.JTextField();
+        lblfechaInicioPermiso6 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jLabel13 = new javax.swing.JLabel();
+        cmbPermiso = new javax.swing.JComboBox<>();
+        btnValidarFecha = new javax.swing.JButton();
+        cmbnombreEmpleado = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -171,7 +301,7 @@ public class Gestor_Permiso extends javax.swing.JFrame {
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(32, 32, 32))
         );
 
         PanelAspirante.setBackground(new java.awt.Color(255, 255, 255));
@@ -180,18 +310,6 @@ public class Gestor_Permiso extends javax.swing.JFrame {
         lblCedula.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblCedula.setText("Cedula:");
         PanelAspirante.add(lblCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, -1, -1));
-
-        txtnombreEmpleado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtnombreEmpleadoActionPerformed(evt);
-            }
-        });
-        txtnombreEmpleado.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtnombreEmpleadoKeyTyped(evt);
-            }
-        });
-        PanelAspirante.add(txtnombreEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 342, 28));
 
         btnGuardarPermiso.setBackground(new java.awt.Color(0, 153, 153));
         btnGuardarPermiso.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -218,12 +336,12 @@ public class Gestor_Permiso extends javax.swing.JFrame {
         PanelAspirante.add(btnNuevoPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 99, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel12.setText("Permiso:");
-        PanelAspirante.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 104, -1, -1));
+        jLabel12.setText("Tipo de Permiso: ");
+        PanelAspirante.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 100, -1, -1));
 
         lblfechaFinPermiso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblfechaFinPermiso.setText("Fecha de Fin de Permiso: ");
-        PanelAspirante.add(lblfechaFinPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, -1, -1));
+        PanelAspirante.add(lblfechaFinPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 150, -1, -1));
 
         txtfechaFinPermiso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,7 +353,7 @@ public class Gestor_Permiso extends javax.swing.JFrame {
                 txtfechaFinPermisoKeyTyped(evt);
             }
         });
-        PanelAspirante.add(txtfechaFinPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 150, 200, 28));
+        PanelAspirante.add(txtfechaFinPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 140, 200, 28));
 
         txtCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -262,21 +380,26 @@ public class Gestor_Permiso extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        PanelAspirante.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 860, 450));
+        PanelAspirante.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 860, 420));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        PanelAspirante.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 180, -1));
+        cmbTipoPermiso.setToolTipText("");
+        cmbTipoPermiso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTipoPermisoActionPerformed(evt);
+            }
+        });
+        PanelAspirante.add(cmbTipoPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, 240, -1));
 
         lblnombreEmpleado1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblnombreEmpleado1.setText("Nombre del Empleado:");
         PanelAspirante.add(lblnombreEmpleado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 65, -1, -1));
 
         lblfechaInicioPermiso1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblfechaInicioPermiso1.setText("Valor a Pagar por Permiso: ");
-        PanelAspirante.add(lblfechaInicioPermiso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
+        lblfechaInicioPermiso1.setText("Descripción");
+        PanelAspirante.add(lblfechaInicioPermiso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, -1, -1));
 
         lblfechaInicioPermiso2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblfechaInicioPermiso2.setText("Fecha Inicio Permiso: ");
+        lblfechaInicioPermiso2.setText("Fecha Inicio: ");
         PanelAspirante.add(lblfechaInicioPermiso2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
 
         txtvalorAPagar.addActionListener(new java.awt.event.ActionListener() {
@@ -323,7 +446,44 @@ public class Gestor_Permiso extends javax.swing.JFrame {
                 txtfechaInicioPermisoKeyTyped(evt);
             }
         });
-        PanelAspirante.add(txtfechaInicioPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 200, 28));
+        PanelAspirante.add(txtfechaInicioPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 200, 28));
+
+        lblfechaInicioPermiso6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblfechaInicioPermiso6.setText("Valor a Pagar por Permiso: ");
+        PanelAspirante.add(lblfechaInicioPermiso6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
+
+        PanelAspirante.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 770, 70));
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setText("Permiso:");
+        PanelAspirante.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 104, -1, -1));
+
+        cmbPermiso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vacación", "Calamidad Domestica", "Enfermedad", "Nacimiento de Hijo" }));
+        cmbPermiso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbPermisoActionPerformed(evt);
+            }
+        });
+        PanelAspirante.add(cmbPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 180, -1));
+
+        btnValidarFecha.setText("Validar");
+        btnValidarFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnValidarFechaActionPerformed(evt);
+            }
+        });
+        PanelAspirante.add(btnValidarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, -1, -1));
+
+        cmbnombreEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbnombreEmpleadoActionPerformed(evt);
+            }
+        });
+        PanelAspirante.add(cmbnombreEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 330, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -388,7 +548,7 @@ public class Gestor_Permiso extends javax.swing.JFrame {
 
     private void btnNuevoPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoPermisoActionPerformed
       
-        txtnombreEmpleado.setEnabled(true);
+        cmbnombreEmpleado.setEnabled(true);
         txtCedula.setEnabled(true);
         txtfechaFinPermiso.setEnabled(true);
       
@@ -398,15 +558,6 @@ public class Gestor_Permiso extends javax.swing.JFrame {
     private void btnGuardarPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPermisoActionPerformed
 
     }//GEN-LAST:event_btnGuardarPermisoActionPerformed
-
-    private void txtnombreEmpleadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreEmpleadoKeyTyped
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_txtnombreEmpleadoKeyTyped
-
-    private void txtnombreEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnombreEmpleadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtnombreEmpleadoActionPerformed
 
     private void txtvalorAPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtvalorAPagarActionPerformed
         // TODO add your handling code here:
@@ -421,12 +572,36 @@ public class Gestor_Permiso extends javax.swing.JFrame {
     }//GEN-LAST:event_txtnumDiasActionPerformed
 
     private void txtfechaInicioPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfechaInicioPermisoActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_txtfechaInicioPermisoActionPerformed
 
     private void txtfechaInicioPermisoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfechaInicioPermisoKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_txtfechaInicioPermisoKeyTyped
+
+    private void cmbPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPermisoActionPerformed
+        tipoPermiso();
+    }//GEN-LAST:event_cmbPermisoActionPerformed
+
+    private void cmbTipoPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoPermisoActionPerformed
+    String tipoCalamidad = (String) cmbTipoPermiso.getSelectedItem();
+    int numeroDias = calamidad.Calcular_Numero_Dias_Permiso(tipoCalamidad);
+    txtnumDias.setText(Integer.toString(numeroDias));
+    }//GEN-LAST:event_cmbTipoPermisoActionPerformed
+
+    private void btnValidarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarFechaActionPerformed
+    try {
+        fechaInicio();
+        
+    } catch (ParseException ex) {
+        Logger.getLogger(Gestor_Permiso.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
+    }//GEN-LAST:event_btnValidarFechaActionPerformed
+
+    private void cmbnombreEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbnombreEmpleadoActionPerformed
+        ObtenerCedula();
+    }//GEN-LAST:event_cmbnombreEmpleadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -482,20 +657,26 @@ public class Gestor_Permiso extends javax.swing.JFrame {
     private javax.swing.JPanel PanelAspirante;
     private javax.swing.JButton btnGuardarPermiso;
     private javax.swing.JButton btnNuevoPermiso;
+    private javax.swing.JButton btnValidarFecha;
     private javax.swing.JButton btnVolver;
+    private javax.swing.JComboBox<String> cmbPermiso;
+    private javax.swing.JComboBox<String> cmbTipoPermiso;
+    private javax.swing.JComboBox<String> cmbnombreEmpleado;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblCedula;
     private javax.swing.JLabel lblfechaFinPermiso;
     private javax.swing.JLabel lblfechaInicioPermiso1;
@@ -503,12 +684,16 @@ public class Gestor_Permiso extends javax.swing.JFrame {
     private javax.swing.JLabel lblfechaInicioPermiso3;
     private javax.swing.JLabel lblfechaInicioPermiso4;
     private javax.swing.JLabel lblfechaInicioPermiso5;
+    private javax.swing.JLabel lblfechaInicioPermiso6;
     private javax.swing.JLabel lblnombreEmpleado1;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtfechaFinPermiso;
     private javax.swing.JTextField txtfechaInicioPermiso;
-    private javax.swing.JTextField txtnombreEmpleado;
     private javax.swing.JTextField txtnumDias;
     private javax.swing.JTextField txtvalorAPagar;
     // End of variables declaration//GEN-END:variables
+
+    private void clasefecha(int parseInt, int parseInt0, int parseInt1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
