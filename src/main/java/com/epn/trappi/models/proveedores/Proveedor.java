@@ -58,7 +58,7 @@ public class Proveedor {
         this.cuenta = cuenta;
     }
 
-    private void registrarProveedor() {
+    public void registrarProveedor() {
         Proveedor prov = new Proveedor(getRuc(), getRazonSocial(), getDireccion(), getCuenta());
         db.setProveedores(prov);
     }
