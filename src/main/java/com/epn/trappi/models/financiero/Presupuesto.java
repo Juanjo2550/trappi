@@ -1,12 +1,12 @@
 
 package com.epn.trappi.models.financiero;
 
-public class Autorizacion {
+public class Presupuesto {
     String estado="Sin solicitud";
     Analizador analizador;
     Pago pago;
 
-    public Autorizacion(Pago pago) {
+    public Presupuesto(Pago pago) {
         this.pago = pago;
     }
     //El pago debe exisitir si aun no se autoriza?
