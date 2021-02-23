@@ -127,25 +127,10 @@ public class guiFormularioCompras extends javax.swing.JFrame {
         jPaCerrarSesion = new javax.swing.JPanel();
         jBCerrarSesion = new javax.swing.JButton();
         PanelVerTodos = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jTextRucCompNotaCred = new javax.swing.JTextField();
-        jTextFechCompNotaCred = new javax.swing.JTextField();
-        jTextNumFacCompNotaCred = new javax.swing.JTextField();
-        jTextRazSocCompNotaCred = new javax.swing.JTextField();
-        jTextBase12CompNotaCred = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
         jButRegFactCompNotaCred = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        cmbTipoCompraCompNotaCred = new javax.swing.JComboBox<>();
-        jLabel15 = new javax.swing.JLabel();
-        jTextBase0CompNotaCred = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
         jIVA = new javax.swing.JLabel();
-        jValor = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -210,11 +195,6 @@ public class guiFormularioCompras extends javax.swing.JFrame {
         jButClientes.setText("      Facturas       ");
         jButClientes.setBorderPainted(false);
         jButClientes.setFocusPainted(false);
-        jButClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButClientesActionPerformed(evt);
-            }
-        });
 
         jButCompras.setBackground(new java.awt.Color(38, 35, 36));
         jButCompras.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -449,12 +429,12 @@ public class guiFormularioCompras extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 35)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(38, 35, 36));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Editar Nota de Crédito");
+        jLabel4.setText("Formulario de Compras");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(163, 164, 166));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Llena el formulario para editar la Nota de Crédito en Compras.");
+        jLabel5.setText("Llena el formulario con los productos que desee");
 
         jPaCerrarSesion.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -483,85 +463,10 @@ public class guiFormularioCompras extends javax.swing.JFrame {
 
         PanelVerTodos.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel8.setText("Fecha:");
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel9.setText("RUC:");
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel10.setText("Razón Social:");
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel11.setText("Número de Nota de Crédito");
-
-        jTextRucCompNotaCred.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextRucCompNotaCredActionPerformed(evt);
-            }
-        });
-        jTextRucCompNotaCred.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextRucCompNotaCredKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextRucCompNotaCredKeyTyped(evt);
-            }
-        });
-
-        jTextFechCompNotaCred.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFechCompNotaCredActionPerformed(evt);
-            }
-        });
-        jTextFechCompNotaCred.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextFechCompNotaCredKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextFechCompNotaCredKeyTyped(evt);
-            }
-        });
-
-        jTextNumFacCompNotaCred.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextNumFacCompNotaCredActionPerformed(evt);
-            }
-        });
-        jTextNumFacCompNotaCred.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextNumFacCompNotaCredKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextNumFacCompNotaCredKeyTyped(evt);
-            }
-        });
-
-        jTextRazSocCompNotaCred.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextRazSocCompNotaCredKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextRazSocCompNotaCredKeyTyped(evt);
-            }
-        });
-
-        jTextBase12CompNotaCred.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextBase12CompNotaCredKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextBase12CompNotaCredKeyTyped(evt);
-            }
-        });
-
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel13.setText("Base 12%:");
-
         jButRegFactCompNotaCred.setBackground(new java.awt.Color(38, 112, 171));
         jButRegFactCompNotaCred.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButRegFactCompNotaCred.setForeground(new java.awt.Color(240, 240, 241));
-        jButRegFactCompNotaCred.setText("Guardar");
+        jButRegFactCompNotaCred.setText("Continuar Compra");
         jButRegFactCompNotaCred.setBorderPainted(false);
         jButRegFactCompNotaCred.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -575,37 +480,7 @@ public class guiFormularioCompras extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel12.setText("Tipo de Compra:");
 
-        cmbTipoCompraCompNotaCred.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmbTipoCompraCompNotaCred.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Compras Relacionadas al Negocio", "Compras Activos Fijos 12%", "Compras No Relacionadas al Negocio", "Compras Inmuebles", "Compras Exentos IVA", "Reembolso" }));
-        cmbTipoCompraCompNotaCred.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbTipoCompraCompNotaCredItemStateChanged(evt);
-            }
-        });
-        cmbTipoCompraCompNotaCred.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbTipoCompraCompNotaCredActionPerformed(evt);
-            }
-        });
-
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel15.setText("Base 0%:");
-
-        jTextBase0CompNotaCred.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextBase0CompNotaCredKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextBase0CompNotaCredKeyTyped(evt);
-            }
-        });
-
-        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel16.setText("VALOR TOTAL:");
-
         jIVA.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-
-        jValor.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout PanelVerTodosLayout = new javax.swing.GroupLayout(PanelVerTodos);
         PanelVerTodos.setLayout(PanelVerTodosLayout);
@@ -614,84 +489,28 @@ public class guiFormularioCompras extends javax.swing.JFrame {
             .addGroup(PanelVerTodosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelVerTodosLayout.createSequentialGroup()
-                        .addComponent(jTextBase12CompNotaCred, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelVerTodosLayout.createSequentialGroup()
-                                .addComponent(jLabel16)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jValor, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTextBase0CompNotaCred)))
-                    .addComponent(jTextRucCompNotaCred)
-                    .addComponent(jTextRazSocCompNotaCred)
-                    .addComponent(jTextNumFacCompNotaCred)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelVerTodosLayout.createSequentialGroup()
-                        .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jTextFechCompNotaCred, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, Short.MAX_VALUE)
-                        .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(PanelVerTodosLayout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addGap(208, 208, 208))
-                            .addComponent(cmbTipoCompraCompNotaCred, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel12)
+                        .addGap(259, 259, 259))
                     .addGroup(PanelVerTodosLayout.createSequentialGroup()
                         .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelVerTodosLayout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addGap(324, 324, 324)
-                                .addComponent(jLabel15))
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11)
-                            .addComponent(jButRegFactCompNotaCred, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(PanelVerTodosLayout.createSequentialGroup()
                                 .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(51, 51, 51))
+                                .addComponent(jIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButRegFactCompNotaCred))
+                        .addGap(0, 680, Short.MAX_VALUE))))
         );
         PanelVerTodosLayout.setVerticalGroup(
             PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelVerTodosLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 377, Short.MAX_VALUE)
                 .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel12))
-                .addGap(5, 5, 5)
-                .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFechCompNotaCred, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbTipoCompraCompNotaCred, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
-                .addGap(6, 6, 6)
-                .addComponent(jTextRucCompNotaCred, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10)
-                .addGap(6, 6, 6)
-                .addComponent(jTextRazSocCompNotaCred, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel11)
-                .addGap(6, 6, 6)
-                .addComponent(jTextNumFacCompNotaCred, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel15))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextBase0CompNotaCred, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextBase12CompNotaCred, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel14)
-                        .addComponent(jLabel16)
-                        .addComponent(jIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jValor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel14)
+                    .addComponent(jIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(jButRegFactCompNotaCred)
                 .addGap(23, 23, 23))
@@ -709,7 +528,7 @@ public class guiFormularioCompras extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 410, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 538, Short.MAX_VALUE)
                         .addComponent(jPaCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PanelVerTodos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -738,19 +557,6 @@ public class guiFormularioCompras extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButClientesActionPerformed
-        if (jPanOpcNotasVenta.isVisible()){
-            jPanOpcNotasVenta.setVisible(false);
-        }
-           if (jPanOpcNotasCredito.isVisible()){
-            jPanOpcNotasCredito.setVisible(false);
-        }
-        if(jPanOpcFacturas.isVisible())
-            jPanOpcFacturas.setVisible(false);
-        else
-            jPanOpcFacturas.setVisible(true);
-    }//GEN-LAST:event_jButClientesActionPerformed
 
     private void jButComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButComprasActionPerformed
         if (jPanOpcFacturas.isVisible()){
@@ -815,79 +621,9 @@ public class guiFormularioCompras extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButRegNotasCreditoActionPerformed
 
-    private void jTextRucCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextRucCompNotaCredActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextRucCompNotaCredActionPerformed
-
-    private void jTextFechCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFechCompNotaCredActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFechCompNotaCredActionPerformed
-
-    private void jTextNumFacCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNumFacCompNotaCredActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextNumFacCompNotaCredActionPerformed
-
     private void jButRegFactCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegFactCompNotaCredActionPerformed
 
-        
     }//GEN-LAST:event_jButRegFactCompNotaCredActionPerformed
-
-    private void cmbTipoCompraCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoCompraCompNotaCredActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbTipoCompraCompNotaCredActionPerformed
-
-    private void jTextFechCompNotaCredKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFechCompNotaCredKeyTyped
-
-    }//GEN-LAST:event_jTextFechCompNotaCredKeyTyped
-
-    private void jTextFechCompNotaCredKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFechCompNotaCredKeyPressed
-
-    }//GEN-LAST:event_jTextFechCompNotaCredKeyPressed
-
-    private void jTextRucCompNotaCredKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextRucCompNotaCredKeyTyped
-
-    }//GEN-LAST:event_jTextRucCompNotaCredKeyTyped
-
-    private void jTextRucCompNotaCredKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextRucCompNotaCredKeyPressed
-        
-    }//GEN-LAST:event_jTextRucCompNotaCredKeyPressed
-
-    private void jTextRazSocCompNotaCredKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextRazSocCompNotaCredKeyTyped
-        
-    }//GEN-LAST:event_jTextRazSocCompNotaCredKeyTyped
-
-    private void jTextRazSocCompNotaCredKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextRazSocCompNotaCredKeyPressed
-        
-    }//GEN-LAST:event_jTextRazSocCompNotaCredKeyPressed
-
-    private void jTextNumFacCompNotaCredKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNumFacCompNotaCredKeyTyped
-
-    }//GEN-LAST:event_jTextNumFacCompNotaCredKeyTyped
-
-    private void jTextNumFacCompNotaCredKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNumFacCompNotaCredKeyPressed
-
-    }//GEN-LAST:event_jTextNumFacCompNotaCredKeyPressed
-
-    private void jTextBase12CompNotaCredKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextBase12CompNotaCredKeyTyped
-
-    }//GEN-LAST:event_jTextBase12CompNotaCredKeyTyped
-
-    private void jTextBase12CompNotaCredKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextBase12CompNotaCredKeyPressed
-
-        
-    }//GEN-LAST:event_jTextBase12CompNotaCredKeyPressed
-
-    private void jTextBase0CompNotaCredKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextBase0CompNotaCredKeyTyped
-
-    }//GEN-LAST:event_jTextBase0CompNotaCredKeyTyped
-
-    private void jTextBase0CompNotaCredKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextBase0CompNotaCredKeyPressed
-
-    }//GEN-LAST:event_jTextBase0CompNotaCredKeyPressed
-
-    private void cmbTipoCompraCompNotaCredItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoCompraCompNotaCredItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbTipoCompraCompNotaCredItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -2973,7 +2709,6 @@ public class guiFormularioCompras extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelVerTodos;
-    private javax.swing.JComboBox<String> cmbTipoCompraCompNotaCred;
     private javax.swing.JButton jBCerrarSesion;
     private javax.swing.JButton jButClientes;
     private javax.swing.JButton jButCompras;
@@ -2991,18 +2726,11 @@ public class guiFormularioCompras extends javax.swing.JFrame {
     private javax.swing.JLabel jLabNombreContribuyente;
     private javax.swing.JLabel jLabNombreContribuyente1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPEncabezado;
     private javax.swing.JPanel jPMod;
     private javax.swing.JPanel jPaCerrarSesion;
@@ -3010,12 +2738,5 @@ public class guiFormularioCompras extends javax.swing.JFrame {
     private javax.swing.JPanel jPanOpcNotasCredito;
     private javax.swing.JPanel jPanOpcNotasVenta;
     private javax.swing.JPanel jPanOpcionesDeclaracion;
-    private javax.swing.JTextField jTextBase0CompNotaCred;
-    private javax.swing.JTextField jTextBase12CompNotaCred;
-    private javax.swing.JTextField jTextFechCompNotaCred;
-    private javax.swing.JTextField jTextNumFacCompNotaCred;
-    private javax.swing.JTextField jTextRazSocCompNotaCred;
-    private javax.swing.JTextField jTextRucCompNotaCred;
-    private javax.swing.JLabel jValor;
     // End of variables declaration//GEN-END:variables
 }
