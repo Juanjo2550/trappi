@@ -13,11 +13,13 @@ public class ProveedoresDb {
     private List<Proveedor> proveedores;
     private List<Servicio> servicios;
     private List<Compra> compras;
-    String prodFilename = "src/main/java/com/epn/trappi/db/proveedores/productos.csv";
-    String provFilename = "src/main/java/com/epn/trappi/db/proveedores/proveedores.csv";
-    String servFilename = "src/main/java/com/epn/trappi/db/proveedores/servicios.csv";
-    String compFilename = "src/main/java/com/epn/trappi/db/proveedores/compras.csv";
-    Archivo p = new Archivo();
+    private ArrayList<CantidadDeBien> listaCantidadBienes;
+    private final String prodFilename = "src/main/java/com/epn/trappi/db/proveedores/productos.csv";
+    private final String provFilename = "src/main/java/com/epn/trappi/db/proveedores/proveedores.csv";
+    private final String servFilename = "src/main/java/com/epn/trappi/db/proveedores/servicios.csv";
+    private final String compFilename = "src/main/java/com/epn/trappi/db/proveedores/compras.csv";
+    private final String invFilename = "src/main/java/com/epn/trappi/db/proveedores/inventario.csv";
+    private final Archivo p = new Archivo();
 
     public List<Producto> getProductos() {
         try {
@@ -66,6 +68,15 @@ public class ProveedoresDb {
         return servicios;
     }
 
+    public ArrayList<CantidadDeBien> getListaCantidadBienes() {
+        try {
+            seleccionarCantidadDeBienes();
+        } catch (Exception ex) {
+            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaCantidadBienes;
+    }
+
     public void setServicios(List<Servicio> servicios) {
         servicios.forEach(ser -> {
             agregarServicio(transformarServicio(ser));
@@ -87,7 +98,7 @@ public class ProveedoresDb {
     private void seleccionarProductos() {
         try {
             List<String[]> prod = p.leerArchivoCSV(this.prodFilename);
-            List<Producto> pp = new ArrayList<Producto>();
+            List<Producto> pp = new ArrayList<>();
             prod.forEach(pr -> {
                 pp.add(reformarProducto(pr));
             });
@@ -100,7 +111,7 @@ public class ProveedoresDb {
     private void seleccionarProveedores() {
         try {
             List<String[]> prov = p.leerArchivoCSV(this.provFilename);
-            List<Proveedor> pp = new ArrayList<Proveedor>();
+            List<Proveedor> pp = new ArrayList<>();
             prov.forEach(pr -> {
                 pp.add(reformarProveedor(pr));
             });
@@ -110,10 +121,24 @@ public class ProveedoresDb {
         }
     }
 
+    private void seleccionarCantidadDeBienes() {
+        try {
+            List<String[]> cbienes = p.leerArchivoCSV(this.invFilename);
+            ArrayList<CantidadDeBien> cb = new ArrayList<>();
+            cbienes.forEach(b -> {
+                cb.add(reformarCantidadDeBien(b));
+            });
+
+            this.listaCantidadBienes = cb;
+        } catch (IOException ex) {
+            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     private void seleccionarServicios() {
         try {
             List<String[]> serv = p.leerArchivoCSV(this.servFilename);
-            List<Servicio> ss = new ArrayList<Servicio>();
+            List<Servicio> ss = new ArrayList<>();
             serv.forEach(pr -> {
                 ss.add(reformarServicio(pr));
             });
@@ -148,7 +173,7 @@ public class ProveedoresDb {
     }
 
     private String transformarCompra(String nombreProducto, String Proveedor, int cantidad, String estado, double montoTotal) {
-        return nombreProducto + ";" + Proveedor + ";" + cantidad + ";" + estado+";"+montoTotal;
+        return nombreProducto + ";" + Proveedor + ";" + cantidad + ";" + estado + ";" + montoTotal;
     }
 
     private Producto reformarProducto(String[] str) {
@@ -162,13 +187,30 @@ public class ProveedoresDb {
     }
 
     private Servicio reformarServicio(String[] str) {
-        Servicio nprov = new Servicio(str[0], Double.parseDouble(str[1]), obtenerProveedor(str[2]));
-        return nprov;
+        Servicio serv = new Servicio(str[0], Double.parseDouble(str[1]), obtenerProveedor(str[2]));
+        return serv;
+    }
+
+    private CantidadDeBien reformarCantidadDeBien(String[] str) {
+        CantidadDeBien c = new CantidadDeBien(obtenerBien(str[0]), Integer.parseInt(str[1]));
+        return c;
     }
 
     /*private Compra reformarCompra(String[] str) {
         return null;
     }*/
+    private Producto obtenerBien(String nombre) {
+        seleccionarProductos();
+        Producto resultado = null;
+        for (Producto producto : this.productos) {
+            if (producto.getNombre().equals(nombre)) {
+                resultado = producto;
+                break;
+            }
+        }
+        return resultado;
+    }
+
     private Proveedor obtenerProveedor(String ruc) {
         seleccionarProveedores();
         Proveedor resultado = null;

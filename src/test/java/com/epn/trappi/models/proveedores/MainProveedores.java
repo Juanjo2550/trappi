@@ -6,6 +6,7 @@
 package com.epn.trappi.models.proveedores;
 
 import com.epn.trappi.db.proveedores.ProveedoresDb;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,7 +35,15 @@ public class MainProveedores {
         serv.forEach(pr -> {
             System.out.println(pr.getNombre() + ";" + pr.getPrecio() + ";" + pr.getProveeedor().getRuc());
         });
+        
+        //Probando Listar ListaCantidadBien
+        ListaCantidadDeBienes bienes = new ListaCantidadDeBienes();
+        bienes.getListaCantidadDeBienes().forEach(bien -> {
+            System.out.println(bien.getBien().getNombre() + ";" + bien.getCantidad());
+        });
 
+        //db.getListaCantidadBienes();
+        
         /*//Probando agregar Producto
         Proveedor prove = new Proveedor("1772561566001", "Super Aqui", "Quito, Ecuador");
         Producto pro = new Producto("Doritos, picantes", 3.75, prove);
