@@ -1,8 +1,3 @@
-
-
-
-
-
 package com.epn.trappi.gui.logistico;
 import com.epn.trappi.models.logistico.ListaConductores;
 import com.epn.trappi.models.logistico.ListaEntregas1;
@@ -15,6 +10,8 @@ import javax.swing.table.DefaultTableModel;
 public class EntregasActivas extends javax.swing.JPanel {
        
     public EntregasActivas() {
+        
+        
         initComponents();
         ListaVehiculos vehiculos = new ListaVehiculos();
         ListaConductores conductores = new ListaConductores();
