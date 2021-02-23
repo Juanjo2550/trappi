@@ -8,6 +8,7 @@ public class ListaEntregas1 {
     private ArrayList<Entrega> entregas;
 
     public ListaEntregas1() {
+        //Lista de Datos Entregas Quemadas
         entregas= new ArrayList<Entrega>();
         String [] fcids= new String [10];
         fcids [0]= "";
@@ -27,7 +28,5 @@ public class ListaEntregas1 {
         
     }
     
-    public void aniadirEntrega(Entrega nuevo){
-        entregas.add(nuevo);
-    }
+ 
 }

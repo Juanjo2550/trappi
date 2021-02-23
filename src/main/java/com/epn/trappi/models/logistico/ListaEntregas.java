@@ -9,22 +9,6 @@ public class ListaEntregas {
 
     public ListaEntregas() {
         entregas= new ArrayList<Entrega>();
-        String [] fcids= new String [10];
-        fcids [0]= "";
-        fcids [1]= "";
-        fcids [2]= "";
-        fcids [3]= "";
-        fcids [4]= "";
-        fcids [6]= "";
-        fcids [7]= "";
-        fcids [8]= "";
-        fcids [9]= "";
-        
-        for (int i=0; i<10; i++){
-           Entrega v= new Entrega(new Posicion (fcids[i]));
-           entregas.add(v);
-       } 
-        
     }
     
     public void aniadirEntrega(Entrega nuevo){

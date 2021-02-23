@@ -6,6 +6,7 @@ public class Entrega {
 
     public Entrega(Posicion destino) {
         estado=true;
+        setDestino(destino);
     }
 
     public boolean isEstado() {
