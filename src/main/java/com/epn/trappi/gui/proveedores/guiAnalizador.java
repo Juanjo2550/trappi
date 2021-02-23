@@ -10,7 +10,12 @@ import com.epn.trappi.models.proveedores.Inventario;
 import com.epn.trappi.models.proveedores.ListaCantidadDeBienes;
 import java.util.ArrayList;
 import java.util.Arrays;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -27,14 +32,27 @@ public class guiAnalizador extends javax.swing.JFrame {
     
     public guiAnalizador() {
         initComponents();
+        
         ArrayList<CantidadDeBien> lista;
         lista=inventario.getListaCantidadDeBienes().getListaCantidadDeBienesDb();
+        dibujarDiagrama(lista);
+    }
+
+    private void dibujarDiagrama(ArrayList<CantidadDeBien> lista){
         lista.forEach(bien -> {
             System.out.println(bien.getBien().getNombre() + ";" + bien.getCantidad());
         });
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
+        
+        lista.forEach(bien -> {
+            datos.setValue(bien.getCantidad(), bien.getBien().getNombre(), bien.getBien().getNombre());
+        });
+        JFreeChart ch = ChartFactory.createBarChart("Análisis del stock", "Producto", "Cantidad", datos,PlotOrientation.VERTICAL, true, true, false);
+        ChartPanel cp = new ChartPanel(ch);
+        add(cp);
+        cp.setBounds(250,75,600,500);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,6 +85,7 @@ public class guiAnalizador extends javax.swing.JFrame {
         jLabNombreContribuyente1 = new javax.swing.JLabel();
         jPaCerrarSesion = new javax.swing.JPanel();
         jBCerrarSesion = new javax.swing.JButton();
+        jButRegFactCompNotaCred1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -380,14 +399,29 @@ public class guiAnalizador extends javax.swing.JFrame {
                 .addComponent(jBCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jButRegFactCompNotaCred1.setBackground(new java.awt.Color(38, 112, 171));
+        jButRegFactCompNotaCred1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButRegFactCompNotaCred1.setForeground(new java.awt.Color(240, 240, 241));
+        jButRegFactCompNotaCred1.setText("Generar solicitud de compra");
+        jButRegFactCompNotaCred1.setBorderPainted(false);
+        jButRegFactCompNotaCred1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButRegFactCompNotaCred1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPMod, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 897, Short.MAX_VALUE)
-                .addComponent(jPaCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 586, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPaCerrarSesion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButRegFactCompNotaCred1)
+                        .addGap(179, 179, 179))))
             .addComponent(jPEncabezado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -395,9 +429,13 @@ public class guiAnalizador extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPEncabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPaCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPMod, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPMod, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPaCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButRegFactCompNotaCred1)
+                        .addGap(59, 59, 59))))
         );
 
         pack();
@@ -451,6 +489,10 @@ public class guiAnalizador extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jBCerrarSesionActionPerformed
 
+    private void jButRegFactCompNotaCred1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegFactCompNotaCred1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButRegFactCompNotaCred1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -491,6 +533,7 @@ public class guiAnalizador extends javax.swing.JFrame {
     private javax.swing.JButton jBCerrarSesion;
     private javax.swing.JButton jButClientes;
     private javax.swing.JButton jButCompras;
+    private javax.swing.JButton jButRegFactCompNotaCred1;
     private javax.swing.JButton jButRegFactura;
     private javax.swing.JButton jButRegNotasCredito;
     private javax.swing.JButton jButRegNotasVenta;
