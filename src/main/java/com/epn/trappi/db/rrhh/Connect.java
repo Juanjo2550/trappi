@@ -21,7 +21,7 @@ public class Connect {
                 if(conn == null) {
                     String projectPath = System.getProperty("user.dir");
                     // db parameters
-                    String url = "jdbc:sqlite:" + projectPath + "juanjo.db";
+                    String url = "jdbc:sqlite:" + projectPath + "/src/main/java/com/epn/trappi/db/rrhh/juanjo.db";
                     // create a connection to the database
                     conn = DriverManager.getConnection(url);
                     System.out.println("Connection to SQLite has been established.");
