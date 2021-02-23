@@ -10,5 +10,5 @@ package com.epn.trappi.models.rrhh;
  * @author diego
  */
 public class ControladorRegistros {
-    
+    //mapa:MapaDisponibilidad
 }

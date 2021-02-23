@@ -13,22 +13,16 @@ import java.awt.Color;
  *
  * @author stali
  */
-public class RegistroAspirante extends javax.swing.JFrame {
+public class RegistroAsistencia extends javax.swing.JFrame {
 
     /**
      * Creates new form Ejemplo_GUI
      */
-    public RegistroAspirante() {
+    public RegistroAsistencia() {
         initComponents();
-        jTextActitudesAspirante.setEnabled(false);
-        jTextCedulaAspirante.setEnabled(false);
-        jTextCargoAspirante.setEnabled(false);
-        jTextNombreAspirante.setEnabled(false);
-        jTextPuntajeAspirante.setEnabled(false);
-        jTextTelefonoAspirante.setEnabled(false);
-        jTextApellidoAspirante.setEnabled(false);
-        jTextAptitudesAspirante.setEnabled(false);
-        jButGuardarAspirante.setEnabled(false);
+     
+        jButSalida.setEnabled(false);
+        jButSalida.setEnabled(false);
     }
     
     /**
@@ -49,28 +43,22 @@ public class RegistroAspirante extends javax.swing.JFrame {
         btnVolver = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        PanelAspirante = new javax.swing.JPanel();
+        jButton7 = new javax.swing.JButton();
+        PanelAsistencia = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jTextNombreAspirante = new javax.swing.JTextField();
-        jButGuardarAspirante = new javax.swing.JButton();
-        jButRegCliente2 = new javax.swing.JButton();
+        jButSalida = new javax.swing.JButton();
+        jButEntrada = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
         jTextCedulaAspirante = new javax.swing.JTextField();
         jTextApellidoAspirante = new javax.swing.JTextField();
-        jTextTelefonoAspirante = new javax.swing.JTextField();
-        jTextPuntajeAspirante = new javax.swing.JTextField();
-        jTextActitudesAspirante = new javax.swing.JTextField();
-        jTextAptitudesAspirante = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jTextCargoAspirante = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -148,13 +136,13 @@ public class RegistroAspirante extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(204, 153, 0));
-        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(51, 51, 51));
-        jButton2.setText("Asistencia");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton7.setBackground(new java.awt.Color(204, 153, 0));
+        jButton7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(51, 51, 51));
+        jButton7.setText("Asistencia");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton7ActionPerformed(evt);
             }
         });
 
@@ -166,36 +154,36 @@ public class RegistroAspirante extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(28, 28, 28)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        PanelAspirante.setBackground(new java.awt.Color(255, 255, 255));
-        PanelAspirante.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PanelAsistencia.setBackground(new java.awt.Color(255, 255, 255));
+        PanelAsistencia.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Nombre:");
-        PanelAspirante.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 65, -1, -1));
+        PanelAsistencia.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, 20));
 
         jTextNombreAspirante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -207,55 +195,39 @@ public class RegistroAspirante extends javax.swing.JFrame {
                 jTextNombreAspiranteKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextNombreAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 342, 28));
+        PanelAsistencia.add(jTextNombreAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 520, 28));
 
-        jButGuardarAspirante.setBackground(new java.awt.Color(0, 153, 153));
-        jButGuardarAspirante.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButGuardarAspirante.setForeground(new java.awt.Color(240, 240, 241));
-        jButGuardarAspirante.setText("Guardar");
-        jButGuardarAspirante.setBorderPainted(false);
-        jButGuardarAspirante.addActionListener(new java.awt.event.ActionListener() {
+        jButSalida.setBackground(new java.awt.Color(0, 153, 153));
+        jButSalida.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButSalida.setForeground(new java.awt.Color(240, 240, 241));
+        jButSalida.setText("Salida");
+        jButSalida.setBorderPainted(false);
+        jButSalida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButGuardarAspiranteActionPerformed(evt);
+                jButSalidaActionPerformed(evt);
             }
         });
-        PanelAspirante.add(jButGuardarAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 11, -1, -1));
+        PanelAsistencia.add(jButSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 390, 180, 90));
 
-        jButRegCliente2.setBackground(new java.awt.Color(38, 112, 171));
-        jButRegCliente2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButRegCliente2.setForeground(new java.awt.Color(240, 240, 241));
-        jButRegCliente2.setText("Nuevo");
-        jButRegCliente2.setBorderPainted(false);
-        jButRegCliente2.addActionListener(new java.awt.event.ActionListener() {
+        jButEntrada.setBackground(new java.awt.Color(38, 112, 171));
+        jButEntrada.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButEntrada.setForeground(new java.awt.Color(240, 240, 241));
+        jButEntrada.setText("Entrada");
+        jButEntrada.setBorderPainted(false);
+        jButEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButRegCliente2ActionPerformed(evt);
+                jButEntradaActionPerformed(evt);
             }
         });
-        PanelAspirante.add(jButRegCliente2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 99, -1));
+        PanelAsistencia.add(jButEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, 180, 90));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Apellidos:");
-        PanelAspirante.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 104, -1, -1));
-
-        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel13.setText("Teléfono:");
-        PanelAspirante.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 139, -1, -1));
+        PanelAsistencia.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, 20));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("Cédula:");
-        PanelAspirante.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, -1, -1));
-
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel15.setText("Puntaje:");
-        PanelAspirante.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, -1, -1));
-
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel16.setText("Actitudes:");
-        PanelAspirante.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, -1, -1));
-
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel17.setText("Aptitudes:");
-        PanelAspirante.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, -1, -1));
+        PanelAsistencia.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, -1));
 
         jTextCedulaAspirante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -267,7 +239,7 @@ public class RegistroAspirante extends javax.swing.JFrame {
                 jTextCedulaAspiranteKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextCedulaAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 140, 28));
+        PanelAsistencia.add(jTextCedulaAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 230, 28));
 
         jTextApellidoAspirante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -279,70 +251,7 @@ public class RegistroAspirante extends javax.swing.JFrame {
                 jTextApellidoAspiranteKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextApellidoAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(79, 100, 342, 28));
-
-        jTextTelefonoAspirante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextTelefonoAspiranteActionPerformed(evt);
-            }
-        });
-        jTextTelefonoAspirante.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextTelefonoAspiranteKeyTyped(evt);
-            }
-        });
-        PanelAspirante.add(jTextTelefonoAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 130, 28));
-
-        jTextPuntajeAspirante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextPuntajeAspiranteActionPerformed(evt);
-            }
-        });
-        jTextPuntajeAspirante.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextPuntajeAspiranteKeyTyped(evt);
-            }
-        });
-        PanelAspirante.add(jTextPuntajeAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 140, 110, 28));
-
-        jTextActitudesAspirante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextActitudesAspiranteActionPerformed(evt);
-            }
-        });
-        jTextActitudesAspirante.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextActitudesAspiranteKeyTyped(evt);
-            }
-        });
-        PanelAspirante.add(jTextActitudesAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, 350, 28));
-
-        jTextAptitudesAspirante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextAptitudesAspiranteActionPerformed(evt);
-            }
-        });
-        jTextAptitudesAspirante.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextAptitudesAspiranteKeyTyped(evt);
-            }
-        });
-        PanelAspirante.add(jTextAptitudesAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, 350, 28));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Id", "Nombre", "Apellidos", "Teléfono", "Cédula", "Cargo", "Puntaje", "Actitudes", "Puntaje"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        PanelAspirante.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 860, 450));
+        PanelAsistencia.add(jTextApellidoAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 520, 28));
 
         jTextCargoAspirante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -354,11 +263,27 @@ public class RegistroAspirante extends javax.swing.JFrame {
                 jTextCargoAspiranteKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextCargoAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 140, 170, 28));
+        PanelAsistencia.add(jTextCargoAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, 170, 28));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel18.setText("Cargo:");
-        PanelAspirante.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 140, -1, -1));
+        PanelAsistencia.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, -1, -1));
+
+        jPanel3.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Control registro de empleados");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 510, 40));
+
+        PanelAsistencia.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 100));
+
+        jLabel4.setText("Hora de Entrada:");
+        PanelAsistencia.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, -1, -1));
+
+        jLabel5.setText("Hora de Salida:");
+        PanelAsistencia.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -368,7 +293,7 @@ public class RegistroAspirante extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(PanelAspirante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PanelAsistencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -377,9 +302,11 @@ public class RegistroAspirante extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(PanelAspirante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(46, 46, 46)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(PanelAsistencia, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
                         .addContainerGap())))
         );
 
@@ -400,9 +327,9 @@ public class RegistroAspirante extends javax.swing.JFrame {
         new ContratarAspirante().setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButGuardarAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButGuardarAspiranteActionPerformed
+    private void jButSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButSalidaActionPerformed
 
-    }//GEN-LAST:event_jButGuardarAspiranteActionPerformed
+    }//GEN-LAST:event_jButSalidaActionPerformed
 
     private void jTextNombreAspiranteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNombreAspiranteKeyTyped
         // TODO add your handling code here:
@@ -413,17 +340,9 @@ public class RegistroAspirante extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextNombreAspiranteActionPerformed
 
-    private void jButRegCliente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegCliente2ActionPerformed
-        jTextActitudesAspirante.setEnabled(true);
-        jTextCedulaAspirante.setEnabled(true);
-        jTextCargoAspirante.setEnabled(true);
-        jTextNombreAspirante.setEnabled(true);
-        jTextPuntajeAspirante.setEnabled(true);
-        jTextTelefonoAspirante.setEnabled(true);
-        jTextApellidoAspirante.setEnabled(true);
-        jTextAptitudesAspirante.setEnabled(true);
-        jButGuardarAspirante.setEnabled(true);
-    }//GEN-LAST:event_jButRegCliente2ActionPerformed
+    private void jButEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButEntradaActionPerformed
+      
+    }//GEN-LAST:event_jButEntradaActionPerformed
 
     private void jTextCedulaAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCedulaAspiranteActionPerformed
         // TODO add your handling code here:
@@ -441,38 +360,6 @@ public class RegistroAspirante extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextApellidoAspiranteKeyTyped
 
-    private void jTextTelefonoAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextTelefonoAspiranteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextTelefonoAspiranteActionPerformed
-
-    private void jTextTelefonoAspiranteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextTelefonoAspiranteKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextTelefonoAspiranteKeyTyped
-
-    private void jTextPuntajeAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextPuntajeAspiranteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextPuntajeAspiranteActionPerformed
-
-    private void jTextPuntajeAspiranteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPuntajeAspiranteKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextPuntajeAspiranteKeyTyped
-
-    private void jTextActitudesAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextActitudesAspiranteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextActitudesAspiranteActionPerformed
-
-    private void jTextActitudesAspiranteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextActitudesAspiranteKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextActitudesAspiranteKeyTyped
-
-    private void jTextAptitudesAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextAptitudesAspiranteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextAptitudesAspiranteActionPerformed
-
-    private void jTextAptitudesAspiranteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextAptitudesAspiranteKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextAptitudesAspiranteKeyTyped
-
     private void jTextCargoAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCargoAspiranteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextCargoAspiranteActionPerformed
@@ -486,10 +373,10 @@ public class RegistroAspirante extends javax.swing.JFrame {
         new Contratos().setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
        this.setVisible(false);
         new RegistroAsistencia().setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -508,14 +395,22 @@ public class RegistroAspirante extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistroAspirante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroAsistencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistroAspirante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroAsistencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistroAspirante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroAsistencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistroAspirante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroAsistencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -528,42 +423,36 @@ public class RegistroAspirante extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegistroAspirante().setVisible(true);
+                new RegistroAsistencia().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel PanelAspirante;
+    private javax.swing.JPanel PanelAsistencia;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JButton jButGuardarAspirante;
-    private javax.swing.JButton jButRegCliente2;
+    private javax.swing.JButton jButEntrada;
+    private javax.swing.JButton jButSalida;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextActitudesAspirante;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextApellidoAspirante;
-    private javax.swing.JTextField jTextAptitudesAspirante;
     private javax.swing.JTextField jTextCargoAspirante;
     private javax.swing.JTextField jTextCedulaAspirante;
     private javax.swing.JTextField jTextNombreAspirante;
-    private javax.swing.JTextField jTextPuntajeAspirante;
-    private javax.swing.JTextField jTextTelefonoAspirante;
     // End of variables declaration//GEN-END:variables
 }
