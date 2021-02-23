@@ -28,16 +28,20 @@ public class guiAnalizador extends javax.swing.JPanel {
      */
     private Inventario inventario= new Inventario();
     private JPanel verTodo;
+    private ListaDeCompras solicitud;
+    
     public guiAnalizador(JPanel verTodo) {
         initComponents();
+        jButRegFactCompNotaCred1.setEnabled(false);
         this.verTodo=verTodo;
-        ListaDeCompras solicitud;
         ArrayList<CantidadDeBien> lista;
         lista=inventario.getListaCantidadDeBienes().getListaCantidadDeBienesDb();
         dibujarDiagrama(lista);
         AnalizadorDeInventario analizador = new AnalizadorDeInventario();
-        solicitud=analizador.analizarStock();
-        System.out.println(solicitud.getCompras().size());
+        this.solicitud=analizador.analizarStock();
+        if(solicitud.getCompras().size()!=0){
+            jButRegFactCompNotaCred1.setEnabled(true);
+        }
     }
 
     
@@ -102,7 +106,7 @@ public class guiAnalizador extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButRegFactCompNotaCred1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegFactCompNotaCred1ActionPerformed
-        new CambiaPanel(verTodo, new guiDescripcionCompra());
+        new CambiaPanel(verTodo, new guiDescripcionCompra(solicitud));
         // TODO add your handling code here:
     }//GEN-LAST:event_jButRegFactCompNotaCred1ActionPerformed
 
