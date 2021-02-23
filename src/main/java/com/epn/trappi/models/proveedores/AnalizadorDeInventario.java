@@ -16,21 +16,30 @@ public class AnalizadorDeInventario {
 
     Inventario inventario;
 
-    public void analizarStock() {
-        boolean proveedor;
+    public ListaDeCompras analizarStock() {
+        boolean proveedor=false;
+        inventario=new Inventario();
         ListaDeCompras solicitud = new ListaDeCompras(new ArrayList<Compra>());
-        for (int i=0;i<inventario.getListaCantidadDeBienes().getListaCantidadDeBienes().size() ;i++) {
-            if(inventario.getListaCantidadDeBienes().getListaCantidadDeBienes().get(i).getCantidad() <3){
+        
+
+        for(CantidadDeBien cantidadBien : inventario.getListaCantidadDeBienes().getListaCantidadDeBienes()){
+            if(cantidadBien.getCantidad()<=10){
                 proveedor=false;
-                for (int j=0;j<solicitud.getCompras().size() ;j++) {
-                    if(inventario.getListaCantidadDeBienes().getListaCantidadDeBienes().get(i).getBien().getProveeedor().equals(
-                       solicitud.getCompras().get(j).getListaCantidadDeBienes().getListaCantidadDeBienes().get(j).getBien().getProveeedor())){
-                        solicitud.getCompras().get(j).getListaCantidadDeBienes().añadirBien(
-                                inventario.getListaCantidadDeBienes().getListaCantidadDeBienes().get(i).getBien(), 10);
-                        
+                for(Compra compra: solicitud.getCompras()){
+                    if(compra.getListaCantidadDeBienes().getListaCantidadDeBienes().get(0).getBien().getProveeedor().getRazonSocial().equalsIgnoreCase(
+                            cantidadBien.getBien().getProveeedor().getRazonSocial())){    
+                        proveedor=true;
+                        compra.getListaCantidadDeBienes().añadirBien(cantidadBien.getBien(), 100);
                     }
+                }           
+                if(proveedor==false){
+                    ListaCantidadDeBienes lista =  new ListaCantidadDeBienes();
+                    lista.añadirBien(cantidadBien.getBien(), 100);
+                    solicitud.añadirCompra(new CompraDeProducto(inventario, lista, "Pendiente"));
                 }
             }
-        } 
+        }
+       
+        return solicitud;
     }
 }

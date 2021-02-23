@@ -17,6 +17,10 @@ public class ListaCantidadDeBienes {
     private ArrayList<CantidadDeBien> listaCantidadDeBienes;
     private ProveedoresDb db = new ProveedoresDb();
 
+    public ListaCantidadDeBienes(){
+        listaCantidadDeBienes= new ArrayList<CantidadDeBien>();
+    }
+    
     public ArrayList<CantidadDeBien> getListaCantidadDeBienes() {
         return listaCantidadDeBienes;
     }

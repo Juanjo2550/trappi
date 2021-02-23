@@ -21,7 +21,8 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        new CambiaPanel(PanelVerTodos, new TestPanel());
+        new CambiaPanel(PanelVerTodos, new guiAnalizador(PanelVerTodos));
+        ponerTituloYsub("Dashboard", "Genere una solicitud de compra de productos con bajo stock");
         panelesOpciones.add(jPanOpcProductos);
         panelesOpciones.add(jPanOpcServicios);
         panelesOpciones.add(jPanOpcInventario);
