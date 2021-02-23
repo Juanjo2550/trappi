@@ -59,7 +59,7 @@ public class EmpleadoDb {
         String sql = "SELECT * FROM empleados";
         ListaEmpleados temEmpleados = new ListaEmpleados();
         try {
-            Connection conn = Connect.connect();
+            Connection conn = Connect.connect("juanjo.db");
             Statement stmt  = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             // loop through the result set
@@ -87,7 +87,7 @@ public class EmpleadoDb {
     public boolean addOne(Empleado nuevoEmpleado, Sueldo sueldo) {
         String sql = "INSERT INTO empleados(cedula,nombres, apellidos, cargo, departamento, cuentaBancaria, banco, RegistroAsistencia, estado, sexo) VALUES(?,?,?,?,?,?,?,?,?,?)";
 
-        try (Connection conn = Connect.connect();
+        try (Connection conn = Connect.connect("juanjo.db");
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, nuevoEmpleado.getCedula());
             pstmt.setString(2, nuevoEmpleado.getNombres());

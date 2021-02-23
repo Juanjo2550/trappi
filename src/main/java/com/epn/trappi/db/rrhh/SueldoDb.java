@@ -19,9 +19,9 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class SueldoDb {
     public Sueldo obtenerPorEmpleado (int Cedulaempleado){
-        String sql = "SELECT * FROM sueldo WHERE sueldo.cedulaEmpleado = ?";
+        String sql = "SELECT * FROM sueldos WHERE sueldo.cedulaEmpleado = ?";
         try {
-            Connection conn = Connect.connect();
+            Connection conn = Connect.connect("juanjo.db");
             PreparedStatement pstmt  = conn.prepareStatement(sql);
             pstmt.setInt(1, Cedulaempleado);
             ResultSet rs  = pstmt.executeQuery();
@@ -33,9 +33,9 @@ public class SueldoDb {
     }
 
     public boolean addOne(Empleado empleado, Sueldo sueldo) {
-        String sql = "INSERT INTO sueldo (cedulaEmpleado, valor, desceuntos ) VALUES(?)";
+        String sql = "INSERT INTO sueldos (cedulaEmpleado, valor, descuentos ) VALUES(?)";
 
-        try (Connection conn = Connect.connect();
+        try (Connection conn = Connect.connect("juanjo.db");
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, empleado.getCedula());
             pstmt.setString(2, sueldo.getValor() + "");
