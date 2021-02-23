@@ -23,7 +23,7 @@ public class Ruta {
         this.tiempoAproximado = tiempoAproximado;
     }
     
-    public void trazarRuta(){
+    public void trazarRuta(Posicion posicion){
         
     }
 }

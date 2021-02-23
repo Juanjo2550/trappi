@@ -4,7 +4,8 @@ public class Entrega {
     private boolean estado;
     private Posicion destino;
 
-    public Entrega() {
+    public Entrega(Posicion destino) {
+        estado=true;
     }
 
     public boolean isEstado() {
@@ -30,4 +31,16 @@ public class Entrega {
     public void confirmarEntrega(){
         
     }
+    
+    public void RegistrarEntrega(){
+        
+    }
+    
+    
+    public void determinarDestino(String direccion){
+        //colocar la posicion de string en formato de posicion
+        
+    }
+    
+    
 }

@@ -1,27 +1,22 @@
 package com.epn.trappi.models.logistico;
 
 public class Posicion {
-    private double latitud;
-    private double longitud;
+    private String  fcids;
 
-    public Posicion() {
+
+    public Posicion(String fcid) {
+        fcids= fcid;
     }
 
-    public double getLatitud() {
-        return latitud;
+    public String getFcids() {
+        return fcids;
     }
 
-    public void setLatitud(double latitud) {
-        this.latitud = latitud;
+    public void setFcids(String fcids) {
+        this.fcids = fcids;
     }
 
-    public double getLongitud() {
-        return longitud;
-    }
-
-    public void setLongitud(double longitud) {
-        this.longitud = longitud;
-    }
+    
     
     public void actualizarPosicion(){
         

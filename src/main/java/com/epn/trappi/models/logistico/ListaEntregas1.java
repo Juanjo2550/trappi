@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 import com.epn.trappi.models.logistico.Entrega;
 
-public class ListaEntregas {
+public class ListaEntregas1 {
     private ArrayList<Entrega> entregas;
 
-    public ListaEntregas() {
+    public ListaEntregas1() {
         entregas= new ArrayList<Entrega>();
         String [] fcids= new String [10];
         fcids [0]= "";
