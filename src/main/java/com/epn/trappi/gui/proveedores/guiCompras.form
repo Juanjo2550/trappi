@@ -32,7 +32,7 @@
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="410" max="32767" attributes="0"/>
+                      <EmptySpace pref="517" max="32767" attributes="0"/>
                       <Component id="jPaCerrarSesion" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
@@ -580,7 +580,7 @@
           <Color blue="a6" green="a4" red="a3" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Llena el formulario para editar la Nota de Cr&#xe9;dito en Compras."/>
+        <Property name="text" type="java.lang.String" value="Seleccione una compra y cambie el estado de esta"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="jPaCerrarSesion">

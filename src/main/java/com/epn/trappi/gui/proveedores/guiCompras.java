@@ -5,15 +5,8 @@
  */
 package com.epn.trappi.gui.proveedores;
 
-//import Conexiones.ConexionSQL;
-//import InterfacesAdministración.AsisInicio;
-//import InterfacesAdministración.InicioAdminUsuarios;
-//import InterfacesAdministración.Login;
-//import Validaciones.ValidacionPersonaNaturalesRUC;
-//import Validaciones.validarCampos;
-//import Validaciones.validarFecha;
-
-import java.sql.SQLException;
+import com.epn.trappi.db.proveedores.ProveedoresDb;
+import com.epn.trappi.models.proveedores.Compra;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,6 +23,8 @@ public class guiCompras extends javax.swing.JFrame {
      * Creates new form ContribuyentesPrincipal
      */
     DefaultTableModel modelo;
+    private final ProveedoresDb db = new ProveedoresDb();
+    
     public guiCompras() {
        initComponents();
        this.setSize(1366, 768);   
@@ -43,13 +38,15 @@ public class guiCompras extends javax.swing.JFrame {
         String[] titulos = {"Número de Compra","Cantidad","Proveedor","Fecha","Estado","Monto"};
         String[] fila = new String [6];
         modelo = new DefaultTableModel(null, titulos);
-        fila[0]= 
-        fila[1]= 
-        fila[2]= 
-        fila[3]= 
-        fila[4]= 
-        fila[5]= 
-        modelo.addRow(fila);
+         for (Compra compra : db.getCompras()) {
+            /*fila[0]= "01";
+            fila[1]= compra.
+            fila[2]= compra.getListaCantidadDeBienes().getListaCantidadDeBienes().
+            fila[3]= 
+            fila[4]= 
+            fila[5]= 
+            modelo.addRow(fila);*/
+        }
         jTable1.setModel(modelo);
     }
 
@@ -410,7 +407,7 @@ public class guiCompras extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(163, 164, 166));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Llena el formulario para editar la Nota de Crédito en Compras.");
+        jLabel5.setText("Seleccione una compra y cambie el estado de esta");
 
         jPaCerrarSesion.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -604,7 +601,7 @@ public class guiCompras extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 410, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 517, Short.MAX_VALUE)
                         .addComponent(jPaCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PanelVerTodos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -637,30 +634,11 @@ public class guiCompras extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButClientesActionPerformed
-        if (jPanOpcNotasVenta.isVisible()){
-            jPanOpcNotasVenta.setVisible(false);
-        }
-           if (jPanOpcNotasCredito.isVisible()){
-            jPanOpcNotasCredito.setVisible(false);
-        }
-        if(jPanOpcFacturas.isVisible())
-            jPanOpcFacturas.setVisible(false);
-        else
-            jPanOpcFacturas.setVisible(true);
+
     }//GEN-LAST:event_jButClientesActionPerformed
 
     private void jButComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButComprasActionPerformed
-        if (jPanOpcFacturas.isVisible()){
-            jPanOpcFacturas.setVisible(false);
-        }
-        if (jPanOpcNotasCredito.isVisible()){
-            jPanOpcNotasCredito.setVisible(false);
-        }
-        if(jPanOpcNotasVenta.isVisible())
-            jPanOpcNotasVenta.setVisible(false);
-        else
-            jPanOpcNotasVenta.setVisible(true);
-        
+
     }//GEN-LAST:event_jButComprasActionPerformed
 
     private void jBCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCerrarSesionActionPerformed
@@ -668,24 +646,11 @@ public class guiCompras extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCerrarSesionActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        
-        if(jPaCerrarSesion.isVisible())
-            jPaCerrarSesion.setVisible(false);
-        else jPaCerrarSesion.setVisible(true);
-        
+
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jButventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButventasActionPerformed
-           if (jPanOpcNotasVenta.isVisible()){
-            jPanOpcNotasVenta.setVisible(false);
-        }
-           if (jPanOpcFacturas.isVisible()){
-            jPanOpcFacturas.setVisible(false);
-        }
-        if(jPanOpcNotasCredito.isVisible())
-            jPanOpcNotasCredito.setVisible(false);
-        else
-            jPanOpcNotasCredito.setVisible(true);
+
     }//GEN-LAST:event_jButventasActionPerformed
 
     private void jButRegFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegFacturaActionPerformed

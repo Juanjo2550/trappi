@@ -5,15 +5,10 @@
  */
 package com.epn.trappi.gui.proveedores;
 
-//import Conexiones.ConexionSQL;
-//import InterfacesAdministración.AsisInicio;
-//import InterfacesAdministración.InicioAdminUsuarios;
-//import InterfacesAdministración.Login;
-//import Validaciones.ValidacionPersonaNaturalesRUC;
-//import Validaciones.validarCampos;
-//import Validaciones.validarFecha;
-
-import java.sql.SQLException;
+import com.epn.trappi.db.proveedores.ProveedoresDb;
+import com.epn.trappi.models.proveedores.Producto;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -28,68 +23,25 @@ public class guiFormularioCompras extends javax.swing.JFrame {
     /**
      * Creates new form ContribuyentesPrincipal
      */
+    DefaultTableModel modelo;
+    private final ProveedoresDb db = new ProveedoresDb();
+    public ArrayList seleccionados= new ArrayList();
     public guiFormularioCompras() {
         initComponents();
-//        rsscalelabel.RSScaleLabel.setScaleLabel(jLSidimLogo, "src/Iconos/LogoSidim3670ab.png");
-        jPaCerrarSesion.setVisible(false);
         this.setSize(1366, 768);
-       jPanOpcFacturas.setVisible(false);
-       jPanOpcNotasCredito.setVisible(false);
-       jPanOpcNotasVenta.setVisible(false);
-      
-       
-      cmbTipoCompraCompNotaCred.setEnabled(false);
-       jTextRucCompNotaCred.setEnabled(false);
-       jTextRazSocCompNotaCred.setEnabled(false);
-       jTextNumFacCompNotaCred.setEnabled(false);
-       jTextBase12CompNotaCred.setEnabled(false);
-       jTextBase0CompNotaCred.setEnabled(false);
-       
-
-        
+        cargar();
     }
     
-    public void cargarCamposEnEditar(String buscar ) throws SQLException{        
-         
-    }
-     
-     
-      
-    
-    public String calcularIVA(String valorBase12){
-
-        double valor12 =0; 
-                valor12=Double.parseDouble(valorBase12);
-        double calcular =0; 
-                calcular=valor12*(0.12);
-                
-                calcular = (double)Math.round(calcular * 100d) / 100d;
-        String IVA =""+calcular;
-        
-        return IVA;
-    }
-    
-    public String calcularValorTotal(String valorBase0,String valorBase12){
-        double valor0 = 0;
-             valor0 =   Double.parseDouble(valorBase0);
-        double valor12 =0;
-                valor12=Double.parseDouble(valorBase12);
-        
-        double IVA = 0;
-                IVA=valor12*0.12;
-        System.out.println(IVA);
-        double calcular = 0;
-                calcular=valor12+valor0+IVA;
-                
-              calcular = (double)Math.round(calcular * 100d) / 100d;
-      
-        
-        String valorTotal =""+calcular;
-        return valorTotal;
-    }
-      
-    public void ActualizarNotaCredito(){
-      
+    public void cargar(){
+        String[] titulos = {"Producto","Precio unitario"};
+        String[] fila = new String [2];
+        modelo = new DefaultTableModel(null, titulos);
+        for (Producto producto : db.getProductos()) {
+            fila[0]= producto.getNombre();
+            fila[1]= ""+producto.getPrecio();
+            modelo.addRow(fila);
+        }
+        jTable1.setModel(modelo);
     }
 
     /**
@@ -106,8 +58,6 @@ public class guiFormularioCompras extends javax.swing.JFrame {
         jLSidimLogo = new javax.swing.JLabel();
         jPMod = new javax.swing.JPanel();
         jLabNombreContribuyente = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         jPanOpcionesDeclaracion = new javax.swing.JPanel();
         jButClientes = new javax.swing.JButton();
         jButCompras = new javax.swing.JButton();
@@ -128,9 +78,14 @@ public class guiFormularioCompras extends javax.swing.JFrame {
         jBCerrarSesion = new javax.swing.JButton();
         PanelVerTodos = new javax.swing.JPanel();
         jButRegFactCompNotaCred = new javax.swing.JButton();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jIVA = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jTextFechCompNotaCred = new javax.swing.JTextField();
+        jButRegFactCompNotaCred1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel10 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -171,21 +126,6 @@ public class guiFormularioCompras extends javax.swing.JFrame {
         jLabNombreContribuyente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabNombreContribuyente.setText("Juan Perez");
 
-        jButton1.setBackground(new java.awt.Color(38, 35, 36));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(240, 240, 241));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/iconBack48x48.png"))); // NOI18N
-        jButton1.setText("Volver");
-        jButton1.setBorderPainted(false);
-        jButton1.setFocusPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/iconUser48x48.png"))); // NOI18N
-
         jPanOpcionesDeclaracion.setBackground(new java.awt.Color(51, 51, 51));
 
         jButClientes.setBackground(new java.awt.Color(38, 35, 36));
@@ -195,6 +135,11 @@ public class guiFormularioCompras extends javax.swing.JFrame {
         jButClientes.setText("      Facturas       ");
         jButClientes.setBorderPainted(false);
         jButClientes.setFocusPainted(false);
+        jButClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButClientesActionPerformed(evt);
+            }
+        });
 
         jButCompras.setBackground(new java.awt.Color(38, 35, 36));
         jButCompras.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -398,10 +343,7 @@ public class guiFormularioCompras extends javax.swing.JFrame {
             jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPModLayout.createSequentialGroup()
                 .addComponent(jLabNombreContribuyente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addGap(10, 10, 10))
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(16, 16, 16))
             .addGroup(jPModLayout.createSequentialGroup()
                 .addComponent(jPanOpcionesDeclaracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -414,16 +356,12 @@ public class guiFormularioCompras extends javax.swing.JFrame {
             jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPModLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabNombreContribuyente, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabNombreContribuyente, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabNombreContribuyente1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanOpcionesDeclaracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 35)); // NOI18N
@@ -474,13 +412,76 @@ public class guiFormularioCompras extends javax.swing.JFrame {
             }
         });
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel14.setText("IVA: ");
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel8.setText("Buscar Compra");
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel12.setText("Tipo de Compra:");
+        jTextFechCompNotaCred.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFechCompNotaCredActionPerformed(evt);
+            }
+        });
+        jTextFechCompNotaCred.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFechCompNotaCredKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFechCompNotaCredKeyTyped(evt);
+            }
+        });
 
-        jIVA.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButRegFactCompNotaCred1.setBackground(new java.awt.Color(38, 112, 171));
+        jButRegFactCompNotaCred1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButRegFactCompNotaCred1.setForeground(new java.awt.Color(240, 240, 241));
+        jButRegFactCompNotaCred1.setText("Buscar");
+        jButRegFactCompNotaCred1.setBorderPainted(false);
+        jButRegFactCompNotaCred1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButRegFactCompNotaCred1ActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel10.setText("Añadir");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 902, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(jLabel10)
+                .addGap(33, 33, 33)
+                .addComponent(jCheckBox1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39))
+        );
 
         javax.swing.GroupLayout PanelVerTodosLayout = new javax.swing.GroupLayout(PanelVerTodos);
         PanelVerTodos.setLayout(PanelVerTodosLayout);
@@ -488,30 +489,31 @@ public class guiFormularioCompras extends javax.swing.JFrame {
             PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelVerTodosLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jButRegFactCompNotaCred)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(PanelVerTodosLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelVerTodosLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel12)
-                        .addGap(259, 259, 259))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
                     .addGroup(PanelVerTodosLayout.createSequentialGroup()
-                        .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelVerTodosLayout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButRegFactCompNotaCred))
-                        .addGap(0, 680, Short.MAX_VALUE))))
+                        .addComponent(jTextFechCompNotaCred, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54)
+                        .addComponent(jButRegFactCompNotaCred1)))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         PanelVerTodosLayout.setVerticalGroup(
             PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelVerTodosLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 377, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addGap(8, 8, 8)
                 .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(jIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                    .addComponent(jTextFechCompNotaCred, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButRegFactCompNotaCred1))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(jButRegFactCompNotaCred)
                 .addGap(23, 23, 23))
         );
@@ -541,22 +543,20 @@ public class guiFormularioCompras extends javax.swing.JFrame {
                 .addComponent(jPEncabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPMod, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPaCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(PanelVerTodos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPaCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPMod, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(PanelVerTodos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButComprasActionPerformed
         if (jPanOpcFacturas.isVisible()){
@@ -624,6 +624,26 @@ public class guiFormularioCompras extends javax.swing.JFrame {
     private void jButRegFactCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegFactCompNotaCredActionPerformed
 
     }//GEN-LAST:event_jButRegFactCompNotaCredActionPerformed
+
+    private void jTextFechCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFechCompNotaCredActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFechCompNotaCredActionPerformed
+
+    private void jTextFechCompNotaCredKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFechCompNotaCredKeyPressed
+
+    }//GEN-LAST:event_jTextFechCompNotaCredKeyPressed
+
+    private void jTextFechCompNotaCredKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFechCompNotaCredKeyTyped
+
+    }//GEN-LAST:event_jTextFechCompNotaCredKeyTyped
+
+    private void jButRegFactCompNotaCred1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegFactCompNotaCred1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButRegFactCompNotaCred1ActionPerformed
+
+    private void jButClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButClientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButClientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2713,24 +2733,23 @@ public class guiFormularioCompras extends javax.swing.JFrame {
     private javax.swing.JButton jButClientes;
     private javax.swing.JButton jButCompras;
     private javax.swing.JButton jButRegFactCompNotaCred;
+    private javax.swing.JButton jButRegFactCompNotaCred1;
     private javax.swing.JButton jButRegFactura;
     private javax.swing.JButton jButRegNotasCredito;
     private javax.swing.JButton jButRegNotasVenta;
     private javax.swing.JButton jButVerTodFactura;
     private javax.swing.JButton jButVerTodNotasCredito;
     private javax.swing.JButton jButVerTodNotasVenta;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButventas;
-    private javax.swing.JLabel jIVA;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLSidimLogo;
     private javax.swing.JLabel jLabNombreContribuyente;
     private javax.swing.JLabel jLabNombreContribuyente1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPEncabezado;
     private javax.swing.JPanel jPMod;
     private javax.swing.JPanel jPaCerrarSesion;
@@ -2738,5 +2757,9 @@ public class guiFormularioCompras extends javax.swing.JFrame {
     private javax.swing.JPanel jPanOpcNotasCredito;
     private javax.swing.JPanel jPanOpcNotasVenta;
     private javax.swing.JPanel jPanOpcionesDeclaracion;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextFechCompNotaCred;
     // End of variables declaration//GEN-END:variables
 }
