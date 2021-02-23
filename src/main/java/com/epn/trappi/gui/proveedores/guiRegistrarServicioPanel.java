@@ -9,38 +9,39 @@ import com.epn.trappi.db.proveedores.ProveedoresDb;
 import com.epn.trappi.models.proveedores.ListaProveedores;
 import com.epn.trappi.models.proveedores.Producto;
 import com.epn.trappi.models.proveedores.Proveedor;
+import com.epn.trappi.models.proveedores.Servicio;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Peterca
  */
-public class guiRegistrarProductoPanel extends javax.swing.JPanel {
-    
+public class guiRegistrarServicioPanel extends javax.swing.JPanel {
+
     ProveedoresDb db = new ProveedoresDb();
     ListaProveedores listaProveedores = new ListaProveedores();
 
     /**
      * Creates new form guiRegistrarProductoPanel
      */
-    public guiRegistrarProductoPanel() {
+    public guiRegistrarServicioPanel() {
         initComponents();
         cargarProveedor();
     }
-    
+
     private void cargarProveedor() {
         listaProveedores.getListaDeProveedores().forEach(prov -> {
             cmbProvedor.addItem(prov.getRazonSocial());
         });
     }
-    
+
     private boolean validarNombre(String direccion) {
         if (direccion.length() > 50 || direccion.trim().equals("")) {
             return false;
         }
         return direccion.matches("[[0-9]*[ ]]*[A-Za-zñÑÁÉÍÓÚáéíóú]+[0-9]*[[ ][A-Za-zñÑÁÉÍÓÚáéíóú]+[0-9]*]*");
     }
-    
+
     private boolean validarPrecio(String precio) {
         try {
             Double.parseDouble(precio);
@@ -49,7 +50,7 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
             return false;
         }
     }
-    
+
     private Proveedor obtenerProveedor(String nombre) {
         Proveedor resultado = null;
         for (Proveedor proveedor : this.listaProveedores.getListaDeProveedores()) {
@@ -197,18 +198,18 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
         String precio;
         String prov;
         Proveedor proveedor;
-        
+
         nombre = txtNombre.getText();
         precio = txtPrecio.getText();
         prov = cmbProvedor.getSelectedItem().toString();
-        
+
         if (validarNombre(nombre)) {
             try {
                 if (validarPrecio(precio)) {
                     proveedor = obtenerProveedor(prov);
-                    Producto nuevoP = new Producto(nombre, Double.parseDouble(precio), proveedor);
+                    Servicio nuevoP = new Servicio(nombre, Double.parseDouble(precio), proveedor);
                     nuevoP.registrar();
-                    JOptionPane.showMessageDialog(null, "Producto registrado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Servicio registrado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                     txtNombre.setText("");
                     txtPrecio.setText("");
                     cmbProvedor.setSelectedIndex(0);
@@ -219,7 +220,7 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
                 System.out.println(e.toString());
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Nombre de producto incorrecto.", "Error", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Nombre de servicio incorrecto.", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnRegistrarProductoActionPerformed
 

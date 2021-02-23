@@ -8,15 +8,15 @@ package com.epn.trappi.gui.proveedores;
 import com.epn.trappi.db.proveedores.ProveedoresDb;
 import com.epn.trappi.models.proveedores.ListaProveedores;
 import com.epn.trappi.models.proveedores.Producto;
+import com.epn.trappi.models.proveedores.Servicio;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Peterca
  */
-public class guiListaProductosPanel extends javax.swing.JPanel {
+public class guiListaServiciosPanel extends javax.swing.JPanel {
 
     DefaultTableModel modelo;
     private final ProveedoresDb db = new ProveedoresDb();
@@ -26,9 +26,9 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
     /**
      * Creates new form guiListaProductosPanel
      */
-    public guiListaProductosPanel() {
+    public guiListaServiciosPanel() {
         initComponents();
-        cargarProductos();
+        cargarServicios();
         cargarProveedor();
     }
 
@@ -38,14 +38,14 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
         });
     }
 
-    private void cargarProductos() {
+    public void cargarServicios() {
         String[] titulos = {"Nombre Producto", "Precio unitario", "Proveedor", "Acción"};
         String[] fila = new String[3];
         modelo = new DefaultTableModel(null, titulos);
-        for (Producto producto : db.getProductos()) {
-            fila[0] = producto.getNombre();
-            fila[1] = "" + producto.getPrecio();
-            fila[2] = "" + producto.getProveeedor().getRazonSocial();
+        for (Servicio servicio : db.getServicios()) {
+            fila[0] = servicio.getNombre();
+            fila[1] = "" + servicio.getPrecio();
+            fila[2] = "" + servicio.getProveeedor().getRazonSocial();
             modelo.addRow(fila);
         }
         jtbProductos.setModel(modelo);
@@ -209,7 +209,7 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
                         .addComponent(txtBuscarRUC, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 51, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(cmbProveedores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         PanelVerTodosLayout.setVerticalGroup(
@@ -234,7 +234,7 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
                 .addComponent(jLabel13)
                 .addGap(18, 18, 18)
                 .addComponent(cmbProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnActualizar)
                 .addContainerGap())
         );
