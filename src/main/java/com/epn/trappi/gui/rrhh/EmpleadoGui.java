@@ -3,25 +3,71 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.epn.trappi.gui.rrhh.Permisos;
+package com.epn.trappi.gui.rrhh;
 
 
-import com.epn.trappi.gui.rrhh.*;
 import com.epn.trappi.*;
 import java.awt.Color;
+import com.epn.trappi.db.rrhh.*;
+import com.epn.trappi.models.rrhh.*;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author stali
  */
-public class GUI_Gestor_Permiso extends javax.swing.JFrame {
-
+public class EmpleadoGui extends javax.swing.JFrame {
+    private ListaEmpleados empleados;
     /**
      * Creates new form Ejemplo_GUI
      */
-    public GUI_Gestor_Permiso() {
+    public EmpleadoGui() {
         initComponents();
+        EmpleadoDb db = new EmpleadoDb();
+        this.empleados = db.selectAll();
+        fillTable();
     }
+    
+    
+    public final void fillTable() {
+        String col [] = {
+            "Cedula",
+            "Nombres",
+            "Apellidos",
+            "Cargo",
+            "Departamento",
+            "Cuenta Bancaria",
+            "Banco",
+            "Sueldo",
+            "Estado",
+            "Sexo"
+        };
+        DefaultTableModel tableModel = new DefaultTableModel(col, 0);
+        for(Empleado empleado : this.empleados.obtenerTodos()) {
+            Object [] row = {
+                empleado.getCedula(),
+                empleado.getNombres(),
+                empleado.getApellidos(),
+                empleado.getCargo(),
+                empleado.getDepartamento(),
+                empleado.getCuentaBancaria(),
+                empleado.getBanco(),
+                empleado.getSueldo().calcularValor(),
+                empleado.getEstado(),
+                empleado.getSexo()
+            };
+            tableModel.addRow(row);
+        }
+        
+        this.tablaEmpleados.setModel(tableModel);
+        this.tablaEmpleados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.tablaEmpleados.setDefaultEditor(Object.class, null);
+        this.tablaEmpleados.setRowSelectionAllowed(true);
+        this.tablaEmpleados.setColumnSelectionAllowed(false);
+        this.tablaEmpleados.getColumnModel().getColumn(0).setPreferredWidth(2);
+    }
+    
     boolean bandera = false;
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,14 +86,11 @@ public class GUI_Gestor_Permiso extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        listaEmpleadosButton = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
-        lblGestorPermisos = new javax.swing.JLabel();
-        lblNombreEmpleado = new javax.swing.JLabel();
-        lblEnunciado = new javax.swing.JLabel();
-        txtNombreEmpleado = new javax.swing.JTextField();
-        lblNombreEmpleado1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaEmpleados = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,9 +144,14 @@ public class GUI_Gestor_Permiso extends javax.swing.JFrame {
         jButton2.setForeground(new java.awt.Color(51, 51, 51));
         jButton2.setText("Registrar Empleado");
 
-        jButton3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(51, 51, 51));
-        jButton3.setText("Lista de Empleados");
+        listaEmpleadosButton.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        listaEmpleadosButton.setForeground(new java.awt.Color(51, 51, 51));
+        listaEmpleadosButton.setText("Lista de Empleados");
+        listaEmpleadosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaEmpleadosButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -113,7 +161,7 @@ public class GUI_Gestor_Permiso extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(listaEmpleadosButton, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -121,7 +169,7 @@ public class GUI_Gestor_Permiso extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(listaEmpleadosButton)
                 .addGap(0, 48, Short.MAX_VALUE))
         );
 
@@ -156,27 +204,28 @@ public class GUI_Gestor_Permiso extends javax.swing.JFrame {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 407, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 419, Short.MAX_VALUE)
                 .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        lblGestorPermisos.setFont(new java.awt.Font("Tahoma", 1, 35)); // NOI18N
-        lblGestorPermisos.setForeground(new java.awt.Color(102, 102, 102));
-        lblGestorPermisos.setText("GESTOR DE PERMISOS");
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 35)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(38, 35, 36));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Lista de Empleados");
 
-        lblNombreEmpleado.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblNombreEmpleado.setText("Tipo de Permiso:");
-
-        lblEnunciado.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblEnunciado.setForeground(new java.awt.Color(163, 164, 166));
-        lblEnunciado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblEnunciado.setText("LLene el formulario para registrar un Permiso");
-
-        lblNombreEmpleado1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblNombreEmpleado1.setText("Nombre del Empleado:");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "vacaciones", "Situacion Medica", "Calamidad Domestica", "Nacimiento de Hijo" }));
+        tablaEmpleados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaEmpleados);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -185,41 +234,26 @@ public class GUI_Gestor_Permiso extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblGestorPermisos)
-                    .addComponent(lblEnunciado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblNombreEmpleado1)
-                    .addComponent(txtNombreEmpleado))
-                .addGap(67, 67, 67)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblNombreEmpleado)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1002, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(lblGestorPermisos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblEnunciado, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblNombreEmpleado1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNombreEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblNombreEmpleado)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel4)
+                        .addGap(47, 47, 47)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -242,6 +276,10 @@ public class GUI_Gestor_Permiso extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVolverActionPerformed
 
+    private void listaEmpleadosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaEmpleadosButtonActionPerformed
+
+    }//GEN-LAST:event_listaEmpleadosButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -259,14 +297,42 @@ public class GUI_Gestor_Permiso extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUI_Gestor_Permiso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EmpleadoGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUI_Gestor_Permiso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EmpleadoGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUI_Gestor_Permiso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EmpleadoGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUI_Gestor_Permiso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EmpleadoGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -275,7 +341,7 @@ public class GUI_Gestor_Permiso extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUI_Gestor_Permiso().setVisible(true);
+                new EmpleadoGui().setVisible(true);
             }
         });
     }
@@ -284,18 +350,15 @@ public class GUI_Gestor_Permiso extends javax.swing.JFrame {
     private javax.swing.JButton btnVolver;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JLabel lblEnunciado;
-    private javax.swing.JLabel lblGestorPermisos;
-    private javax.swing.JLabel lblNombreEmpleado;
-    private javax.swing.JLabel lblNombreEmpleado1;
-    private javax.swing.JTextField txtNombreEmpleado;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton listaEmpleadosButton;
+    private javax.swing.JTable tablaEmpleados;
     // End of variables declaration//GEN-END:variables
 }

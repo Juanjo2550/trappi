@@ -9,6 +9,7 @@ package com.epn.trappi.models.rrhh;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import com.epn.trappi.db.rrhh.*;
 
 /**
  * 
@@ -26,10 +27,30 @@ public class ListaEmpleados {
         this.lista.forEach((u, v) -> temp.add(v));
         return temp;
     }
-    
-    public Empleado agregar (Empleado nuevoRol) {
-        this.lista.put(nuevoRol.getCedula(), nuevoRol);
-        return nuevoRol;
+
+    /**
+     * Este método se utiliza para agregar un empleado a la base de datos
+     * Debe ser utilizado por el submódulo de contratación
+     * @param nuevoEmpleado
+     * @param sueldo
+     * @return
+     */
+    public Empleado agregar (Empleado nuevoEmpleado, Sueldo sueldo) {
+        this.lista.put(nuevoEmpleado.getCedula(), nuevoEmpleado);
+        EmpleadoDb empleadoDb = new EmpleadoDb();
+        empleadoDb.addOne(nuevoEmpleado, sueldo);
+        return nuevoEmpleado;
+    }
+
+    /**
+     * Este método no debe ser utilizado ya que no realiza cambios en la base de datos
+     * Se utiliza solo como una estructura de datos
+     * @param nuevoEmpleado
+     * @return
+     */
+    public Empleado agregar (Empleado nuevoEmpleado) {
+        this.lista.put(nuevoEmpleado.getCedula(), nuevoEmpleado);
+        return nuevoEmpleado;
     }
     
     public Empleado buscarUno(int numero) {

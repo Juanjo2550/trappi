@@ -18,6 +18,12 @@ public class RegistroAsistencia {
        this.horaInicio = horaInicio;
        this.fecha = fecha;
    }
+
+    public RegistroAsistencia(Hora horaInicio, Fecha fecha, Hora horaSalida) {
+        this.horaInicio = horaInicio;
+        this.fecha = fecha;
+        this.horaSalida = horaSalida;
+    }
  
     public void setFecha(Fecha fecha) {
         this.fecha = fecha;

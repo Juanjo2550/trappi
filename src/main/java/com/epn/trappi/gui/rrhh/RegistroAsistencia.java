@@ -13,13 +13,16 @@ import java.awt.Color;
  *
  * @author stali
  */
-public class Contratos extends javax.swing.JFrame {
+public class RegistroAsistencia extends javax.swing.JFrame {
 
     /**
      * Creates new form Ejemplo_GUI
      */
-    public Contratos() {
+    public RegistroAsistencia() {
         initComponents();
+     
+        jButSalida.setEnabled(false);
+        jButSalida.setEnabled(false);
     }
     
     /**
@@ -40,12 +43,22 @@ public class Contratos extends javax.swing.JFrame {
         btnVolver = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        PanelAspirante = new javax.swing.JPanel();
-        jButRegCliente2 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jButton7 = new javax.swing.JButton();
+        PanelAsistencia = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jTextNombreAspirante = new javax.swing.JTextField();
+        jButSalida = new javax.swing.JButton();
+        jButEntrada = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jTextCedulaAspirante = new javax.swing.JTextField();
+        jTextApellidoAspirante = new javax.swing.JTextField();
+        jTextCargoAspirante = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -123,13 +136,13 @@ public class Contratos extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(204, 153, 0));
-        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(51, 51, 51));
-        jButton2.setText("Asistencia");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton7.setBackground(new java.awt.Color(204, 153, 0));
+        jButton7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(51, 51, 51));
+        jButton7.setText("Asistencia");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton7ActionPerformed(evt);
             }
         });
 
@@ -144,8 +157,8 @@ public class Contratos extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -153,10 +166,10 @@ public class Contratos extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -165,44 +178,112 @@ public class Contratos extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        PanelAspirante.setBackground(new java.awt.Color(255, 255, 255));
-        PanelAspirante.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PanelAsistencia.setBackground(new java.awt.Color(255, 255, 255));
+        PanelAsistencia.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButRegCliente2.setBackground(new java.awt.Color(38, 112, 171));
-        jButRegCliente2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButRegCliente2.setForeground(new java.awt.Color(240, 240, 241));
-        jButRegCliente2.setText("Ver");
-        jButRegCliente2.setBorderPainted(false);
-        jButRegCliente2.addActionListener(new java.awt.event.ActionListener() {
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setText("Nombre:");
+        PanelAsistencia.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, 20));
+
+        jTextNombreAspirante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButRegCliente2ActionPerformed(evt);
+                jTextNombreAspiranteActionPerformed(evt);
             }
         });
-        PanelAspirante.add(jButRegCliente2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 180, -1));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Id", "Nombre", "Apellidos", "Cédula", "Cargo", "Fecha Inicio", "Fecha Fin", "Tipo"
+        jTextNombreAspirante.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextNombreAspiranteKeyTyped(evt);
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(7).setResizable(false);
-        }
+        });
+        PanelAsistencia.add(jTextNombreAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 520, 28));
 
-        PanelAspirante.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 860, 450));
+        jButSalida.setBackground(new java.awt.Color(0, 153, 153));
+        jButSalida.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButSalida.setForeground(new java.awt.Color(240, 240, 241));
+        jButSalida.setText("Salida");
+        jButSalida.setBorderPainted(false);
+        jButSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButSalidaActionPerformed(evt);
+            }
+        });
+        PanelAsistencia.add(jButSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 390, 180, 90));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 35)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(38, 35, 36));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Contratos Empleados");
-        PanelAspirante.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        jButEntrada.setBackground(new java.awt.Color(38, 112, 171));
+        jButEntrada.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButEntrada.setForeground(new java.awt.Color(240, 240, 241));
+        jButEntrada.setText("Entrada");
+        jButEntrada.setBorderPainted(false);
+        jButEntrada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButEntradaActionPerformed(evt);
+            }
+        });
+        PanelAsistencia.add(jButEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, 180, 90));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setText("Apellidos:");
+        PanelAsistencia.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, 20));
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setText("Cédula:");
+        PanelAsistencia.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, -1));
+
+        jTextCedulaAspirante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextCedulaAspiranteActionPerformed(evt);
+            }
+        });
+        jTextCedulaAspirante.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextCedulaAspiranteKeyTyped(evt);
+            }
+        });
+        PanelAsistencia.add(jTextCedulaAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 230, 28));
+
+        jTextApellidoAspirante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextApellidoAspiranteActionPerformed(evt);
+            }
+        });
+        jTextApellidoAspirante.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextApellidoAspiranteKeyTyped(evt);
+            }
+        });
+        PanelAsistencia.add(jTextApellidoAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 520, 28));
+
+        jTextCargoAspirante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextCargoAspiranteActionPerformed(evt);
+            }
+        });
+        jTextCargoAspirante.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextCargoAspiranteKeyTyped(evt);
+            }
+        });
+        PanelAsistencia.add(jTextCargoAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, 170, 28));
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel18.setText("Cargo:");
+        PanelAsistencia.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, -1, -1));
+
+        jPanel3.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Control registro de empleados");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 510, 40));
+
+        PanelAsistencia.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 100));
+
+        jLabel4.setText("Hora de Entrada:");
+        PanelAsistencia.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, -1, -1));
+
+        jLabel5.setText("Hora de Salida:");
+        PanelAsistencia.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -212,7 +293,7 @@ public class Contratos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(PanelAspirante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PanelAsistencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -221,9 +302,11 @@ public class Contratos extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(PanelAspirante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(46, 46, 46)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(PanelAsistencia, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
                         .addContainerGap())))
         );
 
@@ -244,19 +327,56 @@ public class Contratos extends javax.swing.JFrame {
         new ContratarAspirante().setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButRegCliente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegCliente2ActionPerformed
-        new VistaContrato().setVisible(true);
-    }//GEN-LAST:event_jButRegCliente2ActionPerformed
+    private void jButSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButSalidaActionPerformed
+
+    }//GEN-LAST:event_jButSalidaActionPerformed
+
+    private void jTextNombreAspiranteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNombreAspiranteKeyTyped
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jTextNombreAspiranteKeyTyped
+
+    private void jTextNombreAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNombreAspiranteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextNombreAspiranteActionPerformed
+
+    private void jButEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButEntradaActionPerformed
+      
+    }//GEN-LAST:event_jButEntradaActionPerformed
+
+    private void jTextCedulaAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCedulaAspiranteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextCedulaAspiranteActionPerformed
+
+    private void jTextCedulaAspiranteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCedulaAspiranteKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextCedulaAspiranteKeyTyped
+
+    private void jTextApellidoAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextApellidoAspiranteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextApellidoAspiranteActionPerformed
+
+    private void jTextApellidoAspiranteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextApellidoAspiranteKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextApellidoAspiranteKeyTyped
+
+    private void jTextCargoAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCargoAspiranteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextCargoAspiranteActionPerformed
+
+    private void jTextCargoAspiranteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCargoAspiranteKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextCargoAspiranteKeyTyped
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         this.setVisible(false);
         new Contratos().setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
        this.setVisible(false);
         new RegistroAsistencia().setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -275,13 +395,13 @@ public class Contratos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Contratos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroAsistencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Contratos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroAsistencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Contratos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroAsistencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Contratos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroAsistencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -303,26 +423,36 @@ public class Contratos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Contratos().setVisible(true);
+                new RegistroAsistencia().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel PanelAspirante;
+    private javax.swing.JPanel PanelAsistencia;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JButton jButRegCliente2;
+    private javax.swing.JButton jButEntrada;
+    private javax.swing.JButton jButSalida;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JTextField jTextApellidoAspirante;
+    private javax.swing.JTextField jTextCargoAspirante;
+    private javax.swing.JTextField jTextCedulaAspirante;
+    private javax.swing.JTextField jTextNombreAspirante;
     // End of variables declaration//GEN-END:variables
 }
