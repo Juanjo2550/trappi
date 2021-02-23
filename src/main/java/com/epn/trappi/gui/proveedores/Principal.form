@@ -29,8 +29,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelTitulo" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelSubTitulo" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="326" max="32767" attributes="0"/>
                       <Component id="jPaCerrarSesion" min="-2" max="-2" attributes="0"/>
@@ -53,9 +53,9 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel4" min="-2" pref="44" max="-2" attributes="0"/>
+                              <Component id="labelTitulo" min="-2" pref="44" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                              <Component id="jLabel5" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="labelSubTitulo" min="-2" pref="37" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jPaCerrarSesion" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -404,8 +404,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jButVerTodNotasCredito" alignment="0" min="-2" pref="231" max="-2" attributes="0"/>
-                              <Component id="jButRegNotasCredito" alignment="0" min="-2" pref="231" max="-2" attributes="0"/>
+                              <Component id="jButListarProductos" alignment="0" min="-2" pref="231" max="-2" attributes="0"/>
+                              <Component id="jButRegistrarProducto" alignment="0" min="-2" pref="231" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -414,15 +414,15 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jButRegNotasCredito" min="-2" pref="29" max="-2" attributes="0"/>
+                          <Component id="jButRegistrarProducto" min="-2" pref="29" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButVerTodNotasCredito" min="-2" pref="29" max="-2" attributes="0"/>
+                          <Component id="jButListarProductos" min="-2" pref="29" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JButton" name="jButRegNotasCredito">
+                <Component class="javax.swing.JButton" name="jButRegistrarProducto">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="55" green="55" red="55" type="rgb"/>
@@ -433,15 +433,15 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f1" green="f0" red="f0" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Registrar"/>
+                    <Property name="text" type="java.lang.String" value="Registrar Producto"/>
                     <Property name="borderPainted" type="boolean" value="false"/>
                     <Property name="focusPainted" type="boolean" value="false"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButRegNotasCreditoActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButRegistrarProductoActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButVerTodNotasCredito">
+                <Component class="javax.swing.JButton" name="jButListarProductos">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="55" green="55" red="55" type="rgb"/>
@@ -452,12 +452,12 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f1" green="f0" red="f0" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Ver Todos"/>
+                    <Property name="text" type="java.lang.String" value="Lista Productos"/>
                     <Property name="borderPainted" type="boolean" value="false"/>
                     <Property name="focusPainted" type="boolean" value="false"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButVerTodNotasCreditoActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButListarProductosActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -619,7 +619,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="jLabel4">
+    <Component class="javax.swing.JLabel" name="labelTitulo">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="35" style="1"/>
@@ -631,7 +631,7 @@
         <Property name="text" type="java.lang.String" value="Editar Nota de Cr&#xe9;dito"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
+    <Component class="javax.swing.JLabel" name="labelSubTitulo">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="1"/>

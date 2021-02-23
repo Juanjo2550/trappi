@@ -42,6 +42,11 @@ public class Principal extends javax.swing.JFrame {
         });
     }
 
+    private void ponerTituloYsub(String titulo, String subtitulo) {
+        labelTitulo.setText(titulo);
+        labelSubTitulo.setText(subtitulo);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,8 +69,8 @@ public class Principal extends javax.swing.JFrame {
         jButRegNotasVenta = new javax.swing.JButton();
         jButVerTodNotasVenta = new javax.swing.JButton();
         jPanOpcProductos = new javax.swing.JPanel();
-        jButRegNotasCredito = new javax.swing.JButton();
-        jButVerTodNotasCredito = new javax.swing.JButton();
+        jButRegistrarProducto = new javax.swing.JButton();
+        jButListarProductos = new javax.swing.JButton();
         jButInventario = new javax.swing.JButton();
         jPanOpcServicios = new javax.swing.JPanel();
         jButRegNotasCredito1 = new javax.swing.JButton();
@@ -74,8 +79,8 @@ public class Principal extends javax.swing.JFrame {
         jButDashboard = new javax.swing.JButton();
         jButRealizarCompras = new javax.swing.JButton();
         jLabNombreContribuyente1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        labelTitulo = new javax.swing.JLabel();
+        labelSubTitulo = new javax.swing.JLabel();
         jPaCerrarSesion = new javax.swing.JPanel();
         jBCerrarSesion = new javax.swing.JButton();
         PanelVerTodos = new javax.swing.JPanel();
@@ -215,27 +220,27 @@ public class Principal extends javax.swing.JFrame {
 
         jPanOpcProductos.setBackground(new java.awt.Color(51, 51, 51));
 
-        jButRegNotasCredito.setBackground(new java.awt.Color(85, 85, 85));
-        jButRegNotasCredito.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButRegNotasCredito.setForeground(new java.awt.Color(240, 240, 241));
-        jButRegNotasCredito.setText("Registrar");
-        jButRegNotasCredito.setBorderPainted(false);
-        jButRegNotasCredito.setFocusPainted(false);
-        jButRegNotasCredito.addActionListener(new java.awt.event.ActionListener() {
+        jButRegistrarProducto.setBackground(new java.awt.Color(85, 85, 85));
+        jButRegistrarProducto.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButRegistrarProducto.setForeground(new java.awt.Color(240, 240, 241));
+        jButRegistrarProducto.setText("Registrar Producto");
+        jButRegistrarProducto.setBorderPainted(false);
+        jButRegistrarProducto.setFocusPainted(false);
+        jButRegistrarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButRegNotasCreditoActionPerformed(evt);
+                jButRegistrarProductoActionPerformed(evt);
             }
         });
 
-        jButVerTodNotasCredito.setBackground(new java.awt.Color(85, 85, 85));
-        jButVerTodNotasCredito.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButVerTodNotasCredito.setForeground(new java.awt.Color(240, 240, 241));
-        jButVerTodNotasCredito.setText("Ver Todos");
-        jButVerTodNotasCredito.setBorderPainted(false);
-        jButVerTodNotasCredito.setFocusPainted(false);
-        jButVerTodNotasCredito.addActionListener(new java.awt.event.ActionListener() {
+        jButListarProductos.setBackground(new java.awt.Color(85, 85, 85));
+        jButListarProductos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButListarProductos.setForeground(new java.awt.Color(240, 240, 241));
+        jButListarProductos.setText("Lista Productos");
+        jButListarProductos.setBorderPainted(false);
+        jButListarProductos.setFocusPainted(false);
+        jButListarProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButVerTodNotasCreditoActionPerformed(evt);
+                jButListarProductosActionPerformed(evt);
             }
         });
 
@@ -245,16 +250,16 @@ public class Principal extends javax.swing.JFrame {
             jPanOpcProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanOpcProductosLayout.createSequentialGroup()
                 .addGroup(jPanOpcProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButVerTodNotasCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButRegNotasCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButListarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButRegistrarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanOpcProductosLayout.setVerticalGroup(
             jPanOpcProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanOpcProductosLayout.createSequentialGroup()
-                .addComponent(jButRegNotasCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButRegistrarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButVerTodNotasCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButListarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jButInventario.setBackground(new java.awt.Color(38, 35, 36));
@@ -431,15 +436,15 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 35)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(38, 35, 36));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Editar Nota de Crédito");
+        labelTitulo.setFont(new java.awt.Font("Tahoma", 1, 35)); // NOI18N
+        labelTitulo.setForeground(new java.awt.Color(38, 35, 36));
+        labelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelTitulo.setText("Editar Nota de Crédito");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(163, 164, 166));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Llena el formulario para editar la Nota de Crédito en Compras.");
+        labelSubTitulo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        labelSubTitulo.setForeground(new java.awt.Color(163, 164, 166));
+        labelSubTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelSubTitulo.setText("Llena el formulario para editar la Nota de Crédito en Compras.");
 
         jPaCerrarSesion.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -485,8 +490,8 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
+                            .addComponent(labelTitulo)
+                            .addComponent(labelSubTitulo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 326, Short.MAX_VALUE)
                         .addComponent(jPaCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -503,9 +508,9 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(2, 2, 2)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(labelSubTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jPaCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(PanelVerTodos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -551,19 +556,23 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButRegNotasVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegNotasVentaActionPerformed
         new CambiaPanel(PanelVerTodos, new guiProveedores());
+        ponerTituloYsub("Proveedores", "Llena el formulario para registrar Proveedores.");
     }//GEN-LAST:event_jButRegNotasVentaActionPerformed
 
     private void jButVerTodNotasVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButVerTodNotasVentaActionPerformed
         new CambiaPanel(PanelVerTodos, new guiListaProveedores1());
+        ponerTituloYsub("Actualizar Proveedores", "Consulta de Proveedores para su Actualización.");
     }//GEN-LAST:event_jButVerTodNotasVentaActionPerformed
 
-    private void jButRegNotasCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegNotasCreditoActionPerformed
+    private void jButRegistrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegistrarProductoActionPerformed
+        new CambiaPanel(PanelVerTodos, new guiRegistrarProductoPanel());
+        ponerTituloYsub("Nuevo Producto", "Llena el formulario para registrar un nuevo producto");
+    }//GEN-LAST:event_jButRegistrarProductoActionPerformed
 
-    }//GEN-LAST:event_jButRegNotasCreditoActionPerformed
-
-    private void jButVerTodNotasCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButVerTodNotasCreditoActionPerformed
-
-    }//GEN-LAST:event_jButVerTodNotasCreditoActionPerformed
+    private void jButListarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButListarProductosActionPerformed
+        new CambiaPanel(PanelVerTodos, new guiListaProductosPanel());
+        ponerTituloYsub("Productos", "Lista de los productos registrados");
+    }//GEN-LAST:event_jButListarProductosActionPerformed
 
     private void jBCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCerrarSesionActionPerformed
 
@@ -635,22 +644,20 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButCompras;
     private javax.swing.JButton jButDashboard;
     private javax.swing.JButton jButInventario;
+    private javax.swing.JButton jButListarProductos;
     private javax.swing.JButton jButProductos;
     private javax.swing.JButton jButRealizarCompras;
-    private javax.swing.JButton jButRegNotasCredito;
     private javax.swing.JButton jButRegNotasCredito1;
     private javax.swing.JButton jButRegNotasVenta;
+    private javax.swing.JButton jButRegistrarProducto;
     private javax.swing.JButton jButServicios;
     private javax.swing.JButton jButVerTodFactura;
-    private javax.swing.JButton jButVerTodNotasCredito;
     private javax.swing.JButton jButVerTodNotasCredito1;
     private javax.swing.JButton jButVerTodNotasVenta;
     private javax.swing.JLabel jIVA;
     private javax.swing.JLabel jLSidimLogo;
     private javax.swing.JLabel jLabNombreContribuyente1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPEncabezado;
     private javax.swing.JPanel jPMod;
     private javax.swing.JPanel jPaCerrarSesion;
@@ -660,5 +667,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanOpcServicios;
     private javax.swing.JPanel jPanOpcionesDeclaracion;
     private javax.swing.JLabel jValor;
+    private javax.swing.JLabel labelSubTitulo;
+    private javax.swing.JLabel labelTitulo;
     // End of variables declaration//GEN-END:variables
 }

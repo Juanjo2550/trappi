@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class Archivo {
 
         try {
 
-            br = new BufferedReader(new FileReader(name));
+            br = new BufferedReader(new FileReader(name,StandardCharsets.UTF_8));
             String line = br.readLine();
             while (null != line) {
                 String[] fields = line.split(SEPARATOR);
