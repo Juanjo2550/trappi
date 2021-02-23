@@ -23,7 +23,6 @@ public class ListaCantidadDeBienes {
         this.listaCantidadDeBienes = listaCantidadDeBienes;
     }
     
-    
     //recibimos el bien y la cantidad y se hace el objeto CantidadDeBien
     public void añadirBien(Bien bien,int cantidadDelNuevoBien) {
         CantidadDeBien nuevoBien = new CantidadDeBien(bien, cantidadDelNuevoBien);
