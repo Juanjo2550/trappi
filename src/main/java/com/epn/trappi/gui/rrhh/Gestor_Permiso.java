@@ -15,20 +15,17 @@ import java.awt.Color;
  */
 public class Gestor_Permiso extends javax.swing.JFrame {
 
-    /**
+    /*
      * Creates new form Ejemplo_GUI
      */
     public Gestor_Permiso() {
         initComponents();
-        jTextActitudesAspirante.setEnabled(false);
-        jTextCedulaAspirante.setEnabled(false);
-        jTextCargoAspirante.setEnabled(false);
+       
         txtnombreEmpleado.setEnabled(false);
         txtCedula.setEnabled(false);
         txtfechaFinPermiso.setEnabled(false);
-        jTextApellidoAspirante.setEnabled(false);
-        jTextAptitudesAspirante.setEnabled(false);
-        jButGuardarAspirante.setEnabled(false);
+        
+        btnGuardarPermiso.setEnabled(false);
     }
     
     /**
@@ -52,8 +49,8 @@ public class Gestor_Permiso extends javax.swing.JFrame {
         PanelAspirante = new javax.swing.JPanel();
         lblCedula = new javax.swing.JLabel();
         txtnombreEmpleado = new javax.swing.JTextField();
-        jButGuardarAspirante = new javax.swing.JButton();
-        jButRegCliente2 = new javax.swing.JButton();
+        btnGuardarPermiso = new javax.swing.JButton();
+        btnNuevoPermiso = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         lblfechaFinPermiso = new javax.swing.JLabel();
         txtfechaFinPermiso = new javax.swing.JTextField();
@@ -70,7 +67,7 @@ public class Gestor_Permiso extends javax.swing.JFrame {
         txtnumDias = new javax.swing.JTextField();
         lblfechaInicioPermiso4 = new javax.swing.JLabel();
         lblfechaInicioPermiso5 = new javax.swing.JLabel();
-        txtfechaInicioPermiso3 = new javax.swing.JTextField();
+        txtfechaInicioPermiso = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -196,29 +193,29 @@ public class Gestor_Permiso extends javax.swing.JFrame {
         });
         PanelAspirante.add(txtnombreEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 342, 28));
 
-        jButGuardarAspirante.setBackground(new java.awt.Color(0, 153, 153));
-        jButGuardarAspirante.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButGuardarAspirante.setForeground(new java.awt.Color(240, 240, 241));
-        jButGuardarAspirante.setText("Guardar");
-        jButGuardarAspirante.setBorderPainted(false);
-        jButGuardarAspirante.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardarPermiso.setBackground(new java.awt.Color(0, 153, 153));
+        btnGuardarPermiso.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnGuardarPermiso.setForeground(new java.awt.Color(240, 240, 241));
+        btnGuardarPermiso.setText("Guardar");
+        btnGuardarPermiso.setBorderPainted(false);
+        btnGuardarPermiso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButGuardarAspiranteActionPerformed(evt);
+                btnGuardarPermisoActionPerformed(evt);
             }
         });
-        PanelAspirante.add(jButGuardarAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 11, -1, -1));
+        PanelAspirante.add(btnGuardarPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 11, -1, -1));
 
-        jButRegCliente2.setBackground(new java.awt.Color(38, 112, 171));
-        jButRegCliente2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButRegCliente2.setForeground(new java.awt.Color(240, 240, 241));
-        jButRegCliente2.setText("Nuevo");
-        jButRegCliente2.setBorderPainted(false);
-        jButRegCliente2.addActionListener(new java.awt.event.ActionListener() {
+        btnNuevoPermiso.setBackground(new java.awt.Color(38, 112, 171));
+        btnNuevoPermiso.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnNuevoPermiso.setForeground(new java.awt.Color(240, 240, 241));
+        btnNuevoPermiso.setText("Nuevo");
+        btnNuevoPermiso.setBorderPainted(false);
+        btnNuevoPermiso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButRegCliente2ActionPerformed(evt);
+                btnNuevoPermisoActionPerformed(evt);
             }
         });
-        PanelAspirante.add(jButRegCliente2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 99, -1));
+        PanelAspirante.add(btnNuevoPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 99, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Permiso:");
@@ -316,17 +313,17 @@ public class Gestor_Permiso extends javax.swing.JFrame {
         lblfechaInicioPermiso5.setText("Número de dias de Permiso:");
         PanelAspirante.add(lblfechaInicioPermiso5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
 
-        txtfechaInicioPermiso3.addActionListener(new java.awt.event.ActionListener() {
+        txtfechaInicioPermiso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtfechaInicioPermiso3ActionPerformed(evt);
+                txtfechaInicioPermisoActionPerformed(evt);
             }
         });
-        txtfechaInicioPermiso3.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtfechaInicioPermiso.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtfechaInicioPermiso3KeyTyped(evt);
+                txtfechaInicioPermisoKeyTyped(evt);
             }
         });
-        PanelAspirante.add(txtfechaInicioPermiso3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 200, 28));
+        PanelAspirante.add(txtfechaInicioPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 200, 28));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -389,21 +386,18 @@ public class Gestor_Permiso extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtfechaFinPermisoActionPerformed
 
-    private void jButRegCliente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegCliente2ActionPerformed
-        jTextActitudesAspirante.setEnabled(true);
-        jTextCedulaAspirante.setEnabled(true);
-        jTextCargoAspirante.setEnabled(true);
+    private void btnNuevoPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoPermisoActionPerformed
+      
         txtnombreEmpleado.setEnabled(true);
         txtCedula.setEnabled(true);
         txtfechaFinPermiso.setEnabled(true);
-        jTextApellidoAspirante.setEnabled(true);
-        jTextAptitudesAspirante.setEnabled(true);
-        jButGuardarAspirante.setEnabled(true);
-    }//GEN-LAST:event_jButRegCliente2ActionPerformed
+      
+        btnGuardarPermiso.setEnabled(true);
+    }//GEN-LAST:event_btnNuevoPermisoActionPerformed
 
-    private void jButGuardarAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButGuardarAspiranteActionPerformed
+    private void btnGuardarPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPermisoActionPerformed
 
-    }//GEN-LAST:event_jButGuardarAspiranteActionPerformed
+    }//GEN-LAST:event_btnGuardarPermisoActionPerformed
 
     private void txtnombreEmpleadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreEmpleadoKeyTyped
         // TODO add your handling code here:
@@ -426,13 +420,13 @@ public class Gestor_Permiso extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtnumDiasActionPerformed
 
-    private void txtfechaInicioPermiso3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfechaInicioPermiso3ActionPerformed
+    private void txtfechaInicioPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfechaInicioPermisoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtfechaInicioPermiso3ActionPerformed
+    }//GEN-LAST:event_txtfechaInicioPermisoActionPerformed
 
-    private void txtfechaInicioPermiso3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfechaInicioPermiso3KeyTyped
+    private void txtfechaInicioPermisoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfechaInicioPermisoKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtfechaInicioPermiso3KeyTyped
+    }//GEN-LAST:event_txtfechaInicioPermisoKeyTyped
 
     /**
      * @param args the command line arguments
@@ -486,9 +480,9 @@ public class Gestor_Permiso extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelAspirante;
+    private javax.swing.JButton btnGuardarPermiso;
+    private javax.swing.JButton btnNuevoPermiso;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JButton jButGuardarAspirante;
-    private javax.swing.JButton jButRegCliente2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -512,7 +506,7 @@ public class Gestor_Permiso extends javax.swing.JFrame {
     private javax.swing.JLabel lblnombreEmpleado1;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtfechaFinPermiso;
-    private javax.swing.JTextField txtfechaInicioPermiso3;
+    private javax.swing.JTextField txtfechaInicioPermiso;
     private javax.swing.JTextField txtnombreEmpleado;
     private javax.swing.JTextField txtnumDias;
     private javax.swing.JTextField txtvalorAPagar;
