@@ -32,6 +32,8 @@ public class RegistroAsistencia {
     }
    
    public static RegistroAsistencia registrar(){
+       //Cuando se registra una asistencia, solo lo hace con la hora de inicio, no la de fin
+       //La fecha sin parámentos usa la fecha actual del sistema
        RegistroAsistencia nuevo = new RegistroAsistencia(new Hora(), new Fecha());
        return nuevo;
    }
