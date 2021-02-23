@@ -17,8 +17,8 @@ public class Entrega {
         this.estado = estado;
     }
 
-    public Posicion getDestino() {
-        return destino;
+    public String getDestino() {
+        return destino.getFcids();
     }
 
     public void setDestino(Posicion destino) {

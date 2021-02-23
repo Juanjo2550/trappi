@@ -11,5 +11,6 @@ public class ListaConductores {
         listaConductores.add(new Conductor("Jose",true));
         listaConductores.add(new Conductor("Carlos",true));
         listaConductores.add(new Conductor("Andres",true));
+        listaConductores.add(new Conductor("Juan",true));
     }
 }
