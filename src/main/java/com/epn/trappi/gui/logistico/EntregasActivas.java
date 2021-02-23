@@ -1,20 +1,42 @@
 package com.epn.trappi.gui.logistico;
+import static com.teamdev.jxbrowser.engine.RenderingMode.HARDWARE_ACCELERATED;
+import com.teamdev.jxbrowser.browser.Browser;
+import com.teamdev.jxbrowser.engine.Engine;
+import com.teamdev.jxbrowser.engine.EngineOptions;
+import com.teamdev.jxbrowser.view.swing.BrowserView;
 import com.epn.trappi.models.logistico.ListaConductores;
 import com.epn.trappi.models.logistico.ListaEntregas1;
 import com.epn.trappi.models.logistico.ListaVehiculos;
 import com.epn.trappi.models.logistico.Conductor;
 import com.epn.trappi.models.logistico.Vehiculo;
+import static com.teamdev.jxbrowser.engine.RenderingMode.HARDWARE_ACCELERATED;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class EntregasActivas extends javax.swing.JPanel {
-       
+    //Renderización del buscador embebido.
+    EngineOptions options;
+    Engine engine;
+    Browser browser;
+    BrowserView view;
     public EntregasActivas() {
-        
-        
         initComponents();
+        //inicio de renderizado
+        System.setProperty("jxbrowser.license.key","1BNDHFSC1FYA7D64SFQJOK18Y1R6DP8HFT66SD4MDP3YKT2QSIAZESB9FLPV71B9WTUE3Z");
+        options = EngineOptions.newBuilder(HARDWARE_ACCELERATED).build();
+        engine = Engine.newInstance(options);
+        browser = engine.newBrowser();
+        view = BrowserView.newInstance(browser);
+        this.jPanel1.add(view,BorderLayout.CENTER);
+        //
         ListaVehiculos vehiculos = new ListaVehiculos();
         ListaConductores conductores = new ListaConductores();
         ListaEntregas1 entregas = new ListaEntregas1();      
@@ -97,41 +119,34 @@ public class EntregasActivas extends javax.swing.JPanel {
             jTEntregasDatos.getColumnModel().getColumn(4).setMinWidth(10);
         }
 
-        jLabel1.setText("ENTREGAS ACTIVAS");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setText("Entregas activas");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 529, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 326, Short.MAX_VALUE)
-        );
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("Ruta");
 
-        jLabel2.setText("RUTA");
-
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Información asociada a la entrega:");
 
         jPInformacionConductor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jTAInformacionConductor.setColumns(20);
-        jTAInformacionConductor.setRows(5);
-        jScrollPane2.setViewportView(jTAInformacionConductor);
 
         javax.swing.GroupLayout jPInformacionConductorLayout = new javax.swing.GroupLayout(jPInformacionConductor);
         jPInformacionConductor.setLayout(jPInformacionConductorLayout);
         jPInformacionConductorLayout.setHorizontalGroup(
             jPInformacionConductorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+            .addGap(0, 323, Short.MAX_VALUE)
         );
         jPInformacionConductorLayout.setVerticalGroup(
             jPInformacionConductorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+            .addGap(0, 136, Short.MAX_VALUE)
         );
+
+        jTAInformacionConductor.setColumns(20);
+        jTAInformacionConductor.setRows(5);
+        jScrollPane2.setViewportView(jTAInformacionConductor);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -144,16 +159,17 @@ public class EntregasActivas extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 952, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(44, 44, 44)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPInformacionConductor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4))))))
+                            .addComponent(jPInformacionConductor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(324, 324, 324)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addGap(80, 80, 80)))
                 .addContainerGap(52, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(459, 459, 459)
@@ -167,17 +183,21 @@ public class EntregasActivas extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(49, 49, 49)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPInformacionConductor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(59, 59, 59))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2)
+                        .addGap(43, 43, 43)
+                        .addComponent(jPInformacionConductor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(40, 40, 40))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -187,13 +207,47 @@ public class EntregasActivas extends javax.swing.JPanel {
         String destino = (String)jTEntregasDatos.getValueAt(fila, 4);
         String nombreConductor = (String)jTEntregasDatos.getValueAt(fila,2);
         jTAInformacionConductor.setText("Nombre:\n" + nombreConductor + "\nDirección destino:\n" + destino);
+        trazarRuta(destino);
     }//GEN-LAST:event_jTEntregasDatosMouseClicked
     private String mapeoDireccionIdPlace(String direccion){
         String Id_destino="";
+        switch(direccion){
+            case "Universidad Central del Ecuador":
+                Id_destino="ChIJwU1IVIya1ZER4jbEiWO6gdE";
+                break;
+            case "Megamaxi 6 de Diciembre":
+                Id_destino="ChIJv4XVroGa1ZERW6s47_m15Fc";
+                break;
+            case "Pontificia Universidad Catolica del Ecuador":
+                Id_destino="ChIJI3HFuBCa1ZER3ac3OdXcxHw";
+                break;
+            case "Plaza Grande":
+                Id_destino="ChIJDxkPgoeZ1ZERXqNMH562TCk";
+                break;
+            case "Quicentro Sur":
+                Id_destino="ChIJl6nxrKKY1ZERUPsT2Jl03BQ";
+                break;
+        }
         return Id_destino;
     }
-    private void trazarRuta(String origen,String destino){
+    private void trazarRuta(String destino){
+        String id_origen = "ChIJf3SFnYOa1ZEReimBvayqhDo";
+        String id_destino = mapeoDireccionIdPlace(destino);
+        renderizarMapa(id_origen, id_destino);
+    }
+    private void renderizarMapa(String origen,String destino){
         
+        String CLAVE = "AIzaSyCHuP7hcXW03RWo89ukuZEb3QNKSt_hwwQ";
+        String IFrame = "<iframe width=\"800\" height=\"650\"  style=\"border:0\"  allowfullscreen src=\"https://www.google.com/maps/embed/v1/directions?origin=place_id:"+origen+"&destination=place_id:"+destino+"&key="+CLAVE+"\"></iframe>";
+        try {
+            PrintWriter out = new PrintWriter("ruta.html");
+            out.println(IFrame);
+            out.close();
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null,"Servicio de GPS no disponible");
+        }
+        this.browser.navigation().loadUrl(new File("ruta.html").getAbsolutePath());
+
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

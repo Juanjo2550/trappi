@@ -16,7 +16,7 @@ public class ListaEntregas1 {
         String [] fcids= new String [10];
         fcids [0]= "Universidad Central del Ecuador";
         fcids [1]= "Megamaxi 6 de Diciembre";
-        fcids [2]= "Pontificia Universidad Católica del Ecuador";
+        fcids [2]= "Pontificia Universidad Catolica del Ecuador";
         fcids [3]= "Plaza Grande";
         fcids [4]= "Quicentro Sur";
         //fcids [6]= "";
