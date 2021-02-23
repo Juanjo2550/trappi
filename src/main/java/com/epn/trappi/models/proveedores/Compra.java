@@ -16,12 +16,15 @@ abstract public class Compra {
     protected Inventario inventario;
     protected ListaCantidadDeBienes listaBienesAComprar;
     protected String estado;
+    protected Double montoTotal;
+    
     private ProveedoresDb db;
     
     public Compra(Inventario inventario, ListaCantidadDeBienes listaBienesAComprar, String estado) {
         this.inventario = inventario;
         this.listaBienesAComprar = listaBienesAComprar;
         this.estado = estado;
+        this.montoTotal = calcularMontoTotal();
     }
     
     public void comprar() {
@@ -32,11 +35,11 @@ abstract public class Compra {
     }
     
     public Double calcularMontoTotal() {
-        Double montoTotal = 0.0;
+        Double monto = 0.0;
         for (CantidadDeBien cantidadBien : listaBienesAComprar.getListaCantidadDeBienes()) {
-            montoTotal += cantidadBien.getBien().getPrecio() * cantidadBien.getCantidad();
+            monto += cantidadBien.getBien().getPrecio() * cantidadBien.getCantidad();
         }
-        return montoTotal;
+        return monto;
     }
     
     public boolean solicitarAutorizacion(Proveedor proveedor, double montoTotal) {
