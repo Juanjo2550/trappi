@@ -72,6 +72,7 @@ public class Principal extends javax.swing.JFrame {
         jButVerTodNotasCredito1 = new javax.swing.JButton();
         jButServicios = new javax.swing.JButton();
         jButDashboard = new javax.swing.JButton();
+        jButRealizarCompras = new javax.swing.JButton();
         jLabNombreContribuyente1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -333,6 +334,18 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jButRealizarCompras.setBackground(new java.awt.Color(38, 35, 36));
+        jButRealizarCompras.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButRealizarCompras.setForeground(new java.awt.Color(240, 240, 241));
+        jButRealizarCompras.setText("Realizar Compras");
+        jButRealizarCompras.setBorderPainted(false);
+        jButRealizarCompras.setFocusPainted(false);
+        jButRealizarCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButRealizarComprasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanOpcionesDeclaracionLayout = new javax.swing.GroupLayout(jPanOpcionesDeclaracion);
         jPanOpcionesDeclaracion.setLayout(jPanOpcionesDeclaracionLayout);
         jPanOpcionesDeclaracionLayout.setHorizontalGroup(
@@ -346,16 +359,17 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanOpcionesDeclaracionLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButServicios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanOpcionesDeclaracionLayout.createSequentialGroup()
                         .addGroup(jPanOpcionesDeclaracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanOpcInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanOpcionesDeclaracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jButProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jPanOpcProductos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jButServicios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButDashboard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jPanOpcProductos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButRealizarCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanOpcionesDeclaracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanOpcionesDeclaracionLayout.createSequentialGroup()
@@ -367,7 +381,9 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanOpcionesDeclaracionLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButDashboard)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButRealizarCompras)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButInventario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanOpcInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -412,7 +428,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jLabNombreContribuyente1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanOpcionesDeclaracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 35)); // NOI18N
@@ -573,6 +589,10 @@ public class Principal extends javax.swing.JFrame {
         showPanel(jPanOpcProductos);
     }//GEN-LAST:event_jButProductosActionPerformed
 
+    private void jButRealizarComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRealizarComprasActionPerformed
+        new CambiaPanel(PanelVerTodos, new guiComprasPanel());
+    }//GEN-LAST:event_jButRealizarComprasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -616,6 +636,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButDashboard;
     private javax.swing.JButton jButInventario;
     private javax.swing.JButton jButProductos;
+    private javax.swing.JButton jButRealizarCompras;
     private javax.swing.JButton jButRegNotasCredito;
     private javax.swing.JButton jButRegNotasCredito1;
     private javax.swing.JButton jButRegNotasVenta;

@@ -5,39 +5,19 @@
  */
 package com.epn.trappi.gui.proveedores;
 
-import com.epn.trappi.db.proveedores.ProveedoresDb;
-import com.epn.trappi.models.proveedores.Producto;
-import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
- * @author franc
+ * @author Peterca
  */
-public class guiFormularioComprasPanel extends javax.swing.JPanel {
+public class guiComprasPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form guiFormularioComprasPanel
+     * Creates new form guiComprasPanel
      */
-    DefaultTableModel modelo;
-    private final ProveedoresDb db = new ProveedoresDb();
-    public ArrayList seleccionados= new ArrayList();
-    public guiFormularioComprasPanel() {
+    public guiComprasPanel() {
         initComponents();
-        cargar();
     }
-    
-    public void cargar(){
-        String[] titulos = {"Producto","Precio unitario"};
-        String[] fila = new String [2];
-        modelo = new DefaultTableModel(null, titulos);
-        for (Producto producto : db.getProductos()) {
-            fila[0]= producto.getNombre();
-            fila[1]= ""+producto.getPrecio();
-            modelo.addRow(fila);
-        }
-        jTable1.setModel(modelo);
-    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,33 +28,30 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         PanelVerTodos = new javax.swing.JPanel();
-        jButRegFactCompNotaCred = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jTextFechCompNotaCred = new javax.swing.JTextField();
+        jButRegFactCompNotaCred = new javax.swing.JButton();
+        jIVA = new javax.swing.JLabel();
+        jValor = new javax.swing.JLabel();
         jButRegFactCompNotaCred1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        jLabel11 = new javax.swing.JLabel();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
         PanelVerTodos.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButRegFactCompNotaCred.setBackground(new java.awt.Color(38, 112, 171));
-        jButRegFactCompNotaCred.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButRegFactCompNotaCred.setForeground(new java.awt.Color(240, 240, 241));
-        jButRegFactCompNotaCred.setText("Continuar Compra");
-        jButRegFactCompNotaCred.setBorderPainted(false);
-        jButRegFactCompNotaCred.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButRegFactCompNotaCredActionPerformed(evt);
-            }
-        });
-
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel8.setText("Buscar Compra");
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel9.setText("Compras");
 
         jTextFechCompNotaCred.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +66,16 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
                 jTextFechCompNotaCredKeyTyped(evt);
             }
         });
+
+        jButRegFactCompNotaCred.setBackground(new java.awt.Color(38, 112, 171));
+        jButRegFactCompNotaCred.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButRegFactCompNotaCred.setForeground(new java.awt.Color(240, 240, 241));
+        jButRegFactCompNotaCred.setText("Actualizar estado");
+        jButRegFactCompNotaCred.setBorderPainted(false);
+
+        jIVA.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
+        jValor.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         jButRegFactCompNotaCred1.setBackground(new java.awt.Color(38, 112, 171));
         jButRegFactCompNotaCred1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -115,33 +102,48 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel10.setText("Añadir");
+        jLabel10.setText("Estado");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel11.setText("Compra");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 902, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 902, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(145, 145, 145)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(71, 71, 71)
+                .addComponent(jLabel11)
+                .addGap(195, 195, 195)
                 .addComponent(jLabel10)
-                .addGap(33, 33, 33)
-                .addComponent(jCheckBox1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39))
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52))
         );
 
         javax.swing.GroupLayout PanelVerTodosLayout = new javax.swing.GroupLayout(PanelVerTodos);
@@ -150,18 +152,27 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
             PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelVerTodosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButRegFactCompNotaCred)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(PanelVerTodosLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
                 .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelVerTodosLayout.createSequentialGroup()
+                        .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addGroup(PanelVerTodosLayout.createSequentialGroup()
+                                .addComponent(jTextFechCompNotaCred, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(54, 54, 54)
+                                .addComponent(jButRegFactCompNotaCred1)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(PanelVerTodosLayout.createSequentialGroup()
-                        .addComponent(jTextFechCompNotaCred, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54)
-                        .addComponent(jButRegFactCompNotaCred1)))
-                .addContainerGap(153, Short.MAX_VALUE))
+                        .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jButRegFactCompNotaCred, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(PanelVerTodosLayout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jValor, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         PanelVerTodosLayout.setVerticalGroup(
             PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,19 +183,25 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
                 .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFechCompNotaCred, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButRegFactCompNotaCred1))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9)
+                .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelVerTodosLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jValor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37))
+                    .addGroup(PanelVerTodosLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)))
                 .addComponent(jButRegFactCompNotaCred)
                 .addGap(23, 23, 23))
         );
 
         add(PanelVerTodos);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButRegFactCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegFactCompNotaCredActionPerformed
-
-    }//GEN-LAST:event_jButRegFactCompNotaCredActionPerformed
 
     private void jTextFechCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFechCompNotaCredActionPerformed
         // TODO add your handling code here:
@@ -207,12 +224,17 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
     private javax.swing.JPanel PanelVerTodos;
     private javax.swing.JButton jButRegFactCompNotaCred;
     private javax.swing.JButton jButRegFactCompNotaCred1;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JLabel jIVA;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextFechCompNotaCred;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel jValor;
     // End of variables declaration//GEN-END:variables
 }
