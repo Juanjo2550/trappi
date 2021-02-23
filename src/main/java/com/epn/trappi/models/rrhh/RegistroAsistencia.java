@@ -13,7 +13,12 @@ public class RegistroAsistencia {
    private Hora horaInicio;
    private Hora horaSalida;
    private Fecha fecha;
-
+   
+   public RegistroAsistencia(Hora horaInicio, Fecha fecha) {
+       this.horaInicio = horaInicio;
+       this.fecha = fecha;
+   }
+ 
     public void setFecha(Fecha fecha) {
         this.fecha = fecha;
     }
@@ -26,8 +31,8 @@ public class RegistroAsistencia {
         this.horaSalida = horaSalida;
     }
    
-   public RegistroAsistencia registrar(){
-       RegistroAsistencia nuevo = new RegistroAsistencia();
+   public static RegistroAsistencia registrar(){
+       RegistroAsistencia nuevo = new RegistroAsistencia(new Hora(), new Fecha());
        return nuevo;
    }
 }

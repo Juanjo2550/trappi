@@ -5,6 +5,8 @@
  */
 package com.epn.trappi.models.rrhh;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author diego
@@ -15,9 +17,20 @@ public class Fecha {
     private int mes;
     private int año;
 
-    //constructor por defecto
+    //constructor por defecto, se crea una fecha con la fecha del sistema
     public Fecha() {
-
+        LocalDate unformatedDate = java.time.LocalDate.now();
+        System.out.println(unformatedDate);
+        String[] splitedDate = unformatedDate.toString().split("-");
+        try {
+            this.año = Integer.parseInt(splitedDate[0]);
+            this.mes = Integer.parseInt(splitedDate[1]);
+            this.dia = Integer.parseInt(splitedDate[2]);
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        
     }
 
     //Constructor con parametros
