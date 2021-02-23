@@ -7,14 +7,61 @@ package com.epn.trappi.gui.rrhh;
 
 
 import com.epn.trappi.*;
+import com.epn.trappi.db.rrhh.Connect;
+import com.epn.trappi.models.rrhh.Aspirante;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author stali
  */
 public class RegistroAspirante extends javax.swing.JFrame {
-
+    private void listarAspirantes(){
+        
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        try {
+            Connection conn = Connect.connect();
+            DefaultTableModel model = (DefaultTableModel) jTableAspirantes.getModel();
+            model.setRowCount(0);
+            String query = "SELECT * FROM aspirante_prueba";
+            pstm = conn.prepareStatement(query);
+            rs = pstm.executeQuery();
+            while(rs.next()){
+                Vector vector = new Vector();
+                vector.add(rs.getInt(1));
+                vector.add(rs.getString(2));
+                vector.add(rs.getString(3));
+                vector.add(rs.getString(4));
+                vector.add(rs.getString(5));
+                vector.add(rs.getString(6));
+                vector.add(rs.getString(7));
+                vector.add(rs.getString(8));
+                vector.add(rs.getInt(9));
+                model.addRow(vector);
+                jTableAspirantes.setModel(model);
+                
+            }
+            conn.close();
+        } catch (Exception e) {
+            System.out.println("Error en consulta: " + e);
+        }
+        finally{
+            try {
+                if(rs!=null) rs.close();
+                if(pstm!=null) pstm.close();
+                
+            } catch (Exception e) {
+                System.out.println("Error al cerrar rs y pstm: " + e);
+            }
+        }
+    }
     /**
      * Creates new form Ejemplo_GUI
      */
@@ -29,6 +76,9 @@ public class RegistroAspirante extends javax.swing.JFrame {
         jTextApellidoAspirante.setEnabled(false);
         jTextAptitudesAspirante.setEnabled(false);
         jButGuardarAspirante.setEnabled(false);
+        
+        //Conexion a la base de datos 
+        listarAspirantes();
     }
     
     /**
@@ -67,7 +117,7 @@ public class RegistroAspirante extends javax.swing.JFrame {
         jTextActitudesAspirante = new javax.swing.JTextField();
         jTextAptitudesAspirante = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableAspirantes = new javax.swing.JTable();
         jTextCargoAspirante = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
 
@@ -315,7 +365,7 @@ public class RegistroAspirante extends javax.swing.JFrame {
         });
         PanelAspirante.add(jTextAptitudesAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, 350, 28));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableAspirantes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -323,10 +373,10 @@ public class RegistroAspirante extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "Nombre", "Apellidos", "Teléfono", "Cédula", "Cargo", "Puntaje", "Actitudes", "Puntaje"
+                "Id", "Nombre", "Apellidos", "Teléfono", "Cédula", "Cargo", "Aptitudes", "Actitudes", "Puntaje"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableAspirantes);
 
         PanelAspirante.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 860, 450));
 
@@ -387,7 +437,8 @@ public class RegistroAspirante extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButGuardarAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButGuardarAspiranteActionPerformed
-
+        //Aspirante aspirante = new Aspirante(jTextNombreAspirante.getText(), jTextApellidoAspirante.getText(),
+          //      jTextCedulaAspirante.getText());
     }//GEN-LAST:event_jButGuardarAspiranteActionPerformed
 
     private void jTextNombreAspiranteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNombreAspiranteKeyTyped
@@ -536,7 +587,7 @@ public class RegistroAspirante extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableAspirantes;
     private javax.swing.JTextField jTextActitudesAspirante;
     private javax.swing.JTextField jTextApellidoAspirante;
     private javax.swing.JTextField jTextAptitudesAspirante;

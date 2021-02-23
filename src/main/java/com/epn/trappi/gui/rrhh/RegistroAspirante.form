@@ -461,7 +461,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="jTable1">
+            <Component class="javax.swing.JTable" name="jTableAspirantes">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="9" rowCount="4">
@@ -471,7 +471,7 @@
                     <Column editable="true" title="Tel&#xe9;fono" type="java.lang.Object"/>
                     <Column editable="true" title="C&#xe9;dula" type="java.lang.Object"/>
                     <Column editable="true" title="Cargo" type="java.lang.Object"/>
-                    <Column editable="true" title="Puntaje" type="java.lang.Object"/>
+                    <Column editable="true" title="Aptitudes" type="java.lang.Object"/>
                     <Column editable="true" title="Actitudes" type="java.lang.Object"/>
                     <Column editable="true" title="Puntaje" type="java.lang.Object"/>
                   </Table>

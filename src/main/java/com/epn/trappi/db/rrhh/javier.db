@@ -1,0 +1,1 @@
+insert into aspirante_prueba (nombre, apellido, telefono, cedula, cargo,aptitudes, actitudes, puntaje)values("Javier", "Erazo", "5143126","1755041595", "Developer", "desarrollo web", "alegre", 17)
