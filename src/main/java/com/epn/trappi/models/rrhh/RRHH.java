@@ -1,9 +1,11 @@
 package com.epn.trappi.models.rrhh;
 
+import java.util.ArrayList;
+
 public class RRHH {
 
     private Contratacion contratacion;
-    private RolesPagos pendientes[];
+    private ArrayList<RolPagos> pendientes;
     private Fecha fechaActual;
     public RolesPagos roles = new RolesPagos();
    
@@ -11,16 +13,22 @@ public class RRHH {
     public void contratarPersonal() {
 
     }
-
+    public RRHH(){
+        this.pendientes = new ArrayList<>();
+    }
     public void obtenerRoles() {
         roles.obtenerTodos();
     }
 
-    public void iteracionRoles(Empleado e){
+    public RolPagos iteracionRoles(Empleado e){
         RolPagos rol = new RolPagos(fechaActual,e,e.getSueldo().getValor(),Integer.parseInt(e.getCuentaBancaria()));
-        for(int i=0; i<pendientes.length;i++){
-            roles.agregar(rol);
-            rol.mostrar();
+        new RolesPagos().agregar(rol);
+        return rol;
+    }
+    public void iterarEmpleados(){
+        ArrayList<Empleado>l1 = new ListaEmpleados().obtenerTodos();
+        for(Empleado e1:l1){
+            this.pendientes.add(iteracionRoles(e1));
         }
     }
 }
