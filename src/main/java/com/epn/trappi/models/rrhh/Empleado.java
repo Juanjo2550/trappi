@@ -41,6 +41,20 @@ public class Empleado {
         this.sexo = sexo;
     }
     
+    public Empleado(String nombres, String apellidos, String cedula, String cargo, String departamento, String cuentaBancaria, String banco, Sueldo sueldo, String estado, char sexo) {
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.cedula = cedula;
+        this.cargo = cargo;
+        this.departamento = departamento;
+        this.cuentaBancaria = cuentaBancaria;
+        this.banco = banco;
+        this.asistencias = asistencias;
+        this.sueldo = sueldo;
+        this.estado = estado;
+        this.sexo = sexo;
+    }
+    
     private Boolean registrarAsistencia () {
         //TODO considerar si se debe registrar la asistencia desde la clase Empleado
         RegistroAsistencia.registrar();

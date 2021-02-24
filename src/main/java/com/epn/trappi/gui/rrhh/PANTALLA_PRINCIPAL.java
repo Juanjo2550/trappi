@@ -40,6 +40,7 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
         btnVolver = new javax.swing.JButton();
         btnPermisos = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        btnPermisos1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -100,7 +101,7 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
         btnPermisos.setBackground(new java.awt.Color(204, 153, 0));
         btnPermisos.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnPermisos.setForeground(new java.awt.Color(51, 51, 51));
-        btnPermisos.setText("Permisos");
+        btnPermisos.setText("RRHH");
         btnPermisos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPermisosActionPerformed(evt);
@@ -117,6 +118,16 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
             }
         });
 
+        btnPermisos1.setBackground(new java.awt.Color(204, 153, 0));
+        btnPermisos1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btnPermisos1.setForeground(new java.awt.Color(51, 51, 51));
+        btnPermisos1.setText("Permisos");
+        btnPermisos1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPermisos1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -130,6 +141,11 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
                     .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnPermisos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(btnPermisos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,11 +155,16 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRegistroAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(73, 73, 73)
                 .addComponent(btnPermisos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 374, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 312, Short.MAX_VALUE)
                 .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(189, 189, 189)
+                    .addComponent(btnPermisos1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(433, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -179,9 +200,8 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
 
     private void btnPermisosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPermisosActionPerformed
       
-       Gestor_Permiso gestor = new Gestor_Permiso();
-       gestor.setVisible(true);
        this.setVisible(false);
+        new ListaDeRolesEmpleados().setVisible(true);
     }//GEN-LAST:event_btnPermisosActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -190,6 +210,11 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
         aspirante.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void btnPermisos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPermisos1ActionPerformed
+        this.setVisible(false);
+        new Gestor_Permiso().setVisible(true);
+    }//GEN-LAST:event_btnPermisos1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,6 +284,7 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPermisos;
+    private javax.swing.JButton btnPermisos1;
     private javax.swing.JButton btnRegistroAsistencia;
     private javax.swing.JButton btnVolver;
     private javax.swing.JButton jButton4;
