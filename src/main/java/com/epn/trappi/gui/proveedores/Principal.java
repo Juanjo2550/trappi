@@ -604,7 +604,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButRegNotasVentaActionPerformed
 
     private void jButVerTodNotasVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButVerTodNotasVentaActionPerformed
-        new CambiaPanel(PanelVerTodos, new guiListaProveedores1());
+        new CambiaPanel(PanelVerTodos, new guiListaProveedores());
         ponerTituloYsub("Actualizar Proveedores", "Consulta de Proveedores para su Actualización.");
     }//GEN-LAST:event_jButVerTodNotasVentaActionPerformed
 
