@@ -1,4 +1,11 @@
 # Trappi
+
+
+## Documentación
+### [Definición de entorno de desarrollo](./docs/developmentEnviroment.md)
+
+### [Diagrama UML segunda iteración](./docs/ProyectoModelamientoERP.pdf)
+
 # Auncios
 Para esta primera iteración se debe trabajar en las ramas creadas para cada grupo como se detalla en la siguiente tabla:
 
@@ -47,8 +54,3 @@ Todos los vehículos que se utilizan para las entregas son propiedad de la empre
 - Finanzas
 - Proveedores e Inventarios
 - Recursos Humanos
-
-## Documentación
-### [Definición de entorno de desarrollo](./docs/developmentEnviroment.md)
-
-### [Diagrama UML segunda iteración](./docs/ProyectoModelamientoERP.pdf)
