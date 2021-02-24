@@ -33,6 +33,7 @@ public class ListaAspirantes {
             pstm.setInt(7, aspNuevo.getPrueba().getPuntaje());
             pstm.setString(8, aspNuevo.getCargoAspirante());
             pstm.executeUpdate();
+            pstm.close();
             conn.close();
         } catch (Exception e) {
             System.out.println("Error en insercion de Aspirante: " + e);
@@ -76,7 +77,7 @@ public class ListaAspirantes {
                 
                 
             }
-            
+            pstm.close();
             conn.close();
         } catch (Exception e) {
             System.out.println("Error en consulta de Aspirantes: " + e);

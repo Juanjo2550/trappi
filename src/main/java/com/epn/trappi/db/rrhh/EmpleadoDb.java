@@ -78,6 +78,7 @@ public class EmpleadoDb {
                 rs.getString("sexo").charAt(0)
                 ));
             }
+            conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -91,6 +92,7 @@ public class EmpleadoDb {
             PreparedStatement pstmt  = conn.prepareStatement(sql);
             pstmt.setString(1, cedula);
             ResultSet rs = pstmt.executeQuery();
+            conn.close();
             // loop through the result set
             return new Empleado(
             rs.getString("nombres"),
@@ -104,7 +106,7 @@ public class EmpleadoDb {
             new SueldoDb().obtenerPorEmpleado(rs.getString("cedula")),
             rs.getString("estado"),
             rs.getString("sexo").charAt(0)
-            );            
+            );
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return new Empleado();
@@ -129,6 +131,7 @@ public class EmpleadoDb {
             pstmt.setString(10, nuevoEmpleado.getSexo() + "");
             pstmt.executeUpdate();
             new SueldoDb().addOne(nuevoEmpleado, sueldo);
+            conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;

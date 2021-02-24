@@ -25,7 +25,6 @@ public class Fecha {
     //constructor por defecto, se crea una fecha con la fecha del sistema
     public Fecha() {
         LocalDate unformatedDate = java.time.LocalDate.now();
-        System.out.println(unformatedDate);
         String[] splitedDate = unformatedDate.toString().split("-");
         try {
             this.año = Integer.parseInt(splitedDate[0]);
