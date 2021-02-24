@@ -278,7 +278,8 @@ public class EmpleadoGui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        new RegistroAspirante().setVisible(true);
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void listaEmpleadosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaEmpleadosButtonActionPerformed
