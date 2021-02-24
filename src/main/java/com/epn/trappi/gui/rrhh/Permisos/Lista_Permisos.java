@@ -31,4 +31,12 @@ public class Lista_Permisos {
         this.lista.put(Integer.parseInt(nuevoPermiso.getCI()), nuevoPermiso);
         return nuevoPermiso;
     }*/
+   
+   public void editarPermiso(){
+       
+   }
+   
+   public void EliminarPermiso(){
+       
+   }
 }
