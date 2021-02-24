@@ -8,13 +8,13 @@ public class PruebaAdmision {
     private int puntaje;
     private String actitudes;
     private String aptitudes;
-    private String estado;
+    
 
     public PruebaAdmision(int puntaje, String actitudes, String aptitudes) {
         this.puntaje = puntaje;
         this.actitudes = actitudes;
         this.aptitudes = aptitudes;
-        this.estado = "iniciado";
+        
     }
     
     public void registrarResultadosPrueba( int puntaje, String aptitudes, String actitudes){
@@ -35,9 +35,7 @@ public class PruebaAdmision {
         return aptitudes;
     }
 
-    public String getEstado() {
-        return estado;
-    }
+   
     
     
 }

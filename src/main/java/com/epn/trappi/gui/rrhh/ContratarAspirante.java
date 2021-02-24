@@ -7,7 +7,12 @@ package com.epn.trappi.gui.rrhh;
 
 
 import com.epn.trappi.*;
+import com.epn.trappi.models.rrhh.Aspirante;
+import com.epn.trappi.models.rrhh.ControladorPruebaAdmision;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,6 +25,25 @@ public class ContratarAspirante extends javax.swing.JFrame {
      */
     public ContratarAspirante() {
         initComponents();
+        ControladorPruebaAdmision controlador = new ControladorPruebaAdmision(16, "sociable colaborador amable", "adptable agil versatil");
+        ArrayList<Aspirante> aptos = controlador.obtenerAspirantesAptos();
+        DefaultTableModel model = (DefaultTableModel) jTableAspirantesAptos.getModel();
+        model.setRowCount(0);
+        
+        for (Aspirante asp: aptos){
+            Vector v = new Vector();
+            v.add(asp.getNombre());
+            v.add(asp.getApellidos());
+            v.add(asp.getTelefono());
+            v.add(asp.getCedula());
+            v.add(asp.getCargoAspirante());
+            v.add(asp.getPrueba().getPuntaje());
+            v.add(asp.getPrueba().getActitudes());
+            v.add(asp.getPrueba().getAptitudes());
+            
+            model.addRow(v);
+            jTableAspirantesAptos.setModel(model);
+        }
     }
     
     /**
@@ -31,6 +55,10 @@ public class ContratarAspirante extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGrpCopiaCedula = new javax.swing.ButtonGroup();
+        btnGrpCopiaTitulo = new javax.swing.ButtonGroup();
+        btnGrpREvisionMedica = new javax.swing.ButtonGroup();
+        btnGrpSexo = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
@@ -46,14 +74,14 @@ public class ContratarAspirante extends javax.swing.JFrame {
         jButRegCliente2 = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jTextCorreoCliReg8 = new javax.swing.JTextField();
+        jTableAspirantesAptos = new javax.swing.JTable();
+        jTextContratoFechaInicio = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jTextCorreoCliReg9 = new javax.swing.JTextField();
+        jTextContratoFechaFin = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jCmbContratoTipo = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jLabel21 = new javax.swing.JLabel();
@@ -65,15 +93,18 @@ public class ContratarAspirante extends javax.swing.JFrame {
         jRadioButton5 = new javax.swing.JRadioButton();
         jRadioButton6 = new javax.swing.JRadioButton();
         jLabel24 = new javax.swing.JLabel();
-        jTextCorreoCliReg10 = new javax.swing.JTextField();
+        jTextContratoCuenta = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
-        jTextCorreoCliReg11 = new javax.swing.JTextField();
+        jTextContratoBanco = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
-        jTextCorreoCliReg12 = new javax.swing.JTextField();
+        jTextContratoSueldo = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
-        jTextCorreoCliReg13 = new javax.swing.JTextField();
+        jTextContratoDepto = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
-        jTextCorreoCliReg14 = new javax.swing.JTextField();
+        jTextContratoCargo = new javax.swing.JTextField();
+        jLabel29 = new javax.swing.JLabel();
+        jRadioButton7 = new javax.swing.JRadioButton();
+        jRadioButton8 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -224,32 +255,32 @@ public class ContratarAspirante extends javax.swing.JFrame {
         jLabel14.setText("Usted está a punto de contratar un nuevo empleado, a continuación se muestran los aspirantes que son aptos para ser contratados ");
         PanelAspirante.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableAspirantesAptos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "Nombre", "Apellidos", "Teléfono", "Cédula", "Cargo", "Puntaje", "Actitudes", "Puntaje"
+                "Nombre", "Apellidos", "Teléfono", "Cédula", "Cargo", "Puntaje", "Actitudes", "Puntaje"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableAspirantesAptos);
 
         PanelAspirante.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 840, 290));
 
-        jTextCorreoCliReg8.addActionListener(new java.awt.event.ActionListener() {
+        jTextContratoFechaInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextCorreoCliReg8ActionPerformed(evt);
+                jTextContratoFechaInicioActionPerformed(evt);
             }
         });
-        jTextCorreoCliReg8.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextContratoFechaInicio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextCorreoCliReg8KeyTyped(evt);
+                jTextContratoFechaInicioKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextCorreoCliReg8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 110, 28));
+        PanelAspirante.add(jTextContratoFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 110, 28));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel15.setText("Requisitos del Aspirante");
@@ -259,17 +290,17 @@ public class ContratarAspirante extends javax.swing.JFrame {
         jLabel18.setText("Tipo:");
         PanelAspirante.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
 
-        jTextCorreoCliReg9.addActionListener(new java.awt.event.ActionListener() {
+        jTextContratoFechaFin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextCorreoCliReg9ActionPerformed(evt);
+                jTextContratoFechaFinActionPerformed(evt);
             }
         });
-        jTextCorreoCliReg9.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextContratoFechaFin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextCorreoCliReg9KeyTyped(evt);
+                jTextContratoFechaFinKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextCorreoCliReg9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 110, 28));
+        PanelAspirante.add(jTextContratoFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 110, 28));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel19.setText("Revisión Médica");
@@ -279,18 +310,19 @@ public class ContratarAspirante extends javax.swing.JFrame {
         jLabel20.setText("Fecha Fin:");
         PanelAspirante.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Seleccionar--", "Fijo", "Temporal", "Temporada" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jCmbContratoTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Seleccionar--", "Fijo", "Temporal", "Temporada" }));
+        jCmbContratoTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jCmbContratoTipoActionPerformed(evt);
             }
         });
-        PanelAspirante.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 110, 30));
+        PanelAspirante.add(jCmbContratoTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 110, 30));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setText("Datos Contrato");
         PanelAspirante.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, 20));
 
+        btnGrpCopiaCedula.add(jRadioButton1);
         jRadioButton1.setText("No");
         PanelAspirante.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, -1, -1));
 
@@ -298,6 +330,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
         jLabel21.setText("Fecha Inicio:");
         PanelAspirante.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
+        btnGrpCopiaCedula.add(jRadioButton2);
         jRadioButton2.setText("Si");
         PanelAspirante.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, -1, -1));
 
@@ -305,9 +338,11 @@ public class ContratarAspirante extends javax.swing.JFrame {
         jLabel22.setText("Copia Cédula");
         PanelAspirante.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, -1, -1));
 
+        btnGrpCopiaTitulo.add(jRadioButton3);
         jRadioButton3.setText("Si");
         PanelAspirante.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, -1, -1));
 
+        btnGrpCopiaTitulo.add(jRadioButton4);
         jRadioButton4.setText("No");
         PanelAspirante.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, -1, -1));
 
@@ -315,9 +350,11 @@ public class ContratarAspirante extends javax.swing.JFrame {
         jLabel23.setText("Copia Título(s)");
         PanelAspirante.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, -1, -1));
 
+        btnGrpREvisionMedica.add(jRadioButton5);
         jRadioButton5.setText("Si");
         PanelAspirante.add(jRadioButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, -1, -1));
 
+        btnGrpREvisionMedica.add(jRadioButton6);
         jRadioButton6.setText("No");
         PanelAspirante.add(jRadioButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 200, -1, -1));
 
@@ -325,81 +362,98 @@ public class ContratarAspirante extends javax.swing.JFrame {
         jLabel24.setText("# Cuenta");
         PanelAspirante.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 120, -1, -1));
 
-        jTextCorreoCliReg10.addActionListener(new java.awt.event.ActionListener() {
+        jTextContratoCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextCorreoCliReg10ActionPerformed(evt);
+                jTextContratoCuentaActionPerformed(evt);
             }
         });
-        jTextCorreoCliReg10.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextContratoCuenta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextCorreoCliReg10KeyTyped(evt);
+                jTextContratoCuentaKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextCorreoCliReg10, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 110, 110, 28));
+        PanelAspirante.add(jTextContratoCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 110, 110, 28));
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel25.setText("Banco");
         PanelAspirante.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 120, -1, -1));
 
-        jTextCorreoCliReg11.addActionListener(new java.awt.event.ActionListener() {
+        jTextContratoBanco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextCorreoCliReg11ActionPerformed(evt);
+                jTextContratoBancoActionPerformed(evt);
             }
         });
-        jTextCorreoCliReg11.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextContratoBanco.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextCorreoCliReg11KeyTyped(evt);
+                jTextContratoBancoKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextCorreoCliReg11, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 110, 110, 28));
+        PanelAspirante.add(jTextContratoBanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 110, 110, 28));
 
         jLabel26.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel26.setText("Sueldo($)");
         PanelAspirante.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 160, -1, -1));
 
-        jTextCorreoCliReg12.addActionListener(new java.awt.event.ActionListener() {
+        jTextContratoSueldo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextCorreoCliReg12ActionPerformed(evt);
+                jTextContratoSueldoActionPerformed(evt);
             }
         });
-        jTextCorreoCliReg12.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextContratoSueldo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextCorreoCliReg12KeyTyped(evt);
+                jTextContratoSueldoKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextCorreoCliReg12, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 150, 110, 28));
+        PanelAspirante.add(jTextContratoSueldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 150, 110, 28));
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel27.setText("Depto.");
         PanelAspirante.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 200, -1, -1));
 
-        jTextCorreoCliReg13.addActionListener(new java.awt.event.ActionListener() {
+        jTextContratoDepto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextCorreoCliReg13ActionPerformed(evt);
+                jTextContratoDeptoActionPerformed(evt);
             }
         });
-        jTextCorreoCliReg13.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextContratoDepto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextCorreoCliReg13KeyTyped(evt);
+                jTextContratoDeptoKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextCorreoCliReg13, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 190, 110, 28));
+        PanelAspirante.add(jTextContratoDepto, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 190, 110, 28));
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel28.setText("Cargo");
         PanelAspirante.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 160, -1, -1));
 
-        jTextCorreoCliReg14.addActionListener(new java.awt.event.ActionListener() {
+        jTextContratoCargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextCorreoCliReg14ActionPerformed(evt);
+                jTextContratoCargoActionPerformed(evt);
             }
         });
-        jTextCorreoCliReg14.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextContratoCargo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextCorreoCliReg14KeyTyped(evt);
+                jTextContratoCargoKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextCorreoCliReg14, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 150, 110, 28));
+        PanelAspirante.add(jTextContratoCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 150, 110, 28));
+
+        jLabel29.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel29.setText("Sexo");
+        PanelAspirante.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 200, -1, -1));
+
+        btnGrpSexo.add(jRadioButton7);
+        jRadioButton7.setText("F");
+        PanelAspirante.add(jRadioButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 200, -1, -1));
+
+        btnGrpSexo.add(jRadioButton8);
+        jRadioButton8.setText("M");
+        jRadioButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton8ActionPerformed(evt);
+            }
+        });
+        PanelAspirante.add(jRadioButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 200, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -444,65 +498,65 @@ public class ContratarAspirante extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButRegClienteActionPerformed
 
-    private void jTextCorreoCliReg8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCorreoCliReg8ActionPerformed
+    private void jTextContratoFechaInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextContratoFechaInicioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextCorreoCliReg8ActionPerformed
+    }//GEN-LAST:event_jTextContratoFechaInicioActionPerformed
 
-    private void jTextCorreoCliReg8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCorreoCliReg8KeyTyped
+    private void jTextContratoFechaInicioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextContratoFechaInicioKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextCorreoCliReg8KeyTyped
+    }//GEN-LAST:event_jTextContratoFechaInicioKeyTyped
 
-    private void jTextCorreoCliReg9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCorreoCliReg9ActionPerformed
+    private void jTextContratoFechaFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextContratoFechaFinActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextCorreoCliReg9ActionPerformed
+    }//GEN-LAST:event_jTextContratoFechaFinActionPerformed
 
-    private void jTextCorreoCliReg9KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCorreoCliReg9KeyTyped
+    private void jTextContratoFechaFinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextContratoFechaFinKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextCorreoCliReg9KeyTyped
+    }//GEN-LAST:event_jTextContratoFechaFinKeyTyped
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void jCmbContratoTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbContratoTipoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_jCmbContratoTipoActionPerformed
 
-    private void jTextCorreoCliReg10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCorreoCliReg10ActionPerformed
+    private void jTextContratoCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextContratoCuentaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextCorreoCliReg10ActionPerformed
+    }//GEN-LAST:event_jTextContratoCuentaActionPerformed
 
-    private void jTextCorreoCliReg10KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCorreoCliReg10KeyTyped
+    private void jTextContratoCuentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextContratoCuentaKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextCorreoCliReg10KeyTyped
+    }//GEN-LAST:event_jTextContratoCuentaKeyTyped
 
-    private void jTextCorreoCliReg11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCorreoCliReg11ActionPerformed
+    private void jTextContratoBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextContratoBancoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextCorreoCliReg11ActionPerformed
+    }//GEN-LAST:event_jTextContratoBancoActionPerformed
 
-    private void jTextCorreoCliReg11KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCorreoCliReg11KeyTyped
+    private void jTextContratoBancoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextContratoBancoKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextCorreoCliReg11KeyTyped
+    }//GEN-LAST:event_jTextContratoBancoKeyTyped
 
-    private void jTextCorreoCliReg12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCorreoCliReg12ActionPerformed
+    private void jTextContratoSueldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextContratoSueldoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextCorreoCliReg12ActionPerformed
+    }//GEN-LAST:event_jTextContratoSueldoActionPerformed
 
-    private void jTextCorreoCliReg12KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCorreoCliReg12KeyTyped
+    private void jTextContratoSueldoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextContratoSueldoKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextCorreoCliReg12KeyTyped
+    }//GEN-LAST:event_jTextContratoSueldoKeyTyped
 
-    private void jTextCorreoCliReg13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCorreoCliReg13ActionPerformed
+    private void jTextContratoDeptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextContratoDeptoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextCorreoCliReg13ActionPerformed
+    }//GEN-LAST:event_jTextContratoDeptoActionPerformed
 
-    private void jTextCorreoCliReg13KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCorreoCliReg13KeyTyped
+    private void jTextContratoDeptoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextContratoDeptoKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextCorreoCliReg13KeyTyped
+    }//GEN-LAST:event_jTextContratoDeptoKeyTyped
 
-    private void jTextCorreoCliReg14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCorreoCliReg14ActionPerformed
+    private void jTextContratoCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextContratoCargoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextCorreoCliReg14ActionPerformed
+    }//GEN-LAST:event_jTextContratoCargoActionPerformed
 
-    private void jTextCorreoCliReg14KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCorreoCliReg14KeyTyped
+    private void jTextContratoCargoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextContratoCargoKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextCorreoCliReg14KeyTyped
+    }//GEN-LAST:event_jTextContratoCargoKeyTyped
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         this.setVisible(false);
@@ -518,6 +572,10 @@ public class ContratarAspirante extends javax.swing.JFrame {
         this.setVisible(false);
         new RegistroAsistencia().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jRadioButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -571,6 +629,10 @@ public class ContratarAspirante extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelAspirante;
+    private javax.swing.ButtonGroup btnGrpCopiaCedula;
+    private javax.swing.ButtonGroup btnGrpCopiaTitulo;
+    private javax.swing.ButtonGroup btnGrpREvisionMedica;
+    private javax.swing.ButtonGroup btnGrpSexo;
     private javax.swing.JButton btnVolver;
     private javax.swing.JButton jButRegCliente;
     private javax.swing.JButton jButRegCliente2;
@@ -579,7 +641,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jCmbContratoTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -596,6 +658,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButton jRadioButton1;
@@ -604,14 +667,16 @@ public class ContratarAspirante extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JRadioButton jRadioButton6;
+    private javax.swing.JRadioButton jRadioButton7;
+    private javax.swing.JRadioButton jRadioButton8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextCorreoCliReg10;
-    private javax.swing.JTextField jTextCorreoCliReg11;
-    private javax.swing.JTextField jTextCorreoCliReg12;
-    private javax.swing.JTextField jTextCorreoCliReg13;
-    private javax.swing.JTextField jTextCorreoCliReg14;
-    private javax.swing.JTextField jTextCorreoCliReg8;
-    private javax.swing.JTextField jTextCorreoCliReg9;
+    private javax.swing.JTable jTableAspirantesAptos;
+    private javax.swing.JTextField jTextContratoBanco;
+    private javax.swing.JTextField jTextContratoCargo;
+    private javax.swing.JTextField jTextContratoCuenta;
+    private javax.swing.JTextField jTextContratoDepto;
+    private javax.swing.JTextField jTextContratoFechaFin;
+    private javax.swing.JTextField jTextContratoFechaInicio;
+    private javax.swing.JTextField jTextContratoSueldo;
     // End of variables declaration//GEN-END:variables
 }

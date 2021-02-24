@@ -9,62 +9,46 @@ package com.epn.trappi.gui.rrhh;
 import com.epn.trappi.*;
 import com.epn.trappi.db.rrhh.Connect;
 import com.epn.trappi.models.rrhh.Aspirante;
+import com.epn.trappi.models.rrhh.ListaAspirantes;
+import com.epn.trappi.models.rrhh.PruebaAdmision;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author stali
+ * @author Javier Erazo
  */
 public class RegistroAspirante extends javax.swing.JFrame {
+    
     private void listarAspirantes(){
+        ListaAspirantes listaAspirantes = new ListaAspirantes();
+        ArrayList<Aspirante> aspirantes = listaAspirantes.selectAll();
+        DefaultTableModel model = (DefaultTableModel) jTableAspirantes.getModel();
+        model.setRowCount(0);
         
-        PreparedStatement pstm = null;
-        ResultSet rs = null;
-        try {
-            Connection conn = Connect.connect();
-            DefaultTableModel model = (DefaultTableModel) jTableAspirantes.getModel();
-            model.setRowCount(0);
-            String query = "SELECT * FROM aspirante_prueba";
-            pstm = conn.prepareStatement(query);
-            rs = pstm.executeQuery();
-            while(rs.next()){
-                Vector vector = new Vector();
-                vector.add(rs.getInt(1));
-                vector.add(rs.getString(2));
-                vector.add(rs.getString(3));
-                vector.add(rs.getString(4));
-                vector.add(rs.getString(5));
-                vector.add(rs.getString(6));
-                vector.add(rs.getString(7));
-                vector.add(rs.getString(8));
-                vector.add(rs.getInt(9));
-                model.addRow(vector);
-                jTableAspirantes.setModel(model);
-                
-            }
-            conn.close();
-        } catch (Exception e) {
-            System.out.println("Error en consulta: " + e);
-        }
-        finally{
-            try {
-                if(rs!=null) rs.close();
-                if(pstm!=null) pstm.close();
-                
-            } catch (Exception e) {
-                System.out.println("Error al cerrar rs y pstm: " + e);
-            }
+        for (Aspirante asp: aspirantes){
+            Vector v = new Vector();
+            v.add(asp.getNombre());
+            v.add(asp.getApellidos());
+            v.add(asp.getTelefono());
+            v.add(asp.getCedula());
+            v.add(asp.getCargoAspirante());
+            v.add(asp.getPrueba().getAptitudes());
+            v.add(asp.getPrueba().getActitudes());
+            v.add(asp.getPrueba().getPuntaje());
+            model.addRow(v);
+            jTableAspirantes.setModel(model);
         }
     }
-    /**
-     * Creates new form Ejemplo_GUI
-     */
+
     public RegistroAspirante() {
         initComponents();
         jTextActitudesAspirante.setEnabled(false);
@@ -381,13 +365,13 @@ public class RegistroAspirante extends javax.swing.JFrame {
 
         jTableAspirantes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "Nombre", "Apellidos", "Teléfono", "Cédula", "Cargo", "Aptitudes", "Actitudes", "Puntaje"
+                "Nombre", "Apellidos", "Teléfono", "Cédula", "Cargo", "Aptitudes", "Actitudes", "Puntaje"
             }
         ));
         jScrollPane1.setViewportView(jTableAspirantes);
@@ -451,8 +435,14 @@ public class RegistroAspirante extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButGuardarAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButGuardarAspiranteActionPerformed
-        //Aspirante aspirante = new Aspirante(jTextNombreAspirante.getText(), jTextApellidoAspirante.getText(),
-          //      jTextCedulaAspirante.getText());
+        PruebaAdmision prueba = new PruebaAdmision(Integer.parseInt(jTextPuntajeAspirante.getText()), jTextActitudesAspirante.getText(),
+                jTextAptitudesAspirante.getText());
+        Aspirante aspirante = new Aspirante(jTextNombreAspirante.getText(), jTextApellidoAspirante.getText(), jTextCedulaAspirante.getText(),
+                jTextTelefonoAspirante.getText(), jTextCargoAspirante.getText(), prueba);
+        ListaAspirantes listaAspirantes = new ListaAspirantes();
+        listaAspirantes.agregar(aspirante);
+        listarAspirantes();
+        JOptionPane.showMessageDialog(null, "Aspirante registrado con éxito");
     }//GEN-LAST:event_jButGuardarAspiranteActionPerformed
 
     private void jTextNombreAspiranteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNombreAspiranteKeyTyped
