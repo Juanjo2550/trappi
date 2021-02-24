@@ -8,10 +8,13 @@ package com.epn.trappi.gui.rrhh;
 
 import com.epn.trappi.*;
 import com.epn.trappi.models.rrhh.Aspirante;
+import com.epn.trappi.models.rrhh.Contratacion;
 import com.epn.trappi.models.rrhh.ControladorPruebaAdmision;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.ButtonModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -103,8 +106,8 @@ public class ContratarAspirante extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         jTextContratoCargo = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
-        jRadioButton7 = new javax.swing.JRadioButton();
-        jRadioButton8 = new javax.swing.JRadioButton();
+        rdbtFemenino = new javax.swing.JRadioButton();
+        rdbtMasculino = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -442,18 +445,18 @@ public class ContratarAspirante extends javax.swing.JFrame {
         jLabel29.setText("Sexo");
         PanelAspirante.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 200, -1, -1));
 
-        btnGrpSexo.add(jRadioButton7);
-        jRadioButton7.setText("F");
-        PanelAspirante.add(jRadioButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 200, -1, -1));
+        btnGrpSexo.add(rdbtFemenino);
+        rdbtFemenino.setText("F");
+        PanelAspirante.add(rdbtFemenino, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 200, -1, -1));
 
-        btnGrpSexo.add(jRadioButton8);
-        jRadioButton8.setText("M");
-        jRadioButton8.addActionListener(new java.awt.event.ActionListener() {
+        btnGrpSexo.add(rdbtMasculino);
+        rdbtMasculino.setText("M");
+        rdbtMasculino.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton8ActionPerformed(evt);
+                rdbtMasculinoActionPerformed(evt);
             }
         });
-        PanelAspirante.add(jRadioButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 200, -1, -1));
+        PanelAspirante.add(rdbtMasculino, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 200, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -496,7 +499,26 @@ public class ContratarAspirante extends javax.swing.JFrame {
     }//GEN-LAST:event_jButRegCliente2ActionPerformed
 
     private void jButRegClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegClienteActionPerformed
-
+        //Obtenemos las datos del aspirante
+        DefaultTableModel model = (DefaultTableModel) jTableAspirantesAptos.getModel();
+        int selected = jTableAspirantesAptos.getSelectedRow();
+        String nombre = (String) model.getValueAt(selected, 0);
+        String apellido = (String) model.getValueAt(selected, 1);
+        
+        String cedula = (String) model.getValueAt(selected, 3);
+        String cargo = (String) model.getValueAt(selected, 4);
+        String depto = jTextContratoDepto.getText();
+        String numCuenta = jTextContratoCuenta.getText();
+        String banco = jTextContratoBanco.getText();
+        String valorSueldo = jTextContratoSueldo.getText();
+        rdbtMasculino.setActionCommand("M");
+        rdbtFemenino.setActionCommand("F");
+        char sexo = btnGrpSexo.getSelection().getActionCommand().charAt(0);
+        
+        Contratacion contratacion = new Contratacion();
+       contratacion.registrarEmpleado(nombre, apellido, cedula, cargo, depto , numCuenta, banco, valorSueldo, sexo);
+       JOptionPane.showMessageDialog(null, "El empleado se ha registrado exitosamente");
+               
     }//GEN-LAST:event_jButRegClienteActionPerformed
 
     private void jTextContratoFechaInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextContratoFechaInicioActionPerformed
@@ -574,9 +596,9 @@ public class ContratarAspirante extends javax.swing.JFrame {
         new EmpleadoGui().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jRadioButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton8ActionPerformed
+    private void rdbtMasculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbtMasculinoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton8ActionPerformed
+    }//GEN-LAST:event_rdbtMasculinoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -668,8 +690,6 @@ public class ContratarAspirante extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JRadioButton jRadioButton7;
-    private javax.swing.JRadioButton jRadioButton8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableAspirantesAptos;
     private javax.swing.JTextField jTextContratoBanco;
@@ -679,5 +699,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
     private javax.swing.JTextField jTextContratoFechaFin;
     private javax.swing.JTextField jTextContratoFechaInicio;
     private javax.swing.JTextField jTextContratoSueldo;
+    private javax.swing.JRadioButton rdbtFemenino;
+    private javax.swing.JRadioButton rdbtMasculino;
     // End of variables declaration//GEN-END:variables
 }

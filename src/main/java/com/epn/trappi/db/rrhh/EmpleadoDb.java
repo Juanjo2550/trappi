@@ -104,18 +104,19 @@ public class EmpleadoDb {
             new SueldoDb().obtenerPorEmpleado(rs.getString("cedula")),
             rs.getString("estado"),
             rs.getString("sexo").charAt(0)
-            );
+            );            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return new Empleado();
         }
     }
-
+//Se modificó la base de datos porque no tenia RegistroAsistencia
     public boolean addOne(Empleado nuevoEmpleado, Sueldo sueldo) {
         String sql = "INSERT INTO empleados(cedula,nombres, apellidos, cargo, departamento, cuentaBancaria, banco, RegistroAsistencia, estado, sexo) VALUES(?,?,?,?,?,?,?,?,?,?)";
 
-        try (Connection conn = Connect.connect("juanjo.db");
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try  {
+            Connection conn = Connect.connect("juanjo.db");
+             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, nuevoEmpleado.getCedula());
             pstmt.setString(2, nuevoEmpleado.getNombres());
             pstmt.setString(3, nuevoEmpleado.getApellidos());
