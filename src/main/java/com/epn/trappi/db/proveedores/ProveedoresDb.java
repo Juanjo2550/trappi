@@ -32,14 +32,14 @@ public class ProveedoresDb {
         return productos;
     }
 
-    public void setProductos(List<Producto> productos) {
+public void setProductos(List<Producto> productos) {
         productos.forEach(npr -> {
-            agregarProducto(transformarProducto(npr));
+            agregarProducto(transformarProducto(npr),transformarProductoInventario(npr));
         });
     }
 
     public void setProductos(Producto producto) {
-        agregarProducto(transformarProducto(producto));
+        agregarProducto(transformarProducto(producto),transformarProductoInventario(producto));
     }
 
     public List<Proveedor> getProveedores() {
@@ -181,6 +181,20 @@ public class ProveedoresDb {
             Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public ArrayList<Integer> seleccionarIdentificadores(){
+        try {
+            List<String[]> serv = p.leerArchivoCSV(this.compFilename);
+            ArrayList<Integer> retorno = new ArrayList<>();
+            int auxiliar=-1;
+            for (String[] i : serv)
+                retorno.add(Integer.parseInt(i[0]));
+            return retorno;
+        } catch (IOException ex) {
+            Logger.getLogger(ProveedoresDb.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     /*private void seleccionarCompras() {
         try {
@@ -262,12 +276,17 @@ public class ProveedoresDb {
         return resultado;
     }
 
-    private void agregarProducto(String nuevoProducto) {
+    private void agregarProducto(String nuevoProducto, String nuevoProductoInv) {
         try {
             p.writeArchivoCSV(prodFilename, nuevoProducto);
+            p.writeArchivoCSV(invFilename, nuevoProductoInv);
         } catch (IOException ex) {
             Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    private String transformarProductoInventario(Producto p) {
+        return p.getNombre() + ";0";
     }
 
     private void agregarProveedor(String nuevoProveedor) {

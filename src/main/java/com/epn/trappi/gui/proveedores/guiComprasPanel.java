@@ -6,11 +6,11 @@
 package com.epn.trappi.gui.proveedores;
 
 import com.epn.trappi.db.proveedores.ProveedoresDb;
-import com.epn.trappi.models.proveedores.CantidadDeBien;
 import com.epn.trappi.models.proveedores.Compra;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -75,9 +75,9 @@ public class guiComprasPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jTextCompra = new javax.swing.JTextField();
-        jTextEstado = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -108,6 +108,11 @@ public class guiComprasPanel extends javax.swing.JPanel {
         jButRegFactCompNotaCred.setForeground(new java.awt.Color(240, 240, 241));
         jButRegFactCompNotaCred.setText("Actualizar estado");
         jButRegFactCompNotaCred.setBorderPainted(false);
+        jButRegFactCompNotaCred.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButRegFactCompNotaCredActionPerformed(evt);
+            }
+        });
 
         jIVA.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
@@ -148,6 +153,8 @@ public class guiComprasPanel extends javax.swing.JPanel {
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel11.setText("Compra");
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Entregado", "Pendiente" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -160,8 +167,8 @@ public class guiComprasPanel extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(49, 49, 49)
                         .addComponent(jTextCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(145, 145, 145)
-                        .addComponent(jTextEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(157, 157, 157)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -182,8 +189,8 @@ public class guiComprasPanel extends javax.swing.JPanel {
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52))
         );
 
@@ -261,16 +268,45 @@ public class guiComprasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButRegFactCompNotaCred1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        jTextEstado.setText(modelo.getValueAt(jTable1.getSelectedRow(),5)+"");
-        jTextCompra.setText(modelo.getValueAt(jTable1.getSelectedRow(),0)+"");
-        jTextCompra.setEditable(false);
+        try {
+            ArrayList<Compra> c = (ArrayList<Compra>) db.getCompras();
+            if(c.get(jTable1.getSelectedRow()).getEstado().equals("Entregado")){
+                jComboBox1.setSelectedIndex(0);
+            }
+            else{
+                jComboBox1.setSelectedIndex(1);
+            }
+            jTextCompra.setText(modelo.getValueAt(jTable1.getSelectedRow(),0)+"");
+            jTextCompra.setEditable(false);
+        } catch (IOException ex) {
+            Logger.getLogger(guiComprasPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButRegFactCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegFactCompNotaCredActionPerformed
+        try {
+            ArrayList<Compra> c = (ArrayList<Compra>) db.getCompras(),r = new ArrayList<Compra>();
+            for (int i=0;i<c.size();i++){
+                if(db.seleccionarIdentificadores().get(i)==Integer.parseInt(jTextCompra.getText())){
+                    c.get(i).setEstado(jComboBox1.getSelectedItem().toString());
+                    r.add(c.get(i));
+                }
+            }
+            for (int i=0;i<r.size();i++){
+                db.setCompras(r.get(i).getListaCantidadDeBienes().getListaCantidadDeBienes().get(i).getBien().getNombre(), TOOL_TIP_TEXT_KEY, WIDTH, TOOL_TIP_TEXT_KEY, SOMEBITS);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(guiComprasPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButRegFactCompNotaCredActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelVerTodos;
     private javax.swing.JButton jButRegFactCompNotaCred;
     private javax.swing.JButton jButRegFactCompNotaCred1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jIVA;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -280,7 +316,6 @@ public class guiComprasPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextCompra;
-    private javax.swing.JTextField jTextEstado;
     private javax.swing.JTextField jTextFechCompNotaCred;
     private javax.swing.JLabel jValor;
     // End of variables declaration//GEN-END:variables
