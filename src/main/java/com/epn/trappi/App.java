@@ -10,6 +10,6 @@ public class App {
     public static void main(String args[]){
         MainGui mainWindow = new MainGui();
         mainWindow.setVisible(true);
-        Connect.connect();
+        Connect.connect("diego.db");
     }
 }

@@ -27,7 +27,7 @@ public class RegistroAspirante extends javax.swing.JFrame {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         try {
-            Connection conn = Connect.connect();
+            Connection conn = Connect.connect("juanjo.db");
             DefaultTableModel model = (DefaultTableModel) jTableAspirantes.getModel();
             model.setRowCount(0);
             String query = "SELECT * FROM aspirante_prueba";
