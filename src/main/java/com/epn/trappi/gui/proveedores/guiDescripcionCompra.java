@@ -116,7 +116,8 @@ public class guiDescripcionCompra extends javax.swing.JPanel {
 
     private void jButRegFactCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegFactCompNotaCredActionPerformed
         for (Compra compra : lista.getCompras()) {
-            compra.comprar();
+            //compra.comprar();
+            compra.comprarAnalizador();
         }
         JOptionPane.showMessageDialog(null, "Compra realizada con éxito!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButRegFactCompNotaCredActionPerformed

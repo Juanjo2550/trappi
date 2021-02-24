@@ -55,6 +55,9 @@ abstract public class Compra {
     public void comprar() {
     }
     
+    public void comprarAnalizador() {
+    }
+    
     public void registrarCompra(String nombreProducto, String Proveedor, int cantidad, String estado, double montoTotal, String fecha) {
         db.setCompras(nombreProducto, Proveedor, cantidad, estado, montoTotal, fecha);
     }
