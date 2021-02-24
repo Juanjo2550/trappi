@@ -91,6 +91,7 @@ public class Fecha {
             default:
                 diaCorrecto = dia >= 1 && dia <= 31;
         }
+        
         return diaCorrecto && mesCorrecto && añoCorrecto;
     }
 
@@ -163,6 +164,22 @@ public class Fecha {
             }
 
         }
+    }
+
+    public String sumarDiasAFecha(String fecha, int dias) {
+        if (dias == 0) {
+            return fecha;
+        }
+
+        String[] f = fecha.split("-");
+        Calendar calendar = Calendar.getInstance();
+        //calendar.setTime(new Date(Integer.parseInt(f[0]), Integer.parseInt(f[1]), Integer.parseInt(f[2])));
+        calendar.set(Integer.parseInt(f[0]), Integer.parseInt(f[1]) - 1, Integer.parseInt(f[2]));
+
+        calendar.add(Calendar.DAY_OF_MONTH, dias);
+        SimpleDateFormat fe = new SimpleDateFormat("YYYY-MM-dd");
+        return fe.format(calendar.getTime());
+
     }
 
     @Override

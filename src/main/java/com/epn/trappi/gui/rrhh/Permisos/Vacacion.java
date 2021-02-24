@@ -26,8 +26,9 @@ public class Vacacion implements Permiso{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+ 
     @Override
-    public void Calcular_Numero_Dias_Permiso() {
+    public int Calcular_Numero_Dias_Permiso(String tipo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

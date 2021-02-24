@@ -12,7 +12,7 @@ import java.sql.SQLException;
  * @author stali
  */
 public class Conexion_SQLite_Permisos {
-    public static Connection connect() {
+    public static Connection connect(String databaseFileName) {
             Connection conn = null;
             try {
                 if(conn == null) {
