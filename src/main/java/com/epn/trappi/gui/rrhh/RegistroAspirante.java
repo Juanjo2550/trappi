@@ -11,6 +11,7 @@ import com.epn.trappi.db.rrhh.Connect;
 import com.epn.trappi.models.rrhh.Aspirante;
 import com.epn.trappi.models.rrhh.ListaAspirantes;
 import com.epn.trappi.models.rrhh.PruebaAdmision;
+import com.epn.trappi.models.rrhh.RRHH;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

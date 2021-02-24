@@ -10,6 +10,7 @@ import com.epn.trappi.*;
 import com.epn.trappi.models.rrhh.Aspirante;
 import com.epn.trappi.models.rrhh.Contratacion;
 import com.epn.trappi.models.rrhh.ControladorPruebaAdmision;
+import com.epn.trappi.models.rrhh.RRHH;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -515,8 +516,11 @@ public class ContratarAspirante extends javax.swing.JFrame {
         rdbtFemenino.setActionCommand("F");
         char sexo = btnGrpSexo.getSelection().getActionCommand().charAt(0);
         
-        Contratacion contratacion = new Contratacion();
-       contratacion.registrarEmpleado(nombre, apellido, cedula, cargo, depto , numCuenta, banco, valorSueldo, sexo);
+      // Contratacion contratacion = new Contratacion();
+       //contratacion.registrarEmpleado(nombre, apellido, cedula, cargo, depto , numCuenta, banco, valorSueldo, sexo);
+       
+       RRHH rrhh = new RRHH();
+       rrhh.contratarPersonal(nombre, apellido, cedula, cargo, depto, numCuenta, banco, valorSueldo, sexo);
        JOptionPane.showMessageDialog(null, "El empleado se ha registrado exitosamente");
                
     }//GEN-LAST:event_jButRegClienteActionPerformed

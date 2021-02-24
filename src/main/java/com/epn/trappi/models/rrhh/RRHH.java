@@ -10,8 +10,9 @@ public class RRHH {
     public RolesPagos roles = new RolesPagos();
    
 
-    public void contratarPersonal() {
-           
+    public void contratarPersonal(String nombre, String apellido, String cedula, String cargo, String depto, String numCuenta, String banco, String valorSueldo, char sexo) {
+         Contratacion contratacion = new Contratacion();
+         contratacion.registrarEmpleado(nombre, apellido, cedula, cargo, depto, numCuenta, banco, valorSueldo, sexo);
     }
     public RRHH(){
         this.pendientes = new ArrayList<>();
