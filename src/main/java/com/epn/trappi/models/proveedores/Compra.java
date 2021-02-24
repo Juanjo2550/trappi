@@ -1,6 +1,8 @@
 package com.epn.trappi.models.proveedores;
 
 import com.epn.trappi.db.proveedores.ProveedoresDb;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /*
@@ -26,10 +28,16 @@ abstract public class Compra {
         this.inventario = inventario;
         this.listaBienesAComprar = listaBienesAComprar;
         this.estado = estado;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
+        LocalDateTime now = LocalDateTime.now();  
+        this.fecha=dtf.format(now);  
     }
     public Compra(ListaCantidadDeBienes listaBienesAComprar, String estado) {
         this.listaBienesAComprar = listaBienesAComprar;
         this.estado = estado;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
+        LocalDateTime now = LocalDateTime.now();  
+        this.fecha=dtf.format(now);  
     }
     public Compra(Inventario inventario, ListaCantidadDeBienes listaBienesAComprar, String estado, String fecha) {
         this.inventario = inventario;
