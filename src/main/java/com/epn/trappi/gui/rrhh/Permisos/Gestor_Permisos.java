@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 public class Gestor_Permisos {
     public double afectacionSueldo;
     public String nombre_empleado;
-    public int CI;
+    public String CI;
     public String descripcion;
     public String fechaInicio;
    public String fechaFin;
@@ -30,7 +30,7 @@ public class Gestor_Permisos {
    public String estado;
 
 
-    public Gestor_Permisos(int CI,String nombre_empleado,String TipoPermiso, String fechaInicio, String fechaFin,   
+    public Gestor_Permisos(String CI,String nombre_empleado,String TipoPermiso, String fechaInicio, String fechaFin,   
             String descripcion,String estado, double afectacionSueldo) {
         this.afectacionSueldo = afectacionSueldo;
         this.nombre_empleado = nombre_empleado;
@@ -58,11 +58,11 @@ public class Gestor_Permisos {
         this.nombre_empleado = nombre_empleado;
     }
 
-    public int getCI() {
+    public String getCI() {
         return CI;
     }
 
-    public void setCI(int CI) {
+    public void setCI(String CI) {
         this.CI = CI;
     }
 
@@ -119,7 +119,7 @@ public class Gestor_Permisos {
         
         try (Connection conn = Conexion_SQLite_Permisos.connect("permisos.db");
              PreparedStatement registro = conn.prepareStatement(sql)) {
-            registro.setInt(1, CI);
+            registro.setString(1, CI);
             registro.setString(2, nombre_empleado);
             registro.setString(3, TipoPermiso);
             registro.setString(4, fechaInicio);

@@ -549,7 +549,7 @@ Empleado empleado = new Empleado();
     }//GEN-LAST:event_btnNuevoPermisoActionPerformed
 
     private void btnGuardarPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPermisoActionPerformed
-        Gestor_Permisos permiso = new Gestor_Permisos(Integer.parseInt(txtCedula.getText()),(String) cmbnombreEmpleado.getSelectedItem(),
+        Gestor_Permisos permiso = new Gestor_Permisos(txtCedula.getText(),(String) cmbnombreEmpleado.getSelectedItem(),
            (String) cmbTipoPermiso.getSelectedItem(),txtfechaInicioPermiso.getText(),txtfechaFinPermiso.getText(),
             txtDescripcion.getText(),(String) cmbEstado.getSelectedItem(),Double.parseDouble(txtvalorAPagar.getText())); 
          
