@@ -19,7 +19,8 @@ public class ListaAspirantes {
         this.listaAspirantes = new ArrayList<>();
     }
     
-    public Aspirante agregar(Aspirante aspNuevo){
+    public Aspirante agregar(String nombre, String apellidos, String cedula, String telefono, String cargo, int puntaje, String actitudes, String aptitudes){
+        Aspirante aspNuevo = new Aspirante(nombre, apellidos, cedula, telefono, cargo, puntaje, actitudes, aptitudes);
         try {            
             String query = "INSERT INTO aspirante_prueba (nombre, apellido, telefono, cedula, actitudes, aptitudes, puntaje, cargo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             pstm = conn.prepareStatement(query);
@@ -70,7 +71,7 @@ public class ListaAspirantes {
                 
                 PruebaAdmision prueba = new PruebaAdmision(rs.getInt("puntaje"), rs.getString("aptitudes"), rs.getString("actitudes"));
                 Aspirante aspirante = new Aspirante(rs.getString("nombre"),rs.getString("apellido"),rs.getString("cedula"),
-                rs.getString("telefono"), rs.getString("cargo"),prueba);
+                rs.getString("telefono"), rs.getString("cargo"),prueba.getPuntaje(), prueba.getActitudes(), prueba.getAptitudes());
                 this.listaAspirantes.add(aspirante);
                 
                 

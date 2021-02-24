@@ -436,12 +436,14 @@ public class RegistroAspirante extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButGuardarAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButGuardarAspiranteActionPerformed
-        PruebaAdmision prueba = new PruebaAdmision(Integer.parseInt(jTextPuntajeAspirante.getText()), jTextActitudesAspirante.getText(),
-                jTextAptitudesAspirante.getText());
-        Aspirante aspirante = new Aspirante(jTextNombreAspirante.getText(), jTextApellidoAspirante.getText(), jTextCedulaAspirante.getText(),
-                jTextTelefonoAspirante.getText(), jTextCargoAspirante.getText(), prueba);
+      //  PruebaAdmision prueba = new PruebaAdmision(Integer.parseInt(jTextPuntajeAspirante.getText()), jTextActitudesAspirante.getText(),
+        //        jTextAptitudesAspirante.getText());
+       // Aspirante aspirante = new Aspirante(jTextNombreAspirante.getText(), jTextApellidoAspirante.getText(), jTextCedulaAspirante.getText(),
+              //  jTextTelefonoAspirante.getText(), jTextCargoAspirante.getText(), prueba);
         ListaAspirantes listaAspirantes = new ListaAspirantes();
-        listaAspirantes.agregar(aspirante);
+        listaAspirantes.agregar(jTextNombreAspirante.getText(), jTextApellidoAspirante.getText(), jTextCedulaAspirante.getText(),
+                jTextTelefonoAspirante.getText(), jTextCargoAspirante.getText(),Integer.parseInt(jTextPuntajeAspirante.getText()), jTextActitudesAspirante.getText(),
+                jTextAptitudesAspirante.getText());
         listarAspirantes();
         JOptionPane.showMessageDialog(null, "Aspirante registrado con éxito");
     }//GEN-LAST:event_jButGuardarAspiranteActionPerformed

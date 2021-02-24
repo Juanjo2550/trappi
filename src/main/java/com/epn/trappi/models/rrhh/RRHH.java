@@ -11,7 +11,7 @@ public class RRHH {
    
 
     public void contratarPersonal() {
-
+           
     }
     public RRHH(){
         this.pendientes = new ArrayList<>();

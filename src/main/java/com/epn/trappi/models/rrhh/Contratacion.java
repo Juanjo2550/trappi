@@ -21,6 +21,10 @@ public class Contratacion {
     public void validarRequisitos(){
         
     }
+    
+    public void registrarContrato(){
+        
+    }
 }
 
 

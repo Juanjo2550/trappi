@@ -13,23 +13,23 @@ public class Aspirante {
     private String resultados [];
     private PruebaAdmision prueba;
 
-    public Aspirante(String nombre, String apellidos, String cedula, String telefono, String cargo, PruebaAdmision prueba) {
+    public Aspirante(String nombre, String apellidos, String cedula, String telefono, String cargo, int puntaje, String actitudes, String aptitudes) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.cedula = cedula;
         this.telefono = telefono;
         this.cargoAspirante = cargo;
-        this.prueba = new PruebaAdmision(prueba.getPuntaje(), prueba.getActitudes(), prueba.getActitudes());
+        this. prueba = new PruebaAdmision();
+        solicitarRegistroPrueba(actitudes, aptitudes, puntaje);
+        
     }
     
     public void solicitarRegistroPrueba(String actitudes, String aptitudes, int puntaje ){
-        //prueba.registrarResultadosPrueba();
+        this.prueba.registrarResultadosPrueba(puntaje, actitudes, aptitudes);
     }
     
     
-    public void obtenerDatos(){
-        
-    }
+  
 
     public String getNombre() {
         return nombre;
@@ -51,9 +51,7 @@ public class Aspirante {
         return cargoAspirante;
     }
 
-    public String[] getResultados() {
-        return resultados;
-    }
+    
 
     public PruebaAdmision getPrueba() {
         return prueba;

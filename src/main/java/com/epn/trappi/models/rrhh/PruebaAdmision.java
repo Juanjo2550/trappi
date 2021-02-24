@@ -16,10 +16,15 @@ public class PruebaAdmision {
         this.aptitudes = aptitudes;
         
     }
-    
-    public void registrarResultadosPrueba( int puntaje, String aptitudes, String actitudes){
-  
+    public PruebaAdmision(){
         
+    }
+    
+    public void registrarResultadosPrueba( int puntaje, String actitudes, String aptitudes){
+  
+        this.puntaje = puntaje;
+        this.actitudes = actitudes;
+        this.aptitudes = aptitudes;
     }
     
     
