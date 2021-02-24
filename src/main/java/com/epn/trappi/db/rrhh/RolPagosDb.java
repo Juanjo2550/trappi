@@ -45,7 +45,7 @@ public class RolPagosDb {
         }
         return tempRoles;
     }
-    
+      
     public RolPagos getOne (String cedulaEmpleado) {
         String sql = "SELECT * FROM rolpagos WHERE cedula = ?";
         try{
@@ -66,6 +66,31 @@ public class RolPagosDb {
         }
         
         return new RolPagos();
+    }
+    
+    
+    public ArrayList<RolPagos> getByCedula (String cedulaEmpleado) {
+        String sql = "SELECT * FROM rolpagos WHERE cedula = ?";
+        ArrayList<RolPagos> tempRoles = new ArrayList<RolPagos>();
+        try{
+            Connection conn;
+            conn = Connect.connect("juanjo.db");
+            PreparedStatement pstmt  = conn.prepareStatement(sql);
+            pstmt.setInt(1, Integer.parseInt(cedulaEmpleado));
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                tempRoles.add(new RolPagos(
+                            new Fecha(Integer.parseInt(rs.getString("dia")), Integer.parseInt(rs.getString("mes")), Integer.parseInt(rs.getString("ano"))),
+                            new EmpleadoDb().selectOne(rs.getInt("cedula") + ""),
+                            Integer.parseInt(rs.getString("valor")),
+                            rs.getInt("numero")
+                    ));
+            }
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return tempRoles;
     }
     
     public boolean addOne(RolPagos nuevoRolDePago) {

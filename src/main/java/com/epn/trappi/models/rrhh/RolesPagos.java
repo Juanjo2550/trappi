@@ -24,6 +24,10 @@ public class RolesPagos {
         return new RolPagosDb().selectAll();
     }
     
+    public ArrayList <RolPagos> obtenerTodos(String cedula) {
+            return new RolPagosDb().getByCedula(cedula);
+    }
+    
     public RolPagos agregar (RolPagos nuevoRol) {
         new RolPagosDb().addOne(nuevoRol);
         this.lista = new RolPagosDb().selectAll();

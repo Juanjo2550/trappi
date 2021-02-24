@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DetalleEmpleadoGUI extends javax.swing.JFrame {
     private Empleado empleado;
+    private RolesPagos roles;
     private javax.swing.JFrame parentForm;
     /**
      * Creates new form Ejemplo_GUI
@@ -32,7 +33,7 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
         initComponents();
         this.parentForm = parentForm;
         this.empleado = new EmpleadoDb().selectOne(cedula);
-        this.nombreEmpleado.setText(this.empleado.getNombres() + " " + this.empleado.getApellidos());
+        this.s.setText(this.empleado.getNombres() + " " + this.empleado.getApellidos());
         this.cedulaTextField.setText(this.empleado.getCedula().toString());
         this.cargoTextField.setText(this.empleado.getCargo());
         this.departamentoTextField.setText(this.empleado.getDepartamento());
@@ -40,6 +41,34 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
         this.bancoTextField.setText(this.empleado.getBanco());
         this.estadoTextField.setText(this.empleado.getEstado());
         this.sexoTextiField.setText(this.empleado.getSexo() + "");
+        this.roles = new RolesPagos();
+        fillTable(cedula);
+    }
+    
+    public final void fillTable(String cedula) {
+        String col [] = {
+            "Valor total",
+            "Cuenta",
+            "Fecha"
+        };
+        
+        DefaultTableModel tableModel = new DefaultTableModel(col, 0);
+        for(RolPagos r : this.roles.obtenerTodos(cedula)){ 
+            Object [] row = {
+                r.getValor(),
+                r.getNumero(),
+                r.getFecha(),
+            };
+                   
+            tableModel.addRow(row);
+        }
+        
+        this.tabla.setModel(tableModel);
+        this.tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.tabla.setDefaultEditor(Object.class, null);
+        this.tabla.setRowSelectionAllowed(true);
+        this.tabla.setColumnSelectionAllowed(false);
+        this.tabla.getColumnModel().getColumn(0).setPreferredWidth(2);
     }
     
     boolean bandera = false;
@@ -55,7 +84,7 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
-        nombreEmpleado = new javax.swing.JLabel();
+        s = new javax.swing.JLabel();
         cedulaLabel = new javax.swing.JLabel();
         cedulaTextField = new javax.swing.JTextField();
         cargoTextField = new javax.swing.JTextField();
@@ -70,7 +99,9 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
         estadoTextField = new javax.swing.JTextField();
         sexoLabel = new javax.swing.JLabel();
         sexoTextiField = new javax.swing.JTextField();
-        sueldoButton = new javax.swing.JButton();
+        nombreEmpleado = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,10 +137,10 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        nombreEmpleado.setFont(new java.awt.Font("Tahoma", 1, 35)); // NOI18N
-        nombreEmpleado.setForeground(new java.awt.Color(38, 35, 36));
-        nombreEmpleado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        nombreEmpleado.setText("Nombre");
+        s.setFont(new java.awt.Font("Tahoma", 1, 35)); // NOI18N
+        s.setForeground(new java.awt.Color(38, 35, 36));
+        s.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        s.setText("Roles de pago");
 
         cedulaLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         cedulaLabel.setText("Cédula: ");
@@ -146,7 +177,23 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
 
         sexoTextiField.setEnabled(false);
 
-        sueldoButton.setText("Pagar Sueldo");
+        nombreEmpleado.setFont(new java.awt.Font("Tahoma", 1, 35)); // NOI18N
+        nombreEmpleado.setForeground(new java.awt.Color(38, 35, 36));
+        nombreEmpleado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nombreEmpleado.setText("Nombre");
+
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tabla);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,19 +201,16 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nombreEmpleado)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
+                        .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(cuentaBancariaLabel)
                                 .addComponent(cargoLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(departamentoLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(estadoLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(bancoLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(sueldoButton))
+                                .addComponent(bancoLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                             .addComponent(cedulaLabel)
                             .addComponent(sexoLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -178,16 +222,25 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
                                 .addComponent(bancoTextField)
                                 .addComponent(cargoTextField)
                                 .addComponent(departamentoTextField)
-                                .addComponent(cuentaBancariaTextField)))))
+                                .addComponent(cuentaBancariaTextField))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(s))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(44, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(16, 16, 16)
+                    .addComponent(nombreEmpleado)
+                    .addContainerGap(380, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(nombreEmpleado)
-                .addGap(18, 18, 18)
+                .addGap(73, 73, 73)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cedulaLabel)
                     .addComponent(cedulaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -215,9 +268,16 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sexoLabel)
                     .addComponent(sexoTextiField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addComponent(sueldoButton)
-                .addGap(0, 238, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(s)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 30, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(113, 113, 113)
+                    .addComponent(nombreEmpleado)
+                    .addContainerGap(810, Short.MAX_VALUE)))
         );
 
         pack();
@@ -342,9 +402,11 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nombreEmpleado;
+    private javax.swing.JLabel s;
     private javax.swing.JLabel sexoLabel;
     private javax.swing.JTextField sexoTextiField;
-    private javax.swing.JButton sueldoButton;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }
