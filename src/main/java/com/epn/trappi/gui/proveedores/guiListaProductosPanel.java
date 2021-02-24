@@ -92,20 +92,6 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel11.setText("Precio:");
 
-        txtBuscarRUC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarRUCActionPerformed(evt);
-            }
-        });
-        txtBuscarRUC.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtBuscarRUCKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtBuscarRUCKeyTyped(evt);
-            }
-        });
-
         txtPrecio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,18 +227,6 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
 
         add(PanelVerTodos);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtBuscarRUCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarRUCActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarRUCActionPerformed
-
-    private void txtBuscarRUCKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarRUCKeyPressed
-
-    }//GEN-LAST:event_txtBuscarRUCKeyPressed
-
-    private void txtBuscarRUCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarRUCKeyTyped
-
-    }//GEN-LAST:event_txtBuscarRUCKeyTyped
 
     private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
         // TODO add your handling code here:
