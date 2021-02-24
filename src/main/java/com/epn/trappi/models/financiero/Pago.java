@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class  Pago {
-    String fechadePago;
+    Fecha fechadePago;
     LibroDiario libroDiario;
     String nroCuenta;
     double monto;
@@ -14,11 +14,7 @@ public class  Pago {
 
     public Pago(LibroDiario libroDiario, String nroCuenta, double monto) {
         //Se calcula la fecha del pago
-        Calendar fechaPagoObjeto = Calendar.getInstance(); 
-        String dia = String.valueOf(fechaPagoObjeto.get(Calendar.DATE));
-        String mes = String.valueOf(fechaPagoObjeto.get(Calendar.MONTH)+1);//se le suma uno debido a que enero es igual a cero
-        String anio = String.valueOf(fechaPagoObjeto.get(Calendar.YEAR));
-        this.fechadePago = dia+'/'+mes+'/'+anio;
+        this.fechadePago = new Fecha();
         this.libroDiario = libroDiario;
         this.nroCuenta = nroCuenta;
         this.monto = monto;

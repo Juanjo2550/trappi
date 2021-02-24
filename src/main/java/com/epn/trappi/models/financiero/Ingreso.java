@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 
 public class Ingreso {
-    String fechaIngreso;
+    Fecha fechaIngreso;
     String idFactura;
     double total;
     private LibroDiario libroDiario;
@@ -20,12 +20,9 @@ public class Ingreso {
     }
     
     public void registrarIngreso(Ingreso ingreso){
-        Calendar fechaIngresoObjeto = Calendar.getInstance(); 
-        String dia = String.valueOf(fechaIngresoObjeto.get(Calendar.DATE));
-        String mes = String.valueOf(fechaIngresoObjeto.get(Calendar.MONTH)+1);//se le suma uno debido a que enero es igual a cero
-        String anio = String.valueOf(fechaIngresoObjeto.get(Calendar.YEAR));
-        fechaIngreso = dia+'/'+mes+'/'+anio;
-        libroDiario.ingresosRegistrados.add(ingreso);
+        
+        fechaIngreso = new Fecha();
+ 
     }
     
 

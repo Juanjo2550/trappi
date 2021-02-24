@@ -1,8 +1,10 @@
 
 package com.epn.trappi.gui.financiero;
 
-public class DashboardsinRProgress extends javax.swing.JFrame {
+import com.epn.trappi.models.financiero.Analizador;
 
+public class DashboardsinRProgress extends javax.swing.JFrame {
+    Analizador analizador;
     public DashboardsinRProgress() {
         initComponents();
     }
