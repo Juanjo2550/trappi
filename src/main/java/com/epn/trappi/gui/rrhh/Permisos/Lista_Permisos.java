@@ -5,29 +5,30 @@
  */
 package com.epn.trappi.gui.rrhh.Permisos;
 
+import com.epn.trappi.models.rrhh.Empleado;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  *
  * @author stali
  */
 public class Lista_Permisos {
-    ArrayList<Permiso> listaPermisos = new ArrayList<Permiso>();
+     Map <Integer, Gestor_Permisos> lista;
+     
+     public Lista_Permisos(){
+        this.lista = new HashMap<>();
+    }
+   public ArrayList <Gestor_Permisos> obtenerTodos() {
+        ArrayList<Gestor_Permisos> temp = new ArrayList<>();
+        this.lista.forEach((u, v) -> temp.add(v));
+        return temp;
+    }
     
-     public void añadirRegistroAsistencia(Permiso n){
-        listaPermisos.add(n);
-    }
-    private void editarRegistroAsistencia(int posicionList,Permiso nuevo){
-        listaPermisos.set(posicionList,nuevo);
-    }
-    private void eliminarRegistroAsistencia(Permiso eliminado){
-        listaPermisos.remove(eliminado);
-    }
-    public void mostrarRegistro(){
-        Iterator it = listaPermisos.iterator();
-        while(it.hasNext()){
-            System.out.println(it.next());
-        }
+    public Gestor_Permisos agregar (Gestor_Permisos nuevoPermiso) {
+        this.lista.put(Integer.parseInt(nuevoPermiso.getCI()), nuevoPermiso);
+        return nuevoPermiso;
     }
 }

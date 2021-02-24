@@ -35,6 +35,7 @@ public class Gestor_Permiso extends javax.swing.JFrame {
 Calamidad_Domestica calamidad = new Calamidad_Domestica();
 Fecha fecha = new Fecha();
 Empleado empleado = new Empleado();
+ 
     
     /*
      * Creates new form Ejemplo_GUI
@@ -56,6 +57,8 @@ Empleado empleado = new Empleado();
         btnGuardarPermiso.setEnabled(true);
         TextPrompt buscarProveedor = new TextPrompt("yyyy-MM-dd", txtfechaInicioPermiso);
     }
+
+    
        public void tipoPermiso(){
         String PerCalamidad = (String) cmbPermiso.getSelectedItem();
         if("Calamidad Domestica".equals(PerCalamidad)){
@@ -289,7 +292,7 @@ Empleado empleado = new Empleado();
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addGap(114, 114, 114))
         );
 
         PanelAspirante.setBackground(new java.awt.Color(255, 255, 255));
@@ -505,7 +508,9 @@ Empleado empleado = new Empleado();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        // TODO add your handling code here:
+        PANTALLA_PRINCIPAL principal = new PANTALLA_PRINCIPAL();
+        principal.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -544,14 +549,13 @@ Empleado empleado = new Empleado();
     }//GEN-LAST:event_btnNuevoPermisoActionPerformed
 
     private void btnGuardarPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPermisoActionPerformed
-        Gestor_Permisos permiso = new Gestor_Permisos(Double.parseDouble(txtvalorAPagar.getText()), 
-        (String) cmbnombreEmpleado.getSelectedItem(),txtCedula.getText(), txtDescripcion.getText(),
-        txtfechaInicioPermiso.getText(),txtfechaFinPermiso.getText(),(String) cmbTipoPermiso.getSelectedItem()
-        , (String) cmbEstado.getSelectedItem());
-        boolean res = permiso.registrar_Permiso();
-        if (res ==true){
-            JOptionPane.showMessageDialog(null, "Permiso registrado exitoso");
-        }
+        Gestor_Permisos permiso = new Gestor_Permisos(Integer.parseInt(txtCedula.getText()),(String) cmbnombreEmpleado.getSelectedItem(),
+           (String) cmbTipoPermiso.getSelectedItem(),txtfechaInicioPermiso.getText(),txtfechaFinPermiso.getText(),
+            txtDescripcion.getText(),(String) cmbEstado.getSelectedItem(),Double.parseDouble(txtvalorAPagar.getText())); 
+         
+         
+        permiso.registrar_Permiso();
+       
     }//GEN-LAST:event_btnGuardarPermisoActionPerformed
    
     private void txtvalorAPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtvalorAPagarActionPerformed
