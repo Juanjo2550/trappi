@@ -8,6 +8,9 @@ import com.epn.trappi.models.logistico.ListaConductores;
 import com.epn.trappi.models.logistico.ListaEntregas1;
 import com.epn.trappi.models.logistico.ListaVehiculos;
 import com.epn.trappi.models.logistico.Conductor;
+import com.epn.trappi.models.logistico.MapaGeografico;
+import com.epn.trappi.models.logistico.Posicion;
+import com.epn.trappi.models.logistico.Ruta;
 import com.epn.trappi.models.logistico.Vehiculo;
 import static com.teamdev.jxbrowser.engine.RenderingMode.HARDWARE_ACCELERATED;
 import java.awt.BorderLayout;
@@ -22,13 +25,16 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class EntregasActivas extends javax.swing.JPanel {
-    //Renderización del buscador embebido.
+    /*Renderización del buscador embebido.
     EngineOptions options;
     Engine engine;
     Browser browser;
-    BrowserView view;
+    BrowserView view;*/
+    //Mapa Geografico
+    MapaGeografico mapa;
     public EntregasActivas() {
         initComponents();
+        /*
         //inicio de renderizado
         System.setProperty("jxbrowser.license.key","1BNDHFSC1FYA7D64SFQJOK18Y1R6DP8HFT66SD4MDP3YKT2QSIAZESB9FLPV71B9WTUE3Z");
         options = EngineOptions.newBuilder(HARDWARE_ACCELERATED).build();
@@ -36,7 +42,13 @@ public class EntregasActivas extends javax.swing.JPanel {
         browser = engine.newBrowser();
         view = BrowserView.newInstance(browser);
         this.jPanel1.add(view,BorderLayout.CENTER);
-        //
+        */
+        
+        //MAPA GEOGRAFICO
+        mapa = new MapaGeografico();
+        this.jPanel1.add(mapa.grafico(),BorderLayout.CENTER);
+        
+        
         ListaVehiculos vehiculos = new ListaVehiculos();
         ListaConductores conductores = new ListaConductores();
         ListaEntregas1 entregas = new ListaEntregas1();      
@@ -233,8 +245,12 @@ public class EntregasActivas extends javax.swing.JPanel {
     private void trazarRuta(String destino){
         String id_origen = "ChIJf3SFnYOa1ZEReimBvayqhDo";
         String id_destino = mapeoDireccionIdPlace(destino);
-        renderizarMapa(id_origen, id_destino);
+        Ruta ruta = new Ruta();
+        ruta.definirRuta(new Posicion(id_origen),new Posicion(id_destino));
+        //renderizarMapa(id_origen, id_destino);
+        mapa.trazarRuta(ruta);
     }
+    /*
     private void renderizarMapa(String origen,String destino){
         
         String CLAVE = "AIzaSyCHuP7hcXW03RWo89ukuZEb3QNKSt_hwwQ";
@@ -248,7 +264,7 @@ public class EntregasActivas extends javax.swing.JPanel {
         }
         this.browser.navigation().loadUrl(new File("ruta.html").getAbsolutePath());
 
-    }
+    }*/
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

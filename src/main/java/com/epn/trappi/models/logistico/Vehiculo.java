@@ -3,7 +3,7 @@ package com.epn.trappi.models.logistico;
 
 public class Vehiculo {
     private Estado estado;
-    private Posicion posicion;
+    private Gps gps;
     private int matricula;
     private String tipo;
     private double kilometraje;
@@ -27,7 +27,7 @@ public class Vehiculo {
         
     }
     public Posicion notificarPosicion(){
-        return this.posicion;
+        return this.gps.posicion;
     }
     
     public boolean entregando(){

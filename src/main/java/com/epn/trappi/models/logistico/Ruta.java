@@ -3,7 +3,8 @@ package com.epn.trappi.models.logistico;
 public class Ruta {
     private double distancia;
     private double tiempoAproximado;
-
+    public Posicion origen;
+    public Posicion destino;
     public Ruta() {
     }
 
@@ -22,8 +23,11 @@ public class Ruta {
     public void setTiempoAproximado(double tiempoAproximado) {
         this.tiempoAproximado = tiempoAproximado;
     }
-    
-    public void trazarRuta(Posicion posicion){
+    public void definirRuta(Posicion origen,Posicion destino){
+        this.origen=origen;
+        this.destino=destino;
+    }
+    public void obtenerInformacion(){
         
     }
 }
