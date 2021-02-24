@@ -39,7 +39,7 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
     }
 
     public void cargarServicios() {
-        String[] titulos = {"Nombre Producto", "Precio unitario", "Proveedor", "Acción"};
+        String[] titulos = {"Nombre Producto", "Precio unitario", "Proveedor"};
         String[] fila = new String[3];
         modelo = new DefaultTableModel(null, titulos);
         for (Servicio servicio : db.getServicios()) {

@@ -39,7 +39,7 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
     }
 
     private void cargarProductos() {
-        String[] titulos = {"Nombre Producto", "Precio unitario", "Proveedor", "Acción"};
+        String[] titulos = {"Nombre Producto", "Precio unitario", "Proveedor"};
         String[] fila = new String[3];
         modelo = new DefaultTableModel(null, titulos);
         for (Producto producto : db.getProductos()) {
@@ -209,7 +209,7 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
                         .addComponent(txtBuscarRUC, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 51, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(cmbProveedores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         PanelVerTodosLayout.setVerticalGroup(
@@ -234,7 +234,7 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
                 .addComponent(jLabel13)
                 .addGap(18, 18, 18)
                 .addComponent(cmbProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnActualizar)
                 .addContainerGap())
         );
