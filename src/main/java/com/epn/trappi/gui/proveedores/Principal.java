@@ -16,7 +16,7 @@ import javax.swing.JPanel;
  * @author Peterca
  */
 public class Principal extends javax.swing.JFrame {
-
+    
     private ArrayList<JPanel> panelesOpciones = new ArrayList<>();
 
     /**
@@ -31,9 +31,10 @@ public class Principal extends javax.swing.JFrame {
         panelesOpciones.add(jPanOpcInventario);
         panelesOpciones.add(jPanOpcProveedores);
         panelesOpciones.add(jPanOpcCompras);
+        jBCerrarSesion.setVisible(false);
         showPanel(null);
     }
-
+    
     private void showPanel(JPanel panel) {
         panelesOpciones.forEach(p
                 -> {
@@ -48,7 +49,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
     }
-
+    
     private void ponerTituloYsub(String titulo, String subtitulo) {
         labelTitulo.setText(titulo);
         labelSubTitulo.setText(subtitulo);
@@ -104,7 +105,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel2.setBackground(new java.awt.Color(80, 125, 180));
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(240, 240, 241));
-        jLabel2.setText("Hola: Pierre Dolce");
+        jLabel2.setText("Bienvenido: Administrador 1");
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
@@ -118,7 +119,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPEncabezadoLayout.createSequentialGroup()
                 .addComponent(jLSidimLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2)
                 .addGap(23, 23, 23))
         );
         jPEncabezadoLayout.setVerticalGroup(
@@ -566,7 +567,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-
+        
         if (jPaCerrarSesion.isVisible()) {
             jPaCerrarSesion.setVisible(false);
         } else {
