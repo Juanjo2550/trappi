@@ -19,7 +19,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class PermisosDb {
     
-    public Lista_Permisos selectAll(){
+    /*public Lista_Permisos selectAll(){
         String sql = "SELECT * FROM permiso";
         Lista_Permisos permiso_registrados = new Lista_Permisos();
         try {
@@ -43,6 +43,6 @@ public class PermisosDb {
             System.out.println(e.getMessage());
         }
         return permiso_registrados;
-    }
+    }*/
 }
 

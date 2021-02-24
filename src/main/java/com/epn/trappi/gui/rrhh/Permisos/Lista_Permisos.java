@@ -27,8 +27,8 @@ public class Lista_Permisos {
         return temp;
     }
     
-    public Gestor_Permisos agregar (Gestor_Permisos nuevoPermiso) {
+ /*   public Gestor_Permisos agregar (Gestor_Permisos nuevoPermiso) {
         this.lista.put(Integer.parseInt(nuevoPermiso.getCI()), nuevoPermiso);
         return nuevoPermiso;
-    }
+    }*/
 }
