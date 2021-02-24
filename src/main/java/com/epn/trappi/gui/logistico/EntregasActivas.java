@@ -1,54 +1,24 @@
 package com.epn.trappi.gui.logistico;
-import static com.teamdev.jxbrowser.engine.RenderingMode.HARDWARE_ACCELERATED;
-import com.teamdev.jxbrowser.browser.Browser;
-import com.teamdev.jxbrowser.engine.Engine;
-import com.teamdev.jxbrowser.engine.EngineOptions;
-import com.teamdev.jxbrowser.view.swing.BrowserView;
 import com.epn.trappi.models.logistico.ListaConductores;
 import com.epn.trappi.models.logistico.ListaEntregas1;
 import com.epn.trappi.models.logistico.ListaVehiculos;
-import com.epn.trappi.models.logistico.Conductor;
 import com.epn.trappi.models.logistico.MapaGeografico;
 import com.epn.trappi.models.logistico.Posicion;
 import com.epn.trappi.models.logistico.Ruta;
-import com.epn.trappi.models.logistico.Vehiculo;
-import static com.teamdev.jxbrowser.engine.RenderingMode.HARDWARE_ACCELERATED;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class EntregasActivas extends javax.swing.JPanel {
-    /*Renderización del buscador embebido.
-    EngineOptions options;
-    Engine engine;
-    Browser browser;
-    BrowserView view;*/
-    //Mapa Geografico
+    //ATRIBUTOS
     MapaGeografico mapa;
     public EntregasActivas() {
         initComponents();
-        /*
-        //inicio de renderizado
-        System.setProperty("jxbrowser.license.key","1BNDHFSC1FYA7D64SFQJOK18Y1R6DP8HFT66SD4MDP3YKT2QSIAZESB9FLPV71B9WTUE3Z");
-        options = EngineOptions.newBuilder(HARDWARE_ACCELERATED).build();
-        engine = Engine.newInstance(options);
-        browser = engine.newBrowser();
-        view = BrowserView.newInstance(browser);
-        this.jPanel1.add(view,BorderLayout.CENTER);
-        */
-        
         //MAPA GEOGRAFICO
         mapa = new MapaGeografico();
-        this.jPanel1.add(mapa.grafico(),BorderLayout.CENTER);
-        
-        
+        this.panelDeRutas.add(mapa.grafico(),BorderLayout.CENTER);//añadimos la vista del mapa al panel de rutas
+        //Llenado de tabla con datos quemados
         ListaVehiculos vehiculos = new ListaVehiculos();
         ListaConductores conductores = new ListaConductores();
         ListaEntregas1 entregas = new ListaEntregas1();      
@@ -90,7 +60,7 @@ public class EntregasActivas extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTEntregasDatos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        panelDeRutas = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPInformacionConductor = new javax.swing.JPanel();
@@ -134,8 +104,8 @@ public class EntregasActivas extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Entregas activas");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        panelDeRutas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panelDeRutas.setLayout(new java.awt.BorderLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Ruta");
@@ -171,7 +141,7 @@ public class EntregasActivas extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 952, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(44, 44, 44)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(panelDeRutas, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPInformacionConductor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -208,7 +178,7 @@ public class EntregasActivas extends javax.swing.JPanel {
                             .addComponent(jLabel2)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(panelDeRutas, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(40, 40, 40))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -219,9 +189,14 @@ public class EntregasActivas extends javax.swing.JPanel {
         String destino = (String)jTEntregasDatos.getValueAt(fila, 4);
         String nombreConductor = (String)jTEntregasDatos.getValueAt(fila,2);
         jTAInformacionConductor.setText("Nombre:\n" + nombreConductor + "\nDirección destino:\n" + destino);
-        trazarRuta(destino);
+        String id_origen = "ChIJf3SFnYOa1ZEReimBvayqhDo";//Asumimos que Trappi esta localizado en quicentro norte
+        String id_destino = mapeoDireccionIdPlace(destino);
+        Ruta ruta = new Ruta();
+        ruta.definirRuta(new Posicion(id_origen),new Posicion(id_destino));
+        mapa.trazarRuta(ruta);
     }//GEN-LAST:event_jTEntregasDatosMouseClicked
-    private String mapeoDireccionIdPlace(String direccion){
+    private String mapeoDireccionIdPlace(String direccion){ //Solo para datos quemados
+        
         String Id_destino="";
         switch(direccion){
             case "Universidad Central del Ecuador":
@@ -242,39 +217,17 @@ public class EntregasActivas extends javax.swing.JPanel {
         }
         return Id_destino;
     }
-    private void trazarRuta(String destino){
-        String id_origen = "ChIJf3SFnYOa1ZEReimBvayqhDo";
-        String id_destino = mapeoDireccionIdPlace(destino);
-        Ruta ruta = new Ruta();
-        ruta.definirRuta(new Posicion(id_origen),new Posicion(id_destino));
-        //renderizarMapa(id_origen, id_destino);
-        mapa.trazarRuta(ruta);
-    }
-    /*
-    private void renderizarMapa(String origen,String destino){
-        
-        String CLAVE = "AIzaSyCHuP7hcXW03RWo89ukuZEb3QNKSt_hwwQ";
-        String IFrame = "<iframe width=\"800\" height=\"650\"  style=\"border:0\"  allowfullscreen src=\"https://www.google.com/maps/embed/v1/directions?origin=place_id:"+origen+"&destination=place_id:"+destino+"&key="+CLAVE+"\"></iframe>";
-        try {
-            PrintWriter out = new PrintWriter("ruta.html");
-            out.println(IFrame);
-            out.close();
-        } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(null,"Servicio de GPS no disponible");
-        }
-        this.browser.navigation().loadUrl(new File("ruta.html").getAbsolutePath());
-
-    }*/
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPInformacionConductor;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTAInformacionConductor;
     private javax.swing.JTable jTEntregasDatos;
+    private javax.swing.JPanel panelDeRutas;
     // End of variables declaration//GEN-END:variables
 }
