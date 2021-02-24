@@ -24,7 +24,7 @@ public class RolPagos {
         this.valor = valor;
         this.numero = numero;
     }
-    
+ 
     public void mostrar() {
         //TODO Mostrar que?
     }
