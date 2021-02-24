@@ -293,7 +293,7 @@ public class guiComprasPanel extends javax.swing.JPanel {
                 }
             }
             for (int i=0;i<r.size();i++){
-                db.setCompras(r.get(i).getListaCantidadDeBienes().getListaCantidadDeBienes().get(i).getBien().getNombre(), TOOL_TIP_TEXT_KEY, WIDTH, TOOL_TIP_TEXT_KEY, SOMEBITS);
+                //db.setCompras(r.get(i).getListaCantidadDeBienes().getListaCantidadDeBienes().get(i).getBien().getNombre(), TOOL_TIP_TEXT_KEY, WIDTH, TOOL_TIP_TEXT_KEY, SOMEBITS);
             }
         } catch (IOException ex) {
             Logger.getLogger(guiComprasPanel.class.getName()).log(Level.SEVERE, null, ex);

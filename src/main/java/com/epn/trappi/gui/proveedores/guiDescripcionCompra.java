@@ -8,6 +8,7 @@ package com.epn.trappi.gui.proveedores;
 import com.epn.trappi.models.proveedores.CantidadDeBien;
 import com.epn.trappi.models.proveedores.Compra;
 import com.epn.trappi.models.proveedores.ListaDeCompras;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,27 +20,26 @@ public class guiDescripcionCompra extends javax.swing.JPanel {
     /**
      * Creates new form guiDescripcionCompra1
      */
-    
     private ListaDeCompras lista;
-    
+
     public guiDescripcionCompra(ListaDeCompras lista) {
         initComponents();
-        this.lista=lista;
+        this.lista = lista;
         dibujarTabla();
     }
 
-    private void dibujarTabla(){
+    private void dibujarTabla() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Producto");
         model.addColumn("Cantidad");
-        for(Compra compra:lista.getCompras()){
-            for(CantidadDeBien cantidadBien:compra.getListaCantidadDeBienes().getListaCantidadDeBienes()){
-                model.addRow(new Object[]{cantidadBien.getBien().getNombre(),cantidadBien.getCantidad()});
+        for (Compra compra : lista.getCompras()) {
+            for (CantidadDeBien cantidadBien : compra.getListaCantidadDeBienes().getListaCantidadDeBienes()) {
+                model.addRow(new Object[]{cantidadBien.getBien().getNombre(), cantidadBien.getCantidad()});
             }
         }
         jTable1.setModel(model);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -115,9 +115,10 @@ public class guiDescripcionCompra extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButRegFactCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegFactCompNotaCredActionPerformed
-        for(Compra compra:lista.getCompras()){
+        for (Compra compra : lista.getCompras()) {
             compra.comprar();
         }
+        JOptionPane.showMessageDialog(null, "Compra realizada con éxito!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButRegFactCompNotaCredActionPerformed
 
 

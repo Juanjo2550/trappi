@@ -111,8 +111,8 @@ public void setProductos(List<Producto> productos) {
         return compras;
     }
 
-    public void setCompras(String nombreProducto, String Proveedor, int cantidad, String estado, double montoTotal) {
-        agregarCompra(transformarCompra(nombreProducto, Proveedor, cantidad, estado, montoTotal));
+    public void setCompras(String nombreProducto, String Proveedor, int cantidad, String estado, double montoTotal, String fecha) {
+        agregarCompra(transformarCompra(nombreProducto, Proveedor, cantidad, estado, montoTotal,fecha));
     }
 
     private void seleccionarProductos() {
@@ -220,8 +220,9 @@ public void setProductos(List<Producto> productos) {
         return s.getNombre() + ";" + s.getPrecio() + ";" + s.getProveeedor().getRuc();
     }
 
-    private String transformarCompra(String nombreProducto, String Proveedor, int cantidad, String estado, double montoTotal) {
-        return nombreProducto + ";" + Proveedor + ";" + cantidad + ";" + estado + ";" + montoTotal;
+    private String transformarCompra(String nombreProducto, String Proveedor, int cantidad, String estado, double montoTotal, String fecha) {
+        //01;Fanta;16;1721561568001;21/2/2021;Entregado;45.0
+        return "02;"+nombreProducto + ";" + cantidad + ";" + Proveedor + ";" +fecha+";" +estado + ";" + montoTotal;
     }
 
     private Producto reformarProducto(String[] str) {

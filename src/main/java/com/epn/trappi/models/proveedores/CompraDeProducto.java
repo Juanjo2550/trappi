@@ -25,14 +25,14 @@ public class CompraDeProducto extends Compra {
     
     @Override
     public void comprar(){
-        calcularMontoTotal();
+        setMontoTotal();
         if(solicitarAutorizacion(listaBienesAComprar.getListaCantidadDeBienes().get(0).getBien().getProveeedor(),montoTotal)){
             for (CantidadDeBien cantidadBien : listaBienesAComprar.getListaCantidadDeBienes()){
                 inventario.aumentarStock(cantidadBien.getCantidad(), cantidadBien.getBien());
                 //asumimos que las compras se han entregado
                 setEstado("Entregado");
                 registrarCompra(cantidadBien.getBien().getNombre()
-                        ,cantidadBien.getBien().getProveeedor().getRuc(),cantidadBien.getCantidad(),estado,montoTotal);
+                        ,cantidadBien.getBien().getProveeedor().getRuc(),cantidadBien.getCantidad(),estado,montoTotal, this.fecha);
             }
         }
     }

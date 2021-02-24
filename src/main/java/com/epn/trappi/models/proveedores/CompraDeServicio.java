@@ -23,7 +23,7 @@ public class CompraDeServicio extends Compra{
                 //asumimos que las compras se han entregado
                 setEstado("Entregado");
                 registrarCompra(cantidadBien.getBien().getNombre()
-                        ,cantidadBien.getBien().getProveeedor().getRuc(),cantidadBien.getCantidad(),estado,montoTotal);
+                        ,cantidadBien.getBien().getProveeedor().getRuc(),cantidadBien.getCantidad(),estado,montoTotal,this.fecha);
             }
         }
     }

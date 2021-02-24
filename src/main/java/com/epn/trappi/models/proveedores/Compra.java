@@ -22,7 +22,7 @@ abstract public class Compra {
     protected Double montoTotal;
     protected String fecha=null;
     
-    private ProveedoresDb db;
+    private ProveedoresDb db=new ProveedoresDb();
     
     public Compra(Inventario inventario, ListaCantidadDeBienes listaBienesAComprar, String estado) {
         this.inventario = inventario;
@@ -55,8 +55,8 @@ abstract public class Compra {
     public void comprar() {
     }
     
-    public void registrarCompra(String nombreProducto, String Proveedor, int cantidad, String estado, double montoTotal) {
-        db.setCompras(nombreProducto, Proveedor, cantidad, estado, montoTotal);
+    public void registrarCompra(String nombreProducto, String Proveedor, int cantidad, String estado, double montoTotal, String fecha) {
+        db.setCompras(nombreProducto, Proveedor, cantidad, estado, montoTotal, fecha);
     }
     
     public Double calcularMontoTotal() {
@@ -83,7 +83,7 @@ abstract public class Compra {
         return montoTotal;
     }
 
-    public void setMontoTotal(Double montoTotal) {
+    public void setMontoTotal() {
         this.montoTotal = calcularMontoTotal();
     }
     

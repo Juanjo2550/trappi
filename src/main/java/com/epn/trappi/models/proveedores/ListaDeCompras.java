@@ -19,10 +19,7 @@ public class ListaDeCompras {
         this.compras = compras;
     }
 
-    public void comprar(Compra compra){
-        compras.remove(compra);
-    }
-    
+
     public void añadirCompra(Compra compra){
         compras.add(compra);
     }
