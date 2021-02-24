@@ -6,14 +6,8 @@
 package com.epn.trappi.gui.proveedores;
 
 import com.epn.trappi.db.proveedores.ProveedoresDb;
-import com.epn.trappi.models.proveedores.Compra;
-import com.epn.trappi.models.proveedores.CompraDeProducto;
-import com.epn.trappi.models.proveedores.Inventario;
-import com.epn.trappi.models.proveedores.ListaCantidadDeBienes;
-import com.epn.trappi.models.proveedores.ListaDeCompras;
 import com.epn.trappi.models.proveedores.Producto;
 import java.util.ArrayList;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,16 +21,11 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
      */
     DefaultTableModel modelo;
     private final ProveedoresDb db = new ProveedoresDb();
-    //cuales son seleccionados y la cantidad a comprar
-    public int[][] seleccionados= new int[6][2];
-    private JPanel verTodo;
-    private ListaDeCompras solicitud;
-    
-    public guiFormularioComprasPanel(JPanel verTodo) {
+    public ArrayList seleccionados= new ArrayList();
+    public guiFormularioComprasPanel() {
         initComponents();
-        this.verTodo=verTodo;
         cargar();
-        jCheckBoxAñadir.setEnabled(false);
+        jCheckBox1.setEnabled(false);
     }
     
     public void cargar(){
@@ -68,9 +57,7 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
-        jCheckBoxAñadir = new javax.swing.JCheckBox();
-        jTextCantidad = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -88,7 +75,7 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
         });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel8.setText("Buscar Producto");
+        jLabel8.setText("Buscar Compra");
 
         jTextFechCompNotaCred.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,21 +123,6 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel10.setText("Añadir");
 
-        jCheckBoxAñadir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jCheckBoxAñadirMouseClicked(evt);
-            }
-        });
-
-        jTextCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextCantidadKeyPressed(evt);
-            }
-        });
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel11.setText("Ingresar Cantidad");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -163,11 +135,7 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
                 .addGap(46, 46, 46)
                 .addComponent(jLabel10)
                 .addGap(33, 33, 33)
-                .addComponent(jCheckBoxAñadir)
-                .addGap(131, 131, 131)
-                .addComponent(jLabel11)
-                .addGap(26, 26, 26)
-                .addComponent(jTextCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCheckBox1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -175,19 +143,11 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(jCheckBoxAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextCantidad))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39))
         );
 
         javax.swing.GroupLayout PanelVerTodosLayout = new javax.swing.GroupLayout(PanelVerTodos);
@@ -229,28 +189,7 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButRegFactCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegFactCompNotaCredActionPerformed
-        
-        solicitud = new ListaDeCompras(new ArrayList<Compra>());
-        String auxiliarRuc="";
-        for(int i=0;i<6;i++){
-            if(seleccionados[i][0]==1){
-                CompraDeProducto compra;
-                ListaCantidadDeBienes lista = new ListaCantidadDeBienes();
-                auxiliarRuc=db.getProductos().get(i).getProveeedor().getRuc();
-                for(int j=0;j<6;j++){
-                    if(auxiliarRuc==db.getProductos().get(j).getProveeedor().getRuc()){
-                        lista.añadirBien(new Producto(db.getProductos().get(j).getNombre()
-                                        ,db.getProductos().get(j).getPrecio()
-                                        , db.getProductos().get(j).getProveeedor())
-                                            , seleccionados[j][1]);
-                        seleccionados[i][0]=0;
-                    }
-                }
-                compra = new CompraDeProducto(lista, "Pendiente");
-                solicitud.añadirCompra(compra);
-            }
-        }
-        new CambiaPanel(verTodo, new guiDescripcionCompra(solicitud));
+
     }//GEN-LAST:event_jButRegFactCompNotaCredActionPerformed
 
     private void jTextFechCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFechCompNotaCredActionPerformed
@@ -270,43 +209,20 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButRegFactCompNotaCred1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        jCheckBoxAñadir.setEnabled(true);
-        if(seleccionados[jTable1.getSelectedRow()][0]==0){
-            jCheckBoxAñadir.setSelected(false);
-        }
-        else{
-            jCheckBoxAñadir.setSelected(true);
-        }
-        jCheckBoxAñadir.setText(seleccionados[jTable1.getSelectedRow()][1]+"");
-        
+        jTable1.getSelectedRow();
     }//GEN-LAST:event_jTable1MouseClicked
-
-    private void jCheckBoxAñadirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBoxAñadirMouseClicked
-        
-        int seleccion=0;
-        if(jCheckBoxAñadir.isSelected())
-            seleccion=1;
-        seleccionados[jTable1.getSelectedRow()][0]=seleccion;
-    }//GEN-LAST:event_jCheckBoxAñadirMouseClicked
-
-    private void jTextCantidadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCantidadKeyPressed
-        int cantidad=Integer.parseInt(jTextCantidad.getText());
-        seleccionados[jTable1.getSelectedRow()][1]=cantidad;
-    }//GEN-LAST:event_jTextCantidadKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelVerTodos;
     private javax.swing.JButton jButRegFactCompNotaCred;
     private javax.swing.JButton jButRegFactCompNotaCred1;
-    private javax.swing.JCheckBox jCheckBoxAñadir;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextCantidad;
     private javax.swing.JTextField jTextFechCompNotaCred;
     // End of variables declaration//GEN-END:variables
 }

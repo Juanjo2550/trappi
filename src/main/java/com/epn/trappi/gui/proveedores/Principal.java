@@ -645,7 +645,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButProductosActionPerformed
 
     private void jButRealizarComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRealizarComprasActionPerformed
-        new CambiaPanel(PanelVerTodos, new guiFormularioComprasPanel(PanelVerTodos));
+        try {
+            new CambiaPanel(PanelVerTodos, new guiComprasPanel());
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        showPanel(null);
     }//GEN-LAST:event_jButRealizarComprasActionPerformed
 
     private void jButCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButCompraActionPerformed
@@ -653,12 +658,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButCompraActionPerformed
 
     private void jButVerTodFactura5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButVerTodFactura5ActionPerformed
-        try {
-            new CambiaPanel(PanelVerTodos, new guiComprasPanel());
-        } catch (IOException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        showPanel(null);
+        new CambiaPanel(PanelVerTodos, new guiFormularioComprasPanel());
     }//GEN-LAST:event_jButVerTodFactura5ActionPerformed
 
     /**
