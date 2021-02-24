@@ -22,7 +22,7 @@ public class Ingreso {
     public void registrarIngreso(Ingreso ingreso){
         
         fechaIngreso = new Fecha();
- 
+        this.libroDiario.ingresosRegistrados.add(ingreso);
     }
     
 
