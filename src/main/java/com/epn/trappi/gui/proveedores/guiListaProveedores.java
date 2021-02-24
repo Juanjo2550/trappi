@@ -5,6 +5,7 @@
  */
 package com.epn.trappi.gui.proveedores;
 
+import com.epn.trappi.db.proveedores.ProveedoresDb;
 import com.epn.trappi.models.proveedores.Proveedor;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -20,30 +21,36 @@ public class guiListaProveedores extends javax.swing.JPanel {
     boolean clic = false;
     ArrayList<Proveedor> listaP;
     Proveedor proveedorSeleccionado;
+    private final ProveedoresDb db = new ProveedoresDb();
 
     /**
      * Creates new form guiListaProveedores1
      */
     public guiListaProveedores() {
         initComponents();
-        modelo.addRow(new Object[]{"1721561568001", "Santa María", "Quito, Ecuador", "2152411246"});
-        modelo.addRow(new Object[]{"1721565463001", "Super Maxi", "Quito, Ecuador", "2152417315"});
-        modelo.addRow(new Object[]{"1772561566001", "Super Aqui", "Quito, Ecuador", "2135411246"});
-        modelo.addRow(new Object[]{"1726324151001", "Comisariato", "Quito, Ecuador", "3452411246"});
-        modelo.addRow(new Object[]{"1362462872001", "Vucanizadora Frenos", "Quito, Ecuador", "3624923617"});
+        cargarProveedor();
     }
-    
-    public void llenarTabla() {
-        try {
-            DefaultTableModel modelo = (DefaultTableModel) jtbProveedores.getModel();
-            modelo.setRowCount(0);
-            for (Proveedor auxP : listaP) {
-                modelo.addRow(new Object[]{auxP.getRuc(), auxP.getRazonSocial(), auxP.getDireccion(), auxP.getCuenta()});
-            }
-        } catch (Exception ex) {
-            System.out.println(ex);
+
+    private void cargarProveedor() {
+        String[] titulos = {"Ruc", "Razón Social", "Dirección", "Número de Cuenta"};
+        String[] fila = new String[4];
+        modelo = new DefaultTableModel(null, titulos);
+        for (Proveedor proveedor : db.getProveedores()) {
+            fila[0] = proveedor.getRuc();
+            fila[1] = "" + proveedor.getRazonSocial();
+            fila[2] = "" + proveedor.getDireccion();
+            fila[3] = "" + proveedor.getCuenta();
+            modelo.addRow(fila);
         }
+        jtbProveedores.setModel(modelo);
     }
+
+    private void mostrarProducto(String razonsocial, String direccion, String cuenta) {
+        txtRazonSocial.setText(razonsocial);
+        txtDireccion.setText(direccion);
+        txtNCuenta.setText(cuenta);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -163,6 +170,11 @@ public class guiListaProveedores extends javax.swing.JPanel {
                 "Ruc", "Razón Social", "Dirección", "Número de Cuenta"
             }
         ));
+        jtbProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtbProveedoresMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtbProveedores);
 
         btnEliminar.setBackground(new java.awt.Color(38, 112, 171));
@@ -290,37 +302,31 @@ public class guiListaProveedores extends javax.swing.JPanel {
         direccion = txtDireccion.getText();
         cuenta = txtNCuenta.getText();
 
-        if (clic) {
-            if (guiProveedores.validarDireccion(direccion)) {
-                if (guiProveedores.validarRazonSocial(razonSocial)) {
-                    proveedorSeleccionado.setRazonSocial(razonSocial);
-                    proveedorSeleccionado.setDireccion(direccion);
-                    proveedorSeleccionado.setCuenta(cuenta);
+        if (guiProveedores.validarDireccion(direccion)) {
+            if (guiProveedores.validarRazonSocial(razonSocial)) {
+                proveedorSeleccionado.setRazonSocial(razonSocial);
+                proveedorSeleccionado.setDireccion(direccion);
+                proveedorSeleccionado.setCuenta(cuenta);
 
-                    int fila = jtbProveedores.getSelectedRow();
-                    modelo.setValueAt(txtRazonSocial.getText(), fila, 1);
-                    modelo.setValueAt(txtDireccion.getText(), fila, 2);
-                    modelo.setValueAt(txtNCuenta.getText(), fila, 3);
+                int fila = jtbProveedores.getSelectedRow();
+                modelo.setValueAt(txtRazonSocial.getText(), fila, 1);
+                modelo.setValueAt(txtDireccion.getText(), fila, 2);
+                modelo.setValueAt(txtNCuenta.getText(), fila, 3);
 
-                    JOptionPane.showMessageDialog(null, "Datos Actualizados.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Datos Actualizados.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
-                    txtDireccion.setText("");
-                    txtNCuenta.setText("");
-                    txtRazonSocial.setText("");
+                txtDireccion.setText("");
+                txtNCuenta.setText("");
+                txtRazonSocial.setText("");
 
-                } else {
-                    JOptionPane.showMessageDialog(null, "Razon Social Incorrecta");
-                    this.vaciarCampos();
-                }
             } else {
-                JOptionPane.showMessageDialog(null, "Dirección Incorrecta");
+                JOptionPane.showMessageDialog(null, "Razon Social Incorrecta");
                 this.vaciarCampos();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un Proveedor");
+            JOptionPane.showMessageDialog(null, "Dirección Incorrecta");
             this.vaciarCampos();
         }
-        clic = false;
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     public void vaciarCampos() {
@@ -331,20 +337,6 @@ public class guiListaProveedores extends javax.swing.JPanel {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 //         TODO add your handling code here:
-        try {
-            String buscar = txtBuscarRUC.getText();
-
-            for (int i = 0; i < listaP.size(); i++) {
-                if (listaP.contains(buscar)) {
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "Proveedor No Registrado");
-                }
-            }
-            llenarTabla();
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
 
@@ -352,12 +344,21 @@ public class guiListaProveedores extends javax.swing.JPanel {
         // TODO add your handling code here:
         Object[] o = {"Confirmar", "Cancelar"};
         int c = 0;
-        c = JOptionPane.showOptionDialog(null, "¿Está seguro de eliminar al paciente?", "Eliminar un Paciente", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, o, o[0]);
+        c = JOptionPane.showOptionDialog(null, "¿Está seguro de eliminar al proveedor?", "Eliminar un Proveedor", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, o, o[0]);
         if (c == 0) {
             int fila = jtbProveedores.getSelectedRow();
             modelo.removeRow(fila);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void jtbProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbProveedoresMouseClicked
+        // TODO add your handling code here:
+        int row = jtbProveedores.rowAtPoint(evt.getPoint());
+        int col = jtbProveedores.columnAtPoint(evt.getPoint());
+        if (row >= 0 && col >= 0) {
+            mostrarProducto(modelo.getValueAt(row, 0).toString(), modelo.getValueAt(row, 1).toString(), modelo.getValueAt(row, 2).toString());
+        }
+    }//GEN-LAST:event_jtbProveedoresMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
