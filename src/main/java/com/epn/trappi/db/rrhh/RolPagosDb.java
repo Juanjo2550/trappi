@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -23,16 +24,16 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class RolPagosDb {
 
-    public RolesPagos selectAll() {
+    public ArrayList<RolPagos> selectAll() {
         String sql = "SELECT * FROM rolpagos";
-        RolesPagos tempRoles = new RolesPagos();
+        ArrayList<RolPagos> tempRoles = new ArrayList<RolPagos>();
         try {
             Connection conn;
             conn = Connect.connect("juanjo.db");
             Statement stmt  = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                tempRoles.agregar(new RolPagos(
+                tempRoles.add(new RolPagos(
                         new Fecha(Integer.parseInt(rs.getString("dia")), Integer.parseInt(rs.getString("mes")), Integer.parseInt(rs.getString("ano"))),
                         new EmpleadoDb().selectOne(rs.getInt("cedula") + ""),
                         Integer.parseInt(rs.getString("valor")),
