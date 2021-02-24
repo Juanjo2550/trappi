@@ -5,6 +5,14 @@
  */
 package com.epn.trappi.gui.proveedores;
 
+import com.epn.trappi.db.proveedores.ProveedoresDb;
+import com.epn.trappi.models.proveedores.CantidadDeBien;
+import com.epn.trappi.models.proveedores.Compra;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Peterca
@@ -14,10 +22,38 @@ public class guiComprasPanel extends javax.swing.JPanel {
     /**
      * Creates new form guiComprasPanel
      */
-    public guiComprasPanel() {
+    DefaultTableModel modelo;
+    private final ProveedoresDb db = new ProveedoresDb();
+    
+    public guiComprasPanel() throws IOException {
         initComponents();
+        cargar();
     }
-
+    
+    public void cargar() throws IOException{
+        String[] titulos = {"Número de Compra","Producto","Cantidad","Proveedor","Fecha","Estado","Monto"};
+        String[] fila = new String [7];
+        modelo = new DefaultTableModel(null, titulos);
+        System.out.println("hola \n"+db.getCompras().get(0).toString());
+        ArrayList<Compra> c = (ArrayList<Compra>) db.getCompras();
+        for (int i=0;i<c.size();i++){
+            fila[0]= "01";
+            if(i==0){
+                fila[2]=String.valueOf(c.get(i).getListaCantidadDeBienes().getListaCantidadDeBienes().get(0).getCantidad());
+                fila[1]=c.get(i).getListaCantidadDeBienes().getListaCantidadDeBienes().get(0).getBien().getNombre();
+            }
+            else{
+                fila[2]=String.valueOf(c.get(i).getListaCantidadDeBienes().getListaCantidadDeBienes().get(1).getCantidad());
+                fila[1]=c.get(i).getListaCantidadDeBienes().getListaCantidadDeBienes().get(1).getBien().getNombre();
+            }
+            fila[3]= c.get(i).getListaCantidadDeBienes().getListaCantidadDeBienes().get(1).getBien().getProveeedor().getRuc();   
+            fila[4]= c.get(i).getFecha();
+            fila[5]= c.get(i).getEstado();
+            fila[6]= c.get(i).getMontoTotal().toString();
+            modelo.addRow(fila);
+        }
+        jTable1.setModel(modelo);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,8 +74,8 @@ public class guiComprasPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        jTextCompra = new javax.swing.JTextField();
+        jTextEstado = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
 
@@ -99,6 +135,11 @@ public class guiComprasPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -118,9 +159,9 @@ public class guiComprasPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 902, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(49, 49, 49)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(145, 145, 145)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -141,8 +182,8 @@ public class guiComprasPanel extends javax.swing.JPanel {
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52))
         );
 
@@ -195,7 +236,7 @@ public class guiComprasPanel extends javax.swing.JPanel {
                     .addGroup(PanelVerTodosLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jButRegFactCompNotaCred)
                 .addGap(23, 23, 23))
         );
@@ -219,6 +260,12 @@ public class guiComprasPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButRegFactCompNotaCred1ActionPerformed
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        jTextEstado.setText(modelo.getValueAt(jTable1.getSelectedRow(),5)+"");
+        jTextCompra.setText(modelo.getValueAt(jTable1.getSelectedRow(),0)+"");
+        jTextCompra.setEditable(false);
+    }//GEN-LAST:event_jTable1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelVerTodos;
@@ -232,9 +279,9 @@ public class guiComprasPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextCompra;
+    private javax.swing.JTextField jTextEstado;
     private javax.swing.JTextField jTextFechCompNotaCred;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel jValor;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,6 +1,7 @@
 package com.epn.trappi.db.proveedores;
 
 import com.epn.trappi.models.proveedores.*;
+import com.epn.trappi.models.proveedores.Compra;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ public class ProveedoresDb {
     private List<Producto> productos;
     private List<Proveedor> proveedores;
     private List<Servicio> servicios;
-    private List<Compra> compras;
+    private List<Compra> compras=new ArrayList<Compra>();
     private ArrayList<CantidadDeBien> listaCantidadBienes;
     private final String prodFilename = "src/main/java/com/epn/trappi/db/proveedores/productos.csv";
     private final String provFilename = "src/main/java/com/epn/trappi/db/proveedores/proveedores.csv";
@@ -21,6 +22,7 @@ public class ProveedoresDb {
     private final String invFilename = "src/main/java/com/epn/trappi/db/proveedores/inventario.csv";
     private final Archivo p = new Archivo();
 
+     
     public List<Producto> getProductos() {
         try {
             seleccionarProductos();
@@ -76,6 +78,15 @@ public class ProveedoresDb {
         }
         return listaCantidadBienes;
     }
+    
+    public ArrayList<CantidadDeBien> getListaCantidadBienesCompra(){
+        try {
+            seleccionarCantidadDeBienesCompra();
+        } catch (Exception ex) {
+            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaCantidadBienes;
+    }
 
     public void setServicios(List<Servicio> servicios) {
         servicios.forEach(ser -> {
@@ -87,7 +98,16 @@ public class ProveedoresDb {
         agregarServicio(transformarServicio(servicio));
     }
 
-    public List<Compra> getCompras() {
+    public List<Compra> getCompras() throws IOException {
+        List<String[]> compra = p.leerArchivoCSV(this.compFilename);
+        int auxiliar=-1;
+        for (String[] pr : compra) {
+            if(Integer.parseInt(pr[0])!=auxiliar){
+                String estado=pr[5];
+                compras.add(new CompraDeProducto(new ListaCantidadDeBienes(getListaCantidadBienesCompra()),estado,pr[4],Double.parseDouble(pr[6])));
+                auxiliar=Integer.parseInt(pr[0]);
+            }
+        }
         return compras;
     }
 
@@ -121,6 +141,20 @@ public class ProveedoresDb {
         }
     }
 
+    private void seleccionarCantidadDeBienesCompra(){
+        try {
+            List<String[]> cbienes = p.leerArchivoCSV(this.compFilename);
+            ArrayList<CantidadDeBien> cb = new ArrayList<>();
+            cbienes.forEach(b -> {
+                cb.add(reformarCantidadDeBienCompra(b));
+            });
+
+            this.listaCantidadBienes = cb;
+        } catch (IOException ex) {
+            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void seleccionarCantidadDeBienes() {
         try {
             List<String[]> cbienes = p.leerArchivoCSV(this.invFilename);
@@ -193,6 +227,11 @@ public class ProveedoresDb {
 
     private CantidadDeBien reformarCantidadDeBien(String[] str) {
         CantidadDeBien c = new CantidadDeBien(obtenerBien(str[0]), Integer.parseInt(str[1]));
+        return c;
+    }
+    
+    private CantidadDeBien reformarCantidadDeBienCompra(String[] str) {
+        CantidadDeBien c = new CantidadDeBien(obtenerBien(str[1]), Integer.parseInt(str[2]));
         return c;
     }
 

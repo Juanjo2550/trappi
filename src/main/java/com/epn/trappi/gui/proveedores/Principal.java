@@ -5,7 +5,10 @@
  */
 package com.epn.trappi.gui.proveedores;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /**
@@ -641,7 +644,11 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButProductosActionPerformed
 
     private void jButRealizarComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRealizarComprasActionPerformed
-        new CambiaPanel(PanelVerTodos, new guiComprasPanel());
+        try {
+            new CambiaPanel(PanelVerTodos, new guiComprasPanel());
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         showPanel(null);
     }//GEN-LAST:event_jButRealizarComprasActionPerformed
 

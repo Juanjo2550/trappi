@@ -50,4 +50,11 @@ abstract public class Bien {
     
     public abstract void registrar();
     public abstract void actualizar();
+
+    @Override
+    public String toString() {
+        return "Bien{" + "nombre=" + nombre + ", precio=" + precio + ", proveeedor=" + proveeedor.getRuc() + '}';
+    }
+    
+    
 }

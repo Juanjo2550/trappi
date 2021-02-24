@@ -13,6 +13,7 @@ public class CompraDeServicio extends Compra{
     
     public CompraDeServicio(Inventario inventario, ListaCantidadDeBienes listaBienesAComprar, String estado) {
         super(inventario, listaBienesAComprar, estado);
+        comprar();
     }
     
     @Override

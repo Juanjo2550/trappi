@@ -1,6 +1,7 @@
 package com.epn.trappi.models.proveedores;
 
 import com.epn.trappi.db.proveedores.ProveedoresDb;
+import java.util.Date;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,6 +18,7 @@ abstract public class Compra {
     protected ListaCantidadDeBienes listaBienesAComprar;
     protected String estado;
     protected Double montoTotal;
+    protected String fecha=null;
     
     private ProveedoresDb db;
     
@@ -24,7 +26,22 @@ abstract public class Compra {
         this.inventario = inventario;
         this.listaBienesAComprar = listaBienesAComprar;
         this.estado = estado;
-        this.montoTotal = calcularMontoTotal();
+    }
+    public Compra(ListaCantidadDeBienes listaBienesAComprar, String estado) {
+        this.listaBienesAComprar = listaBienesAComprar;
+        this.estado = estado;
+    }
+    public Compra(Inventario inventario, ListaCantidadDeBienes listaBienesAComprar, String estado, String fecha) {
+        this.inventario = inventario;
+        this.listaBienesAComprar = listaBienesAComprar;
+        this.estado = estado;
+        this.fecha=fecha;
+    }
+    public Compra(ListaCantidadDeBienes listaBienesAComprar, String estado, String fecha, Double monto) {
+        this.listaBienesAComprar = listaBienesAComprar;
+        this.estado = estado;
+        this.fecha=fecha;
+        this.montoTotal=monto;
     }
     
     public void comprar() {
@@ -44,6 +61,22 @@ abstract public class Compra {
     
     public boolean solicitarAutorizacion(Proveedor proveedor, double montoTotal) {
         return true;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public Double getMontoTotal() {
+        return montoTotal;
+    }
+
+    public void setMontoTotal(Double montoTotal) {
+        this.montoTotal = calcularMontoTotal();
     }
     
     public Inventario getInventario() {
@@ -69,5 +102,12 @@ abstract public class Compra {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        return "Compra{listaBienesAComprar=" + listaBienesAComprar.toString() + ", estado=" + estado + ", montoTotal=" + montoTotal + ", fecha=" + fecha ;
+    }
+    
+    
     
 }

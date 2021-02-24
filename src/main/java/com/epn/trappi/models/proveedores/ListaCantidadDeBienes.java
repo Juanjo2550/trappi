@@ -17,6 +17,10 @@ public class ListaCantidadDeBienes {
     private ArrayList<CantidadDeBien> listaCantidadDeBienes;
     private ProveedoresDb db = new ProveedoresDb();
 
+    public ListaCantidadDeBienes(ArrayList<CantidadDeBien> listaCantidadDeBienes) {
+        this.listaCantidadDeBienes = listaCantidadDeBienes;
+    }
+
     public ListaCantidadDeBienes(){
         listaCantidadDeBienes= new ArrayList<CantidadDeBien>();
     }
@@ -29,6 +33,10 @@ public class ListaCantidadDeBienes {
         return db.getListaCantidadBienes();
     }
 
+    public ArrayList<CantidadDeBien> getListaCantidadDeBienesDbCompra() {
+        return db.getListaCantidadBienesCompra();
+    }
+    
     public void setListaCantidadDeBienes(ArrayList<CantidadDeBien> listaCantidadDeBienes) {
         this.listaCantidadDeBienes = listaCantidadDeBienes;
     }
@@ -47,5 +55,16 @@ public class ListaCantidadDeBienes {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        String retorno="";
+        for (CantidadDeBien cantidadBien : listaCantidadDeBienes) {
+            retorno+=cantidadBien.getBien().toString()+cantidadBien.getCantidad();
+        }
+        return retorno;
+    }
+    
+    
 
 }
