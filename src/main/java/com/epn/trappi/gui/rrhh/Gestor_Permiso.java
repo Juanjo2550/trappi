@@ -9,6 +9,7 @@ package com.epn.trappi.gui.rrhh;
 import com.epn.trappi.*;
 import com.epn.trappi.db.rrhh.Connect;
 import com.epn.trappi.gui.rrhh.Permisos.Calamidad_Domestica;
+import com.epn.trappi.gui.rrhh.Permisos.Gestor_Permisos;
 import com.epn.trappi.models.rrhh.Empleado;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.ListaEmpleados;
@@ -33,6 +34,7 @@ import javax.swing.JOptionPane;
 public class Gestor_Permiso extends javax.swing.JFrame {
 Calamidad_Domestica calamidad = new Calamidad_Domestica();
 Fecha fecha = new Fecha();
+Empleado empleado = new Empleado();
     
     /*
      * Creates new form Ejemplo_GUI
@@ -76,7 +78,7 @@ Fecha fecha = new Fecha();
             Statement stmt  = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             // loop through the result set
-            cmbnombreEmpleado.addItem("seleccione");
+           
             while (rs.next()) {
                 String nombre = rs.getString("nombres");
               cmbnombreEmpleado.addItem(nombre);
@@ -125,7 +127,7 @@ Fecha fecha = new Fecha();
        Fecha clasefecha = new Fecha(Integer.parseInt(dia), Integer.parseInt(mes), Integer.parseInt(anio));
         res= clasefecha.fechaCorrecta();
         if (res ==true){
-            String FinPermiso= sumarDiasAFecha(fechaInicio, Integer.parseInt(txtnumDias.getText()));
+            String FinPermiso= fecha.sumarDiasAFecha(fechaInicio, Integer.parseInt(txtnumDias.getText()));
             txtfechaFinPermiso.setText(FinPermiso);
         }
         else{
@@ -136,21 +138,7 @@ Fecha fecha = new Fecha();
         }
         
     }
-     public String sumarDiasAFecha(String fecha, int dias) {
-        if(dias == 0){
-            return fecha;
-        }
-
-        String[] f = fecha.split("-");
-        Calendar calendar = Calendar.getInstance();
-        //calendar.setTime(new Date(Integer.parseInt(f[0]), Integer.parseInt(f[1]), Integer.parseInt(f[2])));
-        calendar.set(Integer.parseInt(f[0]), Integer.parseInt(f[1])-1, Integer.parseInt(f[2]));
-
-        calendar.add(Calendar.DAY_OF_MONTH, dias);
-        SimpleDateFormat fe = new SimpleDateFormat("YYYY-MM-dd");
-        return fe.format(calendar.getTime());
-
-    }
+     
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -185,7 +173,7 @@ Fecha fecha = new Fecha();
         lblfechaInicioPermiso1 = new javax.swing.JLabel();
         lblfechaInicioPermiso2 = new javax.swing.JLabel();
         txtvalorAPagar = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cmbEstado = new javax.swing.JComboBox<>();
         lblfechaInicioPermiso3 = new javax.swing.JLabel();
         txtnumDias = new javax.swing.JTextField();
         lblfechaInicioPermiso4 = new javax.swing.JLabel();
@@ -193,7 +181,7 @@ Fecha fecha = new Fecha();
         txtfechaInicioPermiso = new javax.swing.JTextField();
         lblfechaInicioPermiso6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtDescripcion = new javax.swing.JTextArea();
         jLabel13 = new javax.swing.JLabel();
         cmbPermiso = new javax.swing.JComboBox<>();
         btnValidarFecha = new javax.swing.JButton();
@@ -414,8 +402,8 @@ Fecha fecha = new Fecha();
         });
         PanelAspirante.add(txtvalorAPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 200, 28));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aprobado", "Denegado" }));
-        PanelAspirante.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 160, -1));
+        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aprobado", "Denegado" }));
+        PanelAspirante.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 160, -1));
 
         lblfechaInicioPermiso3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblfechaInicioPermiso3.setText("Estado: ");
@@ -452,9 +440,9 @@ Fecha fecha = new Fecha();
         lblfechaInicioPermiso6.setText("Valor a Pagar por Permiso: ");
         PanelAspirante.add(lblfechaInicioPermiso6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        txtDescripcion.setColumns(20);
+        txtDescripcion.setRows(5);
+        jScrollPane2.setViewportView(txtDescripcion);
 
         PanelAspirante.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 770, 70));
 
@@ -556,9 +544,16 @@ Fecha fecha = new Fecha();
     }//GEN-LAST:event_btnNuevoPermisoActionPerformed
 
     private void btnGuardarPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPermisoActionPerformed
-
+        Gestor_Permisos permiso = new Gestor_Permisos(Double.parseDouble(txtvalorAPagar.getText()), 
+        (String) cmbnombreEmpleado.getSelectedItem(),txtCedula.getText(), txtDescripcion.getText(),
+        txtfechaInicioPermiso.getText(),txtfechaFinPermiso.getText(),(String) cmbTipoPermiso.getSelectedItem()
+        , (String) cmbEstado.getSelectedItem());
+        boolean res = permiso.registrar_Permiso();
+        if (res ==true){
+            JOptionPane.showMessageDialog(null, "Permiso registrado exitoso");
+        }
     }//GEN-LAST:event_btnGuardarPermisoActionPerformed
-
+   
     private void txtvalorAPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtvalorAPagarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtvalorAPagarActionPerformed
@@ -659,6 +654,7 @@ Fecha fecha = new Fecha();
     private javax.swing.JButton btnNuevoPermiso;
     private javax.swing.JButton btnValidarFecha;
     private javax.swing.JButton btnVolver;
+    private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JComboBox<String> cmbPermiso;
     private javax.swing.JComboBox<String> cmbTipoPermiso;
     private javax.swing.JComboBox<String> cmbnombreEmpleado;
@@ -666,7 +662,6 @@ Fecha fecha = new Fecha();
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -676,7 +671,6 @@ Fecha fecha = new Fecha();
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblCedula;
     private javax.swing.JLabel lblfechaFinPermiso;
     private javax.swing.JLabel lblfechaInicioPermiso1;
@@ -687,6 +681,7 @@ Fecha fecha = new Fecha();
     private javax.swing.JLabel lblfechaInicioPermiso6;
     private javax.swing.JLabel lblnombreEmpleado1;
     private javax.swing.JTextField txtCedula;
+    private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtfechaFinPermiso;
     private javax.swing.JTextField txtfechaInicioPermiso;
     private javax.swing.JTextField txtnumDias;

@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.epn.trappi.gui.rrhh.Permisos;
+package com.epn.trappi.db.rrhh;
 
 /**
  *
  * @author stali
  */
-public interface Permiso {
-    public void Calcular_Afectacion_Sueldo();
-    public int Calcular_Numero_Dias_Permiso(String tipo);
+public class PermisosDb {
+    
 }

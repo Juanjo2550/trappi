@@ -57,13 +57,12 @@ public class Calamidad_Domestica implements Permiso{
 
     
 
-    @Override
     public void Calcular_Afectacion_Sueldo() {
-        
+       
     }
 
      
-    public int  Calcular_Numero_Dias_Permiso(String TipoPermiso) {
+    public int Calcular_Numero_Dias_Permiso(String TipoPermiso) {
         this.tipoPermiso = TipoPermiso;
         if("muerte de padres, hermanos, hijos, cónyuge".equals(TipoPermiso)){
             this.numeroDias = 3;
@@ -80,9 +79,7 @@ public class Calamidad_Domestica implements Permiso{
         return this.numeroDias;
     }
 
-    @Override
-    public void Calcular_Numero_Dias_Permiso() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+  
+   
     
 }
