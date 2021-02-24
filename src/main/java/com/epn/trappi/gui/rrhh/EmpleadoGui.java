@@ -10,6 +10,7 @@ import com.epn.trappi.*;
 import java.awt.Color;
 import com.epn.trappi.db.rrhh.*;
 import com.epn.trappi.models.rrhh.*;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,8 +25,7 @@ public class EmpleadoGui extends javax.swing.JFrame {
      */
     public EmpleadoGui() {
         initComponents();
-        EmpleadoDb db = new EmpleadoDb();
-        this.empleados = db.selectAll();
+        this.empleados = new ListaEmpleados();
         fillTable();
     }
     
@@ -225,6 +225,11 @@ public class EmpleadoGui extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaEmpleadosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaEmpleados);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -279,6 +284,15 @@ public class EmpleadoGui extends javax.swing.JFrame {
     private void listaEmpleadosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaEmpleadosButtonActionPerformed
 
     }//GEN-LAST:event_listaEmpleadosButtonActionPerformed
+
+    private void tablaEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEmpleadosMouseClicked
+        // TODO add your handling code here:
+        int row = tablaEmpleados.getSelectedRow();
+        String cedula = tablaEmpleados.getValueAt(row, 0).toString();
+        DetalleEmpleadoGUI detalleGUI = new DetalleEmpleadoGUI(cedula, this);
+        detalleGUI.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_tablaEmpleadosMouseClicked
 
     /**
      * @param args the command line arguments

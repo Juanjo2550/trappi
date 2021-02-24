@@ -55,16 +55,16 @@ public class EmpleadoDb {
     }
 
 
-    public ListaEmpleados selectAll(){
+    public ArrayList<Empleado> selectAll(){
         String sql = "SELECT * FROM empleados";
-        ListaEmpleados temEmpleados = new ListaEmpleados();
+        ArrayList<Empleado> temEmpleados = new ArrayList<Empleado>();
         try {
             Connection conn = Connect.connect("juanjo.db");
             Statement stmt  = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             // loop through the result set
             while (rs.next()) {
-                temEmpleados.agregar(new Empleado(
+                temEmpleados.add(new Empleado(
                 rs.getString("nombres"),
                 rs.getString("apellidos"),
                 rs.getInt("cedula"),
@@ -82,6 +82,33 @@ public class EmpleadoDb {
             System.out.println(e.getMessage());
         }
         return temEmpleados;
+    }
+    
+    public Empleado selectOne(String cedula){
+        String sql = "SELECT * FROM empleados WHERE empleados.cedula = ?";
+        try {
+            Connection conn = Connect.connect("juanjo.db");
+            PreparedStatement pstmt  = conn.prepareStatement(sql);
+            pstmt.setInt(1, Integer.parseInt(cedula));
+            ResultSet rs = pstmt.executeQuery();
+            // loop through the result set
+            return new Empleado(
+            rs.getString("nombres"),
+            rs.getString("apellidos"),
+            rs.getInt("cedula"),
+            rs.getString("cargo"),
+            rs.getString("departamento"),
+            rs.getString("cuentaBancaria"),
+            rs.getString("banco"),
+            asistenciasMock.get(ThreadLocalRandom.current().nextInt(1, 3 + 1)),
+            new SueldoDb().obtenerPorEmpleado(rs.getInt("cedula")),
+            rs.getString("estado"),
+            rs.getString("sexo").charAt(0)
+            );
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return new Empleado();
+        }
     }
 
     public boolean addOne(Empleado nuevoEmpleado, Sueldo sueldo) {

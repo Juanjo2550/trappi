@@ -20,6 +20,10 @@ public class ListaEmpleados {
     
     public ListaEmpleados(){
         this.lista = new HashMap<>();
+        ArrayList<Empleado> l1 = new EmpleadoDb().selectAll();
+        for(Empleado e1 : l1) {
+            this.lista.put(e1.getCedula(), e1);
+        }
     }
     
     public ArrayList <Empleado> obtenerTodos() {

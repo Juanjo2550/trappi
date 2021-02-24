@@ -16,6 +16,8 @@ public class RolPagos {
     private double valor;
     private int numero;
 
+    public RolPagos() {}
+    
     public RolPagos(Fecha fecha, Empleado empleado, double valor, int numero) {
         this.fecha = fecha;
         this.empleado = empleado;

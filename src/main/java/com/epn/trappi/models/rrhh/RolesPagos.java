@@ -35,8 +35,4 @@ public class RolesPagos {
     public RolPagos buscarUno(int numero) {
         return this.lista.get(numero);
     }
-    
-    public RolPagos eliminar(RolPagos rolActualizado) {
-        return this.lista.remove(rolActualizado.getNumero());
-    }
 }

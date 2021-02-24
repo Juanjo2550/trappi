@@ -19,7 +19,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class SueldoDb {
     public Sueldo obtenerPorEmpleado (int Cedulaempleado){
-        String sql = "SELECT * FROM sueldos WHERE sueldo.cedulaEmpleado = ?";
+        String sql = "SELECT * FROM sueldos WHERE sueldos.cedulaEmpleado = ?";
         try {
             Connection conn = Connect.connect("juanjo.db");
             PreparedStatement pstmt  = conn.prepareStatement(sql);
