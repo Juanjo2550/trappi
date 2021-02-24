@@ -8,6 +8,7 @@ package com.epn.trappi.gui.proveedores;
 import com.epn.trappi.db.proveedores.ProveedoresDb;
 import com.epn.trappi.models.proveedores.Compra;
 import com.epn.trappi.models.proveedores.CompraDeProducto;
+import com.epn.trappi.models.proveedores.Inventario;
 import com.epn.trappi.models.proveedores.ListaCantidadDeBienes;
 import com.epn.trappi.models.proveedores.ListaDeCompras;
 import com.epn.trappi.models.proveedores.Producto;
@@ -30,6 +31,7 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
     public int[][] seleccionados= {{0,0},{0,0},{0,0},{0,0},{0,0},{0,0}};
     private JPanel verTodo;
     private ListaDeCompras solicitud;
+
     
     public guiFormularioComprasPanel(JPanel verTodo) {
         initComponents();
@@ -139,14 +141,17 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jCheckBoxAñadirMouseClicked(evt);
             }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jCheckBoxAñadirMouseExited(evt);
+            }
         });
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel11.setText("Ingresar Cantidad");
 
         jTextFieldCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextFieldCantidadKeyPressed(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldCantidadKeyReleased(evt);
             }
         });
 
@@ -228,6 +233,7 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButRegFactCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegFactCompNotaCredActionPerformed
+        Inventario inventario=new Inventario();
         solicitud = new ListaDeCompras(new ArrayList<Compra>());
         String auxiliarRuc="";
         for(int i=0;i<6;i++){
@@ -236,18 +242,21 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
                 ListaCantidadDeBienes lista = new ListaCantidadDeBienes();
                 auxiliarRuc=db.getProductos().get(i).getProveeedor().getRuc();
                 for(int j=0;j<6;j++){
-                    if(auxiliarRuc==db.getProductos().get(j).getProveeedor().getRuc()){
-                        lista.añadirBien(new Producto(db.getProductos().get(j).getNombre()
-                                        ,db.getProductos().get(j).getPrecio()
-                                        , db.getProductos().get(j).getProveeedor())
-                                            , seleccionados[j][1]);
-                        seleccionados[i][0]=0;
+                    if(auxiliarRuc.equals(db.getProductos().get(j).getProveeedor().getRuc())){
+                        if(seleccionados[j][0]==1){
+                            lista.añadirBien(new Producto(db.getProductos().get(j).getNombre()
+                                            ,db.getProductos().get(j).getPrecio()
+                                            , db.getProductos().get(j).getProveeedor())
+                                                , seleccionados[j][1]);
+                            seleccionados[i][0]=0;
+                        }
                     }
                 }
-                compra = new CompraDeProducto(lista, "Pendiente");
+                compra = new CompraDeProducto(inventario,lista, "Pendiente");
                 solicitud.añadirCompra(compra);
             }
         }
+        System.out.println(solicitud.getCompras().get(0).getListaCantidadDeBienes().getListaCantidadDeBienes().get(0).toString());
         new CambiaPanel(verTodo, new guiDescripcionCompra(solicitud));
     }//GEN-LAST:event_jButRegFactCompNotaCredActionPerformed
 
@@ -275,20 +284,30 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
         else{
             jCheckBoxAñadir.setSelected(true);
         }
-        jTextFieldCantidad.setText(seleccionados[jTable1.getSelectedRow()][1]+"");
+        if(seleccionados[jTable1.getSelectedRow()][1]==0){
+            jTextFieldCantidad.setText("");
+        }
+        else{
+            jTextFieldCantidad.setText(seleccionados[jTable1.getSelectedRow()][1]+"");
+        }
+        System.out.println("  "+seleccionados[0][0] + " "+seleccionados[1][0]+ " "+seleccionados[2][0]+ " "+seleccionados[3][0]+ " "+seleccionados[4][0]+ " "+seleccionados[5][0]);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jCheckBoxAñadirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBoxAñadirMouseClicked
-        int seleccion=0;
-        if(jCheckBoxAñadir.isSelected())
-            seleccion=1;
-        seleccionados[jTable1.getSelectedRow()][0]=seleccion;
+        
     }//GEN-LAST:event_jCheckBoxAñadirMouseClicked
 
-    private void jTextFieldCantidadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCantidadKeyPressed
+    private void jTextFieldCantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCantidadKeyReleased
         int cantidad=Integer.parseInt(jTextFieldCantidad.getText());
         seleccionados[jTable1.getSelectedRow()][1]=cantidad;
-    }//GEN-LAST:event_jTextFieldCantidadKeyPressed
+        System.out.println("vv"+seleccionados[0][1] + " "+seleccionados[1][1]+ " "+seleccionados[2][1]+ " "+seleccionados[3][1]+ " "+seleccionados[4][1]+ " "+seleccionados[5][1]);
+    }//GEN-LAST:event_jTextFieldCantidadKeyReleased
+
+    private void jCheckBoxAñadirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBoxAñadirMouseExited
+        if(jCheckBoxAñadir.isSelected())
+            seleccionados[jTable1.getSelectedRow()][0]=1;
+        System.out.println("dd"+seleccionados[0][0] + " "+seleccionados[1][0]+ " "+seleccionados[2][0]+ " "+seleccionados[3][0]+ " "+seleccionados[4][0]+ " "+seleccionados[5][0]);
+    }//GEN-LAST:event_jCheckBoxAñadirMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

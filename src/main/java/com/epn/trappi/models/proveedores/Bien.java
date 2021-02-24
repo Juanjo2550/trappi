@@ -46,6 +46,9 @@ abstract public class Bien {
         this.proveeedor = proveeedor;
     }
     
+    public Bien(String nombre) {
+        this.nombre = nombre;
+    }
     
     
     public abstract void registrar();

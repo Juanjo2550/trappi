@@ -14,6 +14,13 @@ public class Producto extends Bien {
     public Producto(String nombre, double precio, Proveedor proveeedor) {
         super(nombre, precio, proveeedor);
     }
+    
+    
+    
+    
+    public Producto(String nombre) {
+        super(nombre);
+    }
 
     @Override
     public void registrar() {

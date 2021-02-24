@@ -15,6 +15,7 @@ public class ProveedoresDb {
     private List<Servicio> servicios;
     private List<Compra> compras=new ArrayList<Compra>();
     private ArrayList<CantidadDeBien> listaCantidadBienes;
+    private  ArrayList<CantidadDeBien> inventarioDb;
     private final String prodFilename = "src/main/java/com/epn/trappi/db/proveedores/productos.csv";
     private final String provFilename = "src/main/java/com/epn/trappi/db/proveedores/proveedores.csv";
     private final String servFilename = "src/main/java/com/epn/trappi/db/proveedores/servicios.csv";
@@ -285,6 +286,30 @@ public void setProductos(List<Producto> productos) {
             Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public ArrayList<CantidadDeBien> getInventarioDb() throws IOException {
+        List<String[]> serv = p.leerArchivoCSV(invFilename);
+        ArrayList<CantidadDeBien> auxiliar = new ArrayList<>();
+        for(int i=0;i<serv.size();i++){
+            auxiliar.add(new CantidadDeBien(new Producto(serv.get(i)[0]), Integer.parseInt(serv.get(i)[1])));
+        }
+        return auxiliar;
+    }
+
+    public void setInventarioDb(ArrayList<CantidadDeBien> inventarioDb) {
+        String retorno = "";
+        try {
+            p.vaciarArchivoCSV(invFilename);
+            for (CantidadDeBien cantidad : inventarioDb) {
+                retorno+=cantidad.getBien().getNombre()+";"+cantidad.getCantidad()+"\n";
+            }
+            p.writeArchivoCSV(invFilename, retorno);
+        } catch (IOException ex) {
+            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
     
     private String transformarProductoInventario(Producto p) {
         return p.getNombre() + ";0";

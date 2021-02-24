@@ -36,6 +36,7 @@ public class guiComprasPanel extends javax.swing.JPanel {
         modelo = new DefaultTableModel(null, titulos);
         System.out.println("hola \n"+db.getCompras().get(0).toString());
         ArrayList<Compra> c = (ArrayList<Compra>) db.getCompras();
+        System.out.println("hola jhtf\n"+c.size());
         for (int i=0;i<c.size();i++){
             fila[0]= "01";
             if(i==0){

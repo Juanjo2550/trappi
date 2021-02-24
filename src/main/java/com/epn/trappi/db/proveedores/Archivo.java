@@ -72,6 +72,10 @@ public class Archivo {
             }
         }
     }
+    
+    public void vaciarArchivoCSV(String path) throws IOException {
+        new FileWriter(path, false).close();
+    }
 
     private String[] removeTrailingQuotes(String[] fields) {
         String result[] = new String[fields.length];
