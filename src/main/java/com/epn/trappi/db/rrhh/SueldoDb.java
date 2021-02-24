@@ -18,12 +18,12 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author Juan Jaramillo <juanjodev02 at juan.jaramillo02@epn.edu.ec>
  */
 public class SueldoDb {
-    public Sueldo obtenerPorEmpleado (int Cedulaempleado){
+    public Sueldo obtenerPorEmpleado (String Cedulaempleado){
         String sql = "SELECT * FROM sueldos WHERE sueldos.cedulaEmpleado = ?";
         try {
             Connection conn = Connect.connect("juanjo.db");
             PreparedStatement pstmt  = conn.prepareStatement(sql);
-            pstmt.setInt(1, Cedulaempleado);
+            pstmt.setString(1, Cedulaempleado);
             ResultSet rs  = pstmt.executeQuery();
             return new Sueldo(Integer.parseInt(rs.getString("valor")), Integer.parseInt(rs.getString("descuentos")));
         } catch (SQLException e) {
@@ -37,7 +37,7 @@ public class SueldoDb {
 
         try (Connection conn = Connect.connect("juanjo.db");
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, empleado.getCedula());
+            pstmt.setString(1, empleado.getCedula());
             pstmt.setString(2, sueldo.getValor() + "");
             pstmt.setString(3, sueldo.getDescuentos() + "");
             pstmt.executeUpdate();

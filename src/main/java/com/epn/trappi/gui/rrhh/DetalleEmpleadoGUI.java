@@ -33,7 +33,7 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
         initComponents();
         this.parentForm = parentForm;
         this.empleado = new EmpleadoDb().selectOne(cedula);
-        this.s.setText(this.empleado.getNombres() + " " + this.empleado.getApellidos());
+        this.nombreEmpleado.setText(this.empleado.getNombres() + " " + this.empleado.getApellidos());
         this.cedulaTextField.setText(this.empleado.getCedula().toString());
         this.cargoTextField.setText(this.empleado.getCargo());
         this.departamentoTextField.setText(this.empleado.getDepartamento());

@@ -35,7 +35,7 @@ public class RolPagosDb {
             while (rs.next()) {
                 tempRoles.add(new RolPagos(
                         new Fecha(Integer.parseInt(rs.getString("dia")), Integer.parseInt(rs.getString("mes")), Integer.parseInt(rs.getString("ano"))),
-                        new EmpleadoDb().selectOne(rs.getInt("cedula") + ""),
+                        new EmpleadoDb().selectOne(rs.getString("cedula")),
                         Integer.parseInt(rs.getString("valor")),
                         rs.getInt("numero")
                 ));
@@ -52,11 +52,11 @@ public class RolPagosDb {
             Connection conn;
             conn = Connect.connect("juanjo.db");
             PreparedStatement pstmt  = conn.prepareStatement(sql);
-            pstmt.setInt(1, Integer.parseInt(cedulaEmpleado));
+            pstmt.setString(1, cedulaEmpleado);
             ResultSet rs = pstmt.executeQuery();
             return new RolPagos(
                         new Fecha(Integer.parseInt(rs.getString("dia")), Integer.parseInt(rs.getString("mes")), Integer.parseInt(rs.getString("ano"))),
-                        new EmpleadoDb().selectOne(rs.getInt("cedula") + ""),
+                        new EmpleadoDb().selectOne(rs.getString("cedula")),
                         Integer.parseInt(rs.getString("valor")),
                         rs.getInt("numero")
                 );
@@ -76,12 +76,12 @@ public class RolPagosDb {
             Connection conn;
             conn = Connect.connect("juanjo.db");
             PreparedStatement pstmt  = conn.prepareStatement(sql);
-            pstmt.setInt(1, Integer.parseInt(cedulaEmpleado));
+            pstmt.setString(1, cedulaEmpleado);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 tempRoles.add(new RolPagos(
                             new Fecha(Integer.parseInt(rs.getString("dia")), Integer.parseInt(rs.getString("mes")), Integer.parseInt(rs.getString("ano"))),
-                            new EmpleadoDb().selectOne(rs.getInt("cedula") + ""),
+                            new EmpleadoDb().selectOne(rs.getString("cedula")),
                             Integer.parseInt(rs.getString("valor")),
                             rs.getInt("numero")
                     ));
@@ -97,7 +97,7 @@ public class RolPagosDb {
         String sql = "INSERT INTO rolpagos(cedula,valor, numero, dia, mes, ano) VALUES(?,?,?,?,?,?)";
         try (Connection conn = Connect.connect("juanjo.db");
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, nuevoRolDePago.getEmpleado().getCedula());
+            pstmt.setString(1, nuevoRolDePago.getEmpleado().getCedula());
             pstmt.setString(2, nuevoRolDePago.getValor() + "");
             pstmt.setInt(3, nuevoRolDePago.getNumero());
             pstmt.setString(4, nuevoRolDePago.getFecha().getDia() + "");

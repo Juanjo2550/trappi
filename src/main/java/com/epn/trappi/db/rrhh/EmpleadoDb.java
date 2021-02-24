@@ -67,13 +67,13 @@ public class EmpleadoDb {
                 temEmpleados.add(new Empleado(
                 rs.getString("nombres"),
                 rs.getString("apellidos"),
-                rs.getInt("cedula"),
+                rs.getString("cedula"),
                 rs.getString("cargo"),
                 rs.getString("departamento"),
                 rs.getString("cuentaBancaria"),
                 rs.getString("banco"),
                 asistenciasMock.get(ThreadLocalRandom.current().nextInt(1, 3 + 1)),
-                new SueldoDb().obtenerPorEmpleado(rs.getInt("cedula")),
+                new SueldoDb().obtenerPorEmpleado(rs.getString("cedula")),
                 rs.getString("estado"),
                 rs.getString("sexo").charAt(0)
                 ));
@@ -89,19 +89,19 @@ public class EmpleadoDb {
         try {
             Connection conn = Connect.connect("juanjo.db");
             PreparedStatement pstmt  = conn.prepareStatement(sql);
-            pstmt.setInt(1, Integer.parseInt(cedula));
+            pstmt.setString(1, cedula);
             ResultSet rs = pstmt.executeQuery();
             // loop through the result set
             return new Empleado(
             rs.getString("nombres"),
             rs.getString("apellidos"),
-            rs.getInt("cedula"),
+            rs.getString("cedula"),
             rs.getString("cargo"),
             rs.getString("departamento"),
             rs.getString("cuentaBancaria"),
             rs.getString("banco"),
             asistenciasMock.get(ThreadLocalRandom.current().nextInt(1, 3 + 1)),
-            new SueldoDb().obtenerPorEmpleado(rs.getInt("cedula")),
+            new SueldoDb().obtenerPorEmpleado(rs.getString("cedula")),
             rs.getString("estado"),
             rs.getString("sexo").charAt(0)
             );
@@ -116,7 +116,7 @@ public class EmpleadoDb {
 
         try (Connection conn = Connect.connect("juanjo.db");
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, nuevoEmpleado.getCedula());
+            pstmt.setString(1, nuevoEmpleado.getCedula());
             pstmt.setString(2, nuevoEmpleado.getNombres());
             pstmt.setString(3, nuevoEmpleado.getApellidos());
             pstmt.setString(4, nuevoEmpleado.getCargo());

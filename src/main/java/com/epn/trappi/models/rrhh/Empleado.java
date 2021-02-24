@@ -13,7 +13,7 @@ package com.epn.trappi.models.rrhh;
 public class Empleado {
     private String nombres;
     private String apellidos;
-    private int cedula;
+    private String cedula;
     private String cargo;
     private String departamento;
     private String cuentaBancaria;
@@ -27,7 +27,7 @@ public class Empleado {
         
     }
 
-    public Empleado(String nombres, String apellidos, int cedula, String cargo, String departamento, String cuentaBancaria, String banco, ListaRegistrosAsistencias asistencias, Sueldo sueldo, String estado, char sexo) {
+    public Empleado(String nombres, String apellidos, String cedula, String cargo, String departamento, String cuentaBancaria, String banco, ListaRegistrosAsistencias asistencias, Sueldo sueldo, String estado, char sexo) {
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.cedula = cedula;
@@ -51,7 +51,7 @@ public class Empleado {
         return true;
     }
 
-    public Integer getCedula() {
+    public String getCedula() {
         return this.cedula;
     }
 

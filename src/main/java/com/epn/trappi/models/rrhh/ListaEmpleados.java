@@ -16,7 +16,7 @@ import com.epn.trappi.db.rrhh.*;
  * @author Juan Jaramillo <juanjodev02 at juan.jaramillo02@epn.edu.ec>
  */
 public class ListaEmpleados {
-    Map <Integer, Empleado> lista;
+    Map <String, Empleado> lista;
     
     public ListaEmpleados(){
         this.lista = new HashMap<>();
