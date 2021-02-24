@@ -8,8 +8,8 @@ public class Analizador {
 
     
     LibroDiario librodiario;
-    Fecha fechaDesde;
-    Fecha fechaHasta;
+    Fecha fechaDesde=new Fecha();
+    Fecha fechaHasta=new Fecha();
     public Analizador(LibroDiario librodiario) {
         this.librodiario = librodiario;
     }
@@ -27,7 +27,7 @@ public class Analizador {
     }
     public double calcularIngresoMinimo(ArrayList<Ingreso> ingresosRegistrados){
         ingresosRegistrados=librodiario.ingresosRegistrados;
-        double minimoIngreso=0;
+        double minimoIngreso=librodiario.ingresosRegistrados.get(0).total;
         for(Ingreso ingreso: ingresosRegistrados){
             if(ingreso.total<minimoIngreso&&ingreso.fechaIngreso.devolverMes()==fechaHasta.devolverMes()){
                 minimoIngreso=ingreso.total;
@@ -47,7 +47,7 @@ public class Analizador {
     }
     public double calcularGastoMinimo(ArrayList<Pago> pagosRegistrados){
         pagosRegistrados=librodiario.pagosRegistrados;
-        double minimoGasto=0;
+        double minimoGasto=librodiario.pagosRegistrados.get(0).monto;
         for(Pago pago: pagosRegistrados){
             if(pago.monto<minimoGasto&&pago.fechadePago.devolverMes()==fechaHasta.devolverMes()){
                 minimoGasto=pago.monto;
