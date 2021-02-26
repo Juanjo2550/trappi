@@ -23,6 +23,12 @@
   <version>7.12.2</version>
         </dependency>
 
+    <dependency>
+        <groupId>com.microsoft.sqlserver</groupId>
+        <artifactId>mssql-jdbc</artifactId>
+        <version>9.2.0.jre11</version>
+    </dependency>
+
 <dependency>
   <groupId>com.teamdev.jxbrowser</groupId>
   <artifactId>jxbrowser-swing</artifactId>
