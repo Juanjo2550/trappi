@@ -8,6 +8,11 @@ package com.epn.trappi.gui.logistico;
 
 import com.epn.trappi.*;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Insets;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 /**
  *
  * @author stali
@@ -15,14 +20,15 @@ import java.awt.Color;
 public class Logistico_GUI extends javax.swing.JFrame {
     MapaDisponibilidad1 mapaDisponibilidad = new MapaDisponibilidad1();
     EntregasActivas entregasActivas = new EntregasActivas();
-    /**
-     * Creates new form Ejemplo_GUI
-     */
+    boolean bandera = false;
+
     public Logistico_GUI() {
         this.setSize(1366, 768);
-        initComponents();        
+        initComponents();
+        configurarRadiosBotones(20);
+        
     }
-    boolean bandera = false;
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,24 +42,25 @@ public class Logistico_GUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        panEntregas = new javax.swing.JPanel();
-        jBMapaDisponibilidad = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jBEntregasActivas = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
-        jButton8 = new javax.swing.JButton();
+        btnVehiculos = new javax.swing.JButton();
+        panEntregas = new javax.swing.JPanel();
+        botonControl = new javax.swing.JButton();
+        botonRegistroEntregas = new javax.swing.JButton();
+        botonEntregasActivas = new javax.swing.JButton();
+        panEntregas1 = new javax.swing.JPanel();
+        botonFichas = new javax.swing.JButton();
+        botonListaVehiculos = new javax.swing.JButton();
+        btnMantenimientos = new javax.swing.JButton();
+        panEntregas2 = new javax.swing.JPanel();
+        botonMantenimiento = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPEntregasActivasGUI = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(61, 57, 57));
 
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -70,44 +77,107 @@ public class Logistico_GUI extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel2.setBackground(new java.awt.Color(61, 57, 57));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("LOGÍSTICA");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/epn/trappi/images/logistico/Logística.png"))); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(204, 153, 0));
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(51, 51, 51));
-        jButton1.setText("ENTREGAS");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnVolver.setBackground(new java.awt.Color(255, 210, 28));
+        btnVolver.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        btnVolver.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/epn/trappi/images/logistico/left-arrow (1).png"))); // NOI18N
+        btnVolver.setText("   Regresar");
+        btnVolver.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnVolver.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                moveMouseOnVolver(evt);
+            }
+        });
+        btnVolver.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                exitMouseOnVolver(evt);
+            }
+        });
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnVolverActionPerformed(evt);
             }
         });
 
-        panEntregas.setBackground(new java.awt.Color(51, 51, 51));
-
-        jBMapaDisponibilidad.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jBMapaDisponibilidad.setForeground(new java.awt.Color(51, 51, 51));
-        jBMapaDisponibilidad.setText("Mapa de Disponibilidad");
-        jBMapaDisponibilidad.addActionListener(new java.awt.event.ActionListener() {
+        btnVehiculos.setBackground(new java.awt.Color(255, 210, 28));
+        btnVehiculos.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        btnVehiculos.setForeground(new java.awt.Color(255, 255, 255));
+        btnVehiculos.setText("Vehículos");
+        btnVehiculos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnVehiculos.setBorderPainted(false);
+        btnVehiculos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBMapaDisponibilidadActionPerformed(evt);
+                btnVehiculosActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(51, 51, 51));
-        jButton3.setText("Lista de Entregas");
+        panEntregas.setBackground(new java.awt.Color(61, 57, 57));
 
-        jBEntregasActivas.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jBEntregasActivas.setForeground(new java.awt.Color(51, 51, 51));
-        jBEntregasActivas.setText("Entregas activas");
-        jBEntregasActivas.addActionListener(new java.awt.event.ActionListener() {
+        botonControl.setBackground(new java.awt.Color(61, 57, 57));
+        botonControl.setFont(new java.awt.Font("Segoe UI Semibold", 1, 16)); // NOI18N
+        botonControl.setForeground(new java.awt.Color(255, 255, 255));
+        botonControl.setText("Control disponibilidad");
+        botonControl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        botonControl.setContentAreaFilled(false);
+        botonControl.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                botonControlMouseMoved(evt);
+            }
+        });
+        botonControl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonControlMouseExited(evt);
+            }
+        });
+        botonControl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEntregasActivasActionPerformed(evt);
+                botonControlActionPerformed(evt);
+            }
+        });
+
+        botonRegistroEntregas.setBackground(new java.awt.Color(61, 57, 57));
+        botonRegistroEntregas.setFont(new java.awt.Font("Segoe UI Semibold", 1, 16)); // NOI18N
+        botonRegistroEntregas.setForeground(new java.awt.Color(255, 255, 255));
+        botonRegistroEntregas.setText("Registro de entregas");
+        botonRegistroEntregas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        botonRegistroEntregas.setContentAreaFilled(false);
+        botonRegistroEntregas.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                botonRegistroEntregasMouseMoved(evt);
+            }
+        });
+        botonRegistroEntregas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonRegistroEntregasMouseExited(evt);
+            }
+        });
+
+        botonEntregasActivas.setBackground(new java.awt.Color(61, 57, 57));
+        botonEntregasActivas.setFont(new java.awt.Font("Segoe UI Semibold", 1, 16)); // NOI18N
+        botonEntregasActivas.setForeground(new java.awt.Color(255, 255, 255));
+        botonEntregasActivas.setText("Entregas activas");
+        botonEntregasActivas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        botonEntregasActivas.setContentAreaFilled(false);
+        botonEntregasActivas.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                botonEntregasActivasMouseMoved(evt);
+            }
+        });
+        botonEntregasActivas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonEntregasActivasMouseExited(evt);
+            }
+        });
+        botonEntregasActivas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEntregasActivasActionPerformed(evt);
             }
         });
 
@@ -115,187 +185,259 @@ public class Logistico_GUI extends javax.swing.JFrame {
         panEntregas.setLayout(panEntregasLayout);
         panEntregasLayout.setHorizontalGroup(
             panEntregasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panEntregasLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(panEntregasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBMapaDisponibilidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBEntregasActivas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panEntregasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panEntregasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(botonRegistroEntregas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonControl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonEntregasActivas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         panEntregasLayout.setVerticalGroup(
             panEntregasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panEntregasLayout.createSequentialGroup()
-                .addComponent(jBMapaDisponibilidad)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBEntregasActivas)
-                .addGap(6, 6, 6))
-        );
-
-        btnVolver.setBackground(new java.awt.Color(204, 153, 0));
-        btnVolver.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btnVolver.setForeground(new java.awt.Color(51, 51, 51));
-        btnVolver.setText("Volver");
-        btnVolver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolverActionPerformed(evt);
-            }
-        });
-
-        jButton4.setBackground(new java.awt.Color(204, 153, 0));
-        jButton4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(51, 51, 51));
-        jButton4.setText("VEHÍCULOS");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        jButton5.setBackground(new java.awt.Color(204, 153, 0));
-        jButton5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(51, 51, 51));
-        jButton5.setText("MANTENIMIENTOS");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jPanel4.setBackground(new java.awt.Color(51, 51, 51));
-
-        jButton6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton6.setText("Ficha Técnica");
-
-        jButton7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton7.setText("Lista de Vehículos");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addComponent(botonControl, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(botonRegistroEntregas, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(botonEntregasActivas, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+
+        panEntregas1.setBackground(new java.awt.Color(61, 57, 57));
+
+        botonFichas.setBackground(new java.awt.Color(61, 57, 57));
+        botonFichas.setFont(new java.awt.Font("Segoe UI Semibold", 0, 16)); // NOI18N
+        botonFichas.setForeground(new java.awt.Color(255, 255, 255));
+        botonFichas.setText("Fichas técnicas");
+        botonFichas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        botonFichas.setContentAreaFilled(false);
+
+        botonListaVehiculos.setBackground(new java.awt.Color(61, 57, 57));
+        botonListaVehiculos.setFont(new java.awt.Font("Segoe UI Semibold", 1, 16)); // NOI18N
+        botonListaVehiculos.setForeground(new java.awt.Color(255, 255, 255));
+        botonListaVehiculos.setText("Lista de Vehículos");
+        botonListaVehiculos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        botonListaVehiculos.setContentAreaFilled(false);
+        botonListaVehiculos.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                moveMouseOnListaV(evt);
+            }
+        });
+        botonListaVehiculos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                exitMouseOnListaV(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panEntregas1Layout = new javax.swing.GroupLayout(panEntregas1);
+        panEntregas1.setLayout(panEntregas1Layout);
+        panEntregas1Layout.setHorizontalGroup(
+            panEntregas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panEntregas1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton7)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addGroup(panEntregas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonFichas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonListaVehiculos, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        panEntregas1Layout.setVerticalGroup(
+            panEntregas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panEntregas1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(botonFichas, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(botonListaVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        jPanel5.setBackground(new java.awt.Color(51, 51, 51));
+        btnMantenimientos.setBackground(new java.awt.Color(255, 210, 28));
+        btnMantenimientos.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        btnMantenimientos.setForeground(new java.awt.Color(255, 255, 255));
+        btnMantenimientos.setText("Mantenimientos");
+        btnMantenimientos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnMantenimientos.setBorderPainted(false);
+        btnMantenimientos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMantenimientosActionPerformed(evt);
+            }
+        });
 
-        jButton8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton8.setText("Lista de Mantenimientos");
+        panEntregas2.setBackground(new java.awt.Color(61, 57, 57));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        botonMantenimiento.setBackground(new java.awt.Color(61, 57, 57));
+        botonMantenimiento.setFont(new java.awt.Font("Segoe UI Semibold", 1, 16)); // NOI18N
+        botonMantenimiento.setForeground(new java.awt.Color(255, 255, 255));
+        botonMantenimiento.setText("mantenimientos");
+        botonMantenimiento.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        botonMantenimiento.setContentAreaFilled(false);
+        botonMantenimiento.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                moveMouseOnMantenimiento(evt);
+            }
+        });
+        botonMantenimiento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                exitMouseOnMantenimiento(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panEntregas2Layout = new javax.swing.GroupLayout(panEntregas2);
+        panEntregas2.setLayout(panEntregas2Layout);
+        panEntregas2Layout.setHorizontalGroup(
+            panEntregas2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panEntregas2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton8)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addComponent(botonMantenimiento, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
         );
+        panEntregas2Layout.setVerticalGroup(
+            panEntregas2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panEntregas2Layout.createSequentialGroup()
+                .addComponent(botonMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 36, Short.MAX_VALUE))
+        );
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/epn/trappi/images/logistico/icon.png"))); // NOI18N
+        jLabel3.setText("jLabel3");
+
+        jButton1.setBackground(new java.awt.Color(255, 210, 28));
+        jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Entregas");
+        jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jButton1.setBorderPainted(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(panEntregas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 9, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnMantenimientos, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(40, 40, 40)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(17, 17, 17))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(panEntregas2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(panEntregas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(panEntregas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnVehiculos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(61, 61, 61)
+                            .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(22, 22, 22)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panEntregas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(btnVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panEntregas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnMantenimientos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panEntregas2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(33, Short.MAX_VALUE))
         );
+
+        jPEntregasActivasGUI.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPEntregasActivasGUILayout = new javax.swing.GroupLayout(jPEntregasActivasGUI);
         jPEntregasActivasGUI.setLayout(jPEntregasActivasGUILayout);
         jPEntregasActivasGUILayout.setHorizontalGroup(
             jPEntregasActivasGUILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1048, Short.MAX_VALUE)
+            .addGap(0, 1043, Short.MAX_VALUE)
         );
         jPEntregasActivasGUILayout.setVerticalGroup(
             jPEntregasActivasGUILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 660, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPEntregasActivasGUI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jPEntregasActivasGUI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPEntregasActivasGUI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPEntregasActivasGUI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 2, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void configurarRadiosBotones(int radio){
+        this.btnVolver.setBorder(new RoundedBorder(24));
+        this.btnVolver.setBorderPainted(true);
+        this.btnVolver.setOpaque(false);
+        this.btnVolver.setContentAreaFilled(false);
+        this.btnVolver.setHorizontalAlignment(SwingConstants.LEFT);
+        //
+        this.botonRegistroEntregas.setBorder(new RoundedBorder(radio));
+        this.botonRegistroEntregas.setOpaque(false);
+        //this.btnListaEntregas.setBorderPainted(true);
+        this.botonControl.setBorder(new RoundedBorder(radio));
+        this.botonControl.setOpaque(false);
+        //this.btnMapaDisponibilidad.setBorderPainted(true);
+        this.botonEntregasActivas.setBorder(new RoundedBorder(radio));
+        this.botonEntregasActivas.setOpaque(false);
+        //this.jBEntregasActivas.setBorderPainted(true);
+        this.jButton1.setBorder(new RoundedBorder(radio));
+        this.jButton1.setOpaque(false);
+        //this.jButton1.setBorderPainted(true);
+        this.botonFichas.setBorder(new RoundedBorder(radio));
+        this.botonFichas.setOpaque(false);
+        this.botonFichas.setContentAreaFilled(false);
+        //this.jButton6.setBorderPainted(true);
+        this.botonListaVehiculos.setBorder(new RoundedBorder(radio));
+        this.botonListaVehiculos.setOpaque(false);
+        //this.jButton7.setBorderPainted(true);
+        this.botonMantenimiento.setBorder(new RoundedBorder(radio));
+        this.botonMantenimiento.setOpaque(false);
+        //this.jButton8.setBorderPainted(true);
+    }
+    private void configurarTransparencia(){
+        
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (bandera ==false){
         panEntregas.setVisible(true);
@@ -311,8 +453,35 @@ public class Logistico_GUI extends javax.swing.JFrame {
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVolverActionPerformed
+    //BOTONES REDONDEADOS
+    private static class RoundedBorder implements Border {
 
-    private void jBMapaDisponibilidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMapaDisponibilidadActionPerformed
+    private int radius;
+
+
+    RoundedBorder(int radius) {
+        this.radius = radius;
+    }
+
+
+    @Override
+    public Insets getBorderInsets(Component c) {
+        return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);
+    }
+
+
+    @Override
+    public boolean isBorderOpaque() {
+        return true;
+    }
+
+
+    @Override
+    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+        g.drawRoundRect(x, y, width-1, height-1, radius, radius);
+    }
+}
+    private void botonControlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonControlActionPerformed
         //Llamamos al panel Mapa Disponibilidad
         entregasActivas.setVisible(false);
         mapaDisponibilidad.setVisible(true);
@@ -321,17 +490,17 @@ public class Logistico_GUI extends javax.swing.JFrame {
         jPEntregasActivasGUI.revalidate();
         jPEntregasActivasGUI.repaint();
         
-    }//GEN-LAST:event_jBMapaDisponibilidadActionPerformed
+    }//GEN-LAST:event_botonControlActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehiculosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnVehiculosActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnMantenimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMantenimientosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnMantenimientosActionPerformed
 
-    private void jBEntregasActivasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEntregasActivasActionPerformed
+    private void botonEntregasActivasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEntregasActivasActionPerformed
         //Llamamos al panel EntregasActivas
         mapaDisponibilidad.setVisible(false);
         entregasActivas.setVisible(true);
@@ -343,7 +512,68 @@ public class Logistico_GUI extends javax.swing.JFrame {
         
         
         
-    }//GEN-LAST:event_jBEntregasActivasActionPerformed
+    }//GEN-LAST:event_botonEntregasActivasActionPerformed
+
+    private void moveMouseOnVolver(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moveMouseOnVolver
+        
+        Color c = new Color(255, 210, 28);
+        this.btnVolver.setForeground(c);
+    }//GEN-LAST:event_moveMouseOnVolver
+
+    private void exitMouseOnVolver(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseOnVolver
+        Color c = new Color(255, 255,255);
+        this.btnVolver.setForeground(c);
+    }//GEN-LAST:event_exitMouseOnVolver
+
+    private void moveMouseOnMantenimiento(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moveMouseOnMantenimiento
+        Color c = new Color(255, 210, 28);
+        this.botonMantenimiento.setForeground(c);
+    }//GEN-LAST:event_moveMouseOnMantenimiento
+
+    private void exitMouseOnMantenimiento(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseOnMantenimiento
+        Color c = new Color(255, 255,255);
+        this.botonMantenimiento.setForeground(c);
+    }//GEN-LAST:event_exitMouseOnMantenimiento
+
+    private void moveMouseOnListaV(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moveMouseOnListaV
+        Color c = new Color(255, 210, 28);
+        this.botonListaVehiculos.setForeground(c);
+    }//GEN-LAST:event_moveMouseOnListaV
+
+    private void exitMouseOnListaV(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseOnListaV
+        Color c = new Color(255, 255,255);
+        this.botonListaVehiculos.setForeground(c);
+    }//GEN-LAST:event_exitMouseOnListaV
+
+    private void botonEntregasActivasMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEntregasActivasMouseMoved
+        Color c = new Color(255, 210, 28);
+        this.botonEntregasActivas.setForeground(c);
+    }//GEN-LAST:event_botonEntregasActivasMouseMoved
+
+    private void botonEntregasActivasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEntregasActivasMouseExited
+        Color c = new Color(255, 255,255);
+        this.botonEntregasActivas.setForeground(c);
+    }//GEN-LAST:event_botonEntregasActivasMouseExited
+
+    private void botonRegistroEntregasMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRegistroEntregasMouseMoved
+        Color c = new Color(255, 210, 28);
+        this.botonRegistroEntregas.setForeground(c);
+    }//GEN-LAST:event_botonRegistroEntregasMouseMoved
+
+    private void botonRegistroEntregasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRegistroEntregasMouseExited
+        Color c = new Color(255, 255,255);
+        this.botonRegistroEntregas.setForeground(c);
+    }//GEN-LAST:event_botonRegistroEntregasMouseExited
+
+    private void botonControlMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonControlMouseMoved
+        Color c = new Color(255, 210, 28);
+        this.botonControl.setForeground(c);
+    }//GEN-LAST:event_botonControlMouseMoved
+
+    private void botonControlMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonControlMouseExited
+        Color c = new Color(255, 255,255);
+        this.botonControl.setForeground(c);
+    }//GEN-LAST:event_botonControlMouseExited
 
     /**
      * @param args the command line arguments
@@ -382,23 +612,24 @@ public class Logistico_GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonControl;
+    private javax.swing.JButton botonEntregasActivas;
+    private javax.swing.JButton botonFichas;
+    private javax.swing.JButton botonListaVehiculos;
+    private javax.swing.JButton botonMantenimiento;
+    private javax.swing.JButton botonRegistroEntregas;
+    private javax.swing.JButton btnMantenimientos;
+    private javax.swing.JButton btnVehiculos;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JButton jBEntregasActivas;
-    private javax.swing.JButton jBMapaDisponibilidad;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPEntregasActivasGUI;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel panEntregas;
+    private javax.swing.JPanel panEntregas1;
+    private javax.swing.JPanel panEntregas2;
     // End of variables declaration//GEN-END:variables
 }
