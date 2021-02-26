@@ -6,6 +6,7 @@
 package com.epn.trappi.models.logistico;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -45,12 +46,12 @@ public class ControlDisponibilidad {
         de entregas activas para poder ver las rutas que sigue cada vehiculo con una entrega en proceso.
         */
         Entrega entrega = null;
-        entrega.actualizarEstado(vehiculo,conductor,destino);
+        entrega.actualizarEstado(vehiculo,conductor);
         /*
         Después de haber añadido este registro, vamos a llamar a un método que correra en segundo plano
         simulando asi el tiempo que tarde en llegar el vehiculo a su destino. 
         */
-        simularMovimiento(60);
+        simularMovimiento(10);
         /*
         Finalmente, dado que ya se simuló el tiempo que tardó el conductor en llegar a su destino,
         se asume que el producto se entrego exitosamente y se procede a registrar esta entrega
@@ -61,11 +62,13 @@ public class ControlDisponibilidad {
         
         
     }
-    public void simularMovimiento(int tiempo){
-        /*
-        Este metodo sirve para detener un momento el proceso de entrega con el objetivo de simular la entrega
-        fisica del producto.
-        */
+    public void simularMovimiento(int segundos){
+        try{
+            Thread.sleep(segundos*1000);//ms
+        } catch (InterruptedException e){
+            Thread.currentThread().interrupt();
+            JOptionPane.showMessageDialog(null,"Error de concurrencia");
+        }
     }
-    
+
 }

@@ -25,11 +25,11 @@ public class Entrega {
         this.destino = destino;
     }
     
-    public void actualizarEstado(Vehiculo vehiculo,Conductor conductor,Posicion destino){
+    public void actualizarEstado(Vehiculo vehiculo,Conductor conductor){
         /*
-        utiliza los datos de parametros para crear un registro de entrega activa tal y como ya lo hemos
-        hecho en el panel de rutas, con la diferencia de que ahora se añade a una tabla en la base de datos
-        que contiene las entregas activas.
+        En este método se actualiza el estado de la entrega ya creada, practicamente se 
+        cambia a estado "finalizada". Adicionalmente, se cambia el estado del empleado conductor y 
+        del vehiculo a disponible.
         */
     }
     
@@ -43,15 +43,7 @@ public class Entrega {
     
     public void RegistrarEntrega(Vehiculo vehiculo,Conductor conductor){
         /*
-        En este bloque se asume que se utiliza los datos recibidos y junto a los atributos de esta clase
-        como lo es la direccion de destino. Para crear un registro en la base de datos con la entrega
-        que se realizó.
-        */
-        /*
-        En este bloque se elimina el registro de entrega activa de la base de datos.
-        */
-        /*
-        En este bloque se cambia el estado del conductor y el vehiculo a disponible otra vez.
+        En este bloque se registra la entrega en la base de datos, y luego se ejecuta el metodo simulacion movimiento.
         */
     }
     
