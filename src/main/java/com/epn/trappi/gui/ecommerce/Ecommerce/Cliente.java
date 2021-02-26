@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.epn.trappi.gui.ecommerce.Ecommerce;
+package Ecommerce;
 
-import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import FormulariosCliente.FEdicionCliente;
 import FormulariosCliente.FRegistroCliente;
 import FormulariosTarjetas.FEdicionTarjeta;
@@ -151,6 +150,8 @@ public class Cliente {
             
 
         }
+    
+  
     
     /////////Asociacion Con Carrito////////////////
 

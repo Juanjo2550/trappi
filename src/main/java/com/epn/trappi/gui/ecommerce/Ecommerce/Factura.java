@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.epn.trappi.gui.ecommerce.Ecommerce;
+package Ecommerce;
 
 
 import java.util.ArrayList;
@@ -63,15 +63,10 @@ public ArrayList<Articulo> mostrar(){
     ArrayList mostrarDetalle = this.Detalle;
     Double valor = calcularTotal();
     //Metodo de validacion de tarjeta da true, continuo con arrancar
-    pago = new Pago(valor);
+
 
     return mostrarDetalle;
 }
 
-public void finalizar()
-{
-    Double valor = calcularTotal();
-    conexion=new Conexion(this.nombreCliente,valor,this.nFactura,this.Detalle);
-}
    
 }

@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.epn.trappi.gui.ecommerce.Ecommerce;
+package Ecommerce;
 
 import Tarjetas.Tarjeta;
+import Tarjetas.TarjetaCredito;
+import Tarjetas.TarjetaDebito;
 
 
 /**
@@ -13,22 +15,30 @@ import Tarjetas.Tarjeta;
  * @author Bryan
  */
 class Pago {
-    Double valorAPagar;
-    String fecha;
+    TarjetaCredito tarjetacredito = new TarjetaCredito();
+    TarjetaDebito tarjetadebito = new TarjetaDebito();
     
-    public Pago(Double valorPorPagar){
-        this.valorAPagar=valorPorPagar;
-    }
 
-    public boolean validarPago(Tarjeta tarjeta){
-        Double saldo=500000.00;
+
+    public boolean validarPago(String tipo,Double valor){
         boolean bandera=false;
-        if(this.valorAPagar<=saldo)
+        if(tarjetacredito.Tipo.equals(tipo))
         {
-            bandera=true;
-            
+            if(tarjetacredito.validarFondos(valor))
+            {
+                tarjetacredito.realizarPago(valor);
+                bandera=true;
+            }
         }
-       return bandera;
+        else
+        {
+            if(tarjetadebito.validarFondos(valor))
+            {
+                tarjetadebito.realizarPago(valor);
+                bandera=true;
+            }
+        }
+        return bandera; 
     }
     
 }

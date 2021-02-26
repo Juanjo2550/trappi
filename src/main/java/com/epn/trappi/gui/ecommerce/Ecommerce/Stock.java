@@ -1,5 +1,5 @@
 
-package com.epn.trappi.gui.ecommerce.Ecommerce;
+package Ecommerce;
 
 import java.util.ArrayList;
 
