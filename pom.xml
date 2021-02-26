@@ -25,9 +25,9 @@
             <version>RELEASE120</version>
         </dependency>
         <dependency>
-            <groupId>org.xerial</groupId>
-            <artifactId>sqlite-jdbc</artifactId>
-            <version>3.34.0</version>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>9.2.0.jre11</version>
         </dependency>
         <dependency>
             <groupId>jfree</groupId>
