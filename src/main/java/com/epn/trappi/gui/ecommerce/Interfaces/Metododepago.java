@@ -1,7 +1,7 @@
 
-package Interfaces;
+package com.epn.trappi.gui.ecommerce.Interfaces;
 
-import Ecommerce.Main;
+import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import Tarjetas.Tarjeta;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;

@@ -1,8 +1,11 @@
 
-package Ecommerce;
+package com.epn.trappi.gui.ecommerce.Ecommerce;
 
+import com.epn.trappi.gui.ecommerce.Ecommerce.Articulo;
+import com.epn.trappi.gui.ecommerce.Ecommerce.Cliente;
+import com.epn.trappi.gui.ecommerce.Ecommerce.Stock;
 import FormulariosCliente.FRegistroCliente;
-import Interfaces.Login;
+import com.epn.trappi.gui.ecommerce.Interfaces.Login;
 import FormulariosTarjetas.FRegistroTarjeta;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;

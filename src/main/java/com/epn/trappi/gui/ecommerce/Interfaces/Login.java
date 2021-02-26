@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interfaces;
+package com.epn.trappi.gui.ecommerce.Interfaces;
 
-import Ecommerce.Main;
+import Interfaces.TextPrompt;
+import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import javax.swing.JOptionPane;
 
 /**

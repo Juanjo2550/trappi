@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FacturaMostrar;
+package com.epn.trappi.gui.ecommerce.FacturaMostrar;
 
-import Ecommerce.Articulo;
-import Ecommerce.Main;
+import com.epn.trappi.gui.ecommerce.Ecommerce.Articulo;
+import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 

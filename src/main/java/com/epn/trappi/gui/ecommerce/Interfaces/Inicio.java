@@ -1,6 +1,6 @@
 
-package Interfaces;
-import Ecommerce.Main;
+package com.epn.trappi.gui.ecommerce.Interfaces;
+import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 
 public class Inicio extends javax.swing.JFrame {
 
