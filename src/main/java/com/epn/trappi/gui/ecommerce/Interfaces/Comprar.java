@@ -1,14 +1,12 @@
 
 package com.epn.trappi.gui.ecommerce.Interfaces;
 
-import Interfaces.TextPrompt;
+import com.epn.trappi.gui.ecommerce.Diseño.TextPrompt;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Articulo;
 import com.epn.trappi.gui.ecommerce.Ecommerce.CarritoDeCompras;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.FacturaMostrar.FacturaFis;
-import Tarjetas.Tarjeta;
 import java.util.ArrayList;
-import java.util.Vector;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.YES_OPTION;
 import javax.swing.table.DefaultTableModel;
@@ -342,7 +340,7 @@ public class Comprar extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    Cuenta cuenta=new Cuenta();
+    CuentaCliente cuenta=new CuentaCliente();
     cuenta.setVisible(true);
     this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -400,7 +398,7 @@ public class Comprar extends javax.swing.JFrame {
                 +"\nImpuestos: "+carrito.factura.calcularImpuestos()
                 +"\nTotal: "+carrito.factura.calcularTotal()+"\nProductos: "+salida);*/
           if(JOptionPane.showConfirmDialog(null, "¿Desea pagar?","El proceso de pago empezará",JOptionPane.YES_NO_OPTION)==YES_OPTION){
-              carrito.factura.finalizar();
+          
               carrito.factura.conexion.enviarAfinanzas();
               carrito.vaciarCarrito();
                 DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();

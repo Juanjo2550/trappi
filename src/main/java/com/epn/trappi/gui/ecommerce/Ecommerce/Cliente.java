@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Ecommerce;
+package com.epn.trappi.gui.ecommerce.Ecommerce;
 
-import FormulariosCliente.FEdicionCliente;
-import FormulariosCliente.FRegistroCliente;
-import FormulariosTarjetas.FEdicionTarjeta;
-import FormulariosTarjetas.FRegistroTarjeta;
-import Tarjetas.Tarjeta;
-import Tarjetas.TarjetaCredito;
-import Tarjetas.TarjetaDebito;
+import com.epn.trappi.gui.ecommerce.FormulariosCliente.FEdicionCliente;
+import com.epn.trappi.gui.ecommerce.FormulariosCliente.FRegistroCliente;
+import com.epn.trappi.gui.ecommerce.FormulariosTarjetas.FEdicionTarjeta;
+import com.epn.trappi.gui.ecommerce.FormulariosTarjetas.FRegistroTarjeta;
+import com.epn.trappi.gui.ecommerce.Tarjetas.Tarjeta;
+import com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaCredito;
+import com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaDebito;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.YES_OPTION;

@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tarjetas;
+package com.epn.trappi.gui.ecommerce.Tarjetas;
+
+import com.epn.trappi.gui.ecommerce.entidadBancaria.Cuenta;
 
 
 
@@ -17,24 +19,30 @@ public class TarjetaDebito implements Tarjeta{
     public String NumeroTarjeta;
     public String CVV;
     public String Fechacaducidad;
+    Cuenta cuenta= new Cuenta();
     
     @Override
-    public boolean realizarPago() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean validarFondos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mostrar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void realizarPago(Double valor) {
+       if(validarFondos(valor)==true)
+       {
+         cuenta.debitar(valor);  
+       }
+        
     }
     
     @Override
-    public String[] mostrar1() {
+    public boolean validarFondos(Double valor) {
+        boolean bandera=false;
+        if(valor<=cuenta.fondo)
+        {
+            bandera=true;
+        }
+        return bandera;
+    }
+
+
+    @Override
+    public String[] mostrar() {
      String[] datos=new String[4];
      datos[0]=NumeroTarjeta;
      datos[1]=CVV;
@@ -42,5 +50,8 @@ public class TarjetaDebito implements Tarjeta{
      datos[3]=Fechacaducidad;
      return datos;
     }
+
+    
+  
     
 }

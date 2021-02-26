@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Ecommerce;
+package com.epn.trappi.gui.ecommerce.Ecommerce;
 
 
 import java.util.ArrayList;

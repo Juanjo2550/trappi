@@ -1,9 +1,9 @@
 
-package Ecommerce;
+package com.epn.trappi.gui.ecommerce.Ecommerce;
 
-import FormulariosCliente.FRegistroCliente;
-import Interfaces.Login;
-import FormulariosTarjetas.FRegistroTarjeta;
+import com.epn.trappi.gui.ecommerce.FormulariosCliente.FRegistroCliente;
+import com.epn.trappi.gui.ecommerce.Interfaces.Login;
+import com.epn.trappi.gui.ecommerce.FormulariosTarjetas.FRegistroTarjeta;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 

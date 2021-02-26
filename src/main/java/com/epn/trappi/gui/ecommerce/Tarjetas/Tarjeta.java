@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tarjetas;
+package com.epn.trappi.gui.ecommerce.Tarjetas;
 
 /**
  *
@@ -12,9 +12,9 @@ package Tarjetas;
 public interface Tarjeta {
     
     
-    public boolean realizarPago();
-    public boolean validarFondos();
-    public void mostrar();
-    public String[] mostrar1();
+    public void realizarPago(Double valor);
+    public boolean validarFondos(Double valor);
+
+    public String[] mostrar();
     
 }

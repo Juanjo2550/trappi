@@ -5,7 +5,7 @@
  */
 package com.epn.trappi.gui.ecommerce.Interfaces;
 
-import Interfaces.TextPrompt;
+import com.epn.trappi.gui.ecommerce.Diseño.TextPrompt;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import javax.swing.JOptionPane;
 

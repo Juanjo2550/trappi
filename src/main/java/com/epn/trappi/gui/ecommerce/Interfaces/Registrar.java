@@ -2,9 +2,8 @@
 package com.epn.trappi.gui.ecommerce.Interfaces;
 
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
-import FormulariosCliente.FRegistroCliente;
-import Interfaces.TextPrompt;
-import javax.swing.JOptionPane;
+import com.epn.trappi.gui.ecommerce.FormulariosCliente.FRegistroCliente;
+import com.epn.trappi.gui.ecommerce.Diseño.TextPrompt;
 
 public class Registrar extends javax.swing.JFrame {
 

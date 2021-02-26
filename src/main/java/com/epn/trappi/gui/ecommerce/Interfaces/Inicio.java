@@ -167,7 +167,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-    Cuenta cuenta=new Cuenta();
+    CuentaCliente cuenta=new CuentaCliente();
     cuenta.setVisible(true);
     this.setVisible(false);
     }//GEN-LAST:event_jButton1MouseClicked

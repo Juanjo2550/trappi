@@ -1,8 +1,8 @@
 
 package com.epn.trappi.gui.ecommerce.Interfaces;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
-import FormulariosTarjetas.FRegistroTarjeta;
-import Interfaces.TextPrompt;
+import com.epn.trappi.gui.ecommerce.FormulariosTarjetas.FRegistroTarjeta;
+import com.epn.trappi.gui.ecommerce.Diseño.TextPrompt;
 import javax.swing.JOptionPane;
 
 public class RegistrarMetododepago extends javax.swing.JFrame {
@@ -227,7 +227,7 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    Cuenta cuenta=new Cuenta();
+    CuentaCliente cuenta=new CuentaCliente();
     cuenta.setVisible(true);
     this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed

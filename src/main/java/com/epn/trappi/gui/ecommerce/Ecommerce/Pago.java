@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Ecommerce;
+package com.epn.trappi.gui.ecommerce.Ecommerce;
 
-import Tarjetas.Tarjeta;
-import Tarjetas.TarjetaCredito;
-import Tarjetas.TarjetaDebito;
+import com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaCredito;
+import com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaDebito;
 
 
 /**

@@ -2,13 +2,13 @@
 package com.epn.trappi.gui.ecommerce.Interfaces;
 
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
-import FormulariosCliente.FEdicionCliente;
+import com.epn.trappi.gui.ecommerce.FormulariosCliente.FEdicionCliente;
 import javax.swing.JOptionPane;
 
-public class Cuenta extends javax.swing.JFrame {
+public class CuentaCliente extends javax.swing.JFrame {
 
     
-    public Cuenta() {
+    public CuentaCliente() {
         initComponents();
         this.setSize(1300, 700);
         jButtonaceptarcambios.setVisible(false);
@@ -340,21 +340,23 @@ public class Cuenta extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Cuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CuentaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Cuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CuentaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Cuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CuentaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Cuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CuentaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Cuenta().setVisible(true);
+                new CuentaCliente().setVisible(true);
             }
         });
     }

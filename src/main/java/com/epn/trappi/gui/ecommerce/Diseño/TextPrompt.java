@@ -1,4 +1,4 @@
-package Interfaces;
+package com.epn.trappi.gui.ecommerce.Diseño;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

@@ -2,13 +2,12 @@
 package com.epn.trappi.gui.ecommerce.Interfaces;
 
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
-import Tarjetas.Tarjeta;
+import com.epn.trappi.gui.ecommerce.Tarjetas.Tarjeta;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import FormulariosTarjetas.FEdicionTarjeta;
-import FormulariosTarjetas.FRegistroTarjeta;
-import Tarjetas.TarjetaCredito;
-import Tarjetas.TarjetaDebito;
+import com.epn.trappi.gui.ecommerce.FormulariosTarjetas.FEdicionTarjeta;
+import com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaCredito;
+import com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaDebito;
 
 public class Metododepago extends javax.swing.JFrame {
 
@@ -30,7 +29,6 @@ public class Metododepago extends javax.swing.JFrame {
     String[] aux=new String[4];
         for (int i = 0; i < Main.cliente.tarjeta.size(); i++) {
        tarjeta=Main.cliente.tarjeta.get(i);
-       aux=tarjeta.mostrar1();
        tarjetas.addRow(aux);
         }
         tablatarjetas.setModel(tarjetas);
@@ -50,17 +48,10 @@ public class Metododepago extends javax.swing.JFrame {
     }
     
     public Tarjeta obtenertarjeta(){
-        Tarjetas.TarjetaCredito tar=null;
-        Tarjetas.TarjetaDebito tar1=null;
+        com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaCredito tar=null;
+        com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaDebito tar1=null;
     for (int i = 0; i < Main.cliente.tarjeta.size(); i++) {
-       if(jTextFieldtarjeta.equals(Main.cliente.tarjeta.get(i).mostrar1()[0])){
-       if((Main.cliente.tarjeta.get(i).mostrar1()[2]).equals("Credito")){
-       tar=(TarjetaCredito) Main.cliente.tarjeta.get(i);
-       }
-       else{
-       tar1=(TarjetaDebito) Main.cliente.tarjeta.get(i);
-       }
-       }
+      
         }
     return tar;
     }
@@ -322,7 +313,7 @@ public class Metododepago extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    Cuenta cuenta=new Cuenta();
+    CuentaCliente cuenta=new CuentaCliente();
     cuenta.setVisible(true);
     this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
