@@ -1,7 +1,8 @@
 
-package Interfaces;
-import Ecommerce.Main;
+package com.epn.trappi.gui.ecommerce.Interfaces;
+import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import FormulariosTarjetas.FRegistroTarjeta;
+import Interfaces.TextPrompt;
 import javax.swing.JOptionPane;
 
 public class RegistrarMetododepago extends javax.swing.JFrame {

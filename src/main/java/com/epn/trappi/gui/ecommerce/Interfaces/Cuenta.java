@@ -1,7 +1,7 @@
 
-package Interfaces;
+package com.epn.trappi.gui.ecommerce.Interfaces;
 
-import Ecommerce.Main;
+import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import FormulariosCliente.FEdicionCliente;
 import javax.swing.JOptionPane;
 

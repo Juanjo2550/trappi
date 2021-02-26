@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Ecommerce;
+package com.epn.trappi.gui.ecommerce.Ecommerce;
 
+import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import FormulariosCliente.FEdicionCliente;
 import FormulariosCliente.FRegistroCliente;
 import FormulariosTarjetas.FEdicionTarjeta;

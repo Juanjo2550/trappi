@@ -1,11 +1,11 @@
 
-package Interfaces;
+package com.epn.trappi.gui.ecommerce.Interfaces;
 
-import Ecommerce.Articulo;
-import Ecommerce.CarritoDeCompras;
-import Ecommerce.Factura;
-import Ecommerce.Main;
-import FacturaMostrar.FacturaFis;
+import Interfaces.TextPrompt;
+import com.epn.trappi.gui.ecommerce.Ecommerce.Articulo;
+import com.epn.trappi.gui.ecommerce.Ecommerce.CarritoDeCompras;
+import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
+import com.epn.trappi.gui.ecommerce.FacturaMostrar.FacturaFis;
 import Tarjetas.Tarjeta;
 import java.util.ArrayList;
 import java.util.Vector;
