@@ -492,7 +492,7 @@ public class Logistico_GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVolverActionPerformed
     //BOTONES REDONDEADOS
-    private static class RoundedBorder implements Border {
+    public static class RoundedBorder implements Border {
 
     private int radius;
 
