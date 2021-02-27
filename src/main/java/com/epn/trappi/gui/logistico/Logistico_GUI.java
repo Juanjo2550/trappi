@@ -678,9 +678,6 @@ public class Logistico_GUI extends javax.swing.JFrame {
         listasVehiculos.setVisible(panel.getClass().equals(listasVehiculos.getClass()));
         registroMantenimiento.setVisible(panel.getClass().equals(registroMantenimiento.getClass()));
     }
-    private void pasoPorReferencia(){
-     
-    }
     /**
      * @param args the command line arguments
      */

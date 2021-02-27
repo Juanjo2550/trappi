@@ -5,6 +5,8 @@
  */
 package com.epn.trappi.gui.logistico;
 
+import java.awt.Color;
+
 /**
  *
  * @author Alexander
@@ -261,7 +263,7 @@ public class RegistroEntregas extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTEntregasDatos);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(61, 57, 57), 2, true));
         jPanel2.setForeground(new java.awt.Color(61, 57, 57));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -325,6 +327,16 @@ public class RegistroEntregas extends javax.swing.JPanel {
         btnBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 15)); // NOI18N
         btnBuscar.setForeground(new java.awt.Color(61, 57, 57));
         btnBuscar.setText("Buscar");
+        btnBuscar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnBuscarMouseMoved(evt);
+            }
+        });
+        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBuscarMouseExited(evt);
+            }
+        });
         jPanel2.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 50, 100, 30));
 
         jButton4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
@@ -376,6 +388,17 @@ public class RegistroEntregas extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnBuscarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseMoved
+        Color c = new Color(255, 210, 28);
+        this.btnBuscar.setForeground(c);
+        
+    }//GEN-LAST:event_btnBuscarMouseMoved
+
+    private void btnBuscarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseExited
+        Color c = new Color(61,57,57);
+        this.btnBuscar.setForeground(c);
+    }//GEN-LAST:event_btnBuscarMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
