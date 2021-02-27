@@ -11,8 +11,8 @@ public class Presupuesto {
 
     
     public double calcularPresupuesto(){
-        double ingresosTotal=libroDiario.obtenerTotalIngresos();
-        double pagoTotal=libroDiario.obtenerTotalPagos();
+        double ingresosTotal=libroDiario.calcularTotalIngresos();
+        double pagoTotal=libroDiario.calcularTotalPagos();
         return ingresosTotal-pagoTotal;
     }
 }

@@ -72,6 +72,19 @@ public class Analizador {
         }
         
     }
+    
+    public ArrayList<Ingreso> buscarIngresosPorFecha(int dia, int mes, int anio){
+        ArrayList<Ingreso> ingresosPorFecha = new ArrayList<Ingreso>();
+        this.librodiario.ingresosRegistrados = this.librodiario.obtenerIngresosRegistrados();
+        for(Ingreso ingreso : this.librodiario.ingresosRegistrados){
+            if(ingreso.fechaIngreso.devolverDia()==dia && ingreso.fechaIngreso.devolverMes()==mes && ingreso.fechaIngreso.devolverAnio()==anio){
+                ingresosPorFecha.add(ingreso);
+            }
+        }
+        
+      return ingresosPorFecha;
+    }
+    
 
     
 }
