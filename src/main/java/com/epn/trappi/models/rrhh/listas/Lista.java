@@ -1,8 +1,8 @@
 package com.epn.trappi.models.rrhh.listas;
 
-public interface Lista {
-    public Lista agregar();
+public interface Lista <T> {
+    public void agregar(T newObject);
     public Boolean eliminar();
-    public Lista buscarUno();
-    public Lista[] obtenerTodos();
+    public T buscarUno();
+    public T[] obtenerTodos();
 }
