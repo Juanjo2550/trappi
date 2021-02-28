@@ -11,22 +11,21 @@ import com.epn.trappi.models.rrhh.Fecha;
  *
  * @author stali
  */
-public class Vacacion implements Permiso{
+public class Otros_Permisos implements Permiso {
 
-    
-    public Vacacion() {
+    public Otros_Permisos() {
     }
-        public double proporcional;
-    public Fecha fechaActual;
+ public double proporcional;
+    public  Fecha fechaInicio;
        public int numeroDias;
-     public Fecha inicioAtividades;
-    
+     public Fecha fechaFin;
     @Override
     public void Calcular_Afectacion_Sueldo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
- 
+   
+
     @Override
     public int Calcular_Numero_Dias_Permiso(String tipo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
