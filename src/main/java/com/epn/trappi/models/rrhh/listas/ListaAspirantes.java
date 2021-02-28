@@ -1,5 +1,6 @@
 package com.epn.trappi.models.rrhh.listas;
 
+import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.models.rrhh.contratacion.PruebaAdmision;
 import com.epn.trappi.models.rrhh.contratacion.Aspirante;
 import com.epn.trappi.db.rrhh.Connect;
@@ -12,31 +13,31 @@ import java.util.ArrayList;
  *
  * @author Javier Erazo
  */
-public class ListaAspirantes {
-    ArrayList <Aspirante> listaAspirantes;
+public class ListaAspirantes implements Lista <Aspirante> {
+    //ArrayList <Aspirante> listaAspirantes;
     PreparedStatement pstm = null;
     ResultSet rs = null;
-    Connection conn = Connect.connect("javiere.db");
+    //Connection conn = Connect.connect("javiere.db");
+    DataBaseConnection dbInstance = DataBaseConnection.getInstance();
+    Connection conn = dbInstance.getConnection();
     public ListaAspirantes() {
-        this.listaAspirantes = new ArrayList<>();
+       // this.listaAspirantes = new ArrayList<>();
     }
     
-    public Aspirante agregar(String nombre, String apellidos, String cedula, String telefono, String cargo, int puntaje, String actitudes, String aptitudes){
-        Aspirante aspNuevo = new Aspirante(nombre, apellidos, cedula, telefono, cargo, puntaje, actitudes, aptitudes);
+    public void agregar(String nombre, String apellidos, String cedula, String telefono, String cargo){
+        //Aspirante aspNuevo = new Aspirante(nombre, apellidos, cedula, telefono, cargo);
+        int idAsp = obtenerTodos().size() + 1;
         try {            
-            String query = "INSERT INTO aspirante_prueba (nombre, apellido, telefono, cedula, actitudes, aptitudes, puntaje, cargo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO aspirante_prueba ( nombre, apellido, telefono, cedula) VALUES (?, ?, ?, ?, ?)";
             pstm = conn.prepareStatement(query);
-            pstm.setString(1, aspNuevo.getNombre());
-            pstm.setString(2, aspNuevo.getApellidos());
-            pstm.setString(3, aspNuevo.getTelefono());
-            pstm.setString(4, aspNuevo.getCedula());
-            pstm.setString(5, aspNuevo.getPrueba().getActitudes());
-            pstm.setString(6, aspNuevo.getPrueba().getAptitudes());
-            pstm.setInt(7, aspNuevo.getPrueba().getPuntaje());
-            pstm.setString(8, aspNuevo.getCargoAspirante());
+            pstm.setInt(1, idAsp);
+            pstm.setString(2, nombre);
+            pstm.setString(3, apellidos);
+            pstm.setString(4, cedula);
+            pstm.setString(5, telefono);
+            pstm.setString(6, cargo);
             pstm.executeUpdate();
-            pstm.close();
-            conn.close();
+            
         } catch (Exception e) {
             System.out.println("Error en insercion de Aspirante: " + e);
         }
@@ -49,38 +50,34 @@ public class ListaAspirantes {
                 System.out.println("Error al cerrar rs y pstm: " + e);
             }
         }
-        listaAspirantes.add(aspNuevo);
-        return aspNuevo;
+        //listaAspirantes.add(aspNuevo);
+       // return aspNuevo;
         
     }
 
-    public ArrayList<Aspirante> getListaAspirantes() {
-        return listaAspirantes;
-    }
+//    public ArrayList<Aspirante> getListaAspirantes() {
+//        return listaAspirantes;
+//    }
     
     
-    //selectAll accede a la base de datos para obtenere toda la info del Aspirante
-    public ArrayList selectAll(){
+    //obtener Todos accede a la base de datos para obtenere toda la info del Aspirante
+    @Override
+    public Aspirante[] obtenerTodos(){
         
         
-        ListaAspirantes listaTemp = new ListaAspirantes();
+       // ListaAspirantes listaTemp = new ListaAspirantes();
+       //this.listaAspirantes.clear();
         try {
-            Connection conn = Connect.connect("javiere.db");
-            String query = "SELECT * FROM aspirante_prueba";
+            //Connection conn = Connect.connect("javiere.db");
+            String query = "SELECT * FROM ASPIRANTE";
             pstm = conn.prepareStatement(query);
             rs = pstm.executeQuery();
             
             while(rs.next()){
-                
-                PruebaAdmision prueba = new PruebaAdmision(rs.getInt("puntaje"), rs.getString("aptitudes"), rs.getString("actitudes"));
-                Aspirante aspirante = new Aspirante(rs.getString("nombre"),rs.getString("apellido"),rs.getString("cedula"),
-                rs.getString("telefono"), rs.getString("cargo"),prueba.getPuntaje(), prueba.getActitudes(), prueba.getAptitudes());
-                this.listaAspirantes.add(aspirante);
-                
-                
+               listaAspirantes.add(new Aspirante(rs.getString("nombre"),rs.getString("apellido"),rs.getString("cedula"),
+                rs.getString("telefono"), rs.getString("cargo")));
             }
-            pstm.close();
-            conn.close();
+            
         } catch (Exception e) {
             System.out.println("Error en consulta de Aspirantes: " + e);
         }
@@ -95,6 +92,22 @@ public class ListaAspirantes {
         }
         return this.listaAspirantes;
     }
-    
+
+    @Override
+    public void agregar(Aspirante newObject) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Boolean eliminar(String parametro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Aspirante buscarUno(String parametro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
     
 }

@@ -15,16 +15,13 @@ public class Contratacion {
     private String estado;
     
     public void registrarEmpleado(String nombre, String apellido, String cedula, String cargo, String depto, String numCuenta, String banco, String valorSueldo, char sexo){
-<<<<<<< Updated upstream:src/main/java/com/epn/trappi/models/rrhh/contratacion/Contratacion.java
         String estado = "activo";
         Sueldo sueldo = new Sueldo(Double.parseDouble(valorSueldo), 0.0);
         ListaEmpleados emps = new ListaEmpleados();
         //Cambio a clase abstracta
        // Empleado nuevoEmpleado = new Empleado(nombre, apellido, cedula, cargo, depto, numCuenta, banco, sueldo, estado, sexo);
         //emps.agregar(nuevoEmpleado, sueldo);
-        
-=======
->>>>>>> Stashed changes:src/main/java/com/epn/trappi/models/rrhh/Contratacion.java
+
     }
     
     public void validarRequisitos(){

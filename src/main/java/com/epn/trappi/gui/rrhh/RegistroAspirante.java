@@ -10,15 +10,7 @@ import com.epn.trappi.*;
 import com.epn.trappi.db.rrhh.Connect;
 import com.epn.trappi.models.rrhh.contratacion.Aspirante;
 import com.epn.trappi.models.rrhh.listas.ListaAspirantes;
-import com.epn.trappi.models.rrhh.contratacion.PruebaAdmision;
-import com.epn.trappi.models.rrhh.RRHH;
-import java.awt.Color;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -31,7 +23,7 @@ public class RegistroAspirante extends javax.swing.JFrame {
     
     private void listarAspirantes(){
         ListaAspirantes listaAspirantes = new ListaAspirantes();
-        ArrayList<Aspirante> aspirantes = listaAspirantes.selectAll();
+        ArrayList<Aspirante> aspirantes = listaAspirantes.obtenerTodos();
         DefaultTableModel model = (DefaultTableModel) jTableAspirantes.getModel();
         model.setRowCount(0);
         
@@ -42,9 +34,6 @@ public class RegistroAspirante extends javax.swing.JFrame {
             v.add(asp.getTelefono());
             v.add(asp.getCedula());
             v.add(asp.getCargoAspirante());
-            v.add(asp.getPrueba().getAptitudes());
-            v.add(asp.getPrueba().getActitudes());
-            v.add(asp.getPrueba().getPuntaje());
             model.addRow(v);
             jTableAspirantes.setModel(model);
         }
@@ -437,14 +426,11 @@ public class RegistroAspirante extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButGuardarAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButGuardarAspiranteActionPerformed
-      //  PruebaAdmision prueba = new PruebaAdmision(Integer.parseInt(jTextPuntajeAspirante.getText()), jTextActitudesAspirante.getText(),
-        //        jTextAptitudesAspirante.getText());
-       // Aspirante aspirante = new Aspirante(jTextNombreAspirante.getText(), jTextApellidoAspirante.getText(), jTextCedulaAspirante.getText(),
-              //  jTextTelefonoAspirante.getText(), jTextCargoAspirante.getText(), prueba);
+      
         ListaAspirantes listaAspirantes = new ListaAspirantes();
-        listaAspirantes.agregar(jTextNombreAspirante.getText(), jTextApellidoAspirante.getText(), jTextCedulaAspirante.getText(),
-                jTextTelefonoAspirante.getText(), jTextCargoAspirante.getText(),Integer.parseInt(jTextPuntajeAspirante.getText()), jTextActitudesAspirante.getText(),
-                jTextAptitudesAspirante.getText());
+//        listaAspirantes.agregar(jTextNombreAspirante.getText(), jTextApellidoAspirante.getText(), jTextCedulaAspirante.getText(),
+//                jTextTelefonoAspirante.getText(), jTextCargoAspirante.getText(),Integer.parseInt(jTextPuntajeAspirante.getText()), jTextActitudesAspirante.getText(),
+//                jTextAptitudesAspirante.getText());
         listarAspirantes();
         JOptionPane.showMessageDialog(null, "Aspirante registrado con éxito");
     }//GEN-LAST:event_jButGuardarAspiranteActionPerformed

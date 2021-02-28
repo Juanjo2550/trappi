@@ -10,22 +10,22 @@ public class Aspirante {
     private String cedula;
     private String telefono;
     private String cargoAspirante;
-    private String resultados [];
-    private PruebaAdmision prueba;
+    //private String resultados [];
+   // private PruebaAdmision prueba;
 
-    public Aspirante(String nombre, String apellidos, String cedula, String telefono, String cargo, int puntaje, String actitudes, String aptitudes) {
+    public Aspirante(String nombre, String apellidos, String cedula, String telefono, String cargo) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.cedula = cedula;
         this.telefono = telefono;
         this.cargoAspirante = cargo;
-        this. prueba = new PruebaAdmision();
-        solicitarRegistroPrueba(actitudes, aptitudes, puntaje);
+        //this. prueba = new PruebaAdmision();
+        //solicitarRegistroPrueba(actitudes, aptitudes, puntaje);
         
     }
     
     public void solicitarRegistroPrueba(String actitudes, String aptitudes, int puntaje ){
-        this.prueba.registrarResultadosPrueba(puntaje, actitudes, aptitudes);
+       // this.prueba.registrarResultadosPrueba(puntaje, actitudes, aptitudes);
     }
     
     
@@ -53,9 +53,9 @@ public class Aspirante {
 
     
 
-    public PruebaAdmision getPrueba() {
-        return prueba;
-    }
+//    public PruebaAdmision getPrueba() {
+//        return prueba;
+//    }
     
     
 }

@@ -44,7 +44,7 @@ public class DataBaseConnection {
 //        Statement statement = connection.createStatement();
 //        String sql = "select * from sys.database_principals";
 //        ResultSet resultSet = statement.executeQuery(sql);
-//        System.out.println(resultSet);
+//        System.out.println(resultSet);        
 //        while (resultSet.next()) {
 //            System.out.println(resultSet.getString(1) + " " + resultSet.getString(2));
 //        }
