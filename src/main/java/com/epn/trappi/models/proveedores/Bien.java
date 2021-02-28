@@ -13,6 +13,8 @@ abstract public class Bien {
     protected String nombre;
     protected double precio;
     protected Proveedor proveeedor;
+    protected int cantidad ;
+    protected String marca;
 
     public String getNombre() {
         return nombre;
@@ -34,10 +36,42 @@ abstract public class Bien {
         return proveeedor;
     }
 
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    
     public void setProveeedor(Proveedor proveeedor) {
         this.proveeedor = proveeedor;
     }
     
+    public void aumentarCantidad(int cantidadAAumentar){
+        cantidad-=cantidadAAumentar;
+    }
+    
+    public void disminuirCantidad(int cantidadADisminuir){
+        cantidad-=cantidadADisminuir;
+    }
+
+    public Bien(String nombre, double precio, Proveedor proveeedor, int cantidad, String marca) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.proveeedor = proveeedor;
+        this.cantidad = cantidad;
+        this.marca = marca;
+    }
     
 
     public Bien(String nombre, double precio, Proveedor proveeedor) {

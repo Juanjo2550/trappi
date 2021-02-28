@@ -12,6 +12,10 @@ public class Servicio extends Bien {
         super(nombre, precio, proveeedor);
     }
 
+    public Servicio(String nombre, double precio, Proveedor proveeedor, int cantidad, String marca) {
+        super(nombre, precio, proveeedor, cantidad, marca);
+    }
+
     @Override
     public void registrar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

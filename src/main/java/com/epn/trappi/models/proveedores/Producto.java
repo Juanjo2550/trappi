@@ -11,12 +11,14 @@ public class Producto extends Bien {
 
     private final ProveedoresDb db = new ProveedoresDb();
 
+
+    public Producto(String nombre, double precio, Proveedor proveeedor, int cantidad, String marca) {
+        super(nombre, precio, proveeedor, cantidad, marca);
+    }
+    
     public Producto(String nombre, double precio, Proveedor proveeedor) {
         super(nombre, precio, proveeedor);
     }
-    
-    
-    
     
     public Producto(String nombre) {
         super(nombre);

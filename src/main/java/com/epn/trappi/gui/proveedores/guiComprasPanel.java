@@ -40,14 +40,14 @@ public class guiComprasPanel extends javax.swing.JPanel {
         for (int i=0;i<c.size();i++){
             fila[0]= "01";
             if(i==0){
-                fila[2]=String.valueOf(c.get(i).getListaCantidadDeBienes().getListaCantidadDeBienes().get(0).getCantidad());
-                fila[1]=c.get(i).getListaCantidadDeBienes().getListaCantidadDeBienes().get(0).getBien().getNombre();
+                fila[2]=String.valueOf(c.get(i).getListaCantidadDeBienes().getListaBienes().get(0).getCantidad());
+                fila[1]=c.get(i).getListaCantidadDeBienes().getListaBienes().get(0).getBien().getNombre();
             }
             else{
-                fila[2]=String.valueOf(c.get(i).getListaCantidadDeBienes().getListaCantidadDeBienes().get(1).getCantidad());
-                fila[1]=c.get(i).getListaCantidadDeBienes().getListaCantidadDeBienes().get(1).getBien().getNombre();
+                fila[2]=String.valueOf(c.get(i).getListaCantidadDeBienes().getListaBienes().get(1).getCantidad());
+                fila[1]=c.get(i).getListaCantidadDeBienes().getListaBienes().get(1).getBien().getNombre();
             }
-            fila[3]= c.get(i).getListaCantidadDeBienes().getListaCantidadDeBienes().get(1).getBien().getProveeedor().getRuc();   
+            fila[3]= c.get(i).getListaCantidadDeBienes().getListaBienes().get(1).getBien().getProveeedor().getRuc();   
             fila[4]= c.get(i).getFecha();
             fila[5]= c.get(i).getEstado();
             fila[6]= c.get(i).getMontoTotal().toString();

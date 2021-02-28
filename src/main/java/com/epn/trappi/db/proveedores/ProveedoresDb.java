@@ -105,7 +105,7 @@ public void setProductos(List<Producto> productos) {
         for (String[] pr : compra) {
             if(Integer.parseInt(pr[0])!=auxiliar){
                 String estado=pr[5];
-                compras.add(new CompraDeProducto(new ListaCantidadDeBienes(getListaCantidadBienesCompra()),estado,pr[4],Double.parseDouble(pr[6])));
+                compras.add(new CompraDeProducto(new ListaDeBienes(getListaCantidadBienesCompra()),estado,pr[4],Double.parseDouble(pr[6])));
                 auxiliar=Integer.parseInt(pr[0]);
             }
         }

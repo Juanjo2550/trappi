@@ -11,19 +11,19 @@ package com.epn.trappi.models.proveedores;
  */
 public class CompraDeServicio extends Compra{
     
-    public CompraDeServicio(Inventario inventario, ListaCantidadDeBienes listaBienesAComprar, String estado) {
+    public CompraDeServicio(Inventario inventario, ListaDeBienes listaBienesAComprar, String estado) {
         super(inventario, listaBienesAComprar, estado);
         comprar();
     }
     
     @Override
     public void comprar(){
-        if(solicitarAutorizacion(listaBienesAComprar.getListaCantidadDeBienes().get(0).getBien().getProveeedor(),montoTotal)){
-            for (CantidadDeBien cantidadBien : listaBienesAComprar.getListaCantidadDeBienes()){
+        if(solicitarAutorizacion(listaBienesAComprar.getListaBienes().get(0).getProveeedor(),montoTotal)){
+            for (Bien cantidadBien : listaBienesAComprar.getListaBienes()){
                 //asumimos que las compras se han entregado
                 setEstado("Entregado");
-                registrarCompra(cantidadBien.getBien().getNombre()
-                        ,cantidadBien.getBien().getProveeedor().getRuc(),cantidadBien.getCantidad(),estado,montoTotal,this.fecha);
+                registrarCompra(cantidadBien.getNombre()
+                        ,cantidadBien.getProveeedor().getRuc(),cantidadBien.getCantidad(),estado,montoTotal,this.fecha);
             }
         }
     }

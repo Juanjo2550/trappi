@@ -9,7 +9,7 @@ import com.epn.trappi.db.proveedores.ProveedoresDb;
 import com.epn.trappi.models.proveedores.Compra;
 import com.epn.trappi.models.proveedores.CompraDeProducto;
 import com.epn.trappi.models.proveedores.Inventario;
-import com.epn.trappi.models.proveedores.ListaCantidadDeBienes;
+import com.epn.trappi.models.proveedores.ListaDeBienes;
 import com.epn.trappi.models.proveedores.ListaDeCompras;
 import com.epn.trappi.models.proveedores.Producto;
 import java.util.ArrayList;
@@ -239,7 +239,7 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
         for(int i=0;i<6;i++){
             if(seleccionados[i][0]==1){
                 CompraDeProducto compra;
-                ListaCantidadDeBienes lista = new ListaCantidadDeBienes();
+                ListaDeBienes lista = new ListaDeBienes();
                 auxiliarRuc=db.getProductos().get(i).getProveeedor().getRuc();
                 for(int j=0;j<6;j++){
                     if(auxiliarRuc.equals(db.getProductos().get(j).getProveeedor().getRuc())){
@@ -256,7 +256,7 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
                 solicitud.añadirCompra(compra);
             }
         }
-        System.out.println(solicitud.getCompras().get(0).getListaCantidadDeBienes().getListaCantidadDeBienes().get(0).toString());
+        System.out.println(solicitud.getCompras().get(0).getListaCantidadDeBienes().getListaBienes().get(0).toString());
         new CambiaPanel(verTodo, new guiDescripcionCompra(solicitud));
     }//GEN-LAST:event_jButRegFactCompNotaCredActionPerformed
 

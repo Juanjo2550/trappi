@@ -22,18 +22,18 @@ public class AnalizadorDeInventario {
         ListaDeCompras solicitud = new ListaDeCompras(new ArrayList<Compra>());
         
 
-        for(CantidadDeBien cantidadBien : inventario.getListaCantidadDeBienes().getListaCantidadDeBienes()){
+        for(CantidadDeBien cantidadBien : inventario.getListDeBienes().getListaBienes()){
             if(cantidadBien.getCantidad()<=10){
                 proveedor=false;
                 for(Compra compra: solicitud.getCompras()){
-                    if(compra.getListaCantidadDeBienes().getListaCantidadDeBienes().get(0).getBien().getProveeedor().getRazonSocial().equalsIgnoreCase(
+                    if(compra.getListaCantidadDeBienes().getListaBienes().get(0).getBien().getProveeedor().getRazonSocial().equalsIgnoreCase(
                             cantidadBien.getBien().getProveeedor().getRazonSocial())){    
                         proveedor=true;
                         compra.getListaCantidadDeBienes().añadirBien(cantidadBien.getBien(), 100);
                     }
                 }           
                 if(proveedor==false){
-                    ListaCantidadDeBienes lista =  new ListaCantidadDeBienes();
+                    ListaDeBienes lista =  new ListaDeBienes();
                     lista.añadirBien(cantidadBien.getBien(), 100);
                     solicitud.añadirCompra(new CompraDeProducto(inventario, lista, "Pendiente"));
                 }

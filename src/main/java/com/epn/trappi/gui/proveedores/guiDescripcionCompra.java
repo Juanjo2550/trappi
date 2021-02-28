@@ -33,7 +33,7 @@ public class guiDescripcionCompra extends javax.swing.JPanel {
         model.addColumn("Producto");
         model.addColumn("Cantidad");
         for (Compra compra : lista.getCompras()) {
-            for (CantidadDeBien cantidadBien : compra.getListaCantidadDeBienes().getListaCantidadDeBienes()) {
+            for (CantidadDeBien cantidadBien : compra.getListaCantidadDeBienes().getListaBienes()) {
                 model.addRow(new Object[]{cantidadBien.getBien().getNombre(), cantidadBien.getCantidad()});
             }
         }

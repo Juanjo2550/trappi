@@ -17,14 +17,28 @@ import java.util.Date;
 abstract public class Compra {
 
     protected Inventario inventario;
-    protected ListaCantidadDeBienes listaBienesAComprar;
+    protected ListaDeBienes listaBienesAComprar;
+    protected Bien bien;
     protected String estado;
     protected Double montoTotal;
     protected String fecha=null;
+    protected int identificador;
     
     private ProveedoresDb db=new ProveedoresDb();
+
+    public Compra(Inventario inventario, ListaDeBienes listaBienesAComprar, Bien bien, String estado, Double montoTotal, int identificador) {
+        this.inventario = inventario;
+        this.listaBienesAComprar = listaBienesAComprar;
+        this.bien = bien;
+        this.estado = estado;
+        this.montoTotal = montoTotal;
+        this.identificador = identificador;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
+        LocalDateTime now = LocalDateTime.now();  
+        this.fecha=dtf.format(now);  
+    }
     
-    public Compra(Inventario inventario, ListaCantidadDeBienes listaBienesAComprar, String estado) {
+    public Compra(Inventario inventario, ListaDeBienes listaBienesAComprar, String estado) {
         this.inventario = inventario;
         this.listaBienesAComprar = listaBienesAComprar;
         this.estado = estado;
@@ -32,20 +46,20 @@ abstract public class Compra {
         LocalDateTime now = LocalDateTime.now();  
         this.fecha=dtf.format(now);  
     }
-    public Compra(ListaCantidadDeBienes listaBienesAComprar, String estado) {
+    public Compra(ListaDeBienes listaBienesAComprar, String estado) {
         this.listaBienesAComprar = listaBienesAComprar;
         this.estado = estado;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
         LocalDateTime now = LocalDateTime.now();  
         this.fecha=dtf.format(now);  
     }
-    public Compra(Inventario inventario, ListaCantidadDeBienes listaBienesAComprar, String estado, String fecha) {
+    public Compra(Inventario inventario, ListaDeBienes listaBienesAComprar, String estado, String fecha) {
         this.inventario = inventario;
         this.listaBienesAComprar = listaBienesAComprar;
         this.estado = estado;
         this.fecha=fecha;
     }
-    public Compra(ListaCantidadDeBienes listaBienesAComprar, String estado, String fecha, Double monto) {
+    public Compra(ListaDeBienes listaBienesAComprar, String estado, String fecha, Double monto) {
         this.listaBienesAComprar = listaBienesAComprar;
         this.estado = estado;
         this.fecha=fecha;
@@ -64,8 +78,8 @@ abstract public class Compra {
     
     public Double calcularMontoTotal() {
         Double monto = 0.0;
-        for (CantidadDeBien cantidadBien : listaBienesAComprar.getListaCantidadDeBienes()) {
-            monto += cantidadBien.getBien().getPrecio() * cantidadBien.getCantidad();
+        for (Bien bien : listaBienesAComprar.getListaBienes()) {
+            monto += bien.getPrecio() * bien.getCantidad();
         }
         return monto;
     }
@@ -98,11 +112,11 @@ abstract public class Compra {
         this.inventario = inventario;
     }
     
-    public ListaCantidadDeBienes getListaCantidadDeBienes() {
+    public ListaDeBienes getListaCantidadDeBienes() {
         return listaBienesAComprar;
     }
     
-    public void setListaCantidadDeBienes(ListaCantidadDeBienes listaCantidadDeBienes) {
+    public void setListaCantidadDeBienes(ListaDeBienes listaCantidadDeBienes) {
         this.listaBienesAComprar = listaCantidadDeBienes;
     }
     
