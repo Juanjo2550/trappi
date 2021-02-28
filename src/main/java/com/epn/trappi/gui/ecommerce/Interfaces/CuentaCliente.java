@@ -23,13 +23,9 @@ public class CuentaCliente extends javax.swing.JFrame {
         this.setSize(1300, 700);
         jButtonaceptarcambios.setVisible(false);
         this.setLocationRelativeTo(null);
-        jTextFieldcedula.setText(Main.cliente.getCedula());
-        jTextFieldcelular.setText(Main.cliente.getCelular());
-        jTextFieldcontrasena.setText(Main.cliente.getContraseña());
-        jTextFieldcorreo.setText(Main.cliente.getCorreo());
-        jTextFieldnombre.setText(Main.cliente.getNombre());
-        jTextFielddireccion.setText(Main.cliente.getDireccion());
-        jTextFieldfecha.setText(Main.cliente.getFechadenacimiento());
+        
+        
+        
         
         jTextFieldcedula.setEditable(false);
         jTextFieldcelular.setEditable(false);
@@ -323,10 +319,11 @@ public class CuentaCliente extends javax.swing.JFrame {
      try {
            
             String sql = "update CLIENTES set NOMBRECLIE='"+jTextFieldnombre.getText()+"',FECHADENACIMIENTO='"+
-                    jTextFieldfecha.getText()+"',CELULAR ="+jTextFieldcelular.getText()+"',DIRECCION ='"+jTextFielddireccion.getText()+
-                    "',CONTRASENA ='"+jTextFieldcontrasena.getText()+"',CORREO ='"+jTextFieldcorreo.getText()+"' where CEDULA2='"+
-                    "where NOMBRECLIE-'"+"NOMBRE";
+                    jTextFieldfecha.getText()+"',CELULAR='"+jTextFieldcelular.getText()+"',DIRECCION='"+jTextFielddireccion.getText()+
+                    "',CONTRASENA='"+jTextFieldcontrasena.getText()+"',CORREO='"+jTextFieldcorreo.getText()+
+                    " where NOMBRECLIE='"+jt.getText()+"'";
             PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
+            prepsInsertProduct.execute();
             JOptionPane.showMessageDialog(null,"cambios realizados con exito");
         } catch (SQLException ex) {
             Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
@@ -349,6 +346,21 @@ public class CuentaCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    public void llenardatos(String str1,String str2,String str3,String str4,String str5,String str6,String str7){
+        jTextFieldnombre.setText(str1);
+        jTextFieldcedula.setText(str2);
+        jTextFieldcorreo.setText(str3);
+        jTextFieldfecha.setText(str4);
+        jTextFieldcelular.setText(str5);
+        jTextFielddireccion.setText(str6);
+        jTextFieldcontrasena.setText(str7);
+              
+    }
+    
+    public void nombretitulo(String name){
+        jt.setText(name);
+        System.out.println(name);
+    }
     /**
      * @param args the command line arguments
      */

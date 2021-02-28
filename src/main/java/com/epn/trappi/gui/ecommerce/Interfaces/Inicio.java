@@ -1,9 +1,18 @@
 
 package com.epn.trappi.gui.ecommerce.Interfaces;
+import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Inicio extends javax.swing.JFrame {
 
+    DataBaseConnection dbInstance = DataBaseConnection.getInstance();
+    Connection connection = dbInstance.getConnection();
     
     public Inicio() {
         initComponents();
@@ -40,6 +49,11 @@ public class Inicio extends javax.swing.JFrame {
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -168,9 +182,38 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-    CuentaCliente cuenta=new CuentaCliente();
-    cuenta.setVisible(true);
-    this.setVisible(false);
+    try {
+            String nombre= "";
+            String cedula ="";
+            String correo ="";
+            String fecha ="";
+            String celular ="";
+            String direc ="";
+            String contra ="";
+                       
+            Statement statement = connection.createStatement();
+            String sql = "select * from CLIENTES where NOMBRECLIE ='"+
+                        jt.getText()+"'";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                 nombre= resultSet.getString("NOMBRECLIE");
+                 cedula =resultSet.getString("CEDULA2");
+                 correo =resultSet.getString("CORREO");
+                 fecha =resultSet.getString("FECHADENACIMIENTO");
+                 celular =resultSet.getString("CELULAR");
+                 direc =resultSet.getString("DIRECCION");
+                 contra =resultSet.getString("CONTRASENA");
+               
+            }
+            CuentaCliente cuenta=new CuentaCliente();
+            cuenta.llenardatos(nombre, cedula,correo, fecha,celular, direc, contra);
+            cuenta.nombretitulo(nombre);
+            cuenta.setVisible(true);
+            this.setVisible(false);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -188,6 +231,10 @@ public class Inicio extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

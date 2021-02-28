@@ -137,18 +137,20 @@ public class Login extends javax.swing.JFrame {
     private void jButtoningresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtoningresarMouseClicked
     try {
             boolean on_off= false;
+            String nombre= "";
             String user = jTextFieldUsuario.getText();
             String pass = jTextFieldcontraseña.getText();
             Statement statement = connection.createStatement();
-            String sql = "select * from CLIENTES where CORREO ='"+
+            String sql = "select NOMBRECLIE from CLIENTES where CORREO ='"+
                         user+"' and CONTRASENA='"+ pass+"'";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 on_off=true;
-                System.out.println(resultSet.getString(1) + " " + resultSet.getString(2));
+                nombre=resultSet.getString("NOMBRECLIE");
             }
             if(on_off){
                 Inicio nuevo= new Inicio();
+                nuevo.jt.setText(nombre);
                 nuevo.setVisible(true);
                 this.setVisible(false);
             }
@@ -171,18 +173,20 @@ public class Login extends javax.swing.JFrame {
             String user = jTextFieldUsuario.getText();
             String pass = jTextFieldcontraseña.getText();
             Statement statement = connection.createStatement();
-            String sql = "select NOMBRECLIE from CLIENTES where CORREO ="+
-                        user+"and CONTRASENA="+ pass;
+            String sql = "select NOMBRECLIE from CLIENTES where CORREO ='"+
+                        user+"'and CONTRASENA='"+ pass+"'";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 on_off=true;
-                nombre=resultSet.getString("1");
+                nombre=resultSet.getString("NOMBRECLIE");
             }
             if(on_off){
                 Inicio nuevo= new Inicio();
                 nuevo.setVisible(true);
                 nuevo.jt.setText(nombre);
                 this.setVisible(false);
+            }else{
+                JOptionPane.showMessageDialog(null,"error");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);

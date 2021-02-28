@@ -5,6 +5,12 @@
  */
 package com.epn.trappi.gui.ecommerce.Interfaces;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Andres
@@ -114,17 +120,9 @@ public class JFBanco extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabelPacifico.setIcon(new javax.swing.ImageIcon("C:\\Users\\Christian\\Documents\\GitHub\\trappi\\src\\main\\resources\\contents\\Imagenes\\BancoPacifico.png")); // NOI18N
         jPanel1.add(jLabelPacifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
-
-        jLabelPichincha.setIcon(new javax.swing.ImageIcon("C:\\Users\\Christian\\Documents\\GitHub\\trappi\\src\\main\\resources\\contents\\Imagenes\\BancoPichincha.png")); // NOI18N
         jPanel1.add(jLabelPichincha, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
-
-        jLabelGuayaquil.setIcon(new javax.swing.ImageIcon("C:\\Users\\Christian\\Documents\\GitHub\\trappi\\src\\main\\resources\\contents\\Imagenes\\BancoGuayaquil.jpg")); // NOI18N
         jPanel1.add(jLabelGuayaquil, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, -1, -1));
-
-        jLabelBolivariano.setIcon(new javax.swing.ImageIcon("C:\\Users\\Christian\\Documents\\GitHub\\trappi\\src\\main\\resources\\contents\\Imagenes\\BancoBolivariano.png")); // NOI18N
         jPanel1.add(jLabelBolivariano, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, -1, -1));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -502,6 +500,12 @@ public class JFBanco extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel5.setText("Crear Cuenta");
         jPanelCrearCuenta.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(256, 11, -1, -1));
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
         jPanelCrearCuenta.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 83, 150, -1));
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
@@ -510,6 +514,12 @@ public class JFBanco extends javax.swing.JFrame {
             }
         });
         jPanelCrearCuenta.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 150, -1));
+
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
         jPanelCrearCuenta.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 150, -1));
 
         jLabel6.setText("Cedula:");
@@ -691,7 +701,7 @@ public class JFBanco extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
@@ -719,6 +729,14 @@ public class JFBanco extends javax.swing.JFrame {
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         jPanelCuentas.setVisible(true);
     }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
 
     /**
      * @param args the command line arguments

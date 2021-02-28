@@ -9,6 +9,7 @@ import java.sql.*;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class Registrar extends javax.swing.JFrame {
     
@@ -190,32 +191,39 @@ public class Registrar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-    FRegistroCliente frc=new FRegistroCliente(jTextFieldNombre.getText(),jTextFieldCorreo.getText(), jTextFieldFecha.getText(), jTextFieldCelular.getText(),jTextFieldDireccion.getText(),jTextFieldCedula.getText(),jTextFieldContraseña.getText());
-    Main.cliente.registrarse(frc);
-        
-        
-    Inicio inicio=new Inicio();
-    inicio.setVisible(true);
-    this.setVisible(false);
+    
+        try {
+            
+            FRegistroCliente frc=new FRegistroCliente(jTextFieldNombre.getText(),jTextFieldCorreo.getText(), jTextFieldFecha.getText(), jTextFieldCelular.getText(),jTextFieldDireccion.getText(),jTextFieldCedula.getText(),jTextFieldContraseña.getText());
+            Main.cliente.registrarse(frc);
+            
+            String sql = "INSERT INTO CLIENTES Values("+23+",'"+jTextFieldNombre.getText()+"','"+
+                    "','"+jTextFieldFecha.getText()+"','"+jTextFieldCelular.getText()+"','"+jTextFieldDireccion.getText()+
+                    "','"+jTextFieldCedula.getText()+"','"+jTextFieldContraseña.getText()+"','"+jTextFieldCorreo.getText()+"')";
+            PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
+            prepsInsertProduct.execute();
+            JOptionPane.showMessageDialog(null,"exito");
+            Inicio inicio=new Inicio();
+            inicio.nombretitulo(jTextFieldNombre.getText());
+            inicio.setVisible(true);
+            this.setVisible(false);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+    
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-    Login login=new Login();
-    login.setVisible(true);
-    this.setVisible(false);
+    
+        
+            Login login=new Login();
+            login.setVisible(true);
+            this.setVisible(false);
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            Random aleatorio = new Random(System.currentTimeMillis());
-            int idAletorio = aleatorio.nextInt(100);
-            String sql = "insert into CLIENTES values ("+idAletorio+",'"+jTextFieldNombre.getText()+"','"+
-                    "','"+jTextFieldFecha.getText()+"','"+jTextFieldCelular.getText()+"','"+jTextFieldDireccion.getText()+
-                    "','"+jTextFieldContraseña.getText()+"','"+jTextFieldCorreo.getText()+"')";
-            PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
-        } catch (SQLException ex) {
-            Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
