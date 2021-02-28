@@ -28,6 +28,13 @@ public class  Pago {
         this.nroCuenta = nroCuenta;
         this.monto = monto;
     }
+
+    public Pago(String nroCuenta, double monto) {
+        this.fechadePago=new Fecha();
+        this.nroCuenta = nroCuenta;
+        this.monto = monto;
+    }
+    
     
 
 
@@ -46,6 +53,7 @@ public class  Pago {
         
     }
     public String realizarPago(Pago pago){
+        this.libroDiario=new LibroDiario();
         this.presupuesto=new Presupuesto(this.libroDiario);
         String estadoSolicitud="Pendiente";
         if(pago.monto<this.presupuesto.calcularPresupuesto()){
