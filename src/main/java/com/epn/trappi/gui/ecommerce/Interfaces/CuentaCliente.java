@@ -336,10 +336,17 @@ public class CuentaCliente extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 
-    Main.cliente.eliminarse();
-    Login login=new Login();
-    login.setVisible(true);
-    this.setVisible(false);
+    try {
+           Main.cliente.eliminarse();
+           Login login=new Login();
+           login.setVisible(true);
+           this.setVisible(false);
+            String sql = "delete CLIENTES where NOMBRECLIE='"+"NOMBRE";
+            PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
+            JOptionPane.showMessageDialog(null,"cambios realizados con exito");
+        } catch (SQLException ex) {
+            Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
