@@ -6,7 +6,9 @@
 package com.epn.trappi.controladores.logistico;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
+import com.epn.trappi.models.logistico.Mantenimiento;
 import java.sql.CallableStatement;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -45,6 +47,7 @@ public class storedProcedures {
         }
         return modelo;
     }
+    
     public ArrayList<String[]> consultarUsosPorVehiculo(String matricula) throws SQLException{
         CallableStatement statement = connection.getConnection().prepareCall("{ call usosVehiculo(?) }");
         statement.setString(1,matricula);
@@ -62,6 +65,24 @@ public class storedProcedures {
             }
             registros.add(registro);
         }
-        return registros;
+        return registros;}
+    
+    public void ingresarMantenimiento(Mantenimiento mantenimiento) throws SQLException{
+        CallableStatement statement = connection.getConnection().prepareCall("{call Ingresar_Mantenimiento(?,?,?,?) }");
+        statement.setInt(1,mantenimiento.getIdMantenimiento());
+        statement.setString(2,mantenimiento.getMatricula());
+        statement.setString(3,mantenimiento.getDetalleMantenimiento());
+        statement.setDouble(4,mantenimiento.getValorGasto());
+        statement.execute();
+    }
+    
+    public void ingresarSolicitudMantenimiento(int numSolicitud, int identificadorBien, int idMantenimiento,String fechaSol, String estadoMantenimiento ) throws SQLException{
+        CallableStatement statement = connection.getConnection().prepareCall("{call IngresarSolicitud_Mantenimiento(?,?,?,?,?) }");
+        statement.setInt(1,numSolicitud);
+        statement.setInt(2,identificadorBien);
+        statement.setInt(3,idMantenimiento);
+        statement.setDate(4,Date.valueOf(fechaSol));
+        statement.setString(5,estadoMantenimiento);
+        statement.execute();
     }
 }
