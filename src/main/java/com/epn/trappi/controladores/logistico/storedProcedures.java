@@ -10,6 +10,7 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -28,7 +29,6 @@ public class storedProcedures {
         ResultSet resultados = statement.executeQuery();
         ResultSetMetaData informacion_tabla = resultados.getMetaData();
         int num_columnas = informacion_tabla.getColumnCount();
-        System.out.println(num_columnas);
         DefaultTableModel modelo = new DefaultTableModel();
         for (int i=1;i<=num_columnas;i++){
             modelo.addColumn(informacion_tabla.getColumnName(i));
@@ -44,5 +44,24 @@ public class storedProcedures {
             modelo.addRow(registro);
         }
         return modelo;
+    }
+    public ArrayList<String[]> consultarUsosPorVehiculo(String matricula) throws SQLException{
+        CallableStatement statement = connection.getConnection().prepareCall("{ call usosVehiculo(?) }");
+        statement.setString(1,matricula);
+        ResultSet resultados = statement.executeQuery();
+        //
+        ResultSetMetaData informacion_tabla = resultados.getMetaData();
+        int num_columnas = informacion_tabla.getColumnCount();
+        ArrayList<String[]> registros = new ArrayList<>();
+        String[] registro = new String[num_columnas];
+        while(resultados.next()){
+            for (int indice_columna=1;indice_columna<=num_columnas;indice_columna++){
+                Object valor_registro = resultados.getObject(indice_columna);
+                String cadena = valor_registro.toString();
+                registro[indice_columna-1]=cadena;
+            }
+            registros.add(registro);
+        }
+        return registros;
     }
 }

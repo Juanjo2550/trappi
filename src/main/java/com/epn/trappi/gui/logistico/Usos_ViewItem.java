@@ -29,7 +29,7 @@ public class Usos_ViewItem extends JPanel{
         this.setLayout(new GridBagLayout());
         this.setBackground(new Color(255,255,255));
     }
-    public void inicializarVistaAlterna(String fecha,String hora,String conductor,String factura,String direccion){
+    public void inicializarVistaAlterna(String fecha,String conductor,String factura,String direccion){
         JLabel labelFecha = new JLabel(this.fecha+fecha);
         labelFecha.setFont(new Font("Segoe UI Semibold", Font.BOLD, 12));
         labelFecha.setForeground(new Color(61,57,57));
