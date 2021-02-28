@@ -6,12 +6,10 @@
 
 package com.epn.trappi.db.rrhh;
 
-import com.epn.trappi.models.rrhh.Empleado;
-import com.epn.trappi.models.rrhh.ListaEmpleados;
+import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import com.epn.trappi.models.rrhh.Sueldo;
 
 import java.sql.*;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * 

@@ -6,13 +6,10 @@
 package com.epn.trappi.gui.rrhh.Permisos;
 
 import com.epn.trappi.db.rrhh.Conexion_SQLite_Permisos;
-import com.epn.trappi.models.rrhh.Empleado;
-import com.epn.trappi.models.rrhh.Fecha;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**

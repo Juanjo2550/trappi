@@ -6,11 +6,11 @@
 package com.epn.trappi.gui.rrhh;
 
 
-import com.epn.trappi.*;
-import java.awt.Color;
 import com.epn.trappi.db.rrhh.*;
 import com.epn.trappi.models.rrhh.*;
-import javax.swing.JOptionPane;
+import com.epn.trappi.models.rrhh.juanjo.Empleado;
+import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
+
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -53,7 +53,7 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
         };
         
         DefaultTableModel tableModel = new DefaultTableModel(col, 0);
-        for(RolPagos r : this.roles.obtenerTodos(cedula)){ 
+        for(RolDePagos r : this.roles.obtenerTodos(cedula)){
             Object [] row = {
                 r.getValor(),
                 r.getNumero(),

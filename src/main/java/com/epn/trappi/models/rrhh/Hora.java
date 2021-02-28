@@ -19,6 +19,12 @@ public class Hora {
     private int minutos;
     private int segundos;
 
+    public Hora(int hora, int minutos, int segundos) {
+        this.hora = hora;
+        this.minutos = minutos;
+        this.segundos = segundos;
+    }
+
     public Hora() {
         hora = calendario.get(Calendar.HOUR_OF_DAY);
         minutos = calendario.get(Calendar.MINUTE);
@@ -49,4 +55,8 @@ public class Hora {
         this.segundos = segundos;
     }
 
+    @Override
+    public String toString() {
+        return this.getHora() + ":" + this.getMinutos() + ":" + this.getSegundos();
+    }
 }

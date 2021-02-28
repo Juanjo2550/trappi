@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import com.epn.trappi.db.rrhh.*;
+import com.epn.trappi.models.rrhh.juanjo.Empleado;
 
 /**
  * 
