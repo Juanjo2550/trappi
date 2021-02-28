@@ -54,11 +54,11 @@ public class Logistico_GUI extends javax.swing.JFrame {
         botonRegistroEntregas = new javax.swing.JButton();
         botonEntregasActivas = new javax.swing.JButton();
         panEntregas1 = new javax.swing.JPanel();
-        botonFichas = new javax.swing.JButton();
         botonListaVehiculos = new javax.swing.JButton();
         btnMantenimientos = new javax.swing.JButton();
         panEntregas2 = new javax.swing.JPanel();
         botonMantenimiento = new javax.swing.JButton();
+        botonFichas = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPEntregasActivasGUI = new javax.swing.JPanel();
@@ -217,28 +217,6 @@ public class Logistico_GUI extends javax.swing.JFrame {
 
         panEntregas1.setBackground(new java.awt.Color(61, 57, 57));
 
-        botonFichas.setBackground(new java.awt.Color(61, 57, 57));
-        botonFichas.setFont(new java.awt.Font("Segoe UI Semibold", 0, 16)); // NOI18N
-        botonFichas.setForeground(new java.awt.Color(255, 255, 255));
-        botonFichas.setText("Fichas técnicas");
-        botonFichas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        botonFichas.setContentAreaFilled(false);
-        botonFichas.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                botonFichasMouseMoved(evt);
-            }
-        });
-        botonFichas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                botonFichasMouseExited(evt);
-            }
-        });
-        botonFichas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonFichasActionPerformed(evt);
-            }
-        });
-
         botonListaVehiculos.setBackground(new java.awt.Color(61, 57, 57));
         botonListaVehiculos.setFont(new java.awt.Font("Segoe UI Semibold", 1, 16)); // NOI18N
         botonListaVehiculos.setForeground(new java.awt.Color(255, 255, 255));
@@ -267,19 +245,15 @@ public class Logistico_GUI extends javax.swing.JFrame {
             panEntregas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panEntregas1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panEntregas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botonFichas, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                    .addComponent(botonListaVehiculos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(botonListaVehiculos, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panEntregas1Layout.setVerticalGroup(
             panEntregas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panEntregas1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(botonFichas, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addComponent(botonListaVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnMantenimientos.setBackground(new java.awt.Color(255, 210, 28));
@@ -318,20 +292,46 @@ public class Logistico_GUI extends javax.swing.JFrame {
             }
         });
 
+        botonFichas.setBackground(new java.awt.Color(61, 57, 57));
+        botonFichas.setFont(new java.awt.Font("Segoe UI Semibold", 0, 16)); // NOI18N
+        botonFichas.setForeground(new java.awt.Color(255, 255, 255));
+        botonFichas.setText("Fichas técnicas");
+        botonFichas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        botonFichas.setContentAreaFilled(false);
+        botonFichas.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                botonFichasMouseMoved(evt);
+            }
+        });
+        botonFichas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonFichasMouseExited(evt);
+            }
+        });
+        botonFichas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonFichasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panEntregas2Layout = new javax.swing.GroupLayout(panEntregas2);
         panEntregas2.setLayout(panEntregas2Layout);
         panEntregas2Layout.setHorizontalGroup(
             panEntregas2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panEntregas2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(botonMantenimiento, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                .addGroup(panEntregas2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonMantenimiento, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                    .addComponent(botonFichas, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panEntregas2Layout.setVerticalGroup(
             panEntregas2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panEntregas2Layout.createSequentialGroup()
                 .addComponent(botonMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 36, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(botonFichas, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 24, Short.MAX_VALUE))
         );
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/epn/trappi/images/logistico/icon.png"))); // NOI18N
@@ -393,11 +393,11 @@ public class Logistico_GUI extends javax.swing.JFrame {
                 .addComponent(panEntregas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addComponent(btnVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(panEntregas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnMantenimientos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
                 .addComponent(panEntregas2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
