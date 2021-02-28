@@ -30,4 +30,5 @@ public class Sueldo {
     public double calcularValor() {
         return valor;
     }
+    
 }
