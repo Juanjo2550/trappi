@@ -9,6 +9,9 @@ package com.epn.trappi.db.rrhh;
 import java.sql.*;
 
 import com.epn.trappi.models.rrhh.*;
+import com.epn.trappi.models.rrhh.juanjo.Administrativo;
+import com.epn.trappi.models.rrhh.juanjo.Empleado;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -64,7 +67,7 @@ public class EmpleadoDb {
             ResultSet rs = stmt.executeQuery(sql);
             // loop through the result set
             while (rs.next()) {
-                temEmpleados.add(new Empleado(
+                temEmpleados.add(new Administrativo(
                 rs.getString("nombres"),
                 rs.getString("apellidos"),
                 rs.getString("cedula"),
@@ -94,7 +97,7 @@ public class EmpleadoDb {
             ResultSet rs = pstmt.executeQuery();
             conn.close();
             // loop through the result set
-            return new Empleado(
+            return new Administrativo(
             rs.getString("nombres"),
             rs.getString("apellidos"),
             rs.getString("cedula"),
@@ -109,7 +112,7 @@ public class EmpleadoDb {
             );
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            return new Empleado();
+            return new Administrativo();
         }
     }
 //Se modificó la base de datos porque no tenia RegistroAsistencia

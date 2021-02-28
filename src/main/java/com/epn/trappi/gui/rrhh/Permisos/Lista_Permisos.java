@@ -5,10 +5,8 @@
  */
 package com.epn.trappi.gui.rrhh.Permisos;
 
-import com.epn.trappi.models.rrhh.Empleado;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /**

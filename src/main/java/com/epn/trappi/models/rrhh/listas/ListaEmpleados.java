@@ -33,7 +33,7 @@ public class ListaEmpleados implements Lista<Empleado> {
         } else {
             insertSql = "INSERT INTO dbo.EMPLEADO(IDEMP, NOMBREEMP, APELLIDOEMP, CEDULAEMP, CARGOEMP, DEPARTAMENTOEMP, CUENTABANCARIAEMP, BANCOEMP, ESTADOEMP, TIPOEMP, SUELDOEMP, SEXOEMP) " +
                     "VALUES (" +
-                    this.obtenerTodos().length + "," +
+                    (this.obtenerTodos().length + 1) + "," +
                     "'" + nuevoEmpleado.getNombres() + "' ," +
                     "'" + nuevoEmpleado.getApellidos() + "' ," +
                     "'" + nuevoEmpleado.getCedula() + "' ," +
@@ -72,35 +72,38 @@ public class ListaEmpleados implements Lista<Empleado> {
         try {
             Statement createdStatement = this.connection.createStatement();
             ResultSet resultSet = createdStatement.executeQuery(sql);
-            String tipoEmpleado = resultSet.getString(10);
-            if ("conductor".equalsIgnoreCase(tipoEmpleado)) {
-                empleadoObtenido = new Conductor(
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getString(6),
-                        resultSet.getString(7),
-                        resultSet.getString(8),
-                        new Asistencia[]{},
-                        resultSet.getString(11),
-                        resultSet.getString(9),
-                        resultSet.getString(12).charAt(0)
-                );
-            } else {
-                empleadoObtenido = new Administrativo(
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getString(6),
-                        resultSet.getString(7),
-                        resultSet.getString(8),
-                        new Asistencia[]{},
-                        resultSet.getString(11),
-                        resultSet.getString(9),
-                        resultSet.getString(12).charAt(0)
-                );
+            while(resultSet.next()) {
+                if (resultSet.getString(10).equals("conductor")) {
+                    empleadoObtenido = new Conductor(
+                            resultSet.getInt(1),
+                            resultSet.getString(2),
+                            resultSet.getString(3),
+                            resultSet.getString(4),
+                            resultSet.getString(5),
+                            resultSet.getString(6),
+                            resultSet.getString(7),
+                            resultSet.getString(8),
+                            new Asistencia[]{},
+                            resultSet.getString(11),
+                            resultSet.getString(9),
+                            resultSet.getString(12).charAt(0)
+                    );
+                } else {
+                    empleadoObtenido = new Administrativo(
+                            resultSet.getInt(1),
+                            resultSet.getString(2),
+                            resultSet.getString(3),
+                            resultSet.getString(4),
+                            resultSet.getString(5),
+                            resultSet.getString(6),
+                            resultSet.getString(7),
+                            resultSet.getString(8),
+                            new Asistencia[]{},
+                            resultSet.getString(11),
+                            resultSet.getString(9),
+                            resultSet.getString(12).charAt(0)
+                    );
+                }
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
@@ -116,6 +119,7 @@ public class ListaEmpleados implements Lista<Empleado> {
             while(resultSet.next()) {
                 if(resultSet.getString(10).equals("conductor")) {
                     empleados.add(new Conductor(
+                            resultSet.getInt(1),
                             resultSet.getString(2),
                             resultSet.getString(3),
                             resultSet.getString(4),
@@ -130,6 +134,7 @@ public class ListaEmpleados implements Lista<Empleado> {
                     ));
                 } else {
                     empleados.add(new Administrativo(
+                            resultSet.getInt(1),
                             resultSet.getString(2),
                             resultSet.getString(3),
                             resultSet.getString(4),
@@ -171,5 +176,7 @@ public class ListaEmpleados implements Lista<Empleado> {
         for (Empleado e : l1.obtenerTodos()) {
             System.out.println(e.getNombres());
         }
+        
+        System.out.println(l1.buscarUno("1722951165").toString());
     }
 }

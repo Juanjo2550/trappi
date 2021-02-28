@@ -7,6 +7,8 @@
 package com.epn.trappi.models.rrhh;
 
 import com.epn.trappi.db.rrhh.RolPagosDb;
+import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
+
 import java.util.ArrayList;
 
 /**
@@ -14,27 +16,27 @@ import java.util.ArrayList;
  * @author Juan Jaramillo <juanjodev02 at juan.jaramillo02@epn.edu.ec>
  */
 public class RolesPagos {
-    ArrayList <RolPagos> lista;
+    ArrayList <RolDePagos> lista;
     
     public RolesPagos () {
         this.lista = new RolPagosDb().selectAll();
     }
     
-    public ArrayList <RolPagos> obtenerTodos() {
+    public ArrayList <RolDePagos> obtenerTodos() {
         return new RolPagosDb().selectAll();
     }
     
-    public ArrayList <RolPagos> obtenerTodos(String cedula) {
+    public ArrayList <RolDePagos> obtenerTodos(String cedula) {
             return new RolPagosDb().getByCedula(cedula);
     }
     
-    public RolPagos agregar (RolPagos nuevoRol) {
+    public RolDePagos agregar (RolDePagos nuevoRol) {
         new RolPagosDb().addOne(nuevoRol);
         this.lista = new RolPagosDb().selectAll();
         return nuevoRol;
     }
     
-    public RolPagos buscarUno(int cedula) {
+    public RolDePagos buscarUno(int cedula) {
         return new RolPagosDb().getOne(cedula + "");
     }
 }

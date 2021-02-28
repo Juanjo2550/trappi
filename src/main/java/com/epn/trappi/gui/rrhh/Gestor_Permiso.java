@@ -6,23 +6,18 @@
 package com.epn.trappi.gui.rrhh;
 
 
-import com.epn.trappi.*;
 import com.epn.trappi.db.rrhh.Connect;
 import com.epn.trappi.gui.rrhh.Permisos.Calamidad_Domestica;
 import com.epn.trappi.gui.rrhh.Permisos.Gestor_Permisos;
-import com.epn.trappi.models.rrhh.Empleado;
+import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import com.epn.trappi.models.rrhh.Fecha;
-import com.epn.trappi.models.rrhh.ListaEmpleados;
 import com.epn.trappi.models.rrhh.TextPrompt;
-import java.awt.Color;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;

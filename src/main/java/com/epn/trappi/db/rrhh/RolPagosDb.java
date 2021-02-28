@@ -6,17 +6,15 @@
 
 package com.epn.trappi.db.rrhh;
 
-import com.epn.trappi.models.rrhh.Empleado;
 import com.epn.trappi.models.rrhh.Fecha;
-import com.epn.trappi.models.rrhh.RolPagos;
-import com.epn.trappi.models.rrhh.RolesPagos;
+import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * 
@@ -24,16 +22,16 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class RolPagosDb {
 
-    public ArrayList<RolPagos> selectAll() {
+    public ArrayList<RolDePagos> selectAll() {
         String sql = "SELECT * FROM rolpagos";
-        ArrayList<RolPagos> tempRoles = new ArrayList<RolPagos>();
+        ArrayList<RolDePagos> tempRoles = new ArrayList<RolDePagos>();
         try {
             Connection conn;
             conn = Connect.connect("juanjo.db");
             Statement stmt  = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                tempRoles.add(new RolPagos(
+                tempRoles.add(new RolDePagos(
                         new Fecha(Integer.parseInt(rs.getString("dia")), Integer.parseInt(rs.getString("mes")), Integer.parseInt(rs.getString("ano"))),
                         new EmpleadoDb().selectOne(rs.getString("cedula")),
                         Integer.parseInt(rs.getString("valor")),
@@ -46,7 +44,7 @@ public class RolPagosDb {
         return tempRoles;
     }
       
-    public RolPagos getOne (String cedulaEmpleado) {
+    public RolDePagos getOne (String cedulaEmpleado) {
         String sql = "SELECT * FROM rolpagos WHERE cedula = ?";
         try{
             Connection conn;
@@ -54,7 +52,7 @@ public class RolPagosDb {
             PreparedStatement pstmt  = conn.prepareStatement(sql);
             pstmt.setString(1, cedulaEmpleado);
             ResultSet rs = pstmt.executeQuery();
-            return new RolPagos(
+            return new RolDePagos(
                         new Fecha(Integer.parseInt(rs.getString("dia")), Integer.parseInt(rs.getString("mes")), Integer.parseInt(rs.getString("ano"))),
                         new EmpleadoDb().selectOne(rs.getString("cedula")),
                         Integer.parseInt(rs.getString("valor")),
@@ -65,13 +63,13 @@ public class RolPagosDb {
             System.out.println(e.getMessage());
         }
         
-        return new RolPagos();
+        return new RolDePagos();
     }
     
     
-    public ArrayList<RolPagos> getByCedula (String cedulaEmpleado) {
+    public ArrayList<RolDePagos> getByCedula (String cedulaEmpleado) {
         String sql = "SELECT * FROM rolpagos WHERE cedula = ?";
-        ArrayList<RolPagos> tempRoles = new ArrayList<RolPagos>();
+        ArrayList<RolDePagos> tempRoles = new ArrayList<RolDePagos>();
         try{
             Connection conn;
             conn = Connect.connect("juanjo.db");
@@ -79,7 +77,7 @@ public class RolPagosDb {
             pstmt.setString(1, cedulaEmpleado);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                tempRoles.add(new RolPagos(
+                tempRoles.add(new RolDePagos(
                             new Fecha(Integer.parseInt(rs.getString("dia")), Integer.parseInt(rs.getString("mes")), Integer.parseInt(rs.getString("ano"))),
                             new EmpleadoDb().selectOne(rs.getString("cedula")),
                             Integer.parseInt(rs.getString("valor")),
@@ -93,7 +91,7 @@ public class RolPagosDb {
         return tempRoles;
     }
     
-    public boolean addOne(RolPagos nuevoRolDePago) {
+    public boolean addOne(RolDePagos nuevoRolDePago) {
         String sql = "INSERT INTO rolpagos(cedula,valor, numero, dia, mes, ano) VALUES(?,?,?,?,?,?)";
         try (Connection conn = Connect.connect("juanjo.db");
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

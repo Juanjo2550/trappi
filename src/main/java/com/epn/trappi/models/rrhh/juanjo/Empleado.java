@@ -13,6 +13,7 @@ import com.epn.trappi.models.rrhh.Sueldo;
  * @author Juan Jaramillo <juanjodev02 at juan.jaramillo02@epn.edu.ec>
  */
 public abstract class Empleado {
+    private int id;
     private String nombres;
     private String apellidos;
     private String cedula;
@@ -25,7 +26,8 @@ public abstract class Empleado {
     private String estado;
     private char sexo;
 
-    public Empleado(String nombres, String apellidos, String cedula, String cargo, String departamento, String cuentaBancaria, String banco, Asistencia[] asistencias, String sueldo, String estado, char sexo) {
+    public Empleado(int id, String nombres, String apellidos, String cedula, String cargo, String departamento, String cuentaBancaria, String banco, Asistencia[] asistencias, String sueldo, String estado, char sexo) {
+        this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.cedula = cedula;
@@ -85,5 +87,9 @@ public abstract class Empleado {
 
     public char getSexo() {
         return sexo;
+    }
+
+    public int getId() {
+        return id;
     }
 }
