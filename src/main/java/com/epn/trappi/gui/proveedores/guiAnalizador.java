@@ -6,7 +6,7 @@
 package com.epn.trappi.gui.proveedores;
 
 import com.epn.trappi.models.proveedores.AnalizadorDeInventario;
-import com.epn.trappi.models.proveedores.CantidadDeBien;
+import com.epn.trappi.models.proveedores.Bien;
 import com.epn.trappi.models.proveedores.Inventario;
 import com.epn.trappi.models.proveedores.ListaDeCompras;
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class guiAnalizador extends javax.swing.JPanel {
         initComponents();
         jButRegFactCompNotaCred1.setEnabled(false);
         this.verTodo=verTodo;
-        ArrayList<CantidadDeBien> lista;
+        ArrayList<Bien> lista;
         lista=inventario.getListDeBienes().getListaCantidadDeBienesDb();
         dibujarDiagrama(lista);
         AnalizadorDeInventario analizador = new AnalizadorDeInventario();
@@ -45,14 +45,14 @@ public class guiAnalizador extends javax.swing.JPanel {
     }
 
     
-    private void dibujarDiagrama(ArrayList<CantidadDeBien> lista){
+    private void dibujarDiagrama(ArrayList<Bien> lista){
         lista.forEach(bien -> {
-            System.out.println(bien.getBien().getNombre() + ";" + bien.getCantidad()+";"+bien.getBien().getProveeedor().getRazonSocial());
+            System.out.println(bien.getNombre() + ";" + bien.getCantidad()+";"+bien.getProveeedor().getRazonSocial());
         });
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
         
         lista.forEach(bien -> {
-            datos.setValue(bien.getCantidad(), bien.getBien().getNombre(), bien.getBien().getNombre());
+            datos.setValue(bien.getCantidad(), bien.getNombre(), bien.getNombre());
         });
         JFreeChart ch = ChartFactory.createBarChart("Análisis del stock", "Producto", "Cantidad", datos,PlotOrientation.VERTICAL, true, true, false);
         ChartPanel cp = new ChartPanel(ch);

@@ -5,7 +5,7 @@
  */
 package com.epn.trappi.gui.proveedores;
 
-import com.epn.trappi.models.proveedores.CantidadDeBien;
+import com.epn.trappi.models.proveedores.Bien;
 import com.epn.trappi.models.proveedores.Compra;
 import com.epn.trappi.models.proveedores.ListaDeCompras;
 import javax.swing.JOptionPane;
@@ -33,8 +33,8 @@ public class guiDescripcionCompra extends javax.swing.JPanel {
         model.addColumn("Producto");
         model.addColumn("Cantidad");
         for (Compra compra : lista.getCompras()) {
-            for (CantidadDeBien cantidadBien : compra.getListaCantidadDeBienes().getListaBienes()) {
-                model.addRow(new Object[]{cantidadBien.getBien().getNombre(), cantidadBien.getCantidad()});
+            for (Bien cantidadBien : compra.getListaCantidadDeBienes().getListaBienes()) {
+                model.addRow(new Object[]{cantidadBien.getNombre(), cantidadBien.getCantidad()});
             }
         }
         jTable1.setModel(model);
