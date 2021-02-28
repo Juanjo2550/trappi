@@ -1,6 +1,9 @@
 
 package com.epn.trappi.models.financiero;
 
+import com.epn.trappi.db.connection.DataBaseConnection;
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
@@ -20,11 +23,27 @@ public class  Pago {
         this.monto = monto;
     }
 
+    public Pago(Fecha fechadePago, String nroCuenta, double monto) {
+        this.fechadePago = fechadePago;
+        this.nroCuenta = nroCuenta;
+        this.monto = monto;
+    }
+    
+
 
     
     public void registrarPago(Pago pago){
 
-        libroDiario.pagosRegistrados.add(pago);
+    DataBaseConnection dbInstance = DataBaseConnection.getInstance();
+        Connection connection = dbInstance.getConnection();
+        try{
+        Statement statement = connection.createStatement();
+        String sql = "INSERT INTO dbo.PAGO VALUES(1,1,'12345',150,28,02,2021)";
+        statement.executeUpdate(sql);
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
     }
     public String realizarPago(Pago pago){
         this.presupuesto=new Presupuesto(this.libroDiario);

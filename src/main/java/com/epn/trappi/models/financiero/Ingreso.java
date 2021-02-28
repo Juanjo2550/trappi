@@ -38,11 +38,11 @@ public class Ingreso {
         Connection connection = dbInstance.getConnection();
         try{
         Statement statement = connection.createStatement();
-        String sql = "insert into Ingreso values (idIngreso,"+ingreso.idFactura+","+ingreso.total+","+ingreso.fechaIngreso.devolverDia()+","+ingreso.fechaIngreso.devolverMes()+","+ingreso.fechaIngreso.devolverAnio()+"  );";
-        ResultSet resultSet = statement.executeQuery(sql);
-        System.out.println(resultSet);
+        String sql = "insert into dbo.INGRESO values (idIngreso,'"+ingreso.idFactura+"',"+ingreso.total+","+ingreso.fechaIngreso.devolverDia()+","+ingreso.fechaIngreso.devolverMes()+","+ingreso.fechaIngreso.devolverAnio()+"  );";
+        statement.executeUpdate(sql);
+        System.out.println("Se registró ingreso");
         }catch( Exception e){
-        
+            System.out.println(e);
             
         }
     }

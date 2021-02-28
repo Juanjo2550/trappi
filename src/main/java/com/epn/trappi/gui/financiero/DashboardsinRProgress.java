@@ -1,7 +1,12 @@
 
 package com.epn.trappi.gui.financiero;
 
+import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.models.financiero.Analizador;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -15,6 +20,7 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         initComponents();
         this.panelGastos.setVisible(false);
         this.panelDashboard.setVisible(false);
+        this.mostrarTablaIngresos();
       
     }
 
@@ -36,19 +42,9 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         panelDespliegue = new javax.swing.JPanel();
-        panelDashboard = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
         panelIngresos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaIngresos = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
@@ -59,7 +55,7 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         panelGastos = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tablaGastos = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -68,6 +64,16 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        panelDashboard = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -243,6 +249,112 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
 
         panelDespliegue.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        panelIngresos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tablaIngresos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaIngresos);
+
+        panelIngresos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 890, 360));
+        panelIngresos.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, 40, -1));
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+        panelIngresos.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 140, 40, -1));
+        panelIngresos.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 140, 60, -1));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel1.setText("Día:");
+        panelIngresos.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel2.setText("Mes:");
+        panelIngresos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 140, 30, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel3.setText("Año:");
+        panelIngresos.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 140, 40, 20));
+
+        jButton1.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jButton1.setText("Consultar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        panelIngresos.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 140, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel5.setText("Ingresos del: ");
+        panelIngresos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, -1, -1));
+
+        panelDespliegue.add(panelIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 690));
+
+        panelGastos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tablaGastos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tablaGastos);
+
+        panelGastos.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 730, 410));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel11.setText("Gastos del: ");
+        panelGastos.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel12.setText("Día:");
+        panelGastos.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel13.setText("Mes:");
+        panelGastos.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 120, 30, -1));
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel14.setText("Año:");
+        panelGastos.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 120, 40, 20));
+        panelGastos.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 40, -1));
+
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField5ActionPerformed(evt);
+            }
+        });
+        panelGastos.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 40, -1));
+        panelGastos.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 120, 60, -1));
+
+        jButton2.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jButton2.setText("Consultar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        panelGastos.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 110, 90, 40));
+
+        panelDespliegue.add(panelGastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 690));
+
         panelDashboard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -285,112 +397,6 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         panelDashboard.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 1190, 10));
 
         panelDespliegue.add(panelDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 690));
-
-        panelIngresos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        panelIngresos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 890, 360));
-        panelIngresos.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, 40, -1));
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-        panelIngresos.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 140, 40, -1));
-        panelIngresos.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 140, 60, -1));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel1.setText("Día:");
-        panelIngresos.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel2.setText("Mes:");
-        panelIngresos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 140, 30, -1));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel3.setText("Año:");
-        panelIngresos.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 140, 40, 20));
-
-        jButton1.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jButton1.setText("Consultar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        panelIngresos.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 140, -1, -1));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel5.setText("Ingresos del: ");
-        panelIngresos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, -1, -1));
-
-        panelDespliegue.add(panelIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 690));
-
-        panelGastos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable2);
-
-        panelGastos.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 730, 460));
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel11.setText("Gastos del: ");
-        panelGastos.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, -1, -1));
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel12.setText("Día:");
-        panelGastos.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, -1, -1));
-
-        jLabel13.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel13.setText("Mes:");
-        panelGastos.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 120, 30, -1));
-
-        jLabel14.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel14.setText("Año:");
-        panelGastos.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 120, 40, 20));
-        panelGastos.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 40, -1));
-
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
-            }
-        });
-        panelGastos.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 40, -1));
-        panelGastos.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 120, 60, -1));
-
-        jButton2.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jButton2.setText("Consultar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        panelGastos.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 110, 90, 40));
-
-        panelDespliegue.add(panelGastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 690));
 
         jPanel1.add(panelDespliegue, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 1190, 690));
 
@@ -509,6 +515,7 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         this.panelIngresos.setVisible(false);
         this.panelGastos.setVisible(true);
         this.panelDashboard.setVisible(false);
+        this.mostrarTablaGastos();
     }//GEN-LAST:event_btndashboardgastosMousePressed
 
     private void btndashboardingresosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btndashboardingresosMousePressed
@@ -517,6 +524,69 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         this.panelDashboard.setVisible(false);
     }//GEN-LAST:event_btndashboardingresosMousePressed
 
+    public void mostrarTablaIngresos(){
+        DefaultTableModel tab = null;
+        try{
+            String [] columnastabla = {"Nro. Factura", "Total", "Fecha"};
+            String [] datos = new String[3];
+            tab = new DefaultTableModel(null,columnastabla);
+            DataBaseConnection dbInstance = DataBaseConnection.getInstance();
+        Connection connection = dbInstance.getConnection();
+        try{
+        Statement statement = connection.createStatement();
+       String sql = "SELECT NROFACTURA2, TOTAL3, DIAINGRESO2, MESINGRESO2, ANIOINGRESO2 FROM dbo.INGRESO";
+        ResultSet resultSet = statement.executeQuery(sql);
+        while(resultSet.next()){
+            System.out.println("Está entrando");
+            datos[0] = resultSet.getString(1);
+            datos[1] = String.valueOf(resultSet.getInt(2));
+            String fecha = String.valueOf(resultSet.getInt(3))+'/'+String.valueOf(resultSet.getInt(4))+'/'+String.valueOf(resultSet.getInt(5));
+            datos[2] = fecha;
+            tab.addRow(datos);
+            
+        }
+        
+        }catch( Exception e){
+            System.out.println(e);
+            
+        }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        this.tablaIngresos.setModel(tab);
+    }
+    
+    public void mostrarTablaGastos(){
+        DefaultTableModel tab = null;
+        try{
+            String [] columnastabla = {"Nro. Cuenta", "Monto", "Fecha"};
+            String [] datos = new String[3];
+            tab = new DefaultTableModel(null,columnastabla);
+            DataBaseConnection dbInstance = DataBaseConnection.getInstance();
+        Connection connection = dbInstance.getConnection();
+        try{
+        Statement statement = connection.createStatement();
+       String sql = "SELECT NROCUENTA, MONTO, DIAPAGO, MESPAGO, ANIOPAGO FROM dbo.PAGO";
+        ResultSet resultSet = statement.executeQuery(sql);
+        while(resultSet.next()){
+            System.out.println("Está entrando");
+            datos[0] = resultSet.getString(1);
+            datos[1] = String.valueOf(resultSet.getDouble(2));
+            String fecha = String.valueOf(resultSet.getInt(3))+'/'+String.valueOf(resultSet.getInt(4))+'/'+String.valueOf(resultSet.getInt(5));
+            datos[2] = fecha;
+            tab.addRow(datos);
+            
+        }
+        
+        }catch( Exception e){
+            System.out.println(e);
+            
+        }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        this.tablaGastos.setModel(tab);
+    }
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -556,8 +626,6 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -572,5 +640,7 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
     private javax.swing.JPanel panelHorizontalCabecera;
     private javax.swing.JPanel panelIngresos;
     private javax.swing.JPanel panelVerticalIzquierdo;
+    private javax.swing.JTable tablaGastos;
+    private javax.swing.JTable tablaIngresos;
     // End of variables declaration//GEN-END:variables
 }

@@ -13,16 +13,16 @@ public class LibroDiario {
     ArrayList<Pago> pagosRegistrados = new ArrayList<Pago>();
     public double calcularTotalIngresos(){
         double totalIngresos=0;
-        for(Ingreso ingreso:ingresosRegistrados){
-            totalIngresos+=ingreso.total;
-        }
+       for(Ingreso ingreso : this.obtenerIngresosRegistrados()){
+           totalIngresos+=ingreso.total;
+       }
         return totalIngresos;
     }
     public double calcularTotalPagos(){
         double totalPagos=0;
-        for(Pago pago:pagosRegistrados){
-            totalPagos+=pago.monto;
-        }
+       for(Pago pago: this.obtenerPagosRegistrados()){
+           totalPagos+=pago.monto;     
+       }
         return totalPagos;
     }
     
@@ -32,18 +32,35 @@ public class LibroDiario {
         Connection connection = dbInstance.getConnection();
         try{
         Statement statement = connection.createStatement();
-        String sql = "Select nroFactura, total, diaIngreso, mesIngreso, anioIngreso from Ingreso";
+        String sql = "Select NROFACTURA2, TOTAL3, DIAINGRESO2, MESINGRESO2, ANIOINGRESO2 from dbo.INGRESO";
         ResultSet resultSet = statement.executeQuery(sql);
         while(resultSet.next()){
-            Fecha fecha = new Fecha(resultSet.getInt(2),resultSet.getInt(3),resultSet.getInt(4));
-            Ingreso ingresotemporal = new Ingreso(resultSet.getString("nroFactura"),resultSet.getDouble("total"),fecha);
+            Fecha fecha = new Fecha(resultSet.getInt(3),resultSet.getInt(4),resultSet.getInt(5));
+            Ingreso ingresotemporal = new Ingreso(resultSet.getString(1),resultSet.getDouble(2),fecha);
             ingresosRegistrados.add(ingresotemporal);           
         }
-        System.out.println(resultSet);
         }catch( Exception e){
-
+            System.out.println(e);
         }
         return ingresosRegistrados;
     }
 
+    public ArrayList<Pago> obtenerPagosRegistrados(){
+        ArrayList<Pago> pagosRegistrados = new ArrayList<Pago>();
+        DataBaseConnection dbInstance = DataBaseConnection.getInstance();
+        Connection connection = dbInstance.getConnection();
+        try{
+        Statement statement = connection.createStatement();
+        String sql = "Select NROCUENTA, MONTO, DIAPAGO, MESPAGO, ANIOPAGO from dbo.PAGO";
+        ResultSet resultSet = statement.executeQuery(sql);
+        while(resultSet.next()){
+            Fecha fecha = new Fecha(resultSet.getInt(3),resultSet.getInt(4),resultSet.getInt(5));
+            Pago pagotemporal = new Pago(fecha,resultSet.getString(1),resultSet.getDouble(2));
+            pagosRegistrados.add(pagotemporal);           
+        }
+        }catch( Exception e){
+            System.out.println(e);
+        }
+        return pagosRegistrados;
+    }
 }
