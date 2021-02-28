@@ -5,15 +5,25 @@
  */
 package com.epn.trappi.gui.logistico;
 
+import com.epn.trappi.controladores.logistico.storedProcedures;
+import com.epn.trappi.models.logistico.Mantenimiento;
+import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Alexander
  */
 public class FichasTecnicas extends javax.swing.JPanel {
 
-    /**
-     * Creates new form FichasTecnicas
-     */
+    storedProcedures instancia = new storedProcedures();
+    private String tabla = "";
+    private String columna = "";
+    private String valor = "";
     public FichasTecnicas() {
         initComponents();
     }
@@ -33,14 +43,14 @@ public class FichasTecnicas extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtMatriculaVehiculo = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        jTFidMantenimiento = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txaDetallesMantenimiento = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTableMatricula = new javax.swing.JTable();
+        jTableVerificarVehiculo = new javax.swing.JTable();
         btnVerificarVehiculo = new javax.swing.JButton();
         btnRegistrarMantenimiento = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -51,15 +61,15 @@ public class FichasTecnicas extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         btnRegistrarSolicitud = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        jTFidSolicitud = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         txtIdBien = new javax.swing.JTextField();
         btnVerificarMantenimiento = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTMatricula1 = new javax.swing.JTable();
+        jTVerificarMantenimiento = new javax.swing.JTable();
         btnVerificarBien = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTMatricula2 = new javax.swing.JTable();
+        jTVerificarBien = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -105,13 +115,18 @@ public class FichasTecnicas extends javax.swing.JPanel {
 
         txtMatriculaVehiculo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtMatriculaVehiculo.setForeground(new java.awt.Color(61, 57, 57));
-        txtMatriculaVehiculo.setText("20FD-22");
+        txtMatriculaVehiculo.setText("PBP-2432");
+        txtMatriculaVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMatriculaVehiculoActionPerformed(evt);
+            }
+        });
         jPanel2.add(txtMatriculaVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 180, 30));
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(61, 57, 57));
-        jTextField2.setText("123");
-        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 50, 130, 30));
+        jTFidMantenimiento.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jTFidMantenimiento.setForeground(new java.awt.Color(61, 57, 57));
+        jTFidMantenimiento.setText("123");
+        jPanel2.add(jTFidMantenimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 50, 130, 30));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(61, 57, 57));
@@ -136,7 +151,7 @@ public class FichasTecnicas extends javax.swing.JPanel {
         jLabel6.setText("Detalles del mantenimiento:");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 90, -1, 30));
 
-        jTableMatricula.setModel(new javax.swing.table.DefaultTableModel(
+        jTableVerificarVehiculo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -147,7 +162,7 @@ public class FichasTecnicas extends javax.swing.JPanel {
                 "Matricula"
             }
         ));
-        jScrollPane2.setViewportView(jTableMatricula);
+        jScrollPane2.setViewportView(jTableVerificarVehiculo);
 
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 360, 70));
 
@@ -233,10 +248,10 @@ public class FichasTecnicas extends javax.swing.JPanel {
         jLabel11.setText("ID solicitud:");
         jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 80, 100, 30));
 
-        jTextField5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jTextField5.setForeground(new java.awt.Color(61, 57, 57));
-        jTextField5.setText("123");
-        jPanel3.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 50, 150, 30));
+        jTFidSolicitud.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jTFidSolicitud.setForeground(new java.awt.Color(61, 57, 57));
+        jTFidSolicitud.setText("123");
+        jPanel3.add(jTFidSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 50, 150, 30));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(61, 57, 57));
@@ -258,7 +273,7 @@ public class FichasTecnicas extends javax.swing.JPanel {
         });
         jPanel3.add(btnVerificarMantenimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 300, 30));
 
-        jTMatricula1.setModel(new javax.swing.table.DefaultTableModel(
+        jTVerificarMantenimiento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -269,7 +284,7 @@ public class FichasTecnicas extends javax.swing.JPanel {
                 "Matricula"
             }
         ));
-        jScrollPane3.setViewportView(jTMatricula1);
+        jScrollPane3.setViewportView(jTVerificarMantenimiento);
 
         jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 300, 100));
 
@@ -283,7 +298,7 @@ public class FichasTecnicas extends javax.swing.JPanel {
         });
         jPanel3.add(btnVerificarBien, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 300, 30));
 
-        jTMatricula2.setModel(new javax.swing.table.DefaultTableModel(
+        jTVerificarBien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -294,7 +309,7 @@ public class FichasTecnicas extends javax.swing.JPanel {
                 "Matricula"
             }
         ));
-        jScrollPane4.setViewportView(jTMatricula2);
+        jScrollPane4.setViewportView(jTVerificarBien);
 
         jPanel3.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, 300, 100));
 
@@ -321,31 +336,76 @@ public class FichasTecnicas extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(43, 43, 43)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(68, 68, 68))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerificarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarVehiculoActionPerformed
-        // TODO add your handling code here:
+        tabla = "VEHICULO";
+        columna = "MATRICULA";
+        valor = txtMatriculaVehiculo.getText();
+        try {
+            DefaultTableModel modelo = instancia.consultarTablaColumna(tabla, columna, valor);
+            this.jTableVerificarVehiculo.setModel(modelo);
+        } catch (SQLException ex) {
+            Logger.getLogger(FichasTecnicas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnVerificarVehiculoActionPerformed
 
     private void btnVerificarMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarMantenimientoActionPerformed
-        // TODO add your handling code here:
+        tabla = "MANTENIMIENTO";
+        columna = "IDMANTENIMIENTO";
+        valor = txtIdMantenimiento.getText();
+        try {
+            DefaultTableModel modelo = instancia.consultarTablaColumna(tabla, columna, valor);
+            this.jTVerificarMantenimiento.setModel(modelo);
+        } catch (SQLException ex) {
+            Logger.getLogger(FichasTecnicas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnVerificarMantenimientoActionPerformed
 
     private void btnVerificarBienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarBienActionPerformed
-        // TODO add your handling code here:
+        tabla = "VEHICULO";
+        columna = "MATRICULA";
+        valor = txtIdBien.getText();
+        try {
+            DefaultTableModel modelo = instancia.consultarTablaColumna(tabla, columna, valor);
+            this.jTVerificarBien.setModel(modelo);
+        } catch (SQLException ex) {
+            Logger.getLogger(FichasTecnicas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnVerificarBienActionPerformed
 
     private void btnRegistrarSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarSolicitudActionPerformed
-        // TODO add your handling code here:
+        Calendar fecha = Calendar.getInstance();
+        int numSolicitud = Integer.parseInt(jTFidSolicitud.getText());
+        int identificadorBien = Integer.parseInt(txtIdBien.getText());
+        int idMantenimiento = Integer.parseInt(txtIdMantenimiento.getText());;
+        String fechaSol = String.valueOf(fecha); 
+        String estadoMantenimiento = txaDetallesMantenimiento.getText();
+        try {
+            instancia.ingresarSolicitudMantenimiento(numSolicitud, identificadorBien, idMantenimiento, fechaSol, estadoMantenimiento);
+            JOptionPane.showMessageDialog(null, "Solicitud de mantenimiento ingresado exitosamente!");
+        } catch (SQLException ex) {
+            Logger.getLogger(FichasTecnicas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnRegistrarSolicitudActionPerformed
 
     private void btnRegistrarMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarMantenimientoActionPerformed
-        // TODO add your handling code here:
+        Mantenimiento mantenimiento = new Mantenimiento(Integer.parseInt(jTFidMantenimiento.getText()),txtMatriculaVehiculo.getText(), txaDetallesMantenimiento.getText());
+        try {
+            instancia.ingresarMantenimiento(mantenimiento);
+            JOptionPane.showMessageDialog(null, "Mantenimiento ingresado exitosamente!");
+        } catch (SQLException ex) {
+            Logger.getLogger(FichasTecnicas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnRegistrarMantenimientoActionPerformed
+
+    private void txtMatriculaVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatriculaVehiculoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMatriculaVehiculoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -373,11 +433,11 @@ public class FichasTecnicas extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTMatricula1;
-    private javax.swing.JTable jTMatricula2;
-    private javax.swing.JTable jTableMatricula;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTFidMantenimiento;
+    private javax.swing.JTextField jTFidSolicitud;
+    private javax.swing.JTable jTVerificarBien;
+    private javax.swing.JTable jTVerificarMantenimiento;
+    private javax.swing.JTable jTableVerificarVehiculo;
     private javax.swing.JTextArea txaDetallesMantenimiento;
     private javax.swing.JTextField txtIdBien;
     private javax.swing.JTextField txtIdMantenimiento;
