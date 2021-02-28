@@ -27,6 +27,7 @@ public class JFBanco extends javax.swing.JFrame {
         jPanelEliminarCuenta.setVisible(false);
         jPanelMovimientosCuenta.setVisible(false);
         jPanelIngresar.setVisible(false);
+        jPanelCuentas.setVisible(false);
         jPanel8.setVisible(false);
         jPanel9.setVisible(false);
         jPanel10.setVisible(false);
@@ -84,6 +85,11 @@ public class JFBanco extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jPanelCrearCuenta = new javax.swing.JPanel();
+        jPanelCuentas = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton13 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
@@ -93,6 +99,7 @@ public class JFBanco extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
         jPanelEliminarCuenta = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
@@ -434,20 +441,85 @@ public class JFBanco extends javax.swing.JFrame {
 
         jPanel3.add(jPanelIngresarCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 480));
 
+        jPanelCrearCuenta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel1.setText("Cuentas Creadas");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Nombres", "Cedula", "Nro. Cuenta", "Entidad"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        jButton13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton13.setText("Cerrar");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelCuentasLayout = new javax.swing.GroupLayout(jPanelCuentas);
+        jPanelCuentas.setLayout(jPanelCuentasLayout);
+        jPanelCuentasLayout.setHorizontalGroup(
+            jPanelCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCuentasLayout.createSequentialGroup()
+                .addContainerGap(51, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
+            .addGroup(jPanelCuentasLayout.createSequentialGroup()
+                .addGroup(jPanelCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelCuentasLayout.createSequentialGroup()
+                        .addGap(202, 202, 202)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanelCuentasLayout.createSequentialGroup()
+                        .addGap(164, 164, 164)
+                        .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanelCuentasLayout.setVerticalGroup(
+            jPanelCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCuentasLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanelCrearCuenta.add(jPanelCuentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 630, 430));
+
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel5.setText("Crear Cuenta");
+        jPanelCrearCuenta.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(256, 11, -1, -1));
+        jPanelCrearCuenta.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 83, 150, -1));
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
             }
         });
+        jPanelCrearCuenta.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 150, -1));
+        jPanelCrearCuenta.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 150, -1));
 
         jLabel6.setText("Cedula:");
+        jPanelCrearCuenta.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, -1, -1));
 
         jLabel7.setText("Nombres:");
+        jPanelCrearCuenta.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 89, -1, -1));
 
         jLabel8.setText("Contraseña:");
+        jPanelCrearCuenta.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, -1, -1));
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton4.setText("Aceptar");
@@ -456,60 +528,20 @@ public class JFBanco extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
+        jPanelCrearCuenta.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, -1, -1));
 
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton5.setText("Cancelar");
+        jPanelCrearCuenta.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, -1, -1));
 
-        javax.swing.GroupLayout jPanelCrearCuentaLayout = new javax.swing.GroupLayout(jPanelCrearCuenta);
-        jPanelCrearCuenta.setLayout(jPanelCrearCuentaLayout);
-        jPanelCrearCuentaLayout.setHorizontalGroup(
-            jPanelCrearCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCrearCuentaLayout.createSequentialGroup()
-                .addGroup(jPanelCrearCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelCrearCuentaLayout.createSequentialGroup()
-                        .addGap(256, 256, 256)
-                        .addComponent(jLabel5))
-                    .addGroup(jPanelCrearCuentaLayout.createSequentialGroup()
-                        .addGap(182, 182, 182)
-                        .addGroup(jPanelCrearCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel7))
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanelCrearCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanelCrearCuentaLayout.createSequentialGroup()
-                        .addGap(170, 170, 170)
-                        .addComponent(jButton4)
-                        .addGap(118, 118, 118)
-                        .addComponent(jButton5)))
-                .addContainerGap(219, Short.MAX_VALUE))
-        );
-        jPanelCrearCuentaLayout.setVerticalGroup(
-            jPanelCrearCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCrearCuentaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addGap(44, 44, 44)
-                .addGroup(jPanelCrearCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(63, 63, 63)
-                .addGroup(jPanelCrearCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(80, 80, 80)
-                .addGroup(jPanelCrearCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(65, 65, 65)
-                .addGroup(jPanelCrearCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
-                .addContainerGap(143, Short.MAX_VALUE))
-        );
+        jButton12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton12.setText("Mostrar todas las Cuentas");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+        jPanelCrearCuenta.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, -1, -1));
 
         jPanel3.add(jPanelCrearCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 24, -1, -1));
 
@@ -680,6 +712,14 @@ public class JFBanco extends javax.swing.JFrame {
         jPanelMovimientosCuenta.setVisible(false);
     }//GEN-LAST:event_jButton11ActionPerformed
 
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        jPanelCuentas.setVisible(false);
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        jPanelCuentas.setVisible(true);
+    }//GEN-LAST:event_jButton12ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -719,6 +759,8 @@ public class JFBanco extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -727,6 +769,7 @@ public class JFBanco extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -758,12 +801,15 @@ public class JFBanco extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jPanelCrearCuenta;
+    private javax.swing.JPanel jPanelCuentas;
     private javax.swing.JPanel jPanelEliminarCuenta;
     private javax.swing.JPanel jPanelIngresar;
     private javax.swing.JPanel jPanelIngresarCuenta;
     private javax.swing.JPanel jPanelMovimientosCuenta;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
