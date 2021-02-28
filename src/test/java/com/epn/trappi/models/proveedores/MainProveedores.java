@@ -5,7 +5,13 @@
  */
 package com.epn.trappi.models.proveedores;
 
+import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.db.proveedores.ProveedoresDb;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,47 +21,40 @@ import java.util.List;
  */
 public class MainProveedores {
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws SQLException {
         ProveedoresDb db = new ProveedoresDb();
+        /*DataBaseConnection dbInstance = DataBaseConnection.getInstance();
+        Connection connection = dbInstance.getConnection();
+        Statement statement = connection.createStatement();
+        CallableStatement cstmt = null;
+        cstmt = connection.prepareCall(
+                "{call selectAllProveedor}");
+        boolean resultSet = cstmt.execute();
+        System.out.println(resultSet);
+         */
+ /*while (resultSet.next()) {
+            System.out.println(resultSet.getString(1) + " " + resultSet.getString(2));
+        }*/
 
-        //Probando Listar Productos
+        //db.getProveedores();
+        //ListaProveedores prov = new ListaProveedores();
+        db.getProveedores().forEach(pr -> {
+            System.out.println(pr.getRuc() + ";" + pr.getRazonSocial() + ";" + pr.getDireccion() + ";" + pr.getCuenta());
+        });
+        
         List<Producto> prod = db.getProductos();
         prod.forEach(p -> {
             System.out.println(p.getNombre() + ";" + p.getPrecio() + ";" + p.getProveeedor().getRuc());
         });
-
-        //Probando Listar Proveedores
-        ListaProveedores prov = new ListaProveedores();
-        prov.getListaDeProveedores().forEach(pr -> {
-            System.out.println(pr.getRuc() + ";" + pr.getRazonSocial() + ";" + pr.getDireccion() + ";" + pr.getCuenta());
-        });
-
-        //Probando Listar Servicios
+        
         List<Servicio> serv = db.getServicios();
         serv.forEach(pr -> {
             System.out.println(pr.getNombre() + ";" + pr.getPrecio() + ";" + pr.getProveeedor().getRuc());
         });
-
-        //Probando Listar ListaCantidadBien
-        /*ListaCantidadDeBienes bienes = new ListaCantidadDeBienes();
-        bienes.getListaCantidadDeBienesDb().forEach(bien -> {
-            System.out.println(bien.getBien().getNombre() + ";" + bien.getCantidad());
-        });*/
-
-        Inventario inv = new Inventario();
-
-        inv.getListaCantidadDeBienes().getListaCantidadDeBienes().forEach(bien -> {
-            System.out.println(bien.getBien().getNombre() + ";" + bien.getCantidad());
-        });
-
-        //db.getListaCantidadBienes();
-        /*//Probando agregar Producto
-        Proveedor prove = new Proveedor("1772561566001", "Super Aqui", "Quito, Ecuador");
-        Producto pro = new Producto("Doritos, picantes", 3.75, prove);
-        db.setProductos(pro);
         
-        //Probando agregar Proveedores
-        Proveedor prove = new Proveedor("1772561566001", "Super Aqui", "Quito, Ecuador");
-        db.setProveedores(prove);*/
+        /*String [] params = {"ruc:7043728305001","nombrebien:Papel higienico","preciobien:2.8","tipobien:Producto","cantidad:50","marca:Familia"};
+        
+        db.ejecutarSPParameters("insertBien", params);*/
+
     }
 }

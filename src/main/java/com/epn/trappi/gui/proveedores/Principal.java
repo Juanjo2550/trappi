@@ -24,7 +24,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        new CambiaPanel(PanelVerTodos, new guiAnalizador(PanelVerTodos));
+        //new CambiaPanel(PanelVerTodos, new guiAnalizador(PanelVerTodos));
         ponerTituloYsub("Dashboard", "Genere una solicitud de compra de productos con bajo stock");
         panelesOpciones.add(jPanOpcProductos);
         panelesOpciones.add(jPanOpcServicios);
@@ -576,8 +576,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jButDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButDashboardActionPerformed
-        new CambiaPanel(PanelVerTodos, new guiAnalizador(PanelVerTodos));
-        showPanel(null);
+        //new CambiaPanel(PanelVerTodos, new guiAnalizador(PanelVerTodos));
+        //showPanel(null);
     }//GEN-LAST:event_jButDashboardActionPerformed
 
     private void jButComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButComprasActionPerformed
@@ -646,7 +646,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButProductosActionPerformed
 
     private void jButRealizarComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRealizarComprasActionPerformed
-        new CambiaPanel(PanelVerTodos, new guiFormularioComprasPanel(PanelVerTodos));
+        //new CambiaPanel(PanelVerTodos, new guiFormularioComprasPanel(PanelVerTodos));
     }//GEN-LAST:event_jButRealizarComprasActionPerformed
 
     private void jButCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButCompraActionPerformed
@@ -654,12 +654,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButCompraActionPerformed
 
     private void jButVerTodFactura5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButVerTodFactura5ActionPerformed
-        try {
+        /*try {
             new CambiaPanel(PanelVerTodos, new guiComprasPanel());
         } catch (IOException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        showPanel(null);
+           Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        showPanel(null);*/
     }//GEN-LAST:event_jButVerTodFactura5ActionPerformed
 
     /**

@@ -10,16 +10,24 @@ import com.epn.trappi.db.proveedores.ProveedoresDb;
 public class Producto extends Bien {
 
     private final ProveedoresDb db = new ProveedoresDb();
+    private String marca;
 
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
 
     public Producto(String nombre, double precio, Proveedor proveeedor, int cantidad, String marca) {
         super(nombre, precio, proveeedor, cantidad, marca);
     }
-    
+
     public Producto(String nombre, double precio, Proveedor proveeedor) {
         super(nombre, precio, proveeedor);
     }
-    
+
     public Producto(String nombre) {
         super(nombre);
     }
