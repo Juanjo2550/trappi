@@ -5,6 +5,11 @@
  */
 package com.epn.trappi.gui.logistico;
 
+import com.epn.trappi.db.connection.*;
+import com.epn.trappi.models.logistico.*;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.sql.*;
 /**
  *
  * @author Alexander
@@ -33,14 +38,14 @@ public class ListasVehiculos extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        btnBuscar = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        cmbBusquedaVehiculos = new javax.swing.JComboBox<>();
+        btnEntregasRecientes = new javax.swing.JButton();
+        txtBusquedaVehiculos = new javax.swing.JTextField();
+        btnBuscarVehiculo = new javax.swing.JButton();
+        btnEntregasDia = new javax.swing.JButton();
+        btnEntregasMes = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTEntregasDatos = new javax.swing.JTable();
+        tbListaVehiculos = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -106,77 +111,89 @@ public class ListasVehiculos extends javax.swing.JPanel {
         jLabel6.setText("Atributo de búsqueda:");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(61, 57, 57));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Número de factura", "Nombre del cliente", "Nombre del conductor", "Cédula del cliente", "Fecha", "Destino" }));
-        jComboBox1.setBorder(null);
-        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 54, 140, 30));
+        cmbBusquedaVehiculos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmbBusquedaVehiculos.setForeground(new java.awt.Color(61, 57, 57));
+        cmbBusquedaVehiculos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Matrícula", "Tipo de Vehículo" }));
+        cmbBusquedaVehiculos.setBorder(null);
+        jPanel2.add(cmbBusquedaVehiculos, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 54, 140, 30));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(61, 57, 57));
-        jButton2.setText("Mostrar las entregas más recientes");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnEntregasRecientes.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnEntregasRecientes.setForeground(new java.awt.Color(61, 57, 57));
+        btnEntregasRecientes.setText("Mostrar las entregas más recientes");
+        btnEntregasRecientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnEntregasRecientesActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 110, -1, -1));
+        jPanel2.add(btnEntregasRecientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 110, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jTextField1.setText("Mazda Z2");
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 370, 30));
+        txtBusquedaVehiculos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jPanel2.add(txtBusquedaVehiculos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 370, 30));
 
-        btnBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 15)); // NOI18N
-        btnBuscar.setForeground(new java.awt.Color(61, 57, 57));
-        btnBuscar.setText("Buscar");
-        btnBuscar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        btnBuscarVehiculo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 15)); // NOI18N
+        btnBuscarVehiculo.setForeground(new java.awt.Color(61, 57, 57));
+        btnBuscarVehiculo.setText("Buscar");
+        btnBuscarVehiculo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                btnBuscarMouseMoved(evt);
+                btnBuscarVehiculoMouseMoved(evt);
             }
         });
-        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnBuscarVehiculo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnBuscarMouseExited(evt);
+                btnBuscarVehiculoMouseExited(evt);
             }
         });
-        jPanel2.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 50, 100, 30));
+        btnBuscarVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarVehiculoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnBuscarVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 50, 100, 30));
 
-        jButton4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(61, 57, 57));
-        jButton4.setText("Mostrar entregas del día actual");
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+        btnEntregasDia.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnEntregasDia.setForeground(new java.awt.Color(61, 57, 57));
+        btnEntregasDia.setText("Mostrar entregas del día actual");
+        jPanel2.add(btnEntregasDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
-        jButton5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(61, 57, 57));
-        jButton5.setText("Mostrar entregas del mes actual");
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, -1, -1));
+        btnEntregasMes.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnEntregasMes.setForeground(new java.awt.Color(61, 57, 57));
+        btnEntregasMes.setText("Mostrar entregas del mes actual");
+        jPanel2.add(btnEntregasMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, -1, -1));
 
-        jTEntregasDatos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jTEntregasDatos.setForeground(new java.awt.Color(61, 57, 57));
-        jTEntregasDatos.setModel(new javax.swing.table.DefaultTableModel(
+        tbListaVehiculos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tbListaVehiculos.setForeground(new java.awt.Color(61, 57, 57));
+        tbListaVehiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID_Entrega", "Cliente", "Conductor", "Vehiculo", "Destino"
+                "Matrícula", "Estado", "Tipo", "Kilometraje"
             }
-        ));
-        jTEntregasDatos.setFocusable(false);
-        jTEntregasDatos.setGridColor(new java.awt.Color(61, 57, 57));
-        jTEntregasDatos.setIntercellSpacing(new java.awt.Dimension(0, 0));
-        jTEntregasDatos.setOpaque(false);
-        jTEntregasDatos.setRowHeight(25);
-        jTEntregasDatos.setSelectionBackground(new java.awt.Color(61, 57, 57));
-        jTEntregasDatos.getTableHeader().setReorderingAllowed(false);
-        jTEntregasDatos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTEntregasDatosMouseClicked(evt);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTEntregasDatos);
+        tbListaVehiculos.setFocusable(false);
+        tbListaVehiculos.setGridColor(new java.awt.Color(61, 57, 57));
+        tbListaVehiculos.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        tbListaVehiculos.setOpaque(false);
+        tbListaVehiculos.setRowHeight(25);
+        tbListaVehiculos.setSelectionBackground(new java.awt.Color(61, 57, 57));
+        tbListaVehiculos.getTableHeader().setReorderingAllowed(false);
+        tbListaVehiculos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbListaVehiculosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbListaVehiculos);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -382,30 +399,92 @@ public class ListasVehiculos extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnEntregasRecientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntregasRecientesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnEntregasRecientesActionPerformed
 
-    private void btnBuscarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseMoved
+    private void btnBuscarVehiculoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarVehiculoMouseMoved
 
 
-    }//GEN-LAST:event_btnBuscarMouseMoved
+    }//GEN-LAST:event_btnBuscarVehiculoMouseMoved
 
-    private void btnBuscarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseExited
+    private void btnBuscarVehiculoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarVehiculoMouseExited
 
-    }//GEN-LAST:event_btnBuscarMouseExited
+    }//GEN-LAST:event_btnBuscarVehiculoMouseExited
 
-    private void jTEntregasDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTEntregasDatosMouseClicked
+    private void tbListaVehiculosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbListaVehiculosMouseClicked
+        try{
+            int fila = tbListaVehiculos.getSelectedRow();
+            String matricula = (String)tbListaVehiculos.getValueAt(fila, 0);
+            
+            String sql = "";
+            DataBaseConnection dbInstance = DataBaseConnection.getInstance();
+            Connection connection = dbInstance.getConnection();
+            Statement statement = connection.createStatement();
+            
+            ResultSet resultSet = statement.executeQuery(sql);
+            System.out.println(resultSet);
+            while (resultSet.next()) {
 
-    }//GEN-LAST:event_jTEntregasDatosMouseClicked
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_tbListaVehiculosMouseClicked
+
+    private void btnBuscarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarVehiculoActionPerformed
+        // TODO add your handling code here:
+        try{
+            String parametro = (String)cmbBusquedaVehiculos.getSelectedItem();
+            String texto = txtBusquedaVehiculos.getText().trim();
+            
+            if(texto.isBlank())
+                JOptionPane.showMessageDialog(null, "Ingrese un valor para el parámetro");
+            else{
+                String sql = "";
+                DefaultTableModel modelo = new DefaultTableModel();
+                tbListaVehiculos.setModel(modelo);
+                modelo.addColumn("Matricula");
+                modelo.addColumn("Estado");
+                modelo.addColumn("Tipo");
+                modelo.addColumn("Kilometraje");
+                Object[] filas = new Object[4];
+
+                DataBaseConnection dbInstance = DataBaseConnection.getInstance();
+                Connection connection = dbInstance.getConnection();
+                Statement statement = connection.createStatement();
+
+                switch(parametro){
+                    case "Matrícula":
+                        sql = "select * from VEHICULO where MATRICULA=\'" + texto + "\'";
+                        break;
+                    case "Tipo de Vehículo":
+                        sql = "select * from VEHICULO where TIPOVEHICULO=\'" + texto + "\'";
+                        break;
+                }
+                ResultSet resultSet = statement.executeQuery(sql);
+                System.out.println(resultSet);
+                while (resultSet.next()) {
+                    filas[0]=(String)resultSet.getString(1).trim();
+                    filas[1]=(String)resultSet.getString(2).trim();
+                    filas[2]=(String)resultSet.getString(3).trim();
+                    filas[3]=resultSet.getInt(4);
+                    modelo.addRow(filas);
+                }
+            }
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_btnBuscarVehiculoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnBuscarVehiculo;
+    private javax.swing.JButton btnEntregasDia;
+    private javax.swing.JButton btnEntregasMes;
+    private javax.swing.JButton btnEntregasRecientes;
+    private javax.swing.JComboBox<String> cmbBusquedaVehiculos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -430,7 +509,7 @@ public class ListasVehiculos extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTEntregasDatos;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tbListaVehiculos;
+    private javax.swing.JTextField txtBusquedaVehiculos;
     // End of variables declaration//GEN-END:variables
 }

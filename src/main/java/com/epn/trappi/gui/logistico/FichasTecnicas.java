@@ -32,32 +32,32 @@ public class FichasTecnicas extends javax.swing.JPanel {
         jPanel7 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtMatriculaVehiculo = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txaDetallesMantenimiento = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTMatricula = new javax.swing.JTable();
-        jButton6 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jTableMatricula = new javax.swing.JTable();
+        btnVerificarVehiculo = new javax.swing.JButton();
+        btnRegistrarMantenimiento = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtIdMantenimiento = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        btnRegistrarSolicitud = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jButton7 = new javax.swing.JButton();
+        txtIdBien = new javax.swing.JTextField();
+        btnVerificarMantenimiento = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTMatricula1 = new javax.swing.JTable();
-        jButton8 = new javax.swing.JButton();
+        btnVerificarBien = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTMatricula2 = new javax.swing.JTable();
 
@@ -103,10 +103,10 @@ public class FichasTecnicas extends javax.swing.JPanel {
         jLabel4.setText("Filtros de búsqueda");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(61, 57, 57));
-        jTextField1.setText("20FD-22");
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 180, 30));
+        txtMatriculaVehiculo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtMatriculaVehiculo.setForeground(new java.awt.Color(61, 57, 57));
+        txtMatriculaVehiculo.setText("20FD-22");
+        jPanel2.add(txtMatriculaVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 180, 30));
 
         jTextField2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jTextField2.setForeground(new java.awt.Color(61, 57, 57));
@@ -123,11 +123,11 @@ public class FichasTecnicas extends javax.swing.JPanel {
         jLabel8.setText("Matrícula del vehículo:");
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 30));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jTextArea1.setForeground(new java.awt.Color(61, 57, 57));
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txaDetallesMantenimiento.setColumns(20);
+        txaDetallesMantenimiento.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        txaDetallesMantenimiento.setForeground(new java.awt.Color(61, 57, 57));
+        txaDetallesMantenimiento.setRows(5);
+        jScrollPane1.setViewportView(txaDetallesMantenimiento);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 460, 70));
 
@@ -136,7 +136,7 @@ public class FichasTecnicas extends javax.swing.JPanel {
         jLabel6.setText("Detalles del mantenimiento:");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 90, -1, 30));
 
-        jTMatricula.setModel(new javax.swing.table.DefaultTableModel(
+        jTableMatricula.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -147,19 +147,29 @@ public class FichasTecnicas extends javax.swing.JPanel {
                 "Matricula"
             }
         ));
-        jScrollPane2.setViewportView(jTMatricula);
+        jScrollPane2.setViewportView(jTableMatricula);
 
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 360, 70));
 
-        jButton6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(61, 57, 57));
-        jButton6.setText("Verificar");
-        jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 360, 30));
+        btnVerificarVehiculo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnVerificarVehiculo.setForeground(new java.awt.Color(61, 57, 57));
+        btnVerificarVehiculo.setText("Verificar");
+        btnVerificarVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerificarVehiculoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnVerificarVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 360, 30));
 
-        jButton4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(61, 57, 57));
-        jButton4.setText("Registrar");
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 50, 150, 30));
+        btnRegistrarMantenimiento.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnRegistrarMantenimiento.setForeground(new java.awt.Color(61, 57, 57));
+        btnRegistrarMantenimiento.setText("Registrar");
+        btnRegistrarMantenimiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarMantenimientoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnRegistrarMantenimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 50, 150, 30));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(61, 57, 57), 2, true));
@@ -198,20 +208,25 @@ public class FichasTecnicas extends javax.swing.JPanel {
         jLabel9.setText("Filtros de búsqueda");
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jTextField4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(61, 57, 57));
-        jTextField4.setText("123");
-        jPanel3.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 150, 30));
+        txtIdMantenimiento.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        txtIdMantenimiento.setForeground(new java.awt.Color(61, 57, 57));
+        txtIdMantenimiento.setText("123");
+        jPanel3.add(txtIdMantenimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 150, 30));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(61, 57, 57));
         jLabel10.setText("ID Mantenimiento:");
         jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 30));
 
-        jButton5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(61, 57, 57));
-        jButton5.setText("Registrar");
-        jPanel3.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 130, 146, 70));
+        btnRegistrarSolicitud.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnRegistrarSolicitud.setForeground(new java.awt.Color(61, 57, 57));
+        btnRegistrarSolicitud.setText("Registrar");
+        btnRegistrarSolicitud.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarSolicitudActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnRegistrarSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 130, 146, 70));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(61, 57, 57));
@@ -228,15 +243,20 @@ public class FichasTecnicas extends javax.swing.JPanel {
         jLabel12.setText("ID Bien:");
         jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 80, 30));
 
-        jTextField6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jTextField6.setForeground(new java.awt.Color(61, 57, 57));
-        jTextField6.setText("123");
-        jPanel3.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 200, 30));
+        txtIdBien.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        txtIdBien.setForeground(new java.awt.Color(61, 57, 57));
+        txtIdBien.setText("123");
+        jPanel3.add(txtIdBien, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 200, 30));
 
-        jButton7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(61, 57, 57));
-        jButton7.setText("Verificar");
-        jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 300, 30));
+        btnVerificarMantenimiento.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnVerificarMantenimiento.setForeground(new java.awt.Color(61, 57, 57));
+        btnVerificarMantenimiento.setText("Verificar");
+        btnVerificarMantenimiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerificarMantenimientoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnVerificarMantenimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 300, 30));
 
         jTMatricula1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -253,10 +273,15 @@ public class FichasTecnicas extends javax.swing.JPanel {
 
         jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 300, 100));
 
-        jButton8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(61, 57, 57));
-        jButton8.setText("Verificar");
-        jPanel3.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 300, 30));
+        btnVerificarBien.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnVerificarBien.setForeground(new java.awt.Color(61, 57, 57));
+        btnVerificarBien.setText("Verificar");
+        btnVerificarBien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerificarBienActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnVerificarBien, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 300, 30));
 
         jTMatricula2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -296,19 +321,39 @@ public class FichasTecnicas extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(43, 43, 43)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(68, 68, 68))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnVerificarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarVehiculoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVerificarVehiculoActionPerformed
+
+    private void btnVerificarMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarMantenimientoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVerificarMantenimientoActionPerformed
+
+    private void btnVerificarBienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarBienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVerificarBienActionPerformed
+
+    private void btnRegistrarSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarSolicitudActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarSolicitudActionPerformed
+
+    private void btnRegistrarMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarMantenimientoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarMantenimientoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton btnRegistrarMantenimiento;
+    private javax.swing.JButton btnRegistrarSolicitud;
+    private javax.swing.JButton btnVerificarBien;
+    private javax.swing.JButton btnVerificarMantenimiento;
+    private javax.swing.JButton btnVerificarVehiculo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -328,14 +373,14 @@ public class FichasTecnicas extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTMatricula;
     private javax.swing.JTable jTMatricula1;
     private javax.swing.JTable jTMatricula2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable jTableMatricula;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextArea txaDetallesMantenimiento;
+    private javax.swing.JTextField txtIdBien;
+    private javax.swing.JTextField txtIdMantenimiento;
+    private javax.swing.JTextField txtMatriculaVehiculo;
     // End of variables declaration//GEN-END:variables
 }
