@@ -2,6 +2,12 @@
 package com.epn.trappi.gui.financiero;
 
 import com.epn.trappi.models.financiero.Analizador;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 public class DashboardsinRProgress extends javax.swing.JFrame {
     Analizador analizador;
@@ -31,6 +37,15 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         panelDespliegue = new javax.swing.JPanel();
         panelDashboard = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
         panelIngresos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -207,7 +222,7 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
 
         panelVerticalIzquierdo.add(btnDashboardSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 570, 180, 30));
 
-        jPanel1.add(panelVerticalIzquierdo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 180, 690));
+        jPanel1.add(panelVerticalIzquierdo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 180, 670));
 
         panelHorizontalCabecera.setBackground(new java.awt.Color(51, 51, 51));
         panelHorizontalCabecera.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -228,16 +243,46 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
 
         panelDespliegue.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout panelDashboardLayout = new javax.swing.GroupLayout(panelDashboard);
-        panelDashboard.setLayout(panelDashboardLayout);
-        panelDashboardLayout.setHorizontalGroup(
-            panelDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1190, Short.MAX_VALUE)
-        );
-        panelDashboardLayout.setVerticalGroup(
-            panelDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 690, Short.MAX_VALUE)
-        );
+        panelDashboard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel10.setText("INGRESOS TOTALES");
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 140, 32));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel15.setText("$450000.00");
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 130, 20));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel16.setText("GASTOS TOTALES");
+        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel17.setText("$700000.00");
+        jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 120, -1));
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText("PRESUPUESTO");
+        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 180, 50));
+
+        jLabel19.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setText("$300000.00");
+        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 190, 30));
+
+        panelDashboard.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 370, 475, 230));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        jLabel9.setText("RESUMEN DE INGRESOS Y GASTOS");
+        panelDashboard.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 300, 48));
+        panelDashboard.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 1190, 10));
 
         panelDespliegue.add(panelDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 690));
 
@@ -391,6 +436,37 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         this.panelDashboard.setVisible(true);
         this.panelGastos.setVisible(false);
         this.panelIngresos.setVisible(false);
+        DefaultCategoryDataset dts = new DefaultCategoryDataset();
+        dts.setValue(30, "Enero", "");
+        dts.setValue(40, "Febrero", "");
+        dts.setValue(70, "Marzo", "");
+        dts.setValue(80, "Abril", "");
+        dts.setValue(20, "Mayo", "");
+        JFreeChart jc = ChartFactory.createBarChart("Ingresos Mensuales","Meses","Cantidad Ingresos", dts, PlotOrientation.HORIZONTAL,true,true,false);
+        ChartPanel cp = new ChartPanel(jc);
+        add(cp);
+        cp.setBounds(270, 190, 475, 250);
+        
+        DefaultCategoryDataset dts1 = new DefaultCategoryDataset();
+        dts1.setValue(30, "Enero", "");
+        dts1.setValue(40, "Febrero", "");
+        dts1.setValue(70, "Marzo", "");
+        dts1.setValue(80, "Abril", "");
+        dts1.setValue(20, "Mayo", "");
+        JFreeChart jc1 = ChartFactory.createBarChart("Ingresos Mensuales","Meses","Cantidad Ingresos", dts1, PlotOrientation.HORIZONTAL,true,true,false);
+        ChartPanel cp1 = new ChartPanel(jc1);
+        add(cp1);
+        cp1.setBounds(810, 190, 475, 250);
+        
+        
+        DefaultPieDataset dts2 = new DefaultPieDataset();
+        dts2.setValue("Ingresos", 80);
+        dts2.setValue("Gastos", 20);
+        
+        JFreeChart jc2 = ChartFactory.createPieChart("Ingresos Mensuales", dts2,true,true,false);
+        ChartPanel cp2 = new ChartPanel(jc2);
+        add(cp2);
+        cp2.setBounds(270, 460, 475, 230);
     }//GEN-LAST:event_btndashboardgeneralMousePressed
 
     private void btndashboardingresosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btndashboardingresosMouseEntered
@@ -457,10 +533,16 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -468,9 +550,12 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
