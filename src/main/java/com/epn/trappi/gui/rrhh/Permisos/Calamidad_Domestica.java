@@ -12,56 +12,20 @@ import com.epn.trappi.gui.rrhh.Gestor_Permiso;
  *
  * @author stali
  */
-public class Calamidad_Domestica implements Permiso{
+public class Calamidad_Domestica extends Permiso{
 
-    public Calamidad_Domestica() {
-    }
    
-    public Fecha fechaInicio;
-       public int numeroDias;
-    public Fecha fechaFin;
-    public String tipoPermiso;
-
-    public Fecha getFechaInicio() {
-        return fechaInicio;
+    public Calamidad_Domestica(int IDPERM, int IDEMP, int NUMDIASPERM, String VALORPAGARPERM, String COMENTPERM, String FECHAINICIOPERM,
+            String FECHAFINPERM, String ESTADOPERM, String TIPOPERM) {
+        super(IDPERM, IDEMP, NUMDIASPERM, VALORPAGARPERM, COMENTPERM, FECHAINICIOPERM, FECHAFINPERM, 
+                ESTADOPERM, TIPOPERM);
     }
-
-    public void setFechaInicio(Fecha fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
-
-    public int getNumeroDias() {
-        return numeroDias;
-    }
-
-    public void setNumeroDias(int numeroDias) {
-        this.numeroDias = numeroDias;
-    }
-
-    public Fecha getFechaFin() {
-        return fechaFin;
-    }
-
-    public void setFechaFin(Fecha fechaFin) {
-        this.fechaFin = fechaFin;
-    }
-
-    public String getTipoPermiso() {
-        return tipoPermiso;
-    }
-
-    public void setTipoPermiso(String tipoPermiso) {
-        this.tipoPermiso = tipoPermiso;
-    }
-    
-
-    
 
     public void Calcular_Afectacion_Sueldo() {
        
     }
 
-     
+ /*    
     public int Calcular_Numero_Dias_Permiso(String TipoPermiso) {
         this.tipoPermiso = TipoPermiso;
         if("muerte de padres, hermanos, hijos, cónyuge".equals(TipoPermiso)){
@@ -77,6 +41,12 @@ public class Calamidad_Domestica implements Permiso{
             this.numeroDias = 2;
         }
         return this.numeroDias;
+    }
+*/
+
+    @Override
+    public void RegistrarPermiso() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
   

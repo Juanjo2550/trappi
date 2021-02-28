@@ -12,25 +12,24 @@ import com.epn.trappi.models.rrhh.Fecha;
  *
  * @author stali
  */
-public class Nacimiento_Hijo implements Permiso {
+public class Enfermedad extends Permiso {
 
-    public Nacimiento_Hijo() {
+public Enfermedad(int IDPERM, int IDEMP, int NUMDIASPERM, String VALORPAGARPERM, String COMENTPERM, String FECHAINICIOPERM,
+            String FECHAFINPERM, String ESTADOPERM, String TIPOPERM) {
+        super(IDPERM, IDEMP, NUMDIASPERM, VALORPAGARPERM, COMENTPERM, FECHAINICIOPERM, FECHAFINPERM, 
+                ESTADOPERM, TIPOPERM);
     }
-    public double proporcional;
-    public Fecha FechaInicio;
-       public int numeroDias;
-    public Fecha fechaFin;
-       public String tipo;
        
-    @Override
-    public void Calcular_Afectacion_Sueldo() {
+  @Override
+    public void RegistrarPermiso() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 
-    @Override
+
+ /*   @Override
     public int Calcular_Numero_Dias_Permiso(String tipo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+    }*/
 }
+
