@@ -273,7 +273,7 @@ public class Logistico_GUI extends javax.swing.JFrame {
         botonMantenimiento.setBackground(new java.awt.Color(61, 57, 57));
         botonMantenimiento.setFont(new java.awt.Font("Segoe UI Semibold", 1, 16)); // NOI18N
         botonMantenimiento.setForeground(new java.awt.Color(255, 255, 255));
-        botonMantenimiento.setText("Solicitud y registro");
+        botonMantenimiento.setText("Historial");
         botonMantenimiento.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         botonMantenimiento.setContentAreaFilled(false);
         botonMantenimiento.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -295,7 +295,7 @@ public class Logistico_GUI extends javax.swing.JFrame {
         botonFichas.setBackground(new java.awt.Color(61, 57, 57));
         botonFichas.setFont(new java.awt.Font("Segoe UI Semibold", 0, 16)); // NOI18N
         botonFichas.setForeground(new java.awt.Color(255, 255, 255));
-        botonFichas.setText("Fichas técnicas");
+        botonFichas.setText("Solicitud y registro");
         botonFichas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         botonFichas.setContentAreaFilled(false);
         botonFichas.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {

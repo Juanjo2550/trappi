@@ -28,32 +28,81 @@ public class RegistroMantenimiento extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTEntregasDatos = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setText("Registro de mantenimiento");
+        jLabel1.setText("Historial de mantenimientos");
+
+        jTEntregasDatos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jTEntregasDatos.setForeground(new java.awt.Color(61, 57, 57));
+        jTEntregasDatos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ID_Entrega", "Cliente", "Conductor", "Vehiculo", "Destino"
+            }
+        ));
+        jTEntregasDatos.setFocusable(false);
+        jTEntregasDatos.setGridColor(new java.awt.Color(61, 57, 57));
+        jTEntregasDatos.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        jTEntregasDatos.setOpaque(false);
+        jTEntregasDatos.setRowHeight(25);
+        jTEntregasDatos.setSelectionBackground(new java.awt.Color(61, 57, 57));
+        jTEntregasDatos.getTableHeader().setReorderingAllowed(false);
+        jTEntregasDatos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTEntregasDatosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTEntregasDatos);
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(432, Short.MAX_VALUE)
+                .addContainerGap(425, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(426, 426, 426))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel1)
-                .addContainerGap(726, Short.MAX_VALUE))
+                .addGap(54, 54, 54)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(232, 232, 232))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTEntregasDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTEntregasDatosMouseClicked
+
+    }//GEN-LAST:event_jTEntregasDatosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTEntregasDatos;
     // End of variables declaration//GEN-END:variables
 }

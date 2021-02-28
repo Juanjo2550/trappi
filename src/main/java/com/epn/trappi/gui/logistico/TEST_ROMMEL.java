@@ -20,7 +20,7 @@ public class TEST_ROMMEL extends javax.swing.JFrame {
     storedProcedures instancia = new storedProcedures();
     public TEST_ROMMEL() throws SQLException {
         initComponents();
-        DefaultTableModel modelo = instancia.consultarTablaColumna("VEHICULO","MATRICULA","PBP-2432");
+        DefaultTableModel modelo = instancia.consultarTablaColumna("ENTREGA","NUMFACTURA","12345");
         this.jTable1.setModel(modelo);
     }
 
