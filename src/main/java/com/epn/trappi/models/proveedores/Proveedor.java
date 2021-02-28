@@ -1,6 +1,7 @@
 package com.epn.trappi.models.proveedores;
 
 import com.epn.trappi.db.proveedores.ProveedoresDb;
+import java.sql.SQLException;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -58,7 +59,7 @@ public class Proveedor {
         this.cuenta = cuenta;
     }
 
-    public void registrarProveedor() {
+    public void registrarProveedor() throws SQLException {
         Proveedor prov = new Proveedor(getRuc(), getRazonSocial(), getDireccion(), getCuenta());
         db.setProveedores(prov);
     }

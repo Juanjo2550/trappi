@@ -1,6 +1,9 @@
 package com.epn.trappi.models.proveedores;
 
 import com.epn.trappi.db.proveedores.ProveedoresDb;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -34,8 +37,12 @@ public class Producto extends Bien {
 
     @Override
     public void registrar() {
-        Producto prod = new Producto(nombre, precio, proveeedor);
-        db.setProductos(prod);
+        Producto prod = new Producto(nombre, precio, proveeedor, cantidad, marca);
+        try {
+            db.setProductos(prod);
+        } catch (SQLException ex) {
+            Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

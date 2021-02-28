@@ -1,6 +1,7 @@
 package com.epn.trappi.models.proveedores;
 
 import com.epn.trappi.db.proveedores.ProveedoresDb;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /*
@@ -26,7 +27,7 @@ public class ListaProveedores {
         this.listaDeProveedores = listaDeProveedores;
     }
 
-    public void añadirProveedor(Proveedor prov) {
+    public void añadirProveedor(Proveedor prov) throws SQLException {
         db.setProveedores(prov);
     }
 
