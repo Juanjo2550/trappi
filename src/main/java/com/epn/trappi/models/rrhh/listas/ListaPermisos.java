@@ -16,10 +16,11 @@ import java.util.Objects;
 public class ListaPermisos implements Lista<Permiso>{
     private final Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance()).getConnection();
     @Override
-    public void agregar(Permiso newPermission) {
+    public void agregar(Permiso nuevoPermiso) {
         String querySQL;
-        if (newPermission instanceOf )
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (nuevoPermiso instanceof Permiso){
+        
+        }   
     }
 
     @Override
