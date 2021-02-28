@@ -1,11 +1,21 @@
 
 package com.epn.trappi.gui.ecommerce.Interfaces;
 
+import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.FormulariosCliente.FEdicionCliente;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.*;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class CuentaCliente extends javax.swing.JFrame {
+    
+    DataBaseConnection dbInstance = DataBaseConnection.getInstance();
+    Connection connection = dbInstance.getConnection();
 
     
     public CuentaCliente() {
@@ -150,7 +160,7 @@ public class CuentaCliente extends javax.swing.JFrame {
         jLabel7.setText("Celular");
 
         Direccion.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        Direccion.setText("Cedula");
+        Direccion.setText("Dirección");
 
         jLabel9.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel9.setText("Contraseña");
@@ -310,9 +320,18 @@ public class CuentaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButtonaceptarcambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaceptarcambiosActionPerformed
-     FEdicionCliente fec=new FEdicionCliente(jTextFieldnombre.getText(),jTextFieldcorreo.getText(),jTextFieldfecha.getText(),jTextFieldcelular.getText(),jTextFielddireccion.getText(),jTextFieldcedula.getText(),jTextFieldcontrasena.getText());
-        Main.cliente.editarMisDato(fec);
-        JOptionPane.showMessageDialog(null,"cambios realizados con exito");
+     try {
+           
+            String sql = "update CLIENTES set NOMBRECLIE='"+jTextFieldnombre.getText()+"',FECHADENACIMIENTO='"+
+                    jTextFieldfecha.getText()+"',CELULAR ="+jTextFieldcelular.getText()+"',DIRECCION ='"+jTextFielddireccion.getText()+
+                    "',CONTRASENA ='"+jTextFieldcontrasena.getText()+"',CORREO ='"+jTextFieldcorreo.getText()+"' where CEDULA2='"+
+                    "where NOMBRECLIE-'"+"NOMBRE";
+            PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
+            JOptionPane.showMessageDialog(null,"cambios realizados con exito");
+        } catch (SQLException ex) {
+            Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_jButtonaceptarcambiosActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

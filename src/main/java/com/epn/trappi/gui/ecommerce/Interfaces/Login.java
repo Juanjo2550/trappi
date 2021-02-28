@@ -5,15 +5,23 @@
  */
 package com.epn.trappi.gui.ecommerce.Interfaces;
 
+import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Diseño.TextPrompt;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Christian
  */
 public class Login extends javax.swing.JFrame {
+    
+    DataBaseConnection dbInstance = DataBaseConnection.getInstance();
+    Connection connection = dbInstance.getConnection();
 
     /**
      * Creates new form LOGIN1
@@ -25,6 +33,11 @@ public class Login extends javax.swing.JFrame {
          TextPrompt contrasena= new TextPrompt("Contraseña", jTextFieldcontraseña);
          
     }
+    
+    //Luis
+    //luis@com
+    //1234567890
+    //12345
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -122,38 +135,29 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtoningresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtoningresarMouseClicked
-    Boolean aux=false;
-        for(int i=0; i<Main.listaclientes.size();i++){
-    if(Main.listaclientes.get(i).Correo.equals(jTextFieldUsuario.getText())){
-        Main.cliente=Main.listaclientes.get(i);
-        aux=true;
-    }
-    }
-        if(aux==false){
-            JOptionPane.showMessageDialog(null,"Usuario no valido");
-        }
-        else{
-            if(Main.cliente.entrarAlSistema(jTextFieldUsuario.getText(),jTextFieldcontraseña.getText())){
-    Inicio inicio=new Inicio();
-    inicio.setVisible(true);
-    this.setVisible(false);
-    }
-    else{
-    JOptionPane.showMessageDialog(null,"Contraseña incorrecta");
-    }
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
+    try {
+            boolean on_off= false;
+            String user = jTextFieldUsuario.getText();
+            String pass = jTextFieldcontraseña.getText();
+            Statement statement = connection.createStatement();
+            String sql = "select * from CLIENTES where CORREO ='"+
+                        user+"' and CONTRASENA='"+ pass+"'";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                on_off=true;
+                System.out.println(resultSet.getString(1) + " " + resultSet.getString(2));
+            }
+            if(on_off){
+                Inicio nuevo= new Inicio();
+                nuevo.setVisible(true);
+                this.setVisible(false);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }//GEN-LAST:event_jButtoningresarMouseClicked
 
+    
     private void jButtonregistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonregistrarMouseClicked
      Registrar registrar=new Registrar();
      registrar.setVisible(true);
@@ -161,7 +165,28 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonregistrarMouseClicked
 
     private void jButtoningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoningresarActionPerformed
-        // TODO add your handling code here:
+        try {
+            boolean on_off= false;
+            String nombre= "";
+            String user = jTextFieldUsuario.getText();
+            String pass = jTextFieldcontraseña.getText();
+            Statement statement = connection.createStatement();
+            String sql = "select NOMBRECLIE from CLIENTES where CORREO ="+
+                        user+"and CONTRASENA="+ pass;
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                on_off=true;
+                nombre=resultSet.getString("1");
+            }
+            if(on_off){
+                Inicio nuevo= new Inicio();
+                nuevo.setVisible(true);
+                nuevo.jt.setText(nombre);
+                this.setVisible(false);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtoningresarActionPerformed
 
     /**

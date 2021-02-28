@@ -1,11 +1,19 @@
 
 package com.epn.trappi.gui.ecommerce.Interfaces;
 
+import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.FormulariosCliente.FRegistroCliente;
 import com.epn.trappi.gui.ecommerce.Diseño.TextPrompt;
+import java.sql.*;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Registrar extends javax.swing.JFrame {
+    
+    DataBaseConnection dbInstance = DataBaseConnection.getInstance();
+    Connection connection = dbInstance.getConnection();
 
     
     public Registrar() {
@@ -54,6 +62,11 @@ public class Registrar extends javax.swing.JFrame {
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -191,6 +204,19 @@ public class Registrar extends javax.swing.JFrame {
     login.setVisible(true);
     this.setVisible(false);
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            Random aleatorio = new Random(System.currentTimeMillis());
+            int idAletorio = aleatorio.nextInt(100);
+            String sql = "insert into CLIENTES values ("+idAletorio+",'"+jTextFieldNombre.getText()+"','"+
+                    "','"+jTextFieldFecha.getText()+"','"+jTextFieldCelular.getText()+"','"+jTextFieldDireccion.getText()+
+                    "','"+jTextFieldContraseña.getText()+"','"+jTextFieldCorreo.getText()+"')";
+            PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

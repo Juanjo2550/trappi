@@ -9,9 +9,10 @@ public class Inicio extends javax.swing.JFrame {
         initComponents();
         this.setSize(1290, 700);
         this.setLocationRelativeTo(null);
-        jt.setText(Main.cliente.getNombre());
+        //jt.setText(Main.cliente.getNombre());
         jt.setEditable(false);
     }
+    
 
     
     @SuppressWarnings("unchecked")
@@ -222,6 +223,11 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void nombretitulo(String name){
+     jt.setText(name);
+        System.out.println(name);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -233,6 +239,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jt;
+    public javax.swing.JTextField jt;
     // End of variables declaration//GEN-END:variables
 }
