@@ -1,5 +1,6 @@
-package com.epn.trappi.models.rrhh;
+package com.epn.trappi.models.rrhh.contratacion;
 
+import com.epn.trappi.models.rrhh.listas.ListaAspirantes;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.Vector;

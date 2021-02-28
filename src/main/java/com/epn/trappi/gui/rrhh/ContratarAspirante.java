@@ -7,9 +7,9 @@ package com.epn.trappi.gui.rrhh;
 
 
 import com.epn.trappi.*;
-import com.epn.trappi.models.rrhh.Aspirante;
-import com.epn.trappi.models.rrhh.Contratacion;
-import com.epn.trappi.models.rrhh.ControladorPruebaAdmision;
+import com.epn.trappi.models.rrhh.contratacion.Aspirante;
+import com.epn.trappi.models.rrhh.contratacion.Contratacion;
+import com.epn.trappi.models.rrhh.contratacion.ControladorPruebaAdmision;
 import com.epn.trappi.models.rrhh.RRHH;
 import java.awt.Color;
 import java.util.ArrayList;

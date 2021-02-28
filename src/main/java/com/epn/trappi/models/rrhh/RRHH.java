@@ -1,5 +1,6 @@
 package com.epn.trappi.models.rrhh;
 
+import com.epn.trappi.models.rrhh.contratacion.Contratacion;
 import java.util.ArrayList;
 
 public class RRHH {
@@ -20,16 +21,16 @@ public class RRHH {
     public void obtenerRoles() {
         roles.obtenerTodos();
     }
-
-    public RolPagos iteracionRoles(Empleado e){
-        RolPagos rol = new RolPagos(fechaActual,e,e.getSueldo().getValor(),Integer.parseInt(e.getCuentaBancaria()));
-        new RolesPagos().agregar(rol);
-        return rol;
-    }
-    public void iterarEmpleados(){
-        ArrayList<Empleado>l1 = new ListaEmpleados().obtenerTodos();
-        for(Empleado e1:l1){
-            this.pendientes.add(iteracionRoles(e1));
-        }
-    }
+    //REVISAR Clase Abstracta  
+//    public RolPagos iteracionRoles(Empleado e){
+//        RolPagos rol = new RolPagos(fechaActual,e,e.getSueldo().getValor(),Integer.parseInt(e.getCuentaBancaria()));
+//        new RolesPagos().agregar(rol);
+//        return rol;
+//    }
+//    public void iterarEmpleados(){
+//        ArrayList<Empleado>l1 = new ListaEmpleados().obtenerTodos();
+//        for(Empleado e1:l1){
+//            this.pendientes.add(iteracionRoles(e1));
+//        }
+//    }
 }

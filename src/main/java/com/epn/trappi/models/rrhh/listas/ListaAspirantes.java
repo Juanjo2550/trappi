@@ -1,5 +1,7 @@
-package com.epn.trappi.models.rrhh;
+package com.epn.trappi.models.rrhh.listas;
 
+import com.epn.trappi.models.rrhh.contratacion.PruebaAdmision;
+import com.epn.trappi.models.rrhh.contratacion.Aspirante;
 import com.epn.trappi.db.rrhh.Connect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
