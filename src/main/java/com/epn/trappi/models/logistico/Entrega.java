@@ -37,7 +37,7 @@ public class Entrega {
         //Se deserializa el String para obtener la direccion de destino y el nombre del cliente.
         deserializar(datos);
         //Se llama al método asignar del control de disponibilidad
-        ControlDisponibilidad control = null;
+        ControlDisponibilidad control = new ControlDisponibilidad();
         control.asignar(this.destino);
     }
     
