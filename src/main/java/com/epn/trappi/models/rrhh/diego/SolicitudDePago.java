@@ -7,6 +7,7 @@ package com.epn.trappi.models.rrhh.diego;
 
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
+import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
 
 /**
  *
@@ -17,14 +18,25 @@ public class SolicitudDePago {
     Fecha fechaSolicitud;
     String estado;
     Empleado empleadoAPagar;
-
-    public void autorizarSolicitud(String estado) {
-        if(this.estado.equalsIgnoreCase(estado)){
-            System.out.print("Pendiente");
+    RolDePagos rol;
+    public boolean autorizarSolicitud(SolicitudDePago a, boolean autoriza) {
+        if(autoriza == true){
+            this.estado = "Autorizado";
+            System.out.print("Psgo autorizado");
+            return true;
+        }
+        else{
+            this.estado = "Rechazado";
+            System.out.print("No se autorizo el pago");
+            return false;
         }
     }
 
-    public void solicitarPago(String cedula, String cuenta) {
+    public void solicitarPago(Pago nuevoPago, SolicitudDePago p, boolean autoriza) {
+        if(autorizarSolicitud(p,autoriza)){
+            nuevoPago=new Pago(this.empleadoAPagar.getCuentaBancaria(),this.rol.getTotal());
+            nuevoPago.realizarPago();
+        }
 
     }
 
