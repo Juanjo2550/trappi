@@ -184,17 +184,17 @@ public class Fecha {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        if (dia < 10) {
-            sb.append("0");
-        }
-        sb.append(dia);
+        sb.append(año);
         sb.append("-");
         if (mes < 10) {
             sb.append("0");
         }
         sb.append(mes);
         sb.append("-");
-        sb.append(año);
+        if (dia < 10) {
+            sb.append("0");
+        }
+        sb.append(dia);
         return sb.toString();
     }
 
