@@ -22,9 +22,9 @@ public class Inventario {
 
     private ProveedoresDb db = new ProveedoresDb();
     
-    public Inventario() {
+    public Inventario() throws IOException {
         this.listDeBienes = new ListaDeBienes();
-        this.listDeBienes.setListaBienes(listDeBienes.getListaCantidadDeBienesDb());
+        this.listDeBienes = db.getInventarioDb();
     }
 
     public ListaDeBienes getListDeBienes() {
@@ -46,7 +46,7 @@ public class Inventario {
     }
 
     public void aumentarStockDb(Bien cantidadBien) {
-        try {
+        /*try {
             ArrayList<Bien> a = new ArrayList<>();
             a=db.getInventarioDb();
             for (int i=0;i<a.size();i++) {
@@ -58,7 +58,7 @@ public class Inventario {
             db.setInventarioDb(a);
         } catch (IOException ex) {
             Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }
     
     
@@ -73,7 +73,7 @@ public class Inventario {
     
     //el parámetro es la cantidad de productos nuevos para añadir a la cantidad existente y el bien
     public void aumentarStock(int cantidadDeProductosNuevos, Bien bienAAumentar) {
-        for (CantidadDeBien cantidadBien : listDeBienes.getListaBienes()) {
+        /*for (CantidadDeBien cantidadBien : listDeBienes.getListaBienes()) {
             if (cantidadBien.getBien() == bienAAumentar) {
                 ArrayList<CantidadDeBien> aux = listDeBienes.getListaBienes();
                 int indice = aux.indexOf(cantidadBien);
@@ -82,12 +82,12 @@ public class Inventario {
                 listDeBienes.setListaBienes(aux);
             }
         }
-        analizador.analizarStock();
+        analizador.analizarStock();*/
     }
 
     //el parámetro es la cantidad de productos a disminuir a la cantidad existente y el bien
     public void disminuirStock(int cantidadDeProductosRetirados, Bien bienADisminuir) {
-        for (CantidadDeBien cantidadBien : listDeBienes.getListaBienes()) {
+        /*for (CantidadDeBien cantidadBien : listDeBienes.getListaBienes()) {
             if (cantidadBien.getBien() == bienADisminuir) {
                 ArrayList<CantidadDeBien> aux = listDeBienes.getListaBienes();
                 int indice = aux.indexOf(cantidadBien);
@@ -96,6 +96,6 @@ public class Inventario {
                 listDeBienes.setListaBienes(aux);
             }
         }
-        analizador.analizarStock();
+        analizador.analizarStock();*/
     }
 }
