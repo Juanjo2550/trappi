@@ -505,6 +505,17 @@ public class Comprar extends javax.swing.JFrame {
             Logger.getLogger(JFBanco.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void updatefacturaDatabase(int idfac,double subtotal  ,double impuestos, double total){
+        try{
+            
+            String sql = "exec actualizar_factura"+idfac+","+subtotal+","+impuestos+","+total; 
+            PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
+            prepsInsertProduct.execute();
+        } catch(SQLException ex){
+            Logger.getLogger(JFBanco.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     /**
      * @param args the command line arguments
      */
