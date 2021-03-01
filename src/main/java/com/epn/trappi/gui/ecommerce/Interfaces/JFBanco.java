@@ -18,6 +18,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -47,6 +48,7 @@ public class JFBanco extends javax.swing.JFrame {
         jPanel8.setVisible(false);
         jPanel9.setVisible(false);
         jPanel10.setVisible(false);
+        
     }
 
     /**
@@ -688,6 +690,7 @@ public class JFBanco extends javax.swing.JFrame {
         jPanelMovimientosCuenta.setVisible(false);
         jPanelIngresar.setVisible(false);
         jPanelEliminarCuenta.setVisible(false);
+        llenartablat();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -800,6 +803,30 @@ public class JFBanco extends javax.swing.JFrame {
           }
        
    }
+   
+   public void llenartablat(){
+       
+       try{
+            DefaultTableModel cuenta = (DefaultTableModel) jTable1.getModel();
+            String[] aux=new String[4];
+            Statement statement = connection.createStatement();
+            String sql = "select  L.NOMBRECLIE, L.CEDULA2, C.NUMERODECUENTA, B.NOMBREBAN from CUENTABANCARIA C, CLIENTES L, BANCO B " +
+                         "where L.IDCLIENTE=C.IDCLIENTE and B.IDBANCO=C.IDBANCO and B.NOMBREBAN='"+banco+"'";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                 
+                aux[0]=resultSet.getString("NOMBRECLIE");
+                aux[1]=resultSet.getString("CEDULA2");
+                aux[2]=resultSet.getString("NUMERODECUENTA");
+                aux[3]=resultSet.getString("NOMBREBAN");
+                cuenta.addRow(aux);
+            }
+            jTable1.setModel(cuenta);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     /**
      * @param args the command line arguments

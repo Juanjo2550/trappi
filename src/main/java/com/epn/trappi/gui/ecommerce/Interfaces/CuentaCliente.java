@@ -303,6 +303,7 @@ public class CuentaCliente extends javax.swing.JFrame {
     Metododepago mp=new Metododepago();
     mp.setVisible(true);
     this.setVisible(false);
+    mp.nombretitulo(jt.getText());
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

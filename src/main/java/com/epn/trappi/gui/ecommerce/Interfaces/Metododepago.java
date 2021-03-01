@@ -2,6 +2,7 @@
 package com.epn.trappi.gui.ecommerce.Interfaces;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
+import com.epn.trappi.gui.ecommerce.Ecommerce.Articulo;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.Tarjetas.Tarjeta;
 import javax.swing.JOptionPane;
@@ -27,6 +28,7 @@ public class Metododepago extends javax.swing.JFrame {
         jButtoneditarconfirmarcambios.setVisible(false);
         this.setLocationRelativeTo(null);
         llenardatos();
+        llenartablat();
         jt.setText(Main.cliente.getNombre());
         jt.setEditable(false);
         
@@ -55,14 +57,15 @@ public class Metododepago extends javax.swing.JFrame {
         jTextFieldtarjeta.setEditable(false);
         jTextFieldtipo.setEditable(false);
     }
-  /*  public Tarjeta obtenertarjeta(){
+   public Tarjeta obtenertarjeta(){
         com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaCredito tar=null;
         com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaDebito tar1=null;
     for (int i = 0; i < Main.cliente.tarjeta.size(); i++) {
       
         }
     return tar;
-    }*/
+   }
+    
     
     
 
@@ -329,6 +332,7 @@ public class Metododepago extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     CuentaCliente cuenta=new CuentaCliente();
     cuenta.setVisible(true);
+    cuenta.nombretitulo(jt.getText());
     this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -341,6 +345,7 @@ public class Metododepago extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     Comprar comprar=new Comprar();
     comprar.setVisible(true);
+    comprar.nombretitulo(jt.getText());
     this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -348,10 +353,12 @@ public class Metododepago extends javax.swing.JFrame {
     RegistrarMetododepago rmp=new RegistrarMetododepago();
     rmp.setVisible(true);
     this.setVisible(false);
+    rmp.nombretitulo(jt.getText());
+    rmp.llenardatos();
     }//GEN-LAST:event_jButtoneditarActionPerformed
 
     private void tablatarjetasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablatarjetasMouseClicked
-    //tomarTarjeta();
+    tomarTarjeta();
     }//GEN-LAST:event_tablatarjetasMouseClicked
 
     private void jButtoneditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoneditar1ActionPerformed
@@ -393,17 +400,19 @@ public class Metododepago extends javax.swing.JFrame {
         try {
             String tarjeta= "";
             String cvv ="";
-            String tipo ="Credito";
+            String tipo ="";
             String fecha ="";
                                    
             Statement statement = connection.createStatement();
-            String sql = "select NUMEROTARJETA, CVV, FECHADECADUCIDAD from TARJETAS T, CUENTABANCARIA C, CLIENTES L "+
+            String sql = "select NUMEROTARJETA, CVV, FECHADECADUCIDAD,TIPO from TARJETAS T, CUENTABANCARIA C, CLIENTES L "+
                          "where T.IDCUENTABANCARIA=C.IDCUENTABANCARIA and C.IDCLIENTE=L.IDCLIENTE and L.NOMBRECLIE='"+jt.getText()+"'";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                  tarjeta= resultSet.getString("NUMEROTARJETA");
                  cvv =resultSet.getString("CVV");
-                 fecha =resultSet.getString("FECHADECADUCIDAD");}
+                 fecha =resultSet.getString("FECHADECADUCIDAD");
+                 tipo=resultSet.getString("TIPO");
+            }
             System.out.println(tarjeta);
             jTextFieldtarjeta.setText(tarjeta);
             jTextFieldcvv.setText(cvv);
@@ -414,6 +423,31 @@ public class Metododepago extends javax.swing.JFrame {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void llenartablat(){
+       
+       try{
+            DefaultTableModel tarjeta = (DefaultTableModel) tablatarjetas.getModel();
+            String[] aux=new String[4];
+            Statement statement = connection.createStatement();
+            String sql = "select NUMEROTARJETA, CVV, FECHADECADUCIDAD, TIPO from TARJETAS T, CUENTABANCARIA C, CLIENTES L "+
+                         "where T.IDCUENTABANCARIA=C.IDCUENTABANCARIA and C.IDCLIENTE=L.IDCLIENTE and L.NOMBRECLIE='"+jt.getText()+"'";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                 
+                aux[0]=resultSet.getString("NUMEROTARJETA");
+                aux[1]=resultSet.getString("CVV");
+                aux[2]=resultSet.getString("TIPO");
+                aux[3]=resultSet.getString("FECHADECADUCIDAD");
+                tarjeta.addRow(aux);
+            }
+            tablatarjetas.setModel(tarjeta);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */

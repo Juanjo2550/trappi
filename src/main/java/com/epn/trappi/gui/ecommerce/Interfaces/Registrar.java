@@ -58,6 +58,18 @@ public class Registrar extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTextFieldNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNombreActionPerformed(evt);
+            }
+        });
+
+        jTextFieldCorreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCorreoActionPerformed(evt);
+            }
+        });
+
         jButton1.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jButton1.setText("Aceptar");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -228,6 +240,48 @@ public class Registrar extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jTextFieldNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNombreActionPerformed
+
+    private void jTextFieldCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCorreoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCorreoActionPerformed
+
+    public  void llenardato(){
+        try {
+            String nombre= "";
+            String cedula ="";
+            String correo ="";
+            String fecha ="";
+            String celular ="";
+            String direc ="";
+            String contra ="";
+                       
+            Statement statement = connection.createStatement();
+            String sql = "select * from CLIENTES where NOMBRECLIE ='"+
+                        jTextFieldNombre.getText()+"'";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                 nombre= resultSet.getString("NOMBRECLIE");
+                 cedula =resultSet.getString("CEDULA2");
+                 correo =resultSet.getString("CORREO");
+                 fecha =resultSet.getString("FECHADENACIMIENTO");
+                 celular =resultSet.getString("CELULAR");
+                 direc =resultSet.getString("DIRECCION");
+                 contra =resultSet.getString("CONTRASENA");
+               
+            }
+            CuentaCliente cuenta=new CuentaCliente();
+            cuenta.llenardatos(nombre, cedula,correo, fecha,celular, direc, contra);
+            cuenta.nombretitulo(nombre);
+            cuenta.setVisible(true);
+            this.setVisible(false);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     /**
      * @param args the command line arguments
      */

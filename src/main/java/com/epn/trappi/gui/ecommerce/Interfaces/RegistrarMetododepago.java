@@ -1,23 +1,34 @@
 
 package com.epn.trappi.gui.ecommerce.Interfaces;
+import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.FormulariosTarjetas.FRegistroTarjeta;
 import com.epn.trappi.gui.ecommerce.Diseño.TextPrompt;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class RegistrarMetododepago extends javax.swing.JFrame {
+    
+    DataBaseConnection dbInstance = DataBaseConnection.getInstance();
+    Connection connection = dbInstance.getConnection();
 
     
     public RegistrarMetododepago() {
         initComponents();
         this.setSize(1300, 700);
         this.setLocationRelativeTo(null);
-        jt.setText(Main.cliente.getNombre());
+        
         jt.setEditable(false);
-        TextPrompt tarjeta = new TextPrompt("Número de Tarjeeta", jTextFieldTarjeta);
+         TextPrompt tarjeta = new TextPrompt("Número de Tarjeeta", jTextFieldTarjeta);
          TextPrompt cvv = new TextPrompt("CVV", jTextFieldCvv);
          TextPrompt tipo = new TextPrompt("Tipo ", jTextFieldTipo);
          TextPrompt fecha = new TextPrompt("Fecha de Caducidad", jTextFieldFecha);
+         llenardatos();
     }
 
     
@@ -257,6 +268,37 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
      
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    public void llenardatos(){
+        try {
+            String tarjeta= "";
+            String cvv ="";
+            String tipo ="Credito";
+            String fecha ="";
+                                   
+            Statement statement = connection.createStatement();
+            String sql = "select NUMEROTARJETA, CVV, FECHADECADUCIDAD from TARJETAS T, CUENTABANCARIA C, CLIENTES L "+
+                         "where T.IDCUENTABANCARIA=C.IDCUENTABANCARIA and C.IDCLIENTE=L.IDCLIENTE and L.NOMBRECLIE='"+jt.getText()+"'";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                 tarjeta= resultSet.getString("NUMEROTARJETA");
+                 cvv =resultSet.getString("CVV");
+                 fecha =resultSet.getString("FECHADECADUCIDAD");}
+            System.out.println(tarjeta);
+            System.out.println("estoy aqui");
+            jTextFieldTarjeta.setText(tarjeta);
+            jTextFieldCvv.setText(cvv);
+            jTextFieldTipo.setText(tipo);
+            jTextFieldFecha.setText(fecha);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void nombretitulo(String name){
+     jt.setText(name);
+        System.out.println(name);
+    }
+    
     /**
      * @param args the command line arguments
      */

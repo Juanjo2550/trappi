@@ -228,6 +228,7 @@ public class Inicio extends javax.swing.JFrame {
     mp.nombretitulo(jt.getText());
     mp.setVisible(true);
     mp.llenardatos();
+    mp.llenartablat();
     this.setVisible(false);
     }//GEN-LAST:event_jButton3MouseClicked
 
