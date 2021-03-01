@@ -6,7 +6,7 @@
 package com.epn.trappi.gui.rrhh;
 
 
-import com.epn.trappi.db.rrhh.Connect;
+
 import com.epn.trappi.gui.rrhh.Permisos.Calamidad_Domestica;
 import com.epn.trappi.gui.rrhh.Permisos.Gestor_Permisos;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
@@ -70,7 +70,7 @@ Fecha fecha = new Fecha();
  
     
     public void  ListarEmpleado(){
-        String sql = "SELECT nombres FROM empleados";
+     /*   String sql = "SELECT nombres FROM empleados";
        // ListaEmpleados temEmpleados = new ListaEmpleados();
         try {
             Connection conn = Connect.connect("juanjo.db");
@@ -86,7 +86,7 @@ Fecha fecha = new Fecha();
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }   
+        }   */
     }
      
     public void  ObtenerCedula(){
@@ -94,21 +94,21 @@ Fecha fecha = new Fecha();
         String sql = "SELECT cedula FROM empleados where nombres = '"+(String) cmbnombreEmpleado.getSelectedItem()+"'" ;
         
        // ListaEmpleados temEmpleados = new ListaEmpleados();
-        try {
+       /* try {
             Connection conn = Connect.connect("juanjo.db");
             Statement stmt  = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
-            // loop through the result set
+            loop through the result set
             
                 String CI = rs.getString("cedula");
                 txtCedula.setText(CI);
-                //txtCedula.setVisible(false);
+                txtCedula.setVisible(false);
            
             
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }   
+        }  */
     }
     
     public void  fechaInicio() throws ParseException{

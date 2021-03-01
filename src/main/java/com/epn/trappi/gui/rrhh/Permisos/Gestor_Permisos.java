@@ -5,7 +5,7 @@
  */
 package com.epn.trappi.gui.rrhh.Permisos;
 
-import com.epn.trappi.db.rrhh.Conexion_SQLite_Permisos;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -110,7 +110,7 @@ public class Gestor_Permisos {
         
     } 
     public boolean registrar_Permiso(){
-     
+     /*
         String sql = "INSERT INTO permiso (cedula,nombre,Tipo_Permiso,fecha_inicio,fecha_fin,estado,descripcion,afectacion_sueldo)" 
                 + "VALUES(?,?,?,?,?,?,?,?);";
         
@@ -136,7 +136,34 @@ public class Gestor_Permisos {
         }
         
         return true;
+        */return false;
+     /*
+        String sql = "INSERT INTO permiso (cedula,nombre,Tipo_Permiso,fecha_inicio,fecha_fin,estado,descripcion,afectacion_sueldo)" 
+                + "VALUES(?,?,?,?,?,?,?,?);";
         
+        try (Connection conn = Conexion_SQLite_Permisos.connect("permisos.db");
+             PreparedStatement registro = conn.prepareStatement(sql)) {
+            registro.setString(1, CI);
+            registro.setString(2, nombre_empleado);
+            registro.setString(3, TipoPermiso);
+            registro.setString(4, fechaInicio);
+            registro.setString(5, fechaFin);
+            registro.setString(6, estado);
+            registro.setString(7, descripcion);
+            registro.setDouble(8, afectacionSueldo);
+            registro.executeUpdate();
+            JOptionPane.showMessageDialog(null, "El permiso se ha registrado con exito");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Algo ha fallado, intenta de nuevo");
+            return false;
+        }
+        catch (java.lang.NumberFormatException e) {
+            JOptionPane.showMessageDialog(null,"Ingrese todos los campos");
+            return false;
+        }
+        
+        return true;
+        */    
     }
         
     

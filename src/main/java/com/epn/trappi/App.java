@@ -1,6 +1,6 @@
 package com.epn.trappi;
 
-import com.epn.trappi.db.rrhh.Connect;
+
 
 public class App {
     /**
