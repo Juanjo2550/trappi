@@ -255,6 +255,10 @@ public class Analizador {
         }
       return pagosPorFecha;
     }
+
+    public LibroDiario getLibrodiario() {
+        return librodiario;
+    }
     
 
     

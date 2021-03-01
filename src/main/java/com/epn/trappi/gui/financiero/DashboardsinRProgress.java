@@ -57,6 +57,8 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         txtMesGasto = new javax.swing.JTextField();
         txtAnioGasto = new javax.swing.JTextField();
         btnConsultarGastosporFecha = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
         panelIngresos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaIngresos = new javax.swing.JTable();
@@ -68,14 +70,16 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnConsultarIngresosporFecha = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
         panelDashboard = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        labelIngresosTotales = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        labelGastosTotales = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        labelPresupuesto = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         panelCircular = new javax.swing.JPanel();
@@ -271,7 +275,7 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tablaGastos);
 
-        panelGastos.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 730, 410));
+        panelGastos.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 730, 360));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
         jLabel11.setText("Gastos del: ");
@@ -310,7 +314,13 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
                 btnConsultarGastosporFechaActionPerformed(evt);
             }
         });
-        panelGastos.add(btnConsultarGastosporFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 110, 130, 40));
+        panelGastos.add(btnConsultarGastosporFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 110, 100, -1));
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("GASTOS DE TRAPPI");
+        panelGastos.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 300, 48));
+        panelGastos.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 1190, 10));
 
         panelDespliegue.add(panelGastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 690));
 
@@ -370,6 +380,12 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         jLabel5.setText("Ingresos del: ");
         panelIngresos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, -1, -1));
 
+        jLabel15.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("INGRESOS DE TRAPPI");
+        panelIngresos.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 300, 48));
+        panelIngresos.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 1190, 10));
+
         panelDespliegue.add(panelIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 690));
 
         panelDashboard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -382,18 +398,20 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         jLabel10.setText("INGRESOS TOTALES");
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 140, 32));
 
-        jLabel15.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel15.setText("$450000.00");
-        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 130, 20));
+        labelIngresosTotales.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        labelIngresosTotales.setForeground(new java.awt.Color(0, 51, 255));
+        labelIngresosTotales.setText("$450000.00");
+        jPanel2.add(labelIngresosTotales, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 130, 20));
 
         jLabel16.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(51, 51, 51));
         jLabel16.setText("GASTOS TOTALES");
         jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
-        jLabel17.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel17.setText("$700000.00");
-        jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 120, -1));
+        labelGastosTotales.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        labelGastosTotales.setForeground(new java.awt.Color(255, 51, 51));
+        labelGastosTotales.setText("$700000.00");
+        jPanel2.add(labelGastosTotales, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 120, -1));
 
         jLabel18.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(51, 51, 51));
@@ -401,10 +419,11 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         jLabel18.setText("PRESUPUESTO");
         jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 180, 50));
 
-        jLabel19.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
-        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel19.setText("$300000.00");
-        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 190, 30));
+        labelPresupuesto.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        labelPresupuesto.setForeground(new java.awt.Color(0, 153, 51));
+        labelPresupuesto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelPresupuesto.setText("$300000.00");
+        jPanel2.add(labelPresupuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 190, 30));
 
         panelDashboard.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 370, 475, 230));
 
@@ -518,11 +537,6 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         for(int i=0;i<5;i++){
             dts1.setValue(this.analizador.calcularPagosporIntervalodeMeses()[i], this.analizador.calcularIntervaloMensualString()[i], "");
         }
-        /*dts1.setValue(30, "Enero", "");
-        dts1.setValue(40, "Febrero", "");
-        dts1.setValue(70, "Marzo", "");
-        dts1.setValue(80, "Abril", "");
-        dts1.setValue(20, "Mayo", "");*/
         JFreeChart jc1 = ChartFactory.createBarChart("Gastos Mensuales","Meses","Cantidad Gastos(USD)", dts1, PlotOrientation.HORIZONTAL,true,true,false);
         ChartPanel cp1 = new ChartPanel(jc1);
         cp1.setBounds(810, 190, 475, 250);
@@ -532,15 +546,18 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         
         
         DefaultPieDataset dts2 = new DefaultPieDataset();
-        dts2.setValue("Ingresos", 80);
-        dts2.setValue("Gastos", 20);
+        dts2.setValue("Gastos",this.analizador.getLibrodiario().calcularTotalPagos() );
+        dts2.setValue("Ingresos", this.analizador.getLibrodiario().calcularTotalIngresos());
         
-        JFreeChart jc2 = ChartFactory.createPieChart("Ingresos Mensuales", dts2,true,true,false);
+        JFreeChart jc2 = ChartFactory.createPieChart("Gastos vs. Ingresos", dts2,true,true,false);
         ChartPanel cp2 = new ChartPanel(jc2);
         cp2.setBounds(270, 460, 475, 230);
         panelCircular.setLayout(new java.awt.BorderLayout());
         panelCircular.add(cp2);
         panelCircular.validate();
+        this.labelIngresosTotales.setText("$"+String.valueOf(this.analizador.getLibrodiario().calcularTotalIngresos()));
+        this.labelGastosTotales.setText("$"+String.valueOf(this.analizador.getLibrodiario().calcularTotalPagos()));
+        this.labelPresupuesto.setText("$"+String.valueOf(this.analizador.getLibrodiario().calcularTotalIngresos()-this.analizador.getLibrodiario().calcularTotalPagos()));
         this.panelDashboard.setVisible(true);
     }//GEN-LAST:event_btndashboardgeneralMousePressed
 
@@ -736,7 +753,6 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -750,7 +766,12 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel labelDashboardSalir;
+    private javax.swing.JLabel labelGastosTotales;
+    private javax.swing.JLabel labelIngresosTotales;
+    private javax.swing.JLabel labelPresupuesto;
     private javax.swing.JLabel lableGeneralDashboard;
     private javax.swing.JPanel panelBarrasGastos;
     private javax.swing.JPanel panelBarrasIngresos;
