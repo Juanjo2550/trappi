@@ -52,7 +52,7 @@ public class Main {
         Connection connection = dbInstance.getConnection();
         try{
         Statement statement = connection.createStatement();
-        //String sql = "INSERT INTO dbo.INGRESO VALUES(1,1,'12345',400,28,02,2021)";
+       // String sql = "INSERT INTO dbo.INGRESO VALUES(2,1,'12345',400,27,02,2021)";
        // String sql = "INSERT INTO dbo.LIBRODIARIO VALUES(1)";
 //       String sql = "SELECT * FROM dbo.INGRESO";
 //        ResultSet resultSet = statement.executeQuery(sql);
@@ -69,21 +69,22 @@ public class Main {
 //            System.out.println("Consulta = "+dato+dato1+dato2+dato3+dato4+dato5+dato6);
 //        }
         
-        //String sql = "INSERT INTO dbo.PAGO VALUES(1,1,'12345',150,28,02,2021)";
+        String sql = "INSERT INTO dbo.PAGO VALUES(2,1,'12378',150,01,01,2021)";
         //statement.executeUpdate(sql);
-        String sql = "SELECT * FROM dbo.PAGO";
-        ResultSet resultSet = statement.executeQuery(sql);
-        while(resultSet.next()){
-            System.out.println("Está entrando");
-            String dato = String.valueOf(resultSet.getInt(1));
-             String dato1 = String.valueOf(resultSet.getInt(2));
-              String dato2 = resultSet.getString(3);
-               String dato3 = String.valueOf(resultSet.getDouble(4));
-                String dato4 = String.valueOf(resultSet.getInt(5));
-                 String dato5 = String.valueOf(resultSet.getInt(6));
-                  String dato6 = String.valueOf(resultSet.getInt(7));
-            System.out.println("Consulta = "+dato+dato1+dato2+dato3+dato4+dato5+dato6);
-        }
+        //String sql = "SELECT * FROM dbo.PAGO";
+        //ResultSet resultSet =statement.executeUpdate(sql);
+        statement.executeUpdate(sql);
+//        while(resultSet.next()){
+//            System.out.println("Está entrando");
+//            String dato = String.valueOf(resultSet.getInt(1));
+//             String dato1 = String.valueOf(resultSet.getInt(2));
+//              String dato2 = resultSet.getString(3);
+//               String dato3 = String.valueOf(resultSet.getDouble(4));
+//                String dato4 = String.valueOf(resultSet.getInt(5));
+//                 String dato5 = String.valueOf(resultSet.getInt(6));
+//                  String dato6 = String.valueOf(resultSet.getInt(7));
+//            System.out.println("Consulta = "+dato+dato1+dato2+dato3+dato4+dato5+dato6);
+//        }
         }catch( Exception e){
             System.out.println(e);
             

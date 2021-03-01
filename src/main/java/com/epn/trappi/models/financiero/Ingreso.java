@@ -46,8 +46,20 @@ public class Ingreso {
             
         }
     }
-    
 
+    public Fecha getFechaIngreso() {
+        return fechaIngreso;
+    }
+
+    public String getIdFactura() {
+        return idFactura;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+    
+    
     @Override
     public String toString() {
         return "Ingreso: " + "Fecha de Ingreso: "+this.fechaIngreso+", idFactura=" + idFactura + ", total=" + total + '\n';

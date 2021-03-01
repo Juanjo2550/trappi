@@ -3,9 +3,12 @@ package com.epn.trappi.gui.financiero;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.models.financiero.Analizador;
+import com.epn.trappi.models.financiero.Ingreso;
+import com.epn.trappi.models.financiero.Pago;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -20,6 +23,7 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         initComponents();
         this.panelGastos.setVisible(false);
         this.panelDashboard.setVisible(false);
+        this.panelIngresos.setVisible(false);
         this.mostrarTablaIngresos();
       
     }
@@ -42,17 +46,6 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         panelDespliegue = new javax.swing.JPanel();
-        panelIngresos = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaIngresos = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
         panelGastos = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaGastos = new javax.swing.JTable();
@@ -60,10 +53,21 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        txtDiaGasto = new javax.swing.JTextField();
+        txtMesGasto = new javax.swing.JTextField();
+        txtAnioGasto = new javax.swing.JTextField();
+        btnConsultarGastosporFecha = new javax.swing.JButton();
+        panelIngresos = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaIngresos = new javax.swing.JTable();
+        txtDiaIngreso = new javax.swing.JTextField();
+        txtMesIngreso = new javax.swing.JTextField();
+        txtAnioIngreso = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btnConsultarIngresosporFecha = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         panelDashboard = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -74,6 +78,9 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        panelCircular = new javax.swing.JPanel();
+        panelBarrasGastos = new javax.swing.JPanel();
+        panelBarrasIngresos = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -228,7 +235,7 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
 
         panelVerticalIzquierdo.add(btnDashboardSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 570, 180, 30));
 
-        jPanel1.add(panelVerticalIzquierdo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 180, 670));
+        jPanel1.add(panelVerticalIzquierdo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 180, 690));
 
         panelHorizontalCabecera.setBackground(new java.awt.Color(51, 51, 51));
         panelHorizontalCabecera.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -248,59 +255,6 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         jPanel1.add(panelHorizontalCabecera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 90));
 
         panelDespliegue.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelIngresos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tablaIngresos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tablaIngresos);
-
-        panelIngresos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 890, 360));
-        panelIngresos.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, 40, -1));
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-        panelIngresos.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 140, 40, -1));
-        panelIngresos.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 140, 60, -1));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel1.setText("Día:");
-        panelIngresos.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel2.setText("Mes:");
-        panelIngresos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 140, 30, -1));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel3.setText("Año:");
-        panelIngresos.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 140, 40, 20));
-
-        jButton1.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jButton1.setText("Consultar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        panelIngresos.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 140, -1, -1));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel5.setText("Ingresos del: ");
-        panelIngresos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, -1, -1));
-
-        panelDespliegue.add(panelIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 690));
 
         panelGastos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -334,26 +288,89 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
         jLabel14.setText("Año:");
         panelGastos.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 120, 40, 20));
-        panelGastos.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 40, -1));
+        panelGastos.add(txtDiaGasto, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 40, -1));
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        txtMesGasto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                txtMesGastoActionPerformed(evt);
             }
         });
-        panelGastos.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 40, -1));
-        panelGastos.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 120, 60, -1));
+        panelGastos.add(txtMesGasto, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 40, -1));
+        panelGastos.add(txtAnioGasto, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 120, 60, -1));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jButton2.setText("Consultar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        btnConsultarGastosporFecha.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        btnConsultarGastosporFecha.setText("Consultar");
+        btnConsultarGastosporFecha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnConsultarGastosporFechaMousePressed(evt);
             }
         });
-        panelGastos.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 110, 90, 40));
+        btnConsultarGastosporFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarGastosporFechaActionPerformed(evt);
+            }
+        });
+        panelGastos.add(btnConsultarGastosporFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 110, 130, 40));
 
         panelDespliegue.add(panelGastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 690));
+
+        panelIngresos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tablaIngresos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaIngresos);
+
+        panelIngresos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 890, 360));
+        panelIngresos.add(txtDiaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, 40, -1));
+
+        txtMesIngreso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMesIngresoActionPerformed(evt);
+            }
+        });
+        panelIngresos.add(txtMesIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 140, 40, -1));
+        panelIngresos.add(txtAnioIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 140, 60, -1));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel1.setText("Día:");
+        panelIngresos.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel2.setText("Mes:");
+        panelIngresos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 140, 30, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel3.setText("Año:");
+        panelIngresos.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 140, 40, 20));
+
+        btnConsultarIngresosporFecha.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        btnConsultarIngresosporFecha.setText("Consultar");
+        btnConsultarIngresosporFecha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnConsultarIngresosporFechaMousePressed(evt);
+            }
+        });
+        btnConsultarIngresosporFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarIngresosporFechaActionPerformed(evt);
+            }
+        });
+        panelIngresos.add(btnConsultarIngresosporFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 140, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel5.setText("Ingresos del: ");
+        panelIngresos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, -1, -1));
+
+        panelDespliegue.add(panelIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 690));
 
         panelDashboard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -395,6 +412,45 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         jLabel9.setText("RESUMEN DE INGRESOS Y GASTOS");
         panelDashboard.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 300, 48));
         panelDashboard.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 1190, 10));
+
+        javax.swing.GroupLayout panelCircularLayout = new javax.swing.GroupLayout(panelCircular);
+        panelCircular.setLayout(panelCircularLayout);
+        panelCircularLayout.setHorizontalGroup(
+            panelCircularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 475, Short.MAX_VALUE)
+        );
+        panelCircularLayout.setVerticalGroup(
+            panelCircularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 250, Short.MAX_VALUE)
+        );
+
+        panelDashboard.add(panelCircular, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, 475, 250));
+
+        javax.swing.GroupLayout panelBarrasGastosLayout = new javax.swing.GroupLayout(panelBarrasGastos);
+        panelBarrasGastos.setLayout(panelBarrasGastosLayout);
+        panelBarrasGastosLayout.setHorizontalGroup(
+            panelBarrasGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 475, Short.MAX_VALUE)
+        );
+        panelBarrasGastosLayout.setVerticalGroup(
+            panelBarrasGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 250, Short.MAX_VALUE)
+        );
+
+        panelDashboard.add(panelBarrasGastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 90, 475, 250));
+
+        javax.swing.GroupLayout panelBarrasIngresosLayout = new javax.swing.GroupLayout(panelBarrasIngresos);
+        panelBarrasIngresos.setLayout(panelBarrasIngresosLayout);
+        panelBarrasIngresosLayout.setHorizontalGroup(
+            panelBarrasIngresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 475, Short.MAX_VALUE)
+        );
+        panelBarrasIngresosLayout.setVerticalGroup(
+            panelBarrasIngresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 250, Short.MAX_VALUE)
+        );
+
+        panelDashboard.add(panelBarrasIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 475, 250));
 
         panelDespliegue.add(panelDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 690));
 
@@ -439,30 +495,40 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
     }//GEN-LAST:event_btndashboardgeneralMouseExited
 
     private void btndashboardgeneralMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btndashboardgeneralMousePressed
-        this.panelDashboard.setVisible(true);
+        this.vaciarCampos();
         this.panelGastos.setVisible(false);
         this.panelIngresos.setVisible(false);
         DefaultCategoryDataset dts = new DefaultCategoryDataset();
-        dts.setValue(30, "Enero", "");
-        dts.setValue(40, "Febrero", "");
-        dts.setValue(70, "Marzo", "");
-        dts.setValue(80, "Abril", "");
-        dts.setValue(20, "Mayo", "");
-        JFreeChart jc = ChartFactory.createBarChart("Ingresos Mensuales","Meses","Cantidad Ingresos", dts, PlotOrientation.HORIZONTAL,true,true,false);
+        analizador=new Analizador();
+        String[] mesesCalculados = this.analizador.calcularIntervaloMensualString();
+        analizador.calcularIntervaloMensualInt();
+        analizador.calcularIngresosporIntervalodeMeses();
+        for(int i=0;i<5;i++){
+            dts.setValue(analizador.calcularIngresosporIntervalodeMeses()[i], analizador.calcularIntervaloMensualString()[i], "");
+        }
+        
+        JFreeChart jc = ChartFactory.createBarChart("Ingresos Mensuales","Meses","Cantidad Ingresos(USD)", dts, PlotOrientation.HORIZONTAL,true,true,false);
         ChartPanel cp = new ChartPanel(jc);
-        add(cp);
         cp.setBounds(270, 190, 475, 250);
+        panelBarrasIngresos.setLayout(new java.awt.BorderLayout());
+        panelBarrasIngresos.add(cp);
+        panelBarrasIngresos.validate();
         
         DefaultCategoryDataset dts1 = new DefaultCategoryDataset();
-        dts1.setValue(30, "Enero", "");
+        for(int i=0;i<5;i++){
+            dts1.setValue(this.analizador.calcularPagosporIntervalodeMeses()[i], this.analizador.calcularIntervaloMensualString()[i], "");
+        }
+        /*dts1.setValue(30, "Enero", "");
         dts1.setValue(40, "Febrero", "");
         dts1.setValue(70, "Marzo", "");
         dts1.setValue(80, "Abril", "");
-        dts1.setValue(20, "Mayo", "");
-        JFreeChart jc1 = ChartFactory.createBarChart("Ingresos Mensuales","Meses","Cantidad Ingresos", dts1, PlotOrientation.HORIZONTAL,true,true,false);
+        dts1.setValue(20, "Mayo", "");*/
+        JFreeChart jc1 = ChartFactory.createBarChart("Gastos Mensuales","Meses","Cantidad Gastos(USD)", dts1, PlotOrientation.HORIZONTAL,true,true,false);
         ChartPanel cp1 = new ChartPanel(jc1);
-        add(cp1);
         cp1.setBounds(810, 190, 475, 250);
+        panelBarrasGastos.setLayout(new java.awt.BorderLayout());
+        panelBarrasGastos.add(cp1);
+        panelBarrasGastos.validate();
         
         
         DefaultPieDataset dts2 = new DefaultPieDataset();
@@ -471,8 +537,11 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         
         JFreeChart jc2 = ChartFactory.createPieChart("Ingresos Mensuales", dts2,true,true,false);
         ChartPanel cp2 = new ChartPanel(jc2);
-        add(cp2);
         cp2.setBounds(270, 460, 475, 230);
+        panelCircular.setLayout(new java.awt.BorderLayout());
+        panelCircular.add(cp2);
+        panelCircular.validate();
+        this.panelDashboard.setVisible(true);
     }//GEN-LAST:event_btndashboardgeneralMousePressed
 
     private void btndashboardingresosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btndashboardingresosMouseEntered
@@ -495,34 +564,47 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         this.btnDashboardSalir.setOpaque(false);
     }//GEN-LAST:event_btnDashboardSalirMouseExited
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnConsultarIngresosporFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarIngresosporFechaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnConsultarIngresosporFechaActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtMesIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMesIngresoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtMesIngresoActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void txtMesGastoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMesGastoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_txtMesGastoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnConsultarGastosporFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarGastosporFechaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnConsultarGastosporFechaActionPerformed
 
     private void btndashboardgastosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btndashboardgastosMousePressed
+        this.vaciarCampos();
         this.panelIngresos.setVisible(false);
-        this.panelGastos.setVisible(true);
         this.panelDashboard.setVisible(false);
+        this.panelGastos.setVisible(true);
         this.mostrarTablaGastos();
     }//GEN-LAST:event_btndashboardgastosMousePressed
 
     private void btndashboardingresosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btndashboardingresosMousePressed
-        this.panelIngresos.setVisible(true);
+        this.vaciarCampos();
         this.panelGastos.setVisible(false);
         this.panelDashboard.setVisible(false);
+        this.panelIngresos.setVisible(true);
+        this.mostrarTablaIngresos();
     }//GEN-LAST:event_btndashboardingresosMousePressed
+
+    private void btnConsultarIngresosporFechaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarIngresosporFechaMousePressed
+        this.analizador=new Analizador();
+        this.mostrarTablaIngresosporFecha(analizador.buscarIngresosPorFecha(Integer.parseInt(this.txtDiaIngreso.getText()), Integer.parseInt(this.txtMesIngreso.getText()), Integer.parseInt(this.txtAnioIngreso.getText())));
+    }//GEN-LAST:event_btnConsultarIngresosporFechaMousePressed
+
+    private void btnConsultarGastosporFechaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarGastosporFechaMousePressed
+        this.analizador=new Analizador();
+        this.mostrarTablaPagosporFecha(this.analizador.buscarPagosPorFecha(Integer.parseInt(txtDiaGasto.getText()), Integer.parseInt(txtMesGasto.getText()), Integer.parseInt(txtAnioGasto.getText())));
+    }//GEN-LAST:event_btnConsultarGastosporFechaMousePressed
 
     public void mostrarTablaIngresos(){
         DefaultTableModel tab = null;
@@ -553,6 +635,23 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println(e);
         }
+        this.tablaIngresos.setModel(tab);
+    }
+    public void mostrarTablaIngresosporFecha(ArrayList<Ingreso> ingresosporFecha){
+        DefaultTableModel tab = null;
+       
+            String [] columnastabla = {"Nro. Factura", "Total", "Fecha"};
+            String [] datos = new String[3];
+            tab = new DefaultTableModel(null,columnastabla);
+            for(Ingreso ingreso: ingresosporFecha){
+            System.out.println("Está entrando");
+            datos[0] = ingreso.getIdFactura();
+            datos[1] = String.valueOf(ingreso.getTotal());
+            String fecha = String.valueOf(ingreso.getFechaIngreso().devolverDia())+'/'+String.valueOf(ingreso.getFechaIngreso().devolverMes())+'/'+String.valueOf(ingreso.getFechaIngreso().devolverAnio());
+            datos[2] = fecha;
+            tab.addRow(datos);
+            
+            }
         this.tablaIngresos.setModel(tab);
     }
     
@@ -587,6 +686,31 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         }
         this.tablaGastos.setModel(tab);
     }
+    public void mostrarTablaPagosporFecha(ArrayList<Pago> pagosporFecha){
+        DefaultTableModel tab = null;
+       
+            String [] columnastabla = {"Nro. Cuenta", "Total", "Fecha"};
+            String [] datos = new String[3];
+            tab = new DefaultTableModel(null,columnastabla);
+            for(Pago pago: pagosporFecha){
+            System.out.println("Está entrando");
+            datos[0] = pago.getNroCuenta();
+            datos[1] = String.valueOf(pago.getMonto());
+            String fecha = String.valueOf(pago.getFechadePago().devolverDia())+'/'+String.valueOf(pago.getFechadePago().devolverMes())+'/'+String.valueOf(pago.getFechadePago().devolverAnio());
+            datos[2] = fecha;
+            tab.addRow(datos);
+            
+            }
+        this.tablaGastos.setModel(tab);
+    }
+    public void vaciarCampos(){
+        txtDiaGasto.setText("");
+        txtMesGasto.setText("");
+        txtAnioGasto.setText("");
+        txtDiaIngreso.setText("");
+        txtMesIngreso.setText("");
+        txtAnioIngreso.setText("");
+    }
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -596,12 +720,12 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConsultarGastosporFecha;
+    private javax.swing.JButton btnConsultarIngresosporFecha;
     private javax.swing.JPanel btnDashboardSalir;
     private javax.swing.JPanel btndashboardgastos;
     private javax.swing.JPanel btndashboardgeneral;
     private javax.swing.JPanel btndashboardingresos;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -626,14 +750,11 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel labelDashboardSalir;
     private javax.swing.JLabel lableGeneralDashboard;
+    private javax.swing.JPanel panelBarrasGastos;
+    private javax.swing.JPanel panelBarrasIngresos;
+    private javax.swing.JPanel panelCircular;
     private javax.swing.JPanel panelDashboard;
     private javax.swing.JPanel panelDespliegue;
     private javax.swing.JPanel panelGastos;
@@ -642,5 +763,11 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
     private javax.swing.JPanel panelVerticalIzquierdo;
     private javax.swing.JTable tablaGastos;
     private javax.swing.JTable tablaIngresos;
+    private javax.swing.JTextField txtAnioGasto;
+    private javax.swing.JTextField txtAnioIngreso;
+    private javax.swing.JTextField txtDiaGasto;
+    private javax.swing.JTextField txtDiaIngreso;
+    private javax.swing.JTextField txtMesGasto;
+    private javax.swing.JTextField txtMesIngreso;
     // End of variables declaration//GEN-END:variables
 }

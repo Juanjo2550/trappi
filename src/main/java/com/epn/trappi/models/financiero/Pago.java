@@ -73,5 +73,17 @@ public class  Pago {
         
     }
 
+    public Fecha getFechadePago() {
+        return fechadePago;
+    }
+
+    public String getNroCuenta() {
+        return nroCuenta;
+    }
+
+    public double getMonto() {
+        return monto;
+    }
+
     
 }
