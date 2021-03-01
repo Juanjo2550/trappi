@@ -6,6 +6,7 @@
 package com.epn.trappi.gui.proveedores;
 
 import com.epn.trappi.db.proveedores.ProveedoresDb;
+import com.epn.trappi.models.proveedores.Bien;
 import com.epn.trappi.models.proveedores.Compra;
 import com.epn.trappi.models.proveedores.CompraDeProducto;
 import com.epn.trappi.models.proveedores.Inventario;
@@ -27,6 +28,7 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
      */
     DefaultTableModel modelo;
     private final ProveedoresDb db = new ProveedoresDb();
+    private ListaDeBienes listaDeProductos;
     //cuales son seleccionados y la cantidad a comprar
     public int[][] seleccionados= {{0,0},{0,0},{0,0},{0,0},{0,0},{0,0}};
     private JPanel verTodo;
@@ -44,7 +46,8 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
         String[] titulos = {"Producto","Precio unitario"};
         String[] fila = new String [2];
         modelo = new DefaultTableModel(null, titulos);
-        for (Producto producto : db.getProductos()) {
+        listaDeProductos=new ListaDeBienes((ArrayList)db.getProductos());
+        for (Bien producto : listaDeProductos.getListaBienes()) {
             fila[0]= producto.getNombre();
             fila[1]= ""+producto.getPrecio();
             modelo.addRow(fila);
@@ -244,15 +247,12 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
                 for(int j=0;j<6;j++){
                     if(auxiliarRuc.equals(db.getProductos().get(j).getProveeedor().getRuc())){
                         if(seleccionados[j][0]==1){
-                            lista.añadirBien(new Producto(db.getProductos().get(j).getNombre()
-                                            ,db.getProductos().get(j).getPrecio()
-                                            , db.getProductos().get(j).getProveeedor())
-                                                , seleccionados[j][1]);
+                            lista.añadirBien(listaDeProductos.getListaBienes().get(j));
                             seleccionados[i][0]=0;
                         }
                     }
                 }
-                compra = new CompraDeProducto(inventario,lista, "Pendiente");
+                compra = new CompraDeProducto(inventario,lista, "Entregado");
                 solicitud.añadirCompra(compra);
             }
         }

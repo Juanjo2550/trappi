@@ -11,6 +11,11 @@ package com.epn.trappi.models.proveedores;
  */
 public class CompraDeProducto extends Compra {
 
+    public CompraDeProducto() {
+        super();
+    }
+
+    
     public CompraDeProducto(ListaDeBienes listaBienesAComprar, String estado) {
         super(listaBienesAComprar,estado);
     }

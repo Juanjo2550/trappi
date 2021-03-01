@@ -66,6 +66,13 @@ abstract public class Compra {
         this.montoTotal=monto;
     }
     
+    public Compra() {
+        
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
+        LocalDateTime now = LocalDateTime.now();  
+        this.fecha=dtf.format(now);  
+    }
+    
     public void comprar() {
     }
     
@@ -126,6 +133,10 @@ abstract public class Compra {
     
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public int getIdentificador() {
+        return identificador;
     }
 
     @Override
