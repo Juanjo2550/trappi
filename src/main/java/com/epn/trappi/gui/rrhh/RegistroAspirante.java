@@ -6,12 +6,7 @@
 package com.epn.trappi.gui.rrhh;
 
 
-import com.epn.trappi.*;
-import com.epn.trappi.db.rrhh.Connect;
-import com.epn.trappi.models.rrhh.contratacion.Aspirante;
 import com.epn.trappi.models.rrhh.listas.ListaAspirantes;
-import java.util.ArrayList;
-import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,20 +18,20 @@ public class RegistroAspirante extends javax.swing.JFrame {
     
     private void listarAspirantes(){
         ListaAspirantes listaAspirantes = new ListaAspirantes();
-        ArrayList<Aspirante> aspirantes = listaAspirantes.obtenerTodos();
+       // ArrayList<Aspirante> aspirantes = listaAspirantes.obtenerTodos();
         DefaultTableModel model = (DefaultTableModel) jTableAspirantes.getModel();
         model.setRowCount(0);
         
-        for (Aspirante asp: aspirantes){
-            Vector v = new Vector();
-            v.add(asp.getNombre());
-            v.add(asp.getApellidos());
-            v.add(asp.getTelefono());
-            v.add(asp.getCedula());
-            v.add(asp.getCargoAspirante());
-            model.addRow(v);
-            jTableAspirantes.setModel(model);
-        }
+//        for (Aspirante asp: aspirantes){
+//            Vector v = new Vector();
+//            v.add(asp.getNombre());
+//            v.add(asp.getApellidos());
+//            v.add(asp.getTelefono());
+//            v.add(asp.getCedula());
+//            v.add(asp.getCargoAspirante());
+//            model.addRow(v);
+//            jTableAspirantes.setModel(model);
+//        }
     }
 
     public RegistroAspirante() {

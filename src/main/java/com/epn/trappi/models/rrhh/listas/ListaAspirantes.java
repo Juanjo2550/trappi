@@ -26,11 +26,11 @@ public class ListaAspirantes implements Lista <Aspirante> {
     
     public void agregar(String nombre, String apellidos, String cedula, String telefono, String cargo){
         //Aspirante aspNuevo = new Aspirante(nombre, apellidos, cedula, telefono, cargo);
-        int idAsp = obtenerTodos().size() + 1;
+        //int idAsp = obtenerTodos().size() + 1;
         try {            
             String query = "INSERT INTO aspirante_prueba ( nombre, apellido, telefono, cedula) VALUES (?, ?, ?, ?, ?)";
             pstm = conn.prepareStatement(query);
-            pstm.setInt(1, idAsp);
+            //pstm.setInt(1, idAsp);
             pstm.setString(2, nombre);
             pstm.setString(3, apellidos);
             pstm.setString(4, cedula);
@@ -74,8 +74,8 @@ public class ListaAspirantes implements Lista <Aspirante> {
             rs = pstm.executeQuery();
             
             while(rs.next()){
-               listaAspirantes.add(new Aspirante(rs.getString("nombre"),rs.getString("apellido"),rs.getString("cedula"),
-                rs.getString("telefono"), rs.getString("cargo")));
+//               listaAspirantes.add(new Aspirante(rs.getString("nombre"),rs.getString("apellido"),rs.getString("cedula"),
+//                rs.getString("telefono"), rs.getString("cargo")));
             }
             
         } catch (Exception e) {
@@ -90,7 +90,8 @@ public class ListaAspirantes implements Lista <Aspirante> {
                 System.out.println("Error al cerrar rs y pstm: " + e);
             }
         }
-        return this.listaAspirantes;
+       // return this.listaAspirantes;
+       return null;
     }
 
     @Override

@@ -36,7 +36,7 @@ public class PruebaAdmision {
     
         public ArrayList <Aspirante> obtenerAspirantesAptos(){
         ArrayList <Aspirante> asp = new ArrayList<>();
-         asp = aspirantes.obtenerTodos();
+        // asp = aspirantes.obtenerTodos();
         for (Aspirante a: asp){
 //            if(validarPruebaAdmision(a.getPrueba()))
 //                asp.add(a);

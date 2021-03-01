@@ -9,7 +9,6 @@ package com.epn.trappi.gui.rrhh;
 import com.epn.trappi.*;
 import com.epn.trappi.models.rrhh.contratacion.Aspirante;
 import com.epn.trappi.models.rrhh.contratacion.Contratacion;
-import com.epn.trappi.models.rrhh.contratacion.ControladorPruebaAdmision;
 import com.epn.trappi.models.rrhh.RRHH;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -29,25 +28,25 @@ public class ContratarAspirante extends javax.swing.JFrame {
      */
     public ContratarAspirante() {
         initComponents();
-        ControladorPruebaAdmision controlador = new ControladorPruebaAdmision(16, "sociable colaborador amable", "adptable agil versatil");
-        ArrayList<Aspirante> aptos = controlador.obtenerAspirantesAptos();
-        DefaultTableModel model = (DefaultTableModel) jTableAspirantesAptos.getModel();
-        model.setRowCount(0);
-        
-        for (Aspirante asp: aptos){
-            Vector v = new Vector();
-            v.add(asp.getNombre());
-            v.add(asp.getApellidos());
-            v.add(asp.getTelefono());
-            v.add(asp.getCedula());
-            v.add(asp.getCargoAspirante());
-            v.add(asp.getPrueba().getPuntaje());
-            v.add(asp.getPrueba().getActitudes());
-            v.add(asp.getPrueba().getAptitudes());
-            
-            model.addRow(v);
-            jTableAspirantesAptos.setModel(model);
-        }
+       // ControladorPruebaAdmision controlador = new ControladorPruebaAdmision(16, "sociable colaborador amable", "adptable agil versatil");
+       // ArrayList<Aspirante> aptos = controlador.obtenerAspirantesAptos();
+//        DefaultTableModel model = (DefaultTableModel) jTableAspirantesAptos.getModel();
+//        model.setRowCount(0);
+//        
+//        for (Aspirante asp: aptos){
+//            Vector v = new Vector();
+//            v.add(asp.getNombre());
+//            v.add(asp.getApellidos());
+//            v.add(asp.getTelefono());
+//            v.add(asp.getCedula());
+//            v.add(asp.getCargoAspirante());
+//            v.add(asp.getPrueba().getPuntaje());
+//            v.add(asp.getPrueba().getActitudes());
+//            v.add(asp.getPrueba().getAptitudes());
+//            
+//            model.addRow(v);
+//            jTableAspirantesAptos.setModel(model);
+//        }
     }
     
     /**

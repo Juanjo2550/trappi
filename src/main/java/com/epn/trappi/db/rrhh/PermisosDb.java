@@ -6,7 +6,6 @@
 package com.epn.trappi.db.rrhh;
 
 import com.epn.trappi.gui.rrhh.Gestor_Permiso;
-import com.epn.trappi.gui.rrhh.Permisos.Lista_Permisos;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
