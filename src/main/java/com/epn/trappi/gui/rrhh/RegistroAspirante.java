@@ -6,7 +6,9 @@
 package com.epn.trappi.gui.rrhh;
 
 
+import com.epn.trappi.models.rrhh.contratacion.Aspirante;
 import com.epn.trappi.models.rrhh.listas.ListaAspirantes;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,20 +20,20 @@ public class RegistroAspirante extends javax.swing.JFrame {
     
     private void listarAspirantes(){
         ListaAspirantes listaAspirantes = new ListaAspirantes();
-       // ArrayList<Aspirante> aspirantes = listaAspirantes.obtenerTodos();
+        Aspirante[] aspirantes = listaAspirantes.obtenerTodos();
         DefaultTableModel model = (DefaultTableModel) jTableAspirantes.getModel();
         model.setRowCount(0);
         
-//        for (Aspirante asp: aspirantes){
-//            Vector v = new Vector();
-//            v.add(asp.getNombre());
-//            v.add(asp.getApellidos());
-//            v.add(asp.getTelefono());
-//            v.add(asp.getCedula());
-//            v.add(asp.getCargoAspirante());
-//            model.addRow(v);
-//            jTableAspirantes.setModel(model);
-//        }
+        for (Aspirante asp: aspirantes){
+            Vector v = new Vector();
+            v.add(asp.getNombre());
+            v.add(asp.getApellidos());
+            v.add(asp.getTelefono());
+            v.add(asp.getCedula());
+            v.add(asp.getCargoAspirante());
+            model.addRow(v);
+            jTableAspirantes.setModel(model);
+        }
     }
 
     public RegistroAspirante() {
@@ -423,9 +425,9 @@ public class RegistroAspirante extends javax.swing.JFrame {
     private void jButGuardarAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButGuardarAspiranteActionPerformed
       
         ListaAspirantes listaAspirantes = new ListaAspirantes();
-//        listaAspirantes.agregar(jTextNombreAspirante.getText(), jTextApellidoAspirante.getText(), jTextCedulaAspirante.getText(),
-//                jTextTelefonoAspirante.getText(), jTextCargoAspirante.getText(),Integer.parseInt(jTextPuntajeAspirante.getText()), jTextActitudesAspirante.getText(),
-//                jTextAptitudesAspirante.getText());
+        Aspirante aspirante = new Aspirante(jTextNombreAspirante.getText(), jTextApellidoAspirante.getText(), jTextCedulaAspirante.getText(),
+                jTextTelefonoAspirante.getText(), jTextCargoAspirante.getText());
+        listaAspirantes.agregar(aspirante);
         listarAspirantes();
         JOptionPane.showMessageDialog(null, "Aspirante registrado con éxito");
     }//GEN-LAST:event_jButGuardarAspiranteActionPerformed
