@@ -360,6 +360,8 @@ public class Comprar extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     CuentaCliente cuenta=new CuentaCliente();
+    cuenta.nombretitulo(jt.getText());
+    cuenta.llenardatroscl();
     cuenta.setVisible(true);
     this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -372,6 +374,9 @@ public class Comprar extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
     Metododepago mp=new Metododepago();
+    mp.nombretitulo(jt.getText());
+    mp.llenardatos();
+    mp.llenartablat();
     mp.setVisible(true);
     this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed

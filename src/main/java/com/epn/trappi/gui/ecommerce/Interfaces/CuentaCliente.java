@@ -295,12 +295,17 @@ public class CuentaCliente extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     Comprar comprar=new Comprar();
+    comprar.nombretitulo(jt.getText());
+    comprar.llenartabla();
     comprar.setVisible(true);
     this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
     Metododepago mp=new Metododepago();
+    mp.nombretitulo(jt.getText());
+    mp.llenardatos();
+    mp.llenartablat();
     mp.setVisible(true);
     this.setVisible(false);
     mp.nombretitulo(jt.getText());
@@ -363,6 +368,37 @@ public class CuentaCliente extends javax.swing.JFrame {
     public void nombretitulo(String name){
         jt.setText(name);
         System.out.println(name);
+    }
+    public void llenardatroscl(){
+        try {
+            String nombre= "";
+            String cedula ="";
+            String correo ="";
+            String fecha ="";
+            String celular ="";
+            String direc ="";
+            String contra ="";
+                       
+            Statement statement = connection.createStatement();
+            String sql = "select * from CLIENTES where NOMBRECLIE ='"+
+                        jt.getText()+"'";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                 nombre= resultSet.getString("NOMBRECLIE");
+                 cedula =resultSet.getString("CEDULA2");
+                 correo =resultSet.getString("CORREO");
+                 fecha =resultSet.getString("FECHADENACIMIENTO");
+                 celular =resultSet.getString("CELULAR");
+                 direc =resultSet.getString("DIRECCION");
+                 contra =resultSet.getString("CONTRASENA");
+               
+            }
+            
+            llenardatos(nombre, cedula,correo, fecha,celular, direc, contra);
+                        
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     /**
      * @param args the command line arguments

@@ -333,6 +333,7 @@ public class Metododepago extends javax.swing.JFrame {
     CuentaCliente cuenta=new CuentaCliente();
     cuenta.setVisible(true);
     cuenta.nombretitulo(jt.getText());
+    cuenta.llenardatroscl();
     this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -346,6 +347,7 @@ public class Metododepago extends javax.swing.JFrame {
     Comprar comprar=new Comprar();
     comprar.setVisible(true);
     comprar.nombretitulo(jt.getText());
+    comprar.llenartabla();
     this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
