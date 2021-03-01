@@ -1,4 +1,5 @@
 package com.epn.trappi.gui.logistico;
+import com.epn.trappi.controladores.logistico.storedProcedures;
 import com.epn.trappi.models.logistico.ListaConductores;
 import com.epn.trappi.models.logistico.ListaEntregas1;
 import com.epn.trappi.models.logistico.ListaVehiculos;
@@ -8,7 +9,11 @@ import com.epn.trappi.models.logistico.Ruta;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.SQLException;
+import java.text.Collator;
+import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 public class EntregasActivas extends javax.swing.JPanel {
     //ATRIBUTOS
@@ -62,17 +67,17 @@ public class EntregasActivas extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        labelConductores = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
+        labelAutomoviles = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
+        labelMotocicletas = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
+        labelCamiones = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         panelDeRutas = new javax.swing.JPanel();
@@ -95,7 +100,7 @@ public class EntregasActivas extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID_Entrega", "Cliente", "Conductor", "Vehiculo", "Destino"
+                "ID_Entrega", "Factura", "Cédula_Conductor", "Matrícula_Vehiculo", "Destino"
             }
         ));
         jTEntregasDatos.setFocusable(false);
@@ -123,9 +128,9 @@ public class EntregasActivas extends javax.swing.JPanel {
 
         jPanel3.setBackground(new java.awt.Color(44, 154, 142));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 28)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("5");
+        labelConductores.setFont(new java.awt.Font("Segoe UI Semibold", 1, 28)); // NOI18N
+        labelConductores.setForeground(new java.awt.Color(255, 255, 255));
+        labelConductores.setText("5");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -141,7 +146,7 @@ public class EntregasActivas extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelConductores, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -157,7 +162,7 @@ public class EntregasActivas extends javax.swing.JPanel {
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(labelConductores, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addContainerGap(17, Short.MAX_VALUE))
@@ -167,32 +172,33 @@ public class EntregasActivas extends javax.swing.JPanel {
 
         jPanel4.setBackground(new java.awt.Color(61, 57, 57));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 1, 28)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("31");
+        labelAutomoviles.setFont(new java.awt.Font("Segoe UI Semibold", 1, 28)); // NOI18N
+        labelAutomoviles.setForeground(new java.awt.Color(255, 255, 255));
+        labelAutomoviles.setText("31");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Conductores ocupados");
+        jLabel9.setText("Automóviles en uso");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(74, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap(82, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(34, 34, 34))
+                        .addComponent(labelAutomoviles, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(43, 43, 43))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelAutomoviles, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addContainerGap(17, Short.MAX_VALUE))
@@ -202,32 +208,33 @@ public class EntregasActivas extends javax.swing.JPanel {
 
         jPanel5.setBackground(new java.awt.Color(246, 201, 108));
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI Semibold", 1, 28)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("16");
+        labelMotocicletas.setFont(new java.awt.Font("Segoe UI Semibold", 1, 28)); // NOI18N
+        labelMotocicletas.setForeground(new java.awt.Color(255, 255, 255));
+        labelMotocicletas.setText("16");
 
         jLabel11.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Conductores ocupados");
+        jLabel11.setText("Motocicletas en uso");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(84, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap(86, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))
-                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(34, 34, 34))
+                        .addComponent(labelMotocicletas, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelMotocicletas, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
                 .addContainerGap(17, Short.MAX_VALUE))
@@ -237,32 +244,33 @@ public class EntregasActivas extends javax.swing.JPanel {
 
         jPanel6.setBackground(new java.awt.Color(19, 174, 226));
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI Semibold", 1, 28)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("11");
+        labelCamiones.setFont(new java.awt.Font("Segoe UI Semibold", 1, 28)); // NOI18N
+        labelCamiones.setForeground(new java.awt.Color(255, 255, 255));
+        labelCamiones.setText("11");
 
         jLabel13.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Conductores ocupados");
+        jLabel13.setText("Camiones en uso");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(74, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap(84, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))
-                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(34, 34, 34))
+                        .addComponent(labelCamiones, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47))))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelCamiones, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
                 .addContainerGap(17, Short.MAX_VALUE))
@@ -397,20 +405,66 @@ public class EntregasActivas extends javax.swing.JPanel {
         }
         return Id_destino;
     }
-    
+    //SE LLAMA ESTE METODO CADA VEZ QUE SE ENTRE AL PANEL DE ENTREGAS ACTIVAS PARA QUE ACTUALICE LA TABLA
+    public void actualizarTablaDeEntregasActivas() throws SQLException{
+        //Instancia que accede a la base de datos
+        storedProcedures agente = new storedProcedures();
+        //Parámetros del procedimiento almacenado
+        String[] columnas = {"IDENTREGA","NUM_FACTURA","EMPLEADOENTREGA","MATRICULA","DIRECCION"}; //SELECT *
+        String TABLA1="FACTURAS",TABLA2="ENTREGA",COLUMNA1="NUMEROFACTURA",COLUMNA2="NUMFACTURA"; //JOIN
+        String WHERE_COLUMNA="ESTADOENTREGA",WHERE_VALUE="Activa"; //FILTRADO
+        //LLenamos los datos en un tablemodel
+        DefaultTableModel modelo = agente.selectColumnasEnUnionPorValor(TABLA1,TABLA2, 
+                COLUMNA1, COLUMNA2, WHERE_COLUMNA, WHERE_VALUE, columnas);
+        jTEntregasDatos.setModel(modelo);
+    }
+    //SE LLAMA A ESTE METODO CADA VEZ QUE SE ENTRE AL PANEL DE ENTREGAS PARA QUE ACTUALICE LOS CONTADORES EN LA CABECERA
+    public void actualizarContadores() throws SQLException{
+        //Contadores
+        int contador_vehiculos=0;
+        int contador_motos=0;
+        int contador_camiones=0;
+        int numero_registros=0;
+        //Instancia que accede a la base de datos
+        storedProcedures agente = new storedProcedures();
+        //Parámetros del procedimiento almacenado
+        String[] columnas = {"TIPOVEHICULO"}; // SELECT TIPOVEHICULO
+        String TABLA1="ENTREGA",TABLA2="VEHICULO",COLUMNA1="MATRICULA",COLUMNA2="MATRICULA"; //JOIN
+        String WHERE_COLUMNA="ESTADOENTREGA",WHERE_VALUE="Activa"; //FILTRADO
+        //Llenamos la lista de tipos de vehiculo en un table model
+        DefaultTableModel modelo = agente.selectColumnasEnUnionPorValor(TABLA1, TABLA2, COLUMNA1, COLUMNA2, WHERE_COLUMNA, WHERE_VALUE, columnas);
+        //Llenamos los contadores
+        numero_registros=modelo.getRowCount();
+        for (int i=0;i<numero_registros;i++){
+            String estado = modelo.getValueAt(i, 0).toString();
+            System.out.println(estado);
+            final Collator instance = Collator.getInstance();
+            instance.setStrength(Collator.NO_DECOMPOSITION);
+            if (instance.compare(estado,"Automóvil")==0){
+                contador_vehiculos++;
+            }
+            if (instance.compare(estado,"Motocicleta")==0){
+                contador_motos++;
+            }
+            if (instance.compare(estado,"Camion")==0){
+                contador_camiones++;
+            }
+        }
+        //Actualizamos los contadores
+        this.labelConductores.setText(String.valueOf(numero_registros));
+        this.labelAutomoviles.setText(String.valueOf(contador_vehiculos));
+        this.labelMotocicletas.setText(String.valueOf(contador_motos));
+        this.labelCamiones.setText(String.valueOf(contador_camiones));
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -423,6 +477,10 @@ public class EntregasActivas extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTEntregasDatos;
+    private javax.swing.JLabel labelAutomoviles;
+    private javax.swing.JLabel labelCamiones;
+    private javax.swing.JLabel labelConductores;
+    private javax.swing.JLabel labelMotocicletas;
     private javax.swing.JPanel panelDeRutas;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,6 +3,7 @@ package com.epn.trappi.models.logistico;
 public class Conductor {
     private String nombre;
     private boolean estado;
+    private String cedula;
 
     public Conductor(String nombre, boolean estado) {
         this.nombre = nombre;
@@ -23,5 +24,8 @@ public class Conductor {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+    public String getCedula(){
+        return this.cedula;
     }
 }

@@ -1,8 +1,9 @@
 package com.epn.trappi.models.logistico;
 
-public class Entrega {
+public class Entrega extends Thread{
     private boolean estado;
     private Posicion destino;
+    private String factura;
 
     public Entrega(Posicion destino) {
         estado=true;
@@ -33,12 +34,9 @@ public class Entrega {
         */
     }
     
-    public void confirmarEntrega(String datos){
-        //Se deserializa el String para obtener la direccion de destino y el nombre del cliente.
-        deserializar(datos);
-        //Se llama al método asignar del control de disponibilidad
-        ControlDisponibilidad control = new ControlDisponibilidad();
-        control.asignar(this.destino);
+    public void confirmarEntrega(String factura){
+        this.factura=factura;
+        start();
     }
     
     public void RegistrarEntrega(Vehiculo vehiculo,Conductor conductor){
@@ -48,8 +46,13 @@ public class Entrega {
     }
     
     
-    public void deserializar(String datos){
-        
+
+    @Override
+    public void run() {
+        super.run(); //To change body of generated methods, choose Tools | Templates.
+        //Se llama al método asignar del control de disponibilidad
+        ControlDisponibilidad control = new ControlDisponibilidad();
+        control.asignar(this.factura);
     }
     
     

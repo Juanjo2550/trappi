@@ -5,7 +5,9 @@
  */
 package com.epn.trappi.gui.logistico;
 
+import com.epn.trappi.gui.logistico.Logistico_GUI.RoundedBorder;
 import java.awt.Color;
+import java.awt.Font;
 
 /**
  *
@@ -13,15 +15,14 @@ import java.awt.Color;
  */
 public class RegistroEntregas extends javax.swing.JPanel {
 
-    /**
-     * Creates new form RegistroEntregas
-     */
+    RoundedBorder borde_circular;
     public RegistroEntregas() {
         initComponents();
         this.btnBuscar.setBorder(new Logistico_GUI.RoundedBorder(20));
         this.btnBuscar.setBorderPainted(true);
         this.btnBuscar.setOpaque(false);
         this.btnBuscar.setContentAreaFilled(false);
+        borde_circular = new RoundedBorder(24);
     }
 
     /**
@@ -56,11 +57,14 @@ public class RegistroEntregas extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        campoAño = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        campoBusqueda = new javax.swing.JTextField();
+        campoDia = new javax.swing.JTextField();
+        campoRegistros = new javax.swing.JTextField();
+        campoMes = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -301,28 +305,27 @@ public class RegistroEntregas extends javax.swing.JPanel {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(61, 57, 57));
-        jLabel6.setText("Atributo de búsqueda:");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+        jLabel6.setText("Limitar la cantidad de registros:");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, -1, 30));
 
         jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(61, 57, 57));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Número de factura", "Nombre del cliente", "Nombre del conductor", "Cédula del cliente", "Fecha", "Destino" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Número de factura", "Número de matricula", "Cédula del conductor", "Estado de la entrega", "Dirección del cliente", "ID Entrega", "Fecha" }));
         jComboBox1.setBorder(null);
-        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 54, 140, 30));
+        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 170, 30));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(61, 57, 57));
-        jButton2.setText("Mostrar las entregas más recientes");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        campoAño.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
+        campoAño.setForeground(new java.awt.Color(153, 153, 153));
+        campoAño.setText("  año");
+        campoAño.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                campoAñoMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                campoAñoMouseExited(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 110, -1, -1));
-
-        jTextField1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jTextField1.setText("Alexander");
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 370, 30));
+        jPanel2.add(campoAño, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 70, 30));
 
         btnBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 15)); // NOI18N
         btnBuscar.setForeground(new java.awt.Color(61, 57, 57));
@@ -337,17 +340,83 @@ public class RegistroEntregas extends javax.swing.JPanel {
                 btnBuscarMouseExited(evt);
             }
         });
-        jPanel2.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 50, 100, 30));
+        jPanel2.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 60, 100, 30));
 
-        jButton4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(61, 57, 57));
-        jButton4.setText("Mostrar entregas del día actual");
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(61, 57, 57));
+        jLabel14.setText("Atributo de búsqueda:");
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, 30));
 
-        jButton5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(61, 57, 57));
-        jButton5.setText("Mostrar entregas del mes actual");
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, -1, -1));
+        campoBusqueda.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
+        campoBusqueda.setForeground(new java.awt.Color(153, 153, 153));
+        campoBusqueda.setText("Ingrese el valor de la columna que desea filtrar");
+        campoBusqueda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                campoBusquedaMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                campoBusquedaMouseExited(evt);
+            }
+        });
+        campoBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                campoBusquedaKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                campoBusquedaKeyReleased(evt);
+            }
+        });
+        jPanel2.add(campoBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, 370, 30));
+
+        campoDia.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
+        campoDia.setForeground(new java.awt.Color(153, 153, 153));
+        campoDia.setText("  día");
+        campoDia.setActionCommand("<Not Set>");
+        campoDia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                campoDiaMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                campoDiaMouseExited(evt);
+            }
+        });
+        campoDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoDiaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(campoDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 70, 30));
+
+        campoRegistros.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
+        campoRegistros.setForeground(new java.awt.Color(153, 153, 153));
+        campoRegistros.setText("  # registros que desea traer");
+        campoRegistros.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                campoRegistrosMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                campoRegistrosMouseExited(evt);
+            }
+        });
+        jPanel2.add(campoRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 110, 210, 30));
+
+        campoMes.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
+        campoMes.setForeground(new java.awt.Color(153, 153, 153));
+        campoMes.setText("  mes");
+        campoMes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                campoMesMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                campoMesMouseExited(evt);
+            }
+        });
+        jPanel2.add(campoMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 70, 30));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(61, 57, 57));
+        jLabel15.setText("Filtrar por fecha:");
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -374,9 +443,9 @@ public class RegistroEntregas extends javax.swing.JPanel {
                 .addGap(26, 26, 26)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -384,10 +453,6 @@ public class RegistroEntregas extends javax.swing.JPanel {
     private void jTEntregasDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTEntregasDatosMouseClicked
 
     }//GEN-LAST:event_jTEntregasDatosMouseClicked
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnBuscarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseMoved
         Color c = new Color(255, 210, 28);
@@ -400,18 +465,117 @@ public class RegistroEntregas extends javax.swing.JPanel {
         this.btnBuscar.setForeground(c);
     }//GEN-LAST:event_btnBuscarMouseExited
 
+    private void campoBusquedaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoBusquedaKeyPressed
+        //HINT
+        
+        /*
+        if (campoBusqueda.getText().length()==0){
+            campoBusqueda.setForeground(new Color(153,153,153));
+            campoBusqueda.setFont(new Font("Segoe UI Semibold", Font.ITALIC, 14));
+            campoBusqueda.setText("Ingrese el valor de la columna que desea filtrar");
+        }*/
+    }//GEN-LAST:event_campoBusquedaKeyPressed
+
+    private void campoBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoBusquedaKeyReleased
+        /*
+        //HINT
+        if (campoBusqueda.getText().length()==0){
+            campoBusqueda.setForeground(new Color(153,153,153));
+            campoBusqueda.setFont(new Font("Segoe UI Semibold", Font.ITALIC, 14));
+            campoBusqueda.setText("Ingrese el valor de la columna que desea filtrar");
+        }*/
+    }//GEN-LAST:event_campoBusquedaKeyReleased
+
+    private void campoBusquedaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoBusquedaMouseClicked
+        campoBusqueda.setText("");
+        campoBusqueda.setForeground(new Color(0,0,0));
+        campoBusqueda.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 14));
+    }//GEN-LAST:event_campoBusquedaMouseClicked
+
+    private void campoBusquedaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoBusquedaMouseExited
+        if (campoBusqueda.getText().length()==0){
+            campoBusqueda.setForeground(new Color(153,153,153));
+            campoBusqueda.setFont(new Font("Segoe UI Semibold", Font.ITALIC, 14));
+            campoBusqueda.setText("Ingrese el valor de la columna que desea filtrar");
+        }
+    }//GEN-LAST:event_campoBusquedaMouseExited
+
+    private void campoDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoDiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoDiaActionPerformed
+
+    private void campoDiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoDiaMouseClicked
+        campoDia.setText("");
+        campoDia.setForeground(new Color(0,0,0));
+        campoDia.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 14));
+    }//GEN-LAST:event_campoDiaMouseClicked
+
+    private void campoDiaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoDiaMouseExited
+        if (campoDia.getText().length()==0){
+            campoDia.setForeground(new Color(153,153,153));
+            campoDia.setFont(new Font("Segoe UI Semibold", Font.ITALIC, 14));
+            campoDia.setText("  día");
+        }
+    }//GEN-LAST:event_campoDiaMouseExited
+
+    private void campoMesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoMesMouseClicked
+        campoMes.setText("");
+        campoMes.setForeground(new Color(0,0,0));
+        campoMes.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 14));
+    }//GEN-LAST:event_campoMesMouseClicked
+
+    private void campoMesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoMesMouseExited
+        if (campoMes.getText().length()==0){
+            campoMes.setForeground(new Color(153,153,153));
+            campoMes.setFont(new Font("Segoe UI Semibold", Font.ITALIC, 14));
+            campoMes.setText("  mes");
+        }
+    }//GEN-LAST:event_campoMesMouseExited
+
+    private void campoAñoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoAñoMouseClicked
+        campoAño.setText("");
+        campoAño.setForeground(new Color(0,0,0));
+        campoAño.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 14));
+    }//GEN-LAST:event_campoAñoMouseClicked
+
+    private void campoAñoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoAñoMouseExited
+        if (campoAño.getText().length()==0){
+            campoAño.setForeground(new Color(153,153,153));
+            campoAño.setFont(new Font("Segoe UI Semibold", Font.ITALIC, 14));
+            campoAño.setText("  año");
+        }
+    }//GEN-LAST:event_campoAñoMouseExited
+
+    private void campoRegistrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoRegistrosMouseClicked
+        campoRegistros.setText("");
+        campoRegistros.setForeground(new Color(0,0,0));
+        campoRegistros.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 14));
+    }//GEN-LAST:event_campoRegistrosMouseClicked
+
+    private void campoRegistrosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoRegistrosMouseExited
+        if (campoRegistros.getText().length()==0){
+            campoRegistros.setForeground(new Color(153,153,153));
+            campoRegistros.setFont(new Font("Segoe UI Semibold", Font.ITALIC, 14));
+            campoRegistros.setText("registros que desea traer");
+        }
+    }//GEN-LAST:event_campoRegistrosMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JTextField campoAño;
+    private javax.swing.JTextField campoBusqueda;
+    private javax.swing.JTextField campoDia;
+    private javax.swing.JTextField campoMes;
+    private javax.swing.JTextField campoRegistros;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -429,6 +593,5 @@ public class RegistroEntregas extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTEntregasDatos;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

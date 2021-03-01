@@ -40,7 +40,41 @@ public class storedProcedures {
             for (int indice_columna=1;indice_columna<=num_columnas;indice_columna++){
                 Object valor_registro = resultados.getObject(indice_columna);
                 String cadena = valor_registro.toString();
-                System.out.println(cadena);
+                registro[indice_columna-1]=cadena;
+            }
+            modelo.addRow(registro);
+        }
+        return modelo;
+    }
+    public DefaultTableModel selectColumnasEnUnionPorValor(String TABLA1,String TABLA2,String COLUMNA1,String COLUMNA2,String WHERE_COLUMNA,
+            String WHERE_VALOR,String[] COLUMNAS_SELECT) throws SQLException{
+        CallableStatement statement = connection.getConnection().prepareCall("{ call selectColumnsJoinOnValue(?,?,?,?,?,?,?) }");
+        String column_names="";
+        int indice;
+        for (indice=0;(indice<COLUMNAS_SELECT.length-1);indice++){
+            column_names=column_names+COLUMNAS_SELECT[indice]+",";
+        }
+        column_names=column_names+COLUMNAS_SELECT[indice];
+        statement.setString(1,TABLA1);
+        statement.setString(2,TABLA2);
+        statement.setString(3,COLUMNA1);
+        statement.setString(4,COLUMNA2);
+        statement.setString(5,WHERE_COLUMNA);
+        statement.setString(6,WHERE_VALOR);
+        statement.setString(7,column_names);
+        //Generación del modelo de tabla
+        ResultSet resultados = statement.executeQuery();
+        ResultSetMetaData informacion_tabla = resultados.getMetaData();
+        int num_columnas = informacion_tabla.getColumnCount();
+        DefaultTableModel modelo = new DefaultTableModel();
+        for (int i=1;i<=num_columnas;i++){
+            modelo.addColumn(informacion_tabla.getColumnName(i));
+        }
+        String[] registro = new String[num_columnas];
+        while(resultados.next()){
+            for (int indice_columna=1;indice_columna<=num_columnas;indice_columna++){
+                Object valor_registro = resultados.getObject(indice_columna);
+                String cadena = valor_registro.toString();
                 registro[indice_columna-1]=cadena;
             }
             modelo.addRow(registro);

@@ -11,6 +11,9 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Insets;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
@@ -540,15 +543,20 @@ public class Logistico_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMantenimientosActionPerformed
 
     private void botonEntregasActivasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEntregasActivasActionPerformed
-        //Llamamos al panel EntregasActivas
-        //mapaDisponibilidad.setVisible(false);
-        //entregasActivas.setVisible(true);
-        ocultarPaneles(this.entregasActivas);
-        entregasActivas.setSize(1048, 770);
-        jPEntregasActivasGUI.add(entregasActivas);
-        //entregasActivas.setLocation(1048, 660);
-        jPEntregasActivasGUI.revalidate();
-        jPEntregasActivasGUI.repaint();   
+        try {
+            //Llamamos al panel EntregasActivas
+            //mapaDisponibilidad.setVisible(false);
+            //entregasActivas.setVisible(true);
+            ocultarPaneles(this.entregasActivas);
+            this.entregasActivas.actualizarContadores();
+            entregasActivas.setSize(1048, 770);
+            jPEntregasActivasGUI.add(entregasActivas);
+            //entregasActivas.setLocation(1048, 660);
+            jPEntregasActivasGUI.revalidate();   
+            jPEntregasActivasGUI.repaint();
+        } catch (SQLException ex) {
+            Logger.getLogger(Logistico_GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botonEntregasActivasActionPerformed
     //MOUSE EVENTS PARA LOS BOTONES
     private void moveMouseOnVolver(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moveMouseOnVolver
