@@ -5,13 +5,9 @@
  */
 package com.epn.trappi.gui.proveedores;
 
-import com.epn.trappi.db.proveedores.ProveedoresDb;
-import com.epn.trappi.models.proveedores.CantidadDeBien;
+import com.epn.trappi.models.proveedores.Bien;
 import com.epn.trappi.models.proveedores.Inventario;
-import com.epn.trappi.models.proveedores.ListaProveedores;
-import com.epn.trappi.models.proveedores.Producto;
-import com.epn.trappi.models.proveedores.Servicio;
-import java.util.ArrayList;
+import java.io.IOException;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,12 +17,13 @@ import javax.swing.table.DefaultTableModel;
 public class guiInventarioPanel extends javax.swing.JPanel {
 
     DefaultTableModel modelo;
-    private Inventario inventario = new Inventario();
+    private Inventario inventario;
 
     /**
      * Creates new form guiListaProductosPanel
      */
-    public guiInventarioPanel() {
+    public guiInventarioPanel() throws IOException {
+        this.inventario = new Inventario();
         initComponents();
         cargarInventario();
     }
@@ -35,10 +32,10 @@ public class guiInventarioPanel extends javax.swing.JPanel {
         String[] titulos = {"Nombre Producto", "Precio unitario", "Proveedor", "Cantidad"};
         String[] fila = new String[4];
         modelo = new DefaultTableModel(null, titulos);
-        for (CantidadDeBien cantBien : inventario.getListDeBienes().getListaCantidadDeBienesDb()) {
-            fila[0] = cantBien.getBien().getNombre();
-            fila[1] = "" + cantBien.getBien().getPrecio();
-            fila[2] = "" + cantBien.getBien().getProveeedor().getRazonSocial();
+        for (Bien cantBien : inventario.getListDeBienes().getListaBienes()) {
+            fila[0] = cantBien.getNombre();
+            fila[1] = "" + cantBien.getPrecio();
+            fila[2] = "" + cantBien.getProveeedor().getRazonSocial();
             fila[3] = "" + cantBien.getCantidad();
             modelo.addRow(fila);
         }

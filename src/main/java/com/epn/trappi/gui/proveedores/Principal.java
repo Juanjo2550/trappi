@@ -595,7 +595,11 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButComprasActionPerformed
 
     private void jButVerTodFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButVerTodFacturaActionPerformed
-        new CambiaPanel(PanelVerTodos, new guiInventarioPanel());
+        try {
+            new CambiaPanel(PanelVerTodos, new guiInventarioPanel());
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ponerTituloYsub("Inventario", "Lista de los productos del inventario.");
     }//GEN-LAST:event_jButVerTodFacturaActionPerformed
 
