@@ -29,6 +29,8 @@ public class ProveedoresDb {
     private final String spSelectAllCompras = "selectAllCompra";
     private final String spSelectAllDetalleCompra = "selectAllDetalleCompra";
     private final String spBuscarProveedor = "BuscarProveedor";
+    private final String spUpdateCompras = "updateCompras";
+
     private final String invFilename = "src/main/java/com/epn/trappi/db/proveedores/inventario.csv";
     private final Archivo p = new Archivo();
 
@@ -295,6 +297,11 @@ public class ProveedoresDb {
             ss.add(reformarServicio(res));
         }
         this.servicios = ss;
+    }
+
+    public void actualizarCompras(int idCompra, String estado) throws SQLException {
+        String[] param = {"idcompra:" + idCompra, "estado:" + estado};
+        ResultSet rs = ejecutarSPParameters(spUpdateCompras, param);
     }
 
     /*public ArrayList<Integer> seleccionarIdentificadores() {

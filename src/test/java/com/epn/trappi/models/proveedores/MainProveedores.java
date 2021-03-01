@@ -41,9 +41,7 @@ public class MainProveedores {
         //ListaProveedores prov = new ListaProveedores();
 
                 
-        db.buscarProveedores("7").forEach(pr -> {
-            System.out.println(pr.getRuc() + ";" + pr.getRazonSocial() + ";" + pr.getDireccion() + ";" + pr.getCuenta());
-        });
+        db.actualizarCompras(1,"Pendiente");
         /*List<Producto> prod = db.seleccionarComprabien(1);
         prod.forEach(p -> {
             System.out.println(p.getNombre() + ";" + p.getPrecio() + ";" + p.getProveeedor().getRuc());
