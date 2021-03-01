@@ -126,13 +126,13 @@ public class ProveedoresDb {
         return servicios;
     }
 
-    public List<Servicio> getCompras() {
+    public ListaDeCompras getCompras() {
         try {
-            seleccionarServicios();
+            seleccionarCompras();
         } catch (Exception ex) {
             Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return servicios;
+        return compras;
     }
 
     /*public ArrayList<CantidadDeBien> getListaCantidadBienes() {
@@ -192,7 +192,7 @@ public class ProveedoresDb {
         this.productos = pp;
     }
 
-    public ListaDeCompras seleccionarCompras() throws SQLException {
+    private ListaDeCompras seleccionarCompras() throws SQLException {
         ResultSet rs = ejecutarSP(spSelectAllCompras);
 
         ArrayList<Compra> listaCompra = new ArrayList<>();
