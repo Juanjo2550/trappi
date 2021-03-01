@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  * @author Peterca
  */
 public class guiRegistrarProductoPanel extends javax.swing.JPanel {
-    
+
     ProveedoresDb db = new ProveedoresDb();
     ListaProveedores listaProveedores = new ListaProveedores();
 
@@ -27,29 +27,38 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
         initComponents();
         cargarProveedor();
     }
-    
+
     private void cargarProveedor() {
         listaProveedores.getListaDeProveedores().forEach(prov -> {
             cmbProvedor.addItem(prov.getRazonSocial());
         });
     }
-    
+
     private boolean validarNombre(String direccion) {
         if (direccion.length() > 50 || direccion.trim().equals("")) {
             return false;
         }
         return direccion.matches("[[0-9]*[ ]]*[A-Za-zñÑÁÉÍÓÚáéíóú]+[0-9]*[[ ][A-Za-zñÑÁÉÍÓÚáéíóú]+[0-9]*]*");
     }
-    
+
+    private boolean validarMarca(String marca) {
+        if (marca.length() > 50 || marca.trim().equals("")) {
+            return false;
+        }
+        return marca.matches("[[0-9]*[ ]]*[A-Za-zñÑÁÉÍÓÚáéíóú]+[0-9]*[[ ][A-Za-zñÑÁÉÍÓÚáéíóú]+[0-9]*]*");
+    }
+
     private boolean validarPrecio(String precio) {
         try {
-            Double.parseDouble(precio);
-            return true;
+            if (Double.parseDouble(precio) >= 0) {
+                return true;
+            }
+            return false;
         } catch (Exception ex) {
             return false;
         }
     }
-    
+
     private Proveedor obtenerProveedor(String nombre) {
         Proveedor resultado = null;
         for (Proveedor proveedor : this.listaProveedores.getListaDeProveedores()) {
@@ -59,6 +68,17 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
             }
         }
         return resultado;
+    }
+
+    private boolean validarCantidad(String cantidad) {
+        try {
+            if (Integer.parseInt(cantidad) >= 0) {
+                return true;
+            }
+            return false;
+        } catch (Exception ex) {
+            return false;
+        }
     }
 
     /**
@@ -78,6 +98,10 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
         txtPrecio = new javax.swing.JTextField();
         btnRegistrarProducto = new javax.swing.JButton();
         cmbProvedor = new javax.swing.JComboBox<>();
+        txtMarca = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        txtCantidad = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -128,6 +152,35 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
 
         cmbProvedor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        txtMarca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMarcaKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMarcaKeyTyped(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel12.setText("Precio:");
+
+        txtCantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCantidadActionPerformed(evt);
+            }
+        });
+        txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCantidadKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadKeyTyped(evt);
+            }
+        });
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel13.setText("Cantidad:");
+
         javax.swing.GroupLayout PanelVerTodosLayout = new javax.swing.GroupLayout(PanelVerTodos);
         PanelVerTodos.setLayout(PanelVerTodosLayout);
         PanelVerTodosLayout.setHorizontalGroup(
@@ -142,11 +195,16 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
                             .addComponent(jLabel9)
                             .addComponent(jLabel10)
                             .addComponent(jLabel11))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(289, Short.MAX_VALUE))
+                    .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtCantidad)
+                        .addComponent(txtMarca)
+                        .addComponent(jLabel13)
+                        .addComponent(jLabel12))
+                    .addComponent(cmbProvedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(PanelVerTodosLayout.createSequentialGroup()
                         .addComponent(btnRegistrarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 205, Short.MAX_VALUE))
-                    .addComponent(cmbProvedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         PanelVerTodosLayout.setVerticalGroup(
             PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,9 +221,17 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
                 .addComponent(jLabel11)
                 .addGap(18, 18, 18)
                 .addComponent(cmbProvedor, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel13)
+                .addGap(6, 6, 6)
+                .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel12)
+                .addGap(6, 6, 6)
+                .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(btnRegistrarProducto)
-                .addGap(155, 155, 155))
+                .addGap(31, 31, 31))
         );
 
         add(PanelVerTodos);
@@ -196,24 +262,39 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
         String nombre;
         String precio;
         String prov;
+        String marca;
+        String cantidad;
         Proveedor proveedor;
-        
+
         nombre = txtNombre.getText();
         precio = txtPrecio.getText();
         prov = cmbProvedor.getSelectedItem().toString();
-        
+        marca = txtMarca.getText();
+        cantidad = txtCantidad.getText();
+
         if (validarNombre(nombre)) {
             try {
                 if (validarPrecio(precio)) {
-                    proveedor = obtenerProveedor(prov);
-                    Producto nuevoP = new Producto(nombre, Double.parseDouble(precio), proveedor);
-                    nuevoP.registrar();
-                    JOptionPane.showMessageDialog(null, "Producto registrado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    txtNombre.setText("");
-                    txtPrecio.setText("");
-                    cmbProvedor.setSelectedIndex(0);
+                    if (validarMarca(marca)) {
+                        if (validarCantidad(cantidad)) {
+                            proveedor = obtenerProveedor(prov);
+                            Producto nuevoP = new Producto(nombre, Double.parseDouble(precio), proveedor, Integer.parseInt(cantidad), marca);
+                            nuevoP.registrar();
+                            JOptionPane.showMessageDialog(null, "Producto registrado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                            txtNombre.setText("");
+                            txtPrecio.setText("");
+                            cmbProvedor.setSelectedIndex(0);
+                            txtMarca.setText("");
+                            txtCantidad.setText("");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Debe ingresar una cantidad válida", "Error", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Debe ingresar un nombre de marca válida", "Error", JOptionPane.INFORMATION_MESSAGE);
+                    }
+
                 } else {
-                    JOptionPane.showMessageDialog(null, "Debes ingresar un precio válido", "Error", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Debe ingresar un precio válido", "Error", JOptionPane.INFORMATION_MESSAGE);
                 }
             } catch (Exception e) {
                 System.out.println(e.toString());
@@ -223,6 +304,26 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnRegistrarProductoActionPerformed
 
+    private void txtMarcaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMarcaKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMarcaKeyPressed
+
+    private void txtMarcaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMarcaKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMarcaKeyTyped
+
+    private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadActionPerformed
+
+    private void txtCantidadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadKeyPressed
+
+    private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelVerTodos;
@@ -230,7 +331,11 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cmbProvedor;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField txtCantidad;
+    private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables

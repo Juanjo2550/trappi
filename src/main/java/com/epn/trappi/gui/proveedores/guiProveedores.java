@@ -231,16 +231,9 @@ public class guiProveedores extends javax.swing.JPanel {
         n_Cuenta = txtNCuenta.getText();
 
         // Registro
-        //        if (this.validarRUC(ruc)) {
-        //        if (controlClinica.obtenerPaciente(cedula) == null) {
         if (validarRazonSocial(razonSocial)) {
             try {
                 if (validarDireccion(direccion)) {
-                    //                    if (cbxEstado.getSelectedIndex() == 0) {
-                    //                        estado = true;
-                    //                    } else {
-                    //                        estado = false;
-                    //                    }
                     Proveedor nuevoP = new Proveedor(ruc, razonSocial, direccion, n_Cuenta);
                     nuevoP.registrarProveedor();
                     JOptionPane.showMessageDialog(null, "Proveedor registrado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
@@ -257,12 +250,6 @@ public class guiProveedores extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "Razon Social Incorrecta.", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
-        //        } else {
-        //            JOptionPane.showMessageDialog(null, "El proveedor ya está registrado.", "Error", JOptionPane.INFORMATION_MESSAGE);
-        //        }
-        //        } else {
-        //            JOptionPane.showMessageDialog(null, "RUC Incorrecto.", "Error", JOptionPane.INFORMATION_MESSAGE);
-        //        }
     }//GEN-LAST:event_btnRegistrarProveedorActionPerformed
 
 
