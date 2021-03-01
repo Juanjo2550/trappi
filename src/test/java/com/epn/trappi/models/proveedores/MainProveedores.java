@@ -38,23 +38,23 @@ public class MainProveedores {
 
         //db.getProveedores();
         //ListaProveedores prov = new ListaProveedores();
-        db.getProveedores().forEach(pr -> {
+        /*db.getProveedores().forEach(pr -> {
             System.out.println(pr.getRuc() + ";" + pr.getRazonSocial() + ";" + pr.getDireccion() + ";" + pr.getCuenta());
-        });
-        
-        List<Producto> prod = db.getProductos();
+        });*/
+        List<Producto> prod = db.seleccionarComprabien(1);
         prod.forEach(p -> {
             System.out.println(p.getNombre() + ";" + p.getPrecio() + ";" + p.getProveeedor().getRuc());
         });
-        
+
+        ListaDeCompras comp = db.seleccionarCompras();
+
         List<Servicio> serv = db.getServicios();
-        serv.forEach(pr -> {
-            System.out.println(pr.getNombre() + ";" + pr.getPrecio() + ";" + pr.getProveeedor().getRuc());
+        comp.getCompras().forEach(pr -> {
+            System.out.println(pr.getEstado() + ";" + pr.getFecha()+ ";" + pr.getListaCantidadDeBienes());
         });
-        
+
         /*String [] params = {"ruc:7043728305001","nombrebien:Papel higienico","preciobien:2.8","tipobien:Producto","cantidad:50","marca:Familia"};
         
         db.ejecutarSPParameters("insertBien", params);*/
-
     }
 }

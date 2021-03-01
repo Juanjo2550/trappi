@@ -20,13 +20,14 @@ public class ProveedoresDb {
     private List<Producto> productos;
     private List<Proveedor> proveedores;
     private List<Servicio> servicios;
-    private List<Compra> compras = new ArrayList<Compra>();
+    private ListaDeCompras compras;
     //private ArrayList<CantidadDeBien> listaCantidadBienes;
     //private  ArrayList<CantidadDeBien> inventarioDb;
     private final String spSelectAllProductos = "selectAllInventarioProductos";
     private final String spSelectAllProveedor = "selectAllProveedor";
     private final String spSelectAllServicios = "selectAllServicios";
-    private final String compFilename = "src/main/java/com/epn/trappi/db/proveedores/compras.csv";
+    private final String spSelectAllCompras = "selectAllCompra";
+    private final String spSelectAllDetalleCompra = "selectAllDetalleCompra";
     private final String invFilename = "src/main/java/com/epn/trappi/db/proveedores/inventario.csv";
     private final Archivo p = new Archivo();
 
@@ -44,7 +45,7 @@ public class ProveedoresDb {
         return rs;
     }
 
-    public void ejecutarSPParameters(String nombreSP, String[] parametros) throws SQLException {
+    private ResultSet ejecutarSPParameters(String nombreSP, String[] parametros) throws SQLException {
 
         Connection connection = dbInstance.getConnection();
         CallableStatement cstmt = null;
@@ -61,12 +62,13 @@ public class ProveedoresDb {
         }
 
         boolean resultSet = cstmt.execute();
-        System.out.println(resultSet);
         ResultSet rs = null;
         rs = cstmt.getResultSet();
-        /*if (rs.next()) {
-            System.out.println(rs.getString(1) + "; " + rs.getString(2));
-        }*/
+
+        if (resultSet) {
+            rs = cstmt.getResultSet();
+        }
+        return rs;
     }
 
     public List<Producto> getProductos() {
@@ -116,6 +118,15 @@ public class ProveedoresDb {
     }
 
     public List<Servicio> getServicios() {
+        try {
+            seleccionarServicios();
+        } catch (Exception ex) {
+            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return servicios;
+    }
+
+    public List<Servicio> getCompras() {
         try {
             seleccionarServicios();
         } catch (Exception ex) {
@@ -175,11 +186,47 @@ public class ProveedoresDb {
         ResultSet rs = ejecutarSP(spSelectAllProductos);
         List<Producto> pp = new ArrayList<>();
         while (rs.next()) {
-            //Producto(String nombre, double precio, Proveedor proveeedor, int cantidad, String marca)
             String[] res = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)};
             pp.add(reformarProducto(res));
         }
         this.productos = pp;
+    }
+
+    public ListaDeCompras seleccionarCompras() throws SQLException {
+        ResultSet rs = ejecutarSP(spSelectAllCompras);
+
+        ArrayList<Compra> listaCompra = new ArrayList<>();
+        while (rs.next()) {
+            List<Producto> pp = seleccionarComprabien(Integer.parseInt(rs.getString(1)));
+            ArrayList<Bien> listaBienes = new ArrayList<>();
+            pp.forEach(bien -> {
+                listaBienes.add(bien);
+            });
+
+            ListaDeBienes listaBienesCompra = new ListaDeBienes();
+            listaBienesCompra.setListaBienes(listaBienes);
+            CompraDeProducto comp = new CompraDeProducto(listaBienesCompra, rs.getString(2),
+                    rs.getString(4), Double.parseDouble(rs.getString(3)));
+            listaCompra.add(comp);
+            /*String[] res = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)};
+            pp.add(reformarProducto(res));*/
+        }
+
+        //compras.setCompras(listaCompra);
+        compras = new ListaDeCompras(listaCompra);
+        return compras;
+    }
+
+    public List<Producto> seleccionarComprabien(int idCompra) throws SQLException {
+        String[] param = {"identificadorcompra:" + idCompra};
+        ResultSet rs = ejecutarSPParameters(spSelectAllDetalleCompra, param);
+        List<Producto> pp = new ArrayList<>();
+        while (rs.next()) {
+            //Producto(String nombre, double precio, Proveedor proveeedor, int cantidad, String marca)
+            String[] res = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)};
+            pp.add(reformarProducto(res));
+        }
+        return pp;
     }
 
     private void seleccionarProveedores() throws SQLException {
@@ -229,7 +276,7 @@ public class ProveedoresDb {
         this.servicios = ss;
     }
 
-    public ArrayList<Integer> seleccionarIdentificadores() {
+    /*public ArrayList<Integer> seleccionarIdentificadores() {
         try {
             List<String[]> serv = p.leerArchivoCSV(this.compFilename);
             ArrayList<Integer> retorno = new ArrayList<>();
@@ -242,9 +289,9 @@ public class ProveedoresDb {
             Logger.getLogger(ProveedoresDb.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }
+    }*/
 
-    /*private void seleccionarCompras() {
+ /*private void seleccionarCompras() {
         try {
             List<String[]> prov = p.leerArchivoCSV(this.provFilename);
             List<Compra> cc = new ArrayList<Compra>();
@@ -279,7 +326,6 @@ public class ProveedoresDb {
     }
 
     private Producto reformarProducto(String[] str) throws SQLException {
-        //Producto(String nombre, double precio, Proveedor proveeedor, int cantidad, String marca)
         Producto np = new Producto(str[0], Double.parseDouble(str[1]), obtenerProveedor(str[2]), Integer.parseInt(str[3]), str[4]);
         return np;
     }
@@ -369,10 +415,6 @@ public class ProveedoresDb {
     }
 
     private void agregarCompra(String nuevaCompra) {
-        try {
-            p.writeArchivoCSV(compFilename, nuevaCompra);
-        } catch (IOException ex) {
-            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }
 }
