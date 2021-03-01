@@ -1,44 +1,28 @@
 
 package com.epn.trappi.gui.logistico;
-import com.epn.trappi.models.logistico.ListaConductores;
-import com.epn.trappi.models.logistico.ListaEntregas1;
-import com.epn.trappi.models.logistico.ListaVehiculos;
-import com.epn.trappi.models.logistico.Conductor;
-import com.epn.trappi.models.logistico.Vehiculo;
+import com.epn.trappi.controladores.logistico.storedProcedures;
+
+import java.sql.SQLException;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 public class ControlDisponibilidad extends javax.swing.JPanel {
+    
+    storedProcedures instancia = new storedProcedures();
+    private String tabla = "";
+    private String columna= "";
+    private String valor = "";
 
     public ControlDisponibilidad() {
         initComponents();
-        ListaVehiculos vehiculos = new ListaVehiculos();
-        ListaConductores conductores = new ListaConductores();
-        
-        DefaultTableModel modelo = new DefaultTableModel();
-        jTMatricula.setModel(modelo);
-        modelo.addColumn("Matricula");
-        Object[] filas = new Object[1];
-        /*for(int i =0; i<vehiculos.vehiculos.size();i++){
-            filas[i]=vehiculos.vehiculos.get(i).getMatricula();
-        }*/
-        //int i=0;
-        for(Vehiculo a: vehiculos.vehiculos){
-            filas[0]=a.getMatricula();
-            //i++;
-            modelo.addRow(filas);
-        }
-        //modelo.addRow(filas);
-        
-        //Mostrar Nombres de conductores------------------------ 
-            DefaultTableModel modelo1 = new DefaultTableModel();
-            jTNombres.setModel(modelo1);
-            modelo1.addColumn("Nombre");
-            for(Conductor a: conductores.listaConductores){
-                filas[0]=a.getNombre();
-                modelo1.addRow(filas);
-            }
-        //Fin de mostrar Nombres de Conductores----------------- 
+      
     }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,33 +36,38 @@ public class ControlDisponibilidad extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTNombres = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTMatricula = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTMatricula1 = new javax.swing.JTable();
+        btnActualizar = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTMatricula2 = new javax.swing.JTable();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableVerificarVehiculo = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1048, 660));
 
         jTNombres.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Nombre"
+                "Nombre", "Edad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false
+                false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -87,10 +76,33 @@ public class ControlDisponibilidad extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTNombres);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Conductores Disponibles");
 
-        jTMatricula.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setText("Vehículos Disponibles");
+
+        btnActualizar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+
+        jTableVerificarVehiculo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
                 {null},
                 {null},
                 {null},
@@ -100,117 +112,117 @@ public class ControlDisponibilidad extends javax.swing.JPanel {
                 "Matricula"
             }
         ));
-        jScrollPane2.setViewportView(jTMatricula);
-
-        jLabel5.setText("Vehiculos Disponibles");
-
-        jButton1.setText("jButton1");
-
-        jTMatricula1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Matricula"
-            }
-        ));
-        jScrollPane3.setViewportView(jTMatricula1);
-
-        jTMatricula2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Matricula"
-            }
-        ));
-        jScrollPane4.setViewportView(jTMatricula2);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane5.setViewportView(jTable1);
+        jScrollPane4.setViewportView(jTableVerificarVehiculo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addContainerGap(916, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(166, 166, 166)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(189, 189, 189)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(202, 202, 202))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(403, 403, 403)
+                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(286, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jLabel5)
+                .addGap(64, 64, 64)
+                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1)
-                        .addGap(35, 35, 35))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jButton1)
-                .addContainerGap())
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(205, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+        tabla = "VEHICULO";
+        columna = "ESTADO";
+        valor = "Habilitado";
+        try {
+            DefaultTableModel modelo = instancia.consultarTablaColumna(tabla, columna, valor);
+            this.jTableVerificarVehiculo.setModel(modelo);
+            //Eliminar Tablas sin Importancia
+                jTableVerificarVehiculo.removeColumn(jTableVerificarVehiculo.getColumnModel().getColumn(3));
+                jTableVerificarVehiculo.removeColumn(jTableVerificarVehiculo.getColumnModel().getColumn(1));
+            //Poner Nombres
+            changeColumnNameVehiculo(0, "Matricula");
+            changeColumnNameVehiculo(1, "Tipo de Vehiculo");
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ControlDisponibilidad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //llenar tabla Empleado
+        tabla = "EMPLEADO";
+        columna = "TIPOEMP";
+        valor = "conductor";
+        try {
+            DefaultTableModel modelo = instancia.consultarTablaColumna(tabla, columna, valor);
+            this.jTNombres.setModel(modelo);
+            jTNombres.removeColumn(jTNombres.getColumnModel().getColumn(11));
+            jTNombres.removeColumn(jTNombres.getColumnModel().getColumn(10));
+            jTNombres.removeColumn(jTNombres.getColumnModel().getColumn(9));
+            jTNombres.removeColumn(jTNombres.getColumnModel().getColumn(7));
+            jTNombres.removeColumn(jTNombres.getColumnModel().getColumn(6));
+            jTNombres.removeColumn(jTNombres.getColumnModel().getColumn(5));
+            jTNombres.removeColumn(jTNombres.getColumnModel().getColumn(4));
+            jTNombres.removeColumn(jTNombres.getColumnModel().getColumn(3));
+            jTNombres.removeColumn(jTNombres.getColumnModel().getColumn(2));
+            jTNombres.removeColumn(jTNombres.getColumnModel().getColumn(0));
+            //Poner Nombres
+            changeColumnNameConductor(0, "Nombre");
+            changeColumnNameConductor(1, "Estado");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ControlDisponibilidad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnActualizarActionPerformed
+     public void changeColumnNameVehiculo(int __COLUMN__, String __NAME__){
+        JTableHeader head = jTableVerificarVehiculo.getTableHeader();
+        TableColumnModel tcm = head.getColumnModel();
+        TableColumn tabCM = tcm.getColumn(__COLUMN__);
+        tabCM.setHeaderValue(__NAME__);
+        jTableVerificarVehiculo.repaint();
+    }
+     public void changeColumnNameConductor(int __COLUMN__, String __NAME__){
+        JTableHeader head = jTNombres.getTableHeader();
+        TableColumnModel tcm = head.getColumnModel();
+        TableColumn tabCM = tcm.getColumn(__COLUMN__);
+        tabCM.setHeaderValue(__NAME__);
+        jTNombres.repaint();
+    }
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTMatricula;
-    private javax.swing.JTable jTMatricula1;
-    private javax.swing.JTable jTMatricula2;
     private javax.swing.JTable jTNombres;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableVerificarVehiculo;
     // End of variables declaration//GEN-END:variables
 }

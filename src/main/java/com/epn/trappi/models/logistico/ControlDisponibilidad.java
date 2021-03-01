@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 public class ControlDisponibilidad {
     private ArrayList<Vehiculo> vehiculos;
     private ArrayList<Conductor> conductores;
+    
     //METODOS
     public ControlDisponibilidad(){
         
