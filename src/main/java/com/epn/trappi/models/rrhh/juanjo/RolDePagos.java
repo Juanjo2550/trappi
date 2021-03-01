@@ -7,7 +7,6 @@
 package com.epn.trappi.models.rrhh.juanjo;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.contratacion.Contrato;
-import com.epn.trappi.models.rrhh.juanjo.Empleado;
 
 /**
  * 
