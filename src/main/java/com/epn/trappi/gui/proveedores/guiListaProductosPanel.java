@@ -151,7 +151,7 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Nombre del prodcuto", "Precio", "Proveedor"
+                "Nombre del producto", "Precio", "Proveedor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
