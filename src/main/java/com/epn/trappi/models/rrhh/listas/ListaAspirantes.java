@@ -102,12 +102,12 @@ public class ListaAspirantes implements Lista <Aspirante> {
 
     @Override
     public Boolean eliminar(String parametro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return false; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public Aspirante buscarUno(String parametro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null; //To change body of generated methods, choose Tools | Templates.
     }
 
 

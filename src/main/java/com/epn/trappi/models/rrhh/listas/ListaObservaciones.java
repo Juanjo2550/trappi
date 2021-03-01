@@ -39,7 +39,7 @@ public class ListaObservaciones implements Lista<Observacion> {
     @Deprecated
     @Override
     public Observacion buscarUno(String parametro) {
-        throw new NotImplementedException();
+        return null;
     }
 
     public Observacion[] obtenerTodos(String cedula, Fecha fecha) throws Exception {

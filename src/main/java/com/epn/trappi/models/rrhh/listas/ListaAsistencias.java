@@ -38,7 +38,8 @@ public class ListaAsistencias implements Lista<Asistencia>{
 
     @Override
     public Asistencia buscarUno(String parametro) {
-        throw new NotImplementedException();
+//        throw new NotImplementedException();
+        return null;
     }
 
     public Asistencia buscarUno(String cedula, Fecha fecha) throws Exception {
