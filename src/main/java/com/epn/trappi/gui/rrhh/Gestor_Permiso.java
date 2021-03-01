@@ -7,17 +7,21 @@ package com.epn.trappi.gui.rrhh;
 
 
 
+
 import com.epn.trappi.gui.rrhh.Permisos.Calamidad_Domestica;
 import com.epn.trappi.gui.rrhh.Permisos.Gestor_Permisos;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.TextPrompt;
+import com.epn.trappi.db.connection.DataBaseConnection;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -29,6 +33,7 @@ import javax.swing.JOptionPane;
 public class Gestor_Permiso extends javax.swing.JFrame {
 /*Calamidad_Domestica calamidad = new Calamidad_Domestica();*/
 Fecha fecha = new Fecha();
+Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance()).getConnection();
 /*Empleado empleado = new Empleado();*/
  
     
@@ -67,7 +72,23 @@ Fecha fecha = new Fecha();
     
     }
            
- 
+     public void obtenerNombre(){
+        String sql = "SELECT * FROM dbo.EMPLEADO";
+        ArrayList<Empleado> empleados = new ArrayList<>();
+        try {
+        Statement createdStatment = connection.createStatement();
+            ResultSet resultSet = createdStatment.executeQuery(sql);
+            while(resultSet.next()) {
+                String nombre = resultSet.getString("NOMBREEMP");
+              cmbnombreEmpleado.addItem(nombre);
+            }
+        } catch (SQLException e){
+            System.out.println(e.toString());
+        }
+     /*   Empleado[] empleadosArray = new Empleado[empleados.size()];
+        empleadosArray = empleados.toArray(empleadosArray);
+        return empleadosArray;*/
+    }
     
     public void  ListarEmpleado(){
      /*   String sql = "SELECT nombres FROM empleados";
@@ -94,7 +115,7 @@ Fecha fecha = new Fecha();
         String sql = "SELECT cedula FROM empleados where nombres = '"+(String) cmbnombreEmpleado.getSelectedItem()+"'" ;
         
        // ListaEmpleados temEmpleados = new ListaEmpleados();
-       /* try {
+        /*try {
             Connection conn = Connect.connect("juanjo.db");
             Statement stmt  = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -648,4 +669,5 @@ Fecha fecha = new Fecha();
     private void clasefecha(int parseInt, int parseInt0, int parseInt1) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }

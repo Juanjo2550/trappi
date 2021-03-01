@@ -23,27 +23,54 @@ import java.util.Objects;
 public class ListaPermisos implements Lista<Permiso>{
     private final Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance()).getConnection();
     @Override
-  /*  public void agregar(Permiso newPermission) {
+    public void agregar(Permiso newPermission) {
         String querySQL;
-        if (newPermission instanceof Permiso){
+        if (newPermission instanceof Calamidad_Domestica){
 
         querySQL = "INSERT INTO dbo.PERMISO(IDPERM, IDEMP, NUMDIASPERM, VALORPAGARPERM, COMENTPERM, FECHAINICIOPERM,"
            + " FECHAFINPERM, ESTADOPERM, TIPOPERM) " +
                     "VALUES (" +
-                    (this.obtenerTodos().length + 1) + "," +
-                    "'" + nuevoEmpleado.getNombres() + "' ," +
-                    "'" + nuevoEmpleado.getApellidos() + "' ," +
-                    "'" + nuevoEmpleado.getCedula() + "' ," +
-                    "'" + nuevoEmpleado.getCargo() + "' ," +
-                    "'" + nuevoEmpleado.getDepartamento() + "' ," +
-                    "'" + nuevoEmpleado.getCuentaBancaria() + "' ," +
-                    "'" + nuevoEmpleado.getBanco() + "' ," +
-                    "'" + nuevoEmpleado.getEstado() + "'," +
-                    "'conductor',"+
-                    "'" + nuevoEmpleado.getSueldo() + "'," +
-                    "'" + nuevoEmpleado.getSexo() + "');";
+                    (this.obtenerTodos().length + 1) + "," 
+                    + new ListaEmpleados().buscarUno(newPermission.getEmpleado().getCedula()).getId() + ","
+                    + "'" + newPermission.getNUMDIASPERM() + "' ," +
+                    "'" + newPermission.getVALORPAGARPERM() + "' ," +
+                    "'" + newPermission.getCOMENTPERM() + "' ," +
+                    "'" + newPermission.getFECHAINICIOPERM() + "' ," +
+                    "'" + newPermission.getFECHAFINPERM() + "' ," +
+                    "'" + newPermission.getESTADOPERM() + "' ," +
+                    "'Calamidad Domestica');";
         }   
-    }*/
+        else if (newPermission instanceof Enfermedad){
+
+        querySQL = "INSERT INTO dbo.PERMISO(IDPERM, IDEMP, NUMDIASPERM, VALORPAGARPERM, COMENTPERM, FECHAINICIOPERM,"
+           + " FECHAFINPERM, ESTADOPERM, TIPOPERM) " +
+                    "VALUES (" +
+                    (this.obtenerTodos().length + 1) + "," 
+                    + new ListaEmpleados().buscarUno(newPermission.getEmpleado().getCedula()).getId() + ","
+                    + "'" + newPermission.getNUMDIASPERM() + "' ," +
+                    "'" + newPermission.getVALORPAGARPERM() + "' ," +
+                    "'" + newPermission.getCOMENTPERM() + "' ," +
+                    "'" + newPermission.getFECHAINICIOPERM() + "' ," +
+                    "'" + newPermission.getFECHAFINPERM() + "' ," +
+                    "'" + newPermission.getESTADOPERM() + "' ," +
+                    "'Enfermedad');";
+        }
+        else {
+
+        querySQL = "INSERT INTO dbo.PERMISO(IDPERM, IDEMP, NUMDIASPERM, VALORPAGARPERM, COMENTPERM, FECHAINICIOPERM,"
+           + " FECHAFINPERM, ESTADOPERM, TIPOPERM) " +
+                    "VALUES (" +
+                    (this.obtenerTodos().length + 1) + "," 
+                    + new ListaEmpleados().buscarUno(newPermission.getEmpleado().getCedula()).getId() + ","
+                    + "'" + newPermission.getNUMDIASPERM() + "' ," +
+                    "'" + newPermission.getVALORPAGARPERM() + "' ," +
+                    "'" + newPermission.getCOMENTPERM() + "' ," +
+                    "'" + newPermission.getFECHAINICIOPERM() + "' ," +
+                    "'" + newPermission.getFECHAFINPERM() + "' ," +
+                    "'" + newPermission.getESTADOPERM() + "' ," +
+                    "'" + newPermission.getTIPOPERM() + "');";
+        }  
+    }
 
     
     public Boolean eliminar(String parametro) {
@@ -109,11 +136,5 @@ public class ListaPermisos implements Lista<Permiso>{
         Permiso[] Lista_Permisos = new Permiso[permisos.size()];
         Lista_Permisos = permisos.toArray(Lista_Permisos);
         return Lista_Permisos;
-    }
-
-    @Override
-    public void agregar(Permiso newObject) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+    }    
 }
