@@ -197,9 +197,10 @@ public class Registrar extends javax.swing.JFrame {
             FRegistroCliente frc=new FRegistroCliente(jTextFieldNombre.getText(),jTextFieldCorreo.getText(), jTextFieldFecha.getText(), jTextFieldCelular.getText(),jTextFieldDireccion.getText(),jTextFieldCedula.getText(),jTextFieldContraseña.getText());
             Main.cliente.registrarse(frc);
             
-            String sql = "INSERT INTO CLIENTES Values("+23+",'"+jTextFieldNombre.getText()+"','"+
-                    "','"+jTextFieldFecha.getText()+"','"+jTextFieldCelular.getText()+"','"+jTextFieldDireccion.getText()+
-                    "','"+jTextFieldCedula.getText()+"','"+jTextFieldContraseña.getText()+"','"+jTextFieldCorreo.getText()+"')";
+            String sql = "exec cliente_insert "+7+",'"+jTextFieldNombre.getText()+"','"+jTextFieldFecha.getText()+
+                    "','"+jTextFieldCelular.getText()+"','"+jTextFieldDireccion.getText()+"','"+jTextFieldCedula.getText()+"','"+
+                    jTextFieldContraseña.getText()+"','"+jTextFieldCorreo.getText()+"'"; 
+           
             PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
             prepsInsertProduct.execute();
             JOptionPane.showMessageDialog(null,"exito");

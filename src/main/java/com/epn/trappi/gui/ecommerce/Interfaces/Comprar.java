@@ -1,19 +1,27 @@
 
 package com.epn.trappi.gui.ecommerce.Interfaces;
 
+import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Diseño.TextPrompt;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Articulo;
 import com.epn.trappi.gui.ecommerce.Ecommerce.CarritoDeCompras;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.FacturaMostrar.FacturaFis;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.YES_OPTION;
 import javax.swing.table.DefaultTableModel;
 
 
 public class Comprar extends javax.swing.JFrame {
-
+    DataBaseConnection dbInstance = DataBaseConnection.getInstance();
+    Connection connection = dbInstance.getConnection();
     CarritoDeCompras carrito;
     String id1;
     String nombre1;
@@ -36,20 +44,29 @@ public class Comprar extends javax.swing.JFrame {
     
     
     public void llenartabla(){
-        
-    DefaultTableModel productos = (DefaultTableModel) jTable1.getModel();
-    Articulo articulo;
-    String[] aux=new String[5];
-        for (int i = 0; i < Main.stock.listaarticulos.size(); i++) {
-       articulo=Main.stock.listaarticulos.get(i);
-       aux[0]=articulo.getId();
-       aux[1]=articulo.getNombre();
-       aux[2]=articulo.getMarca();
-       aux[3]=String.valueOf(articulo.getPrecio());
-       aux[4]=Integer.toString(articulo.getCantidad());
-       productos.addRow(aux);
+       
+       try{
+            DefaultTableModel productos = (DefaultTableModel) jTable1.getModel();
+            Articulo articulo;
+            String[] aux=new String[5];
+            Statement statement = connection.createStatement();
+            String sql = "select B.IDENTIFICADORBIEN2,NOMBREBIEN,MARCA,PRECIOBIEN,CANTIDADINVENTARIO from BIEN B, INVENTARIO I"+
+                    " where B.IDENTIFICADORBIEN2=I.IDENTIFICADORBIEN2";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                 
+                aux[0]=resultSet.getString("IDENTIFICADORBIEN2");
+                aux[1]=resultSet.getString("NOMBREBIEN");
+                aux[2]=resultSet.getString("MARCA");
+                aux[3]=resultSet.getString("PRECIOBIEN");
+                aux[4]=resultSet.getString("CANTIDADINVENTARIO");;
+                productos.addRow(aux);
+            }
+            jTable1.setModel(productos);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
-       jTable1.setModel(productos);
     }
     
     public void obtenerproductodestock()

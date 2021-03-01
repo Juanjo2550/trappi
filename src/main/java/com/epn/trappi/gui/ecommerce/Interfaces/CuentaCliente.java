@@ -317,11 +317,10 @@ public class CuentaCliente extends javax.swing.JFrame {
 
     private void jButtonaceptarcambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaceptarcambiosActionPerformed
      try {
-           
-            String sql = "update CLIENTES set NOMBRECLIE='"+jTextFieldnombre.getText()+"',FECHADENACIMIENTO='"+
-                    jTextFieldfecha.getText()+"',CELULAR='"+jTextFieldcelular.getText()+"',DIRECCION='"+jTextFielddireccion.getText()+
-                    "',CONTRASENA='"+jTextFieldcontrasena.getText()+"',CORREO='"+jTextFieldcorreo.getText()+
-                    " where NOMBRECLIE='"+jt.getText()+"'";
+            String sql ="EXEC cliente_modificar '"+jTextFieldnombre.getText()+"','"+jTextFieldfecha.getText()+"','"+
+                    jTextFieldcelular.getText()+"','"+jTextFielddireccion.getText()+"','"+jTextFieldcontrasena.getText()+
+                    "','"+jTextFieldcontrasena.getText()+"'";
+            
             PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
             prepsInsertProduct.execute();
             JOptionPane.showMessageDialog(null,"cambios realizados con exito");
@@ -338,9 +337,12 @@ public class CuentaCliente extends javax.swing.JFrame {
            Login login=new Login();
            login.setVisible(true);
            this.setVisible(false);
-            String sql = "delete CLIENTES where NOMBRECLIE='"+"NOMBRE";
+            String sql = "EXEC cliente_borrar '"+jTextFieldnombre.getText()+"'";
             PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
+            prepsInsertProduct.execute();
             JOptionPane.showMessageDialog(null,"cambios realizados con exito");
+            login.setVisible(true);
+            this.setVisible(false);
         } catch (SQLException ex) {
             Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
         }
