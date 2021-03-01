@@ -3,7 +3,6 @@ package com.epn.trappi.models.proveedores;
 import com.epn.trappi.db.proveedores.ProveedoresDb;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,11 +20,21 @@ abstract public class Compra {
     protected Bien bien;
     protected String estado;
     protected Double montoTotal;
-    protected String fecha=null;
+    protected String fecha;
     protected int identificador;
     
     private ProveedoresDb db=new ProveedoresDb();
 
+    public Compra(ListaDeBienes listaBienesAComprar, String estado, Double montoTotal, String fecha, int identificador) {
+        this.listaBienesAComprar = listaBienesAComprar;
+        this.estado = estado;
+        this.montoTotal = montoTotal;
+        this.fecha = fecha;
+        this.identificador = identificador;
+    }
+
+    
+    
     public Compra(Inventario inventario, ListaDeBienes listaBienesAComprar, Bien bien, String estado, Double montoTotal, int identificador) {
         this.inventario = inventario;
         this.listaBienesAComprar = listaBienesAComprar;
@@ -65,6 +74,7 @@ abstract public class Compra {
         this.fecha=fecha;
         this.montoTotal=monto;
     }
+    
     
     public Compra() {
         

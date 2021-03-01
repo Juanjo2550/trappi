@@ -15,6 +15,10 @@ public class CompraDeProducto extends Compra {
         super();
     }
 
+    public CompraDeProducto(ListaDeBienes listaBienesAComprar, String estado, Double montoTotal, String fecha, int identificador) {
+        super(listaBienesAComprar, estado, montoTotal, fecha, identificador);
+    }
+
     
     public CompraDeProducto(ListaDeBienes listaBienesAComprar, String estado) {
         super(listaBienesAComprar,estado);

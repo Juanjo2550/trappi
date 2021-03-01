@@ -297,7 +297,6 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
         else{
             jTextFieldCantidad.setText(seleccionados[jTable1.getSelectedRow()][1]+"");
         }
-        System.out.println("  "+seleccionados[0][0] + " "+seleccionados[1][0]+ " "+seleccionados[2][0]+ " "+seleccionados[3][0]+ " "+seleccionados[4][0]+ " "+seleccionados[5][0]);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jCheckBoxAñadirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBoxAñadirMouseClicked
@@ -307,7 +306,6 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
     private void jTextFieldCantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCantidadKeyReleased
         int cantidad=Integer.parseInt(jTextFieldCantidad.getText());
         seleccionados[jTable1.getSelectedRow()][1]=cantidad;
-        System.out.println("vv"+seleccionados[0][1] + " "+seleccionados[1][1]+ " "+seleccionados[2][1]+ " "+seleccionados[3][1]+ " "+seleccionados[4][1]+ " "+seleccionados[5][1]);
     }//GEN-LAST:event_jTextFieldCantidadKeyReleased
 
     private void jCheckBoxAñadirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBoxAñadirMouseExited

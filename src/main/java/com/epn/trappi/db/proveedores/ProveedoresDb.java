@@ -218,7 +218,7 @@ public class ProveedoresDb {
             ListaDeBienes listaBienesCompra = new ListaDeBienes();
             listaBienesCompra.setListaBienes(listaBienes);
             CompraDeProducto comp = new CompraDeProducto(listaBienesCompra, rs.getString(2),
-                    rs.getString(4), Double.parseDouble(rs.getString(3)));
+                    Double.parseDouble(rs.getString(3)),rs.getString(4),Integer.parseInt(rs.getString(1)));
             listaCompra.add(comp);
             /*String[] res = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)};
             pp.add(reformarProducto(res));*/

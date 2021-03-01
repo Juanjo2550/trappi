@@ -10,6 +10,7 @@ import com.epn.trappi.models.proveedores.Bien;
 import com.epn.trappi.models.proveedores.Compra;
 import com.epn.trappi.models.proveedores.ListaDeCompras;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -73,7 +74,6 @@ public class guiComprasPanel extends javax.swing.JPanel {
                 for (Bien bienAux : compraAuxiliar.getListaCantidadDeBienes().getListaBienes()){
                     fila[0]= bienAux.getNombre()+"";
                     fila[1]= bienAux.getMarca();
-                    System.out.print(bienAux.getMarca());
                     fila[2]= bienAux.getCantidad()+"";
                     fila[3]= bienAux.getProveeedor().getRazonSocial();
                     modelo.addRow(fila);
@@ -330,17 +330,19 @@ public class guiComprasPanel extends javax.swing.JPanel {
         } catch (IOException ex) {
             Logger.getLogger(guiComprasPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
-        System.out.print(compras.getCompras().get(0).toString());
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButRegFactCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegFactCompNotaCredActionPerformed
         if(!compras.getCompras().get(jTable1.getSelectedRow()).getEstado().equals(String.valueOf(jComboBox1.getSelectedItem()))){
-            compras.getCompras().get(jTable1.getSelectedRow()).setEstado(String.valueOf(jComboBox1.getSelectedItem()));
-            //db.setEstadoCompra(compras.getCompras().get(jTable1.getSelectedRow()).getIdentificador(),compras.getCompras().get(jTable1.getSelectedRow()).getEstado());
-            //iniciarTablas();
+            try {
+                compras.getCompras().get(jTable1.getSelectedRow()).setEstado(String.valueOf(jComboBox1.getSelectedItem()));
+                db.actualizarCompras(compras.getCompras().get(jTable1.getSelectedRow()).getIdentificador(),compras.getCompras().get(jTable1.getSelectedRow()).getEstado());
+                iniciarTablas();
+            } catch (SQLException ex) {
+                Logger.getLogger(guiComprasPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(guiComprasPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_jButRegFactCompNotaCredActionPerformed
 

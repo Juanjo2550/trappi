@@ -52,7 +52,6 @@ abstract public class Bien {
         this.marca = marca;
     }
 
-    
     public void setProveeedor(Proveedor proveeedor) {
         this.proveeedor = proveeedor;
     }
