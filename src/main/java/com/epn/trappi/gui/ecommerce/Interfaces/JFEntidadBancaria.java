@@ -93,18 +93,22 @@ public class JFEntidadBancaria extends javax.swing.JFrame {
         if(jComboBox1.getSelectedItem().toString().equals("Banco Pichincha")){
             ban.jLabelPichincha.setVisible(true);
             ban.jPanel1.setBackground(Color.yellow);
+            ban.nombrebanco(jComboBox1.getSelectedItem().toString());
         }
         else if(jComboBox1.getSelectedItem().toString().equals("Banco Pacífico")){
             ban.jLabelPacifico.setVisible(true);
             ban.jPanel1.setBackground(Color.cyan);
+            ban.nombrebanco(jComboBox1.getSelectedItem().toString());
         }
         else if(jComboBox1.getSelectedItem().toString().equals("Banco Guayaquil")){
             ban.jLabelGuayaquil.setVisible(true);
             ban.jPanel1.setBackground(Color.cyan);
+            ban.nombrebanco(jComboBox1.getSelectedItem().toString());
         }
         else{
             ban.jLabelBolivariano.setVisible(true);
             ban.jPanel1.setBackground(Color.green);
+            ban.nombrebanco(jComboBox1.getSelectedItem().toString());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

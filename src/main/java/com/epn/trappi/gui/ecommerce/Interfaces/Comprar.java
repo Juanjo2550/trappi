@@ -8,10 +8,12 @@ import com.epn.trappi.gui.ecommerce.Ecommerce.CarritoDeCompras;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.FacturaMostrar.FacturaFis;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -450,6 +452,59 @@ public class Comprar extends javax.swing.JFrame {
     jButtoneliminar.setVisible(true);
     }//GEN-LAST:event_jTable2MouseClicked
 
+    
+    
+    public void nombretitulo(String name){
+     jt.setText(name);
+        System.out.println(name);
+    }
+    
+     public String idcliente(){
+        String idcl="";
+        try{
+            
+            Statement statement = connection.createStatement();
+            String sql = "SELECT IDCLIENTE FROM CLIENTES WHERE NOMBRECLIE='"+jt.getText()+"'";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+              idcl=resultSet.getString("IDCLIENTE");
+            }  
+            
+       } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return idcl;
+    }
+    public String direccliente(){
+        String idcl="";
+        try{
+            
+            Statement statement = connection.createStatement();
+            String sql = "SELECT DIRECCION FROM CLIENTES WHERE CEDULA2='"+jt.getText()+"'";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+              idcl=resultSet.getString("DIRECCION");
+            }  
+            
+       } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return idcl;
+    }
+    
+    
+    public void generarfacturaDatabase(){
+        try{
+            Random aleatorio = new Random(System.currentTimeMillis());
+            int idAletorio = aleatorio.nextInt(100);
+            String sql = "exec factura_insert"+ idAletorio+","+Integer.parseInt(idcliente())+","+idAletorio+","+direccliente(); 
+           
+            PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
+            prepsInsertProduct.execute();
+        } catch(SQLException ex){
+            Logger.getLogger(JFBanco.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     /**
      * @param args the command line arguments
      */

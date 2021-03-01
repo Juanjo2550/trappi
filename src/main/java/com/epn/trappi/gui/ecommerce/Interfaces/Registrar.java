@@ -196,8 +196,9 @@ public class Registrar extends javax.swing.JFrame {
             
             FRegistroCliente frc=new FRegistroCliente(jTextFieldNombre.getText(),jTextFieldCorreo.getText(), jTextFieldFecha.getText(), jTextFieldCelular.getText(),jTextFieldDireccion.getText(),jTextFieldCedula.getText(),jTextFieldContraseña.getText());
             Main.cliente.registrarse(frc);
-            
-            String sql = "exec cliente_insert "+7+",'"+jTextFieldNombre.getText()+"','"+jTextFieldFecha.getText()+
+            Random aleatorio = new Random(System.currentTimeMillis());
+            int idAletorio = aleatorio.nextInt(100);
+            String sql = "exec cliente_insert "+idAletorio+",'"+jTextFieldNombre.getText()+"','"+jTextFieldFecha.getText()+
                     "','"+jTextFieldCelular.getText()+"','"+jTextFieldDireccion.getText()+"','"+jTextFieldCedula.getText()+"','"+
                     jTextFieldContraseña.getText()+"','"+jTextFieldCorreo.getText()+"'"; 
            

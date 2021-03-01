@@ -220,11 +220,14 @@ public class Inicio extends javax.swing.JFrame {
     Comprar comprar=new Comprar();
     comprar.setVisible(true);
     this.setVisible(false);
+    comprar.nombretitulo(jt.getText());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
     Metododepago mp=new Metododepago();
+    mp.nombretitulo(jt.getText());
     mp.setVisible(true);
+    mp.llenardatos();
     this.setVisible(false);
     }//GEN-LAST:event_jButton3MouseClicked
 

@@ -1,6 +1,7 @@
 
 package com.epn.trappi.gui.ecommerce.Interfaces;
 
+import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.Tarjetas.Tarjeta;
 import javax.swing.JOptionPane;
@@ -8,8 +9,16 @@ import javax.swing.table.DefaultTableModel;
 import com.epn.trappi.gui.ecommerce.FormulariosTarjetas.FEdicionTarjeta;
 import com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaCredito;
 import com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaDebito;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Metododepago extends javax.swing.JFrame {
+        DataBaseConnection dbInstance = DataBaseConnection.getInstance();
+        Connection connection = dbInstance.getConnection();
 
     
     public Metododepago() {
@@ -17,7 +26,7 @@ public class Metododepago extends javax.swing.JFrame {
         this.setSize(1300, 700);
         jButtoneditarconfirmarcambios.setVisible(false);
         this.setLocationRelativeTo(null);
-        llenartabla();
+        llenardatos();
         jt.setText(Main.cliente.getNombre());
         jt.setEditable(false);
         
@@ -46,15 +55,14 @@ public class Metododepago extends javax.swing.JFrame {
         jTextFieldtarjeta.setEditable(false);
         jTextFieldtipo.setEditable(false);
     }
-    
-    public Tarjeta obtenertarjeta(){
+  /*  public Tarjeta obtenertarjeta(){
         com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaCredito tar=null;
         com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaDebito tar1=null;
     for (int i = 0; i < Main.cliente.tarjeta.size(); i++) {
       
         }
     return tar;
-    }
+    }*/
     
     
 
@@ -165,6 +173,12 @@ public class Metododepago extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         jLabel4.setText("Datos:");
+
+        jTextFieldtarjeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldtarjetaActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         jLabel5.setText("CVV");
@@ -337,7 +351,7 @@ public class Metododepago extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtoneditarActionPerformed
 
     private void tablatarjetasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablatarjetasMouseClicked
-    tomarTarjeta();
+    //tomarTarjeta();
     }//GEN-LAST:event_tablatarjetasMouseClicked
 
     private void jButtoneditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoneditar1ActionPerformed
@@ -350,7 +364,12 @@ public class Metododepago extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtoneditar1ActionPerformed
 
     private void jButtoneditarconfirmarcambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoneditarconfirmarcambiosActionPerformed
-        FEdicionTarjeta fet=new FEdicionTarjeta(jTextFieldtarjeta.getText(),jTextFieldcvv.getText(),jTextFieldfecha.getText(), jTextFieldtipo.getText());
+                Inicio nuevo= new Inicio();
+                nuevo.jt.setText(jt.getText());
+                nuevo.setVisible(true);
+                this.setVisible(false);
+        
+        /*FEdicionTarjeta fet=new FEdicionTarjeta(jTextFieldtarjeta.getText(),jTextFieldcvv.getText(),jTextFieldfecha.getText(), jTextFieldtipo.getText());
         if(jTextFieldtipo.getText().equals("Credito")){
         Main.cliente.editarTarjetaCredito(fet, (TarjetaCredito) obtenertarjeta());
         }
@@ -358,10 +377,43 @@ public class Metododepago extends javax.swing.JFrame {
         Main.cliente.editarTarjetaDebito(fet, (TarjetaDebito) obtenertarjeta());
         }
         JOptionPane.showMessageDialog(null,"cambios realizados con exito");
-        llenartabla();
+        llenartabla();*/
         
     }//GEN-LAST:event_jButtoneditarconfirmarcambiosActionPerformed
 
+    private void jTextFieldtarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldtarjetaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldtarjetaActionPerformed
+
+    public void nombretitulo(String name){
+     jt.setText(name);
+        System.out.println(name);
+    }
+    public void llenardatos(){
+        try {
+            String tarjeta= "";
+            String cvv ="";
+            String tipo ="Credito";
+            String fecha ="";
+                                   
+            Statement statement = connection.createStatement();
+            String sql = "select NUMEROTARJETA, CVV, FECHADECADUCIDAD from TARJETAS T, CUENTABANCARIA C, CLIENTES L "+
+                         "where T.IDCUENTABANCARIA=C.IDCUENTABANCARIA and C.IDCLIENTE=L.IDCLIENTE and L.NOMBRECLIE='"+jt.getText()+"'";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                 tarjeta= resultSet.getString("NUMEROTARJETA");
+                 cvv =resultSet.getString("CVV");
+                 fecha =resultSet.getString("FECHADECADUCIDAD");}
+            System.out.println(tarjeta);
+            jTextFieldtarjeta.setText(tarjeta);
+            jTextFieldcvv.setText(cvv);
+            jTextFieldtipo.setText(tipo);
+            jTextFieldfecha.setText(fecha);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     /**
      * @param args the command line arguments
      */

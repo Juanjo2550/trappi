@@ -5,8 +5,16 @@
  */
 package com.epn.trappi.gui.ecommerce.Interfaces;
 
+import com.epn.trappi.db.connection.DataBaseConnection;
+import java.sql.Connection;
+
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -16,7 +24,9 @@ import javax.swing.JOptionPane;
  * @author Andres
  */
 public class JFBanco extends javax.swing.JFrame {
-
+        private String banco;
+        DataBaseConnection dbInstance = DataBaseConnection.getInstance();
+        Connection connection = dbInstance.getConnection();
     /**
      * Creates new form JFBanco
      */
@@ -738,6 +748,59 @@ public class JFBanco extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
+    public void nombrebanco(String name){
+        this.banco=name;
+    }
+    
+   public String idbanco(){
+        String idban="";
+        try {
+            Statement statement = connection.createStatement();
+            String sql1 = "SELECT IDBANCO FROM BANCO WHERE NOMBREBAN='"+this.banco+"'";
+            ResultSet resultSet = statement.executeQuery(sql1);
+            while (resultSet.next()) {
+            idban=resultSet.getString("IDBANCO");
+            }  
+        } catch (SQLException ex) {
+            Logger.getLogger(JFBanco.class.getName()).log(Level.SEVERE, null, ex);
+          }
+            return idban;
+    }
+   public String idcliente(){
+        String idcl="";
+        try{
+            
+            Statement statement = connection.createStatement();
+            String sql = "SELECT IDCLIENTE FROM CLIENTES WHERE NOMBRECLIE='"+jTextField2.getText()+"'";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+              idcl=resultSet.getString("IDCLIENTE");
+            }  
+            
+       } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return idcl;
+    }
+   
+   public void crearCuenta(){
+       try {
+            Random aleatorio = new Random(System.currentTimeMillis());
+            int idAletorio = aleatorio.nextInt(100);
+            String numcuenta= "10000"+String.valueOf(idAletorio);
+            Date ahora = new Date();
+            SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
+            String fecha= formateador.format(ahora);
+            String sql = "exec cuenta_insert"+idAletorio+","+Integer.parseInt(idcliente())+","+Integer.parseInt(idbanco())+",'"+
+                    numcuenta+"','200','"+fecha+"'"; 
+           PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
+            prepsInsertProduct.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(JFBanco.class.getName()).log(Level.SEVERE, null, ex);
+          }
+       
+   }
+    
     /**
      * @param args the command line arguments
      */
