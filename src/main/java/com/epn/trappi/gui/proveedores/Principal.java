@@ -576,8 +576,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jButDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButDashboardActionPerformed
-        //new CambiaPanel(PanelVerTodos, new guiAnalizador(PanelVerTodos));
-        //showPanel(null);
+        try {
+            new CambiaPanel(PanelVerTodos, new guiAnalizador(PanelVerTodos));
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        showPanel(null);
     }//GEN-LAST:event_jButDashboardActionPerformed
 
     private void jButComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButComprasActionPerformed
