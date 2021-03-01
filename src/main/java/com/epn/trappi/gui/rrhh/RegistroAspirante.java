@@ -7,7 +7,9 @@ package com.epn.trappi.gui.rrhh;
 
 
 import com.epn.trappi.models.rrhh.contratacion.Aspirante;
+import com.epn.trappi.models.rrhh.contratacion.PruebaAdmision;
 import com.epn.trappi.models.rrhh.listas.ListaAspirantes;
+import com.epn.trappi.models.rrhh.listas.ListaPruebasAdmision;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -425,10 +427,15 @@ public class RegistroAspirante extends javax.swing.JFrame {
     private void jButGuardarAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButGuardarAspiranteActionPerformed
       
         ListaAspirantes listaAspirantes = new ListaAspirantes();
+        ListaPruebasAdmision listaPruebas = new ListaPruebasAdmision();
         Aspirante aspirante = new Aspirante(jTextNombreAspirante.getText(), jTextApellidoAspirante.getText(), jTextCedulaAspirante.getText(),
                 jTextTelefonoAspirante.getText(), jTextCargoAspirante.getText());
+        PruebaAdmision prueba = new PruebaAdmision(Integer.parseInt(jTextPuntajeAspirante.getText()), jTextActitudesAspirante.getText(), jTextAptitudesAspirante.getText());
+        
         listaAspirantes.agregar(aspirante);
         listarAspirantes();
+        listaPruebas.agregar(prueba, jTextCedulaAspirante.getText());
+        //listarAspirantes();
         JOptionPane.showMessageDialog(null, "Aspirante registrado con éxito");
     }//GEN-LAST:event_jButGuardarAspiranteActionPerformed
 

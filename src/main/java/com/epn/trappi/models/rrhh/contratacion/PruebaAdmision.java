@@ -16,7 +16,9 @@ public class PruebaAdmision {
     private int puntajeBase;
     private String actitudesBase;
     private String aptitudesBase;
+    private String aprobacion;
     private ListaAspirantes aspirantes;
+    
     public PruebaAdmision(int puntaje, String actitudes, String aptitudes) {
         this.puntaje = puntaje;
         this.actitudes = actitudes;
@@ -87,7 +89,11 @@ public class PruebaAdmision {
     public String getAptitudes() {
         return aptitudes;
     }
-
+    
+    public String getAprobacion() {
+        return aprobacion;
+    }
+    
    
     
     
