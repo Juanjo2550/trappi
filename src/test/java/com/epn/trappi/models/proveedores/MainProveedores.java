@@ -7,6 +7,7 @@ package com.epn.trappi.models.proveedores;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.db.proveedores.ProveedoresDb;
+import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,7 +22,7 @@ import java.util.List;
  */
 public class MainProveedores {
 
-    public static void main(String args[]) throws SQLException {
+    public static void main(String args[]) throws SQLException, IOException {
         ProveedoresDb db = new ProveedoresDb();
         /*DataBaseConnection dbInstance = DataBaseConnection.getInstance();
         Connection connection = dbInstance.getConnection();
@@ -41,17 +42,25 @@ public class MainProveedores {
         /*db.getProveedores().forEach(pr -> {
             System.out.println(pr.getRuc() + ";" + pr.getRazonSocial() + ";" + pr.getDireccion() + ";" + pr.getCuenta());
         });*/
-        List<Producto> prod = db.seleccionarComprabien(1);
+        /*List<Producto> prod = db.seleccionarComprabien(1);
         prod.forEach(p -> {
             System.out.println(p.getNombre() + ";" + p.getPrecio() + ";" + p.getProveeedor().getRuc());
-        });
+        });*/
 
-        ListaDeCompras comp = db.seleccionarCompras();
+        
+        db.getInventarioDb();
+        
+        ListaDeBienes prod = db.getInventarioDb();
+        prod.getListaBienes().forEach(p -> {
+            System.out.println(p.getNombre() + ";" + p.getPrecio() + ";" + p.getProveeedor().getRuc());
+        });
+                
+        /*ListaDeCompras comp = db.seleccionarCompras();
 
         List<Servicio> serv = db.getServicios();
         comp.getCompras().forEach(pr -> {
             System.out.println(pr.getEstado() + ";" + pr.getFecha()+ ";" + pr.getListaCantidadDeBienes());
-        });
+        });*/
 
         /*String [] params = {"ruc:7043728305001","nombrebien:Papel higienico","preciobien:2.8","tipobien:Producto","cantidad:50","marca:Familia"};
         

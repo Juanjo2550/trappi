@@ -381,16 +381,18 @@ public class ProveedoresDb {
         ejecutarSPParameters("insertBien", nuevoProducto);
     }
 
-    /*public ArrayList<CantidadDeBien> getInventarioDb() throws IOException {
-        List<String[]> serv = p.leerArchivoCSV(invFilename);
-        ArrayList<CantidadDeBien> auxiliar = new ArrayList<>();
-        for (int i = 0; i < serv.size(); i++) {
-            auxiliar.add(new CantidadDeBien(new Producto(serv.get(i)[0]), Integer.parseInt(serv.get(i)[1])));
-        }
-        return auxiliar;
-    }*/
+    public ListaDeBienes getInventarioDb() throws IOException {
 
- /* public void setInventarioDb(ArrayList<CantidadDeBien> inventarioDb) {
+        List<Producto> listaProductos = getProductos();
+        ArrayList<Bien> auxiliar = new ArrayList<>();
+
+        listaProductos.forEach(products -> {
+            auxiliar.add(products);
+        });
+        return new ListaDeBienes(auxiliar);
+    }
+
+    /* public void setInventarioDb(ArrayList<CantidadDeBien> inventarioDb) {
         String retorno = "";
         try {
             p.vaciarArchivoCSV(invFilename);
