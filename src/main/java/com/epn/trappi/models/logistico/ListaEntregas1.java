@@ -23,12 +23,6 @@ public class ListaEntregas1 {
         //fcids [7]= "";
         //fcids [8]= "";
         //fcids [9]= "";
-        
-        for (int i=0; i<10; i++){
-           Entrega v= new Entrega(new Posicion (fcids[i]));
-           entregas.add(v);
-       } 
-        
     }
     
  

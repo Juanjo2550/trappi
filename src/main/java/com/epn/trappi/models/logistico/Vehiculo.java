@@ -4,18 +4,60 @@ package com.epn.trappi.models.logistico;
 public class Vehiculo {
     private Estado estado;
     private Gps gps;
-    private int matricula;
+    private String matricula;
     private String tipo;
-    private double kilometraje;
+    private int kilometraje;
     private FichaTecnica fichaTecnica;
     
-    public Vehiculo(int matricula){
+    public Vehiculo(){
         estado= new Habilitado(this);
-        this.matricula = matricula;
     }
 
-    public int getMatricula() {
+    public String getMatricula() {
         return matricula;
+    }
+    public void setMatricula(String matricula){
+        this.matricula=matricula;
+    }
+
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
+    public Gps getGps() {
+        return gps;
+    }
+
+    public void setGps(Gps gps) {
+        this.gps = gps;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public int getKilometraje() {
+        return kilometraje;
+    }
+
+    public void setKilometraje(int kilometraje) {
+        this.kilometraje = kilometraje;
+    }
+
+    public FichaTecnica getFichaTecnica() {
+        return fichaTecnica;
+    }
+
+    public void setFichaTecnica(FichaTecnica fichaTecnica) {
+        this.fichaTecnica = fichaTecnica;
     }
     
     

@@ -9,7 +9,7 @@ public class ListaVehiculos {
     public ListaVehiculos(){
         vehiculos = new ArrayList<Vehiculo>();
         for (int i=0; i<5; i++){
-           Vehiculo v= new Vehiculo(123+i);
+           Vehiculo v= new Vehiculo();
            vehiculos.add(v);
         } 
     }

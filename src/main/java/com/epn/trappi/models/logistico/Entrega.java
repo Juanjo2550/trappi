@@ -1,13 +1,20 @@
 package com.epn.trappi.models.logistico;
 
-public class Entrega extends Thread{
-    private boolean estado;
-    private Posicion destino;
-    private String factura;
+import com.epn.trappi.controladores.logistico.storedProcedures;
+import java.sql.SQLException;
 
-    public Entrega(Posicion destino) {
+public class Entrega{
+    private int ID_Entrega;
+    private String matricula;
+    private String fecha;
+    private String ID_Empleado;
+    private boolean estado;
+    private String factura;
+    
+
+    public Entrega(String factura) {
+        this.factura=factura;
         estado=true;
-        setDestino(destino);
     }
 
     public boolean isEstado() {
@@ -18,42 +25,74 @@ public class Entrega extends Thread{
         this.estado = estado;
     }
 
-    public String getDestino() {
-        return destino.getFcids();
+    public int getID_Entrega() {
+        return ID_Entrega;
     }
 
-    public void setDestino(Posicion destino) {
-        this.destino = destino;
+    public void setID_Entrega(int ID_Entrega) {
+        this.ID_Entrega = ID_Entrega;
     }
-    
-    public void actualizarEstado(Vehiculo vehiculo,Conductor conductor){
-        /*
-        En este método se actualiza el estado de la entrega ya creada, practicamente se 
-        cambia a estado "finalizada". Adicionalmente, se cambia el estado del empleado conductor y 
-        del vehiculo a disponible.
-        */
-    }
-    
-    public void confirmarEntrega(String factura){
-        this.factura=factura;
-        start();
-    }
-    
-    public void RegistrarEntrega(Vehiculo vehiculo,Conductor conductor){
-        /*
-        En este bloque se registra la entrega en la base de datos, y luego se ejecuta el metodo simulacion movimiento.
-        */
-    }
-    
-    
 
-    @Override
-    public void run() {
-        super.run(); //To change body of generated methods, choose Tools | Templates.
-        //Se llama al método asignar del control de disponibilidad
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getID_Empleado() {
+        return ID_Empleado;
+    }
+
+    public void setID_Empleado(String ID_Empleado) {
+        this.ID_Empleado = ID_Empleado;
+    }
+
+    public String getFactura() {
+        return factura;
+    }
+
+    public void setFactura(String factura) {
+        this.factura = factura;
+    }
+
+ 
+    
+    public void actualizarEstado() throws SQLException{
+        storedProcedures agente = new storedProcedures();
+        agente.actualizarEntrega(this);
+    }
+    
+    public void confirmarEntrega() throws SQLException{
         ControlDisponibilidad control = new ControlDisponibilidad();
-        control.asignar(this.factura);
+        control.asignar(factura);
     }
+    
+    public void RegistrarEntrega(Vehiculo vehiculo,String ID_conductor) throws SQLException{
+        this.setFecha("");
+        this.setID_Empleado(ID_conductor);
+        this.setID_Entrega(generarID());
+        this.setMatricula(vehiculo.getMatricula());
+        storedProcedures agente = new storedProcedures();
+        agente.ingresarEntrega(this);
+        
+    }
+    public int generarID(){
+        //Se debe consultar la Tabla de Entregas y obtener el ultimo o primer ID de entrega y sumarle 1
+        int a=0;
+        return a;
+    }
+    
+   
     
     
 }

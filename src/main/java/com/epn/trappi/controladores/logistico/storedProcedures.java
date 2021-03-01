@@ -6,7 +6,12 @@
 package com.epn.trappi.controladores.logistico;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
+import com.epn.trappi.models.logistico.Conductor;
+import com.epn.trappi.models.logistico.Entrega;
+import com.epn.trappi.models.logistico.Estado;
+import com.epn.trappi.models.logistico.Habilitado;
 import com.epn.trappi.models.logistico.Mantenimiento;
+import com.epn.trappi.models.logistico.Vehiculo;
 import java.sql.CallableStatement;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -45,6 +50,42 @@ public class storedProcedures {
             modelo.addRow(registro);
         }
         return modelo;
+    }
+    public Vehiculo obtenerVehiculoAsignado(String tabla,String columna,String valor) throws SQLException{
+        CallableStatement statement = connection.getConnection().prepareCall("{ call InsertData(?,?,?) }");
+        statement.setString(1,tabla);
+        statement.setString(2,columna);
+        statement.setString(3,valor);
+        ResultSet resultados = statement.executeQuery();
+        ResultSetMetaData informacion_tabla = resultados.getMetaData();
+        int num_columnas = informacion_tabla.getColumnCount();
+        String[] registro_vehiculo = new String[num_columnas];
+        resultados.next();
+        for (int indice_columna=1;indice_columna<=num_columnas;indice_columna++){
+                Object valor_registro = resultados.getObject(indice_columna);
+                String cadena = valor_registro.toString();
+                registro_vehiculo[indice_columna-1]=cadena;
+        }
+        Vehiculo vehiculo = new Vehiculo();
+        vehiculo.setMatricula(registro_vehiculo[0]);
+        vehiculo.setTipo(registro_vehiculo[2]);
+        vehiculo.setKilometraje(Integer.parseInt(registro_vehiculo[3]));
+        return vehiculo;
+    }
+    public String obtenerConductorAsignado(String tabla,String columna,String valor) throws SQLException{
+        CallableStatement statement = connection.getConnection().prepareCall("{ call InsertData(?,?,?) }");
+        statement.setString(1,tabla);
+        statement.setString(2,columna);
+        statement.setString(3,valor);
+        ResultSet resultados = statement.executeQuery();
+        ResultSetMetaData informacion_tabla = resultados.getMetaData();
+        int num_columnas = informacion_tabla.getColumnCount();
+        String ID_Conductor; 
+        resultados.next();
+        Object valor_registro = resultados.getObject(1);
+        ID_Conductor = valor_registro.toString();
+        return ID_Conductor;
+        //SELECT * FROM EMPLEADO WHERE Estado=Disponible
     }
     public DefaultTableModel selectColumnasEnUnionPorValor(String TABLA1,String TABLA2,String COLUMNA1,String COLUMNA2,String WHERE_COLUMNA,
             String WHERE_VALOR,String[] COLUMNAS_SELECT) throws SQLException{
@@ -109,6 +150,16 @@ public class storedProcedures {
         statement.setDouble(4,mantenimiento.getValorGasto());
         statement.execute();
     }
+    public void ingresarEntrega(Entrega entrega) throws SQLException{
+        CallableStatement statement = connection.getConnection().prepareCall("{call Ingresar_Entrega(?,?,?,?,?,?) }");
+        statement.setString(1, String.valueOf(entrega.getID_Entrega()));
+        statement.setString(2,entrega.getMatricula());
+        statement.setString(3,entrega.getFecha());
+        statement.setString(4,"En curso");
+        statement.setString(5, entrega.getFactura());
+        statement.setString(6,entrega.getID_Empleado());
+        statement.execute();
+    }
     
     public void ingresarSolicitudMantenimiento(int numSolicitud, int identificadorBien, int idMantenimiento,String fechaSol, String estadoMantenimiento ) throws SQLException{
         CallableStatement statement = connection.getConnection().prepareCall("{call IngresarSolicitud_Mantenimiento(?,?,?,?,?) }");
@@ -117,6 +168,13 @@ public class storedProcedures {
         statement.setInt(3,idMantenimiento);
         statement.setDate(4,Date.valueOf(fechaSol));
         statement.setString(5,estadoMantenimiento);
+        statement.execute();
+    }
+    
+    public void actualizarEntrega(Entrega entrega) throws SQLException{
+        CallableStatement statement = connection.getConnection().prepareCall("{call Actualizar_Entrega(?,?) }");
+        statement.setString(1,String.valueOf(entrega.getID_Entrega()));
+        statement.setString(2,"Finalizado");
         statement.execute();
     }
 }

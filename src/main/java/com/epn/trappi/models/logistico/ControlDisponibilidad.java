@@ -5,66 +5,57 @@
  */
 package com.epn.trappi.models.logistico;
 
+import com.epn.trappi.controladores.logistico.storedProcedures;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import com.epn.trappi.models.logistico.Vehiculo;
+import java.sql.SQLException;
 
 /**
  *
  * @author Erick
  */
 public class ControlDisponibilidad {
+    
+    /*
+    Al usar la base de datos ya no debemos recurrir a almacenamiento interno
+    Al usarse hilos para cada asignacion de entrega consumiria muchos recursos traer todas las listas por cada uno
     private ArrayList<Vehiculo> vehiculos;
     private ArrayList<Conductor> conductores;
+    */
     
     //METODOS
     public ControlDisponibilidad(){
         
     }
-    public ControlDisponibilidad(ArrayList<Vehiculo> vehiculos, ArrayList<Conductor> conductores) {
-        this.vehiculos = vehiculos;
-        this.conductores = conductores;
+
+    
+    public void actualizarEstadoVehiculo(String estado){
+
+        
+    }
+    public void actualizarEstadoConductor(String estado){
+
+        
     }
     
-    public Vehiculo actualizarEstado(Vehiculo vehiculo,Conductor conductor){
-        int matricula = vehiculo.getMatricula();
-        String identificador = conductor.getNombre(); //Debemos usar una cedula
-        /*
-        Se utiliza la matricula y el identificador para cambiar el estado de disponibilidad
-        en la base de datos que contenga la lista de conductores y vehiculos.
-        */
-        //Se cambia el estado de la instancia del vehiculo
-        vehiculo.actualizarEstado(new Inhabilitado(vehiculo));
-        return vehiculo;
-    }
-    
-    public void asignar(Posicion destino){
-        /*
-        Se asume que aquí se realiza el proceso de selección de un conductor y un vehiculo
-        esto da como resultado una instancia de vehiculo y conductor.
-        */
-        Vehiculo vehiculo=null;
-        Conductor conductor=null;
-        vehiculo = actualizarEstado(vehiculo,conductor);
-        /*
-        Luego de actualizar los estados de disponibildad, debemos crear un registro en la tabla
-        de entregas activas para poder ver las rutas que sigue cada vehiculo con una entrega en proceso.
-        */
-        Entrega entrega = null;
-        entrega.actualizarEstado(vehiculo,conductor);
-        /*
-        Después de haber añadido este registro, vamos a llamar a un método que correra en segundo plano
-        simulando asi el tiempo que tarde en llegar el vehiculo a su destino. 
-        */
-        simularMovimiento(10);
-        /*
-        Finalmente, dado que ya se simuló el tiempo que tardó el conductor en llegar a su destino,
-        se asume que el producto se entrego exitosamente y se procede a registrar esta entrega
-        en la base de datos. Y también se retira el registro de entrega activa ya que 
-        ahora esta finalizada. Para esto usamos el método registrarEntrega() de la clase Entrega.
-        */
-        entrega.RegistrarEntrega(vehiculo, conductor);
+    public void asignar(String factura) throws SQLException{
+        // Se obtiene el conductor y el vehiculo que llevara el pedido
+        storedProcedures agente = new storedProcedures();
+        Vehiculo vehiculo = agente.obtenerVehiculoAsignado("VEHICULO","ESTADO","Habilitado");
+        String ID_conductor = agente.obtenerConductorAsignado("EMPLEADO","ESTADOEMP","Activo");
+        //Se debe actualizar el ESTADOEMP de la tabla EMPLEADO correspondiente al ID_conductor obtenido al valor "Ocupado"
         
-        
+        //Se debe actualizar el ESTADO de la tabla VEHICULO correspondiente al vehiculo.matricula al valor "En espera"
+        //Se crea el registro de entrega nuevo
+        Entrega entrega = new Entrega(factura);
+        entrega.RegistrarEntrega(vehiculo, ID_conductor);
+        //Mantener la entrega como En curso durante cierto tiempo.
+        simularMovimiento(60);
+        //Ahora se actualiza el estado de esa entrega a entregado
+        //Se debe actualizar el ESTADOEMP de la tabla EMPLEADO correspondiente al ID_conductor al valor "Activo"
+        //Se debe actualizar el ESTADO de la tabla VEHICULO correspondiente al vehiculo.matricula al valor "Habilitado"
+        entrega.actualizarEstado();    
     }
     public void simularMovimiento(int segundos){
         try{

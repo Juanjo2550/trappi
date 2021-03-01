@@ -24,6 +24,7 @@ public class EntregasActivas extends javax.swing.JPanel {
         mapa = new MapaGeografico();
         this.panelDeRutas.add(mapa.grafico(),BorderLayout.CENTER);//añadimos la vista del mapa al panel de rutas
         //Llenado de tabla con datos quemados
+        /*
         ListaVehiculos vehiculos = new ListaVehiculos();
         ListaConductores conductores = new ListaConductores();
         ListaEntregas1 entregas = new ListaEntregas1();      
@@ -46,10 +47,10 @@ public class EntregasActivas extends javax.swing.JPanel {
             filas[1]=clientes[i];
             filas[2] = conductores.listaConductores.get(i).getNombre();
             filas[3] = vehiculos.vehiculos.get(i).getMatricula();
-            filas[4] = entregas.entregas.get(i).getDestino();
             modelo.addRow(filas);
             idEntrega++;
         }
+        */
         
     }
 
