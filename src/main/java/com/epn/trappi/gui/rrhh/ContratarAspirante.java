@@ -9,7 +9,7 @@ package com.epn.trappi.gui.rrhh;
 import com.epn.trappi.*;
 import com.epn.trappi.models.rrhh.contratacion.Aspirante;
 import com.epn.trappi.models.rrhh.contratacion.Contratacion;
-import com.epn.trappi.models.rrhh.RRHH;
+
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -518,10 +518,10 @@ public class ContratarAspirante extends javax.swing.JFrame {
       // Contratacion contratacion = new Contratacion();
        //contratacion.registrarEmpleado(nombre, apellido, cedula, cargo, depto , numCuenta, banco, valorSueldo, sexo);
        
-       RRHH rrhh = new RRHH();
+      /* RRHH rrhh = new RRHH();
        rrhh.contratarPersonal(nombre, apellido, cedula, cargo, depto, numCuenta, banco, valorSueldo, sexo);
        JOptionPane.showMessageDialog(null, "El empleado se ha registrado exitosamente");
-               
+        */
     }//GEN-LAST:event_jButRegClienteActionPerformed
 
     private void jTextContratoFechaInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextContratoFechaInicioActionPerformed

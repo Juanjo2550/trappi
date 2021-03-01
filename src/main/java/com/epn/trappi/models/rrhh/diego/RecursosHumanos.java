@@ -5,9 +5,9 @@
  */
 package com.epn.trappi.models.rrhh.diego;
 
-import com.epn.trappi.models.rrhh.ListaEmpleados;
-import com.epn.trappi.models.rrhh.RolPagos;
-import com.epn.trappi.models.rrhh.RolesPagos;
+import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
+import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
+//import com.epn.trappi.models.rrhh.RolesPagos;
 import java.util.ArrayList;
 
 /**
@@ -16,15 +16,17 @@ import java.util.ArrayList;
  */
 public class RecursosHumanos {
     ListaEmpleados empleados;
-    public RolesPagos roles = new RolesPagos();
-    private ArrayList<RolPagos> pendientes;
+    
+    //comentado para solucionar problemas
+   /* public RolesPagos roles = new RolesPagos();
+    private ArrayList<RolPagos> pendientes;*/
     
     public void generarRolesDePago(){
         
     }
     public void obtenerRolesDePagoPendientes(){
-        
-        this.roles.obtenerTodos();
+        //comentado para solucionar problemas 
+       // this.roles.obtenerTodos();
     }
     public void generarSolicitudDePago(){
         

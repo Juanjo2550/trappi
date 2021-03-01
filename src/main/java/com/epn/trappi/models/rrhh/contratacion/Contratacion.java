@@ -1,7 +1,7 @@
 package com.epn.trappi.models.rrhh.contratacion;
 
 import com.epn.trappi.models.rrhh.Fecha;
-import com.epn.trappi.models.rrhh.ListaEmpleados;
+import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
 import com.epn.trappi.models.rrhh.Sueldo;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 

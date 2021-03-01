@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DetalleEmpleadoGUI extends javax.swing.JFrame {
     private Empleado empleado;
-    private RolesPagos roles;
+  
     private javax.swing.JFrame parentForm;
     /**
      * Creates new form Ejemplo_GUI
@@ -32,7 +32,7 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
     public DetalleEmpleadoGUI(String cedula, javax.swing.JFrame parentForm) {
         initComponents();
         this.parentForm = parentForm;
-        this.empleado = new EmpleadoDb().selectOne(cedula);
+        /*this.empleado = new EmpleadoDb().selectOne(cedula);*/
         this.nombreEmpleado.setText(this.empleado.getNombres() + " " + this.empleado.getApellidos());
         this.cedulaTextField.setText(this.empleado.getCedula().toString());
         this.cargoTextField.setText(this.empleado.getCargo());
@@ -41,7 +41,7 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
         this.bancoTextField.setText(this.empleado.getBanco());
         this.estadoTextField.setText(this.empleado.getEstado());
         this.sexoTextiField.setText(this.empleado.getSexo() + "");
-        this.roles = new RolesPagos();
+        /*this.roles = new RolesPagos();*/
         fillTable(cedula);
     }
     
@@ -52,7 +52,7 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
             "Fecha"
         };
         
-        DefaultTableModel tableModel = new DefaultTableModel(col, 0);
+    /*   DefaultTableModel tableModel = new DefaultTableModel(col, 0);
         for(RolDePagos r : this.roles.obtenerTodos(cedula)){
             Object [] row = {
                 r.getValor(),
@@ -61,9 +61,9 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
             };
                    
             tableModel.addRow(row);
-        }
+        }*/
         
-        this.tabla.setModel(tableModel);
+      /*  this.tabla.setModel(tableModel);*/
         this.tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.tabla.setDefaultEditor(Object.class, null);
         this.tabla.setRowSelectionAllowed(true);

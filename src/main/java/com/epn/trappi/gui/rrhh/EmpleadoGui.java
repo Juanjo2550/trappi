@@ -8,6 +8,7 @@ package com.epn.trappi.gui.rrhh;
 
 import com.epn.trappi.models.rrhh.*;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
+import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
@@ -23,7 +24,7 @@ public class EmpleadoGui extends javax.swing.JFrame {
      */
     public EmpleadoGui() {
         initComponents();
-        this.empleados = new ListaEmpleados();
+      this.empleados = new ListaEmpleados();
         fillTable();
     }
     

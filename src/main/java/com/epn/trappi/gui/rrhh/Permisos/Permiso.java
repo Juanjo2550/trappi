@@ -23,6 +23,9 @@ public abstract class Permiso {
    private String FECHAFINPERM;
    private String ESTADOPERM;
    private String TIPOPERM;
+   private Empleado empleado;
+
+    
 
     public Permiso(int IDPERM, int IDEMP, int NUMDIASPERM, String VALORPAGARPERM, String COMENTPERM, String FECHAINICIOPERM, 
             String FECHAFINPERM, String ESTADOPERM, String TIPOPERM) {
@@ -41,7 +44,9 @@ public abstract class Permiso {
     public int getIDPERM() {
         return IDPERM;
     }
-
+    public Empleado getEmpleado() {
+        return empleado;
+    }
     public int getIDEMP() {
         return IDEMP;
     }

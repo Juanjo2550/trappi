@@ -31,15 +31,15 @@ public class SolicitudDePago {
             return false;
         }
     }
-
-    public void solicitarPago(Pago nuevoPago, SolicitudDePago p, boolean autoriza) {
+        //esto es comentado para solucionar los errores 
+   /* public void solicitarPago(Pago nuevoPago, SolicitudDePago p, boolean autoriza) {
         if(autorizarSolicitud(p,autoriza)){
             nuevoPago=new Pago(this.empleadoAPagar.getCuentaBancaria(),this.rol.getTotal());
             nuevoPago.realizarPago();
         }
 
     }
-
+*/
     public Fecha getFechaSolicitud() {
         return fechaSolicitud;
     }

@@ -27,9 +27,9 @@ import javax.swing.JOptionPane;
  * @author stali
  */
 public class Gestor_Permiso extends javax.swing.JFrame {
-Calamidad_Domestica calamidad = new Calamidad_Domestica();
+/*Calamidad_Domestica calamidad = new Calamidad_Domestica();*/
 Fecha fecha = new Fecha();
-Empleado empleado = new Empleado();
+/*Empleado empleado = new Empleado();*/
  
     
     /*
@@ -538,9 +538,9 @@ Empleado empleado = new Empleado();
     }//GEN-LAST:event_cmbPermisoActionPerformed
 
     private void cmbTipoPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoPermisoActionPerformed
-    String tipoCalamidad = (String) cmbTipoPermiso.getSelectedItem();
+    /*String tipoCalamidad = (String) cmbTipoPermiso.getSelectedItem();
     int numeroDias = calamidad.Calcular_Numero_Dias_Permiso(tipoCalamidad);
-    txtnumDias.setText(Integer.toString(numeroDias));
+    txtnumDias.setText(Integer.toString(numeroDias));*/
     }//GEN-LAST:event_cmbTipoPermisoActionPerformed
 
     private void btnValidarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarFechaActionPerformed

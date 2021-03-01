@@ -7,6 +7,7 @@ package com.epn.trappi.gui.rrhh;
 
 import com.epn.trappi.models.rrhh.*;
 import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
+import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
@@ -18,14 +19,14 @@ import javax.swing.table.DefaultTableModel;
 public class ListaDeRolesEmpleados extends javax.swing.JFrame {
 
     private ListaEmpleados empleados;
-    private RolesPagos roles;
+    private RolDePagos roles;
 
     /**
      * Creates new form Ejemplo_GUI
      */
     public ListaDeRolesEmpleados() {
         initComponents();
-        this.roles = new RolesPagos();
+     /*   this.roles = new RolDePagos();*/
         fillTable();
     }
 
@@ -40,7 +41,7 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
 
         };
         DefaultTableModel tableModel = new DefaultTableModel(col, 0);
-        for (RolDePagos rol : this.roles.obtenerTodos()) {
+      /*  for (RolDePagos rol : this.roles.obtenerTodos()) {
             Object[] row = {
                 rol.getEmpleado().getCedula(),
                 rol.getValor(),
@@ -49,7 +50,7 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
             };
             tableModel.addRow(row);
         }
-
+        */
         this.tablaEmpleados.setModel(tableModel);
         this.tablaEmpleados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.tablaEmpleados.setDefaultEditor(Object.class, null);
