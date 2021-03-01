@@ -39,21 +39,23 @@ public class MainProveedores {
 
         //db.getProveedores();
         //ListaProveedores prov = new ListaProveedores();
-        /*db.getProveedores().forEach(pr -> {
+
+                
+        db.buscarProveedores("7").forEach(pr -> {
             System.out.println(pr.getRuc() + ";" + pr.getRazonSocial() + ";" + pr.getDireccion() + ";" + pr.getCuenta());
-        });*/
+        });
         /*List<Producto> prod = db.seleccionarComprabien(1);
         prod.forEach(p -> {
             System.out.println(p.getNombre() + ";" + p.getPrecio() + ";" + p.getProveeedor().getRuc());
         });*/
 
         
-        db.getInventarioDb();
+        /*db.getInventarioDb();
         
         ListaDeBienes prod = db.getInventarioDb();
         prod.getListaBienes().forEach(p -> {
             System.out.println(p.getNombre() + ";" + p.getPrecio() + ";" + p.getProveeedor().getRuc());
-        });
+        });*/
                 
         /*ListaDeCompras comp = db.seleccionarCompras();
 

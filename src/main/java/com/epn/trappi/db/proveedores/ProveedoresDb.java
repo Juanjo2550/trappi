@@ -28,6 +28,7 @@ public class ProveedoresDb {
     private final String spSelectAllServicios = "selectAllServicios";
     private final String spSelectAllCompras = "selectAllCompra";
     private final String spSelectAllDetalleCompra = "selectAllDetalleCompra";
+    private final String spBuscarProveedor = "BuscarProveedor";
     private final String invFilename = "src/main/java/com/epn/trappi/db/proveedores/inventario.csv";
     private final Archivo p = new Archivo();
 
@@ -101,6 +102,15 @@ public class ProveedoresDb {
             Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
         }
         return proveedores;
+    }
+
+    public List<Proveedor> buscarProveedores(String ruc) {
+        try {
+            return seleccionarProveedores(ruc);
+        } catch (Exception ex) {
+            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public void setProveedores(List<Proveedor> proveedor) {
@@ -237,6 +247,17 @@ public class ProveedoresDb {
             pp.add(reformarProveedor(res));
         }
         this.proveedores = pp;
+    }
+
+    private List<Proveedor> seleccionarProveedores(String ruc) throws SQLException {
+        String[] clave = {"ruc:" + ruc};
+        ResultSet rs = ejecutarSPParameters(spBuscarProveedor, clave);
+        List<Proveedor> pp = new ArrayList<>();
+        while (rs.next()) {
+            String[] res = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)};
+            pp.add(reformarProveedor(res));
+        }
+        return pp;
     }
 
     /*private void seleccionarCantidadDeBienesCompra() {
