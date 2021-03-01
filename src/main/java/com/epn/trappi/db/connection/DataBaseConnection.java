@@ -15,9 +15,7 @@ public class DataBaseConnection {
                     + "loginTimeout=30;";
 
     private DataBaseConnection() throws SQLException {
-        System.out.println("NO SE CONECTA LA BASE DE DATOS");
         this.connection = DriverManager.getConnection(url);
-        
     }
 
     public Connection getConnection() {
