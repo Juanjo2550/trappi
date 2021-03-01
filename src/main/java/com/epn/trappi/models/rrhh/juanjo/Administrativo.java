@@ -11,8 +11,8 @@ package com.epn.trappi.models.rrhh.juanjo;
  * @author Juan Jaramillo <juanjodev02 at juan.jaramillo02@epn.edu.ec>
  */
 public class Administrativo extends Empleado {
-    public Administrativo(int id, String nombres, String apellidos, String cedula, String cargo, String departamento, String cuentaBancaria, String banco, Asistencia[] asistencias, String sueldo, String estado, char sexo) {
-        super(id, nombres, apellidos, cedula, cargo, departamento, cuentaBancaria, banco, asistencias, sueldo, estado, sexo);
+    public Administrativo(int id, String nombres, String apellidos, String cedula, String cargo, String departamento, String cuentaBancaria, String banco, String sueldo, String estado, char sexo) {
+        super(id, nombres, apellidos, cedula, cargo, departamento, cuentaBancaria, banco, sueldo, estado, sexo);
     }
 
     @Override

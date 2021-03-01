@@ -21,12 +21,11 @@ public abstract class Empleado {
     private String departamento;
     private String cuentaBancaria;
     private String banco;
-    private Asistencia[] asistencias;
     private String sueldo;
     private String estado;
     private char sexo;
 
-    public Empleado(int id, String nombres, String apellidos, String cedula, String cargo, String departamento, String cuentaBancaria, String banco, Asistencia[] asistencias, String sueldo, String estado, char sexo) {
+    public Empleado(int id, String nombres, String apellidos, String cedula, String cargo, String departamento, String cuentaBancaria, String banco, String sueldo, String estado, char sexo) {
         this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -35,7 +34,6 @@ public abstract class Empleado {
         this.departamento = departamento;
         this.cuentaBancaria = cuentaBancaria;
         this.banco = banco;
-        this.asistencias = asistencias;
         this.sueldo = sueldo;
         this.estado = estado;
         this.sexo = sexo;
@@ -71,10 +69,6 @@ public abstract class Empleado {
 
     public String getBanco() {
         return banco;
-    }
-
-    public Asistencia[] getAsistencias() {
-        return asistencias;
     }
 
     public String getSueldo() {

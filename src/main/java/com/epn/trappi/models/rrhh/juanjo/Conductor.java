@@ -12,8 +12,8 @@ package com.epn.trappi.models.rrhh.juanjo;
  */
 public class Conductor extends Empleado {
 
-    public Conductor(int id, String nombres, String apellidos, String cedula, String cargo, String departamento, String cuentaBancaria, String banco, Asistencia[] asistencias, String sueldo, String estado, char sexo) {
-        super(id, nombres, apellidos, cedula, cargo, departamento, cuentaBancaria, banco, asistencias, sueldo, estado, sexo);
+    public Conductor(int id, String nombres, String apellidos, String cedula, String cargo, String departamento, String cuentaBancaria, String banco, String sueldo, String estado, char sexo) {
+        super(id, nombres, apellidos, cedula, cargo, departamento, cuentaBancaria, banco, sueldo, estado, sexo);
     }
 
     @Override

@@ -83,7 +83,6 @@ public class ListaEmpleados implements Lista<Empleado> {
                             resultSet.getString(6),
                             resultSet.getString(7),
                             resultSet.getString(8),
-                            new Asistencia[]{},
                             resultSet.getString(11),
                             resultSet.getString(9),
                             resultSet.getString(12).charAt(0)
@@ -98,7 +97,6 @@ public class ListaEmpleados implements Lista<Empleado> {
                             resultSet.getString(6),
                             resultSet.getString(7),
                             resultSet.getString(8),
-                            new Asistencia[]{},
                             resultSet.getString(11),
                             resultSet.getString(9),
                             resultSet.getString(12).charAt(0)
@@ -107,15 +105,64 @@ public class ListaEmpleados implements Lista<Empleado> {
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            e.printStackTrace();
+        }
+        return empleadoObtenido;
+    }
+    public Empleado buscarUno(int id){
+        String sql = "SELECT * FROM dbo.EMPLEADO WHERE IDEMP=" + id + ";";
+        Empleado empleadoObtenido = null;
+        try {
+            Statement createdStatement = this.connection.createStatement();
+            ResultSet resultSet = createdStatement.executeQuery(sql);
+            while(resultSet.next()) {
+                if (resultSet.getString(10).equals("conductor")) {
+                    empleadoObtenido = new Conductor(
+                            resultSet.getInt(1),
+                            resultSet.getString(2),
+                            resultSet.getString(3),
+                            resultSet.getString(4),
+                            resultSet.getString(5),
+                            resultSet.getString(6),
+                            resultSet.getString(7),
+                            resultSet.getString(8),
+                            resultSet.getString(11),
+                            resultSet.getString(9),
+                            resultSet.getString(12).charAt(0)
+                    );
+                } else {
+                    empleadoObtenido = new Administrativo(
+                            resultSet.getInt(1),
+                            resultSet.getString(2),
+                            resultSet.getString(3),
+                            resultSet.getString(4),
+                            resultSet.getString(5),
+                            resultSet.getString(6),
+                            resultSet.getString(7),
+                            resultSet.getString(8),
+                            resultSet.getString(11),
+                            resultSet.getString(9),
+                            resultSet.getString(12).charAt(0)
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            e.printStackTrace();
         }
         return empleadoObtenido;
     }
     public Empleado[] obtenerTodos(){
+        System.out.println("Ejecutando...");
         String sql = "SELECT * FROM dbo.EMPLEADO";
         ArrayList<Empleado> empleados = new ArrayList<>();
         try {
-            Statement createdStatment = this.connection.createStatement();
-            ResultSet resultSet = createdStatment.executeQuery(sql);
+            Statement createdStatement = this.connection.createStatement();
+            ResultSet resultSet = createdStatement.executeQuery(sql);
             while(resultSet.next()) {
                 if(resultSet.getString(10).equals("conductor")) {
                     empleados.add(new Conductor(
@@ -127,7 +174,6 @@ public class ListaEmpleados implements Lista<Empleado> {
                             resultSet.getString(6),
                             resultSet.getString(7),
                             resultSet.getString(8),
-                            new Asistencia[]{},
                             resultSet.getString(11),
                             resultSet.getString(9),
                             resultSet.getString(12).charAt(0)
@@ -142,7 +188,6 @@ public class ListaEmpleados implements Lista<Empleado> {
                             resultSet.getString(6),
                             resultSet.getString(7),
                             resultSet.getString(8),
-                            new Asistencia[]{},
                             resultSet.getString(11),
                             resultSet.getString(9),
                             resultSet.getString(12).charAt(0)
@@ -152,6 +197,9 @@ public class ListaEmpleados implements Lista<Empleado> {
             }
         } catch (SQLException e){
             System.out.println(e.toString());
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            e.printStackTrace();
         }
         Empleado[] empleadosArray = new Empleado[empleados.size()];
         empleadosArray = empleados.toArray(empleadosArray);
@@ -177,6 +225,6 @@ public class ListaEmpleados implements Lista<Empleado> {
             System.out.println(e.getNombres());
         }
         
-        System.out.println(l1.buscarUno("1722951165").toString());
+//        System.out.println(l1.buscarUno("1722951165").toString());
     }
 }
