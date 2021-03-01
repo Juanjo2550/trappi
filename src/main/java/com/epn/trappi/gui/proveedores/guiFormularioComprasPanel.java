@@ -13,7 +13,10 @@ import com.epn.trappi.models.proveedores.Inventario;
 import com.epn.trappi.models.proveedores.ListaDeBienes;
 import com.epn.trappi.models.proveedores.ListaDeCompras;
 import com.epn.trappi.models.proveedores.Producto;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -236,28 +239,32 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButRegFactCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegFactCompNotaCredActionPerformed
-        Inventario inventario=new Inventario();
-        solicitud = new ListaDeCompras(new ArrayList<Compra>());
-        String auxiliarRuc="";
-        for(int i=0;i<6;i++){
-            if(seleccionados[i][0]==1){
-                CompraDeProducto compra;
-                ListaDeBienes lista = new ListaDeBienes();
-                auxiliarRuc=db.getProductos().get(i).getProveeedor().getRuc();
-                for(int j=0;j<6;j++){
-                    if(auxiliarRuc.equals(db.getProductos().get(j).getProveeedor().getRuc())){
-                        if(seleccionados[j][0]==1){
-                            lista.añadirBien(listaDeProductos.getListaBienes().get(j));
-                            seleccionados[i][0]=0;
+        try {
+            Inventario inventario=new Inventario();
+            solicitud = new ListaDeCompras(new ArrayList<Compra>());
+            String auxiliarRuc="";
+            for(int i=0;i<6;i++){
+                if(seleccionados[i][0]==1){
+                    CompraDeProducto compra;
+                    ListaDeBienes lista = new ListaDeBienes();
+                    auxiliarRuc=db.getProductos().get(i).getProveeedor().getRuc();
+                    for(int j=0;j<6;j++){
+                        if(auxiliarRuc.equals(db.getProductos().get(j).getProveeedor().getRuc())){
+                            if(seleccionados[j][0]==1){
+                                lista.añadirBien(listaDeProductos.getListaBienes().get(j));
+                                seleccionados[i][0]=0;
+                            }
                         }
                     }
+                    compra = new CompraDeProducto(inventario,lista, "Entregado");
+                    solicitud.añadirCompra(compra);
                 }
-                compra = new CompraDeProducto(inventario,lista, "Entregado");
-                solicitud.añadirCompra(compra);
             }
+            System.out.println(solicitud.getCompras().get(0).getListaCantidadDeBienes().getListaBienes().get(0).toString());
+            new CambiaPanel(verTodo, new guiDescripcionCompra(solicitud));
+        } catch (IOException ex) {
+            Logger.getLogger(guiFormularioComprasPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(solicitud.getCompras().get(0).getListaCantidadDeBienes().getListaBienes().get(0).toString());
-        new CambiaPanel(verTodo, new guiDescripcionCompra(solicitud));
     }//GEN-LAST:event_jButRegFactCompNotaCredActionPerformed
 
     private void jTextFechCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFechCompNotaCredActionPerformed

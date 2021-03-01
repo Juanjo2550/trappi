@@ -43,13 +43,14 @@ public class guiComprasPanel extends javax.swing.JPanel {
         modelo = new DefaultTableModel(null, titulos);
         compras =  db.getCompras();
         for (Compra compraAuxiliar : compras.getCompras()){
-            fila[0]= compraAuxiliar.getIdentificador()+"";
+            fila[0]= String.valueOf(compraAuxiliar.getIdentificador());
             fila[1]= compraAuxiliar.getFecha();
             fila[2]=compraAuxiliar.getEstado();
             fila[3]= compraAuxiliar.getMontoTotal()+"";
             modelo.addRow(fila);
         }
         jTable1.setModel(modelo);
+        
         
         //instanciamos la tabla vacía
         String[] titulos2 = {"Producto","Marca","Cantidad","Proveedor"};
@@ -66,19 +67,19 @@ public class guiComprasPanel extends javax.swing.JPanel {
     public void cargarDetalleCompras(int identificadorDeCompra) throws IOException{
         String[] titulos2 = {"Producto","Marca","Cantidad","Proveedor"};
         modelo = new DefaultTableModel(null, titulos2);
-        String[] fila = new String [3];
+        String[] fila = new String [4];
         for (Compra compraAuxiliar : compras.getCompras()){
             if(compraAuxiliar.getIdentificador()==identificadorDeCompra){
                 for (Bien bienAux : compraAuxiliar.getListaCantidadDeBienes().getListaBienes()){
                     fila[0]= bienAux.getNombre()+"";
                     fila[1]= bienAux.getMarca();
+                    System.out.print(bienAux.getMarca());
                     fila[2]= bienAux.getCantidad()+"";
                     fila[3]= bienAux.getProveeedor().getRazonSocial();
+                    modelo.addRow(fila);
                 }
             }
-            modelo.addRow(fila);
         }
-        modelo.addRow(fila);
         jTable2.setModel(modelo);
     }
     /**
@@ -319,18 +320,27 @@ public class guiComprasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButRegFactCompNotaCred1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        jComboBox1.setEnabled(true);
-        if(compras.getCompras().get(jTable1.getSelectedRow()).getEstado().equals("Entregado"))
-            jComboBox1.setSelectedIndex(0);
-        else
-            jComboBox1.setSelectedIndex(1);
+        try {
+            jComboBox1.setEnabled(true);
+            if(compras.getCompras().get(jTable1.getSelectedRow()).getEstado().equalsIgnoreCase("Entregado"))
+                jComboBox1.setSelectedIndex(0);
+            else
+                jComboBox1.setSelectedIndex(1);
+            cargarDetalleCompras(compras.getCompras().get(jTable1.getSelectedRow()).getIdentificador());
+        } catch (IOException ex) {
+            Logger.getLogger(guiComprasPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        System.out.print(compras.getCompras().get(0).toString());
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButRegFactCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegFactCompNotaCredActionPerformed
         if(!compras.getCompras().get(jTable1.getSelectedRow()).getEstado().equals(String.valueOf(jComboBox1.getSelectedItem()))){
             compras.getCompras().get(jTable1.getSelectedRow()).setEstado(String.valueOf(jComboBox1.getSelectedItem()));
-            db.setEstadoCompra(compras.getCompras().get(jTable1.getSelectedRow()).getIdentificador(),compras.getCompras().get(jTable1.getSelectedRow()).getEstado());
-            iniciarTablas();
+            //db.setEstadoCompra(compras.getCompras().get(jTable1.getSelectedRow()).getIdentificador(),compras.getCompras().get(jTable1.getSelectedRow()).getEstado());
+            //iniciarTablas();
         }
     }//GEN-LAST:event_jButRegFactCompNotaCredActionPerformed
 

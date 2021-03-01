@@ -90,7 +90,7 @@ abstract public class Bien {
 
     @Override
     public String toString() {
-        return "Bien{" + "nombre=" + nombre + ", precio=" + precio + ", proveeedor=" + proveeedor.getRuc() + '}';
+        return "Bien{" + "nombre=" + nombre + ", precio=" + precio + ", proveeedor=" + proveeedor.getRuc() + ", marca=" + getMarca() + '}';
     }
     
     
