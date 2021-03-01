@@ -9,6 +9,7 @@ import com.epn.trappi.models.proveedores.AnalizadorDeInventario;
 import com.epn.trappi.models.proveedores.Bien;
 import com.epn.trappi.models.proveedores.Inventario;
 import com.epn.trappi.models.proveedores.ListaDeCompras;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
@@ -23,19 +24,20 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class guiAnalizador extends javax.swing.JPanel {
 
-    /**
+    private Inventario inventario;
+/**
      * Creates new form guiAnalizador
      */
-    private Inventario inventario= new Inventario();
     private JPanel verTodo;
     private ListaDeCompras solicitud;
     
-    public guiAnalizador(JPanel verTodo) {
+    public guiAnalizador(JPanel verTodo) throws IOException {
+        this.inventario = new Inventario();
         initComponents();
         jButRegFactCompNotaCred1.setEnabled(false);
         this.verTodo=verTodo;
         ArrayList<Bien> lista;
-        lista=inventario.getListDeBienes().getListaCantidadDeBienesDb();
+        lista=inventario.getListDeBienes().getListaBienes();
         dibujarDiagrama(lista);
         AnalizadorDeInventario analizador = new AnalizadorDeInventario();
         this.solicitud=analizador.analizarStock();
