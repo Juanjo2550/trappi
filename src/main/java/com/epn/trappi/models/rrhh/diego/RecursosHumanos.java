@@ -5,9 +5,7 @@
  */
 package com.epn.trappi.models.rrhh.diego;
 
-import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
-import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
-//import com.epn.trappi.models.rrhh.RolesPagos;
+
 import java.util.ArrayList;
 
 /**
@@ -15,7 +13,9 @@ import java.util.ArrayList;
  * @author diego
  */
 public class RecursosHumanos {
-    ListaEmpleados empleados;
+    /*ListaEmpleados empleados;
+    public RolesPagos roles = new RolesPagos();
+    private ArrayList<RolPagos> pendientes;*/
     
     //comentado para solucionar problemas
    /* public RolesPagos roles = new RolesPagos();
