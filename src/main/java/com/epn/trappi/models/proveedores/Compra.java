@@ -1,8 +1,11 @@
 package com.epn.trappi.models.proveedores;
 
 import com.epn.trappi.db.proveedores.ProveedoresDb;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -89,8 +92,19 @@ abstract public class Compra {
     public void comprarAnalizador() {
     }
     
-    public void registrarCompra(String nombreProducto, String Proveedor, int cantidad, String estado, double montoTotal, String fecha) {
-        db.setCompras(nombreProducto, Proveedor, cantidad, estado, montoTotal, fecha);
+    public void registrarCompra() {
+        int idcompra;
+        try {
+            if(solicitarAutorizacion(listaBienesAComprar.getListaBienes().get(0).getProveeedor(),montoTotal)){
+                idcompra = db.insertarCompra("Pendiente", Double.toString(montoTotal), fecha);
+                for (Bien cantidadBien : listaBienesAComprar.getListaBienes()){
+                    db.insertDetalleCompra(idcompra, db.getIdBien(cantidadBien.getNombre()), 100);
+                }
+            }
+            
+        } catch (SQLException ex) {
+             Logger.getLogger(CompraDeProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public Double calcularMontoTotal() {

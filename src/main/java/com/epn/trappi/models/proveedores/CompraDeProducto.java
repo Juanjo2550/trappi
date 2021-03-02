@@ -5,6 +5,11 @@
  */
 package com.epn.trappi.models.proveedores;
 
+import com.epn.trappi.db.proveedores.ProveedoresDb;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author franc
@@ -35,21 +40,16 @@ public class CompraDeProducto extends Compra {
     @Override
     public void comprar(){
         setMontoTotal();
+        ProveedoresDb db = new ProveedoresDb();
+        setMontoTotal();
         if(solicitarAutorizacion(listaBienesAComprar.getListaBienes().get(0).getProveeedor(),montoTotal)){
-            for (Bien cantidadBien : listaBienesAComprar.getListaBienes()){
-                inventario.aumentarStockDb(cantidadBien);
-                inventario.aumentarStock(cantidadBien.getCantidad(), cantidadBien);
-                //asumimos que las compras se han entregado
-                setEstado("Entregado");
-                registrarCompra(cantidadBien.getNombre()
-                        ,cantidadBien.getProveeedor().getRuc(),cantidadBien.getCantidad(),estado,montoTotal, this.fecha);
-            }
+            registrarCompra();
         }
     }
     
     @Override
     public void comprarAnalizador(){
-        setMontoTotal();
+        /*setMontoTotal();
         if(solicitarAutorizacion(listaBienesAComprar.getListaBienes().get(0).getProveeedor(),montoTotal)){
             for (Bien cantidadBien : listaBienesAComprar.getListaBienes()){
                 inventario.aumentarStock(cantidadBien.getCantidad(), cantidadBien);
@@ -58,7 +58,7 @@ public class CompraDeProducto extends Compra {
                 registrarCompra(cantidadBien.getNombre()
                         ,cantidadBien.getProveeedor().getRuc(),cantidadBien.getCantidad(),estado,montoTotal, this.fecha);
             }
-        }
+        }*/
     }
     
     

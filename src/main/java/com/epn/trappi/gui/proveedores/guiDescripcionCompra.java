@@ -5,9 +5,11 @@
  */
 package com.epn.trappi.gui.proveedores;
 
+import com.epn.trappi.db.proveedores.ProveedoresDb;
 import com.epn.trappi.models.proveedores.Bien;
 import com.epn.trappi.models.proveedores.Compra;
 import com.epn.trappi.models.proveedores.ListaDeCompras;
+import com.epn.trappi.models.proveedores.Proveedor;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -115,6 +117,7 @@ public class guiDescripcionCompra extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButRegFactCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegFactCompNotaCredActionPerformed
+        ProveedoresDb db = new ProveedoresDb();
         for (Compra compra : lista.getCompras()) {
             //compra.comprar();
             compra.comprarAnalizador();
