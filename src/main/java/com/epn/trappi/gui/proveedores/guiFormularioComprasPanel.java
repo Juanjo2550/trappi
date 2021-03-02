@@ -266,7 +266,7 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
                             if(seleccionados[j][0]==1){
                                 listaDeProductos.getListaBienes().get(j).setCantidad(seleccionados[j][1]);
                                 lista.añadirBien(listaDeProductos.getListaBienes().get(j));
-                                seleccionados[i][0]=0;
+                                seleccionados[j][0]=0;
                             }
                         }
                     }
