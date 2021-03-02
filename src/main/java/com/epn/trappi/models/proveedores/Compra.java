@@ -98,7 +98,7 @@ abstract public class Compra {
             if(solicitarAutorizacion(listaBienesAComprar.getListaBienes().get(0).getProveeedor(),montoTotal)){
                 idcompra = db.insertarCompra("Pendiente", Double.toString(montoTotal), fecha);
                 for (Bien cantidadBien : listaBienesAComprar.getListaBienes()){
-                    db.insertDetalleCompra(idcompra, db.getIdBien(cantidadBien.getNombre()), 100);
+                    db.insertDetalleCompra(idcompra, db.getIdBien(cantidadBien.getNombre()), cantidadBien.getCantidad());
                 }
             }
             
