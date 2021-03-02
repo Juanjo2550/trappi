@@ -21,6 +21,7 @@ public class ListaDeBienes {
         this.listaBienes = listaCantidadDeBienes;
     }
 
+    
     public ListaDeBienes(){
         listaBienes= new ArrayList<Bien>();
     }

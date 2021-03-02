@@ -52,9 +52,7 @@ public class MainProveedores {
             System.out.println(p.getNombre() + ";" + p.getPrecio() + ";" + p.getProveeedor().getRuc());
         });*/
 
-        db.buscarProveedores("10").forEach(p -> {
-            System.out.println(p.getRuc()+ ";" + p.getRazonSocial()+ ";" + p.getCuenta());
-        });
+        db.actualizarProveedor("7043728305001","Guayaquil","1547935481");
         /*ListaDeCompras comp = db.seleccionarCompras();
 
         List<Servicio> serv = db.getServicios();

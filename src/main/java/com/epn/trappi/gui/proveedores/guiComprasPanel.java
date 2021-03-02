@@ -8,6 +8,8 @@ package com.epn.trappi.gui.proveedores;
 import com.epn.trappi.db.proveedores.ProveedoresDb;
 import com.epn.trappi.models.proveedores.Bien;
 import com.epn.trappi.models.proveedores.Compra;
+import com.epn.trappi.models.proveedores.Inventario;
+import com.epn.trappi.models.proveedores.ListaDeBienes;
 import com.epn.trappi.models.proveedores.ListaDeCompras;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -322,8 +324,10 @@ public class guiComprasPanel extends javax.swing.JPanel {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         try {
             jComboBox1.setEnabled(true);
-            if(compras.getCompras().get(jTable1.getSelectedRow()).getEstado().equalsIgnoreCase("Entregado"))
+            if(compras.getCompras().get(jTable1.getSelectedRow()).getEstado().equalsIgnoreCase("Entregado")){
                 jComboBox1.setSelectedIndex(0);
+                jComboBox1.setEnabled(false);
+            }
             else
                 jComboBox1.setSelectedIndex(1);
             cargarDetalleCompras(compras.getCompras().get(jTable1.getSelectedRow()).getIdentificador());
@@ -337,6 +341,8 @@ public class guiComprasPanel extends javax.swing.JPanel {
             try {
                 compras.getCompras().get(jTable1.getSelectedRow()).setEstado(String.valueOf(jComboBox1.getSelectedItem()));
                 db.actualizarCompras(compras.getCompras().get(jTable1.getSelectedRow()).getIdentificador(),compras.getCompras().get(jTable1.getSelectedRow()).getEstado());
+                Inventario inv = new Inventario(new ListaDeBienes(compras.getCompras().get(jTable1.getSelectedRow()).getListaCantidadDeBienes().getListaBienes()));
+                inv.aumentarStock();
                 iniciarTablas();
             } catch (SQLException ex) {
                 Logger.getLogger(guiComprasPanel.class.getName()).log(Level.SEVERE, null, ex);

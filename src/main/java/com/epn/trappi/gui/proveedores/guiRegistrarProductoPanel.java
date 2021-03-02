@@ -162,7 +162,7 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
         });
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel12.setText("Precio:");
+        jLabel12.setText("Marca:");
 
         txtCantidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,21 +190,20 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
                 .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNombre)
                     .addComponent(txtPrecio)
+                    .addComponent(txtCantidad)
+                    .addComponent(txtMarca)
+                    .addComponent(cmbProvedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(PanelVerTodosLayout.createSequentialGroup()
+                        .addComponent(btnRegistrarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 205, Short.MAX_VALUE))
                     .addGroup(PanelVerTodosLayout.createSequentialGroup()
                         .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(jLabel10)
-                            .addComponent(jLabel11))
-                        .addContainerGap(289, Short.MAX_VALUE))
-                    .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtCantidad)
-                        .addComponent(txtMarca)
-                        .addComponent(jLabel13)
-                        .addComponent(jLabel12))
-                    .addComponent(cmbProvedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(PanelVerTodosLayout.createSequentialGroup()
-                        .addComponent(btnRegistrarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel12))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         PanelVerTodosLayout.setVerticalGroup(
             PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

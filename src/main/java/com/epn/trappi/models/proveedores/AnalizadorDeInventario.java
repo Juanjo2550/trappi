@@ -26,7 +26,7 @@ public class AnalizadorDeInventario {
             ListaDeCompras solicitud = new ListaDeCompras(new ArrayList<Compra>());
             
             
-            for(Bien cantidadBien : inventario.getListDeBienes().getListaBienes()){
+            for(Bien cantidadBien : inventario.getListaDeBienes().getListaBienes()){
                 if(cantidadBien.getCantidad()<=10){
                     proveedor=false;
                     for(Compra compra: solicitud.getCompras()){

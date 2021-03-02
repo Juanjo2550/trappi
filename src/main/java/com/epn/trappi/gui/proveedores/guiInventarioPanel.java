@@ -32,7 +32,7 @@ public class guiInventarioPanel extends javax.swing.JPanel {
         String[] titulos = {"Nombre Producto", "Precio unitario", "Proveedor", "Cantidad"};
         String[] fila = new String[4];
         modelo = new DefaultTableModel(null, titulos);
-        for (Bien cantBien : inventario.getListDeBienes().getListaBienes()) {
+        for (Bien cantBien : inventario.getListaDeBienes().getListaBienes()) {
             fila[0] = cantBien.getNombre();
             fila[1] = "" + cantBien.getPrecio();
             fila[2] = "" + cantBien.getProveeedor().getRazonSocial();
