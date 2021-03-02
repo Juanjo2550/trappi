@@ -208,8 +208,8 @@ public class Registrar extends javax.swing.JFrame {
             
             FRegistroCliente frc=new FRegistroCliente(jTextFieldNombre.getText(),jTextFieldCorreo.getText(), jTextFieldFecha.getText(), jTextFieldCelular.getText(),jTextFieldDireccion.getText(),jTextFieldCedula.getText(),jTextFieldContraseña.getText());
             Main.cliente.registrarse(frc);
-            Random aleatorio = new Random(System.currentTimeMillis());
-            int idAletorio = aleatorio.nextInt(100);
+            
+            int idAletorio = idsuario();
             String sql = "exec cliente_insert "+idAletorio+",'"+jTextFieldNombre.getText()+"','"+jTextFieldFecha.getText()+
                     "','"+jTextFieldCelular.getText()+"','"+jTextFieldDireccion.getText()+"','"+jTextFieldCedula.getText()+"','"+
                     jTextFieldContraseña.getText()+"','"+jTextFieldCorreo.getText()+"'"; 
@@ -282,6 +282,26 @@ public class Registrar extends javax.swing.JFrame {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public int idsuario(){
+        int numero=0;
+        try {
+            String id= "";
+                       
+            Statement statement = connection.createStatement();
+            String sql = "Select COUNT(IDCLIENTE) from CLIENTES";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                 id= resultSet.getString(1);
+            }
+            numero=Integer.parseInt(id)+1;
+                        
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return numero;
+    }
+    
     /**
      * @param args the command line arguments
      */

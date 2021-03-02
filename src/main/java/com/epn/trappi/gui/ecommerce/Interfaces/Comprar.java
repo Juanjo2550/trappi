@@ -500,8 +500,8 @@ public class Comprar extends javax.swing.JFrame {
     
     public void generarfacturaDatabase(){
         try{
-            Random aleatorio = new Random(System.currentTimeMillis());
-            int idAletorio = aleatorio.nextInt(100);
+            
+            int idAletorio = idfactura();
             String sql = "exec factura_insert"+ idAletorio+","+Integer.parseInt(idcliente())+","+idAletorio+","+direccliente(); 
            
             PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
@@ -520,6 +520,24 @@ public class Comprar extends javax.swing.JFrame {
         } catch(SQLException ex){
             Logger.getLogger(JFBanco.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public int idfactura(){
+        int numero=0;
+        try {
+            String id= "";
+                       
+            Statement statement = connection.createStatement();
+            String sql = "Select COUNT(IDFACTURA) from FACTURAS";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                 id= resultSet.getString(1);
+            }
+            numero=Integer.parseInt(id)+1;
+                        
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return numero;
     }
     /**
      * @param args the command line arguments

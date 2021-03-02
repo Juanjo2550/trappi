@@ -788,8 +788,8 @@ public class JFBanco extends javax.swing.JFrame {
    
    public void crearCuenta(){
        try {
-            Random aleatorio = new Random(System.currentTimeMillis());
-            int idAletorio = aleatorio.nextInt(100);
+            
+            int idAletorio = idcuenta();
             String numcuenta= "10000"+String.valueOf(idAletorio);
             Date ahora = new Date();
             SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
@@ -826,6 +826,25 @@ public class JFBanco extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+   
+   public int idcuenta(){
+        int numero=0;
+        try {
+            String id= "";
+                       
+            Statement statement = connection.createStatement();
+            String sql = "Select COUNT(IDCUENTABANCARIA) from CUENTABANCARIA";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                 id= resultSet.getString(1);
+            }
+            numero=Integer.parseInt(id)+1;
+                        
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return numero;
     }
     
     /**

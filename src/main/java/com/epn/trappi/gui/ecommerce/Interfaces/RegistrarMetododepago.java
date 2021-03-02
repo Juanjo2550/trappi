@@ -28,7 +28,7 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
          TextPrompt cvv = new TextPrompt("CVV", jTextFieldCvv);
          TextPrompt tipo = new TextPrompt("Tipo ", jTextFieldTipo);
          TextPrompt fecha = new TextPrompt("Fecha de Caducidad", jTextFieldFecha);
-         llenardatos();
+         
     }
 
     
@@ -239,6 +239,8 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     CuentaCliente cuenta=new CuentaCliente();
+    cuenta.nombretitulo(jt.getText());
+    cuenta.llenardatroscl();
     cuenta.setVisible(true);
     this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -251,12 +253,17 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     Comprar comprar=new Comprar();
+    comprar.nombretitulo(jt.getText());
+    comprar.llenartabla();
     comprar.setVisible(true);
     this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
     Metododepago mp=new Metododepago();
+    mp.nombretitulo(jt.getText());
+    mp.llenardatos();
+    mp.llenartablat();
     mp.setVisible(true);
     this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -272,7 +279,7 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
         try {
             String tarjeta= "";
             String cvv ="";
-            String tipo ="Credito";
+            String tipo ="";
             String fecha ="";
                                    
             Statement statement = connection.createStatement();

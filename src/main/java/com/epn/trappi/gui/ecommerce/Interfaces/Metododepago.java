@@ -356,7 +356,7 @@ public class Metododepago extends javax.swing.JFrame {
     rmp.setVisible(true);
     this.setVisible(false);
     rmp.nombretitulo(jt.getText());
-    rmp.llenardatos();
+    
     }//GEN-LAST:event_jButtoneditarActionPerformed
 
     private void tablatarjetasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablatarjetasMouseClicked
