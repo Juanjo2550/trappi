@@ -37,7 +37,7 @@ public class guiAnalizador extends javax.swing.JPanel {
         jButRegFactCompNotaCred1.setEnabled(false);
         this.verTodo=verTodo;
         ArrayList<Bien> lista;
-        lista=inventario.getListDeBienes().getListaBienes();
+        lista=inventario.getListaDeBienes().getListaBienes();
         dibujarDiagrama(lista);
         AnalizadorDeInventario analizador = new AnalizadorDeInventario();
         this.solicitud=analizador.analizarStock();
