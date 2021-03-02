@@ -36,6 +36,7 @@ public class ProveedoresDb {
     private final String spUpdateStock = "updateStock";
     private final String spGetIdBien = "getIdBien";
     private final String spUpdateProveedor = "updateProveedor";
+    private final String spBuscarProducto = "BuscarProducto";
 
     private ResultSet ejecutarSP(String nombreSP) throws SQLException {
         Connection connection = dbInstance.getConnection();
@@ -125,6 +126,15 @@ public class ProveedoresDb {
             Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
         }
         return productos;
+    }
+
+    public List<Producto> buscarProductos(String nombre) {
+        try {
+            return seleccionarProductos(nombre);
+        } catch (Exception ex) {
+            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public void setProductos(List<Producto> productos) {
@@ -306,6 +316,17 @@ public class ProveedoresDb {
         return pp;
     }
 
+    private List<Producto> seleccionarProductos(String nombre) throws SQLException {
+        String[] clave = {"nombre:" + nombre};
+        ResultSet rs = ejecutarSPParameters(spBuscarProducto, clave);
+        List<Producto> pp = new ArrayList<>();
+        while (rs.next()) {
+            String[] res = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)};
+            pp.add(reformarProducto(res));
+        }
+        return pp;
+    }
+
     /*private void seleccionarCantidadDeBienesCompra() {
         try {
             List<String[]> cbienes = p.leerArchivoCSV(this.compFilename);
@@ -364,9 +385,9 @@ public class ProveedoresDb {
         String[] param = {"idbien:" + idBien, "cantidad:" + cantidad};
         ResultSet rs = ejecutarSPParameters(spUpdateStock, param);
     }
-    
+
     public void actualizarProveedor(String ruc, String direccion, String cuenta) throws SQLException {
-        String[] param = {"ruc:" + ruc, "direccion:" + direccion,"cuenta:"+cuenta};
+        String[] param = {"ruc:" + ruc, "direccion:" + direccion, "cuenta:" + cuenta};
         ResultSet rs = ejecutarSPParameters(spUpdateProveedor, param);
     }
 

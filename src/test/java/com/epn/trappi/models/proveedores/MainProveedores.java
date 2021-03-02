@@ -41,18 +41,18 @@ public class MainProveedores {
         //ListaProveedores prov = new ListaProveedores();
         /*int id = db.getIdBien("Jugo");
         System.out.println(id);*/
-        /*List<Producto> prod = db.seleccionarComprabien(1);
+ /*List<Producto> prod = db.seleccionarComprabien(1);
         prod.forEach(p -> {
             System.out.println(p.getNombre() + ";" + p.getPrecio() + ";" + p.getProveeedor().getRuc());
         });*/
  /*db.getInventarioDb();
         
-        ListaDeBienes prod = db.getInventarioDb();
-        prod.getListaBienes().forEach(p -> {
+        ListaDeBienes prod = db.getInventarioDb();*/
+        db.buscarProductos("Jugo").forEach(p -> {
             System.out.println(p.getNombre() + ";" + p.getPrecio() + ";" + p.getProveeedor().getRuc());
-        });*/
+        });
 
-        db.actualizarProveedor("7043728305001","Guayaquil","1547935481");
+        //db.actualizarProveedor("7043728305001","Guayaquil","1547935481");
         /*ListaDeCompras comp = db.seleccionarCompras();
 
         List<Servicio> serv = db.getServicios();
