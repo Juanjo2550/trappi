@@ -28,14 +28,16 @@ public class guiListaProveedores extends javax.swing.JPanel {
      */
     public guiListaProveedores() {
         initComponents();
+        listaP = (ArrayList<Proveedor>) db.getProveedores();
         cargarProveedor();
     }
-
+    
+    
     private void cargarProveedor() {
         String[] titulos = {"Ruc", "Razón Social", "Dirección", "Número de Cuenta"};
         String[] fila = new String[4];
         modelo = new DefaultTableModel(null, titulos);
-        for (Proveedor proveedor : db.getProveedores()) {
+        for (Proveedor proveedor : listaP) {
             fila[0] = proveedor.getRuc();
             fila[1] = "" + proveedor.getRazonSocial();
             fila[2] = "" + proveedor.getDireccion();
@@ -116,6 +118,7 @@ public class guiListaProveedores extends javax.swing.JPanel {
             }
         });
 
+        txtRazonSocial.setEnabled(false);
         txtRazonSocial.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtRazonSocialKeyPressed(evt);
@@ -232,7 +235,7 @@ public class guiListaProveedores extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel10)
-                .addGap(6, 6, 6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel11)
@@ -261,7 +264,13 @@ public class guiListaProveedores extends javax.swing.JPanel {
     }//GEN-LAST:event_txtBuscarRUCKeyPressed
 
     private void txtBuscarRUCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarRUCKeyTyped
-
+        // Busqueda
+        // Atributos
+        String ruc = txtBuscarRUC.getText();
+        if (ruc.length() >= 1) {
+            listaP = (ArrayList<Proveedor>) db.buscarProveedores(ruc);
+            cargarProveedor();
+        }
     }//GEN-LAST:event_txtBuscarRUCKeyTyped
 
     private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
@@ -298,18 +307,15 @@ public class guiListaProveedores extends javax.swing.JPanel {
         String direccion;
         String cuenta;
 
-        razonSocial = txtRazonSocial.getText();
         direccion = txtDireccion.getText();
         cuenta = txtNCuenta.getText();
 
         if (guiProveedores.validarDireccion(direccion)) {
-            if (guiProveedores.validarRazonSocial(razonSocial)) {
-                proveedorSeleccionado.setRazonSocial(razonSocial);
+            if (cuenta.length()==13) {
                 proveedorSeleccionado.setDireccion(direccion);
                 proveedorSeleccionado.setCuenta(cuenta);
 
                 int fila = jtbProveedores.getSelectedRow();
-                modelo.setValueAt(txtRazonSocial.getText(), fila, 1);
                 modelo.setValueAt(txtDireccion.getText(), fila, 2);
                 modelo.setValueAt(txtNCuenta.getText(), fila, 3);
 
@@ -317,10 +323,8 @@ public class guiListaProveedores extends javax.swing.JPanel {
 
                 txtDireccion.setText("");
                 txtNCuenta.setText("");
-                txtRazonSocial.setText("");
-
             } else {
-                JOptionPane.showMessageDialog(null, "Razon Social Incorrecta");
+                JOptionPane.showMessageDialog(null, "Número de Cuenta Incorrecta");
                 this.vaciarCampos();
             }
         } else {
@@ -337,6 +341,17 @@ public class guiListaProveedores extends javax.swing.JPanel {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 //         TODO add your handling code here:
+        // Atributos
+        String ruc = txtBuscarRUC.getText();
+        try {
+            if (ruc.length() >= 1) {
+                listaP = (ArrayList<Proveedor>) db.buscarProveedores(ruc);
+                cargarProveedor();
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Proveedor no encontrado", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
 
