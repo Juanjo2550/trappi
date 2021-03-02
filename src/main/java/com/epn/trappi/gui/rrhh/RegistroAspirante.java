@@ -435,7 +435,7 @@ public class RegistroAspirante extends javax.swing.JFrame {
         listaAspirantes.agregar(aspirante);
         listarAspirantes();
         listaPruebas.agregar(prueba, jTextCedulaAspirante.getText());
-        //listarAspirantes();
+        listarAspirantes();
         JOptionPane.showMessageDialog(null, "Aspirante registrado con éxito");
     }//GEN-LAST:event_jButGuardarAspiranteActionPerformed
 

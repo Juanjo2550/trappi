@@ -47,7 +47,7 @@ public class ListaAspirantes implements Lista <Aspirante> {
             rs = pstm.executeQuery();
             
             while(rs.next()){
-               System.out.println("El id del aspirante es " + rs.getInt("ID_ASP") + " la cedula es " + rs.getString("CEDULAASP"));
+               //System.out.println("El id del aspirante es " + rs.getInt("ID_ASP") + " la cedula es " + rs.getString("CEDULAASP"));
                listaAspirantes.add(new Aspirante(rs.getString("NOMBREASP"),rs.getString("APELLIDOASP"),rs.getString("CEDULAASP"),
                 rs.getString("TELEFONOASP"), rs.getString("CARGOASP")));
             }

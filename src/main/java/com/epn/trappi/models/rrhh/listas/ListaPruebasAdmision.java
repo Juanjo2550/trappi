@@ -51,7 +51,7 @@ public class ListaPruebasAdmision implements Lista <PruebaAdmision> {
     }
     public void agregar(PruebaAdmision nuevaPruebaAdm, String cedulaAsp){
         try { 
-            String query = "SELECT * FROM ASPIRANTE WHERE CEDULAASP = " + cedulaAsp;
+            String query = "SELECT * FROM ASPIRANTE WHERE CEDULAASP = " + "'"+cedulaAsp+"'";
             pstm = conn.prepareStatement(query);
             rs = pstm.executeQuery();
             System.out.println("cedula  se obtuvo fue " + cedulaAsp);
@@ -60,16 +60,16 @@ public class ListaPruebasAdmision implements Lista <PruebaAdmision> {
                 idAspirante = rs.getInt("ID_ASP");
             }
             System.out.println("id se obtuvo fue " + idAspirante);
-//            int idPrueba = obtenerTodos().length + 1;
-//            query = "INSERT INTO PRUEBAADMISION ( IDPRUEBA, ID_ASP, PUNTAJEPRUEBA, ACTITUDESPRUEBA, APTITUDESPRUEBA, APROBACIONPRUEBA) VALUES (?, ?, ?, ?, ?, ?)";
-//            pstm = conn.prepareStatement(query);
-//            pstm.setInt(1, idPrueba);
-//            pstm.setInt(2, idAspirante);
-//            pstm.setInt(3, nuevaPruebaAdm.getPuntaje());
-//            pstm.setString(4, nuevaPruebaAdm.getActitudes());
-//            pstm.setString(5, nuevaPruebaAdm.getAptitudes());
-//            pstm.setString(6, nuevaPruebaAdm.getAprobacion());
-//            pstm.executeUpdate();
+            int idPrueba = obtenerTodos().length + 1;
+            query = "INSERT INTO PRUEBAADMISION ( IDPRUEBA, ID_ASP, PUNTAJEPRUEBA, ACTITUDESPRUEBA, APTITUDESPRUEBA, APROBACIONPRUEBA) VALUES (?, ?, ?, ?, ?, ?)";
+            pstm = conn.prepareStatement(query);
+            pstm.setInt(1, idPrueba);
+            pstm.setInt(2, idAspirante);
+            pstm.setInt(3, nuevaPruebaAdm.getPuntaje());
+            pstm.setString(4, nuevaPruebaAdm.getActitudes());
+            pstm.setString(5, nuevaPruebaAdm.getAptitudes());
+            pstm.setString(6, nuevaPruebaAdm.getAprobacion());
+            pstm.executeUpdate();
             System.out.println("La prueba de admision se registro con exito" + idAspirante + " cedula " + cedulaAsp);
             
         } catch (Exception e) {
