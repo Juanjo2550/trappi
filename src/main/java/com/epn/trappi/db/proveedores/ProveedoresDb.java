@@ -35,6 +35,7 @@ public class ProveedoresDb {
     private final String spInsertCompraBien = "insertCompraBien";
     private final String spUpdateStock = "updateStock";
     private final String spGetIdBien = "getIdBien";
+    private final String spUpdateProveedor = "updateProveedor";
 
     private ResultSet ejecutarSP(String nombreSP) throws SQLException {
         Connection connection = dbInstance.getConnection();
@@ -364,6 +365,11 @@ public class ProveedoresDb {
         ResultSet rs = ejecutarSPParameters(spUpdateStock, param);
     }
     
+    public void actualizarProveedor(String ruc, String direccion, String cuenta) throws SQLException {
+        String[] param = {"ruc:" + ruc, "direccion:" + direccion,"cuenta:"+cuenta};
+        ResultSet rs = ejecutarSPParameters(spUpdateProveedor, param);
+    }
+
     public void disminuirStock(int idBien, int cantidad) throws SQLException {
         cantidad = -cantidad;
         String[] param = {"idbien:" + idBien, "cantidad:" + cantidad};
