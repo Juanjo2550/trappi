@@ -120,7 +120,7 @@ public class guiDescripcionCompra extends javax.swing.JPanel {
         ProveedoresDb db = new ProveedoresDb();
         for (Compra compra : lista.getCompras()) {
             //compra.comprar();
-            compra.comprarAnalizador();
+            compra.comprar();
         }
         JOptionPane.showMessageDialog(null, "Compra realizada con éxito!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButRegFactCompNotaCredActionPerformed
