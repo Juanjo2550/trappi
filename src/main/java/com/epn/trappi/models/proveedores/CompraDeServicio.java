@@ -22,8 +22,8 @@ public class CompraDeServicio extends Compra{
             for (Bien cantidadBien : listaBienesAComprar.getListaBienes()){
                 //asumimos que las compras se han entregado
                 setEstado("Entregado");
-                registrarCompra(cantidadBien.getNombre()
-                        ,cantidadBien.getProveeedor().getRuc(),cantidadBien.getCantidad(),estado,montoTotal,this.fecha);
+//                registrarCompra(cantidadBien.getNombre()
+//                        ,cantidadBien.getProveeedor().getRuc(),cantidadBien.getCantidad(),estado,montoTotal,this.fecha);
             }
         }
     }

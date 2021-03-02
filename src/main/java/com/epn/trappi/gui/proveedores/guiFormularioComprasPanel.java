@@ -12,7 +12,6 @@ import com.epn.trappi.models.proveedores.CompraDeProducto;
 import com.epn.trappi.models.proveedores.Inventario;
 import com.epn.trappi.models.proveedores.ListaDeBienes;
 import com.epn.trappi.models.proveedores.ListaDeCompras;
-import com.epn.trappi.models.proveedores.Producto;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -31,10 +30,10 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
      */
     DefaultTableModel modelo;
     private final ProveedoresDb db = new ProveedoresDb();
-    private ListaDeBienes listaDeProductos;
-    //cuales son seleccionados y la cantidad a comprar
-    public int[][] seleccionados= {{0,0},{0,0},{0,0},{0,0},{0,0},{0,0}};
     private JPanel verTodo;
+    
+    private ListaDeBienes listaDeProductos;
+    public int[][] seleccionados;
     private ListaDeCompras solicitud;
 
     
@@ -43,19 +42,33 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
         this.verTodo=verTodo;
         cargar();
         jCheckBoxAñadir.setEnabled(false);
+        jBotonSol.setEnabled(false);
+        jTextFieldCantidad.setEnabled(false);
     }
     
     public void cargar(){
-        String[] titulos = {"Producto","Precio unitario"};
-        String[] fila = new String [2];
+        int auxiliarTamañoBuffer=0;
+        String[] titulos = {"Producto","Precio unitario","Proveedor"};
+        String[] fila = new String [3];
         modelo = new DefaultTableModel(null, titulos);
         listaDeProductos=new ListaDeBienes((ArrayList)db.getProductos());
         for (Bien producto : listaDeProductos.getListaBienes()) {
             fila[0]= producto.getNombre();
             fila[1]= ""+producto.getPrecio();
+            fila[2]= producto.getProveeedor().getRazonSocial();
             modelo.addRow(fila);
+            auxiliarTamañoBuffer++;
         }
         jTable1.setModel(modelo);
+        iniciarBufferSeleccionar(auxiliarTamañoBuffer);
+    }
+    
+    public void iniciarBufferSeleccionar(int auxiliarTamañoBuffer){
+        seleccionados = new int[auxiliarTamañoBuffer][2];
+        for(int i =0; i<auxiliarTamañoBuffer;i++){
+            seleccionados[i][0]=0;
+            seleccionados[i][1]=0;
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -67,7 +80,7 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         PanelVerTodos = new javax.swing.JPanel();
-        jButRegFactCompNotaCred = new javax.swing.JButton();
+        jBotonSol = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jTextFechCompNotaCred = new javax.swing.JTextField();
         jButRegFactCompNotaCred1 = new javax.swing.JButton();
@@ -83,14 +96,14 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
 
         PanelVerTodos.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButRegFactCompNotaCred.setBackground(new java.awt.Color(38, 112, 171));
-        jButRegFactCompNotaCred.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButRegFactCompNotaCred.setForeground(new java.awt.Color(240, 240, 241));
-        jButRegFactCompNotaCred.setText("Continuar Compra");
-        jButRegFactCompNotaCred.setBorderPainted(false);
-        jButRegFactCompNotaCred.addActionListener(new java.awt.event.ActionListener() {
+        jBotonSol.setBackground(new java.awt.Color(38, 112, 171));
+        jBotonSol.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jBotonSol.setForeground(new java.awt.Color(240, 240, 241));
+        jBotonSol.setText("Generar solicitud de compra");
+        jBotonSol.setBorderPainted(false);
+        jBotonSol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButRegFactCompNotaCredActionPerformed(evt);
+                jBotonSolActionPerformed(evt);
             }
         });
 
@@ -206,7 +219,7 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
             PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelVerTodosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButRegFactCompNotaCred)
+                .addComponent(jBotonSol)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(PanelVerTodosLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
@@ -231,41 +244,41 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(jButRegFactCompNotaCred)
+                .addComponent(jBotonSol)
                 .addGap(23, 23, 23))
         );
 
         add(PanelVerTodos);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButRegFactCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegFactCompNotaCredActionPerformed
+    private void jBotonSolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonSolActionPerformed
         try {
             Inventario inventario=new Inventario();
             solicitud = new ListaDeCompras(new ArrayList<Compra>());
             String auxiliarRuc="";
-            for(int i=0;i<6;i++){
+            for(int i=0;i<seleccionados.length;i++){
                 if(seleccionados[i][0]==1){
                     CompraDeProducto compra;
                     ListaDeBienes lista = new ListaDeBienes();
-                    auxiliarRuc=db.getProductos().get(i).getProveeedor().getRuc();
-                    for(int j=0;j<6;j++){
-                        if(auxiliarRuc.equals(db.getProductos().get(j).getProveeedor().getRuc())){
+                    auxiliarRuc=listaDeProductos.getListaBienes().get(i).getProveeedor().getRuc();
+                    for(int j=0;j<seleccionados.length;j++){
+                        if(auxiliarRuc.equals(listaDeProductos.getListaBienes().get(j).getProveeedor().getRuc())){
                             if(seleccionados[j][0]==1){
+                                listaDeProductos.getListaBienes().get(j).setCantidad(seleccionados[j][1]);
                                 lista.añadirBien(listaDeProductos.getListaBienes().get(j));
                                 seleccionados[i][0]=0;
                             }
                         }
                     }
-                    compra = new CompraDeProducto(inventario,lista, "Entregado");
+                    compra = new CompraDeProducto(inventario,lista, "Pendiente");
                     solicitud.añadirCompra(compra);
                 }
             }
-            System.out.println(solicitud.getCompras().get(0).getListaCantidadDeBienes().getListaBienes().get(0).toString());
             new CambiaPanel(verTodo, new guiDescripcionCompra(solicitud));
         } catch (IOException ex) {
             Logger.getLogger(guiFormularioComprasPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButRegFactCompNotaCredActionPerformed
+    }//GEN-LAST:event_jBotonSolActionPerformed
 
     private void jTextFechCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFechCompNotaCredActionPerformed
         // TODO add your handling code here:
@@ -284,7 +297,10 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButRegFactCompNotaCred1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        jTextFieldCantidad.setEnabled(true);
+        jBotonSol.setEnabled(true);
         jCheckBoxAñadir.setEnabled(true);
+        
         if(seleccionados[jTable1.getSelectedRow()][0]==0){
             jCheckBoxAñadir.setSelected(false);
         }
@@ -306,18 +322,21 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
     private void jTextFieldCantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCantidadKeyReleased
         int cantidad=Integer.parseInt(jTextFieldCantidad.getText());
         seleccionados[jTable1.getSelectedRow()][1]=cantidad;
+        System.out.print(cantidad);
     }//GEN-LAST:event_jTextFieldCantidadKeyReleased
 
     private void jCheckBoxAñadirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBoxAñadirMouseExited
         if(jCheckBoxAñadir.isSelected())
             seleccionados[jTable1.getSelectedRow()][0]=1;
-        System.out.println("dd"+seleccionados[0][0] + " "+seleccionados[1][0]+ " "+seleccionados[2][0]+ " "+seleccionados[3][0]+ " "+seleccionados[4][0]+ " "+seleccionados[5][0]);
+        else{
+            seleccionados[jTable1.getSelectedRow()][0]=0;
+        }
     }//GEN-LAST:event_jCheckBoxAñadirMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelVerTodos;
-    private javax.swing.JButton jButRegFactCompNotaCred;
+    private javax.swing.JButton jBotonSol;
     private javax.swing.JButton jButRegFactCompNotaCred1;
     private javax.swing.JCheckBox jCheckBoxAñadir;
     private javax.swing.JLabel jLabel10;
