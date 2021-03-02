@@ -8,6 +8,7 @@ package com.epn.trappi.gui.rrhh;
 
 import com.epn.trappi.models.rrhh.contratacion.Aspirante;
 import com.epn.trappi.models.rrhh.contratacion.PruebaAdmision;
+import com.epn.trappi.models.rrhh.listas.Lista;
 import com.epn.trappi.models.rrhh.listas.ListaAspirantes;
 import com.epn.trappi.models.rrhh.listas.ListaPruebasAdmision;
 import java.util.Vector;
@@ -21,19 +22,30 @@ import javax.swing.table.DefaultTableModel;
 public class RegistroAspirante extends javax.swing.JFrame {
     
     private void listarAspirantes(){
-        ListaAspirantes listaAspirantes = new ListaAspirantes();
-        Aspirante[] aspirantes = listaAspirantes.obtenerTodos();
+        Lista listaAspirantes = new ListaAspirantes();
+        Aspirante[] aspirantes = (Aspirante[]) listaAspirantes.obtenerTodos();
+        ListaPruebasAdmision listaPruebas = new ListaPruebasAdmision();
         DefaultTableModel model = (DefaultTableModel) jTableAspirantes.getModel();
         model.setRowCount(0);
         
         for (Aspirante asp: aspirantes){
             Vector v = new Vector();
-            v.add(asp.getNombre());
-            v.add(asp.getApellidos());
-            v.add(asp.getTelefono());
-            v.add(asp.getCedula());
-            v.add(asp.getCargoAspirante());
-            model.addRow(v);
+            PruebaAdmision prueba = new PruebaAdmision();
+            prueba = listaPruebas.buscarUno(asp.getCedula());
+            if (prueba != null){
+                v.add(asp.getNombre());
+                v.add(asp.getApellidos());
+                v.add(asp.getTelefono());
+                v.add(asp.getCedula());
+                v.add(asp.getCargoAspirante());
+                v.add(prueba.getAptitudes());
+                v.add(prueba.getActitudes());
+                v.add(prueba.getPuntaje());
+                model.addRow(v); 
+            } else {
+                continue;
+            }
+            
             jTableAspirantes.setModel(model);
         }
     }
@@ -426,14 +438,13 @@ public class RegistroAspirante extends javax.swing.JFrame {
 
     private void jButGuardarAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButGuardarAspiranteActionPerformed
       
-        ListaAspirantes listaAspirantes = new ListaAspirantes();
+        Lista listaAspirantes = new ListaAspirantes();
         ListaPruebasAdmision listaPruebas = new ListaPruebasAdmision();
         Aspirante aspirante = new Aspirante(jTextNombreAspirante.getText(), jTextApellidoAspirante.getText(), jTextCedulaAspirante.getText(),
                 jTextTelefonoAspirante.getText(), jTextCargoAspirante.getText());
         PruebaAdmision prueba = new PruebaAdmision(Integer.parseInt(jTextPuntajeAspirante.getText()), jTextActitudesAspirante.getText(), jTextAptitudesAspirante.getText());
         
         listaAspirantes.agregar(aspirante);
-        listarAspirantes();
         listaPruebas.agregar(prueba, jTextCedulaAspirante.getText());
         listarAspirantes();
         JOptionPane.showMessageDialog(null, "Aspirante registrado con éxito");

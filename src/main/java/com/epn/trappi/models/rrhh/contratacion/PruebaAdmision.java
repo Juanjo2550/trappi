@@ -23,6 +23,7 @@ public class PruebaAdmision {
         this.puntaje = puntaje;
         this.actitudes = actitudes;
         this.aptitudes = aptitudes;
+        this.aprobacion = "Pendiente";
         
     }
     public PruebaAdmision(){

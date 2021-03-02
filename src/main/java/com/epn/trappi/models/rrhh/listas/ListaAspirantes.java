@@ -24,17 +24,8 @@ public class ListaAspirantes implements Lista <Aspirante> {
        // this.listaAspirantes = new ArrayList<>();
     }
     
-    public void agregar(String nombre, String apellidos, String cedula, String telefono, String cargo){
-        
-        
-    }
 
-//    public ArrayList<Aspirante> getListaAspirantes() {
-//        return listaAspirantes;
-//    }
-    
-    
-    //obtener Todos accede a la base de datos para obtenere toda la info del Aspirante
+
     @Override
     public Aspirante[] obtenerTodos(){
         listaAspirantes = new ArrayList<>();
@@ -106,10 +97,35 @@ public class ListaAspirantes implements Lista <Aspirante> {
     }
 
     @Override
-    public Aspirante buscarUno(String parametro) {
-        return null; //To change body of generated methods, choose Tools | Templates.
+    public Aspirante buscarUno(String idAspirante) {
+        Aspirante aspirante = null;
+        try {
+            String query = "SELECT * FROM ASPIRANTE WHERE ID_ASP = ?";
+            pstm = conn.prepareStatement(query);
+            pstm.setInt(1, Integer.parseInt(idAspirante));
+            
+            rs = pstm.executeQuery();
+            
+            
+            aspirante = new Aspirante(rs.getString("NOMBREASP"),rs.getString("APELLIDOASP"),rs.getString("CEDULAASP"),
+            rs.getString("TELEFONOASP"), rs.getString("CARGOASP"));
+            
+            System.out.println("Consulta Buscar un aspirante se hizo con exito");
+           
+        } catch (Exception e) {
+            System.out.println("Error en consulta de buscar un Aspirantes: " + e);
+        }
+        finally{
+            try {
+                if(rs!=null) rs.close();
+                if(pstm!=null) pstm.close();
+                
+            } catch (Exception e) {
+                System.out.println("Error al cerrar rs y pstm: " + e);
+            }
+        }
+        return aspirante;
     }
 
-
-    
+ 
 }

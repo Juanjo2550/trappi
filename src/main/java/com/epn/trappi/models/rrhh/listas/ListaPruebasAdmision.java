@@ -121,8 +121,33 @@ public class ListaPruebasAdmision implements Lista <PruebaAdmision> {
     }
 
     @Override
-    public PruebaAdmision buscarUno(String parametro) {
-        return null; //To change body of generated methods, choose Tools | Templates.
+    public PruebaAdmision buscarUno(String cedulaAspirante) {
+        PruebaAdmision prueba = null;
+        try {
+            String query = "SELECT * FROM ASPIRANTE JOIN PRUEBAADMISION on ASPIRANTE.ID_ASP = PRUEBAADMISION.ID_ASP WHERE CEDULAASP ='"+cedulaAspirante+"'";
+            System.out.println(query);
+            pstm = conn.prepareStatement(query);
+            //pstm.setString(0, cedulaAspirante);
+            rs = pstm.executeQuery();
+            rs.next();
+            prueba = new PruebaAdmision(rs.getInt("PUNTAJEPRUEBA"), rs.getString("ACTITUDESPRUEBA"),
+            rs.getString("APTITUDESPRUEBA"));
+            
+            System.out.println("Consulta Buscar una prueba se hizo con exito");
+           
+        } catch (Exception e) {
+            System.out.println("Error en consulta de buscar una prueba (" + cedulaAspirante+"): " + e);
+        }
+        finally{
+            try {
+                if(rs!=null) rs.close();
+                if(pstm!=null) pstm.close();
+                
+            } catch (Exception e) {
+                System.out.println("Error al cerrar rs y pstm: " + e);
+            }
+        }
+        return prueba;
     }
 
 
