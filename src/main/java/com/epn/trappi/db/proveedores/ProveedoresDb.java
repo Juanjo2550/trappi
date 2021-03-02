@@ -31,8 +31,10 @@ public class ProveedoresDb {
     private final String spBuscarProveedor = "BuscarProveedor";
     private final String spUpdateCompras = "updateCompras";
 
-    private final String invFilename = "src/main/java/com/epn/trappi/db/proveedores/inventario.csv";
-    private final Archivo p = new Archivo();
+    private final String spInsertCompra = "insertCompra";
+    private final String spInsertCompraBien = "insertCompraBien";
+    private final String spUpdateStock = "updateStock";
+    private final String spGetIdBien = "getIdBien";
 
     private ResultSet ejecutarSP(String nombreSP) throws SQLException {
         Connection connection = dbInstance.getConnection();
@@ -48,22 +50,27 @@ public class ProveedoresDb {
         return rs;
     }
 
-    private ResultSet ejecutarSPParameters(String nombreSP, String[] parametros) throws SQLException {
-
+    private CallableStatement crearStatement(String nombreSP, String[] parametros) throws SQLException {
         Connection connection = dbInstance.getConnection();
         CallableStatement cstmt = null;
         String numPara = "?,".repeat(parametros.length);
         numPara = numPara.substring(0, numPara.length() - 1); //replace(numPara.charAt(numPara.length()-1), '');
         System.out.println(numPara);
-        cstmt = connection.prepareCall(
-                "{call " + nombreSP + "(" + numPara + ")}");
+        cstmt = connection.prepareCall("{call " + nombreSP + "(" + numPara + ")}");
 
         for (String para : parametros) {
             String[] valores = para.split(":");
             System.out.println(Arrays.toString(valores));
-            cstmt.setString(valores[0], valores[1]);
-        }
+            try {
+                cstmt.setString(valores[0], valores[1]);
+            } catch (Exception e) {
 
+            }
+        }
+        return cstmt;
+    }
+
+    private ResultSet obtenerResultado(CallableStatement cstmt) throws SQLException {
         boolean resultSet = cstmt.execute();
         ResultSet rs = null;
         rs = cstmt.getResultSet();
@@ -72,6 +79,42 @@ public class ProveedoresDb {
             rs = cstmt.getResultSet();
         }
         return rs;
+    }
+
+    private ResultSet ejecutarSPParameters(String nombreSP, String[] parametros) throws SQLException {
+        CallableStatement cstmt = crearStatement(nombreSP, parametros);
+
+        return obtenerResultado(cstmt);
+    }
+
+    private int ejecutarSPRegistraCompras(String nombreSP, String[] parametros) throws SQLException {
+        CallableStatement cstmt = crearStatement(nombreSP, parametros);
+        cstmt.registerOutParameter("idcompra", java.sql.Types.INTEGER);
+
+        boolean resultSet = cstmt.execute();
+        int idCompra = cstmt.getInt("idcompra");
+        ResultSet rs = null;
+        rs = cstmt.getResultSet();
+
+        if (resultSet) {
+            rs = cstmt.getResultSet();
+        }
+        return idCompra;
+    }
+
+    private int ejecutarSPGetIdBien(String nombreSP, String[] parametros) throws SQLException {
+        CallableStatement cstmt = crearStatement(nombreSP, parametros);
+        cstmt.registerOutParameter("idBien", java.sql.Types.INTEGER);
+
+        boolean resultSet = cstmt.execute();
+        int idCompra = cstmt.getInt("idBien");
+        ResultSet rs = null;
+        rs = cstmt.getResultSet();
+
+        if (resultSet) {
+            rs = cstmt.getResultSet();
+        }
+        return idCompra;
     }
 
     public List<Producto> getProductos() {
@@ -218,7 +261,7 @@ public class ProveedoresDb {
             ListaDeBienes listaBienesCompra = new ListaDeBienes();
             listaBienesCompra.setListaBienes(listaBienes);
             CompraDeProducto comp = new CompraDeProducto(listaBienesCompra, rs.getString(2),
-                    Double.parseDouble(rs.getString(3)),rs.getString(4),Integer.parseInt(rs.getString(1)));
+                    Double.parseDouble(rs.getString(3)), rs.getString(4), Integer.parseInt(rs.getString(1)));
             listaCompra.add(comp);
             /*String[] res = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)};
             pp.add(reformarProducto(res));*/
@@ -299,9 +342,31 @@ public class ProveedoresDb {
         this.servicios = ss;
     }
 
+    public int insertarCompra(String estado, String monto, String fecha) throws SQLException {
+        String[] param = {"estadocompra:" + estado, "montototal:" + monto, "fechacompra:" + fecha, ""};
+        int idCompra = ejecutarSPRegistraCompras(spInsertCompra, param);
+        return idCompra;
+    }
+
+    public int getIdBien(String nombreBien) throws SQLException {
+        String[] param = {"nombreBien:" + nombreBien, ""};
+        int idCompra = ejecutarSPGetIdBien(spGetIdBien, param);
+        return idCompra;
+    }
+
     public void actualizarCompras(int idCompra, String estado) throws SQLException {
         String[] param = {"idcompra:" + idCompra, "estado:" + estado};
         ResultSet rs = ejecutarSPParameters(spUpdateCompras, param);
+    }
+
+    public void actualizarStock(int idBien, int cantidad) throws SQLException {
+        String[] param = {"idbien:" + idBien, "cantidad:" + cantidad};
+        ResultSet rs = ejecutarSPParameters(spUpdateStock, param);
+    }
+
+    public void insertDetalleCompra(int idCompra, int idBien, int cantidad) throws SQLException {
+        String[] param = {"identificadorcomprabien:" + idCompra, "identificadorbien2:" + idBien, "cantidadbien:" + cantidad};
+        ResultSet rs = ejecutarSPParameters(spInsertCompraBien, param);
     }
 
     /*public ArrayList<Integer> seleccionarIdentificadores() {

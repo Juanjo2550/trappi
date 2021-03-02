@@ -39,30 +39,26 @@ public class MainProveedores {
 
         //db.getProveedores();
         //ListaProveedores prov = new ListaProveedores();
-
-                
-        db.actualizarCompras(1,"Pendiente");
+        int id = db.getIdBien("Jugo");
+        System.out.println(id);
         /*List<Producto> prod = db.seleccionarComprabien(1);
         prod.forEach(p -> {
             System.out.println(p.getNombre() + ";" + p.getPrecio() + ";" + p.getProveeedor().getRuc());
         });*/
-
-        
-        /*db.getInventarioDb();
+ /*db.getInventarioDb();
         
         ListaDeBienes prod = db.getInventarioDb();
         prod.getListaBienes().forEach(p -> {
             System.out.println(p.getNombre() + ";" + p.getPrecio() + ";" + p.getProveeedor().getRuc());
         });*/
-                
-        /*ListaDeCompras comp = db.seleccionarCompras();
+ /*ListaDeCompras comp = db.seleccionarCompras();
 
         List<Servicio> serv = db.getServicios();
         comp.getCompras().forEach(pr -> {
             System.out.println(pr.getEstado() + ";" + pr.getFecha()+ ";" + pr.getListaCantidadDeBienes());
         });*/
 
-        /*String [] params = {"ruc:7043728305001","nombrebien:Papel higienico","preciobien:2.8","tipobien:Producto","cantidad:50","marca:Familia"};
+ /*String [] params = {"ruc:7043728305001","nombrebien:Papel higienico","preciobien:2.8","tipobien:Producto","cantidad:50","marca:Familia"};
         
         db.ejecutarSPParameters("insertBien", params);*/
     }
