@@ -9,6 +9,7 @@ import com.epn.trappi.db.proveedores.ProveedoresDb;
 import com.epn.trappi.models.proveedores.ListaProveedores;
 import com.epn.trappi.models.proveedores.Producto;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,6 +29,7 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
      */
     public guiListaProductosPanel() {
         initComponents();
+        seleccionados = (ArrayList) db.getProductos();
         cargarProductos();
         cargarProveedor();
     }
@@ -42,7 +44,9 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
         String[] titulos = {"Nombre Producto", "Precio unitario", "Proveedor"};
         String[] fila = new String[3];
         modelo = new DefaultTableModel(null, titulos);
-        for (Producto producto : db.getProductos()) {
+        //Aquí cambie algo para que sirva, puse este iterador y luego castee la clase producto
+        for (Iterator it = seleccionados.iterator(); it.hasNext();) {
+            Producto producto = (Producto) it.next();
             fila[0] = producto.getNombre();
             fila[1] = "" + producto.getPrecio();
             fila[2] = "" + producto.getProveeedor().getRazonSocial();
@@ -69,7 +73,7 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        txtBuscarRUC = new javax.swing.JTextField();
+        txtNombreProducto = new javax.swing.JTextField();
         txtPrecio = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
@@ -91,6 +95,12 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel11.setText("Precio:");
+
+        txtNombreProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreProductoKeyTyped(evt);
+            }
+        });
 
         txtPrecio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtPrecio.addActionListener(new java.awt.event.ActionListener() {
@@ -192,7 +202,7 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane1)
                         .addGap(112, 112, 112))
                     .addGroup(PanelVerTodosLayout.createSequentialGroup()
-                        .addComponent(txtBuscarRUC, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -204,7 +214,7 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
                 .addComponent(jLabel9)
                 .addGap(9, 9, 9)
                 .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtBuscarRUC, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -253,7 +263,17 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
+        String producto = txtNombreProducto.getText();
+        try {
+            if (producto.length() >= 1) {
+                seleccionados = (ArrayList) db.buscarProductos(producto);
+                cargarProductos();
+            } else {
+                cargarProductos();
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Proveedor no encontrado", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void jtbProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbProductosMouseClicked
@@ -263,6 +283,21 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
             mostrarProducto(modelo.getValueAt(row, 0).toString(), modelo.getValueAt(row, 1).toString(), modelo.getValueAt(row, 2).toString());
         }
     }//GEN-LAST:event_jtbProductosMouseClicked
+
+    private void txtNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProductoKeyTyped
+        // TODO add your handling code here:
+        String producto = txtNombreProducto.getText();
+        try {
+            if (producto.length() >= 1) {
+                seleccionados = (ArrayList) db.buscarProductos(producto);
+                cargarProductos();
+            } else {
+                cargarProductos();
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Proveedor no encontrado", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_txtNombreProductoKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -276,8 +311,8 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtbProductos;
-    private javax.swing.JTextField txtBuscarRUC;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNombreProducto;
     private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }

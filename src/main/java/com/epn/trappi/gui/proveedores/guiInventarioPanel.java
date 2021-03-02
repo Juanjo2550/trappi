@@ -29,14 +29,15 @@ public class guiInventarioPanel extends javax.swing.JPanel {
     }
 
     public void cargarInventario() {
-        String[] titulos = {"Nombre Producto", "Precio unitario", "Proveedor", "Cantidad"};
-        String[] fila = new String[4];
+        String[] titulos = {"Nombre Producto", "Marca","Precio unitario", "Proveedor", "Cantidad"};
+        String[] fila = new String[5];
         modelo = new DefaultTableModel(null, titulos);
         for (Bien cantBien : inventario.getListaDeBienes().getListaBienes()) {
             fila[0] = cantBien.getNombre();
-            fila[1] = "" + cantBien.getPrecio();
-            fila[2] = "" + cantBien.getProveeedor().getRazonSocial();
-            fila[3] = "" + cantBien.getCantidad();
+            fila[1] = "" + cantBien.getMarca();
+            fila[2] = "" + cantBien.getPrecio();
+            fila[3] = "" + cantBien.getProveeedor().getRazonSocial();
+            fila[4] = "" + cantBien.getCantidad();
             modelo.addRow(fila);
         }
         jtbProductos.setModel(modelo);

@@ -10,6 +10,7 @@ import com.epn.trappi.models.proveedores.ListaProveedores;
 import com.epn.trappi.models.proveedores.Producto;
 import com.epn.trappi.models.proveedores.Servicio;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -69,7 +70,7 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        txtBuscarRUC = new javax.swing.JTextField();
+        txtNombreServicio = new javax.swing.JTextField();
         txtPrecio = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
@@ -92,17 +93,17 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel11.setText("Precio:");
 
-        txtBuscarRUC.addActionListener(new java.awt.event.ActionListener() {
+        txtNombreServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarRUCActionPerformed(evt);
+                txtNombreServicioActionPerformed(evt);
             }
         });
-        txtBuscarRUC.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtNombreServicio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtBuscarRUCKeyPressed(evt);
+                txtNombreServicioKeyPressed(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtBuscarRUCKeyTyped(evt);
+                txtNombreServicioKeyTyped(evt);
             }
         });
 
@@ -206,7 +207,7 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane1)
                         .addGap(112, 112, 112))
                     .addGroup(PanelVerTodosLayout.createSequentialGroup()
-                        .addComponent(txtBuscarRUC, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNombreServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -218,7 +219,7 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
                 .addComponent(jLabel9)
                 .addGap(9, 9, 9)
                 .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtBuscarRUC, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombreServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,18 +242,6 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
 
         add(PanelVerTodos);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtBuscarRUCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarRUCActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarRUCActionPerformed
-
-    private void txtBuscarRUCKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarRUCKeyPressed
-
-    }//GEN-LAST:event_txtBuscarRUCKeyPressed
-
-    private void txtBuscarRUCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarRUCKeyTyped
-
-    }//GEN-LAST:event_txtBuscarRUCKeyTyped
 
     private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
         // TODO add your handling code here:
@@ -279,7 +268,16 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
+        String servicio = txtNombreServicio.getText();
+        try {
+            if (servicio.length() >= 1) {
+                seleccionados = (ArrayList) db.buscarProductos(servicio);
+                cargarServicios();
+                cargarProveedor();
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Proveedor no encontrado", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void jtbProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbProductosMouseClicked
@@ -289,6 +287,26 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
             mostrarProducto(modelo.getValueAt(row, 0).toString(), modelo.getValueAt(row, 1).toString(), modelo.getValueAt(row, 2).toString());
         }
     }//GEN-LAST:event_jtbProductosMouseClicked
+
+    private void txtNombreServicioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreServicioKeyTyped
+        String servicio = txtNombreServicio.getText();
+        try {
+            if (servicio.length() >= 1) {
+                seleccionados = (ArrayList) db.buscarProductos(servicio);
+                cargarServicios();
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Proveedor no encontrado", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_txtNombreServicioKeyTyped
+
+    private void txtNombreServicioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreServicioKeyPressed
+
+    }//GEN-LAST:event_txtNombreServicioKeyPressed
+
+    private void txtNombreServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreServicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreServicioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -302,8 +320,8 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtbProductos;
-    private javax.swing.JTextField txtBuscarRUC;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNombreServicio;
     private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }
