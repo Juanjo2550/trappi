@@ -39,8 +39,8 @@ public class MainProveedores {
 
         //db.getProveedores();
         //ListaProveedores prov = new ListaProveedores();
-        int id = db.getIdBien("Jugo");
-        System.out.println(id);
+        /*int id = db.getIdBien("Jugo");
+        System.out.println(id);*/
         /*List<Producto> prod = db.seleccionarComprabien(1);
         prod.forEach(p -> {
             System.out.println(p.getNombre() + ";" + p.getPrecio() + ";" + p.getProveeedor().getRuc());
@@ -51,7 +51,11 @@ public class MainProveedores {
         prod.getListaBienes().forEach(p -> {
             System.out.println(p.getNombre() + ";" + p.getPrecio() + ";" + p.getProveeedor().getRuc());
         });*/
- /*ListaDeCompras comp = db.seleccionarCompras();
+
+        db.buscarProveedores("10").forEach(p -> {
+            System.out.println(p.getRuc()+ ";" + p.getRazonSocial()+ ";" + p.getCuenta());
+        });
+        /*ListaDeCompras comp = db.seleccionarCompras();
 
         List<Servicio> serv = db.getServicios();
         comp.getCompras().forEach(pr -> {

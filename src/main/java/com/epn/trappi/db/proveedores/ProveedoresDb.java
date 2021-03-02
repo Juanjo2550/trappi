@@ -363,6 +363,12 @@ public class ProveedoresDb {
         String[] param = {"idbien:" + idBien, "cantidad:" + cantidad};
         ResultSet rs = ejecutarSPParameters(spUpdateStock, param);
     }
+    
+    public void disminuirStock(int idBien, int cantidad) throws SQLException {
+        cantidad = -cantidad;
+        String[] param = {"idbien:" + idBien, "cantidad:" + cantidad};
+        ResultSet rs = ejecutarSPParameters(spUpdateStock, param);
+    }
 
     public void insertDetalleCompra(int idCompra, int idBien, int cantidad) throws SQLException {
         String[] param = {"identificadorcomprabien:" + idCompra, "identificadorbien2:" + idBien, "cantidadbien:" + cantidad};
