@@ -18,7 +18,7 @@ public class Inicio extends javax.swing.JFrame {
         initComponents();
         this.setSize(1290, 700);
         this.setLocationRelativeTo(null);
-        //jt.setText(Main.cliente.getNombre());
+        jt.setText(Main.cliente.Nombre);
         jt.setEditable(false);
     }
     
@@ -83,6 +83,11 @@ public class Inicio extends javax.swing.JFrame {
         jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton4MouseClicked(evt);
+            }
+        });
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
             }
         });
 
@@ -176,56 +181,25 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-    Login login=new Login();
-    login.setVisible(true);
+        Main.cliente.salirSistema();
     this.setVisible(false);
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-    try {
-            String nombre= "";
-            String cedula ="";
-            String correo ="";
-            String fecha ="";
-            String celular ="";
-            String direc ="";
-            String contra ="";
-                       
-            Statement statement = connection.createStatement();
-            String sql = "select * from CLIENTES where NOMBRECLIE ='"+
-                        jt.getText()+"'";
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                 nombre= resultSet.getString("NOMBRECLIE");
-                 cedula =resultSet.getString("CEDULA2");
-                 correo =resultSet.getString("CORREO");
-                 fecha =resultSet.getString("FECHADENACIMIENTO");
-                 celular =resultSet.getString("CELULAR");
-                 direc =resultSet.getString("DIRECCION");
-                 contra =resultSet.getString("CONTRASENA");
-               
-            }
             CuentaCliente cuenta=new CuentaCliente();
-            cuenta.llenardatos(nombre, cedula,correo, fecha,celular, direc, contra);
-            cuenta.nombretitulo(nombre);
             cuenta.setVisible(true);
             this.setVisible(false);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     Comprar comprar=new Comprar();
     comprar.setVisible(true);
     this.setVisible(false);
-    comprar.nombretitulo(jt.getText());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
     Metododepago mp=new Metododepago();
-    mp.nombretitulo(jt.getText());
     mp.setVisible(true);
     mp.llenardatos();
     mp.llenartablat();
@@ -239,6 +213,10 @@ public class Inicio extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

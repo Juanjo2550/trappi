@@ -39,7 +39,7 @@ public class Comprar extends javax.swing.JFrame {
         carrito=new CarritoDeCompras();
         jButtonagregar.setVisible(false);
         jButtoneliminar.setVisible(false);
-        jt.setText(Main.cliente.getNombre());
+        jt.setText(Main.cliente.Nombre);
         jt.setEditable(false);
         TextPrompt buscar = new TextPrompt("Busqueda", jTextFieldBuscar);
     }
@@ -360,21 +360,18 @@ public class Comprar extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     CuentaCliente cuenta=new CuentaCliente();
-    cuenta.nombretitulo(jt.getText());
-    cuenta.llenardatroscl();
     cuenta.setVisible(true);
     this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-     Login login=new Login();
-    login.setVisible(true);
+    Main.cliente.salirSistema();
     this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
     Metododepago mp=new Metododepago();
-    mp.nombretitulo(jt.getText());
+    
     mp.llenardatos();
     mp.llenartablat();
     mp.setVisible(true);

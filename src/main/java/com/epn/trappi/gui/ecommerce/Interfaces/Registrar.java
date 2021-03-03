@@ -5,6 +5,7 @@ import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.FormulariosCliente.FRegistroCliente;
 import com.epn.trappi.gui.ecommerce.Diseño.TextPrompt;
+import com.epn.trappi.gui.ecommerce.Ecommerce.ListaClientes;
 import java.sql.*;
 import java.util.Random;
 import java.util.logging.Level;
@@ -203,28 +204,11 @@ public class Registrar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-    
-        try {
-            
-            FRegistroCliente frc=new FRegistroCliente(jTextFieldNombre.getText(),jTextFieldCorreo.getText(), jTextFieldFecha.getText(), jTextFieldCelular.getText(),jTextFieldDireccion.getText(),jTextFieldCedula.getText(),jTextFieldContraseña.getText());
-            Main.cliente.registrarse(frc);
-            
-            int idAletorio = idsuario();
-            String sql = "exec cliente_insert "+idAletorio+",'"+jTextFieldNombre.getText()+"','"+jTextFieldFecha.getText()+
-                    "','"+jTextFieldCelular.getText()+"','"+jTextFieldDireccion.getText()+"','"+jTextFieldCedula.getText()+"','"+
-                    jTextFieldContraseña.getText()+"','"+jTextFieldCorreo.getText()+"'"; 
-           
-            PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
-            prepsInsertProduct.execute();
-            JOptionPane.showMessageDialog(null,"exito");
-            Inicio inicio=new Inicio();
-            inicio.nombretitulo(jTextFieldNombre.getText());
-            inicio.setVisible(true);
-            this.setVisible(false);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
-        }    
+    ListaClientes lista=new ListaClientes();
+    FRegistroCliente fr=new FRegistroCliente(jTextFieldNombre.getText(),jTextFieldCorreo.getText(),jTextFieldFecha.getText(),jTextFieldCelular.getText(),jTextFieldDireccion.getText(),jTextFieldCedula.getText(),jTextFieldContraseña.getText());
+    lista.ingresar(fr);
+    Main.cliente.registrarse(fr);
+    this.setVisible(false);
     
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -273,8 +257,6 @@ public class Registrar extends javax.swing.JFrame {
                
             }
             CuentaCliente cuenta=new CuentaCliente();
-            cuenta.llenardatos(nombre, cedula,correo, fecha,celular, direc, contra);
-            cuenta.nombretitulo(nombre);
             cuenta.setVisible(true);
             this.setVisible(false);
             

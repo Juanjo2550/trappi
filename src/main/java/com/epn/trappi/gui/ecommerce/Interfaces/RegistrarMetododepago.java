@@ -4,6 +4,7 @@ import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.FormulariosTarjetas.FRegistroTarjeta;
 import com.epn.trappi.gui.ecommerce.Diseño.TextPrompt;
+import com.epn.trappi.gui.ecommerce.Ecommerce.ListaTar;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,7 +23,7 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
         initComponents();
         this.setSize(1300, 700);
         this.setLocationRelativeTo(null);
-        
+        jt.setText(Main.cliente.Nombre);
         jt.setEditable(false);
          TextPrompt tarjeta = new TextPrompt("Número de Tarjeeta", jTextFieldTarjeta);
          TextPrompt cvv = new TextPrompt("CVV", jTextFieldCvv);
@@ -239,15 +240,12 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     CuentaCliente cuenta=new CuentaCliente();
-    cuenta.nombretitulo(jt.getText());
-    cuenta.llenardatroscl();
     cuenta.setVisible(true);
     this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    Login login=new Login();
-    login.setVisible(true);
+        Main.cliente.salirSistema();
     this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -261,7 +259,6 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
     Metododepago mp=new Metododepago();
-    mp.nombretitulo(jt.getText());
     mp.llenardatos();
     mp.llenartablat();
     mp.setVisible(true);
@@ -271,6 +268,8 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
     FRegistroTarjeta frt=new FRegistroTarjeta(jTextFieldTarjeta.getText(),jTextFieldCvv.getText(),jTextFieldFecha.getText(),jTextFieldTipo.getText());
     Main.cliente.añadirTarjeta(frt);
+        ListaTar lis=new ListaTar();
+        lis.creartarjeta(Main.cliente.Cedula,jTextFieldCvv.getText(),jTextFieldTarjeta.getText(),jTextFieldTipo.getText(),jTextFieldFecha.getText());
         JOptionPane.showMessageDialog(null,"tarjeta ingresada con exito");
      
     }//GEN-LAST:event_jButton5ActionPerformed

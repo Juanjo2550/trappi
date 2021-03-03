@@ -9,6 +9,8 @@ import com.epn.trappi.gui.ecommerce.FormulariosCliente.FEdicionCliente;
 import com.epn.trappi.gui.ecommerce.FormulariosCliente.FRegistroCliente;
 import com.epn.trappi.gui.ecommerce.FormulariosTarjetas.FEdicionTarjeta;
 import com.epn.trappi.gui.ecommerce.FormulariosTarjetas.FRegistroTarjeta;
+import com.epn.trappi.gui.ecommerce.Interfaces.Inicio;
+import com.epn.trappi.gui.ecommerce.Interfaces.Login;
 import com.epn.trappi.gui.ecommerce.Tarjetas.Tarjeta;
 import com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaCredito;
 import com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaDebito;
@@ -21,28 +23,21 @@ import static javax.swing.JOptionPane.YES_OPTION;
  * @author Bryan
  */
 public class Cliente {
-    String Nombre;
+   public String Nombre;
    public String Correo;
-    String Fechadenacimiento;
-    String Celular;
-    String Direccion;
-    String Cedula;
+   public String Fechadenacimiento;
+   public String Celular;
+   public String Direccion;
+   public String Cedula;
    public String Contraseña;
     
-    public boolean entrarAlSistema(String correo, String contrasena){
-        boolean aux=false;
-        if(correo.equals(this.Correo) && contrasena.equals(this.Contraseña)){
-            aux=true;
-            
-        }
-        
-        return aux;
+    public void entrarAlSistema(){
+        Inicio inicio=new Inicio();
+        inicio.setVisible(true);
     }
     
     public void registrarse( FRegistroCliente registrar)
     {
-  
-
        String[] datos = registrar.obtenerDatos();
        
        this.Nombre = datos[0];
@@ -52,6 +47,8 @@ public class Cliente {
        this.Direccion= datos[4];
        this.Cedula=datos[5];
        this.Contraseña=datos[6];
+       Inicio inicio=new Inicio();
+       inicio.setVisible(true);
     }
     
     public void editarMisDato(FEdicionCliente editar){
@@ -73,14 +70,22 @@ public class Cliente {
     
     public void eliminarse()
     {
-        //editarMisDato("","","","","");  
-        Main login = new Main();
+    this.Nombre =null;
+       this.Correo =null;
+       this.Fechadenacimiento=null;
+       this.Celular =null;
+       this.Direccion =null;
+       this.Cedula =null;
+       this.Contraseña =null;
+    Login login=new Login();
+    login.setVisible(true);
     }
     
     public void salirSistema()
     {
        if(JOptionPane.showConfirmDialog(null, "¿Está seguro que desea Cerrar Sesión?","Su sesión finalizará",JOptionPane.YES_NO_OPTION)==YES_OPTION){
-           Main login = new Main();
+       Login login=new Login();
+       login.setVisible(true);
        }
     }
     
@@ -155,37 +160,7 @@ public class Cliente {
     
     /////////Asociacion Con Carrito////////////////
 
-    public String getNombre() {
-        return Nombre;
-    }
-
-    public String getCorreo() {
-        return Correo;
-    }
-
-    public String getFechadenacimiento() {
-        return Fechadenacimiento;
-    }
-
-    public String getCelular() {
-        return Celular;
-    }
-
-    public String getDireccion() {
-        return Direccion;
-    }
-
-    public String getCedula() {
-        return Cedula;
-    }
-
-    public String getContraseña() {
-        return Contraseña;
-    }
-
-    public ArrayList<Tarjeta> getTarjeta() {
-        return tarjeta;
-    }
+    
     
     
     

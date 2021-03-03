@@ -7,6 +7,7 @@ package com.epn.trappi.gui.ecommerce.Interfaces;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Diseño.TextPrompt;
+import com.epn.trappi.gui.ecommerce.Ecommerce.ListaClientes;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
@@ -77,6 +78,11 @@ public class Login extends javax.swing.JFrame {
                 jButtonregistrarMouseClicked(evt);
             }
         });
+        jButtonregistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonregistrarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logo_solotexto_resize.jpg"))); // NOI18N
 
@@ -135,28 +141,11 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtoningresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtoningresarMouseClicked
-    try {
-            boolean on_off= false;
-            String nombre= "";
-            String user = jTextFieldUsuario.getText();
-            String pass = jTextFieldcontraseña.getText();
-            Statement statement = connection.createStatement();
-            String sql = "select NOMBRECLIE from CLIENTES where CORREO ='"+
-                        user+"' and CONTRASENA='"+ pass+"'";
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                on_off=true;
-                nombre=resultSet.getString("NOMBRECLIE");
-            }
-            if(on_off){
-                Inicio nuevo= new Inicio();
-                nuevo.jt.setText(nombre);
-                nuevo.setVisible(true);
-                this.setVisible(false);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+    ListaClientes lista=new ListaClientes();
+    if(lista.buscar(Main.cliente,jTextFieldUsuario.getText(),jTextFieldcontraseña.getText())){
+    Main.cliente.entrarAlSistema();
+    this.setVisible(false);
+    }
     }//GEN-LAST:event_jButtoningresarMouseClicked
 
     
@@ -167,31 +156,12 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonregistrarMouseClicked
 
     private void jButtoningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoningresarActionPerformed
-        try {
-            boolean on_off= false;
-            String nombre= "";
-            String user = jTextFieldUsuario.getText();
-            String pass = jTextFieldcontraseña.getText();
-            Statement statement = connection.createStatement();
-            String sql = "select NOMBRECLIE from CLIENTES where CORREO ='"+
-                        user+"'and CONTRASENA='"+ pass+"'";
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                on_off=true;
-                nombre=resultSet.getString("NOMBRECLIE");
-            }
-            if(on_off){
-                Inicio nuevo= new Inicio();
-                nuevo.setVisible(true);
-                nuevo.jt.setText(nombre);
-                this.setVisible(false);
-            }else{
-                JOptionPane.showMessageDialog(null,"error");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }//GEN-LAST:event_jButtoningresarActionPerformed
+
+    private void jButtonregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonregistrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonregistrarActionPerformed
 
     /**
      * @param args the command line arguments

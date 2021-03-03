@@ -30,30 +30,7 @@ public class Articulo {
     public Articulo() {
     }
         
-        
-
-    public String getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public Double getPrecio() {
-        return precio;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    @Override
-    public String toString() {
+    public String mostrar() {
         return "nombre=" + nombre + ", precio=" + precio + ", cantidad=" + cantidad;
     }
         

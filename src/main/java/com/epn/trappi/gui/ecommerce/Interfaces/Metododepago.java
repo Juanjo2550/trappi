@@ -3,6 +3,7 @@ package com.epn.trappi.gui.ecommerce.Interfaces;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Articulo;
+import com.epn.trappi.gui.ecommerce.Ecommerce.ListaTar;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.Tarjetas.Tarjeta;
 import javax.swing.JOptionPane;
@@ -26,10 +27,11 @@ public class Metododepago extends javax.swing.JFrame {
         initComponents();
         this.setSize(1300, 700);
         jButtoneditarconfirmarcambios.setVisible(false);
+        jbeliminar.setVisible(false);
         this.setLocationRelativeTo(null);
         llenardatos();
         llenartablat();
-        jt.setText(Main.cliente.getNombre());
+        jt.setText(Main.cliente.Nombre);
         jt.setEditable(false);
         
     }
@@ -91,13 +93,14 @@ public class Metododepago extends javax.swing.JFrame {
         jTextFieldtipo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jTextFieldfecha = new javax.swing.JTextField();
-        jButtoneditar = new javax.swing.JButton();
+        jButtonregistrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablatarjetas = new javax.swing.JTable();
         jButtoneditar1 = new javax.swing.JButton();
         jButtoneditarconfirmarcambios = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jbeliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -144,7 +147,7 @@ public class Metododepago extends javax.swing.JFrame {
                         .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jt, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
@@ -159,9 +162,9 @@ public class Metododepago extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
                 .addComponent(jButton4)
-                .addGap(46, 46, 46))
+                .addGap(90, 90, 90))
         );
 
         jLabel1.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
@@ -192,10 +195,10 @@ public class Metododepago extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         jLabel8.setText("Fecha de caducidad");
 
-        jButtoneditar.setText("Registar");
-        jButtoneditar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonregistrar.setText("Registar");
+        jButtonregistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtoneditarActionPerformed(evt);
+                jButtonregistrarActionPerformed(evt);
             }
         });
 
@@ -232,6 +235,13 @@ public class Metododepago extends javax.swing.JFrame {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logo_solotexto_resize.jpg"))); // NOI18N
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/panelSuperiorComidasVariadasCortada.jpg"))); // NOI18N
+
+        jbeliminar.setText("Eliminar");
+        jbeliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbeliminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -273,12 +283,13 @@ public class Metododepago extends javax.swing.JFrame {
                             .addComponent(jTextFieldfecha))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(164, 164, 164)
+                        .addGap(168, 168, 168)
                         .addComponent(jButtoneditarconfirmarcambios, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtoneditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtoneditar))
+                            .addComponent(jButtonregistrar)
+                            .addComponent(jbeliminar))
                         .addGap(228, 228, 228))))
         );
         layout.setVerticalGroup(
@@ -318,12 +329,14 @@ public class Metododepago extends javax.swing.JFrame {
                             .addComponent(jTextFieldfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
                         .addGap(2, 2, 2)
-                        .addComponent(jButtoneditar)
-                        .addGap(209, 209, 209)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonregistrar)
+                        .addGap(28, 28, 28)
+                        .addComponent(jbeliminar)
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtoneditar1)
                             .addComponent(jButtoneditarconfirmarcambios))
-                        .addContainerGap(85, Short.MAX_VALUE))))
+                        .addContainerGap(216, Short.MAX_VALUE))))
         );
 
         pack();
@@ -332,14 +345,11 @@ public class Metododepago extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     CuentaCliente cuenta=new CuentaCliente();
     cuenta.setVisible(true);
-    cuenta.nombretitulo(jt.getText());
-    cuenta.llenardatroscl();
     this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    Login login=new Login();
-    login.setVisible(true);
+    Main.cliente.salirSistema();
     this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -351,16 +361,18 @@ public class Metododepago extends javax.swing.JFrame {
     this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButtoneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoneditarActionPerformed
+    private void jButtonregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonregistrarActionPerformed
     RegistrarMetododepago rmp=new RegistrarMetododepago();
     rmp.setVisible(true);
     this.setVisible(false);
     rmp.nombretitulo(jt.getText());
     
-    }//GEN-LAST:event_jButtoneditarActionPerformed
+    }//GEN-LAST:event_jButtonregistrarActionPerformed
 
     private void tablatarjetasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablatarjetasMouseClicked
     tomarTarjeta();
+    jbeliminar.setVisible(true);
+    jButtonregistrar.setVisible(true);
     }//GEN-LAST:event_tablatarjetasMouseClicked
 
     private void jButtoneditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoneditar1ActionPerformed
@@ -377,6 +389,8 @@ public class Metododepago extends javax.swing.JFrame {
                 nuevo.jt.setText(jt.getText());
                 nuevo.setVisible(true);
                 this.setVisible(false);
+                ListaTar lis=new ListaTar();
+                lis.modtarjeta(Integer.parseInt(jTextFieldtarjeta.getText()),Integer.parseInt(jTextFieldcvv.getText()),jTextFieldfecha.getText(),jTextFieldtipo.getText());
         
         /*FEdicionTarjeta fet=new FEdicionTarjeta(jTextFieldtarjeta.getText(),jTextFieldcvv.getText(),jTextFieldfecha.getText(), jTextFieldtipo.getText());
         if(jTextFieldtipo.getText().equals("Credito")){
@@ -394,10 +408,15 @@ public class Metododepago extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldtarjetaActionPerformed
 
-    public void nombretitulo(String name){
-     jt.setText(name);
-        System.out.println(name);
-    }
+    private void jbeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbeliminarActionPerformed
+    ListaTar lis=new ListaTar();
+    lis.borartarjeta(Integer.parseInt(jTextFieldtarjeta.getText()));
+    jTextFieldtarjeta.setText(null);
+    jTextFieldcvv.setText(null);
+    jTextFieldtipo.setText(null);
+    jTextFieldfecha.setText(null);
+    }//GEN-LAST:event_jbeliminarActionPerformed
+
     public void llenardatos(){
         try {
             String tarjeta= "";
@@ -415,11 +434,7 @@ public class Metododepago extends javax.swing.JFrame {
                  fecha =resultSet.getString("FECHADECADUCIDAD");
                  tipo=resultSet.getString("TIPO");
             }
-            System.out.println(tarjeta);
-            jTextFieldtarjeta.setText(tarjeta);
-            jTextFieldcvv.setText(cvv);
-            jTextFieldtipo.setText(tipo);
-            jTextFieldfecha.setText(fecha);
+            
             
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -493,9 +508,9 @@ public class Metododepago extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButtoneditar;
     private javax.swing.JButton jButtoneditar1;
     private javax.swing.JButton jButtoneditarconfirmarcambios;
+    private javax.swing.JButton jButtonregistrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -511,6 +526,7 @@ public class Metododepago extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldfecha;
     private javax.swing.JTextField jTextFieldtarjeta;
     private javax.swing.JTextField jTextFieldtipo;
+    private javax.swing.JButton jbeliminar;
     private javax.swing.JTextField jt;
     private javax.swing.JTable tablatarjetas;
     // End of variables declaration//GEN-END:variables

@@ -2,6 +2,7 @@
 package com.epn.trappi.gui.ecommerce.Interfaces;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
+import com.epn.trappi.gui.ecommerce.Ecommerce.ListaClientes;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.FormulariosCliente.FEdicionCliente;
 import java.sql.Connection;
@@ -24,8 +25,13 @@ public class CuentaCliente extends javax.swing.JFrame {
         jButtonaceptarcambios.setVisible(false);
         this.setLocationRelativeTo(null);
         
-        
-        
+        jTextFieldnombre.setText(Main.cliente.Nombre);
+        jTextFieldcedula.setText(Main.cliente.Cedula);
+        jTextFieldcorreo.setText(Main.cliente.Correo);
+        jTextFieldfecha.setText(Main.cliente.Fechadenacimiento);
+        jTextFieldcelular.setText(Main.cliente.Celular);
+        jTextFielddireccion.setText(Main.cliente.Direccion);
+        jTextFieldcontrasena.setText(Main.cliente.Contraseña);
         
         jTextFieldcedula.setEditable(false);
         jTextFieldcelular.setEditable(false);
@@ -34,7 +40,7 @@ public class CuentaCliente extends javax.swing.JFrame {
         jTextFieldnombre.setEditable(false);
         jTextFielddireccion.setEditable(false);
         jTextFieldfecha.setEditable(false);
-        jt.setText(Main.cliente.getNombre());
+        jt.setText(Main.cliente.Nombre);
         jt.setEditable(false);
     }
 
@@ -288,8 +294,7 @@ public class CuentaCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    Login login=new Login();
-    login.setVisible(true);
+    Main.cliente.salirSistema();
     this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -303,12 +308,10 @@ public class CuentaCliente extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
     Metododepago mp=new Metododepago();
-    mp.nombretitulo(jt.getText());
     mp.llenardatos();
     mp.llenartablat();
     mp.setVisible(true);
     this.setVisible(false);
-    mp.nombretitulo(jt.getText());
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -322,84 +325,20 @@ public class CuentaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButtonaceptarcambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaceptarcambiosActionPerformed
-     try {
-            String sql ="EXEC cliente_modificar '"+jTextFieldnombre.getText()+"','"+jTextFieldfecha.getText()+"','"+
-                    jTextFieldcelular.getText()+"','"+jTextFielddireccion.getText()+"','"+jTextFieldcontrasena.getText()+
-                    "','"+jTextFieldcontrasena.getText()+"'";
-            
-            PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
-            prepsInsertProduct.execute();
-            JOptionPane.showMessageDialog(null,"cambios realizados con exito");
-        } catch (SQLException ex) {
-            Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+     ListaClientes lista=new ListaClientes();
+    FEdicionCliente editar=new FEdicionCliente(jTextFieldnombre.getText(),jTextFieldcorreo.getText(),jTextFieldfecha.getText(),jTextFieldcelular.getText(),jTextFielddireccion.getText(),jTextFieldcedula.getText(),jTextFieldcontrasena.getText());
+    lista.editar(editar);
+    Main.cliente.editarMisDato(editar);
     }//GEN-LAST:event_jButtonaceptarcambiosActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-
-    try {
-           Main.cliente.eliminarse();
-           Login login=new Login();
-           login.setVisible(true);
-           this.setVisible(false);
-            String sql = "EXEC cliente_borrar '"+jTextFieldnombre.getText()+"'";
-            PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
-            prepsInsertProduct.execute();
-            JOptionPane.showMessageDialog(null,"cambios realizados con exito");
-            login.setVisible(true);
-            this.setVisible(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    ListaClientes lista=new ListaClientes();
+    lista.eliminar(Main.cliente.Nombre);
+    Main.cliente.eliminarse();
+    this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    public void llenardatos(String str1,String str2,String str3,String str4,String str5,String str6,String str7){
-        jTextFieldnombre.setText(str1);
-        jTextFieldcedula.setText(str2);
-        jTextFieldcorreo.setText(str3);
-        jTextFieldfecha.setText(str4);
-        jTextFieldcelular.setText(str5);
-        jTextFielddireccion.setText(str6);
-        jTextFieldcontrasena.setText(str7);
-              
-    }
     
-    public void nombretitulo(String name){
-        jt.setText(name);
-        System.out.println(name);
-    }
-    public void llenardatroscl(){
-        try {
-            String nombre= "";
-            String cedula ="";
-            String correo ="";
-            String fecha ="";
-            String celular ="";
-            String direc ="";
-            String contra ="";
-                       
-            Statement statement = connection.createStatement();
-            String sql = "select * from CLIENTES where NOMBRECLIE ='"+
-                        jt.getText()+"'";
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                 nombre= resultSet.getString("NOMBRECLIE");
-                 cedula =resultSet.getString("CEDULA2");
-                 correo =resultSet.getString("CORREO");
-                 fecha =resultSet.getString("FECHADENACIMIENTO");
-                 celular =resultSet.getString("CELULAR");
-                 direc =resultSet.getString("DIRECCION");
-                 contra =resultSet.getString("CONTRASENA");
-               
-            }
-            
-            llenardatos(nombre, cedula,correo, fecha,celular, direc, contra);
-                        
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     /**
      * @param args the command line arguments
      */
