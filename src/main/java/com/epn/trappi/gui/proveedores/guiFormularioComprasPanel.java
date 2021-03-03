@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,45 +32,45 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
     DefaultTableModel modelo;
     private final ProveedoresDb db = new ProveedoresDb();
     private JPanel verTodo;
-    
+
     private ListaDeBienes listaDeProductos;
     public int[][] seleccionados;
     private ListaDeCompras solicitud;
 
-    
     public guiFormularioComprasPanel(JPanel verTodo) {
         initComponents();
-        this.verTodo=verTodo;
+        this.verTodo = verTodo;
+        listaDeProductos = new ListaDeBienes((ArrayList) db.getProductos());
         cargar();
         jCheckBoxAñadir.setEnabled(false);
         jBotonSol.setEnabled(false);
         jTextFieldCantidad.setEnabled(false);
     }
-    
-    public void cargar(){
-        int auxiliarTamañoBuffer=0;
-        String[] titulos = {"Producto","Precio unitario","Proveedor"};
-        String[] fila = new String [3];
+
+    public void cargar() {
+        int auxiliarTamañoBuffer = 0;
+        String[] titulos = {"Producto", "Precio unitario", "Proveedor"};
+        String[] fila = new String[3];
         modelo = new DefaultTableModel(null, titulos);
-        listaDeProductos=new ListaDeBienes((ArrayList)db.getProductos());
         for (Bien producto : listaDeProductos.getListaBienes()) {
-            fila[0]= producto.getNombre();
-            fila[1]= ""+producto.getPrecio();
-            fila[2]= producto.getProveeedor().getRazonSocial();
+            fila[0] = producto.getNombre();
+            fila[1] = "" + producto.getPrecio();
+            fila[2] = producto.getProveeedor().getRazonSocial();
             modelo.addRow(fila);
             auxiliarTamañoBuffer++;
         }
         jTable1.setModel(modelo);
         iniciarBufferSeleccionar(auxiliarTamañoBuffer);
     }
-    
-    public void iniciarBufferSeleccionar(int auxiliarTamañoBuffer){
+
+    public void iniciarBufferSeleccionar(int auxiliarTamañoBuffer) {
         seleccionados = new int[auxiliarTamañoBuffer][2];
-        for(int i =0; i<auxiliarTamañoBuffer;i++){
-            seleccionados[i][0]=0;
-            seleccionados[i][1]=0;
+        for (int i = 0; i < auxiliarTamañoBuffer; i++) {
+            seleccionados[i][0] = 0;
+            seleccionados[i][1] = 0;
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,7 +83,7 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
         PanelVerTodos = new javax.swing.JPanel();
         jBotonSol = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jTextFechCompNotaCred = new javax.swing.JTextField();
+        txtNombreProducto = new javax.swing.JTextField();
         jButRegFactCompNotaCred1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -110,17 +111,17 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel8.setText("Buscar Producto");
 
-        jTextFechCompNotaCred.addActionListener(new java.awt.event.ActionListener() {
+        txtNombreProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFechCompNotaCredActionPerformed(evt);
+                txtNombreProductoActionPerformed(evt);
             }
         });
-        jTextFechCompNotaCred.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtNombreProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextFechCompNotaCredKeyPressed(evt);
+                txtNombreProductoKeyPressed(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextFechCompNotaCredKeyTyped(evt);
+                txtNombreProductoKeyTyped(evt);
             }
         });
 
@@ -227,7 +228,7 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addGroup(PanelVerTodosLayout.createSequentialGroup()
-                        .addComponent(jTextFechCompNotaCred, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54)
                         .addComponent(jButRegFactCompNotaCred1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -239,7 +240,7 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
                 .addComponent(jLabel8)
                 .addGap(8, 8, 8)
                 .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFechCompNotaCred, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButRegFactCompNotaCred1))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -253,24 +254,24 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
 
     private void jBotonSolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonSolActionPerformed
         try {
-            Inventario inventario=new Inventario();
+            Inventario inventario = new Inventario();
             solicitud = new ListaDeCompras(new ArrayList<Compra>());
-            String auxiliarRuc="";
-            for(int i=0;i<seleccionados.length;i++){
-                if(seleccionados[i][0]==1){
+            String auxiliarRuc = "";
+            for (int i = 0; i < seleccionados.length; i++) {
+                if (seleccionados[i][0] == 1) {
                     CompraDeProducto compra;
                     ListaDeBienes lista = new ListaDeBienes();
-                    auxiliarRuc=listaDeProductos.getListaBienes().get(i).getProveeedor().getRuc();
-                    for(int j=0;j<seleccionados.length;j++){
-                        if(auxiliarRuc.equals(listaDeProductos.getListaBienes().get(j).getProveeedor().getRuc())){
-                            if(seleccionados[j][0]==1){
+                    auxiliarRuc = listaDeProductos.getListaBienes().get(i).getProveeedor().getRuc();
+                    for (int j = 0; j < seleccionados.length; j++) {
+                        if (auxiliarRuc.equals(listaDeProductos.getListaBienes().get(j).getProveeedor().getRuc())) {
+                            if (seleccionados[j][0] == 1) {
                                 listaDeProductos.getListaBienes().get(j).setCantidad(seleccionados[j][1]);
                                 lista.añadirBien(listaDeProductos.getListaBienes().get(j));
-                                seleccionados[j][0]=0;
+                                seleccionados[j][0] = 0;
                             }
                         }
                     }
-                    compra = new CompraDeProducto(inventario,lista, "Pendiente");
+                    compra = new CompraDeProducto(inventario, lista, "Pendiente");
                     solicitud.añadirCompra(compra);
                 }
             }
@@ -280,56 +281,75 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jBotonSolActionPerformed
 
-    private void jTextFechCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFechCompNotaCredActionPerformed
+    private void txtNombreProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreProductoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFechCompNotaCredActionPerformed
+    }//GEN-LAST:event_txtNombreProductoActionPerformed
 
-    private void jTextFechCompNotaCredKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFechCompNotaCredKeyPressed
+    private void txtNombreProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProductoKeyPressed
 
-    }//GEN-LAST:event_jTextFechCompNotaCredKeyPressed
+    }//GEN-LAST:event_txtNombreProductoKeyPressed
 
-    private void jTextFechCompNotaCredKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFechCompNotaCredKeyTyped
-
-    }//GEN-LAST:event_jTextFechCompNotaCredKeyTyped
+    private void txtNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProductoKeyTyped
+        String producto = txtNombreProducto.getText();
+        try {
+            if (producto.length() >= 1) {
+                listaDeProductos = new ListaDeBienes((ArrayList) db.buscarProductos(producto));
+                cargar();
+            } else {
+                cargar();
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Producto no encontrado", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_txtNombreProductoKeyTyped
 
     private void jButRegFactCompNotaCred1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegFactCompNotaCred1ActionPerformed
         // TODO add your handling code here:
+        String producto = txtNombreProducto.getText();
+        try {
+            if (producto.length() >= 1) {
+                listaDeProductos = new ListaDeBienes((ArrayList) db.buscarProductos(producto));
+                cargar();
+            } else {
+                cargar();
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Producto no encontrado", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_jButRegFactCompNotaCred1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         jTextFieldCantidad.setEnabled(true);
         jBotonSol.setEnabled(true);
         jCheckBoxAñadir.setEnabled(true);
-        
-        if(seleccionados[jTable1.getSelectedRow()][0]==0){
+
+        if (seleccionados[jTable1.getSelectedRow()][0] == 0) {
             jCheckBoxAñadir.setSelected(false);
-        }
-        else{
+        } else {
             jCheckBoxAñadir.setSelected(true);
         }
-        if(seleccionados[jTable1.getSelectedRow()][1]==0){
+        if (seleccionados[jTable1.getSelectedRow()][1] == 0) {
             jTextFieldCantidad.setText("");
-        }
-        else{
-            jTextFieldCantidad.setText(seleccionados[jTable1.getSelectedRow()][1]+"");
+        } else {
+            jTextFieldCantidad.setText(seleccionados[jTable1.getSelectedRow()][1] + "");
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jCheckBoxAñadirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBoxAñadirMouseClicked
-        
+
     }//GEN-LAST:event_jCheckBoxAñadirMouseClicked
 
     private void jTextFieldCantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCantidadKeyReleased
-        int cantidad=Integer.parseInt(jTextFieldCantidad.getText());
-        seleccionados[jTable1.getSelectedRow()][1]=cantidad;
+        int cantidad = Integer.parseInt(jTextFieldCantidad.getText());
+        seleccionados[jTable1.getSelectedRow()][1] = cantidad;
         System.out.print(cantidad);
     }//GEN-LAST:event_jTextFieldCantidadKeyReleased
 
     private void jCheckBoxAñadirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBoxAñadirMouseExited
-        if(jCheckBoxAñadir.isSelected())
-            seleccionados[jTable1.getSelectedRow()][0]=1;
-        else{
-            seleccionados[jTable1.getSelectedRow()][0]=0;
+        if (jCheckBoxAñadir.isSelected())
+            seleccionados[jTable1.getSelectedRow()][0] = 1;
+        else {
+            seleccionados[jTable1.getSelectedRow()][0] = 0;
         }
     }//GEN-LAST:event_jCheckBoxAñadirMouseExited
 
@@ -345,7 +365,7 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextFechCompNotaCred;
     private javax.swing.JTextField jTextFieldCantidad;
+    private javax.swing.JTextField txtNombreProducto;
     // End of variables declaration//GEN-END:variables
 }

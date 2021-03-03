@@ -8,8 +8,12 @@ package com.epn.trappi.gui.proveedores;
 import com.epn.trappi.db.proveedores.ProveedoresDb;
 import com.epn.trappi.models.proveedores.ListaProveedores;
 import com.epn.trappi.models.proveedores.Producto;
+import com.epn.trappi.models.proveedores.Proveedor;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,6 +26,7 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
     DefaultTableModel modelo;
     private final ProveedoresDb db = new ProveedoresDb();
     public ArrayList seleccionados = new ArrayList();
+
     ListaProveedores listaProveedores = new ListaProveedores();
 
     /**
@@ -58,6 +63,7 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
     private void mostrarProducto(String nombre, String precio, String proveedor) {
         txtNombre.setText(nombre);
         txtPrecio.setText(precio);
+        cmbProveedores.setSelectedItem(proveedor);
     }
 
     /**
@@ -180,6 +186,11 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jtbProductos);
 
         cmbProveedores.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        cmbProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbProveedoresActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelVerTodosLayout = new javax.swing.GroupLayout(PanelVerTodos);
         PanelVerTodos.setLayout(PanelVerTodosLayout);
@@ -259,7 +270,31 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        String nombre = txtNombre.getText();
+        String precio = txtPrecio.getText();
 
+        try {
+            if (nombre.length() >= 1) {
+                if (Double.parseDouble(precio) >= 0) {
+                    Proveedor proveedor;
+                    proveedor = db.obtenerProveedorRuc((String) cmbProveedores.getSelectedItem());
+                    db.actualizarBien(db.getIdBien(nombre), nombre, Double.parseDouble(precio), proveedor.getRuc());
+                    JOptionPane.showMessageDialog(null, "Producto Actualizado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    seleccionados = (ArrayList) db.getProductos();
+                    cargarProductos();
+
+                    txtNombre.setText("");
+                    txtPrecio.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Precio Incorrecto", "Error", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Nombre Incorrecto", "Error", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error no se pudo Actualizar el Producto", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -298,6 +333,11 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Proveedor no encontrado", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_txtNombreProductoKeyTyped
+
+    private void cmbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProveedoresActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_cmbProveedoresActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

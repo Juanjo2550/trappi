@@ -8,6 +8,7 @@ package com.epn.trappi.gui.proveedores;
 import com.epn.trappi.db.proveedores.ProveedoresDb;
 import com.epn.trappi.models.proveedores.ListaProveedores;
 import com.epn.trappi.models.proveedores.Producto;
+import com.epn.trappi.models.proveedores.Proveedor;
 import com.epn.trappi.models.proveedores.Servicio;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -55,6 +56,7 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
     private void mostrarProducto(String nombre, String precio, String proveedor) {
         txtNombre.setText(nombre);
         txtPrecio.setText(precio);
+        cmbProveedores.setSelectedItem(proveedor);
     }
 
     /**
@@ -264,7 +266,31 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        String nombre = txtNombre.getText();
+        String precio = txtPrecio.getText();
 
+        try {
+            if (nombre.length() >= 1) {
+                if (Double.parseDouble(precio) >= 0) {
+                    Proveedor proveedor;
+                    proveedor = db.obtenerProveedorRuc((String) cmbProveedores.getSelectedItem());
+                    db.actualizarBien(db.getIdBien(nombre), nombre, Double.parseDouble(precio), proveedor.getRuc());
+                    JOptionPane.showMessageDialog(null, "Servicio Actualizado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    seleccionados = (ArrayList) db.getProductos();
+                    cargarServicios();
+
+                    txtNombre.setText("");
+                    txtPrecio.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Precio Incorrecto", "Error", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Nombre Incorrecto", "Error", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error no se pudo Actualizar el Servicio", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed

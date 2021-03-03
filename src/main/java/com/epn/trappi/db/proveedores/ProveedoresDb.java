@@ -509,6 +509,18 @@ public class ProveedoresDb {
         }
         return resultado;
     }
+    
+        public Proveedor obtenerProveedorRuc(String nombre) throws SQLException {
+        seleccionarProveedores();
+        Proveedor resultado = null;
+        for (Proveedor proveedor : this.proveedores) {
+            if (proveedor.getRazonSocial().equals(nombre)) {
+                resultado = proveedor;
+                break;
+            }
+        }
+        return resultado;
+    }
 
     private void agregarProducto(String[] nuevoProducto) throws SQLException {
         ejecutarSPParameters("insertBien", nuevoProducto);

@@ -37,7 +37,7 @@
                       <Component id="jPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jTextFechCompNotaCred" min="-2" pref="444" max="-2" attributes="0"/>
+                          <Component id="txtNombreProducto" min="-2" pref="444" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                           <Component id="jButRegFactCompNotaCred1" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -53,7 +53,7 @@
                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextFechCompNotaCred" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="txtNombreProducto" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="jButRegFactCompNotaCred1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -92,11 +92,11 @@
             <Property name="text" type="java.lang.String" value="Buscar Producto"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextFechCompNotaCred">
+        <Component class="javax.swing.JTextField" name="txtNombreProducto">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFechCompNotaCredActionPerformed"/>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFechCompNotaCredKeyPressed"/>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFechCompNotaCredKeyTyped"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNombreProductoActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNombreProductoKeyPressed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNombreProductoKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButRegFactCompNotaCred1">

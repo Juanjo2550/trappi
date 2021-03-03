@@ -7,7 +7,10 @@ package com.epn.trappi.gui.proveedores;
 
 import com.epn.trappi.db.proveedores.ProveedoresDb;
 import com.epn.trappi.models.proveedores.Proveedor;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,8 +34,7 @@ public class guiListaProveedores extends javax.swing.JPanel {
         listaP = (ArrayList<Proveedor>) db.getProveedores();
         cargarProveedor();
     }
-    
-    
+
     private void cargarProveedor() {
         String[] titulos = {"Ruc", "Razón Social", "Dirección", "Número de Cuenta"};
         String[] fila = new String[4];
@@ -47,7 +49,8 @@ public class guiListaProveedores extends javax.swing.JPanel {
         jtbProveedores.setModel(modelo);
     }
 
-    private void mostrarProducto(String razonsocial, String direccion, String cuenta) {
+    private void mostrarProveedor(String ruc, String razonsocial, String direccion, String cuenta) {
+        txtBuscarRUC.setText(ruc);
         txtRazonSocial.setText(razonsocial);
         txtDireccion.setText(direccion);
         txtNCuenta.setText(cuenta);
@@ -119,6 +122,11 @@ public class guiListaProveedores extends javax.swing.JPanel {
         });
 
         txtRazonSocial.setEnabled(false);
+        txtRazonSocial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRazonSocialActionPerformed(evt);
+            }
+        });
         txtRazonSocial.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtRazonSocialKeyPressed(evt);
@@ -303,26 +311,27 @@ public class guiListaProveedores extends javax.swing.JPanel {
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // Atributos
-        String razonSocial;
+        String ruc;
         String direccion;
         String cuenta;
 
+        ruc = txtBuscarRUC.getText();
         direccion = txtDireccion.getText();
         cuenta = txtNCuenta.getText();
 
         if (guiProveedores.validarDireccion(direccion)) {
-            if (cuenta.length()==13) {
-                proveedorSeleccionado.setDireccion(direccion);
-                proveedorSeleccionado.setCuenta(cuenta);
+            if (cuenta.length() == 10) {
+                try {
+                    db.actualizarProveedor(ruc, direccion, cuenta);
+                    JOptionPane.showMessageDialog(null, "Proveedor Actualizado.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "No se pudo Actualizar el Proveedor", "Error", JOptionPane.INFORMATION_MESSAGE);
+                }
+                listaP = (ArrayList<Proveedor>) db.getProveedores();
+                cargarProveedor();
+                
+                vaciarCampos();
 
-                int fila = jtbProveedores.getSelectedRow();
-                modelo.setValueAt(txtDireccion.getText(), fila, 2);
-                modelo.setValueAt(txtNCuenta.getText(), fila, 3);
-
-                JOptionPane.showMessageDialog(null, "Datos Actualizados.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-
-                txtDireccion.setText("");
-                txtNCuenta.setText("");
             } else {
                 JOptionPane.showMessageDialog(null, "Número de Cuenta Incorrecta");
                 this.vaciarCampos();
@@ -337,6 +346,7 @@ public class guiListaProveedores extends javax.swing.JPanel {
         txtDireccion.setText("");
         txtNCuenta.setText("");
         txtRazonSocial.setText("");
+        txtBuscarRUC.setText("");
     }
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -371,9 +381,13 @@ public class guiListaProveedores extends javax.swing.JPanel {
         int row = jtbProveedores.rowAtPoint(evt.getPoint());
         int col = jtbProveedores.columnAtPoint(evt.getPoint());
         if (row >= 0 && col >= 0) {
-            mostrarProducto(modelo.getValueAt(row, 0).toString(), modelo.getValueAt(row, 1).toString(), modelo.getValueAt(row, 2).toString());
+            mostrarProveedor(modelo.getValueAt(row, 0).toString(), modelo.getValueAt(row, 1).toString(), modelo.getValueAt(row, 2).toString(), modelo.getValueAt(row, 3).toString());
         }
     }//GEN-LAST:event_jtbProveedoresMouseClicked
+
+    private void txtRazonSocialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRazonSocialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRazonSocialActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
