@@ -5,7 +5,6 @@ import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.Hora;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import com.epn.trappi.models.rrhh.juanjo.Observacion;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.sql.*;
 import java.util.ArrayList;

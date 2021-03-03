@@ -16,13 +16,35 @@ public class ListaAsistencias implements Lista<Asistencia>{
 
     @Override
     public void agregar(Asistencia nuevaAsistencia) {
-        String sql = "INSERT INTO dbo.ASISTENCIA (IDREGASIS, IDEMP, FECHAREGASIS, OBSASIS, HORASALIDA, HORAINGRESO) VALUES ("
+        if (nuevaAsistencia.getHoraFin() == null) {
+            this.agregarEntrada(nuevaAsistencia);
+        } else {
+            this.registrarSalida(nuevaAsistencia);
+        }
+    }
+
+    private void agregarEntrada(Asistencia nuevaAsistencia) {
+        String sql = "INSERT INTO dbo.ASISTENCIA (IDREGASIS, IDEMP, FECHAREGASIS, OBSASIS, HORAINGRESO) VALUES ("
                 + (this.obtenerTodos().length + 1) + ","
                 + new ListaEmpleados().buscarUno(nuevaAsistencia.getEmpleado().getCedula()).getId() + ","
                 + "'" + nuevaAsistencia.getFecha().toString() + "',"
                 + "'" + nuevaAsistencia.getObservaciones() + "',"
-                + "'" + nuevaAsistencia.getHoraFin().toString() + "',"
                 + "'" + nuevaAsistencia.getHoraInicio().toString() + "');";
+        try {
+            PreparedStatement statement = this.connection.prepareStatement(sql);
+            statement.execute();
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+    }
+
+    public void registrarSalida(Asistencia asistencia) {
+        String sql = "UPDATE dbo.ASISTENCIA SET HORASALIDA="
+                + "'" + asistencia.getHoraFin().toString() + "' "
+                + "WHERE IDEMP=" + asistencia.getEmpleado().getId() + " AND FECHAREGASIS="
+                + "'" + asistencia.getFecha().toString() + "' AND HORAINGRESO="
+                + "'" + asistencia.getHoraInicio().toString() + "';";
+        System.out.println(sql);
         try {
             PreparedStatement statement = this.connection.prepareStatement(sql);
             statement.execute();
@@ -56,13 +78,22 @@ public class ListaAsistencias implements Lista<Asistencia>{
             while (resultSet.next()){
                 String unformattedDate = resultSet.getDate(3).toString();
                 String[] formattedDate = unformattedDate.split("-");
-                asistencia = new Asistencia(
-                        empleado,
-                        new Hora(resultSet.getTime(6).getHours(),resultSet.getTime(6).getMinutes(), resultSet.getTime(6).getSeconds()),
-                        new Hora(resultSet.getTime(5).getHours(),resultSet.getTime(5).getMinutes(), resultSet.getTime(5).getSeconds()),
-                        new Fecha(Integer.parseInt(formattedDate[2]), Integer.parseInt(formattedDate[1]), Integer.parseInt(formattedDate[0])),
-                        resultSet.getString(4)
-                );
+                if(resultSet.getTime(5) == null) {
+                    asistencia = new Asistencia(
+                            empleado,
+                            new Hora(resultSet.getTime(6).getHours(),resultSet.getTime(6).getMinutes(), resultSet.getTime(6).getSeconds()),
+                            new Fecha(Integer.parseInt(formattedDate[2]), Integer.parseInt(formattedDate[1]), Integer.parseInt(formattedDate[0])),
+                            resultSet.getString(4)
+                    );
+                } else {
+                    asistencia = new Asistencia(
+                            empleado,
+                            new Hora(resultSet.getTime(6).getHours(),resultSet.getTime(6).getMinutes(), resultSet.getTime(6).getSeconds()),
+                            new Hora(resultSet.getTime(5).getHours(),resultSet.getTime(5).getMinutes(), resultSet.getTime(5).getSeconds()),
+                            new Fecha(Integer.parseInt(formattedDate[2]), Integer.parseInt(formattedDate[1]), Integer.parseInt(formattedDate[0])),
+                            resultSet.getString(4)
+                    );
+                }
             }
         } catch (SQLException e){
             System.out.println(e.toString());
@@ -93,13 +124,22 @@ public class ListaAsistencias implements Lista<Asistencia>{
                         currentEmpleado = emp;
                     }
                 }
-                asistencia.add(new Asistencia(
-                        currentEmpleado,
-                        new Hora(resultSet.getTime(6).getHours(),resultSet.getTime(6).getMinutes(), resultSet.getTime(6).getSeconds()),
-                        new Hora(resultSet.getTime(5).getHours(),resultSet.getTime(5).getMinutes(), resultSet.getTime(5).getSeconds()),
-                        new Fecha(Integer.parseInt(formattedDate[2]), Integer.parseInt(formattedDate[1]), Integer.parseInt(formattedDate[0])),
-                        resultSet.getString(4)
-                ));
+                if(resultSet.getTime(5) == null) {
+                    asistencia.add(new Asistencia(
+                            currentEmpleado,
+                            new Hora(resultSet.getTime(6).getHours(),resultSet.getTime(6).getMinutes(), resultSet.getTime(6).getSeconds()),
+                            new Fecha(Integer.parseInt(formattedDate[2]), Integer.parseInt(formattedDate[1]), Integer.parseInt(formattedDate[0])),
+                            resultSet.getString(4)
+                    ));
+                } else {
+                    asistencia.add(new Asistencia(
+                            currentEmpleado,
+                            new Hora(resultSet.getTime(6).getHours(),resultSet.getTime(6).getMinutes(), resultSet.getTime(6).getSeconds()),
+                            new Hora(resultSet.getTime(5).getHours(),resultSet.getTime(5).getMinutes(), resultSet.getTime(5).getSeconds()),
+                            new Fecha(Integer.parseInt(formattedDate[2]), Integer.parseInt(formattedDate[1]), Integer.parseInt(formattedDate[0])),
+                            resultSet.getString(4)
+                    ));
+                }
             }
         } catch (SQLException e){
             System.out.println(e.toString());
@@ -123,13 +163,22 @@ public class ListaAsistencias implements Lista<Asistencia>{
             while (resultSet.next()){
                 String unformattedDate = resultSet.getDate(3).toString();
                 String[] formattedDate = unformattedDate.split("-");
-                asistencia.add(new Asistencia(
-                        empleado,
-                        new Hora(resultSet.getTime(6).getHours(),resultSet.getTime(6).getMinutes(), resultSet.getTime(6).getSeconds()),
-                        new Hora(resultSet.getTime(5).getHours(),resultSet.getTime(5).getMinutes(), resultSet.getTime(5).getSeconds()),
-                        new Fecha(Integer.parseInt(formattedDate[2]), Integer.parseInt(formattedDate[1]), Integer.parseInt(formattedDate[0])),
-                        resultSet.getString(4)
-                ));
+                if(resultSet.getTime(5) == null) {
+                    asistencia.add(new Asistencia(
+                            empleado,
+                            new Hora(resultSet.getTime(6).getHours(),resultSet.getTime(6).getMinutes(), resultSet.getTime(6).getSeconds()),
+                            new Fecha(Integer.parseInt(formattedDate[2]), Integer.parseInt(formattedDate[1]), Integer.parseInt(formattedDate[0])),
+                            resultSet.getString(4)
+                    ));
+                } else {
+                    asistencia.add(new Asistencia(
+                            empleado,
+                            new Hora(resultSet.getTime(6).getHours(),resultSet.getTime(6).getMinutes(), resultSet.getTime(6).getSeconds()),
+                            new Hora(resultSet.getTime(5).getHours(),resultSet.getTime(5).getMinutes(), resultSet.getTime(5).getSeconds()),
+                            new Fecha(Integer.parseInt(formattedDate[2]), Integer.parseInt(formattedDate[1]), Integer.parseInt(formattedDate[0])),
+                            resultSet.getString(4)
+                    ));
+                }
             }
         } catch (SQLException e){
             System.out.println(e.toString());
@@ -147,9 +196,12 @@ public class ListaAsistencias implements Lista<Asistencia>{
     public static void main(String args[]) throws SQLException {
         ListaAsistencias l1 = new ListaAsistencias();
         try {
-            l1.agregar(new Asistencia(new ListaEmpleados().buscarUno("1722951165"), new Hora(), new Hora(18, 0, 0), new Fecha(), "N/A"));
-            System.out.println(l1.obtenerTodos("1722951165").length);
-            System.out.print(l1.buscarUno("1722951165", new Fecha(28, 02, 2021)).getEmpleado().getNombres());
+            Asistencia a = new Asistencia(new ListaEmpleados().buscarUno("1722951165"), new Hora(), new Fecha(), "N/A");
+            l1.agregar(a);
+//            System.out.println(l1.obtenerTodos("1722951165").length);
+//            System.out.print(l1.buscarUno("1722951165", new Fecha(02, 03, 2021)).getEmpleado().getNombres());
+            a.setHoraFin(new Hora());
+            l1.registrarSalida(a);
         }catch (Exception e) {
             System.out.println(e.getMessage());
         }
