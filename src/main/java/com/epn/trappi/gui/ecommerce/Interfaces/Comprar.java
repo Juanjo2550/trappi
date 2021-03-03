@@ -507,7 +507,7 @@ public class Comprar extends javax.swing.JFrame {
             PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
             prepsInsertProduct.execute();
         } catch(SQLException ex){
-            Logger.getLogger(JFBanco.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFBancoInicio.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -518,7 +518,7 @@ public class Comprar extends javax.swing.JFrame {
             PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
             prepsInsertProduct.execute();
         } catch(SQLException ex){
-            Logger.getLogger(JFBanco.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFBancoInicio.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public int idfactura(){
