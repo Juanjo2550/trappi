@@ -16,12 +16,13 @@ import com.epn.trappi.models.rrhh.Sueldo;
 public abstract class Permiso {
    private int IDPERM;
  //  private int IDEMP;
-   private int NUMDIASPERM;
+   public int NUMDIASPERM;
    private String VALORPAGARPERM;
    private String COMENTPERM;
    private String FECHAINICIOPERM;
    private String FECHAFINPERM;
    private String ESTADOPERM;
+   private String tipoPermiso;
    
    private Empleado empleado;
 
@@ -35,12 +36,17 @@ public abstract class Permiso {
         this.empleado = empleado;
     }
 
+    public Permiso() {
+    }
+    
+    
 
+public abstract int calcularNumeroDias(String tipoPermiso, char sexo);
 
     
 
 
-    public abstract void RegistrarPermiso();
+ 
 
     public int getIDPERM() {
         return IDPERM;

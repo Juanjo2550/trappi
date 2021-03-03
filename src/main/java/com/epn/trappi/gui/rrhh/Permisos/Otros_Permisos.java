@@ -28,8 +28,12 @@ public class Otros_Permisos extends Permiso {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 */
+
+
+
+
     @Override
-    public void RegistrarPermiso() {
+    public int calcularNumeroDias(String tipoPermiso, char sexo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

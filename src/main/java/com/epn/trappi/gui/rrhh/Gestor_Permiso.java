@@ -6,7 +6,6 @@
 package com.epn.trappi.gui.rrhh;
 
 import com.epn.trappi.gui.rrhh.Permisos.Calamidad_Domestica;
-import com.epn.trappi.gui.rrhh.Permisos.Gestor_Permisos;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.TextPrompt;
@@ -24,6 +23,7 @@ import com.epn.trappi.models.rrhh.juanjo.Conductor;
 import com.epn.trappi.models.rrhh.listas.Lista;
 import com.epn.trappi.models.rrhh.listas.ListaPermisos;
 import java.awt.Dimension;
+import java.awt.event.ItemEvent;
 
 
 import java.sql.Connection;
@@ -36,6 +36,7 @@ import java.util.Objects;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -44,10 +45,10 @@ import javax.swing.table.DefaultTableModel;
  * @author stali
  */
 public class Gestor_Permiso extends javax.swing.JFrame {
-/*Calamidad_Domestica calamidad = new Calamidad_Domestica();*/
+Calamidad_Domestica calamidad = new Calamidad_Domestica();
 Fecha fecha = new Fecha();
 Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance()).getConnection();
-/*Empleado empleado = new Empleado();*/
+
  ListaPermisos permisos = new ListaPermisos();
     
     /*
@@ -63,7 +64,9 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         
         initComponents();
           obtenerNombre();
-          listarAspirantes();
+          listarPermisos();
+         
+          
         
         
        
@@ -78,17 +81,23 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
     }
 
     
-       public void tipoPermiso(){
-        String PerCalamidad = (String) cmbPermiso.getSelectedItem();
-        if("Calamidad Domestica".equals(PerCalamidad)){
-       cmbTipoPermiso.addItem("Seleccione");
-       cmbTipoPermiso.addItem("muerte de padres, hermanos, hijos, cónyuge");
-       cmbTipoPermiso.addItem("muerte de nietos, padres del cónyuge o hermanos de la pareja");
-       cmbTipoPermiso.addItem("enfermedad de hijos o conyuge");
-       cmbTipoPermiso.addItem("enfermedad de padres o hermanos");
-        }
-    
+       public String[] tipoPermiso(String tipo){
+       String [] PermisosCalamidad = new String [10];
+        if(tipo.equalsIgnoreCase("Calamidad Domestica")){
+            PermisosCalamidad[0]= "Seleccione";
+       PermisosCalamidad[1]="Nacimiento Hijo (Parto Normal)";
+       PermisosCalamidad[2]="Nacimiento Hijo (Parto Cesarea)";
+       PermisosCalamidad[3]="muerte de padres, hermanos, hijos, cónyuge";
+       PermisosCalamidad[4]="muerte de nietos, padres del cónyuge o hermanos de la pareja";
+       PermisosCalamidad[5]="enfermedad de hijos o conyuge";
+       PermisosCalamidad[6]="enfermedad de padres o hermanos";
     }
+        if (tipo.equalsIgnoreCase("Enfermedad")){
+            PermisosCalamidad[0] = "No se qe enfermedad es"; 
+        }
+            return PermisosCalamidad;
+     }  
+       
            
 //metodo para obtener el nombre y apellido de la persona que quiere solicitar el permiso
      public void obtenerNombre(){
@@ -111,7 +120,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
 
     }
      
-         private void listarAspirantes(){
+         private void listarPermisos(){
         Lista listaPermisos = new ListaPermisos();
         Permiso[] permisos = (Permiso[]) listaPermisos.obtenerTodos();
        // ListaPruebasAdmision listaPruebas = new ListaPruebasAdmision();
@@ -145,28 +154,6 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
     }
     
 
-     
-    public void  ObtenerCedula(){
-        
-        String sql = "SELECT cedula FROM empleados where nombres = '"+(String) cmbnombreEmpleado.getSelectedItem()+"'" ;
-        
-       // ListaEmpleados temEmpleados = new ListaEmpleados();
-        /*try {
-            Connection conn = Connect.connect("juanjo.db");
-            Statement stmt  = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            loop through the result set
-            
-                String CI = rs.getString("cedula");
-                txtCedula.setText(CI);
-                txtCedula.setVisible(false);
-           
-            
-            
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }  */
-    }
     
           public Empleado buscarUno(){
           String nombre_Completo = (String) cmbnombreEmpleado.getSelectedItem();
@@ -456,7 +443,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 cmbTipoPermisoActionPerformed(evt);
             }
         });
-        PanelAspirante.add(cmbTipoPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, 240, -1));
+        PanelAspirante.add(cmbTipoPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 90, 240, -1));
 
         lblnombreEmpleado1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblnombreEmpleado1.setText("Nombre del Empleado:");
@@ -530,7 +517,12 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         jLabel13.setText("Permiso:");
         PanelAspirante.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 104, -1, -1));
 
-        cmbPermiso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vacación", "Calamidad Domestica", "Enfermedad", "Nacimiento de Hijo" }));
+        cmbPermiso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Calamidad Domestica", "Enfermedad", "Otros Permisos" }));
+        cmbPermiso.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbPermisoItemStateChanged(evt);
+            }
+        });
         cmbPermiso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbPermisoActionPerformed(evt);
@@ -573,7 +565,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PanelAspirante, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 18, Short.MAX_VALUE))))
+                        .addGap(0, 12, Short.MAX_VALUE))))
         );
 
         pack();
@@ -661,13 +653,17 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
     }//GEN-LAST:event_txtfechaInicioPermisoKeyTyped
 
     private void cmbPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPermisoActionPerformed
-        tipoPermiso();
+   
+        
+        
+        
     }//GEN-LAST:event_cmbPermisoActionPerformed
 
     private void cmbTipoPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoPermisoActionPerformed
-    /*String tipoCalamidad = (String) cmbTipoPermiso.getSelectedItem();
-    int numeroDias = calamidad.Calcular_Numero_Dias_Permiso(tipoCalamidad);
-    txtnumDias.setText(Integer.toString(numeroDias));*/
+    String tipoCalamidad = (String) cmbTipoPermiso.getSelectedItem();
+    Empleado sexoEmpleado = buscarUno();
+    int numeroDias = calamidad.calcularNumeroDias(tipoCalamidad,sexoEmpleado.getSexo());
+    txtnumDias.setText(Integer.toString(numeroDias));
     }//GEN-LAST:event_cmbTipoPermisoActionPerformed
 
     private void btnValidarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarFechaActionPerformed
@@ -684,6 +680,14 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         Empleado obtenerCedula = buscarUno();
         txtCedula.setText(obtenerCedula.getCedula());
     }//GEN-LAST:event_cmbnombreEmpleadoActionPerformed
+
+    private void cmbPermisoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbPermisoItemStateChanged
+        if(evt.getStateChange()==ItemEvent.SELECTED){
+            if(cmbPermiso.getSelectedIndex()>0){
+                this.cmbTipoPermiso.setModel(new DefaultComboBoxModel(tipoPermiso(cmbPermiso.getSelectedItem().toString())));
+            }
+        }
+    }//GEN-LAST:event_cmbPermisoItemStateChanged
 
     /**
      * @param args the command line arguments

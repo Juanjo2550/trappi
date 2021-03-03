@@ -20,14 +20,6 @@ public class Calamidad_Domestica extends Permiso{
     }
 
 
-
-
-   
-
-    public void Calcular_Afectacion_Sueldo() {
-       
-    }
-
  /*    
     public int Calcular_Numero_Dias_Permiso(String TipoPermiso) {
         this.tipoPermiso = TipoPermiso;
@@ -47,12 +39,54 @@ public class Calamidad_Domestica extends Permiso{
     }
 */
 
-    @Override
-    public void RegistrarPermiso() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Calamidad_Domestica() {
     }
+
+
+
+    @Override
+    public int calcularNumeroDias(String tipoPermiso, char sexo) {
+        
+        int numeroDias = NUMDIASPERM;
+        //this.tipoPermiso = TipoPermiso;
+        
+         if("Nacimiento Hijo (Parto Normal)".equals(tipoPermiso)){
+             if ("M".equals(sexo)){
+                 numeroDias = 10;
+             }
+             else{
+                 numeroDias = 90;
+             }
+           
+        }
+         if("Nacimiento Hijo (Parto Cesarea)".equals(tipoPermiso)){
+           if ("M".equals(sexo)){
+                 numeroDias = 15;
+             }
+             else{
+                 numeroDias = 90;
+             }
+        }
+        if("muerte de padres, hermanos, hijos, cónyuge".equals(tipoPermiso)){
+           numeroDias = 3;
+        }
+        if("muerte de nietos, padres del cónyuge o hermanos de la pareja".equals(tipoPermiso)){
+            numeroDias = 2;
+        }
+        if("enfermedad de hijos o conyuge".equals(tipoPermiso)){
+            numeroDias =8;
+        }
+        if("enfermedad de padres o hermanos".equals(tipoPermiso)){
+            numeroDias = 2;
+        }
+        return numeroDias;
+    }
+
+        
+    }
+
 
   
    
     
-}
+

@@ -22,11 +22,6 @@ public class Enfermedad extends Permiso {
 
 
 
-       
-  @Override
-    public void RegistrarPermiso() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 
 
@@ -34,5 +29,12 @@ public class Enfermedad extends Permiso {
     public int Calcular_Numero_Dias_Permiso(String tipo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }*/
+
+
+
+    @Override
+    public int calcularNumeroDias(String tipoPermiso, char sexo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
 

@@ -41,7 +41,7 @@
                   <Component id="jPanel2" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="PanelAspirante" min="-2" pref="668" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="18" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -393,7 +393,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="430" y="100" width="240" height="-1"/>
+              <AbsoluteConstraints x="440" y="90" width="240" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -575,14 +575,15 @@
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
-                <StringItem index="0" value="Vacaci&#xf3;n"/>
+                <StringItem index="0" value="Seleccione..."/>
                 <StringItem index="1" value="Calamidad Domestica"/>
                 <StringItem index="2" value="Enfermedad"/>
-                <StringItem index="3" value="Nacimiento de Hijo"/>
+                <StringItem index="3" value="Otros Permisos"/>
               </StringArray>
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbPermisoItemStateChanged"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbPermisoActionPerformed"/>
           </Events>
           <AuxValues>
