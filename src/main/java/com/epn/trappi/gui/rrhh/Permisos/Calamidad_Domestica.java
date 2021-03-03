@@ -7,6 +7,7 @@ package com.epn.trappi.gui.rrhh.Permisos;
 
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.gui.rrhh.Gestor_Permiso;
+import com.epn.trappi.models.rrhh.juanjo.Empleado;
 
 /**
  *
@@ -14,12 +15,14 @@ import com.epn.trappi.gui.rrhh.Gestor_Permiso;
  */
 public class Calamidad_Domestica extends Permiso{
 
-   
-    public Calamidad_Domestica(int IDPERM, int IDEMP, int NUMDIASPERM, String VALORPAGARPERM, String COMENTPERM, String FECHAINICIOPERM,
-            String FECHAFINPERM, String ESTADOPERM, String TIPOPERM) {
-        super(IDPERM, IDEMP, NUMDIASPERM, VALORPAGARPERM, COMENTPERM, FECHAINICIOPERM, FECHAFINPERM, 
-                ESTADOPERM, TIPOPERM);
+    public Calamidad_Domestica(Empleado empleado, int NUMDIASPERM, String VALORPAGARPERM, String COMENTPERM, String FECHAINICIOPERM, String FECHAFINPERM, String ESTADOPERM) {
+        super(empleado, NUMDIASPERM, VALORPAGARPERM, COMENTPERM, FECHAINICIOPERM, FECHAFINPERM, ESTADOPERM);
     }
+
+
+
+
+   
 
     public void Calcular_Afectacion_Sueldo() {
        

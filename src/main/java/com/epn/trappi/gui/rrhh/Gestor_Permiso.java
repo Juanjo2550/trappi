@@ -5,15 +5,26 @@
  */
 package com.epn.trappi.gui.rrhh;
 
-
-
-
 import com.epn.trappi.gui.rrhh.Permisos.Calamidad_Domestica;
 import com.epn.trappi.gui.rrhh.Permisos.Gestor_Permisos;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.TextPrompt;
 import com.epn.trappi.db.connection.DataBaseConnection;
+
+import com.epn.trappi.gui.rrhh.Permisos.Permiso;
+import com.epn.trappi.models.rrhh.listas.Lista;
+import com.epn.trappi.models.rrhh.listas.ListaPermisos;
+
+import com.epn.trappi.gui.rrhh.Permisos.Enfermedad;
+import com.epn.trappi.gui.rrhh.Permisos.Otros_Permisos;
+import com.epn.trappi.gui.rrhh.Permisos.Permiso;
+import com.epn.trappi.models.rrhh.juanjo.Administrativo;
+import com.epn.trappi.models.rrhh.juanjo.Conductor;
+import com.epn.trappi.models.rrhh.listas.Lista;
+import com.epn.trappi.models.rrhh.listas.ListaPermisos;
+import java.awt.Dimension;
+
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -22,9 +33,11 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -35,18 +48,23 @@ public class Gestor_Permiso extends javax.swing.JFrame {
 Fecha fecha = new Fecha();
 Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance()).getConnection();
 /*Empleado empleado = new Empleado();*/
- 
+ ListaPermisos permisos = new ListaPermisos();
     
     /*
      * Creates new form Ejemplo_GUI
      */
 
-    
+    @Override
+    public Dimension size() {
+        return super.size(); //To change body of generated methods, choose Tools | Templates.
+    }
 
     public Gestor_Permiso() {
         
         initComponents();
-        ListarEmpleado();
+          obtenerNombre();
+          listarAspirantes();
+        
         
        
         
@@ -72,6 +90,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
     
     }
            
+//metodo para obtener el nombre y apellido de la persona que quiere solicitar el permiso
      public void obtenerNombre(){
         String sql = "SELECT * FROM dbo.EMPLEADO";
         ArrayList<Empleado> empleados = new ArrayList<>();
@@ -80,35 +99,51 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
             ResultSet resultSet = createdStatment.executeQuery(sql);
             while(resultSet.next()) {
                 String nombre = resultSet.getString("NOMBREEMP");
-              cmbnombreEmpleado.addItem(nombre);
+                String apellido = resultSet.getString("APELLIDOEMP");
+                String nombre_completo = nombre + "_" + apellido;
+              cmbnombreEmpleado.addItem(nombre_completo);
             }
+            
         } catch (SQLException e){
             System.out.println(e.toString());
         }
-     /*   Empleado[] empleadosArray = new Empleado[empleados.size()];
-        empleadosArray = empleados.toArray(empleadosArray);
-        return empleadosArray;*/
+        
+
+    }
+     
+         private void listarAspirantes(){
+        Lista listaPermisos = new ListaPermisos();
+        Permiso[] permisos = (Permiso[]) listaPermisos.obtenerTodos();
+       // ListaPruebasAdmision listaPruebas = new ListaPruebasAdmision();
+        DefaultTableModel model = (DefaultTableModel) tbllista.getModel();
+        model.setRowCount(0);
+        
+        for (Permiso asp: permisos){
+            Vector v = new Vector();
+           // PruebaAdmision prueba = new PruebaAdmision();
+          //  prueba = listaPruebas.buscarUno(asp.getCedula());
+           // if (prueba != null){
+                v.add(asp.getEmpleado().getNombres() + " " + asp.getEmpleado().getApellidos());
+                v.add(asp.getNUMDIASPERM());
+                v.add(asp.getVALORPAGARPERM());
+                v.add(asp.getCOMENTPERM());
+                v.add(asp.getFECHAINICIOPERM());
+                 v.add(asp.getFECHAFINPERM());
+                  v.add(asp.getESTADOPERM());
+              //  v.add(prueba.getAptitudes());
+              //  v.add(prueba.getActitudes());
+              // v.add(prueba.getPuntaje());
+                model.addRow(v); 
+        //    }
+      /*  else {
+                continue;
+            }*/
+            System.out.println("si se pudo ");
+            tbllista.setModel(model);
+        }
     }
     
-    public void  ListarEmpleado(){
-     /*   String sql = "SELECT nombres FROM empleados";
-       // ListaEmpleados temEmpleados = new ListaEmpleados();
-        try {
-            Connection conn = Connect.connect("juanjo.db");
-            Statement stmt  = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            // loop through the result set
-           
-            while (rs.next()) {
-                String nombre = rs.getString("nombres");
-              cmbnombreEmpleado.addItem(nombre);
-            }
-           
-            
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }   */
-    }
+
      
     public void  ObtenerCedula(){
         
@@ -130,6 +165,58 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }  */
+    }
+    
+          public Empleado buscarUno(){
+          String nombre_Completo = (String) cmbnombreEmpleado.getSelectedItem();
+          String[] partes = nombre_Completo.split("_");
+          String nombreEmpleado = partes[0];
+         
+            String apellido = partes[1];   
+        String sql = "SELECT * FROM dbo.EMPLEADO WHERE (NOMBREEMP='" + nombreEmpleado + "'" + "and APELLIDOEMP='" +apellido+ "')";
+        Empleado empleadoObtenido = null;
+        try {
+            Statement createdStatement = this.connection.createStatement();
+            ResultSet resultSet = createdStatement.executeQuery(sql);
+            while(resultSet.next()) {
+                if (resultSet.getString(10).equals("conductor")) {
+                    empleadoObtenido = new Conductor(
+                            resultSet.getInt(1),
+                            resultSet.getString(2),
+                            resultSet.getString(3),
+                            resultSet.getString(4),
+                            resultSet.getString(5),
+                            resultSet.getString(6),
+                            resultSet.getString(7),
+                            resultSet.getString(8),
+                            resultSet.getString(11),
+                            resultSet.getString(9),
+                            resultSet.getString(12).charAt(0)
+                    );
+                } else {
+                    empleadoObtenido = new Administrativo(
+                            resultSet.getInt(1),
+                            resultSet.getString(2),
+                            resultSet.getString(3),
+                            resultSet.getString(4),
+                            resultSet.getString(5),
+                            resultSet.getString(6),
+                            resultSet.getString(7),
+                            resultSet.getString(8),
+                            resultSet.getString(11),
+                            resultSet.getString(9),
+                            resultSet.getString(12).charAt(0)
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            e.printStackTrace();
+        }
+        return empleadoObtenido;
+
     }
     
     public void  fechaInicio() throws ParseException{
@@ -185,7 +272,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         txtfechaFinPermiso = new javax.swing.JTextField();
         txtCedula = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbllista = new javax.swing.JTable();
         cmbTipoPermiso = new javax.swing.JComboBox<>();
         lblnombreEmpleado1 = new javax.swing.JLabel();
         lblfechaInicioPermiso1 = new javax.swing.JLabel();
@@ -349,7 +436,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         });
         PanelAspirante.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, 180, 28));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbllista.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -360,7 +447,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 "Cedula", "Nombre", "Tipo de Permiso", "Fecha Inicio", "Fecha  Fin", "Estado", "Dias de Permiso", "Valor a Pagar", ""
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbllista);
 
         PanelAspirante.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 860, 200));
 
@@ -525,13 +612,33 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
     }//GEN-LAST:event_btnNuevoPermisoActionPerformed
 
     private void btnGuardarPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPermisoActionPerformed
-        Gestor_Permisos permiso = new Gestor_Permisos(txtCedula.getText(),(String) cmbnombreEmpleado.getSelectedItem(),
-           (String) cmbTipoPermiso.getSelectedItem(),txtfechaInicioPermiso.getText(),txtfechaFinPermiso.getText(),
-            txtDescripcion.getText(),(String) cmbEstado.getSelectedItem(),Double.parseDouble(txtvalorAPagar.getText())); 
-         
-         
-        permiso.registrar_Permiso();
-       
+  String tipoPermiso = (String) cmbPermiso.getSelectedItem();
+   int numeroDias = Integer.parseInt(txtnumDias.getText());
+   String valorPagar = txtvalorAPagar.getText();
+   String descripcionPermiso = (String) cmbTipoPermiso.getSelectedItem();
+   String fechaInicio = txtfechaInicioPermiso.getText();
+   String fechaFin = txtfechaFinPermiso.getText();
+   String estado = (String)cmbEstado.getSelectedItem();
+   Empleado id = buscarUno();
+   Calamidad_Domestica calamidad;
+   Enfermedad enfermedad;
+   Otros_Permisos otro;
+   
+   if(tipoPermiso.equals("Calamidad Domestica")){
+      
+      calamidad= new Calamidad_Domestica(
+              id,numeroDias, valorPagar,descripcionPermiso,fechaInicio,fechaFin,estado
+      );    
+      permisos.agregar(calamidad);
+   }
+   if(tipoPermiso.equals("Enfermedad")){
+       enfermedad = new Enfermedad(id,numeroDias, valorPagar,descripcionPermiso,fechaInicio,fechaFin,estado);
+       permisos.agregar(enfermedad);
+   }
+   else {
+       otro = new Otros_Permisos(id,numeroDias, valorPagar,descripcionPermiso,fechaInicio,fechaFin,estado);
+       permisos.agregar(otro);
+   }
     }//GEN-LAST:event_btnGuardarPermisoActionPerformed
    
     private void txtvalorAPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtvalorAPagarActionPerformed
@@ -575,7 +682,8 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
     }//GEN-LAST:event_btnValidarFechaActionPerformed
 
     private void cmbnombreEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbnombreEmpleadoActionPerformed
-        ObtenerCedula();
+        Empleado obtenerCedula = buscarUno();
+        txtCedula.setText(obtenerCedula.getCedula());
     }//GEN-LAST:event_cmbnombreEmpleadoActionPerformed
 
     /**
@@ -648,7 +756,6 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCedula;
     private javax.swing.JLabel lblfechaFinPermiso;
     private javax.swing.JLabel lblfechaInicioPermiso1;
@@ -658,6 +765,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
     private javax.swing.JLabel lblfechaInicioPermiso5;
     private javax.swing.JLabel lblfechaInicioPermiso6;
     private javax.swing.JLabel lblnombreEmpleado1;
+    private javax.swing.JTable tbllista;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtfechaFinPermiso;

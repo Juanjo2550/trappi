@@ -15,30 +15,31 @@ import com.epn.trappi.models.rrhh.Sueldo;
  */
 public abstract class Permiso {
    private int IDPERM;
-   private int IDEMP;
+ //  private int IDEMP;
    private int NUMDIASPERM;
    private String VALORPAGARPERM;
    private String COMENTPERM;
    private String FECHAINICIOPERM;
    private String FECHAFINPERM;
    private String ESTADOPERM;
-   private String TIPOPERM;
+   
    private Empleado empleado;
 
-    
-
-    public Permiso(int IDPERM, int IDEMP, int NUMDIASPERM, String VALORPAGARPERM, String COMENTPERM, String FECHAINICIOPERM, 
-            String FECHAFINPERM, String ESTADOPERM, String TIPOPERM) {
-        this.IDPERM = IDPERM;
-        this.IDEMP = IDEMP;
+    public Permiso(Empleado empleado, int NUMDIASPERM, String VALORPAGARPERM, String COMENTPERM, String FECHAINICIOPERM, String FECHAFINPERM, String ESTADOPERM) {
         this.NUMDIASPERM = NUMDIASPERM;
         this.VALORPAGARPERM = VALORPAGARPERM;
         this.COMENTPERM = COMENTPERM;
         this.FECHAINICIOPERM = FECHAINICIOPERM;
         this.FECHAFINPERM = FECHAFINPERM;
         this.ESTADOPERM = ESTADOPERM;
-        this.TIPOPERM = TIPOPERM;
+        this.empleado = empleado;
     }
+
+
+
+    
+
+
     public abstract void RegistrarPermiso();
 
     public int getIDPERM() {
@@ -47,9 +48,7 @@ public abstract class Permiso {
     public Empleado getEmpleado() {
         return empleado;
     }
-    public int getIDEMP() {
-        return IDEMP;
-    }
+
 
     public int getNUMDIASPERM() {
         return NUMDIASPERM;
@@ -73,10 +72,6 @@ public abstract class Permiso {
 
     public String getESTADOPERM() {
         return ESTADOPERM;
-    }
-
-    public String getTIPOPERM() {
-        return TIPOPERM;
     }
 
 
