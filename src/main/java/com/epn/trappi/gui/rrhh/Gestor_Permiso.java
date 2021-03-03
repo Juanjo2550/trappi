@@ -124,12 +124,13 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
           //  prueba = listaPruebas.buscarUno(asp.getCedula());
            // if (prueba != null){
                 v.add(asp.getEmpleado().getNombres() + " " + asp.getEmpleado().getApellidos());
-                v.add(asp.getNUMDIASPERM());
-                v.add(asp.getVALORPAGARPERM());
                 v.add(asp.getCOMENTPERM());
                 v.add(asp.getFECHAINICIOPERM());
-                 v.add(asp.getFECHAFINPERM());
-                  v.add(asp.getESTADOPERM());
+                v.add(asp.getFECHAFINPERM());
+                v.add(asp.getNUMDIASPERM());
+                v.add(asp.getVALORPAGARPERM());
+                v.add(asp.getESTADOPERM());
+                
               //  v.add(prueba.getAptitudes());
               //  v.add(prueba.getActitudes());
               // v.add(prueba.getPuntaje());
@@ -438,13 +439,11 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
 
         tbllista.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Cedula", "Nombre", "Tipo de Permiso", "Fecha Inicio", "Fecha  Fin", "Estado", "Dias de Permiso", "Valor a Pagar", ""
+                "Nombre del Empleado", "Descripción", "Fecha Inicio", "Fecha  Fin", "Dias de Permiso", "Valor a Pagar", "Estado"
             }
         ));
         jScrollPane1.setViewportView(tbllista);
