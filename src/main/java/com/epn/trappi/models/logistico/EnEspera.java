@@ -20,6 +20,9 @@ public class EnEspera extends Estado{
     public EnEspera(Vehiculo vehiculo) {
         super(vehiculo);
     }
+    public EnEspera(String estado){
+        super(estado);
+    }
 
     @Override
     public String enEntrega() {
@@ -46,7 +49,10 @@ public class EnEspera extends Estado{
     public String enPicoPlaca() {
         return null;
     }
-    
+    @Override
+    public String toString(){
+        return super.estado;
+    }
     
     
     

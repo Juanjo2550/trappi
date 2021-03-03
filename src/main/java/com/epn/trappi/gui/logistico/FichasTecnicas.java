@@ -6,8 +6,21 @@
 package com.epn.trappi.gui.logistico;
 
 import com.epn.trappi.controladores.logistico.storedProcedures;
+import com.epn.trappi.models.logistico.Estado;
+import com.epn.trappi.models.logistico.Inhabilitado;
+import com.epn.trappi.models.logistico.ListaMantenimientos;
+import com.epn.trappi.models.logistico.ListaVehiculos;
 import com.epn.trappi.models.logistico.Mantenimiento;
+import com.epn.trappi.models.logistico.SolicitudMantenimiento;
+import com.epn.trappi.models.logistico.Vehiculo;
+import com.epn.trappi.models.logistico.servicios.Consultable;
+import com.epn.trappi.models.logistico.servicios.Manipulable;
+import com.epn.trappi.models.logistico.servicios.ServicioDbMantenimiento;
+import com.epn.trappi.models.logistico.servicios.ServicioDbSolicitudMantenimiento;
+import com.epn.trappi.models.logistico.servicios.ServicioDbVehiculo;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,11 +32,10 @@ import javax.swing.table.DefaultTableModel;
  * @author Alexander
  */
 public class FichasTecnicas extends javax.swing.JPanel {
-
-    storedProcedures instancia = new storedProcedures();
-    private String tabla = "";
-    private String columna = "";
-    private String valor = "";
+    //ATRIBUTOS
+    Manipulable manipulable;
+    Consultable consultable;
+    //METODOS
     public FichasTecnicas() {
         initComponents();
     }
@@ -343,63 +355,76 @@ public class FichasTecnicas extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerificarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarVehiculoActionPerformed
-        tabla = "VEHICULO";
-        columna = "MATRICULA";
-        valor = txtMatriculaVehiculo.getText();
+        ListaVehiculos vehiculos = new ListaVehiculos();
+        consultable = new ServicioDbVehiculo();
+        String valor = txtMatriculaVehiculo.getText();
         try {
-            DefaultTableModel modelo = instancia.consultarTablaColumna(tabla, columna, valor);
-            this.jTableVerificarVehiculo.setModel(modelo);
-        } catch (SQLException ex) {
-            Logger.getLogger(FichasTecnicas.class.getName()).log(Level.SEVERE, null, ex);
+            vehiculos.setVehiculos(consultable.obtenerElementosPorFiltro(ServicioDbVehiculo.MATRICULA, valor));
+            this.jTableVerificarVehiculo.setModel(vehiculos.mostrarLista());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,"Base de datos no disponible.");
         }
     }//GEN-LAST:event_btnVerificarVehiculoActionPerformed
 
     private void btnVerificarMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarMantenimientoActionPerformed
-        tabla = "MANTENIMIENTO";
-        columna = "IDMANTENIMIENTO";
-        valor = txtIdMantenimiento.getText();
+        ListaMantenimientos mantenimientos = new ListaMantenimientos();
+        consultable = new ServicioDbMantenimiento();
+        String valor = txtIdMantenimiento.getText();
         try {
-            DefaultTableModel modelo = instancia.consultarTablaColumna(tabla, columna, valor);
-            this.jTVerificarMantenimiento.setModel(modelo);
-        } catch (SQLException ex) {
-            Logger.getLogger(FichasTecnicas.class.getName()).log(Level.SEVERE, null, ex);
+            mantenimientos.setMantenimientos(consultable.obtenerElementosPorFiltro(ServicioDbMantenimiento.ID_MANTENIMIENTO, valor));
+            this.jTVerificarMantenimiento.setModel(mantenimientos.mostrarLista());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,"Base de datos no disponible.");
         }
     }//GEN-LAST:event_btnVerificarMantenimientoActionPerformed
 
     private void btnVerificarBienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarBienActionPerformed
-        tabla = "VEHICULO";
-        columna = "MATRICULA";
-        valor = txtIdBien.getText();
-        try {
-            DefaultTableModel modelo = instancia.consultarTablaColumna(tabla, columna, valor);
-            this.jTVerificarBien.setModel(modelo);
-        } catch (SQLException ex) {
-            Logger.getLogger(FichasTecnicas.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }//GEN-LAST:event_btnVerificarBienActionPerformed
 
     private void btnRegistrarSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarSolicitudActionPerformed
+        //Datos de la GUI
         Calendar fecha = Calendar.getInstance();
+        String fechaSol = String.valueOf(fecha); 
         int numSolicitud = Integer.parseInt(jTFidSolicitud.getText());
         int identificadorBien = Integer.parseInt(txtIdBien.getText());
-        int idMantenimiento = Integer.parseInt(txtIdMantenimiento.getText());;
-        String fechaSol = String.valueOf(fecha); 
-        String estadoMantenimiento = txaDetallesMantenimiento.getText();
+        int idMantenimiento = Integer.parseInt(txtIdMantenimiento.getText());
+        //Instancia
+        SolicitudMantenimiento solicitud = new SolicitudMantenimiento();
+        solicitud.setId_Solicitud(numSolicitud);
+        solicitud.setId_Bien(identificadorBien);
+        solicitud.setId_Mantenimiento(idMantenimiento);
+        solicitud.setEstado("En espera");
+        solicitud.setFecha((Date) fecha.getTime());
+        /*
         try {
-            instancia.ingresarSolicitudMantenimiento(numSolicitud, identificadorBien, idMantenimiento, fechaSol, estadoMantenimiento);
+            manipulable = new ServicioDbSolicitudMantenimiento();
+            manipulable.insertar(solicitud);
+            AQUI SE ACTUALIZA EL GASTO DEL MANTENIMIENTO, PARA ESO SE DEBE OBTENER EL VALOR DEL BIEN
             JOptionPane.showMessageDialog(null, "Solicitud de mantenimiento ingresado exitosamente!");
         } catch (SQLException ex) {
             Logger.getLogger(FichasTecnicas.class.getName()).log(Level.SEVERE, null, ex);
         }
+        */
     }//GEN-LAST:event_btnRegistrarSolicitudActionPerformed
 
     private void btnRegistrarMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarMantenimientoActionPerformed
+
         Mantenimiento mantenimiento = new Mantenimiento(Integer.parseInt(jTFidMantenimiento.getText()),txtMatriculaVehiculo.getText(), txaDetallesMantenimiento.getText());
         try {
-            instancia.ingresarMantenimiento(mantenimiento);
+            manipulable = new ServicioDbMantenimiento();
+            manipulable.insertar(mantenimiento);
+            consultable = new ServicioDbVehiculo();
+            ArrayList<Vehiculo> vehiculos = consultable.obtenerElementosPorFiltro(ServicioDbVehiculo.MATRICULA, txtMatriculaVehiculo.getText());
+            Vehiculo vehiculo = vehiculos.get(0); //Como la matricula es unica entonces la lista tiene longitud 1
+            vehiculo.setEstado(new Inhabilitado());
+            manipulable = new ServicioDbVehiculo();
+            manipulable.actualizar(vehiculo);
             JOptionPane.showMessageDialog(null, "Mantenimiento ingresado exitosamente!");
         } catch (SQLException ex) {
-            Logger.getLogger(FichasTecnicas.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Base de datos no disponible.");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,"Asegurese de que existe esa matricula");
         }
     }//GEN-LAST:event_btnRegistrarMantenimientoActionPerformed
 

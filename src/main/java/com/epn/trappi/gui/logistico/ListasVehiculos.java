@@ -35,7 +35,7 @@ public class ListasVehiculos extends javax.swing.JPanel {
             }
         });
     }
-    private void llenarHistorialDeUsos(java.awt.event.MouseEvent evt) throws SQLException {//GEN-FIRST:event_jTEntregasDatosMouseClicked
+    private void llenarHistorialDeUsos(java.awt.event.MouseEvent evt) throws SQLException {                                             
         int fila = tbListaVehiculos.getSelectedRow();
         handler.reiniciarEstado();
         String matricula = (String)tbListaVehiculos.getValueAt(fila, 4); //OBTENEMOS EL VALOR DE LA MATRICULA
@@ -325,7 +325,7 @@ public class ListasVehiculos extends javax.swing.JPanel {
     }//GEN-LAST:event_tbListaVehiculosMouseClicked
 
     private void btnBuscarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarVehiculoActionPerformed
-        // TODO add your handling code here:
+        /*
         try{
             String parametro = (String)cmbBusquedaVehiculos.getSelectedItem();
             String texto = txtBusquedaVehiculos.getText().trim();
@@ -368,6 +368,7 @@ public class ListasVehiculos extends javax.swing.JPanel {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
+        */
     }//GEN-LAST:event_btnBuscarVehiculoActionPerformed
 
 

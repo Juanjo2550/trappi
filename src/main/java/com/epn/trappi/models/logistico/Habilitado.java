@@ -23,13 +23,13 @@ public class Habilitado extends Estado{
     @Override
     public String enEntrega() {
         vehiculo.actualizarEstado(new EnEspera(vehiculo));
-        return "En Espera";
+        return "En Curso";
     }
     
     @Override
     public String enMantenimiento() {
         vehiculo.actualizarEstado(new EnEspera(vehiculo));
-        return "En Espera";
+        return "Mantenimiento";
     }
 
     @Override
@@ -44,8 +44,10 @@ public class Habilitado extends Estado{
         return "Restricción Vehicular";
     }
 
-    
-    
+    @Override
+    public String toString(){
+        return super.estado;
+    }
     
     
 }

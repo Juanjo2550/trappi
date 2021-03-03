@@ -7,7 +7,10 @@ public class Mantenimiento {
     private String matricula;
     private String detalleMantenimiento;
     private double valorGasto;
-
+    
+    public Mantenimiento(){
+        
+    }
     public Mantenimiento(int idMantenimiento, String matricula, String detalleMantenimiento) {
         this.idMantenimiento = idMantenimiento;
         this.matricula = matricula;

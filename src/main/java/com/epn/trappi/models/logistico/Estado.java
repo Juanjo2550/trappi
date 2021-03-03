@@ -14,10 +14,16 @@ import com.epn.trappi.gui.logistico.*;
 public abstract class Estado {
     
     Vehiculo vehiculo;
- 
+    String estado;
 
     Estado(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;
+    }
+    Estado(String estado){
+        this.estado=estado;
+    }
+    Estado(){
+        
     }
     
     //public abstract void verificarVehiculo();

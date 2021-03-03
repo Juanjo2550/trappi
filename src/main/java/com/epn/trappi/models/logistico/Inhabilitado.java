@@ -20,6 +20,9 @@ public class Inhabilitado extends Estado{
     public Inhabilitado(Vehiculo vehiculo) {
         super( vehiculo);
     }
+    public Inhabilitado(){
+        
+    }
 
     @Override
     public String enEntrega() {
@@ -28,8 +31,8 @@ public class Inhabilitado extends Estado{
     
     @Override
     public String enMantenimiento() {
-        vehiculo.actualizarEstado(new EnEspera(vehiculo));
-        return "Se mando a Mantenimeinto";
+        //vehiculo.actualizarEstado(new EnEspera(vehiculo));
+        return "Mantenimiento";
     }
 
     @Override
@@ -42,7 +45,10 @@ public class Inhabilitado extends Estado{
         vehiculo.actualizarEstado(new Habilitado(vehiculo));
         return "No hay restricción Vehicular";
     }
-    
+    @Override
+    public String toString(){
+        return "Mantenimiento";
+    }
     
     
     

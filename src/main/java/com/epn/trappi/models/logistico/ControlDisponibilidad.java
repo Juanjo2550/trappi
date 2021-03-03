@@ -48,14 +48,14 @@ public class ControlDisponibilidad {
         
         //Se debe actualizar el ESTADO de la tabla VEHICULO correspondiente al vehiculo.matricula al valor "En espera"
         //Se crea el registro de entrega nuevo
-        Entrega entrega = new Entrega(factura);
-        entrega.RegistrarEntrega(vehiculo, ID_conductor);
+        //Entrega entrega = new Entrega(factura);
+        //entrega.RegistrarEntrega(vehiculo, ID_conductor);
         //Mantener la entrega como En curso durante cierto tiempo.
         simularMovimiento(60);
         //Ahora se actualiza el estado de esa entrega a entregado
         //Se debe actualizar el ESTADOEMP de la tabla EMPLEADO correspondiente al ID_conductor al valor "Activo"
         //Se debe actualizar el ESTADO de la tabla VEHICULO correspondiente al vehiculo.matricula al valor "Habilitado"
-        entrega.actualizarEstado();    
+        //entrega.actualizarEstado();    
     }
     public void simularMovimiento(int segundos){
         try{

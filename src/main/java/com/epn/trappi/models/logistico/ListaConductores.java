@@ -3,14 +3,28 @@ package com.epn.trappi.models.logistico;
 import java.util.ArrayList;
 
 public class ListaConductores {
-    public ArrayList<Conductor> listaConductores;
+    private ArrayList<Conductor> listaConductores;
 
     public ListaConductores() {
-        this.listaConductores = new ArrayList<Conductor>();
-        listaConductores.add(new Conductor("Kevin",true));
-        listaConductores.add(new Conductor("Jose",true));
-        listaConductores.add(new Conductor("Carlos",true));
-        listaConductores.add(new Conductor("Andres",true));
-        listaConductores.add(new Conductor("Juan",true));
+        this.listaConductores = new ArrayList<>();    
     }
+    public ListaConductores(ArrayList<Conductor> lista){
+        this.listaConductores=lista;
+    }
+    public void aniadirConductor(Conductor nuevo){
+        this.listaConductores.add(nuevo);
+    }
+    public ArrayList<Conductor> getConductores(){
+        return this.listaConductores;
+    }
+
+    public ArrayList<Conductor> getListaConductores() {
+        return listaConductores;
+    }
+
+    public void setListaConductores(ArrayList<Conductor> listaConductores) {
+        this.listaConductores = listaConductores;
+    }
+    
+    
 }

@@ -421,7 +421,7 @@ public class EntregasActivas extends javax.swing.JPanel {
     }
     //SE LLAMA A ESTE METODO CADA VEZ QUE SE ENTRE AL PANEL DE ENTREGAS PARA QUE ACTUALICE LOS CONTADORES EN LA CABECERA
     public void actualizarContadores() throws SQLException{
-        //Contadores
+        /*
         int contador_vehiculos=0;
         int contador_motos=0;
         int contador_camiones=0;
@@ -456,6 +456,7 @@ public class EntregasActivas extends javax.swing.JPanel {
         this.labelAutomoviles.setText(String.valueOf(contador_vehiculos));
         this.labelMotocicletas.setText(String.valueOf(contador_motos));
         this.labelCamiones.setText(String.valueOf(contador_camiones));
+        */
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

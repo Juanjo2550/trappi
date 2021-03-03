@@ -2,12 +2,21 @@
 package com.epn.trappi.models.logistico;
 
 public class Vehiculo {
-    private Estado estado;
-    private Gps gps;
+    private int ID;
     private String matricula;
+    private Estado estado;
     private String tipo;
     private int kilometraje;
     private FichaTecnica fichaTecnica;
+    private Gps gps;
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
     
     public Vehiculo(){
         estado= new Habilitado(this);

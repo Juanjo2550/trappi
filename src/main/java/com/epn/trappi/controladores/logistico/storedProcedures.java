@@ -151,13 +151,11 @@ public class storedProcedures {
         statement.execute();
     }
     public void ingresarEntrega(Entrega entrega) throws SQLException{
-        CallableStatement statement = connection.getConnection().prepareCall("{call Ingresar_Entrega(?,?,?,?,?,?) }");
-        statement.setString(1, String.valueOf(entrega.getID_Entrega()));
-        statement.setString(2,entrega.getMatricula());
-        statement.setString(3,entrega.getFecha());
-        statement.setString(4,"En curso");
-        statement.setString(5, entrega.getFactura());
-        statement.setString(6,entrega.getID_Empleado());
+        CallableStatement statement = connection.getConnection().prepareCall("{call Ingresar_Entrega(?,?,?,?) }");
+        statement.setString(1,entrega.getMatricula());
+        statement.setString(2,entrega.getEstado());
+        statement.setInt(3,entrega.getFactura());
+        statement.setInt(4,entrega.getID_Empleado());
         statement.execute();
     }
     

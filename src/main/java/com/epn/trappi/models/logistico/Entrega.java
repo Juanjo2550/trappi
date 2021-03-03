@@ -6,23 +6,36 @@ import java.sql.SQLException;
 public class Entrega{
     private int ID_Entrega;
     private String matricula;
+    private String estado;
+    private int factura;
+    private int ID_Empleado;
     private String fecha;
-    private String ID_Empleado;
-    private boolean estado;
-    private String factura;
-    
+    private String direccion;
 
-    public Entrega(String factura) {
-        this.factura=factura;
-        estado=true;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public boolean isEstado() {
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
+    }
+    
+    
+    
+    public Entrega(){
+        estado="En curso";
+    }
+    public Entrega(int factura) {
+        this.factura=factura;
+        estado="En curso";
     }
 
     public int getID_Entrega() {
@@ -49,19 +62,19 @@ public class Entrega{
         this.fecha = fecha;
     }
 
-    public String getID_Empleado() {
+    public int getID_Empleado() {
         return ID_Empleado;
     }
 
-    public void setID_Empleado(String ID_Empleado) {
+    public void setID_Empleado(int ID_Empleado) {
         this.ID_Empleado = ID_Empleado;
     }
 
-    public String getFactura() {
+    public int getFactura() {
         return factura;
     }
 
-    public void setFactura(String factura) {
+    public void setFactura(int factura) {
         this.factura = factura;
     }
 
@@ -72,14 +85,15 @@ public class Entrega{
         agente.actualizarEntrega(this);
     }
     
+    
     public void confirmarEntrega() throws SQLException{
         ControlDisponibilidad control = new ControlDisponibilidad();
-        control.asignar(factura);
+        //control.asignar(factura);
     }
     
     public void RegistrarEntrega(Vehiculo vehiculo,String ID_conductor) throws SQLException{
         this.setFecha("");
-        this.setID_Empleado(ID_conductor);
+        //this.setID_Empleado(ID_conductor);
         this.setID_Entrega(generarID());
         this.setMatricula(vehiculo.getMatricula());
         storedProcedures agente = new storedProcedures();
