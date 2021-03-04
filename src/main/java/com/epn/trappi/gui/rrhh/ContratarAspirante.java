@@ -10,8 +10,12 @@ import com.epn.trappi.*;
 import com.epn.trappi.models.rrhh.contratacion.Aspirante;
 import com.epn.trappi.models.rrhh.contratacion.Contratacion;
 import com.epn.trappi.models.rrhh.contratacion.PruebaAdmision;
+import com.epn.trappi.models.rrhh.juanjo.Administrativo;
+import com.epn.trappi.models.rrhh.juanjo.Conductor;
+import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import com.epn.trappi.models.rrhh.listas.Lista;
 import com.epn.trappi.models.rrhh.listas.ListaAspirantes;
+import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
 import com.epn.trappi.models.rrhh.listas.ListaPruebasAdmision;
 
 import java.awt.Color;
@@ -26,33 +30,41 @@ import javax.swing.table.DefaultTableModel;
  * @author stali
  */
 public class ContratarAspirante extends javax.swing.JFrame {
-
+    private void listarAspirantes(){
+        Lista listaAspirantes = new ListaAspirantes();
+        Aspirante[] aspirantes = (Aspirante[]) listaAspirantes.obtenerTodos();
+        ListaPruebasAdmision listaPruebas = new ListaPruebasAdmision();
+        DefaultTableModel model = (DefaultTableModel) jTableAspirantesAptos.getModel();
+        model.setRowCount(0);
+        
+        for (Aspirante asp: aspirantes){
+            Vector v = new Vector();
+            PruebaAdmision prueba = new PruebaAdmision();
+            prueba = listaPruebas.buscarUno(asp.getCedula());
+            if (prueba != null){
+                v.add(asp.getNombre());
+                v.add(asp.getApellidos());
+                v.add(asp.getTelefono());
+                v.add(asp.getCedula());
+                v.add(asp.getCargoAspirante());
+                v.add(prueba.getActitudes());
+                v.add(prueba.getAptitudes());
+                v.add(prueba.getPuntaje());
+                model.addRow(v); 
+            } else {
+                continue;
+            }
+            
+            jTableAspirantesAptos.setModel(model);
+        }
+    }
     public ContratarAspirante() {
         initComponents();
-       // ControladorPruebaAdmision controlador = new ControladorPruebaAdmision(16, "sociable colaborador amable", "adptable agil versatil");
-       // ArrayList<Aspirante> aptos = controlador.obtenerAspirantesAptos();
-//        DefaultTableModel model = (DefaultTableModel) jTableAspirantesAptos.getModel();
-//        model.setRowCount(0);
-//        
-//        for (Aspirante asp: aptos){
-//            Vector v = new Vector();
-//            v.add(asp.getNombre());
-//            v.add(asp.getApellidos());
-//            v.add(asp.getTelefono());
-//            v.add(asp.getCedula());
-//            v.add(asp.getCargoAspirante());
-//            v.add(asp.getPrueba().getPuntaje());
-//            v.add(asp.getPrueba().getActitudes());
-//            v.add(asp.getPrueba().getAptitudes());
-//            
-//            model.addRow(v);
-//            jTableAspirantesAptos.setModel(model);
-//        }
         jBtnContratar.setEnabled(false);
         jTextContratoFechaInicio.setEnabled(false);
         jTextContratoFechaFin.setEnabled(false);
         jCmbContratoTipoEmpleado.setEnabled(false);
-        jTextContratoCuenta.setEnabled(false);
+        jTextContratoNumCuenta.setEnabled(false);
         jTextContratoSueldo.setEnabled(false);
         jTextContratoDepto.setEnabled(false);
         jTextContratoBanco.setEnabled(false);
@@ -111,7 +123,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
         rdbtFemenino = new javax.swing.JRadioButton();
         rdbtMasculino = new javax.swing.JRadioButton();
         jBtnContratar = new javax.swing.JButton();
-        jTextContratoCuenta = new javax.swing.JTextField();
+        jTextContratoNumCuenta = new javax.swing.JTextField();
         jTextContratoAptitudes = new javax.swing.JTextField();
         jTextContratoActitudes = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
@@ -119,6 +131,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         jCmbContratoTipo = new javax.swing.JComboBox<>();
+        jBtnBuscarAspirantes1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -251,7 +264,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
                 jBtnBuscarAspirantesActionPerformed(evt);
             }
         });
-        PanelAspirante.add(jBtnBuscarAspirantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 110, -1));
+        PanelAspirante.add(jBtnBuscarAspirantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, -1, -1));
 
         jBtnNuevoContrato.setBackground(new java.awt.Color(38, 112, 171));
         jBtnNuevoContrato.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -441,17 +454,17 @@ public class ContratarAspirante extends javax.swing.JFrame {
         });
         PanelAspirante.add(jBtnContratar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, -1, -1));
 
-        jTextContratoCuenta.addActionListener(new java.awt.event.ActionListener() {
+        jTextContratoNumCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextContratoCuentaActionPerformed(evt);
+                jTextContratoNumCuentaActionPerformed(evt);
             }
         });
-        jTextContratoCuenta.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextContratoNumCuenta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextContratoCuentaKeyTyped(evt);
+                jTextContratoNumCuentaKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextContratoCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 190, 28));
+        PanelAspirante.add(jTextContratoNumCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 190, 28));
 
         jTextContratoAptitudes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -501,6 +514,18 @@ public class ContratarAspirante extends javax.swing.JFrame {
         });
         PanelAspirante.add(jCmbContratoTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 110, 30));
 
+        jBtnBuscarAspirantes1.setBackground(new java.awt.Color(0, 153, 153));
+        jBtnBuscarAspirantes1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jBtnBuscarAspirantes1.setForeground(new java.awt.Color(240, 240, 241));
+        jBtnBuscarAspirantes1.setText("...");
+        jBtnBuscarAspirantes1.setBorderPainted(false);
+        jBtnBuscarAspirantes1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnBuscarAspirantes1ActionPerformed(evt);
+            }
+        });
+        PanelAspirante.add(jBtnBuscarAspirantes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 40, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -542,7 +567,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
         jTextContratoFechaInicio.setEnabled(true);
         jTextContratoFechaFin.setEnabled(true);
         jCmbContratoTipoEmpleado.setEnabled(true);
-        jTextContratoCuenta.setEnabled(true);
+        jTextContratoNumCuenta.setEnabled(true);
         jTextContratoSueldo.setEnabled(true);
         jTextContratoDepto.setEnabled(true);
         jTextContratoBanco.setEnabled(true);
@@ -671,35 +696,59 @@ public class ContratarAspirante extends javax.swing.JFrame {
         //Obtenemos las datos del aspirante
         DefaultTableModel model = (DefaultTableModel) jTableAspirantesAptos.getModel();
         int selected = jTableAspirantesAptos.getSelectedRow();
-        String nombre = (String) model.getValueAt(selected, 0);
-        String apellido = (String) model.getValueAt(selected, 1);
+        if (selected >=0) {
+            String nombre = (String) model.getValueAt(selected, 0);
+            String apellido = (String) model.getValueAt(selected, 1);
+
+            String cedula = (String) model.getValueAt(selected, 3);
+            String cargo = (String) model.getValueAt(selected, 4);
+            String depto = jTextContratoDepto.getText();
+            String numCuenta = jTextContratoNumCuenta.getText();
+            String banco = jTextContratoBanco.getText();
+            String valorSueldo = jTextContratoSueldo.getText();
+            rdbtMasculino.setActionCommand("M");
+            rdbtFemenino.setActionCommand("F");
+            char sexo = btnGrpSexo.getSelection().getActionCommand().charAt(0);
+            String tipoContrato = (String) jCmbContratoTipo.getSelectedItem();
+            String tipoEmpleado = (String) jCmbContratoTipoEmpleado.getSelectedItem();
+            String estadoEmp = "Activo";
+            //System.out.println("Se va a registrar : " + tipoContrato + " " + tipoEmpleado + " " + sexo);
+            
+            //Se realiza el registro del empleado en la base de datos 
+            Lista listaEmpleado = new ListaEmpleados();
+            Empleado nuevoEmpleado;
+            if (tipoEmpleado.equalsIgnoreCase("conductor")){
+                //System.out.println("Se instancia un conductor");
+                int idNuevoEmp = listaEmpleado.obtenerTodos().length + 1;
+                nuevoEmpleado = new Conductor(idNuevoEmp, nombre, apellido, cedula, cargo, depto, numCuenta, banco, valorSueldo, estadoEmp, sexo);
+                listaEmpleado.agregar(nuevoEmpleado);
+                
+                //Se procede a registrar el contrato 
+                
+                JOptionPane.showMessageDialog(null, "El Empleado Conductor se contrató con éxito");
+            } else if (tipoEmpleado.equalsIgnoreCase("administrativo")) {
+                //System.out.println("Se instancia un administrativo");
+                int idNuevoEmp = listaEmpleado.obtenerTodos().length + 1;
+                nuevoEmpleado = new Administrativo(idNuevoEmp, nombre, apellido, cedula, cargo, depto, numCuenta, banco, valorSueldo, estadoEmp, sexo);
+                listaEmpleado.agregar(nuevoEmpleado);
+                JOptionPane.showMessageDialog(null, "El Empleado Administrativo se contrató con éxito");
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione el tipo de empleado");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe buscar y seleccionar el aspirante a contratar...");
+        }
         
-        String cedula = (String) model.getValueAt(selected, 3);
-        String cargo = (String) model.getValueAt(selected, 4);
-        String depto = jTextContratoDepto.getText();
-        String numCuenta = jTextContratoPuntaje.getText();
-        String banco = jTextContratoBanco.getText();
-        String valorSueldo = jTextContratoSueldo.getText();
-        rdbtMasculino.setActionCommand("M");
-        rdbtFemenino.setActionCommand("F");
-        char sexo = btnGrpSexo.getSelection().getActionCommand().charAt(0);
-        
-      // Contratacion contratacion = new Contratacion();
-       //contratacion.registrarEmpleado(nombre, apellido, cedula, cargo, depto , numCuenta, banco, valorSueldo, sexo);
-       
-      /* RRHH rrhh = new RRHH();
-       rrhh.contratarPersonal(nombre, apellido, cedula, cargo, depto, numCuenta, banco, valorSueldo, sexo);
-       JOptionPane.showMessageDialog(null, "El empleado se ha registrado exitosamente");
-        */
     }//GEN-LAST:event_jBtnContratarActionPerformed
 
-    private void jTextContratoCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextContratoCuentaActionPerformed
+    private void jTextContratoNumCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextContratoNumCuentaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextContratoCuentaActionPerformed
+    }//GEN-LAST:event_jTextContratoNumCuentaActionPerformed
 
-    private void jTextContratoCuentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextContratoCuentaKeyTyped
+    private void jTextContratoNumCuentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextContratoNumCuentaKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextContratoCuentaKeyTyped
+    }//GEN-LAST:event_jTextContratoNumCuentaKeyTyped
 
     private void jTextContratoAptitudesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextContratoAptitudesActionPerformed
         // TODO add your handling code here:
@@ -720,6 +769,10 @@ public class ContratarAspirante extends javax.swing.JFrame {
     private void jCmbContratoTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbContratoTipoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCmbContratoTipoActionPerformed
+
+    private void jBtnBuscarAspirantes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarAspirantes1ActionPerformed
+        listarAspirantes();
+    }//GEN-LAST:event_jBtnBuscarAspirantes1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -779,6 +832,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
     private javax.swing.ButtonGroup btnGrpSexo;
     private javax.swing.JButton btnVolver;
     private javax.swing.JButton jBtnBuscarAspirantes;
+    private javax.swing.JButton jBtnBuscarAspirantes1;
     private javax.swing.JButton jBtnContratar;
     private javax.swing.JButton jBtnNuevoContrato;
     private javax.swing.JButton jButton1;
@@ -813,10 +867,10 @@ public class ContratarAspirante extends javax.swing.JFrame {
     private javax.swing.JTextField jTextContratoAptitudes;
     private javax.swing.JTextField jTextContratoBanco;
     private javax.swing.JTextField jTextContratoCargo;
-    private javax.swing.JTextField jTextContratoCuenta;
     private javax.swing.JTextField jTextContratoDepto;
     private javax.swing.JTextField jTextContratoFechaFin;
     private javax.swing.JTextField jTextContratoFechaInicio;
+    private javax.swing.JTextField jTextContratoNumCuenta;
     private javax.swing.JTextField jTextContratoPuntaje;
     private javax.swing.JTextField jTextContratoSueldo;
     private javax.swing.JRadioButton rdbtFemenino;
