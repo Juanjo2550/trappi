@@ -5,7 +5,6 @@ import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.Hora;
 import com.epn.trappi.models.rrhh.juanjo.Asistencia;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -50,6 +49,7 @@ public class ListaAsistencias implements Lista<Asistencia>{
             statement.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
+            System.out.println("No se encuentra registrado el inicio de jornada");
         }
     }
 

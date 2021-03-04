@@ -157,7 +157,6 @@ public class ListaEmpleados implements Lista<Empleado> {
         return empleadoObtenido;
     }
     public Empleado[] obtenerTodos(){
-        System.out.println("Ejecutando...");
         String sql = "SELECT * FROM dbo.EMPLEADO";
         ArrayList<Empleado> empleados = new ArrayList<>();
         try {
