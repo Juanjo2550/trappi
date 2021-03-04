@@ -332,7 +332,7 @@ public class CuentaCliente extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
     ListaClientes lista=new ListaClientes();
-    lista.eliminar(Main.cliente.Nombre);
+    lista.eliminar(Main.cliente.Nombre, Main.cliente.Cedula);
     Main.cliente.eliminarse();
     this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed

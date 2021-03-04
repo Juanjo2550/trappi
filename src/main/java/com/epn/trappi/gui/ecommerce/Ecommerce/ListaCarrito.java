@@ -45,7 +45,7 @@ public class ListaCarrito {
             String id= "";
                        
             Statement statement = connection.createStatement();
-            String sql = "Select COUNT(IDDETALLEFACTURA) from DETALLEFACTURA";
+            String sql = "Select top 1 IDDETALLEFACTURA from DETALLEFACTURA ORDER BY IDDETALLEFACTURA DESC";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                  id= resultSet.getString(1);

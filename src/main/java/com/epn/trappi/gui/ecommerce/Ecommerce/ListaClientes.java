@@ -32,7 +32,7 @@ public class ListaClientes {
             String id= "";
                        
             Statement statement = connection.createStatement();
-            String sql = "Select COUNT(IDCLIENTE) from CLIENTES";
+            String sql = "Select TOP 1 IDCLIENTE from CLIENTES ORDER BY IDCLIENTE DESC";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                  id= resultSet.getString(1);
@@ -72,7 +72,27 @@ public class ListaClientes {
         }  
     }
     
-    public void eliminar(String nombre){
+    
+    public int numcuenta(String cedula){
+        String cuenta="";
+        int nucuenta=0;
+        
+        try{
+            Statement statement = connection.createStatement();
+            String sql = "EXEC CLienteCuenta_idcuenta '"+cedula+"'";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+              cuenta=resultSet.getString(1);
+            }
+            nucuenta=Integer.parseInt(cuenta);
+            
+       } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return nucuenta;
+    }
+    
+    public void eliminar(String nombre, String cedula){
     
     try {
             String sql = "EXEC cliente_borrar '"+nombre+"'";

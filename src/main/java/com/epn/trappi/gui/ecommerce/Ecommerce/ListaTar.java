@@ -49,7 +49,7 @@ public class ListaTar {
             
                        
             Statement statement = connection.createStatement();
-            String sql = "Select COUNT(IDTARJETA) from TARJETAS";
+            String sql = "Select TOP 1 IDTARJETA from TARJETAS ORDER BY IDTARJETA DESC ";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                  id= resultSet.getString(1);
@@ -67,7 +67,7 @@ public class ListaTar {
        try {
             int numerotarjeta=(Integer.parseInt(numerotarjeta1));
             int cvv = Integer.parseInt(cvv1);
-            int idAletorio = idtarjeta()*5;
+            int idAletorio = idtarjeta();
             
             String sql ="EXEC tarjeta_insert "+idAletorio+","+idcuenta(cedula)+","+numerotarjeta+","+cvv+",'"+fecha+"','"+tipo+"'"; 
             PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);

@@ -71,7 +71,7 @@ public class ListaFacturas {
             String id= "";
                        
             Statement statement = connection.createStatement();
-            String sql = "Select COUNT(IDFACTURA) from FACTURAS";
+            String sql = "Select TOP 1 IDFACTURA from FACTURAS ORDER BY IDFACTURA DESC";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                  id= resultSet.getString(1);

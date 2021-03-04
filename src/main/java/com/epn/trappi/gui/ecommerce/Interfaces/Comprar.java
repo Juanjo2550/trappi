@@ -65,8 +65,8 @@ public class Comprar extends javax.swing.JFrame {
                 aux[3]=resultSet.getString("PRECIOBIEN");
                 aux[4]=resultSet.getString("CANTIDADINVENTARIO");;
                 productos.addRow(aux);
-                Articulo art=new Articulo(aux[0], aux[1],Double.parseDouble(aux[3]) ,Integer.parseInt(aux[4]), aux[2]);
-                Main.stock.listaarticulos.add(art);
+//                Articulo art=new Articulo(aux[0], aux[1],Double.parseDouble(aux[3]) ,Integer.parseInt(aux[4]), aux[2]);
+//                Main.stock.listaarticulos.add(art);
             }
             jTable1.setModel(productos);
             
