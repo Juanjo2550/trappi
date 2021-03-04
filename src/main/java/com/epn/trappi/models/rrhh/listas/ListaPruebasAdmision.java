@@ -1,7 +1,6 @@
 package com.epn.trappi.models.rrhh.listas;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
-import com.epn.trappi.models.rrhh.contratacion.Aspirante;
 import com.epn.trappi.models.rrhh.contratacion.PruebaAdmision;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -49,17 +48,19 @@ public class ListaPruebasAdmision implements Lista <PruebaAdmision> {
        pruebasAdmision = listaPruebasAdmision.toArray(pruebasAdmision);
        return pruebasAdmision;
     }
+    
+    
     public void agregar(PruebaAdmision nuevaPruebaAdm, String cedulaAsp){
         try { 
             String query = "SELECT * FROM ASPIRANTE WHERE CEDULAASP = " + "'"+cedulaAsp+"'";
             pstm = conn.prepareStatement(query);
             rs = pstm.executeQuery();
-            System.out.println("cedula  se obtuvo fue " + cedulaAsp);
+           // System.out.println("cedula  se obtuvo fue " + cedulaAsp);
             int idAspirante = 0;
             while(rs.next()){
                 idAspirante = rs.getInt("ID_ASP");
             }
-            System.out.println("id se obtuvo fue " + idAspirante);
+            //System.out.println("id se obtuvo fue " + idAspirante);
             int idPrueba = obtenerTodos().length + 1;
             query = "INSERT INTO PRUEBAADMISION ( IDPRUEBA, ID_ASP, PUNTAJEPRUEBA, ACTITUDESPRUEBA, APTITUDESPRUEBA, APROBACIONPRUEBA) VALUES (?, ?, ?, ?, ?, ?)";
             pstm = conn.prepareStatement(query);
@@ -125,7 +126,7 @@ public class ListaPruebasAdmision implements Lista <PruebaAdmision> {
         PruebaAdmision prueba = null;
         try {
             String query = "SELECT * FROM ASPIRANTE JOIN PRUEBAADMISION on ASPIRANTE.ID_ASP = PRUEBAADMISION.ID_ASP WHERE CEDULAASP ='"+cedulaAspirante+"'";
-            System.out.println(query);
+           // System.out.println(query);
             pstm = conn.prepareStatement(query);
             //pstm.setString(0, cedulaAspirante);
             rs = pstm.executeQuery();
