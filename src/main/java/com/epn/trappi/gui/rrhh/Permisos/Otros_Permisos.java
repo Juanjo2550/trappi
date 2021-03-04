@@ -39,8 +39,9 @@ public class Otros_Permisos extends Permiso {
     }
 
     @Override
-    public double calcularProporcionalPagar(double sueldo, int numeroDias) {
+    public String calcularProporcionalPagar(double sueldo, int numeroDias) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+
 }
