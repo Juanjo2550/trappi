@@ -751,14 +751,21 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
     }//GEN-LAST:event_cmbnombreEmpleadoItemStateChanged
 
     private void txtnumDiasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumDiasKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            Empleado sueldo = buscarUno();
-            double sueldoEmpleado = Double.parseDouble(sueldo.getSueldo());
+       String permiso = this.cmbPermiso.getSelectedItem().toString();
+       double sueldoEmpleado = Double.parseDouble(buscarUno().getSueldo());
             int numeroDiasPermiso = Integer.parseInt(txtnumDias.getText());
-            System.out.println(sueldoEmpleado + " " + numeroDiasPermiso);
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            if("Enfermedad".equals(permiso)){
             String valorPago = enfermedad.calcularProporcionalPagar(sueldoEmpleado,numeroDiasPermiso);
-            System.out.println(valorPago +  "este es");
            this.txtvalorAPagar.setText(valorPago);
+            }
+            if("Nacimiento Hijos".equals(permiso)){
+
+            String valorPago = nacimiento.calcularProporcionalPagar(sueldoEmpleado,numeroDiasPermiso);
+            
+           this.txtvalorAPagar.setText(valorPago);
+            }
+            
             
         }
     }//GEN-LAST:event_txtnumDiasKeyPressed

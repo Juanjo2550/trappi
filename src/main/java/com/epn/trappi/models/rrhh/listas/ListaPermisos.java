@@ -152,8 +152,20 @@ public class ListaPermisos implements Lista<Permiso>{
                             rs.getString(8)
                             ));
                 }
-                else if (rs.getString(9).equals("Enfermedad")) {
+                 if (rs.getString(9).equals("Enfermedad")) {
                      listaPermiso.add(new Enfermedad(
+                            
+                            currentEmpleado,
+                            rs.getInt(3),
+                            rs.getString(4),
+                            rs.getString(5),
+                            rs.getString(6),
+                            rs.getString(7),
+                            rs.getString(8)
+                            ));
+                }
+                  if (rs.getString(9).equals("Nacimiento Hijos")) {
+                     listaPermiso.add(new Nacimiento_Hijo(
                             
                             currentEmpleado,
                             rs.getInt(3),
