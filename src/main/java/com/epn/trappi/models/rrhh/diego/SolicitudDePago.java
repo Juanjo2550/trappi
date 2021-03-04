@@ -19,6 +19,7 @@ public class SolicitudDePago {
     String estado;
     Empleado empleadoAPagar;
     RolDePagos rol;
+    double montoTotal;
     public boolean autorizarSolicitud(SolicitudDePago a, boolean autoriza) {
         if(autoriza == true){
             this.estado = "Autorizado";
@@ -32,14 +33,15 @@ public class SolicitudDePago {
         }
     }
         //esto es comentado para solucionar los errores 
-   /* public void solicitarPago(Pago nuevoPago, SolicitudDePago p, boolean autoriza) {
+    /*public void solicitarPago(Pago nuevoPago, SolicitudDePago p, boolean autoriza) {
         if(autorizarSolicitud(p,autoriza)){
+            
             nuevoPago=new Pago(this.empleadoAPagar.getCuentaBancaria(),this.rol.getTotal());
             nuevoPago.realizarPago();
         }
 
-    }
-*/
+    }*/
+
     public Fecha getFechaSolicitud() {
         return fechaSolicitud;
     }
