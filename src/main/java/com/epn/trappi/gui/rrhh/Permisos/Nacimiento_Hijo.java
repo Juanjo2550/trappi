@@ -20,6 +20,10 @@ public class Nacimiento_Hijo extends Permiso {
 
     public Nacimiento_Hijo() {
     }
+
+    public Nacimiento_Hijo(int NUMDIASPERM, String VALORPAGARPERM, String FECHAINICIOPERM, String FECHAFINPERM) {
+        super(NUMDIASPERM, VALORPAGARPERM, FECHAINICIOPERM, FECHAFINPERM);
+    }
     
     
     

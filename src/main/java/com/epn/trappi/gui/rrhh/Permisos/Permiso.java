@@ -24,6 +24,7 @@ public abstract class Permiso {
    private String ESTADOPERM;
    private String tipoPermiso;
    
+   
    private Empleado empleado;
 
     public Permiso(Empleado empleado, int NUMDIASPERM, String VALORPAGARPERM, String COMENTPERM, String FECHAINICIOPERM, String FECHAFINPERM, String ESTADOPERM) {
@@ -38,6 +39,15 @@ public abstract class Permiso {
 
     public Permiso() {
     }
+
+    public Permiso(int NUMDIASPERM, String VALORPAGARPERM, String FECHAINICIOPERM, String FECHAFINPERM) {
+        this.NUMDIASPERM = NUMDIASPERM;
+        this.VALORPAGARPERM = VALORPAGARPERM;
+        this.FECHAINICIOPERM = FECHAINICIOPERM;
+        this.FECHAFINPERM = FECHAFINPERM;
+    }
+    
+    
     
     
 
