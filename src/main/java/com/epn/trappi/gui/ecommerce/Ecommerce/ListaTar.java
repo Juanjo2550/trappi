@@ -44,8 +44,9 @@ public class ListaTar {
     
     public int idtarjeta(){
         int numero=0;
+        String id= "";
         try {
-            String id= "";
+            
                        
             Statement statement = connection.createStatement();
             String sql = "Select COUNT(IDTARJETA) from TARJETAS";
@@ -54,6 +55,7 @@ public class ListaTar {
                  id= resultSet.getString(1);
             }
             numero=Integer.parseInt(id)+1;
+            System.out.print("numero"+numero);
                         
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -63,9 +65,9 @@ public class ListaTar {
     
     public void creartarjeta(String cedula,String cvv1, String numerotarjeta1, String tipo, String fecha){
        try {
-            int numerotarjeta=Integer.parseInt(numerotarjeta1);
+            int numerotarjeta=(Integer.parseInt(numerotarjeta1));
             int cvv = Integer.parseInt(cvv1);
-            int idAletorio = idtarjeta();
+            int idAletorio = idtarjeta()*5;
             
             String sql ="EXEC tarjeta_insert "+idAletorio+","+idcuenta(cedula)+","+numerotarjeta+","+cvv+",'"+fecha+"','"+tipo+"'"; 
             PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);

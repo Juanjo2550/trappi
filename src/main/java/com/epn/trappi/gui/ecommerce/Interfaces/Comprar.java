@@ -5,6 +5,8 @@ import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Diseño.TextPrompt;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Articulo;
 import com.epn.trappi.gui.ecommerce.Ecommerce.CarritoDeCompras;
+import com.epn.trappi.gui.ecommerce.Ecommerce.ListaCarrito;
+import com.epn.trappi.gui.ecommerce.Ecommerce.ListaFacturas;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.FacturaMostrar.FacturaFis;
 import java.sql.Connection;
@@ -63,6 +65,8 @@ public class Comprar extends javax.swing.JFrame {
                 aux[3]=resultSet.getString("PRECIOBIEN");
                 aux[4]=resultSet.getString("CANTIDADINVENTARIO");;
                 productos.addRow(aux);
+                Articulo art=new Articulo(aux[0], aux[1],Double.parseDouble(aux[3]) ,Integer.parseInt(aux[4]), aux[2]);
+                Main.stock.listaarticulos.add(art);
             }
             jTable1.setModel(productos);
             
@@ -420,7 +424,15 @@ public class Comprar extends javax.swing.JFrame {
                 +"\nTotal: "+carrito.factura.calcularTotal()+"\nProductos: "+salida);*/
           if(JOptionPane.showConfirmDialog(null, "¿Desea pagar?","El proceso de pago empezará",JOptionPane.YES_NO_OPTION)==YES_OPTION){
           
-              carrito.factura.conexion.enviarAfinanzas();
+
+                
+              ListaFacturas lista=new ListaFacturas();
+              int id=lista.generarfacturaDatabase(Main.cliente.Nombre);
+              carrito.factura.setId(id);
+              ListaCarrito lista1=new ListaCarrito();
+              lista1.registrar_detallecompra(carrito, Main.cliente.Nombre);
+              
+                            carrito.factura.conexion.enviarAfinanzas();
               carrito.vaciarCarrito();
                 DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
                 int filas = modelo.getRowCount();
@@ -455,87 +467,81 @@ public class Comprar extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable2MouseClicked
 
     
-    
-    public void nombretitulo(String name){
-     jt.setText(name);
-        System.out.println(name);
-    }
-    
-     public String idcliente(){
-        String idcl="";
-        try{
-            
-            Statement statement = connection.createStatement();
-            String sql = "SELECT IDCLIENTE FROM CLIENTES WHERE NOMBRECLIE='"+jt.getText()+"'";
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-              idcl=resultSet.getString("IDCLIENTE");
-            }  
-            
-       } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            return idcl;
-    }
-    public String direccliente(){
-        String idcl="";
-        try{
-            
-            Statement statement = connection.createStatement();
-            String sql = "SELECT DIRECCION FROM CLIENTES WHERE CEDULA2='"+jt.getText()+"'";
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-              idcl=resultSet.getString("DIRECCION");
-            }  
-            
-       } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            return idcl;
-    }
-    
-    
-    public void generarfacturaDatabase(){
-        try{
-            
-            int idAletorio = idfactura();
-            String sql = "exec factura_insert"+ idAletorio+","+Integer.parseInt(idcliente())+","+idAletorio+","+direccliente(); 
-           
-            PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
-            prepsInsertProduct.execute();
-        } catch(SQLException ex){
-            Logger.getLogger(JFBancoInicio.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public void updatefacturaDatabase(int idfac,double subtotal  ,double impuestos, double total){
-        try{
-            
-            String sql = "exec actualizar_factura"+idfac+","+subtotal+","+impuestos+","+total; 
-            PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
-            prepsInsertProduct.execute();
-        } catch(SQLException ex){
-            Logger.getLogger(JFBancoInicio.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    public int idfactura(){
-        int numero=0;
-        try {
-            String id= "";
-                       
-            Statement statement = connection.createStatement();
-            String sql = "Select COUNT(IDFACTURA) from FACTURAS";
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                 id= resultSet.getString(1);
-            }
-            numero=Integer.parseInt(id)+1;
-                        
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return numero;
-    }
+//     public String idcliente(){
+//        String idcl="";
+//        try{
+//            
+//            Statement statement = connection.createStatement();
+//            String sql = "SELECT IDCLIENTE FROM CLIENTES WHERE NOMBRECLIE='"+jt.getText()+"'";
+//            ResultSet resultSet = statement.executeQuery(sql);
+//            while (resultSet.next()) {
+//              idcl=resultSet.getString("IDCLIENTE");
+//            }  
+//            
+//       } catch (SQLException ex) {
+//            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//            return idcl;
+//    }
+//    public String direccliente(){
+//        String idcl="";
+//        try{
+//            
+//            Statement statement = connection.createStatement();
+//            String sql = "SELECT DIRECCION FROM CLIENTES WHERE NOMBRECLIE='"+jt.getText()+"'";
+//            ResultSet resultSet = statement.executeQuery(sql);
+//            while (resultSet.next()) {
+//              idcl=resultSet.getString("DIRECCION");
+//            }  
+//            
+//       } catch (SQLException ex) {
+//            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//            return idcl;
+//    }
+//    
+//    
+//    public void generarfacturaDatabase(){
+//        try{
+//            
+//            int idAletorio = idfactura();
+//            String sql = "exec factura_insert"+ idAletorio+","+Integer.parseInt(idcliente())+","+idAletorio+","+direccliente(); 
+//           
+//            PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
+//            prepsInsertProduct.execute();
+//        } catch(SQLException ex){
+//            Logger.getLogger(JFBancoInicio.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+//    
+//    public void updatefacturaDatabase(int idfac,double subtotal  ,double impuestos, double total){
+//        try{
+//            
+//            String sql = "exec actualizar_factura"+idfac+","+subtotal+","+impuestos+","+total; 
+//            PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
+//            prepsInsertProduct.execute();
+//        } catch(SQLException ex){
+//            Logger.getLogger(JFBancoInicio.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+//    public int idfactura(){
+//        int numero=0;
+//        try {
+//            String id= "";
+//                       
+//            Statement statement = connection.createStatement();
+//            String sql = "Select COUNT(IDFACTURA) from FACTURAS";
+//            ResultSet resultSet = statement.executeQuery(sql);
+//            while (resultSet.next()) {
+//                 id= resultSet.getString(1);
+//            }
+//            numero=Integer.parseInt(id)+1;
+//                        
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return numero;
+//    }
     /**
      * @param args the command line arguments
      */

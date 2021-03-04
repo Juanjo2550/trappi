@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author Bryan
  */
 public class Articulo {
-        String id;
+        public String id;
         public String nombre;
         public Double precio;
         public int cantidad;

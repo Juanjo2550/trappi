@@ -300,7 +300,6 @@ public class CuentaCliente extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     Comprar comprar=new Comprar();
-    comprar.nombretitulo(jt.getText());
     comprar.llenartabla();
     comprar.setVisible(true);
     this.setVisible(false);

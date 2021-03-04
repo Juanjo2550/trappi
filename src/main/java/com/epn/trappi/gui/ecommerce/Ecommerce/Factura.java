@@ -18,6 +18,7 @@ public class Factura {
     
    public String cedulaCliente;
    public String nombreCliente;
+   public int id;
     
     public Factura(String cedula,String nombre,ArrayList <Articulo>  detalle){
         this.cedulaCliente=cedula;
@@ -67,6 +68,11 @@ public ArrayList<Articulo> mostrar(){
 
     return mostrarDetalle;
 }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
    
 }
