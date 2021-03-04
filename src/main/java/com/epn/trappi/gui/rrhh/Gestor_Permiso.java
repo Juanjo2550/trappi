@@ -16,6 +16,7 @@ import com.epn.trappi.models.rrhh.listas.Lista;
 import com.epn.trappi.models.rrhh.listas.ListaPermisos;
 
 import com.epn.trappi.gui.rrhh.Permisos.Enfermedad;
+import com.epn.trappi.gui.rrhh.Permisos.Nacimiento_Hijo;
 import com.epn.trappi.gui.rrhh.Permisos.Otros_Permisos;
 import com.epn.trappi.gui.rrhh.Permisos.Permiso;
 import com.epn.trappi.models.rrhh.juanjo.Administrativo;
@@ -47,6 +48,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Gestor_Permiso extends javax.swing.JFrame {
 Calamidad_Domestica calamidad = new Calamidad_Domestica();
+Nacimiento_Hijo nacimiento = new Nacimiento_Hijo();
+Otros_Permisos otro = new Otros_Permisos();
 Enfermedad enfermedad = new Enfermedad();
 Fecha fecha = new Fecha();
 Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance()).getConnection();
@@ -93,35 +96,31 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
             this.cmbTipoPermiso.setEnabled(true);
             txtDescripcion.setEnabled(false);
             Permisos[0]= "Seleccione";
-       Permisos[1]="Nacimiento Hijo (Parto Normal)";
-       Permisos[2]="Nacimiento Hijo (Parto Cesarea)";
-       Permisos[3]="muerte de padres, hermanos, hijos, cónyuge";
-       Permisos[4]="muerte de nietos, padres del cónyuge o hermanos de la pareja";
-       Permisos[5]="enfermedad de hijos o conyuge";
-       Permisos[6]="enfermedad de padres o hermanos";
+       Permisos[1]="muerte de padres, hermanos, hijos, cónyuge";
+       Permisos[2]="muerte de nietos, padres del cónyuge o hermanos de la pareja";
+       Permisos[3]="enfermedad de hijos o conyuge";
+       Permisos[4]="enfermedad de padres o hermanos";
     }
         if (tipo.equalsIgnoreCase("Enfermedad")){
            
         }
-        if (tipo.equalsIgnoreCase("Nacimientos")){
-             this.cmbTipoPermiso.setEnabled(false);
-            this.txtDescripcion.setEnabled(true);
+        if (tipo.equalsIgnoreCase("Nacimiento Hijos")){
+             this.cmbTipoPermiso.setEnabled(true);
+            this.txtDescripcion.setEnabled(false);
             if("M".equalsIgnoreCase(String.valueOf(sexoEmpleado))){
                 Permisos[0]= "Seleccione...";
             Permisos[1]="Nacimiento Hijo (Parto Normal)";
-            Permisos[2]="Nacimiento Multiple o Parto Cesarea)";
+            Permisos[2]="Nacimiento Multiple o Parto Cesarea";
             Permisos[3]="Nacimiento Prematuro";
             Permisos[4]="Nacimiento con enfermedad degenerativa";
             }
             else{
                 Permisos[0]= "Seleccione...";
             Permisos[1]="Nacimiento Hijo (Parto Normal)";
-            Permisos[2]="Nacimiento Multiple o Parto Cesarea)";
+            Permisos[2]="Nacimiento Multiple o Parto Cesarea";
             
             }
-            
-            this.cmbTipoPermiso.setEnabled(false);
-            this.txtDescripcion.setEnabled(true);
+
         }
             return Permisos;
      }  
@@ -551,7 +550,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         jLabel13.setText("Permiso:");
         PanelAspirante.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
-        cmbPermiso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Calamidad Domestica", "Enfermedad", "Otros Permisos" }));
+        cmbPermiso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Calamidad Domestica", "Enfermedad", "Nacimiento Hijos", "Otros Permisos" }));
         cmbPermiso.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbPermisoItemStateChanged(evt);
@@ -704,10 +703,19 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
     }//GEN-LAST:event_cmbPermisoActionPerformed
 
     private void cmbTipoPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoPermisoActionPerformed
+    String tipo_Permiso = this.cmbPermiso.getSelectedItem().toString();
     String tipoCalamidad = (String) cmbTipoPermiso.getSelectedItem();
+    String tipoNacimiento = (String) cmbTipoPermiso.getSelectedItem();
     Empleado sexoEmpleado = buscarUno();
-    int numeroDias = calamidad.calcularNumeroDias(tipoCalamidad,buscarUno().getSexo());
-    txtnumDias.setText(Integer.toString(numeroDias));
+    if("Calamidad Domestica".equalsIgnoreCase(tipo_Permiso)){
+        int numeroDias = calamidad.calcularNumeroDias(tipoCalamidad,buscarUno().getSexo());
+        txtnumDias.setText(Integer.toString(numeroDias));
+    }
+    if ("Nacimiento Hijos".equalsIgnoreCase(tipo_Permiso)){
+        int numeroDias = nacimiento.calcularNumeroDias(tipoCalamidad,buscarUno().getSexo());
+        txtnumDias.setText(Integer.toString(numeroDias));
+    }
+    
     }//GEN-LAST:event_cmbTipoPermisoActionPerformed
 
     private void btnValidarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarFechaActionPerformed

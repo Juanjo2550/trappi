@@ -18,6 +18,9 @@ public class Otros_Permisos extends Permiso {
         super(empleado, NUMDIASPERM, VALORPAGARPERM, COMENTPERM, FECHAINICIOPERM, FECHAFINPERM, ESTADOPERM);
     }
 
+    public Otros_Permisos() {
+    }
+
     
  
 

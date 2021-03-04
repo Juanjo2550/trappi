@@ -17,6 +17,10 @@ public class Nacimiento_Hijo extends Permiso {
     public Nacimiento_Hijo(Empleado empleado, int NUMDIASPERM, String VALORPAGARPERM, String COMENTPERM, String FECHAINICIOPERM, String FECHAFINPERM, String ESTADOPERM) {
         super(empleado, NUMDIASPERM, VALORPAGARPERM, COMENTPERM, FECHAINICIOPERM, FECHAFINPERM, ESTADOPERM);
     }
+
+    public Nacimiento_Hijo() {
+    }
+    
     
     
 
@@ -24,9 +28,10 @@ public class Nacimiento_Hijo extends Permiso {
     public int calcularNumeroDias(String tipoPermiso, char sexo) {
                 int numeroDias = NUMDIASPERM;
         //this.tipoPermiso = TipoPermiso;
-        
+        System.out.println(sexo);
          if("Nacimiento Hijo (Parto Normal)".equals(tipoPermiso) ){
-             System.out.println(sexo);
+             
+             
              if ("M".equalsIgnoreCase(String.valueOf(sexo) )){
                  numeroDias = 10;
              }
@@ -35,7 +40,7 @@ public class Nacimiento_Hijo extends Permiso {
              }
            
         }
-         if("Nacimiento Multiple o Parto Cesarea)".equals(tipoPermiso)){
+         if("Nacimiento Multiple o Parto Cesarea".equals(tipoPermiso)){
            if ("M".equalsIgnoreCase(String.valueOf(sexo) )){
                  numeroDias = 15;
              }
