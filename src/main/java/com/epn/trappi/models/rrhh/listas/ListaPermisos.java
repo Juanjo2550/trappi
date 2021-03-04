@@ -66,7 +66,7 @@ public class ListaPermisos implements Lista<Permiso>{
             else if(newPermission instanceof Enfermedad){
                 int ID = obtenerTodos().length +1;
             String consultaSQL = "INSERT INTO dbo.PERMISO(IDPERM, IDEMP, NUMDIASPERM, VALORPAGARPERM, COMENTPERM, FECHAINICIOPERM,"
-           + " FECHAFINPERM,ESTADOPERM,TIPOPERM) values (?,?,?,?,?,?,?)";
+           + " FECHAFINPERM,ESTADOPERM,TIPOPERM) values (?,?,?,?,?,?,?,?,?)";
             pstm = conn.prepareStatement(consultaSQL);
             pstm.setInt(1, ID);
             pstm.setInt(2, newPermission.getEmpleado().getId());
@@ -75,7 +75,9 @@ public class ListaPermisos implements Lista<Permiso>{
             pstm.setString(5,newPermission.getCOMENTPERM());
             pstm.setString(6,newPermission.getFECHAINICIOPERM());
             pstm.setString(7, newPermission.getFECHAFINPERM());
+                System.out.println("hasta aqui");
             pstm.setString(8, newPermission.getESTADOPERM());
+            System.out.println("hasta aqui");
             pstm.setString(9, "Enfermedad");
             pstm.executeUpdate();
             JOptionPane.showMessageDialog(null,"El permiso se ha registrado con exito");
@@ -83,7 +85,7 @@ public class ListaPermisos implements Lista<Permiso>{
             else{
                 int ID = obtenerTodos().length +1;
             String consultaSQL = "INSERT INTO dbo.PERMISO(IDPERM, IDEMP, NUMDIASPERM, VALORPAGARPERM, COMENTPERM, FECHAINICIOPERM,"
-           + " FECHAFINPERM,ESTADOPERM,TIPOPERM) values (?,?,?,?,?,?,?)";
+           + " FECHAFINPERM,ESTADOPERM,TIPOPERM) values (?,?,?,?,?,?,?,?,?)";
             pstm = conn.prepareStatement(consultaSQL);
             pstm.setInt(1, ID);
             pstm.setInt(2, newPermission.getEmpleado().getId());

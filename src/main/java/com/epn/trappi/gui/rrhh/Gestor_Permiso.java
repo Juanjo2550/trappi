@@ -24,6 +24,7 @@ import com.epn.trappi.models.rrhh.listas.Lista;
 import com.epn.trappi.models.rrhh.listas.ListaPermisos;
 import java.awt.Dimension;
 import java.awt.event.ItemEvent;
+import java.awt.event.KeyEvent;
 
 
 import java.sql.Connection;
@@ -46,6 +47,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Gestor_Permiso extends javax.swing.JFrame {
 Calamidad_Domestica calamidad = new Calamidad_Domestica();
+Enfermedad enfermedad = new Enfermedad();
 Fecha fecha = new Fecha();
 Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance()).getConnection();
 
@@ -75,6 +77,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         cmbnombreEmpleado.setEnabled(true);
         txtCedula.setEnabled(true);
         txtfechaFinPermiso.setEnabled(true);
+        txtDescripcion.setEnabled(false);
         
         btnGuardarPermiso.setEnabled(true);
         TextPrompt buscarProveedor = new TextPrompt("yyyy-MM-dd", txtfechaInicioPermiso);
@@ -84,6 +87,8 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
        public String[] tipoPermiso(String tipo){
        String [] PermisosCalamidad = new String [10];
         if(tipo.equalsIgnoreCase("Calamidad Domestica")){
+            this.cmbTipoPermiso.setEnabled(true);
+            txtDescripcion.setEnabled(false);
             PermisosCalamidad[0]= "Seleccione";
        PermisosCalamidad[1]="Nacimiento Hijo (Parto Normal)";
        PermisosCalamidad[2]="Nacimiento Hijo (Parto Cesarea)";
@@ -93,7 +98,8 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
        PermisosCalamidad[6]="enfermedad de padres o hermanos";
     }
         if (tipo.equalsIgnoreCase("Enfermedad")){
-            PermisosCalamidad[0] = "No se qe enfermedad es"; 
+            this.cmbTipoPermiso.setEnabled(false);
+            this.txtDescripcion.setEnabled(true);
         }
             return PermisosCalamidad;
      }  
@@ -270,7 +276,6 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         lblfechaInicioPermiso3 = new javax.swing.JLabel();
         txtnumDias = new javax.swing.JTextField();
         lblfechaInicioPermiso4 = new javax.swing.JLabel();
-        lblfechaInicioPermiso5 = new javax.swing.JLabel();
         txtfechaInicioPermiso = new javax.swing.JTextField();
         lblfechaInicioPermiso6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -366,7 +371,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
 
         lblCedula.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblCedula.setText("Cedula:");
-        PanelAspirante.add(lblCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, -1, -1));
+        PanelAspirante.add(lblCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 60, -1, -1));
 
         btnGuardarPermiso.setBackground(new java.awt.Color(0, 153, 153));
         btnGuardarPermiso.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -394,11 +399,11 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Tipo de Permiso: ");
-        PanelAspirante.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 100, -1, -1));
+        PanelAspirante.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, -1, -1));
 
         lblfechaFinPermiso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblfechaFinPermiso.setText("Fecha de Fin de Permiso: ");
-        PanelAspirante.add(lblfechaFinPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 150, -1, -1));
+        PanelAspirante.add(lblfechaFinPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 290, -1, -1));
 
         txtfechaFinPermiso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -410,7 +415,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 txtfechaFinPermisoKeyTyped(evt);
             }
         });
-        PanelAspirante.add(txtfechaFinPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 140, 200, 28));
+        PanelAspirante.add(txtfechaFinPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 280, 200, 28));
 
         txtCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -422,7 +427,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 txtCedulaKeyTyped(evt);
             }
         });
-        PanelAspirante.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, 180, 28));
+        PanelAspirante.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 50, 180, 28));
 
         tbllista.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -443,19 +448,19 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 cmbTipoPermisoActionPerformed(evt);
             }
         });
-        PanelAspirante.add(cmbTipoPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 90, 240, -1));
+        PanelAspirante.add(cmbTipoPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, 320, -1));
 
         lblnombreEmpleado1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblnombreEmpleado1.setText("Nombre del Empleado:");
-        PanelAspirante.add(lblnombreEmpleado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 65, -1, -1));
+        PanelAspirante.add(lblnombreEmpleado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
         lblfechaInicioPermiso1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblfechaInicioPermiso1.setText("Descripción");
-        PanelAspirante.add(lblfechaInicioPermiso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, -1, -1));
+        PanelAspirante.add(lblfechaInicioPermiso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
         lblfechaInicioPermiso2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblfechaInicioPermiso2.setText("Fecha Inicio: ");
-        PanelAspirante.add(lblfechaInicioPermiso2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
+        PanelAspirante.add(lblfechaInicioPermiso2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
 
         txtvalorAPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -467,29 +472,30 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 txtvalorAPagarKeyTyped(evt);
             }
         });
-        PanelAspirante.add(txtvalorAPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 200, 28));
+        PanelAspirante.add(txtvalorAPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 200, 28));
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aprobado", "Denegado" }));
-        PanelAspirante.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 160, -1));
+        PanelAspirante.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 160, -1));
 
         lblfechaInicioPermiso3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblfechaInicioPermiso3.setText("Estado: ");
-        PanelAspirante.add(lblfechaInicioPermiso3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
+        PanelAspirante.add(lblfechaInicioPermiso3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
 
         txtnumDias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtnumDiasActionPerformed(evt);
             }
         });
-        PanelAspirante.add(txtnumDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, 80, 30));
+        txtnumDias.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtnumDiasKeyPressed(evt);
+            }
+        });
+        PanelAspirante.add(txtnumDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 80, 30));
 
         lblfechaInicioPermiso4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblfechaInicioPermiso4.setText("Número de dias de Permiso:");
-        PanelAspirante.add(lblfechaInicioPermiso4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
-
-        lblfechaInicioPermiso5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblfechaInicioPermiso5.setText("Número de dias de Permiso:");
-        PanelAspirante.add(lblfechaInicioPermiso5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
+        PanelAspirante.add(lblfechaInicioPermiso4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
         txtfechaInicioPermiso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -501,21 +507,21 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 txtfechaInicioPermisoKeyTyped(evt);
             }
         });
-        PanelAspirante.add(txtfechaInicioPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 200, 28));
+        PanelAspirante.add(txtfechaInicioPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, 200, 28));
 
         lblfechaInicioPermiso6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblfechaInicioPermiso6.setText("Valor a Pagar por Permiso: ");
-        PanelAspirante.add(lblfechaInicioPermiso6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
+        PanelAspirante.add(lblfechaInicioPermiso6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
 
         txtDescripcion.setColumns(20);
         txtDescripcion.setRows(5);
         jScrollPane2.setViewportView(txtDescripcion);
 
-        PanelAspirante.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 770, 70));
+        PanelAspirante.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 710, 70));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Permiso:");
-        PanelAspirante.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 104, -1, -1));
+        PanelAspirante.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         cmbPermiso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Calamidad Domestica", "Enfermedad", "Otros Permisos" }));
         cmbPermiso.addItemListener(new java.awt.event.ItemListener() {
@@ -536,7 +542,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 btnValidarFechaActionPerformed(evt);
             }
         });
-        PanelAspirante.add(btnValidarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, -1, -1));
+        PanelAspirante.add(btnValidarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, -1, -1));
 
         cmbnombreEmpleado.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -548,7 +554,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 cmbnombreEmpleadoActionPerformed(evt);
             }
         });
-        PanelAspirante.add(cmbnombreEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 330, -1));
+        PanelAspirante.add(cmbnombreEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 330, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -612,6 +618,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
    int numeroDias = Integer.parseInt(txtnumDias.getText());
    String valorPagar = txtvalorAPagar.getText();
    String descripcionPermiso = (String) cmbTipoPermiso.getSelectedItem();
+   String descripcionPermisoEnferOtra = txtDescripcion.getText();
    String fechaInicio = txtfechaInicioPermiso.getText();
    String fechaFin = txtfechaFinPermiso.getText();
    String estado = (String)cmbEstado.getSelectedItem();
@@ -628,11 +635,11 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
       permisos.agregar(calamidad);
    }
    if(tipoPermiso.equals("Enfermedad")){
-       enfermedad = new Enfermedad(id,numeroDias, valorPagar,descripcionPermiso,fechaInicio,fechaFin,estado);
+       enfermedad = new Enfermedad(id,numeroDias, valorPagar,descripcionPermisoEnferOtra,fechaInicio,fechaFin,estado);
        permisos.agregar(enfermedad);
    }
    else {
-       otro = new Otros_Permisos(id,numeroDias, valorPagar,descripcionPermiso,fechaInicio,fechaFin,estado);
+       otro = new Otros_Permisos(id,numeroDias, valorPagar,descripcionPermisoEnferOtra,fechaInicio,fechaFin,estado);
        permisos.agregar(otro);
    }
     }//GEN-LAST:event_btnGuardarPermisoActionPerformed
@@ -695,13 +702,26 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
     }//GEN-LAST:event_cmbPermisoItemStateChanged
 
     private void cmbnombreEmpleadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbnombreEmpleadoItemStateChanged
-         if(evt.getStateChange()==ItemEvent.SELECTED){
+        /* if(evt.getStateChange()==ItemEvent.SELECTED){
             if(this.cmbnombreEmpleado.getSelectedIndex()>-1){
                 obtenerNombre();
                 //this.cmbTipoPermiso.setModel(new DefaultComboBoxModel(tipoPermiso(cmbPermiso.getSelectedItem().toString())));
             }
-        }
+        }*/
     }//GEN-LAST:event_cmbnombreEmpleadoItemStateChanged
+
+    private void txtnumDiasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumDiasKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            Empleado sueldo = buscarUno();
+            double sueldoEmpleado = Double.parseDouble(sueldo.getSueldo());
+            int numeroDiasPermiso = Integer.parseInt(txtnumDias.getText());
+            System.out.println(sueldoEmpleado + " " + numeroDiasPermiso);
+            String valorPago = enfermedad.calcularProporcionalPagar(sueldoEmpleado,numeroDiasPermiso);
+            System.out.println(valorPago +  "este es");
+           this.txtvalorAPagar.setText(valorPago);
+            
+        }
+    }//GEN-LAST:event_txtnumDiasKeyPressed
 
     /**
      * @param args the command line arguments
@@ -779,7 +799,6 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
     private javax.swing.JLabel lblfechaInicioPermiso2;
     private javax.swing.JLabel lblfechaInicioPermiso3;
     private javax.swing.JLabel lblfechaInicioPermiso4;
-    private javax.swing.JLabel lblfechaInicioPermiso5;
     private javax.swing.JLabel lblfechaInicioPermiso6;
     private javax.swing.JLabel lblnombreEmpleado1;
     private javax.swing.JTable tbllista;
