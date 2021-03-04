@@ -81,28 +81,52 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         
         btnGuardarPermiso.setEnabled(true);
         TextPrompt buscarProveedor = new TextPrompt("yyyy-MM-dd", txtfechaInicioPermiso);
+        TextPrompt diasPermiso = new TextPrompt("Ingrese el número de días", this.txtnumDias);
+        
     }
 
     
        public String[] tipoPermiso(String tipo){
-       String [] PermisosCalamidad = new String [10];
+       String [] Permisos = new String [10];
+       char sexoEmpleado = buscarUno().getSexo();
         if(tipo.equalsIgnoreCase("Calamidad Domestica")){
             this.cmbTipoPermiso.setEnabled(true);
             txtDescripcion.setEnabled(false);
-            PermisosCalamidad[0]= "Seleccione";
-       PermisosCalamidad[1]="Nacimiento Hijo (Parto Normal)";
-       PermisosCalamidad[2]="Nacimiento Hijo (Parto Cesarea)";
-       PermisosCalamidad[3]="muerte de padres, hermanos, hijos, cónyuge";
-       PermisosCalamidad[4]="muerte de nietos, padres del cónyuge o hermanos de la pareja";
-       PermisosCalamidad[5]="enfermedad de hijos o conyuge";
-       PermisosCalamidad[6]="enfermedad de padres o hermanos";
+            Permisos[0]= "Seleccione";
+       Permisos[1]="Nacimiento Hijo (Parto Normal)";
+       Permisos[2]="Nacimiento Hijo (Parto Cesarea)";
+       Permisos[3]="muerte de padres, hermanos, hijos, cónyuge";
+       Permisos[4]="muerte de nietos, padres del cónyuge o hermanos de la pareja";
+       Permisos[5]="enfermedad de hijos o conyuge";
+       Permisos[6]="enfermedad de padres o hermanos";
     }
         if (tipo.equalsIgnoreCase("Enfermedad")){
+           
+        }
+        if (tipo.equalsIgnoreCase("Nacimientos")){
+             this.cmbTipoPermiso.setEnabled(false);
+            this.txtDescripcion.setEnabled(true);
+            if("M".equalsIgnoreCase(String.valueOf(sexoEmpleado))){
+                Permisos[0]= "Seleccione...";
+            Permisos[1]="Nacimiento Hijo (Parto Normal)";
+            Permisos[2]="Nacimiento Multiple o Parto Cesarea)";
+            Permisos[3]="Nacimiento Prematuro";
+            Permisos[4]="Nacimiento con enfermedad degenerativa";
+            }
+            else{
+                Permisos[0]= "Seleccione...";
+            Permisos[1]="Nacimiento Hijo (Parto Normal)";
+            Permisos[2]="Nacimiento Multiple o Parto Cesarea)";
+            
+            }
+            
             this.cmbTipoPermiso.setEnabled(false);
             this.txtDescripcion.setEnabled(true);
         }
-            return PermisosCalamidad;
+            return Permisos;
      }  
+       
+
        
            
 //metodo para obtener el nombre y apellido de la persona que quiere solicitar el permiso
@@ -112,6 +136,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         try {
         Statement createdStatment = connection.createStatement();
             ResultSet resultSet = createdStatment.executeQuery(sql);
+            
             while(resultSet.next()) {
                 String nombre = resultSet.getString("NOMBREEMP");
                 String apellido = resultSet.getString("APELLIDOEMP");
@@ -162,13 +187,15 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
 
     
           public Empleado buscarUno(){
-          String nombre_Completo = (String) cmbnombreEmpleado.getSelectedItem();
+              Empleado empleadoObtenido = null;
+          
+              String nombre_Completo = (String) cmbnombreEmpleado.getSelectedItem();
           String[] partes = nombre_Completo.split("_");
           String nombreEmpleado = partes[0];
          
             String apellido = partes[1];   
         String sql = "SELECT * FROM dbo.EMPLEADO WHERE (NOMBREEMP='" + nombreEmpleado + "'" + "and APELLIDOEMP='" +apellido+ "')";
-        Empleado empleadoObtenido = null;
+        
         try {
             Statement createdStatement = this.connection.createStatement();
             ResultSet resultSet = createdStatement.executeQuery(sql);
@@ -209,8 +236,9 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
             System.out.println(e.toString());
             e.printStackTrace();
         }
-        return empleadoObtenido;
-
+        
+          
+          return empleadoObtenido;
     }
     
     public void  fechaInicio() throws ParseException{
@@ -638,6 +666,10 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
        enfermedad = new Enfermedad(id,numeroDias, valorPagar,descripcionPermisoEnferOtra,fechaInicio,fechaFin,estado);
        permisos.agregar(enfermedad);
    }
+   if(tipoPermiso.equals("Nacimientos")){
+       enfermedad = new Enfermedad(id,numeroDias, valorPagar,descripcionPermiso,fechaInicio,fechaFin,estado);
+       permisos.agregar(enfermedad);
+   }
    else {
        otro = new Otros_Permisos(id,numeroDias, valorPagar,descripcionPermisoEnferOtra,fechaInicio,fechaFin,estado);
        permisos.agregar(otro);
@@ -674,7 +706,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
     private void cmbTipoPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoPermisoActionPerformed
     String tipoCalamidad = (String) cmbTipoPermiso.getSelectedItem();
     Empleado sexoEmpleado = buscarUno();
-    int numeroDias = calamidad.calcularNumeroDias(tipoCalamidad,sexoEmpleado.getSexo());
+    int numeroDias = calamidad.calcularNumeroDias(tipoCalamidad,buscarUno().getSexo());
     txtnumDias.setText(Integer.toString(numeroDias));
     }//GEN-LAST:event_cmbTipoPermisoActionPerformed
 
@@ -703,8 +735,8 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
 
     private void cmbnombreEmpleadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbnombreEmpleadoItemStateChanged
         /* if(evt.getStateChange()==ItemEvent.SELECTED){
-            if(this.cmbnombreEmpleado.getSelectedIndex()>-1){
-                obtenerNombre();
+            if(this.cmbnombreEmpleado.getSelectedIndex()>0){
+                this.cmbPermiso.setEnabled(false);
                 //this.cmbTipoPermiso.setModel(new DefaultComboBoxModel(tipoPermiso(cmbPermiso.getSelectedItem().toString())));
             }
         }*/

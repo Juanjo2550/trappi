@@ -50,20 +50,21 @@ public class Calamidad_Domestica extends Permiso{
         int numeroDias = NUMDIASPERM;
         //this.tipoPermiso = TipoPermiso;
         
-         if("Nacimiento Hijo (Parto Normal)".equals(tipoPermiso)){
-             if ("M".equals(sexo)){
+         if("Nacimiento Hijo (Parto Normal)".equals(tipoPermiso) ){
+             System.out.println(sexo);
+             if ("M".equalsIgnoreCase(String.valueOf(sexo) )){
                  numeroDias = 10;
              }
-             else{
+             else if ("F".equalsIgnoreCase(String.valueOf(sexo) )){
                  numeroDias = 90;
              }
            
         }
          if("Nacimiento Hijo (Parto Cesarea)".equals(tipoPermiso)){
-           if ("M".equals(sexo)){
+           if ("M".equalsIgnoreCase(String.valueOf(sexo) )){
                  numeroDias = 15;
              }
-             else{
+           else if("F".equalsIgnoreCase(String.valueOf(sexo) )){
                  numeroDias = 90;
              }
         }

@@ -3,6 +3,7 @@ package com.epn.trappi.models.rrhh.listas;
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.rrhh.Permisos.Calamidad_Domestica;
 import com.epn.trappi.gui.rrhh.Permisos.Enfermedad;
+import com.epn.trappi.gui.rrhh.Permisos.Nacimiento_Hijo;
 import com.epn.trappi.gui.rrhh.Permisos.Otros_Permisos;
 import com.epn.trappi.gui.rrhh.Permisos.Permiso;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
@@ -34,36 +35,26 @@ public class ListaPermisos implements Lista<Permiso>{
         try{
             if (newPermission instanceof Calamidad_Domestica){
             int ID = obtenerTodos().length +1;
-                System.out.println("hola+");
+              
             String consultaSQL = "INSERT INTO dbo.PERMISO(IDPERM, IDEMP, NUMDIASPERM, VALORPAGARPERM, COMENTPERM, FECHAINICIOPERM,"
            + " FECHAFINPERM, ESTADOPERM,TIPOPERM) values (?,?,?,?,?,?,?,?,?)";
             System.out.println("hola+1");
             pstm = conn.prepareStatement(consultaSQL);
-            pstm.setInt(1, ID);
-            System.out.println("hola2");
-                System.out.println(ID);
-                System.out.println(newPermission.getESTADOPERM());
-            pstm.setInt(2, newPermission.getEmpleado().getId());
-            System.out.println("hola3");
+            pstm.setInt(1, ID); 
+            pstm.setInt(2, newPermission.getEmpleado().getId());           
                 System.out.println(newPermission.getEmpleado().getId());
             pstm.setInt(3,newPermission.getNUMDIASPERM());
-             System.out.println("hola4");
-            pstm.setString(4,newPermission.getVALORPAGARPERM());
-             System.out.println("hola5");
-            pstm.setString(5,newPermission.getCOMENTPERM());
-             System.out.println("hola6");
-            pstm.setString(6,newPermission.getFECHAINICIOPERM());
-             System.out.println("hola7");
-            pstm.setString(7, newPermission.getFECHAFINPERM());
-             System.out.println("hola8");
-            pstm.setString(8, newPermission.getESTADOPERM());
-             System.out.println("hola9");
+            pstm.setString(4,newPermission.getVALORPAGARPERM()); 
+            pstm.setString(5,newPermission.getCOMENTPERM());         
+            pstm.setString(6,newPermission.getFECHAINICIOPERM());            
+            pstm.setString(7, newPermission.getFECHAFINPERM());  
+            pstm.setString(8, newPermission.getESTADOPERM());           
             pstm.setString(9, "Calamidad Domestica");
-             System.out.println("hola10");
+            
             pstm.executeUpdate();
             JOptionPane.showMessageDialog(null,"El permiso se ha registrado con exito");
             }
-            else if(newPermission instanceof Enfermedad){
+            if(newPermission instanceof Enfermedad){
                 int ID = obtenerTodos().length +1;
             String consultaSQL = "INSERT INTO dbo.PERMISO(IDPERM, IDEMP, NUMDIASPERM, VALORPAGARPERM, COMENTPERM, FECHAINICIOPERM,"
            + " FECHAFINPERM,ESTADOPERM,TIPOPERM) values (?,?,?,?,?,?,?,?,?)";
@@ -75,14 +66,29 @@ public class ListaPermisos implements Lista<Permiso>{
             pstm.setString(5,newPermission.getCOMENTPERM());
             pstm.setString(6,newPermission.getFECHAINICIOPERM());
             pstm.setString(7, newPermission.getFECHAFINPERM());
-                System.out.println("hasta aqui");
             pstm.setString(8, newPermission.getESTADOPERM());
-            System.out.println("hasta aqui");
             pstm.setString(9, "Enfermedad");
             pstm.executeUpdate();
             JOptionPane.showMessageDialog(null,"El permiso se ha registrado con exito");
             }
-            else{
+            if(newPermission instanceof Nacimiento_Hijo){
+                int ID = obtenerTodos().length +1;
+            String consultaSQL = "INSERT INTO dbo.PERMISO(IDPERM, IDEMP, NUMDIASPERM, VALORPAGARPERM, COMENTPERM, FECHAINICIOPERM,"
+           + " FECHAFINPERM,ESTADOPERM,TIPOPERM) values (?,?,?,?,?,?,?,?,?)";
+            pstm = conn.prepareStatement(consultaSQL);
+            pstm.setInt(1, ID);
+            pstm.setInt(2, newPermission.getEmpleado().getId());
+            pstm.setInt(3,newPermission.getNUMDIASPERM());
+            pstm.setString(4,newPermission.getVALORPAGARPERM());
+            pstm.setString(5,newPermission.getCOMENTPERM());
+            pstm.setString(6,newPermission.getFECHAINICIOPERM());
+            pstm.setString(7, newPermission.getFECHAFINPERM());
+            pstm.setString(8, newPermission.getESTADOPERM());
+            pstm.setString(9, "Nacimiento_Hijo");
+            pstm.executeUpdate();
+            JOptionPane.showMessageDialog(null,"El permiso se ha registrado con exito");
+            }
+            else if (newPermission instanceof Otros_Permisos){
                 int ID = obtenerTodos().length +1;
             String consultaSQL = "INSERT INTO dbo.PERMISO(IDPERM, IDEMP, NUMDIASPERM, VALORPAGARPERM, COMENTPERM, FECHAINICIOPERM,"
            + " FECHAFINPERM,ESTADOPERM,TIPOPERM) values (?,?,?,?,?,?,?,?,?)";
