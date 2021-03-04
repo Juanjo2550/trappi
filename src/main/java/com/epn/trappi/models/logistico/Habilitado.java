@@ -19,7 +19,9 @@ public class Habilitado extends Estado{
     public Habilitado(Vehiculo vehiculo) {
         super( vehiculo);
     }
-
+    public Habilitado(){
+        
+    }
     @Override
     public String enEntrega() {
         vehiculo.actualizarEstado(new EnEspera(vehiculo));
@@ -46,7 +48,7 @@ public class Habilitado extends Estado{
 
     @Override
     public String toString(){
-        return super.estado;
+        return "Habilitado";
     }
     
     

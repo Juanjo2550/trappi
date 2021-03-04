@@ -45,7 +45,7 @@ public class ServicioDbConductor implements Consultable<Conductor>,ManipulableCo
     @Override
     public Conductor obtenerElemento(int llave_primaria) throws SQLException {
         Statement sentencia = connection.getConnection().createStatement();
-        ResultSet resultados = sentencia.executeQuery("SELECT IDEMP,ESTADOEMP FROM EMPLEADO WHERE IDEMP="+llave_primaria);
+        ResultSet resultados = sentencia.executeQuery("SELECT IDEMP,ESTADOEMP FROM EMPLEADO WHERE TIPOEMP='Conductor' and IDEMP="+llave_primaria);
         resultados.next();
             Conductor elemento = new Conductor();
             elemento.setID(resultados.getInt(1));
@@ -69,7 +69,7 @@ public class ServicioDbConductor implements Consultable<Conductor>,ManipulableCo
         }
         Statement sentencia = connection.getConnection().createStatement();
         ResultSet resultados;
-        resultados=sentencia.executeQuery("SELECT * FROM EMPLEADO WHERE "+COLUMN_NAME_CONSTANT+"='"+VALOR+"'");
+        resultados=sentencia.executeQuery("SELECT IDEMP,ESTADOEMP FROM EMPLEADO WHERE TIPOEMP='Conductor' AND "+COLUMN_NAME_CONSTANT+"='"+VALOR+"'");
          ArrayList<Conductor> elementos = new ArrayList<>();
         while(resultados.next()){
             Conductor elemento = new Conductor();

@@ -23,6 +23,9 @@ public class EnEspera extends Estado{
     public EnEspera(String estado){
         super(estado);
     }
+    public EnEspera(){
+        
+    }
 
     @Override
     public String enEntrega() {
@@ -51,7 +54,7 @@ public class EnEspera extends Estado{
     }
     @Override
     public String toString(){
-        return super.estado;
+        return "Ocupado";
     }
     
     

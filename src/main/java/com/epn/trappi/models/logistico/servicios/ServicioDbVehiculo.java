@@ -8,6 +8,7 @@ package com.epn.trappi.models.logistico.servicios;
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.models.logistico.EnEspera;
 import com.epn.trappi.models.logistico.Estado;
+import com.epn.trappi.models.logistico.Habilitado;
 import com.epn.trappi.models.logistico.Vehiculo;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
@@ -40,7 +41,13 @@ public class ServicioDbVehiculo implements Consultable<Vehiculo>,Manipulable<Veh
         while(resultados.next()){
             Vehiculo elemento = new Vehiculo();
             elemento.setMatricula(resultados.getString(1));
-            Estado estado_vehiculo = new EnEspera(resultados.getString(2));
+            String estado = resultados.getString(2);
+            Estado estado_vehiculo;
+            if(estado.equals("Ocupado")){
+                estado_vehiculo = new EnEspera();
+            }else{
+                estado_vehiculo = new Habilitado();
+            }
             elemento.setEstado(estado_vehiculo);
             elemento.setTipo(resultados.getString(3));
             elemento.setKilometraje(resultados.getInt(4));
