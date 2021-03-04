@@ -6,16 +6,23 @@
 package com.epn.trappi.models.rrhh.diego;
 
 
+import com.epn.trappi.models.rrhh.Fecha;
+import com.epn.trappi.models.rrhh.juanjo.Empleado;
+import com.epn.trappi.models.rrhh.juanjo.Observacion;
+import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
+import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
+import com.epn.trappi.models.rrhh.listas.ListaRolesDePago;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  *
  * @author diego
  */
 public class RecursosHumanos {
-    /*ListaEmpleados empleados;
-    public RolesPagos roles = new RolesPagos();
-    private ArrayList<RolPagos> pendientes;*/
+    public ListaEmpleados empleados;
+    public RolDePagos pendiente ;
+    private ListaRolesDePago roles = new ListaRolesDePago();
     
     //comentado para solucionar problemas
    /* public RolesPagos roles = new RolesPagos();
@@ -24,11 +31,19 @@ public class RecursosHumanos {
     public void generarRolesDePago(){
         
     }
+    public RolDePagos iteracionRoles(Empleado e,Fecha f) throws Exception{
+        RolDePagos rol = new RolDePagos(e,f);
+        this.roles.agregar(rol);
+        return rol;
+    }
     public void obtenerRolesDePagoPendientes(){
         //comentado para solucionar problemas 
-       // this.roles.obtenerTodos();
+       this.roles.obtenerTodos();
     }
-    public void generarSolicitudDePago(){
-        
+    public void iterarEmpleados(Fecha f) throws Exception{
+        Empleado[] l1 = new ListaEmpleados().obtenerTodos();
+            for(Empleado e1:l1){
+                this.roles.agregar(iteracionRoles(e1,f));
+        }
     }
 }
