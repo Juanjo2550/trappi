@@ -24,6 +24,35 @@ public class ListaContratos implements Lista<Contrato> {
     public void agregar(Contrato newObject) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    //Agregar un contrato con la cedula de un empleado asociado
+    public void agregar(Contrato newContrato, String cedulaEmp){
+        try{
+            String query = "SELECT IDEMP FROM EMPLEADO WHERE CEDULAEMP = '" + cedulaEmp +"'";
+            pstm = conn.prepareStatement(query);
+            rs = pstm.executeQuery();
+            int idEmp = 0;
+            rs.next();
+            idEmp = rs.getInt("IDEMP");
+            
+            int idContrato = obtenerTodos().length + 1;
+            query = "INSERT INTO CONTRATO (IDCONTRATO, IDEMP, FECHAINICIO, FECHAFIN, TIPOCONTRATO, REQCONTRATO, SUELDO) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            pstm = conn.prepareStatement(query);
+            pstm.setInt(1, idContrato);
+            pstm.setInt(2, idEmp);
+            pstm.setString(3, newContrato.getFechaInicio().toString());
+            pstm.setString(4, newContrato.getFechaFin().toString());
+            pstm.setString(5, newContrato.getTipo());
+            pstm.setString(6, "SI");
+            pstm.setString(7, newContrato.getSueldo());
+             pstm.executeUpdate();
+            System.out.println("El contrato se registro con exito" + idContrato + " CEDULA:  " + cedulaEmp);
+            
+            
+        } catch(Exception e){
+            System.out.println("Error en insercion de Contrato: " + e);
+        }
+    }
 
     @Override
     public Boolean eliminar(String parametro) {
