@@ -64,8 +64,12 @@ public class ContratarAspirante extends javax.swing.JFrame {
     public ContratarAspirante() {
         initComponents();
         jBtnContratar.setEnabled(false);
-        //jTextContratoFechaInicioDia.setEnabled(false);
-        //jTextContratoFechaFin.setEnabled(false);
+        jTextContratoFechaInicioDia.setEnabled(false);
+        jTextContratoFechaInicioMes.setEnabled(false);
+        jTextContratoFechaInicioAno.setEnabled(false);
+        jTextContratoFechaFinDia.setEnabled(false);
+        jTextContratoFechaFinMes.setEnabled(false);
+        jTextContratoFechaFinAno.setEnabled(false);
         jCmbContratoTipoEmpleado.setEnabled(false);
         jTextContratoNumCuenta.setEnabled(false);
         jTextContratoSueldo.setEnabled(false);
@@ -698,8 +702,12 @@ public class ContratarAspirante extends javax.swing.JFrame {
 
     private void jBtnNuevoContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNuevoContratoActionPerformed
         jBtnContratar.setEnabled(true);
-        //jTextContratoFechaInicioDia.setEnabled(true);
-        //jTextContratoFechaFin.setEnabled(true);
+        jTextContratoFechaInicioDia.setEnabled(true);
+        jTextContratoFechaInicioMes.setEnabled(true);
+        jTextContratoFechaInicioAno.setEnabled(true);
+        jTextContratoFechaFinDia.setEnabled(true);
+        jTextContratoFechaFinMes.setEnabled(true);
+        jTextContratoFechaFinAno.setEnabled(true);
         jCmbContratoTipoEmpleado.setEnabled(true);
         jTextContratoNumCuenta.setEnabled(true);
         jTextContratoSueldo.setEnabled(true);
@@ -842,13 +850,22 @@ public class ContratarAspirante extends javax.swing.JFrame {
             
             //Se realiza el registro del empleado en la base de datos 
             Lista listaEmpleado = new ListaEmpleados();
-            Empleado nuevoEmpleado;
+            Empleado nuevoEmpleado = null;
             if (tipoEmpleado.equalsIgnoreCase("conductor")){
                 //System.out.println("Se instancia un conductor");
                 int idNuevoEmp = listaEmpleado.obtenerTodos().length + 1;
                 nuevoEmpleado = new Conductor(idNuevoEmp, nombre, apellido, cedula, cargo, depto, numCuenta, banco, valorSueldo, estadoEmp, sexo);
                 listaEmpleado.agregar(nuevoEmpleado);
-                
+            } else if (tipoEmpleado.equalsIgnoreCase("administrativo")) {
+                //System.out.println("Se instancia un administrativo");
+                int idNuevoEmp = listaEmpleado.obtenerTodos().length + 1;
+                nuevoEmpleado = new Administrativo(idNuevoEmp, nombre, apellido, cedula, cargo, depto, numCuenta, banco, valorSueldo, estadoEmp, sexo);
+                listaEmpleado.agregar(nuevoEmpleado);
+                JOptionPane.showMessageDialog(null, "El Empleado Administrativo se contrató con éxito");
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione el tipo de empleado");
+            }
+            if (nuevoEmpleado != null){
                 //Se procede a registrar el contrato 
                 ListaContratos listaContratos = new ListaContratos();
                 int idContrato = listaContratos.obtenerTodos().length + 1;
@@ -860,17 +877,9 @@ public class ContratarAspirante extends javax.swing.JFrame {
                         Integer.parseInt(jTextContratoFechaFinAno.getText()));
                Contrato newContrato = new Contrato(String.valueOf(idContrato), fechaInicio, fechaFin, tipoContrato, valorSueldo  );
                listaContratos.agregar(newContrato, cedula);
-               JOptionPane.showMessageDialog(null, "El Empleado Conductor se contrató con éxito");
-            } else if (tipoEmpleado.equalsIgnoreCase("administrativo")) {
-                //System.out.println("Se instancia un administrativo");
-                int idNuevoEmp = listaEmpleado.obtenerTodos().length + 1;
-                nuevoEmpleado = new Administrativo(idNuevoEmp, nombre, apellido, cedula, cargo, depto, numCuenta, banco, valorSueldo, estadoEmp, sexo);
-                listaEmpleado.agregar(nuevoEmpleado);
-                JOptionPane.showMessageDialog(null, "El Empleado Administrativo se contrató con éxito");
-            } else {
-                JOptionPane.showMessageDialog(null, "Seleccione el tipo de empleado");
+               JOptionPane.showMessageDialog(null, "El Empleado se contrató con éxito");
             }
-            
+                
             
 
         } else {
