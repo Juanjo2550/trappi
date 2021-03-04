@@ -26,6 +26,11 @@ public class ListaPermisos implements Lista<Permiso>{
     DataBaseConnection dbInstance = DataBaseConnection.getInstance();
     Connection conn = dbInstance.getConnection();
     ArrayList<Permiso> listaPermiso;
+    Calamidad_Domestica calamidad;
+    Enfermedad enfermedad ;
+    Nacimiento_Hijo nacimiento ;
+    Otros_Permisos otro ; 
+    
     
     
     
@@ -38,7 +43,7 @@ public class ListaPermisos implements Lista<Permiso>{
               
             String consultaSQL = "INSERT INTO dbo.PERMISO(IDPERM, IDEMP, NUMDIASPERM, VALORPAGARPERM, COMENTPERM, FECHAINICIOPERM,"
            + " FECHAFINPERM, ESTADOPERM,TIPOPERM) values (?,?,?,?,?,?,?,?,?)";
-            System.out.println("hola+1");
+            
             pstm = conn.prepareStatement(consultaSQL);
             pstm.setInt(1, ID); 
             pstm.setInt(2, newPermission.getEmpleado().getId());           
@@ -208,7 +213,52 @@ public class ListaPermisos implements Lista<Permiso>{
     }
 
     @Override
-    public Permiso buscarUno(String parametro) {
-        return null; //To change body of generated methods, choose Tools | Templates.
+    public Permiso buscarUno(String cedulaEmpleado) {
+        
+         Permiso permiso_especifico = null;
+        try {
+            String query = "SELECT * FROM PERMISO JOIN EMPLEADO on PERMISO.IDEMP = EMPLEADO.ID_EMP WHERE CEDULAEMP ='"+cedulaEmpleado+"'";
+           // System.out.println(query);
+            pstm = conn.prepareStatement(query);
+            //pstm.setString(0, cedulaAspirante);
+            rs = pstm.executeQuery();
+            rs.next();
+            
+            if (rs.getString(21).equals("Calamidad Domestica")){
+               permiso_especifico =new Calamidad_Domestica(rs.getInt("NUMDIASPERM"), rs.getString("VALORPAGARPERM"),
+            rs.getString("FECHAINICIOPERM"),rs.getString("FECHAFINPERM"));
+             System.out.println("Consulta Buscar un permiso se hizo con exito"); 
+            }
+             if (rs.getString(21).equals("Enfermedad")){
+               permiso_especifico =new Enfermedad(rs.getInt("NUMDIASPERM"), rs.getString("VALORPAGARPERM"),
+            rs.getString("FECHAINICIOPERM"),rs.getString("FECHAFINPERM"));
+             System.out.println("Consulta Buscar una permiso se hizo con exito"); 
+            }
+              if (rs.getString(21).equals("Nacimiento Hijos")){
+               permiso_especifico =new Nacimiento_Hijo(rs.getInt("NUMDIASPERM"), rs.getString("VALORPAGARPERM"),
+            rs.getString("FECHAINICIOPERM"),rs.getString("FECHAFINPERM"));
+             System.out.println("Consulta Buscar una permiso se hizo con exito"); 
+            }
+
+               if (rs.getString(21).equals("Otros Permisos")){
+               permiso_especifico =new Otros_Permisos(rs.getInt("NUMDIASPERM"), rs.getString("VALORPAGARPERM"),
+            rs.getString("FECHAINICIOPERM"),rs.getString("FECHAFINPERM"));
+             System.out.println("Consulta Buscar una permiso se hizo con exito"); 
+            }
+            
+           
+        } catch (Exception e) {
+            System.out.println("Error en consulta de buscar un permiso (" + cedulaEmpleado+"): " + e);
+        }
+        finally{
+            try {
+                if(rs!=null) rs.close();
+                if(pstm!=null) pstm.close();
+                
+            } catch (Exception e) {
+                System.out.println("Error al cerrar rs y pstm: " + e);
+            }
+        }
+        return permiso_especifico;
     }
 }
