@@ -538,6 +538,11 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         });
         PanelAspirante.add(btnValidarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, -1, -1));
 
+        cmbnombreEmpleado.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbnombreEmpleadoItemStateChanged(evt);
+            }
+        });
         cmbnombreEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbnombreEmpleadoActionPerformed(evt);
@@ -688,6 +693,15 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
             }
         }
     }//GEN-LAST:event_cmbPermisoItemStateChanged
+
+    private void cmbnombreEmpleadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbnombreEmpleadoItemStateChanged
+         if(evt.getStateChange()==ItemEvent.SELECTED){
+            if(this.cmbnombreEmpleado.getSelectedIndex()>-1){
+                obtenerNombre();
+                //this.cmbTipoPermiso.setModel(new DefaultComboBoxModel(tipoPermiso(cmbPermiso.getSelectedItem().toString())));
+            }
+        }
+    }//GEN-LAST:event_cmbnombreEmpleadoItemStateChanged
 
     /**
      * @param args the command line arguments

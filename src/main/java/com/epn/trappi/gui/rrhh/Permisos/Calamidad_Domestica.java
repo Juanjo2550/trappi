@@ -82,6 +82,11 @@ public class Calamidad_Domestica extends Permiso{
         return numeroDias;
     }
 
+    @Override
+    public double calcularProporcionalPagar(double sueldo, int numeroDias) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
         
     }
 
