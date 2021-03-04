@@ -7,19 +7,53 @@ package com.epn.trappi.gui.rrhh;
 
 
 import com.epn.trappi.*;
+import com.epn.trappi.models.rrhh.contratacion.Contrato;
+import com.epn.trappi.models.rrhh.juanjo.Empleado;
+import com.epn.trappi.models.rrhh.listas.Lista;
+import com.epn.trappi.models.rrhh.listas.ListaContratos;
+import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
 import java.awt.Color;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author stali
  */
 public class Contratos extends javax.swing.JFrame {
-
+    private void listarContratos(){
+        Lista listaEmpleados = new ListaEmpleados();
+        Empleado [] empleados = (Empleado[]) listaEmpleados.obtenerTodos();
+        ListaContratos listaContratos = new ListaContratos();
+        DefaultTableModel model = (DefaultTableModel) jTableContratosEmpleados.getModel();
+        model.setRowCount(0);
+        
+        for (Empleado emp: empleados){
+            Vector v = new Vector();
+            Contrato contrato = new Contrato();
+            contrato = listaContratos.buscarUno(emp.getCedula());
+            if (contrato != null){
+                v.add(emp.getNombres());
+                
+                v.add(emp.getApellidos());
+                v.add(emp.getCedula());
+                v.add(emp.getCargo());
+                v.add(contrato.getFechaInicio().toString());
+                v.add(contrato.getFechaFin().toString());
+                v.add(contrato.getTipo());
+                model.addRow(v); 
+            } else {
+                continue;
+            }
+            jTableContratosEmpleados.setModel(model);
+        }
+    }
     /**
      * Creates new form Ejemplo_GUI
      */
     public Contratos() {
         initComponents();
+        listarContratos();
     }
     
     /**
@@ -44,7 +78,7 @@ public class Contratos extends javax.swing.JFrame {
         PanelAspirante = new javax.swing.JPanel();
         jButRegCliente2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableContratosEmpleados = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -187,20 +221,20 @@ public class Contratos extends javax.swing.JFrame {
         });
         PanelAspirante.add(jButRegCliente2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 180, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableContratosEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "Nombre", "Apellidos", "Cédula", "Cargo", "Fecha Inicio", "Fecha Fin", "Tipo"
+                "Nombre", "Apellidos", "Cédula", "Cargo", "Fecha Inicio", "Fecha Fin", "Tipo"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(7).setResizable(false);
+        jScrollPane1.setViewportView(jTableContratosEmpleados);
+        if (jTableContratosEmpleados.getColumnModel().getColumnCount() > 0) {
+            jTableContratosEmpleados.getColumnModel().getColumn(6).setResizable(false);
         }
 
         PanelAspirante.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 860, 450));
@@ -330,6 +364,6 @@ public class Contratos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableContratosEmpleados;
     // End of variables declaration//GEN-END:variables
 }
