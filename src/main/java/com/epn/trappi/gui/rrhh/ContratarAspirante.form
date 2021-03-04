@@ -345,8 +345,8 @@
                     <Column editable="true" title="Tel&#xe9;fono" type="java.lang.Object"/>
                     <Column editable="true" title="C&#xe9;dula" type="java.lang.Object"/>
                     <Column editable="true" title="Cargo" type="java.lang.Object"/>
-                    <Column editable="true" title="Puntaje" type="java.lang.Object"/>
                     <Column editable="true" title="Actitudes" type="java.lang.Object"/>
+                    <Column editable="true" title="Aptitudes" type="java.lang.Object"/>
                     <Column editable="true" title="Puntaje" type="java.lang.Object"/>
                   </Table>
                 </Property>

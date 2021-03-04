@@ -1,6 +1,8 @@
 package com.epn.trappi.models.rrhh.contratacion;
 
+import com.epn.trappi.models.rrhh.listas.Lista;
 import com.epn.trappi.models.rrhh.listas.ListaAspirantes;
+import com.epn.trappi.models.rrhh.listas.ListaPruebasAdmision;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.Vector;
@@ -18,7 +20,7 @@ public class PruebaAdmision {
     private String aptitudesBase;
     private String aprobacion;
     private ListaAspirantes aspirantes;
-    
+    private Lista pruebas;
     public PruebaAdmision(int puntaje, String actitudes, String aptitudes) {
         this.puntaje = puntaje;
         this.actitudes = actitudes;
@@ -27,7 +29,8 @@ public class PruebaAdmision {
         
     }
     public PruebaAdmision(){
-        
+        pruebas = new ListaPruebasAdmision();
+        aspirantes = new ListaAspirantes();
     }
     
     public void registrarResultadosPrueba( int puntaje, String actitudes, String aptitudes){
@@ -37,42 +40,43 @@ public class PruebaAdmision {
         this.aptitudes = aptitudes;
     }
     
-        public ArrayList <Aspirante> obtenerAspirantesAptos(){
-        ArrayList <Aspirante> asp = new ArrayList<>();
-        // asp = aspirantes.obtenerTodos();
-        for (Aspirante a: asp){
-//            if(validarPruebaAdmision(a.getPrueba()))
-//                asp.add(a);
+    public ArrayList <Aspirante> obtenerAspirantesAptos(String actitudes, String aptitudes, int puntaje){
+       ArrayList <Aspirante> aspirantesAptos = new ArrayList<>();
+        Aspirante[] aspirantesOb = aspirantes.obtenerTodos();
+        for (Aspirante asp: aspirantesOb){
+            if(validarPruebaAdmision(asp.getCedula(), actitudes, aptitudes, puntaje))
+               aspirantesAptos.add(asp);
         }
-        return asp;
+        return aspirantesAptos;
     }
-    public boolean validarPruebaAdmision(PruebaAdmision prueba){
-        return (verificarActitudes(prueba) && verificarAptitudes(prueba)  && (prueba.getPuntaje() >= this.puntajeBase));
+    public boolean validarPruebaAdmision(String cedulaAsp, String actitudes, String aptitudes, int puntaje){
+        PruebaAdmision prueba = (PruebaAdmision)pruebas.buscarUno(cedulaAsp);
+        return (verificarActitudes(prueba, actitudes) && verificarAptitudes(prueba, aptitudes)  && (prueba.getPuntaje() >= this.puntajeBase));
     }
     
-    private boolean verificarAptitudes(PruebaAdmision prueba){
-        String aptitudes = prueba.getAptitudes();
+    private boolean verificarAptitudes(PruebaAdmision prueba, String aptitudesBase){
+        String aptitudesPrueba = prueba.getAptitudes();
         Vector v = new Vector();
-        StringTokenizer tokens = new StringTokenizer(aptitudes);
+        StringTokenizer tokens = new StringTokenizer(aptitudesPrueba);
         while(tokens.hasMoreTokens()){
             v.add(tokens.nextToken());
         }
         for (int i = 0; i < v.size(); i++){
-            if (this.aptitudesBase.contains(String.valueOf(v.elementAt(i))))
+            if (aptitudesBase.contains(String.valueOf(v.elementAt(i))))
                 return true;
         }
         return false;
         
     }
-    private boolean verificarActitudes(PruebaAdmision prueba){
-        String actitudes = prueba.getActitudes();
+    private boolean verificarActitudes(PruebaAdmision prueba, String actitudesBase){
+        String actitudesPrueba = prueba.getActitudes();
         Vector v = new Vector();
-        StringTokenizer tokens = new StringTokenizer(actitudes);
+        StringTokenizer tokens = new StringTokenizer(actitudesPrueba);
         while(tokens.hasMoreTokens()){
             v.add(tokens.nextToken());
         }
         for (int i = 0; i < v.size(); i++){
-            if (this.actitudesBase.contains(String.valueOf(v.elementAt(i))))
+            if (actitudesBase.contains(String.valueOf(v.elementAt(i))))
                 return true;
         }
         return false;

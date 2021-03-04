@@ -9,6 +9,10 @@ package com.epn.trappi.gui.rrhh;
 import com.epn.trappi.*;
 import com.epn.trappi.models.rrhh.contratacion.Aspirante;
 import com.epn.trappi.models.rrhh.contratacion.Contratacion;
+import com.epn.trappi.models.rrhh.contratacion.PruebaAdmision;
+import com.epn.trappi.models.rrhh.listas.Lista;
+import com.epn.trappi.models.rrhh.listas.ListaAspirantes;
+import com.epn.trappi.models.rrhh.listas.ListaPruebasAdmision;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -23,9 +27,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ContratarAspirante extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Ejemplo_GUI
-     */
     public ContratarAspirante() {
         initComponents();
        // ControladorPruebaAdmision controlador = new ControladorPruebaAdmision(16, "sociable colaborador amable", "adptable agil versatil");
@@ -285,7 +286,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Apellidos", "Teléfono", "Cédula", "Cargo", "Puntaje", "Actitudes", "Puntaje"
+                "Nombre", "Apellidos", "Teléfono", "Cédula", "Cargo", "Actitudes", "Aptitudes", "Puntaje"
             }
         ));
         jScrollPane1.setViewportView(jTableAspirantesAptos);
@@ -599,29 +600,40 @@ public class ContratarAspirante extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnNuevoContratoActionPerformed
 
     private void jBtnBuscarAspirantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarAspirantesActionPerformed
-        //Obtenemos las datos del aspirante
-        DefaultTableModel model = (DefaultTableModel) jTableAspirantesAptos.getModel();
-        int selected = jTableAspirantesAptos.getSelectedRow();
-        String nombre = (String) model.getValueAt(selected, 0);
-        String apellido = (String) model.getValueAt(selected, 1);
+        PruebaAdmision pruebas = new PruebaAdmision();
+        ArrayList <Aspirante> aspirantesAptos = new ArrayList<>();
+        aspirantesAptos = pruebas.obtenerAspirantesAptos(jTextContratoActitudes.getText(), jTextContratoAptitudes.getText(), Integer.parseInt(jTextContratoPuntaje.getText()));
+        if (aspirantesAptos.size() > 0){
+           
+            ListaPruebasAdmision listaPruebas = new ListaPruebasAdmision();
+            DefaultTableModel model = (DefaultTableModel) jTableAspirantesAptos.getModel();
+            model.setRowCount(0);
+
+            for (Aspirante asp: aspirantesAptos){
+                Vector v = new Vector();
+                PruebaAdmision prueba = new PruebaAdmision();
+                prueba = listaPruebas.buscarUno(asp.getCedula());
+                if (prueba != null){
+                    v.add(asp.getNombre());
+                    v.add(asp.getApellidos());
+                    v.add(asp.getTelefono());
+                    v.add(asp.getCedula());
+                    v.add(asp.getCargoAspirante());
+                    v.add(prueba.getActitudes());
+                    v.add(prueba.getAptitudes());
+                    v.add(prueba.getPuntaje());
+                    model.addRow(v); 
+                } else {
+                    continue;
+                }
+
+                jTableAspirantesAptos.setModel(model);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No existen aspirantes con esos resultados");
+        }
         
-        String cedula = (String) model.getValueAt(selected, 3);
-        String cargo = (String) model.getValueAt(selected, 4);
-        String depto = jTextContratoDepto.getText();
-        String numCuenta = jTextContratoPuntaje.getText();
-        String banco = jTextContratoBanco.getText();
-        String valorSueldo = jTextContratoSueldo.getText();
-        rdbtMasculino.setActionCommand("M");
-        rdbtFemenino.setActionCommand("F");
-        char sexo = btnGrpSexo.getSelection().getActionCommand().charAt(0);
         
-      // Contratacion contratacion = new Contratacion();
-       //contratacion.registrarEmpleado(nombre, apellido, cedula, cargo, depto , numCuenta, banco, valorSueldo, sexo);
-       
-      /* RRHH rrhh = new RRHH();
-       rrhh.contratarPersonal(nombre, apellido, cedula, cargo, depto, numCuenta, banco, valorSueldo, sexo);
-       JOptionPane.showMessageDialog(null, "El empleado se ha registrado exitosamente");
-        */
     }//GEN-LAST:event_jBtnBuscarAspirantesActionPerformed
 
     private void jTextContratoFechaInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextContratoFechaInicioActionPerformed
