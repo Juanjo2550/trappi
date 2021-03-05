@@ -9,7 +9,6 @@ package com.epn.trappi.gui.rrhh;
 import com.epn.trappi.*;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.contratacion.Aspirante;
-import com.epn.trappi.models.rrhh.contratacion.Contratacion;
 import com.epn.trappi.models.rrhh.contratacion.Contrato;
 import com.epn.trappi.models.rrhh.contratacion.PruebaAdmision;
 import com.epn.trappi.models.rrhh.juanjo.Administrativo;
@@ -846,18 +845,15 @@ public class ContratarAspirante extends javax.swing.JFrame {
             String tipoContrato = (String) jCmbContratoTipo.getSelectedItem();
             String tipoEmpleado = (String) jCmbContratoTipoEmpleado.getSelectedItem();
             String estadoEmp = "Activo";
-            //System.out.println("Se va a registrar : " + tipoContrato + " " + tipoEmpleado + " " + sexo);
             
             //Se realiza el registro del empleado en la base de datos 
             Lista listaEmpleado = new ListaEmpleados();
             Empleado nuevoEmpleado = null;
             if (tipoEmpleado.equalsIgnoreCase("conductor")){
-                //System.out.println("Se instancia un conductor");
                 int idNuevoEmp = listaEmpleado.obtenerTodos().length + 1;
                 nuevoEmpleado = new Conductor(idNuevoEmp, nombre, apellido, cedula, cargo, depto, numCuenta, banco, valorSueldo, estadoEmp, sexo);
                 listaEmpleado.agregar(nuevoEmpleado);
             } else if (tipoEmpleado.equalsIgnoreCase("administrativo")) {
-                //System.out.println("Se instancia un administrativo");
                 int idNuevoEmp = listaEmpleado.obtenerTodos().length + 1;
                 nuevoEmpleado = new Administrativo(idNuevoEmp, nombre, apellido, cedula, cargo, depto, numCuenta, banco, valorSueldo, estadoEmp, sexo);
                 listaEmpleado.agregar(nuevoEmpleado);
@@ -866,18 +862,16 @@ public class ContratarAspirante extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Seleccione el tipo de empleado");
             }
             if (nuevoEmpleado != null){
-                //Se procede a registrar el contrato 
-                ListaContratos listaContratos = new ListaContratos();
-                int idContrato = listaContratos.obtenerTodos().length + 1;
+                //Se procede a registrar el contrato
                 Fecha fechaInicio = new Fecha(Integer.parseInt(jTextContratoFechaInicioDia.getText()),
                         Integer.parseInt(jTextContratoFechaInicioMes.getText()),
                         Integer.parseInt(jTextContratoFechaInicioAno.getText()));
                 Fecha fechaFin = new Fecha(Integer.parseInt(jTextContratoFechaFinDia.getText()),
                         Integer.parseInt(jTextContratoFechaFinMes.getText()),
                         Integer.parseInt(jTextContratoFechaFinAno.getText()));
-               Contrato newContrato = new Contrato(String.valueOf(idContrato), fechaInicio, fechaFin, tipoContrato, valorSueldo  );
-               listaContratos.agregar(newContrato, cedula);
-               JOptionPane.showMessageDialog(null, "El Empleado se contrató con éxito");
+                Contrato contrato = new Contrato();
+                contrato.registrar(fechaInicio, fechaFin, tipoContrato, valorSueldo, cedula);               
+                JOptionPane.showMessageDialog(null, "El Empleado se contrató con éxito");
             }
                 
             

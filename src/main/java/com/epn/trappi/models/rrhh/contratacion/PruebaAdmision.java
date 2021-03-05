@@ -15,9 +15,6 @@ public class PruebaAdmision {
     private int puntaje;
     private String actitudes;
     private String aptitudes;
-    private int puntajeBase;
-    private String actitudesBase;
-    private String aptitudesBase;
     private String aprobacion;
     private ListaAspirantes aspirantes;
     private Lista pruebas;
@@ -33,7 +30,7 @@ public class PruebaAdmision {
         aspirantes = new ListaAspirantes();
     }
     
-    public void registrarResultadosPrueba( int puntaje, String actitudes, String aptitudes){
+    public void registrarResultados( int puntaje, String actitudes, String aptitudes){
   
         this.puntaje = puntaje;
         this.actitudes = actitudes;
@@ -44,14 +41,14 @@ public class PruebaAdmision {
        ArrayList <Aspirante> aspirantesAptos = new ArrayList<>();
         Aspirante[] aspirantesOb = aspirantes.obtenerTodos();
         for (Aspirante asp: aspirantesOb){
-            if(validarPruebaAdmision(asp.getCedula(), actitudes, aptitudes, puntaje))
+            if(validarPrueba(asp.getCedula(), actitudes, aptitudes, puntaje))
                aspirantesAptos.add(asp);
         }
         return aspirantesAptos;
     }
-    public boolean validarPruebaAdmision(String cedulaAsp, String actitudes, String aptitudes, int puntaje){
+    public boolean validarPrueba(String cedulaAsp, String actitudes, String aptitudes, int puntaje){
         PruebaAdmision prueba = (PruebaAdmision)pruebas.buscarUno(cedulaAsp);
-        return (verificarActitudes(prueba, actitudes) && verificarAptitudes(prueba, aptitudes)  && (prueba.getPuntaje() >= this.puntajeBase));
+        return (verificarActitudes(prueba, actitudes) && verificarAptitudes(prueba, aptitudes)  && (prueba.getPuntaje() >= puntaje));
     }
     
     private boolean verificarAptitudes(PruebaAdmision prueba, String aptitudesBase){

@@ -29,20 +29,15 @@ public class ListaAspirantes implements Lista <Aspirante> {
     @Override
     public Aspirante[] obtenerTodos(){
         listaAspirantes = new ArrayList<>();
-        
-       // ListaAspirantes listaTemp = new ListaAspirantes();
-       //this.listaAspirantes.clear();
         try {
             String query = "SELECT * FROM ASPIRANTE";
             pstm = conn.prepareStatement(query);
             rs = pstm.executeQuery();
             
             while(rs.next()){
-               //System.out.println("El id del aspirante es " + rs.getInt("ID_ASP") + " la cedula es " + rs.getString("CEDULAASP"));
                listaAspirantes.add(new Aspirante(rs.getString("NOMBREASP"),rs.getString("APELLIDOASP"),rs.getString("CEDULAASP"),
                 rs.getString("TELEFONOASP"), rs.getString("CARGOASP")));
             }
-            System.out.println("Consulta se hizo con exito");
            
         } catch (Exception e) {
             System.out.println("Error en consulta de Aspirantes: " + e);
@@ -103,10 +98,7 @@ public class ListaAspirantes implements Lista <Aspirante> {
             String query = "SELECT * FROM ASPIRANTE WHERE ID_ASP = ?";
             pstm = conn.prepareStatement(query);
             pstm.setInt(1, Integer.parseInt(idAspirante));
-            
             rs = pstm.executeQuery();
-            
-            
             aspirante = new Aspirante(rs.getString("NOMBREASP"),rs.getString("APELLIDOASP"),rs.getString("CEDULAASP"),
             rs.getString("TELEFONOASP"), rs.getString("CARGOASP"));
             

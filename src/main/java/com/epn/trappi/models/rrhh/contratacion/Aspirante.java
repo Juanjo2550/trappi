@@ -10,8 +10,6 @@ public class Aspirante {
     private String cedula;
     private String telefono;
     private String cargoAspirante;
-    //private String resultados [];
-   // private PruebaAdmision prueba;
 
     public Aspirante(String nombre, String apellidos, String cedula, String telefono, String cargo) {
         this.nombre = nombre;
@@ -19,17 +17,8 @@ public class Aspirante {
         this.cedula = cedula;
         this.telefono = telefono;
         this.cargoAspirante = cargo;
-        //this. prueba = new PruebaAdmision();
-        //solicitarRegistroPrueba(actitudes, aptitudes, puntaje);
         
     }
-    
-    public void solicitarRegistroPrueba(String actitudes, String aptitudes, int puntaje ){
-       // this.prueba.registrarResultadosPrueba(puntaje, actitudes, aptitudes);
-    }
-    
-    
-  
 
     public String getNombre() {
         return nombre;
@@ -51,11 +40,6 @@ public class Aspirante {
         return cargoAspirante;
     }
 
-    
-
-//    public PruebaAdmision getPrueba() {
-//        return prueba;
-//    }
     
     
 }

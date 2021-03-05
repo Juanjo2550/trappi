@@ -21,8 +21,22 @@ public class ListaContratos implements Lista<Contrato> {
     Connection conn = dbInstance.getConnection();
     
     @Override
-    public void agregar(Contrato newObject) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void agregar(Contrato newContrato) {
+        try{
+            int idContrato = obtenerTodos().length + 1;
+            String query = "INSERT INTO CONTRATO (IDCONTRATO, FECHAINICIO, FECHAFIN, TIPOCONTRATO, REQCONTRATO, SUELDO) VALUES (?, ?, ?, ?, ?, ?)";
+            pstm = conn.prepareStatement(query);
+            pstm.setInt(1, idContrato);
+            pstm.setString(2, newContrato.getFechaInicio().toString());
+            pstm.setString(3, newContrato.getFechaFin().toString());
+            pstm.setString(4, newContrato.getTipo());
+            pstm.setString(5, "SI");
+            pstm.setString(6, newContrato.getSueldo());
+             pstm.executeUpdate();
+
+        } catch(Exception e){
+            System.out.println("Error en insercion de Contrato: " + e);
+        }
     }
     
     //Agregar un contrato con la cedula de un empleado asociado
@@ -71,7 +85,7 @@ public class ListaContratos implements Lista<Contrato> {
             String fechaInicioTemp = rs.getString("FECHAINICIO");
             String [] fechaInicioArr = fechaInicioTemp.split("-");
             String fechaFinTemp = rs.getString("FECHAFIN");
-            String [] fechaFinArr = fechaInicioTemp.split("-");
+            String [] fechaFinArr = fechaFinTemp.split("-");
             Fecha fechaInicio = new Fecha(Integer.parseInt(fechaInicioArr[2]), Integer.parseInt(fechaInicioArr[1]), Integer.parseInt(fechaInicioArr[0]));
             Fecha fechaFin = new Fecha(Integer.parseInt(fechaFinArr[2]), Integer.parseInt(fechaFinArr[1]), Integer.parseInt(fechaFinArr[0]));
 
@@ -105,7 +119,7 @@ public class ListaContratos implements Lista<Contrato> {
                String fechaInicioTemp = rs.getString("FECHAINICIO");
                String [] fechaInicioArr = fechaInicioTemp.split("-");
                String fechaFinTemp = rs.getString("FECHAFIN");
-               String [] fechaFinArr = fechaInicioTemp.split("-");
+               String [] fechaFinArr = fechaFinTemp.split("-");
                Fecha fechaInicio = new Fecha(Integer.parseInt(fechaInicioArr[2]), Integer.parseInt(fechaInicioArr[1]), Integer.parseInt(fechaInicioArr[0]));
                Fecha fechaFin = new Fecha(Integer.parseInt(fechaFinArr[2]), Integer.parseInt(fechaFinArr[1]), Integer.parseInt(fechaFinArr[0]));
                
