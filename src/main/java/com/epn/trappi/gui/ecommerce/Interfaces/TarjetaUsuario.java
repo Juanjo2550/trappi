@@ -2,9 +2,14 @@
 package com.epn.trappi.gui.ecommerce.Interfaces;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
+import com.epn.trappi.db.ecommerce.ListaCarrito;
+import com.epn.trappi.db.ecommerce.ListaFacturas;
 import com.epn.trappi.db.ecommerce.ListaTar;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
+import static com.epn.trappi.gui.ecommerce.Interfaces.Comprar.carrito;
+
 import com.epn.trappi.gui.ecommerce.Tarjetas.Tarjeta;
+import com.epn.trappi.gui.ecommerce.entidadBancaria.Cuenta;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -12,15 +17,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class TarjetaUsuario extends javax.swing.JFrame {
         DataBaseConnection dbInstance = DataBaseConnection.getInstance();
         Connection connection = dbInstance.getConnection();
-        public  String cardNumber;
-
-    public String getCardNumber() {
-        return cardNumber;
-    }
+        
 
     
     public TarjetaUsuario() {
@@ -28,37 +30,33 @@ public class TarjetaUsuario extends javax.swing.JFrame {
         this.setSize(1300, 700);
       
         this.setLocationRelativeTo(null);
-        jt.setText(Main.cliente.Nombre);
-        llenardatos();
+       
         llenartabla();
 
-        jt.setEditable(false);
+       
         
     }
     
-    public void llenardatos(){
+    public int idsuario(){
+        int numero=0;
         try {
-            String tarjeta= "";
-            String cvv ="";
-            String tipo ="";
-            String fecha ="";
-                                   
+            String id= "";
+                       
             Statement statement = connection.createStatement();
-            String sql = "select NUMEROTARJETA, CVV, FECHADECADUCIDAD,TIPO from TARJETAS T, CUENTABANCARIA C, CLIENTES L "+
-                         "where T.IDCUENTABANCARIA=C.IDCUENTABANCARIA and C.IDCLIENTE=L.IDCLIENTE and L.NOMBRECLIE='"+jt.getText()+"'";
+            String sql = "Select CLIENTES.IDCLIENTE from CLIENTES, CUENTABANCARIA  "+
+                         "WHERE CLIENTES.IDCLIENTE=CUENTABANCARIA.IDCLIENTE AND CLIENTES.CEDULA2="+Integer.parseInt(Main.cliente.Cedula);
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
-                 tarjeta= resultSet.getString("NUMEROTARJETA");
-                 cvv =resultSet.getString("CVV");
-                 fecha =resultSet.getString("FECHADECADUCIDAD");
-                 tipo=resultSet.getString("TIPO");
+                 id= resultSet.getString(1);
             }
-            
-            
+            numero=Integer.parseInt(id);
+                        
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return numero;
     }
+    
     
         
     public void llenartabla(){
@@ -67,8 +65,8 @@ public class TarjetaUsuario extends javax.swing.JFrame {
             DefaultTableModel tarjeta = (DefaultTableModel) tablatarjetas.getModel();
             String[] aux=new String[4];
             Statement statement = connection.createStatement();
-            String sql = "select NUMEROTARJETA, CVV, FECHADECADUCIDAD, TIPO from TARJETAS T, CUENTABANCARIA C, CLIENTES L "+
-                         "where T.IDCUENTABANCARIA=C.IDCUENTABANCARIA and C.IDCLIENTE=L.IDCLIENTE and L.NOMBRECLIE='"+jt.getText()+"'";
+            String sql = "select NUMEROTARJETA, CVV, FECHADECADUCIDAD, TIPO from TARJETAS T, CUENTABANCARIA C "+
+                         "where T.IDCUENTABANCARIA=C.IDCUENTABANCARIA and C.IDCLIENTE="+idsuario();
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                  
@@ -86,13 +84,16 @@ public class TarjetaUsuario extends javax.swing.JFrame {
     }
     
    
-    public String tomarTarjeta()
+    public String[] tomarTarjeta()
     {   String[] aux=new String[4];
         DefaultTableModel modelo = (DefaultTableModel) tablatarjetas.getModel();
-        String numero=(String)modelo.getValueAt(tablatarjetas.getSelectedRow(),0);
-        
-        return numero;
+        aux[0]=((String)modelo.getValueAt(tablatarjetas.getSelectedRow(),0));
+        aux[1]=((String)modelo.getValueAt(tablatarjetas.getSelectedRow(),1));
+        aux[2]=((String)modelo.getValueAt(tablatarjetas.getSelectedRow(),2));
+        aux[3]=((String)modelo.getValueAt(tablatarjetas.getSelectedRow(),3));
+        return aux;
     }
+   
     
  
     
@@ -111,7 +112,6 @@ public class TarjetaUsuario extends javax.swing.JFrame {
         tablatarjetas = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -148,9 +148,6 @@ public class TarjetaUsuario extends javax.swing.JFrame {
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/panelSuperiorComidasVariadasCortada.jpg"))); // NOI18N
 
-        jt.setBackground(new java.awt.Color(0, 102, 102));
-        jt.setForeground(new java.awt.Color(255, 255, 255));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -162,17 +159,19 @@ public class TarjetaUsuario extends javax.swing.JFrame {
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 1044, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jt, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 6, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1039, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(241, 241, 241)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 6, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1039, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -189,9 +188,7 @@ public class TarjetaUsuario extends javax.swing.JFrame {
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jt, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -211,8 +208,57 @@ public class TarjetaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_tablatarjetasMouseClicked
 
     private void jButtonSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSeleccionarActionPerformed
+        Cuenta cuenta=new Cuenta();
+
         
-        this.cardNumber=tomarTarjeta();
+        
+        try{
+            Statement statement = connection.createStatement();
+            String sql = "SELECT NUMERODECUENTA, FONDOS FROM CUENTABANCARIA WHERE IDCLIENTE="+idsuario();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while(resultSet.next()){
+              cuenta.fondo=Double.valueOf(resultSet.getString("FONDOS"));
+              cuenta.NumeroCuenta=resultSet.getString("NUMERODECUENTA");
+              cuenta.CedulaPropietario=Main.cliente.Cedula;
+            }
+            
+       } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE,null, ex);
+        }
+        
+        String datos[]=tomarTarjeta();
+        if(datos[2].equals("Credito")){
+        Main.tarcre.Tipo=datos[2];
+        Main.tip=datos[2];
+        Main.tarcre.CVV=datos[1];
+        Main.tarcre.NumeroTarjeta=datos[0];
+        Main.tarcre.Fechacaducidad=datos[3];
+        Main.tarcre.cuenta=cuenta;
+        }
+        else{
+        Main.tardeb.Tipo=datos[2];
+        Main.tip=datos[2];
+        Main.tardeb.CVV=datos[1];
+        Main.tardeb.NumeroTarjeta=datos[0];
+        Main.tardeb.Fechacaducidad=datos[3];
+        Main.tardeb.cuenta=cuenta;
+        }
+        
+        if(Comprar.carrito.factura.pago.validarPago(Main.tarcre,Main.tardeb,Main.tip,carrito.factura.calcularTotal())){
+              
+            
+                
+              ListaFacturas lista=new ListaFacturas();
+              int id=lista.generarfacturaDatabase(Main.cliente.Nombre);
+              Comprar.carrito.factura.setId(id);
+              ListaCarrito lista1=new ListaCarrito();
+              lista1.registrar_detallecompra(Comprar.carrito, Main.cliente.Nombre);
+                            Comprar.carrito.factura.conexion.enviarAfinanzas();
+                JOptionPane.showMessageDialog(rootPane,"compra realizada con exito");
+         }
+             else{
+                 JOptionPane.showMessageDialog(rootPane,"Saldo insuficiente, no se puede realizar la compra");
+             }
         
         this.setVisible(false);
 
@@ -269,7 +315,6 @@ public class TarjetaUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jt;
     private javax.swing.JTable tablatarjetas;
     // End of variables declaration//GEN-END:variables
 }

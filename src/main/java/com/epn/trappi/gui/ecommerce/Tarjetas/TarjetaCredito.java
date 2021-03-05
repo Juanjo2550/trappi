@@ -20,7 +20,7 @@ public class TarjetaCredito implements Tarjeta{
     public String NumeroTarjeta;
     public String CVV;
     public String Fechacaducidad;
-    Cuenta cuenta;
+    public Cuenta cuenta;
 
     
     

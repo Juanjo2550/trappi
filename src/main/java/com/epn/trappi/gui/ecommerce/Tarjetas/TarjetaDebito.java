@@ -19,7 +19,7 @@ public class TarjetaDebito implements Tarjeta{
     public String NumeroTarjeta;
     public String CVV;
     public String Fechacaducidad;
-    Cuenta cuenta;
+    public Cuenta cuenta;
     
     @Override
     public void realizarPago(Double valor) {

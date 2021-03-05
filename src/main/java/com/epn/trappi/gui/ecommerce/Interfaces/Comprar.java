@@ -10,6 +10,8 @@ import com.epn.trappi.db.ecommerce.ListaFacturas;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Pago;
 import com.epn.trappi.gui.ecommerce.FacturaMostrar.FacturaFis;
+import com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaCredito;
+import com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaDebito;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,19 +27,20 @@ import javax.swing.table.DefaultTableModel;
 public class Comprar extends javax.swing.JFrame {
     DataBaseConnection dbInstance = DataBaseConnection.getInstance();
     Connection connection = dbInstance.getConnection();
-    CarritoDeCompras carrito;
+    public static CarritoDeCompras carrito=new CarritoDeCompras();
     String id1;
     String nombre1;
     String marca1;
     Double precio1;
     int cantidad1;
     
+    
     public Comprar() {
         initComponents();
         this.setSize(1300, 700);
         this.setLocationRelativeTo(null);
         llenartabla();
-        carrito=new CarritoDeCompras();
+        
         jButtonagregar.setVisible(false);
         jButtoneliminar.setVisible(false);
         jt.setText(Main.cliente.Nombre);
@@ -433,46 +436,31 @@ public class Comprar extends javax.swing.JFrame {
         factu.setVisible(true);
         
           if(JOptionPane.showConfirmDialog(null, "¿Desea pagar?","El proceso de pago empezará",JOptionPane.YES_NO_OPTION)==YES_OPTION){
-          
-              
-              
-              /*Pago pago = new Pago();
-              
-              String tarjeta = JOptionPane.showInputDialog("Ingresa la tarjeta para pagar");
-              String tipo = buscarTarjeta(tarjeta);
-              if(tipo.equals("Credito")){
-              
-                  
-                  
-                 
-                  
-              }
-              else if(tipo.equals("Debito")){
-                  
-              }
-              else
-              {
-                  JOptionPane.showMessageDialog(null,"No existe esa tarjeta");
-              }
-              
-              
-              JOptionPane.showMessageDialog(null, tarjeta);*/
+             TarjetaUsuario tarusu=new TarjetaUsuario();
+             tarusu.setVisible(true);
+//             if(carrito.factura.pago.validarPago(Main.tarcre,Main.tardeb,Main.tip,total)){
+//              
+//            
+//                
+//              ListaFacturas lista=new ListaFacturas();
+//              int id=lista.generarfacturaDatabase(Main.cliente.Nombre);
+//              carrito.factura.setId(id);
+//              ListaCarrito lista1=new ListaCarrito();
+//              lista1.registrar_detallecompra(carrito, Main.cliente.Nombre);
+//                            carrito.factura.conexion.enviarAfinanzas();
+//                            
+//              carrito.vaciarCarrito();
+//                DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
+//                int filas = modelo.getRowCount();
+//                for (int i = 0; i < filas; i++) {
+//                 modelo.removeRow(0);
+//                 }
+//                
+//         }
+//             else{
+//                 JOptionPane.showMessageDialog(rootPane,"Saldo insuficiente, no se puede realizar la compra");
+//             }
                 
-              ListaFacturas lista=new ListaFacturas();
-              int id=lista.generarfacturaDatabase(Main.cliente.Nombre);
-              carrito.factura.setId(id);
-              ListaCarrito lista1=new ListaCarrito();
-              lista1.registrar_detallecompra(carrito, Main.cliente.Nombre);
-                            carrito.factura.conexion.enviarAfinanzas();
-                            
-                            //
-                            
-              carrito.vaciarCarrito();
-                DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
-                int filas = modelo.getRowCount();
-                for (int i = 0; i < filas; i++) {
-                 modelo.removeRow(0);
-                 }
           }
     }
     

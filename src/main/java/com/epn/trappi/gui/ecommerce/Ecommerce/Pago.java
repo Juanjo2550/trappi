@@ -5,6 +5,7 @@
  */
 package com.epn.trappi.gui.ecommerce.Ecommerce;
 
+import com.epn.trappi.gui.ecommerce.Tarjetas.Tarjeta;
 import com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaCredito;
 import com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaDebito;
 
@@ -15,26 +16,24 @@ import com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaDebito;
  */
 public class Pago {
     
-    public TarjetaCredito tarjetacredito = new TarjetaCredito();
-    public TarjetaDebito tarjetadebito = new TarjetaDebito();
-    
 
 
-    public boolean validarPago(String tipo,String tarjeta,Double valor){
+    public boolean validarPago(TarjetaCredito tc, TarjetaDebito td, String tipo,Double valor){
         boolean bandera=false;
-        if(tarjetacredito.Tipo.equals(tipo))
+        if(tipo.equals("Credito"))
         {
-            if(tarjetacredito.validarFondos(valor))
+            
+            if(td.validarFondos(valor))
             {
-                tarjetacredito.realizarPago(valor);
+                td.realizarPago(valor);
                 bandera=true;
             }
         }
         else
-        {
-            if(tarjetadebito.validarFondos(valor))
+        {    
+            if(td.validarFondos(valor))
             {
-                tarjetadebito.realizarPago(valor);
+                td.realizarPago(valor);
                 bandera=true;
             }
         }
