@@ -141,7 +141,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         try {
         Statement createdStatment = connection.createStatement();
             ResultSet resultSet = createdStatment.executeQuery(sql);
-            
+             cmbnombreEmpleado.addItem("Seleccione...");
             while(resultSet.next()) {
                 String nombre = resultSet.getString("NOMBREEMP");
                 String apellido = resultSet.getString("APELLIDOEMP");
@@ -643,7 +643,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         this.txtfechaFinPermiso.setText("");
         this.cmbPermiso.setSelectedItem("Seleccione...");
         this.cmbTipoPermiso.setSelectedItem("Seleccione...");
-        this.cmbnombreEmpleado.setSelectedIndex(-1);
+        this.cmbnombreEmpleado.setSelectedItem("Seleccione...");
         this.txtCedula.setText("");
         cmbnombreEmpleado.setEnabled(true);
         txtCedula.setEnabled(true);
@@ -741,8 +741,8 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
     }//GEN-LAST:event_btnValidarFechaActionPerformed
 
     private void cmbnombreEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbnombreEmpleadoActionPerformed
-        Empleado obtenerCedula = buscarUno();
-        txtCedula.setText(obtenerCedula.getCedula());
+        
+        
     }//GEN-LAST:event_cmbnombreEmpleadoActionPerformed
 
     private void cmbPermisoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbPermisoItemStateChanged
@@ -750,16 +750,23 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
             if(cmbPermiso.getSelectedIndex()>0){
                 this.cmbTipoPermiso.setModel(new DefaultComboBoxModel(tipoPermiso(cmbPermiso.getSelectedItem().toString())));
             }
+           
         }
     }//GEN-LAST:event_cmbPermisoItemStateChanged
 
     private void cmbnombreEmpleadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbnombreEmpleadoItemStateChanged
-        /* if(evt.getStateChange()==ItemEvent.SELECTED){
+        if(evt.getStateChange()==ItemEvent.SELECTED){
             if(this.cmbnombreEmpleado.getSelectedIndex()>0){
-                this.cmbPermiso.setEnabled(false);
+                this.cmbPermiso.setEnabled(true);
+                Empleado obtenerCedula = buscarUno();
+                txtCedula.setText(obtenerCedula.getCedula());
                 //this.cmbTipoPermiso.setModel(new DefaultComboBoxModel(tipoPermiso(cmbPermiso.getSelectedItem().toString())));
             }
-        }*/
+            else{
+                txtCedula.setText("");
+                this.cmbPermiso.setEnabled(false);
+            }
+        }
     }//GEN-LAST:event_cmbnombreEmpleadoItemStateChanged
 
     private void txtnumDiasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumDiasKeyPressed
