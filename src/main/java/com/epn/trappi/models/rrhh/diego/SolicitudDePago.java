@@ -50,32 +50,67 @@ public class SolicitudDePago {
         solicitudesArray = roles.toArray(solicitudesArray);
         return solicitudesArray;
     }
-        
-    
-   // public void EnvioSolicitudPago (Empleado empleado , ){
-        
-    
-   /* public boolean autorizarSolicitud(SolicitudDePago a, boolean autoriza) {
-        if(autoriza == true){
-            this.estado = "Autorizado";
-            System.out.print("Psgo autorizado");
-            return true;
-        }
-        else{
-            this.estado = "Rechazado";
-            System.out.print("No se autorizo el pago");
-            return false;
-        }
-    }*/
-        //esto es comentado para solucionar los errores 
-    /*public void solicitarPago(Pago nuevoPago, SolicitudDePago p, boolean autoriza) {
-        if(autorizarSolicitud(p,autoriza)){
-            
-            nuevoPago=new Pago(this.empleadoAPagar.getCuentaBancaria(),this.rol.getTotal());
-            nuevoPago.realizarPago();
-        }
 
+
+    public Empleado getEmpleadoAPagar() {
+        return empleadoAPagar;
+    }
+
+    public void setEmpleadoAPagar(Empleado empleadoAPagar) {
+        this.empleadoAPagar = empleadoAPagar;
+    }
+
+    public RolDePagos getRol() {
+        return rol;
+    }
+
+    public void setRol(RolDePagos rol) {
+        this.rol = rol;
+    }
+
+    public double getMontoTotal() {
+        return montoTotal;
+    }
+
+    public void setMontoTotal(double montoTotal) {
+        this.montoTotal = montoTotal;
+    }
+
+    public String getCuentaBancaria() {
+        return cuentaBancaria;
+    }
+
+    public void setCuentaBancaria(String cuentaBancaria) {
+        this.cuentaBancaria = cuentaBancaria;
+    }
+
+    public RecursosHumanos getRecursos_humanos() {
+        return recursos_humanos;
+    }
+
+    // public void EnvioSolicitudPago (Empleado empleado , ){
+    /* public boolean autorizarSolicitud(SolicitudDePago a, boolean autoriza) {
+    if(autoriza == true){
+    this.estado = "Autorizado";
+    System.out.print("Psgo autorizado");
+    return true;
+    }
+    else{
+    this.estado = "Rechazado";
+    System.out.print("No se autorizo el pago");
+    return false;
+    }
     }*/
+    //esto es comentado para solucionar los errores 
+    /*public void solicitarPago(Pago nuevoPago, SolicitudDePago p, boolean autoriza) {
+    if(autorizarSolicitud(p,autoriza)){
+    nuevoPago=new Pago(this.empleadoAPagar.getCuentaBancaria(),this.rol.getTotal());
+    nuevoPago.realizarPago();
+    }
+    }*/
+    public void setRecursos_humanos(RecursosHumanos recursos_humanos) {
+        this.recursos_humanos = recursos_humanos;
+    }
 
     public Fecha getFechaSolicitud() {
         return fechaSolicitud;
