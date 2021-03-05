@@ -8,6 +8,7 @@ package com.epn.trappi.gui.rrhh;
 import com.epn.trappi.models.rrhh.*;
 import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
 import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
+import com.epn.trappi.models.rrhh.listas.ListaRolesDePago;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
@@ -18,39 +19,44 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ListaDeRolesEmpleados extends javax.swing.JFrame {
 
-    private ListaEmpleados empleados;
-    private RolDePagos roles;
+    private ListaRolesDePago roles;
 
     /**
      * Creates new form Ejemplo_GUI
      */
     public ListaDeRolesEmpleados() {
         initComponents();
-     /*   this.roles = new RolDePagos();*/
+        this.roles = new ListaRolesDePago();
         fillTable();
     }
 
     public final void fillTable() {
 
         String col[] = {
-            "Cedula",
-            "Valor",
-            "Numero",
+            "Número",
+            "Nombre",
+            "Apellido",
             "Fecha",
+            "Total",
+            "Descuentos",
+            "Estado"
             
 
         };
         DefaultTableModel tableModel = new DefaultTableModel(col, 0);
-      /*  for (RolDePagos rol : this.roles.obtenerTodos()) {
+            for (RolDePagos rol : this.roles.obtenerTodos()) {
             Object[] row = {
-                rol.getEmpleado().getCedula(),
-                rol.getValor(),
                 rol.getNumero(),
-                rol.getFecha().toString()
+                rol.getEmpleado().getNombres(),
+                rol.getEmpleado().getApellidos(),
+                rol.getFecha(),
+                rol.getTotal(),
+                rol.getDescuentos(),
+                rol.getEstado()
             };
             tableModel.addRow(row);
         }
-        */
+        
         this.tablaEmpleados.setModel(tableModel);
         this.tablaEmpleados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.tablaEmpleados.setDefaultEditor(Object.class, null);
