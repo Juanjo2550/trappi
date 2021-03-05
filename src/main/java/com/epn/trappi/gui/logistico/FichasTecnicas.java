@@ -5,7 +5,6 @@
  */
 package com.epn.trappi.gui.logistico;
 
-import com.epn.trappi.controladores.logistico.storedProcedures;
 import com.epn.trappi.models.logistico.Estado;
 import com.epn.trappi.models.logistico.Inhabilitado;
 import com.epn.trappi.models.logistico.ListaMantenimientos;
@@ -13,8 +12,7 @@ import com.epn.trappi.models.logistico.ListaVehiculos;
 import com.epn.trappi.models.logistico.Mantenimiento;
 import com.epn.trappi.models.logistico.SolicitudMantenimiento;
 import com.epn.trappi.models.logistico.Vehiculo;
-import com.epn.trappi.models.logistico.servicios.Consultable;
-import com.epn.trappi.models.logistico.servicios.Manipulable;
+import com.epn.trappi.models.logistico.servicios.ServicioDb;
 import com.epn.trappi.models.logistico.servicios.ServicioDbMantenimiento;
 import com.epn.trappi.models.logistico.servicios.ServicioDbSolicitudMantenimiento;
 import com.epn.trappi.models.logistico.servicios.ServicioDbVehiculo;
@@ -33,8 +31,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FichasTecnicas extends javax.swing.JPanel {
     //ATRIBUTOS
-    Manipulable manipulable;
-    Consultable consultable;
+    ServicioDb servicioDB;
     //METODOS
     public FichasTecnicas() {
         initComponents();
@@ -356,26 +353,26 @@ public class FichasTecnicas extends javax.swing.JPanel {
 
     private void btnVerificarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarVehiculoActionPerformed
         ListaVehiculos vehiculos = new ListaVehiculos();
-        consultable = new ServicioDbVehiculo();
+        servicioDB = new ServicioDbVehiculo();
         String valor = txtMatriculaVehiculo.getText();
         try {
-            vehiculos.setVehiculos(consultable.obtenerElementosPorFiltro(ServicioDbVehiculo.MATRICULA, valor));
+            vehiculos.setVehiculos(servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.MATRICULA, valor).getDatos());
             this.jTableVerificarVehiculo.setModel(vehiculos.mostrarLista());
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null,"Base de datos no disponible.");
+        } catch (SQLException ex) {
+            Logger.getLogger(FichasTecnicas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnVerificarVehiculoActionPerformed
 
     private void btnVerificarMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarMantenimientoActionPerformed
         ListaMantenimientos mantenimientos = new ListaMantenimientos();
-        consultable = new ServicioDbMantenimiento();
+        servicioDB = new ServicioDbMantenimiento();
         String valor = txtIdMantenimiento.getText();
         try {
-            mantenimientos.setMantenimientos(consultable.obtenerElementosPorFiltro(ServicioDbMantenimiento.ID_MANTENIMIENTO, valor));
+            mantenimientos.setMantenimientos(servicioDB.obtenerElementosPorFiltro(ServicioDbMantenimiento.ID_MANTENIMIENTO, valor).getDatos());
             this.jTVerificarMantenimiento.setModel(mantenimientos.mostrarLista());
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null,"Base de datos no disponible.");
-        }
+        } catch (SQLException ex) {
+            Logger.getLogger(FichasTecnicas.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }//GEN-LAST:event_btnVerificarMantenimientoActionPerformed
 
     private void btnVerificarBienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarBienActionPerformed
@@ -412,19 +409,17 @@ public class FichasTecnicas extends javax.swing.JPanel {
 
         Mantenimiento mantenimiento = new Mantenimiento(Integer.parseInt(jTFidMantenimiento.getText()),txtMatriculaVehiculo.getText(), txaDetallesMantenimiento.getText());
         try {
-            manipulable = new ServicioDbMantenimiento();
-            manipulable.insertar(mantenimiento);
-            consultable = new ServicioDbVehiculo();
-            ArrayList<Vehiculo> vehiculos = consultable.obtenerElementosPorFiltro(ServicioDbVehiculo.MATRICULA, txtMatriculaVehiculo.getText());
+            servicioDB = new ServicioDbMantenimiento();
+            servicioDB.insertar(mantenimiento);
+            servicioDB = new ServicioDbVehiculo();
+            ArrayList<Vehiculo> vehiculos = servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.MATRICULA, txtMatriculaVehiculo.getText()).getDatos();
             Vehiculo vehiculo = vehiculos.get(0); //Como la matricula es unica entonces la lista tiene longitud 1
             vehiculo.setEstado(new Inhabilitado());
-            manipulable = new ServicioDbVehiculo();
-            manipulable.actualizar(vehiculo);
+            servicioDB = new ServicioDbVehiculo();
+            servicioDB.actualizar(vehiculo);
             JOptionPane.showMessageDialog(null, "Mantenimiento ingresado exitosamente!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Base de datos no disponible.");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null,"Asegurese de que existe esa matricula");
         }
     }//GEN-LAST:event_btnRegistrarMantenimientoActionPerformed
 

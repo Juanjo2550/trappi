@@ -7,8 +7,10 @@ package com.epn.trappi.models.logistico.servicios;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.models.logistico.EnEspera;
+import com.epn.trappi.models.logistico.Entrega;
 import com.epn.trappi.models.logistico.Estado;
 import com.epn.trappi.models.logistico.Habilitado;
+import com.epn.trappi.models.logistico.Mantenimiento;
 import com.epn.trappi.models.logistico.Vehiculo;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
@@ -21,7 +23,7 @@ import java.util.Set;
  *
  * @author Alexander
  */
-public class ServicioDbVehiculo implements Consultable<Vehiculo>,Manipulable<Vehiculo>{
+public class ServicioDbVehiculo implements ServicioDb<Vehiculo>, Unible<Vehiculo>{
     //Atributos
     DataBaseConnection connection;
     public static String ID_VEHICULO="ID";
@@ -34,7 +36,7 @@ public class ServicioDbVehiculo implements Consultable<Vehiculo>,Manipulable<Veh
         connection = DataBaseConnection.getInstance();
     }
     @Override
-    public ArrayList<Vehiculo> obtenerElementos() throws SQLException {
+    public Consultable obtenerElementos() throws SQLException {
         Statement sentencia = connection.getConnection().createStatement();
         ResultSet resultados = sentencia.executeQuery("SELECT * FROM VEHICULO");
         ArrayList<Vehiculo> elementos = new ArrayList<>();
@@ -55,7 +57,7 @@ public class ServicioDbVehiculo implements Consultable<Vehiculo>,Manipulable<Veh
             //add all data
             elementos.add(elemento);
         }
-        return elementos;
+        return new Consultable(elementos);
     }
 
     @Override
@@ -86,6 +88,12 @@ public class ServicioDbVehiculo implements Consultable<Vehiculo>,Manipulable<Veh
     @Override
     public void actualizar(Vehiculo elemento) throws SQLException {
         CallableStatement statement = connection.getConnection().prepareCall("{call Actualizar_Vehiculo(?,?,?) }");
+        if(String.valueOf(elemento.getKilometraje()).length()==0){
+            
+        }
+        if(elemento.getEstado()==null){
+            
+        }
         statement.setInt(1,elemento.getID());
         statement.setString(2,elemento.getEstado().toString());
         statement.setInt(3,elemento.getKilometraje());
@@ -93,11 +101,12 @@ public class ServicioDbVehiculo implements Consultable<Vehiculo>,Manipulable<Veh
     }
 
     @Override
-    public ArrayList<Vehiculo> obtenerElementosPorFiltro(String COLUMN_NAME_CONSTANT, String VALOR) throws SQLException, Exception {
+    public Consultable obtenerElementosPorFiltro(String COLUMN_NAME_CONSTANT, String VALOR) throws SQLException{
+        /*
         Set<String> TABLAS = Set.of(ID_VEHICULO,MATRICULA,ESTADO,TIPO,KILOMETRAJE);
         if(TABLAS.contains(COLUMN_NAME_CONSTANT)==false){
             throw new Exception("No existe esa columna en el sistema");
-        }
+        }*/
         Statement sentencia = connection.getConnection().createStatement();
         ResultSet resultados;
         resultados=sentencia.executeQuery("SELECT * FROM VEHICULO WHERE "+COLUMN_NAME_CONSTANT+"='"+VALOR+"'");
@@ -113,7 +122,46 @@ public class ServicioDbVehiculo implements Consultable<Vehiculo>,Manipulable<Veh
             //add all data
             elementos.add(elemento);
         }
-        return elementos;
+        return new Consultable(elementos);
+    }
+
+    @Override
+    public Object join(ArrayList<Vehiculo> usado_para_join, Consultable consultable) throws SQLException {
+        ArrayList<String> foreign_keys = new ArrayList<>();
+        Object unibleArrayList = new Object();
+        if("Entrega".equals(consultable.getType())){
+            for (int i=0;i<usado_para_join.size();i++){
+                foreign_keys.add(usado_para_join.get(i).getMatricula());
+            }
+            ArrayList<Entrega> entregas = (ArrayList<Entrega>) consultable.getDatos();
+            int dynamic_size= entregas.size();
+            for (int i=0;i<dynamic_size;i++){
+                String matricula = entregas.get(i).getMatricula();
+                if (foreign_keys.contains(matricula)==false){
+                    entregas.remove(i);
+                    i=i-1;
+                    dynamic_size=entregas.size();
+                }
+            }
+            unibleArrayList = entregas;
+        }
+        if("Mantenimiento".equals(consultable.getType())){
+            for (int i=0;i<usado_para_join.size();i++){
+                foreign_keys.add(String.valueOf(usado_para_join.get(i).getMatricula()));
+            }
+            ArrayList<Mantenimiento> mantenimientos = (ArrayList<Mantenimiento>) consultable.getDatos();
+            int dynamic_size= mantenimientos.size();
+            for (int i=0;i<dynamic_size;i++){
+                String matricula = String.valueOf(mantenimientos.get(i).getMatricula());
+                if (foreign_keys.contains(matricula)==false){
+                    mantenimientos.remove(i);
+                    i=i-1;
+                    dynamic_size=mantenimientos.size();
+                }
+            }
+            unibleArrayList = mantenimientos;
+        }
+        return unibleArrayList;
     }
 
 }

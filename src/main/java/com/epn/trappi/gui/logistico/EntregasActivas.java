@@ -1,56 +1,47 @@
 package com.epn.trappi.gui.logistico;
 import com.epn.trappi.controladores.logistico.storedProcedures;
+import com.epn.trappi.models.logistico.Entrega;
 import com.epn.trappi.models.logistico.ListaConductores;
 import com.epn.trappi.models.logistico.ListaEntregas1;
 import com.epn.trappi.models.logistico.ListaVehiculos;
 import com.epn.trappi.models.logistico.MapaGeografico;
 import com.epn.trappi.models.logistico.Posicion;
 import com.epn.trappi.models.logistico.Ruta;
+import com.epn.trappi.models.logistico.Vehiculo;
+import com.epn.trappi.models.logistico.servicios.Consultable;
+import com.epn.trappi.models.logistico.servicios.ServicioDb;
+import com.epn.trappi.models.logistico.servicios.ServicioDbEntrega;
+import com.epn.trappi.models.logistico.servicios.ServicioDbVehiculo;
+import com.epn.trappi.models.logistico.servicios.Unible;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.SQLException;
 import java.text.Collator;
+import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 public class EntregasActivas extends javax.swing.JPanel {
     //ATRIBUTOS
+    ServicioDb servicio;
     MapaGeografico mapa;
-    public EntregasActivas() {
+    int conductores_en_servicio=0;
+    int automoviles_en_uso=0;
+    int motos_en_uso=0;
+    int camiones_en_uso=0;
+    public EntregasActivas() throws SQLException {
         initComponents();
         //MAPA GEOGRAFICO
         mapa = new MapaGeografico();
         this.panelDeRutas.add(mapa.grafico(),BorderLayout.CENTER);//añadimos la vista del mapa al panel de rutas
-        //Llenado de tabla con datos quemados
-        /*
-        ListaVehiculos vehiculos = new ListaVehiculos();
-        ListaConductores conductores = new ListaConductores();
-        ListaEntregas1 entregas = new ListaEntregas1();      
-        DefaultTableModel modelo = new DefaultTableModel();
-        jTEntregasDatos.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12) {
-        });
-        jTEntregasDatos.getTableHeader().setOpaque(true);
-        jTEntregasDatos.getTableHeader().setBackground(Color.WHITE);
-        jTEntregasDatos.setModel(modelo);
-        modelo.addColumn("ID_Entrega");
-        modelo.addColumn("Cliente");
-        modelo.addColumn("Conductor");
-        modelo.addColumn("Vehiculo");
-        modelo.addColumn("Destino");
-        Object[] filas = new Object[5];
-        String [] clientes= {"Christian Morán", "José Pallo", "Erick Mayorga", "Cristhian Muñoz", "Rommel Valdiviezo"};
-        int idEntrega = 1;
-        for(int i=0;i<5;i++){
-            filas[0]=idEntrega;
-            filas[1]=clientes[i];
-            filas[2] = conductores.listaConductores.get(i).getNombre();
-            filas[3] = vehiculos.vehiculos.get(i).getMatricula();
-            modelo.addRow(filas);
-            idEntrega++;
-        }
-        */
+        actualizarContadores();
+        labelConductores.setText(String.valueOf(conductores_en_servicio));
+        labelConductores.setText(String.valueOf(automoviles_en_uso));
+        labelConductores.setText(String.valueOf(motos_en_uso));
+        labelConductores.setText(String.valueOf(camiones_en_uso));
         
     }
 
@@ -131,7 +122,7 @@ public class EntregasActivas extends javax.swing.JPanel {
 
         labelConductores.setFont(new java.awt.Font("Segoe UI Semibold", 1, 28)); // NOI18N
         labelConductores.setForeground(new java.awt.Color(255, 255, 255));
-        labelConductores.setText("5");
+        labelConductores.setText("0");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -175,7 +166,7 @@ public class EntregasActivas extends javax.swing.JPanel {
 
         labelAutomoviles.setFont(new java.awt.Font("Segoe UI Semibold", 1, 28)); // NOI18N
         labelAutomoviles.setForeground(new java.awt.Color(255, 255, 255));
-        labelAutomoviles.setText("31");
+        labelAutomoviles.setText("0");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -211,7 +202,7 @@ public class EntregasActivas extends javax.swing.JPanel {
 
         labelMotocicletas.setFont(new java.awt.Font("Segoe UI Semibold", 1, 28)); // NOI18N
         labelMotocicletas.setForeground(new java.awt.Color(255, 255, 255));
-        labelMotocicletas.setText("16");
+        labelMotocicletas.setText("0");
 
         jLabel11.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -247,7 +238,7 @@ public class EntregasActivas extends javax.swing.JPanel {
 
         labelCamiones.setFont(new java.awt.Font("Segoe UI Semibold", 1, 28)); // NOI18N
         labelCamiones.setForeground(new java.awt.Color(255, 255, 255));
-        labelCamiones.setText("11");
+        labelCamiones.setText("0");
 
         jLabel13.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
@@ -373,7 +364,7 @@ public class EntregasActivas extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTEntregasDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTEntregasDatosMouseClicked
-        
+        //METODO PARA MOSTRAR LAS RUTAS, AUN NO FUNCIONAL
         int fila = jTEntregasDatos.getSelectedRow();
         String destino = (String)jTEntregasDatos.getValueAt(fila, 4);
         String nombreConductor = (String)jTEntregasDatos.getValueAt(fila,2);
@@ -408,55 +399,29 @@ public class EntregasActivas extends javax.swing.JPanel {
     }
     //SE LLAMA ESTE METODO CADA VEZ QUE SE ENTRE AL PANEL DE ENTREGAS ACTIVAS PARA QUE ACTUALICE LA TABLA
     public void actualizarTablaDeEntregasActivas() throws SQLException{
-        //Instancia que accede a la base de datos
-        storedProcedures agente = new storedProcedures();
-        //Parámetros del procedimiento almacenado
-        String[] columnas = {"IDENTREGA","NUM_FACTURA","EMPLEADOENTREGA","MATRICULA","DIRECCION"}; //SELECT *
-        String TABLA1="FACTURAS",TABLA2="ENTREGA",COLUMNA1="NUMEROFACTURA",COLUMNA2="NUMFACTURA"; //JOIN
-        String WHERE_COLUMNA="ESTADOENTREGA",WHERE_VALUE="Activa"; //FILTRADO
-        //LLenamos los datos en un tablemodel
-        DefaultTableModel modelo = agente.selectColumnasEnUnionPorValor(TABLA1,TABLA2, 
-                COLUMNA1, COLUMNA2, WHERE_COLUMNA, WHERE_VALUE, columnas);
-        jTEntregasDatos.setModel(modelo);
+        
     }
     //SE LLAMA A ESTE METODO CADA VEZ QUE SE ENTRE AL PANEL DE ENTREGAS PARA QUE ACTUALICE LOS CONTADORES EN LA CABECERA
     public void actualizarContadores() throws SQLException{
-        /*
-        int contador_vehiculos=0;
-        int contador_motos=0;
-        int contador_camiones=0;
-        int numero_registros=0;
-        //Instancia que accede a la base de datos
-        storedProcedures agente = new storedProcedures();
-        //Parámetros del procedimiento almacenado
-        String[] columnas = {"TIPOVEHICULO"}; // SELECT TIPOVEHICULO
-        String TABLA1="ENTREGA",TABLA2="VEHICULO",COLUMNA1="MATRICULA",COLUMNA2="MATRICULA"; //JOIN
-        String WHERE_COLUMNA="ESTADOENTREGA",WHERE_VALUE="Activa"; //FILTRADO
-        //Llenamos la lista de tipos de vehiculo en un table model
-        DefaultTableModel modelo = agente.selectColumnasEnUnionPorValor(TABLA1, TABLA2, COLUMNA1, COLUMNA2, WHERE_COLUMNA, WHERE_VALUE, columnas);
-        //Llenamos los contadores
-        numero_registros=modelo.getRowCount();
-        for (int i=0;i<numero_registros;i++){
-            String estado = modelo.getValueAt(i, 0).toString();
-            System.out.println(estado);
-            final Collator instance = Collator.getInstance();
-            instance.setStrength(Collator.NO_DECOMPOSITION);
-            if (instance.compare(estado,"Automóvil")==0){
-                contador_vehiculos++;
+        servicio = new ServicioDbEntrega();
+        Consultable consultable = servicio.obtenerElementosPorFiltro(ServicioDbEntrega.ESTADO,"En Curso");
+        ArrayList<Entrega> entregas_en_curso = consultable.getDatos();
+        Unible unible = new ServicioDbEntrega();
+        consultable = new ServicioDbVehiculo().obtenerElementos();
+        ArrayList<Vehiculo> vehiculos_activos = (ArrayList<Vehiculo>) unible.join(entregas_en_curso, consultable);
+        for (int i=0;i<vehiculos_activos.size();i++){
+            if(vehiculos_activos.get(i).getTipo().equalsIgnoreCase("Automovil")){
+                automoviles_en_uso++;
             }
-            if (instance.compare(estado,"Motocicleta")==0){
-                contador_motos++;
+            if(vehiculos_activos.get(i).getTipo().equalsIgnoreCase("Motocicleta")){
+                motos_en_uso++;
             }
-            if (instance.compare(estado,"Camion")==0){
-                contador_camiones++;
+            if(vehiculos_activos.get(i).getTipo().equalsIgnoreCase("Camion")){
+                camiones_en_uso++;
             }
+            conductores_en_servicio=conductores_en_servicio+1;
         }
-        //Actualizamos los contadores
-        this.labelConductores.setText(String.valueOf(numero_registros));
-        this.labelAutomoviles.setText(String.valueOf(contador_vehiculos));
-        this.labelMotocicletas.setText(String.valueOf(contador_motos));
-        this.labelCamiones.setText(String.valueOf(contador_camiones));
-        */
+        
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

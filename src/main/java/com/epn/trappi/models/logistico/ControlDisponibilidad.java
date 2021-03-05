@@ -9,9 +9,7 @@ import com.epn.trappi.controladores.logistico.storedProcedures;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import com.epn.trappi.models.logistico.Vehiculo;
-import com.epn.trappi.models.logistico.servicios.Consultable;
-import com.epn.trappi.models.logistico.servicios.Manipulable;
-import com.epn.trappi.models.logistico.servicios.ManipulableConductor;
+import com.epn.trappi.models.logistico.servicios.ServicioDb;
 import com.epn.trappi.models.logistico.servicios.ServicioDbConductor;
 import com.epn.trappi.models.logistico.servicios.ServicioDbVehiculo;
 import java.sql.SQLException;
@@ -22,39 +20,37 @@ import java.sql.SQLException;
  */
 public final class ControlDisponibilidad {
     //ATRIBUTOS
-    Consultable consultable;
-    Manipulable manipulable;
-    ManipulableConductor manipulableConductor;
+    ServicioDb servicioDB;
     ListaVehiculos lv;
     ListaConductores lc;
     private static ControlDisponibilidad instance;
     //METODOS
-    public static ControlDisponibilidad getInstance() throws Exception {
+    public static ControlDisponibilidad getInstance() throws SQLException {
         if (instance == null) {
             instance = new ControlDisponibilidad();
         }
         return instance;
     }
-    private ControlDisponibilidad() throws Exception{  
+    private ControlDisponibilidad() throws SQLException{  
         lv = new ListaVehiculos();
         lc = new ListaConductores();
         inicializarListas();
     }
 
-    public void inicializarListas() throws Exception{
-        consultable = new ServicioDbVehiculo();
-        lv.setVehiculos(consultable.obtenerElementosPorFiltro(ServicioDbVehiculo.ESTADO,"Habilitado"));
-        consultable = new ServicioDbConductor();
-        lc.setListaConductores(consultable.obtenerElementosPorFiltro(ServicioDbConductor.ESTADO,"Activo"));
+    public void inicializarListas() throws SQLException{
+        servicioDB = new ServicioDbVehiculo();
+        lv.setVehiculos(servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.ESTADO,"Habilitado").getDatos());
+        servicioDB = new ServicioDbConductor();
+        lc.setListaConductores(servicioDB.obtenerElementosPorFiltro(ServicioDbConductor.ESTADO,"Activo").getDatos());
     }
     public void actualizarEstados(Vehiculo vehiculo,Conductor conductor) throws SQLException{
-        manipulable = new ServicioDbVehiculo();
-        manipulable.actualizar(vehiculo);
-        manipulableConductor = new ServicioDbConductor();
-        manipulableConductor.actualizar(conductor);
+        servicioDB = new ServicioDbVehiculo();
+        servicioDB.actualizar(vehiculo);
+        servicioDB = new ServicioDbConductor();
+        servicioDB.actualizar(conductor);
     }
     
-    public void asignar(Entrega entrega) throws SQLException, Exception{
+    public void asignar(Entrega entrega) throws SQLException{
         
         if(lv.estaVacia() || lc.estaVacia()){
             JOptionPane.showMessageDialog(null,"NO HAY CONDUCTORES Y VEHICULOS DISPONIBLES");

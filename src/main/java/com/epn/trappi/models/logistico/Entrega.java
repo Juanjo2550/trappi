@@ -1,8 +1,7 @@
 package com.epn.trappi.models.logistico;
 
 import com.epn.trappi.controladores.logistico.storedProcedures;
-import com.epn.trappi.models.logistico.servicios.Consultable;
-import com.epn.trappi.models.logistico.servicios.Manipulable;
+import com.epn.trappi.models.logistico.servicios.ServicioDb;
 import com.epn.trappi.models.logistico.servicios.ServicioDbEntrega;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -94,21 +93,22 @@ public class Entrega extends Thread{
         this.factura = factura;
     }
     public void actualizarEstado() throws SQLException{
-        Manipulable manipulable = new ServicioDbEntrega();
+        ServicioDb manipulable = new ServicioDbEntrega();
         manipulable.actualizar(this);
     }
     
     
-    public void confirmarEntrega() throws SQLException, Exception{
+    public void confirmarEntrega() throws SQLException{
         ControlDisponibilidad control = ControlDisponibilidad.getInstance();
         control.asignar(this);
     }
     
-    public void RegistrarEntrega() throws SQLException, Exception{
-        Manipulable manipulable = new ServicioDbEntrega();
-        manipulable.insertar(this);
-        Consultable consultable = new ServicioDbEntrega();
-        ArrayList<Entrega> entregas =  consultable.obtenerElementosPorFiltro(ServicioDbEntrega.FACTURA,String.valueOf(factura));
+    public void RegistrarEntrega() throws SQLException{
+        ServicioDb servicioDB;
+        servicioDB = new ServicioDbEntrega();
+        servicioDB.insertar(this);
+        servicioDB = new ServicioDbEntrega();
+        ArrayList<Entrega> entregas =  servicioDB.obtenerElementosPorFiltro(ServicioDbEntrega.FACTURA,String.valueOf(factura)).getDatos();
         this.setID_Entrega(entregas.get(0).getID_Entrega());
         
     }

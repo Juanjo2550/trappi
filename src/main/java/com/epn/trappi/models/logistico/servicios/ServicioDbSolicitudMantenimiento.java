@@ -6,6 +6,7 @@
 package com.epn.trappi.models.logistico.servicios;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
+import com.epn.trappi.models.logistico.Mantenimiento;
 import com.epn.trappi.models.logistico.SolicitudMantenimiento;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,7 @@ import java.util.Set;
  *
  * @author Alexander
  */
-public class ServicioDbSolicitudMantenimiento implements Consultable<SolicitudMantenimiento>,Manipulable<SolicitudMantenimiento>{
+public class ServicioDbSolicitudMantenimiento implements ServicioDb<SolicitudMantenimiento>, Unible<SolicitudMantenimiento>{
     //Atributos
     DataBaseConnection connection;
     public static String ID_SOLICITUD="NUMSOLICITUD";
@@ -31,7 +32,7 @@ public class ServicioDbSolicitudMantenimiento implements Consultable<SolicitudMa
         connection = DataBaseConnection.getInstance();
     }
     @Override
-    public ArrayList<SolicitudMantenimiento> obtenerElementos() throws SQLException {
+    public Consultable obtenerElementos() throws SQLException {
         Statement sentencia = connection.getConnection().createStatement();
         ResultSet resultados = sentencia.executeQuery("SELECT * FROM SOLICITUDPAGOMANTENIMIENTO");
         ArrayList<SolicitudMantenimiento> elementos = new ArrayList<>();
@@ -45,7 +46,7 @@ public class ServicioDbSolicitudMantenimiento implements Consultable<SolicitudMa
             //add all data
             elementos.add(elemento);
         }
-        return elementos;
+        return new Consultable(elementos);
     }
 
     @Override
@@ -82,11 +83,12 @@ public class ServicioDbSolicitudMantenimiento implements Consultable<SolicitudMa
     }
 
     @Override
-    public ArrayList<SolicitudMantenimiento> obtenerElementosPorFiltro(String COLUMN_NAME_CONSTANT, String VALOR) throws SQLException, Exception {
+    public Consultable obtenerElementosPorFiltro(String COLUMN_NAME_CONSTANT, String VALOR) throws SQLException{
+        /*
         Set<String> TABLAS = Set.of(ID_SOLICITUD,ID_BIEN,ID_MANTENIMIENTO,FECHA,ESTADO);
         if(TABLAS.contains(COLUMN_NAME_CONSTANT)==false){
             throw new Exception("No existe esa columna en el sistema");
-        }
+        }*/
         Statement sentencia = connection.getConnection().createStatement();
         ResultSet resultados;
         resultados=sentencia.executeQuery("SELECT * FROM SOLICITUDPAGOMANTENIMIENTO WHERE "+COLUMN_NAME_CONSTANT+"='"+VALOR+"'");
@@ -101,8 +103,31 @@ public class ServicioDbSolicitudMantenimiento implements Consultable<SolicitudMa
             //add all data
             elementos.add(elemento);
         }
-        return elementos;
+        return new Consultable(elementos);
         
+    }
+
+    @Override
+    public Object join(ArrayList<SolicitudMantenimiento> usado_para_join, Consultable consultable) throws SQLException {
+        ArrayList<String> foreign_keys = new ArrayList<>();
+        Object unibleArrayList = new Object();
+        if("Mantenimiento".equals(consultable.getType())){
+            for (int i=0;i<usado_para_join.size();i++){
+                foreign_keys.add(String.valueOf(usado_para_join.get(i).getId_Mantenimiento()));
+            }
+            ArrayList<Mantenimiento> mantenimientos = (ArrayList<Mantenimiento>) consultable.getDatos();
+            int dynamic_size= mantenimientos.size();
+            for (int i=0;i<dynamic_size;i++){
+                String id_mantenimiento = String.valueOf(mantenimientos.get(i).getIdMantenimiento());
+                if (foreign_keys.contains(id_mantenimiento)==false){
+                    mantenimientos.remove(i);
+                    i=i-1;
+                    dynamic_size=mantenimientos.size();
+                }
+            }
+            unibleArrayList = mantenimientos;
+        }
+        return unibleArrayList;
     }
     
 }

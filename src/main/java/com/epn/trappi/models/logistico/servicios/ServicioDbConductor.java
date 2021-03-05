@@ -18,7 +18,7 @@ import java.util.Set;
  *
  * @author Alexander
  */
-public class ServicioDbConductor implements Consultable<Conductor>,ManipulableConductor<Conductor>{
+public class ServicioDbConductor implements ServicioDb<Conductor>{
     //Atributos
     DataBaseConnection connection;
     public static String ID_CONDUCTOR="IDEMP";
@@ -28,7 +28,7 @@ public class ServicioDbConductor implements Consultable<Conductor>,ManipulableCo
         connection = DataBaseConnection.getInstance();
     }
     @Override
-    public ArrayList<Conductor> obtenerElementos() throws SQLException {
+    public Consultable obtenerElementos() throws SQLException {
         Statement sentencia = connection.getConnection().createStatement();
         ResultSet resultados = sentencia.executeQuery("SELECT IDEMP,ESTADOEMP FROM EMPLEADO");
         ArrayList<Conductor> elementos = new ArrayList<>();
@@ -39,7 +39,7 @@ public class ServicioDbConductor implements Consultable<Conductor>,ManipulableCo
             //add all data
             elementos.add(elemento);
         }
-        return elementos;
+        return new Consultable(elementos);
     }
 
     @Override
@@ -62,11 +62,11 @@ public class ServicioDbConductor implements Consultable<Conductor>,ManipulableCo
     }
 
     @Override
-    public ArrayList<Conductor> obtenerElementosPorFiltro(String COLUMN_NAME_CONSTANT, String VALOR) throws SQLException, Exception {
-        Set<String> TABLAS = Set.of(ID_CONDUCTOR,ESTADO);
+    public Consultable obtenerElementosPorFiltro(String COLUMN_NAME_CONSTANT, String VALOR) throws SQLException {
+        /*Set<String> TABLAS = Set.of(ID_CONDUCTOR,ESTADO);
         if(TABLAS.contains(COLUMN_NAME_CONSTANT)==false){
             throw new Exception("No existe esa columna en el sistema");
-        }
+        }*/
         Statement sentencia = connection.getConnection().createStatement();
         ResultSet resultados;
         resultados=sentencia.executeQuery("SELECT IDEMP,ESTADOEMP FROM EMPLEADO WHERE TIPOEMP='Conductor' AND "+COLUMN_NAME_CONSTANT+"='"+VALOR+"'");
@@ -78,7 +78,12 @@ public class ServicioDbConductor implements Consultable<Conductor>,ManipulableCo
             //add all data
             elementos.add(elemento);
         }
-        return elementos;
+        return new Consultable(elementos);
+    }
+
+    @Override
+    public void insertar(Conductor elemento) throws SQLException {
+        //
     }
   
 }

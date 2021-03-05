@@ -13,12 +13,16 @@ import com.epn.trappi.models.logistico.ListaEntregas;
 import com.epn.trappi.models.logistico.ListaMantenimientos;
 import com.epn.trappi.models.logistico.ListaSolicitudesMantenimiento;
 import com.epn.trappi.models.logistico.ListaVehiculos;
+import com.epn.trappi.models.logistico.Mantenimiento;
+import com.epn.trappi.models.logistico.Vehiculo;
 import com.epn.trappi.models.logistico.servicios.Consultable;
+import com.epn.trappi.models.logistico.servicios.ServicioDb;
 import com.epn.trappi.models.logistico.servicios.ServicioDbConductor;
 import com.epn.trappi.models.logistico.servicios.ServicioDbEntrega;
 import com.epn.trappi.models.logistico.servicios.ServicioDbMantenimiento;
 import com.epn.trappi.models.logistico.servicios.ServicioDbSolicitudMantenimiento;
 import com.epn.trappi.models.logistico.servicios.ServicioDbVehiculo;
+import com.epn.trappi.models.logistico.servicios.Unible;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -32,10 +36,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TEST_ROMMEL extends javax.swing.JFrame {
 
-    storedProcedures instancia = new storedProcedures();
+
     Entrega e;
     public TEST_ROMMEL() throws SQLException, Exception {
         initComponents();
+       
+        
+        
     }
 
     /**
@@ -191,10 +198,10 @@ public class TEST_ROMMEL extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Consultable consultable = new ServicioDbVehiculo();
+        ServicioDb consultable = new ServicioDbVehiculo();
         ListaVehiculos lista = new ListaVehiculos();
         try {
-            lista.setVehiculos(consultable.obtenerElementos());
+            lista.setVehiculos(consultable.obtenerElementos().getDatos());
             TABLA.setModel(lista.mostrarLista());
         } catch (SQLException ex) {
             Logger.getLogger(TEST_ROMMEL.class.getName()).log(Level.SEVERE, null, ex);
@@ -202,10 +209,10 @@ public class TEST_ROMMEL extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-       Consultable consultable = new ServicioDbConductor();
+       ServicioDb consultable = new ServicioDbConductor();
         ListaConductores lista = new ListaConductores();
         try {
-            lista.setListaConductores(consultable.obtenerElementos());
+            lista.setListaConductores(consultable.obtenerElementos().getDatos());
             TABLACONDUCTORES.setModel(lista.mostrarLista());
         } catch (SQLException ex) {
             Logger.getLogger(TEST_ROMMEL.class.getName()).log(Level.SEVERE, null, ex);
@@ -213,10 +220,10 @@ public class TEST_ROMMEL extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Consultable consultable = new ServicioDbEntrega();
+        ServicioDb consultable = new ServicioDbEntrega();
         ListaEntregas lista = new ListaEntregas();
         try {
-            lista.setEntregas(consultable.obtenerElementos());
+            lista.setEntregas(consultable.obtenerElementos().getDatos());
             TABLAENTREGAS.setModel(lista.mostrarLista());
         } catch (SQLException ex) {
             Logger.getLogger(TEST_ROMMEL.class.getName()).log(Level.SEVERE, null, ex);
@@ -225,9 +232,9 @@ public class TEST_ROMMEL extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int factura = Integer.parseInt(CAMPOFACTURA.getText());
-        Entrega e = new Entrega();
-        e.setFactura(factura);
-        e.start();
+        Entrega asd = new Entrega();
+        asd.setFactura(factura);
+        asd.start();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -259,6 +266,7 @@ public class TEST_ROMMEL extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 try {
                     new TEST_ROMMEL().setVisible(true);

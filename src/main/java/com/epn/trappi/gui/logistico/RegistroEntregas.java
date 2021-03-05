@@ -8,7 +8,7 @@ package com.epn.trappi.gui.logistico;
 import com.epn.trappi.gui.logistico.Logistico_GUI.RoundedBorder;
 import com.epn.trappi.models.logistico.Entrega;
 import com.epn.trappi.models.logistico.ListaEntregas;
-import com.epn.trappi.models.logistico.servicios.Consultable;
+import com.epn.trappi.models.logistico.servicios.ServicioDb;
 import com.epn.trappi.models.logistico.servicios.ServicioDbEntrega;
 import java.awt.Color;
 import java.awt.Font;
@@ -26,13 +26,13 @@ public class RegistroEntregas extends javax.swing.JPanel {
     //ATRIBUTOS
     ListaEntregas entregas;
     RoundedBorder borde_circular;
-    Consultable consultable;
+    ServicioDb servicioDB;
     //METODOS
     public RegistroEntregas() {
         initComponents();
         //Instanciamos la lista de nuestro modelo y su servicio de base de datos
         this.entregas=new ListaEntregas();
-        this.consultable = new ServicioDbEntrega();
+        this.servicioDB = new ServicioDbEntrega();
         //Apariencia de la GUI
         this.botonBuscar.setBorder(new Logistico_GUI.RoundedBorder(20));
         this.botonBuscar.setBorderPainted(true);
@@ -410,7 +410,7 @@ public class RegistroEntregas extends javax.swing.JPanel {
 
         campoRegistros.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
         campoRegistros.setForeground(new java.awt.Color(153, 153, 153));
-        campoRegistros.setText("  0");
+        campoRegistros.setText("0");
         campoRegistros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 campoRegistrosMouseClicked(evt);
@@ -564,7 +564,7 @@ public class RegistroEntregas extends javax.swing.JPanel {
         if (campoRegistros.getText().length()==0){
             campoRegistros.setForeground(new Color(153,153,153));
             campoRegistros.setFont(new Font("Segoe UI Semibold", Font.ITALIC, 14));
-            campoRegistros.setText("  0");
+            campoRegistros.setText("0");
         }
     }//GEN-LAST:event_campoRegistrosMouseExited
 
@@ -574,25 +574,25 @@ public class RegistroEntregas extends javax.swing.JPanel {
         try{
         switch (opcion){
             case 0:
-                entregas.setEntregas(consultable.obtenerElementos());
+                entregas.setEntregas(servicioDB.obtenerElementos().getDatos());
                 break;
             case 1:
-                entregas.setEntregas(consultable.obtenerElementosPorFiltro(ServicioDbEntrega.FACTURA,campo_busqueda));
+                entregas.setEntregas(servicioDB.obtenerElementosPorFiltro(ServicioDbEntrega.FACTURA,campo_busqueda).getDatos());
                 break;
             case 2:
-                entregas.setEntregas(consultable.obtenerElementosPorFiltro(ServicioDbEntrega.MATRICULA,campo_busqueda));
+                entregas.setEntregas(servicioDB.obtenerElementosPorFiltro(ServicioDbEntrega.MATRICULA,campo_busqueda).getDatos());
                 break;
             case 3:
-                entregas.setEntregas(consultable.obtenerElementosPorFiltro(ServicioDbEntrega.ID_EMPLEADO,campo_busqueda));
+                entregas.setEntregas(servicioDB.obtenerElementosPorFiltro(ServicioDbEntrega.ID_EMPLEADO,campo_busqueda).getDatos());
                 break;
             case 4:
-                entregas.setEntregas(consultable.obtenerElementosPorFiltro(ServicioDbEntrega.ESTADO,campo_busqueda));
+                entregas.setEntregas(servicioDB.obtenerElementosPorFiltro(ServicioDbEntrega.ESTADO,campo_busqueda).getDatos());
                 break;
             case 5:
-                entregas.setEntregas(consultable.obtenerElementosPorFiltro(ServicioDbEntrega.ID_ENTREGA,campo_busqueda));
+                entregas.setEntregas(servicioDB.obtenerElementosPorFiltro(ServicioDbEntrega.ID_ENTREGA,campo_busqueda).getDatos());
                 break;
             case 6:
-                entregas.setEntregas(consultable.obtenerElementosPorFiltro(ServicioDbEntrega.FECHA,campo_busqueda));
+                entregas.setEntregas(servicioDB.obtenerElementosPorFiltro(ServicioDbEntrega.FECHA,campo_busqueda).getDatos());
                 break;
         }
         int numero_registros=0;
@@ -615,9 +615,7 @@ public class RegistroEntregas extends javax.swing.JPanel {
         this.tablaRegistroEntregas.setModel(entregas.mostrarLista());
         }catch (SQLException e){
                 JOptionPane.showMessageDialog(null,"Base de datos fuera de servicio");
-                } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null,"La columna no esta disponible para filtrado");
-        }
+                }
         
     }//GEN-LAST:event_botonBuscarActionPerformed
 
