@@ -85,8 +85,8 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         btnGuardarPermiso.setEnabled(true);
         TextPrompt buscarProveedor = new TextPrompt("yyyy-MM-dd", txtfechaInicioPermiso);
         TextPrompt finpermiso = new TextPrompt("yyyy-MM-dd", txtfechaFinPermiso);
-        TextPrompt diasPermiso = new TextPrompt("Ingrese el n�mero de d�as", this.txtnumDias);
-        TextPrompt descripcion = new TextPrompt("Ingrese la descripci�n del permiso", this.txtDescripcion);
+        TextPrompt diasPermiso = new TextPrompt("Ingrese el número de días", this.txtnumDias);
+        TextPrompt descripcion = new TextPrompt("Ingrese la descripción del permiso", this.txtDescripcion);
         
     }
 
@@ -99,7 +99,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
             txtDescripcion.setEnabled(false);
             Permisos[0]= "Seleccione";
        Permisos[1]="muerte de padres, hermanos, hijos, c�nyuge";
-       Permisos[2]="muerte de nietos, padres del c�nyuge o hermanos de la pareja";
+       Permisos[2]="muerte de nietos, padres del cónyuge o hermanos de la pareja";
        Permisos[3]="enfermedad de hijos o conyuge";
        Permisos[4]="enfermedad de padres o hermanos";
     }
@@ -313,6 +313,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         cmbPermiso = new javax.swing.JComboBox<>();
         btnValidarFecha = new javax.swing.JButton();
         cmbnombreEmpleado = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -464,7 +465,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre del Empleado", "Descripci�n", "Fecha Inicio", "Fecha  Fin", "Dias de Permiso", "Valor a Pagar", "Estado"
+                "Nombre del Empleado", "Descripción", "Fecha Inicio", "Fecha  Fin", "Dias de Permiso", "Valor a Pagar", "Estado"
             }
         ));
         jScrollPane1.setViewportView(tbllista);
@@ -484,7 +485,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         PanelAspirante.add(lblnombreEmpleado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
         lblfechaInicioPermiso1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblfechaInicioPermiso1.setText("Descripci�n");
+        lblfechaInicioPermiso1.setText("Descripción");
         PanelAspirante.add(lblfechaInicioPermiso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
         lblfechaInicioPermiso2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -523,7 +524,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         PanelAspirante.add(txtnumDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 80, 30));
 
         lblfechaInicioPermiso4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblfechaInicioPermiso4.setText("N�mero de dias de Permiso:");
+        lblfechaInicioPermiso4.setText("Número de dias de Permiso:");
         PanelAspirante.add(lblfechaInicioPermiso4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
         txtfechaInicioPermiso.addActionListener(new java.awt.event.ActionListener() {
@@ -584,6 +585,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
             }
         });
         PanelAspirante.add(cmbnombreEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 330, -1));
+        PanelAspirante.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -840,6 +842,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
