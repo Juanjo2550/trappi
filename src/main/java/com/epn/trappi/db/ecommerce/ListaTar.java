@@ -1,5 +1,5 @@
 
-package com.epn.trappi.gui.ecommerce.Ecommerce;
+package com.epn.trappi.db.ecommerce;
 
 import com.epn.trappi.gui.ecommerce.Tarjetas.Tarjeta;
 import com.epn.trappi.db.connection.DataBaseConnection;

@@ -3,7 +3,7 @@ package com.epn.trappi.gui.ecommerce.Interfaces;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Articulo;
-import com.epn.trappi.gui.ecommerce.Ecommerce.ListaTar;
+import com.epn.trappi.db.ecommerce.ListaTar;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.Tarjetas.Tarjeta;
 import javax.swing.JOptionPane;

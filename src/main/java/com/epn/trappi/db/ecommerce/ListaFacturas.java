@@ -1,7 +1,8 @@
 
-package com.epn.trappi.gui.ecommerce.Ecommerce;
+package com.epn.trappi.db.ecommerce;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
+import com.epn.trappi.gui.ecommerce.Ecommerce.Factura;
 import com.epn.trappi.gui.ecommerce.Interfaces.JFBancoInicio;
 import com.epn.trappi.gui.ecommerce.Interfaces.Login;
 import java.sql.Connection;

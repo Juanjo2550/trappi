@@ -7,13 +7,9 @@ package com.epn.trappi.gui.ecommerce.Interfaces;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Diseño.TextPrompt;
-import com.epn.trappi.gui.ecommerce.Ecommerce.ListaClientes;
+import com.epn.trappi.db.ecommerce.ListaClientes;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
-import java.sql.Statement;
-import javax.swing.JOptionPane;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

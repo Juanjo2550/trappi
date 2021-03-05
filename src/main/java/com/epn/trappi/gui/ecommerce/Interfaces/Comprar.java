@@ -5,17 +5,15 @@ import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Diseño.TextPrompt;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Articulo;
 import com.epn.trappi.gui.ecommerce.Ecommerce.CarritoDeCompras;
-import com.epn.trappi.gui.ecommerce.Ecommerce.ListaCarrito;
-import com.epn.trappi.gui.ecommerce.Ecommerce.ListaFacturas;
+import com.epn.trappi.db.ecommerce.ListaCarrito;
+import com.epn.trappi.db.ecommerce.ListaFacturas;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.FacturaMostrar.FacturaFis;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -424,6 +422,11 @@ public class Comprar extends javax.swing.JFrame {
                 +"\nTotal: "+carrito.factura.calcularTotal()+"\nProductos: "+salida);*/
           if(JOptionPane.showConfirmDialog(null, "¿Desea pagar?","El proceso de pago empezará",JOptionPane.YES_NO_OPTION)==YES_OPTION){
           
+              TarjetaUsuario tarjetaElegir = new TarjetaUsuario();
+              
+              tarjetaElegir.setVisible(true);
+              
+              String tarjeta = TarjetaUsuario.numeroDeTarjeta;
 
                 
               ListaFacturas lista=new ListaFacturas();
@@ -431,7 +434,6 @@ public class Comprar extends javax.swing.JFrame {
               carrito.factura.setId(id);
               ListaCarrito lista1=new ListaCarrito();
               lista1.registrar_detallecompra(carrito, Main.cliente.Nombre);
-              
                             carrito.factura.conexion.enviarAfinanzas();
               carrito.vaciarCarrito();
                 DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();

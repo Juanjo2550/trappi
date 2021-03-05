@@ -13,7 +13,8 @@ import com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaDebito;
  *
  * @author Bryan
  */
-class Pago {
+public class Pago {
+    
     TarjetaCredito tarjetacredito = new TarjetaCredito();
     TarjetaDebito tarjetadebito = new TarjetaDebito();
     

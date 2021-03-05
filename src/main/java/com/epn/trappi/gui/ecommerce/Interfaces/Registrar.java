@@ -5,7 +5,7 @@ import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.FormulariosCliente.FRegistroCliente;
 import com.epn.trappi.gui.ecommerce.Diseño.TextPrompt;
-import com.epn.trappi.gui.ecommerce.Ecommerce.ListaClientes;
+import com.epn.trappi.db.ecommerce.ListaClientes;
 import java.sql.*;
 import java.util.Random;
 import java.util.logging.Level;

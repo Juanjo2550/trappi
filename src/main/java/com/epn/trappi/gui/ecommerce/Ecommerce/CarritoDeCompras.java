@@ -15,6 +15,8 @@ import static javax.swing.JOptionPane.YES_OPTION;
  */
 public class CarritoDeCompras {
     
+    
+    //Public ArrayList<Producto>
     public ArrayList<Articulo> articulos = new ArrayList<Articulo>();
     public Factura factura;
     

@@ -4,7 +4,7 @@ import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.FormulariosTarjetas.FRegistroTarjeta;
 import com.epn.trappi.gui.ecommerce.Diseño.TextPrompt;
-import com.epn.trappi.gui.ecommerce.Ecommerce.ListaTar;
+import com.epn.trappi.db.ecommerce.ListaTar;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

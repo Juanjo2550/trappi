@@ -5,6 +5,8 @@
  */
 package com.epn.trappi.gui.ecommerce.Tarjetas;
 
+import com.epn.trappi.gui.ecommerce.entidadBancaria.Cuenta;
+
 /**
  *
  * @author Bryan

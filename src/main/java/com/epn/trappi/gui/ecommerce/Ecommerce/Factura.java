@@ -28,8 +28,8 @@ public class Factura {
 
     String RUC;
     String nFactura;
-    Pago pago;
-    public Conexion conexion;
+    public Pago pago;
+    public FachadaEcommerce conexion;
     
 
 public Double calcularSubTotal(){

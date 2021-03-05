@@ -2,7 +2,7 @@
 package com.epn.trappi.gui.ecommerce.Interfaces;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
-import com.epn.trappi.gui.ecommerce.Ecommerce.ListaClientes;
+import com.epn.trappi.db.ecommerce.ListaClientes;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.FormulariosCliente.FEdicionCliente;
 import java.sql.Connection;

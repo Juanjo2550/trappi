@@ -1,7 +1,9 @@
 
-package com.epn.trappi.gui.ecommerce.Ecommerce;
+package com.epn.trappi.db.ecommerce;
 import com.epn.trappi.gui.ecommerce.Tarjetas.Tarjeta;
 import com.epn.trappi.db.connection.DataBaseConnection;
+import com.epn.trappi.gui.ecommerce.Ecommerce.Articulo;
+import com.epn.trappi.gui.ecommerce.Ecommerce.CarritoDeCompras;
 import com.epn.trappi.gui.ecommerce.Interfaces.Login;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

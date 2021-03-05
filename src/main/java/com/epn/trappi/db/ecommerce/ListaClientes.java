@@ -1,5 +1,5 @@
 
-package com.epn.trappi.gui.ecommerce.Ecommerce;
+package com.epn.trappi.db.ecommerce;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.FormulariosCliente.FEdicionCliente;
@@ -15,6 +15,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import com.epn.trappi.gui.ecommerce.Ecommerce.Cliente;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Cliente;
 import java.util.ArrayList;
 

@@ -10,6 +10,7 @@ package com.epn.trappi.gui.ecommerce.entidadBancaria;
  * @author Bryan
  */
 public class Cuenta {
+    
     public String NumeroCuenta;
     public String CedulaPropietario;
     public Double fondo;
