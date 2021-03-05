@@ -8,6 +8,7 @@ package com.epn.trappi.models.rrhh.juanjo;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.contratacion.Contrato;
 import com.epn.trappi.models.rrhh.listas.ListaObservaciones;
+import com.epn.trappi.models.rrhh.listas.ListaRolesDePago;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -54,7 +55,7 @@ public class RolDePagos {
     public RolDePagos(Empleado empleado, Fecha fecha) throws Exception {
         this.empleado = empleado;
         this.fecha = fecha;
-        calcularTotal();
+        this.calcularTotal();
     }
 
     public Empleado getEmpleado() {
@@ -83,7 +84,8 @@ public class RolDePagos {
             //No hay novedades relacionadas con este empleado
             this.total = Double.parseDouble(this.empleado.getSueldo());
             this.descuentos = 0;
-        } else {
+        }
+        else {
             //Hay novedades relacionadas con este empleado
             ArrayList<Observacion> observacionesPorAtraso = new ArrayList<>();
             ArrayList<Observacion> observacionesPorFaltas = new ArrayList<>();
@@ -108,6 +110,7 @@ public class RolDePagos {
             this.descuentos = descuentosPorAtrasos + descuentosPorFaltas;
             this.total = Double.parseDouble(this.empleado.getSueldo()) + bonoPorHorasExtra - descuentosPorAtrasos;
         }
+        this.estado = "pendiente";
     }
 
     private double calcularAfectacionDeAtrasos(ArrayList<Observacion> observaciones) {
@@ -148,5 +151,9 @@ public class RolDePagos {
 
     private Observacion[] obtenerObservaciones () throws Exception {
         return new ListaObservaciones().obtenerTodos(this.empleado.getCedula(), this.fecha.getMes());
+    }
+
+    public int getNumero() {
+        return numero;
     }
 }

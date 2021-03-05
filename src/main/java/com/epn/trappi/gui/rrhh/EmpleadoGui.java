@@ -24,7 +24,7 @@ public class EmpleadoGui extends javax.swing.JFrame {
      */
     public EmpleadoGui() {
         initComponents();
-      this.empleados = new ListaEmpleados();
+        this.empleados = new ListaEmpleados();
         fillTable();
     }
     
