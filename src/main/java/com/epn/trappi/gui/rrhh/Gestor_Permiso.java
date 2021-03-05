@@ -33,6 +33,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -97,14 +98,17 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         if(tipo.equalsIgnoreCase("Calamidad Domestica")){
             this.cmbTipoPermiso.setEnabled(true);
             txtDescripcion.setEnabled(false);
-            Permisos[0]= "Seleccione";
+            Permisos[0]= "Seleccione...";
        Permisos[1]="muerte de padres, hermanos, hijos, c�nyuge";
        Permisos[2]="muerte de nietos, padres del cónyuge o hermanos de la pareja";
        Permisos[3]="enfermedad de hijos o conyuge";
        Permisos[4]="enfermedad de padres o hermanos";
     }
         if (tipo.equalsIgnoreCase("Enfermedad")){
-           
+           this.txtDescripcion.setEnabled(true);
+        }
+        if (tipo.equalsIgnoreCase("Otros Permisos")){
+           this.txtDescripcion.setEnabled(true);
         }
         if (tipo.equalsIgnoreCase("Nacimiento Hijos")){
              this.cmbTipoPermiso.setEnabled(true);
@@ -298,7 +302,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         tbllista = new javax.swing.JTable();
         cmbTipoPermiso = new javax.swing.JComboBox<>();
         lblnombreEmpleado1 = new javax.swing.JLabel();
-        lblfechaInicioPermiso1 = new javax.swing.JLabel();
+        lblDescripcion = new javax.swing.JLabel();
         lblfechaInicioPermiso2 = new javax.swing.JLabel();
         txtvalorAPagar = new javax.swing.JTextField();
         cmbEstado = new javax.swing.JComboBox<>();
@@ -313,7 +317,6 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         cmbPermiso = new javax.swing.JComboBox<>();
         btnValidarFecha = new javax.swing.JButton();
         cmbnombreEmpleado = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -401,7 +404,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
 
         lblCedula.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblCedula.setText("Cedula:");
-        PanelAspirante.add(lblCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 60, -1, -1));
+        PanelAspirante.add(lblCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, -1, -1));
 
         btnGuardarPermiso.setBackground(new java.awt.Color(0, 153, 153));
         btnGuardarPermiso.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -429,11 +432,11 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Tipo de Permiso: ");
-        PanelAspirante.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, -1, -1));
+        PanelAspirante.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, -1, -1));
 
         lblfechaFinPermiso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblfechaFinPermiso.setText("Fecha de Fin de Permiso: ");
-        PanelAspirante.add(lblfechaFinPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 300, -1, -1));
+        lblfechaFinPermiso.setText("Fin de Permiso: ");
+        PanelAspirante.add(lblfechaFinPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 300, -1, -1));
 
         txtfechaFinPermiso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -445,7 +448,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 txtfechaFinPermisoKeyTyped(evt);
             }
         });
-        PanelAspirante.add(txtfechaFinPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 290, 200, 28));
+        PanelAspirante.add(txtfechaFinPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 290, 200, 28));
 
         txtCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -478,15 +481,15 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 cmbTipoPermisoActionPerformed(evt);
             }
         });
-        PanelAspirante.add(cmbTipoPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, 320, -1));
+        PanelAspirante.add(cmbTipoPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 100, 290, -1));
 
         lblnombreEmpleado1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblnombreEmpleado1.setText("Nombre del Empleado:");
+        lblnombreEmpleado1.setText(" Empleado:");
         PanelAspirante.add(lblnombreEmpleado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
-        lblfechaInicioPermiso1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblfechaInicioPermiso1.setText("Descripción");
-        PanelAspirante.add(lblfechaInicioPermiso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+        lblDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblDescripcion.setText("Descripción");
+        PanelAspirante.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
         lblfechaInicioPermiso2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblfechaInicioPermiso2.setText("Fecha Inicio: ");
@@ -502,14 +505,14 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 txtvalorAPagarKeyTyped(evt);
             }
         });
-        PanelAspirante.add(txtvalorAPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 240, 200, 28));
+        PanelAspirante.add(txtvalorAPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, 200, 28));
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aprobado", "Denegado" }));
-        PanelAspirante.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, 160, -1));
+        PanelAspirante.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 160, -1));
 
         lblfechaInicioPermiso3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblfechaInicioPermiso3.setText("Estado: ");
-        PanelAspirante.add(lblfechaInicioPermiso3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, -1, -1));
+        PanelAspirante.add(lblfechaInicioPermiso3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
 
         txtnumDias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -521,10 +524,10 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 txtnumDiasKeyPressed(evt);
             }
         });
-        PanelAspirante.add(txtnumDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 80, 30));
+        PanelAspirante.add(txtnumDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 80, 30));
 
         lblfechaInicioPermiso4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblfechaInicioPermiso4.setText("Número de dias de Permiso:");
+        lblfechaInicioPermiso4.setText("Días de Permiso:");
         PanelAspirante.add(lblfechaInicioPermiso4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
         txtfechaInicioPermiso.addActionListener(new java.awt.event.ActionListener() {
@@ -537,11 +540,11 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 txtfechaInicioPermisoKeyTyped(evt);
             }
         });
-        PanelAspirante.add(txtfechaInicioPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 200, 28));
+        PanelAspirante.add(txtfechaInicioPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 200, 28));
 
         lblfechaInicioPermiso6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblfechaInicioPermiso6.setText("Valor a Pagar por Permiso: ");
-        PanelAspirante.add(lblfechaInicioPermiso6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 250, -1, -1));
+        PanelAspirante.add(lblfechaInicioPermiso6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 250, -1, -1));
 
         txtDescripcion.setColumns(20);
         txtDescripcion.setRows(5);
@@ -564,7 +567,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 cmbPermisoActionPerformed(evt);
             }
         });
-        PanelAspirante.add(cmbPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 180, -1));
+        PanelAspirante.add(cmbPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 180, -1));
 
         btnValidarFecha.setText("Validar");
         btnValidarFecha.addActionListener(new java.awt.event.ActionListener() {
@@ -572,7 +575,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 btnValidarFechaActionPerformed(evt);
             }
         });
-        PanelAspirante.add(btnValidarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, -1, -1));
+        PanelAspirante.add(btnValidarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, -1, -1));
 
         cmbnombreEmpleado.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -584,8 +587,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 cmbnombreEmpleadoActionPerformed(evt);
             }
         });
-        PanelAspirante.add(cmbnombreEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 330, -1));
-        PanelAspirante.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, -1, -1));
+        PanelAspirante.add(cmbnombreEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 240, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -636,7 +638,13 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
     }//GEN-LAST:event_txtfechaFinPermisoActionPerformed
 
     private void btnNuevoPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoPermisoActionPerformed
-      
+        this.txtnumDias.setText("");
+        this.txtfechaInicioPermiso.setText("");
+        this.txtfechaFinPermiso.setText("");
+        this.cmbPermiso.setSelectedItem("Seleccione...");
+        this.cmbTipoPermiso.setSelectedItem("Seleccione...");
+        this.cmbnombreEmpleado.setSelectedIndex(-1);
+        this.txtCedula.setText("");
         cmbnombreEmpleado.setEnabled(true);
         txtCedula.setEnabled(true);
         txtfechaFinPermiso.setEnabled(true);
@@ -667,14 +675,15 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
        permission = new Enfermedad(id,numeroDias, valorPagar,descripcionPermisoEnferOtra,fechaInicio,fechaFin,estado);
        permisos.agregar(permission);
    }
-   if(tipoPermiso.equals("Nacimientos")){
-       permission = new Enfermedad(id,numeroDias, valorPagar,descripcionPermiso,fechaInicio,fechaFin,estado);
+   if(tipoPermiso.equals("Nacimiento Hijos")){
+       permission = new Nacimiento_Hijo(id,numeroDias, valorPagar,descripcionPermiso,fechaInicio,fechaFin,estado);
        permisos.agregar(permission);
    }
    else {
        permission = new Otros_Permisos(id,numeroDias, valorPagar,descripcionPermisoEnferOtra,fechaInicio,fechaFin,estado);
        permisos.agregar(permission);
    }
+   listarPermisos();
     }//GEN-LAST:event_btnGuardarPermisoActionPerformed
    
     private void txtvalorAPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtvalorAPagarActionPerformed
@@ -761,12 +770,14 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
             if("Enfermedad".equals(permiso)){
             String valorPago = enfermedad.calcularProporcionalPagar(sueldoEmpleado,numeroDiasPermiso);
            this.txtvalorAPagar.setText(valorPago);
+           this.txtvalorAPagar.setEnabled(false);
             }
             if("Nacimiento Hijos".equals(permiso)){
 
             String valorPago = nacimiento.calcularProporcionalPagar(sueldoEmpleado,numeroDiasPermiso);
             
            this.txtvalorAPagar.setText(valorPago);
+           this.txtvalorAPagar.setEnabled(false);
            
             }
             this.txtfechaInicioPermiso.setEnabled(true);
@@ -842,14 +853,13 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblCedula;
+    private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblfechaFinPermiso;
-    private javax.swing.JLabel lblfechaInicioPermiso1;
     private javax.swing.JLabel lblfechaInicioPermiso2;
     private javax.swing.JLabel lblfechaInicioPermiso3;
     private javax.swing.JLabel lblfechaInicioPermiso4;
