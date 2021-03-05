@@ -145,56 +145,57 @@ public class ListaPermisos implements Lista<Permiso>{
                         currentEmpleado = emp;
                     }
                 }
-                if(rs.getString(9).equals("Calamidad Domestica")) {
-                    listaPermiso.add(new Calamidad_Domestica(
-                            
-                            currentEmpleado,
-                            rs.getInt(3),
-                            rs.getString(4),
-                            rs.getString(5),
-                            rs.getString(6),
-                            rs.getString(7),
-                            rs.getString(8)
-                            ));
+                switch (rs.getString(9)) {
+                    case "Calamidad Domestica":
+                        listaPermiso.add(new Calamidad_Domestica(
+
+                                currentEmpleado,
+                                rs.getInt(3),
+                                rs.getString(4),
+                                rs.getString(5),
+                                rs.getString(6),
+                                rs.getString(7),
+                                rs.getString(8)
+                        ));
+                        break;
+                    case "Enfermedad":
+                        listaPermiso.add(new Enfermedad(
+
+                                currentEmpleado,
+                                rs.getInt(3),
+                                rs.getString(4),
+                                rs.getString(5),
+                                rs.getString(6),
+                                rs.getString(7),
+                                rs.getString(8)
+                        ));
+                        break;
+                    case "Nacimiento Hijos":
+                        listaPermiso.add(new Nacimiento_Hijo(
+
+                                currentEmpleado,
+                                rs.getInt(3),
+                                rs.getString(4),
+                                rs.getString(5),
+                                rs.getString(6),
+                                rs.getString(7),
+                                rs.getString(8)
+                        ));
+                        break;
+                    default:
+                        listaPermiso.add(new Otros_Permisos(
+
+                                currentEmpleado,
+                                rs.getInt(3),
+                                rs.getString(4),
+                                rs.getString(5),
+                                rs.getString(6),
+                                rs.getString(7),
+                                rs.getString(8)
+
+                        ));
+                        break;
                 }
-                 if (rs.getString(9).equals("Enfermedad")) {
-                     listaPermiso.add(new Enfermedad(
-                            
-                            currentEmpleado,
-                            rs.getInt(3),
-                            rs.getString(4),
-                            rs.getString(5),
-                            rs.getString(6),
-                            rs.getString(7),
-                            rs.getString(8)
-                            ));
-                }
-                  if (rs.getString(9).equals("Nacimiento Hijos")) {
-                     listaPermiso.add(new Nacimiento_Hijo(
-                            
-                            currentEmpleado,
-                            rs.getInt(3),
-                            rs.getString(4),
-                            rs.getString(5),
-                            rs.getString(6),
-                            rs.getString(7),
-                            rs.getString(8)
-                            ));
-                }
-                     else {
-                          listaPermiso.add(new Otros_Permisos(
-                            
-                            currentEmpleado,
-                            rs.getInt(3),
-                            rs.getString(4),
-                            rs.getString(5),
-                            rs.getString(6),
-                            rs.getString(7),
-                            rs.getString(8)
-                            
-                            ));
-                 
-                         }
                 
 
             }
