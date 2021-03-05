@@ -8,6 +8,8 @@ package com.epn.trappi.models.rrhh.diego;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
+import com.epn.trappi.models.rrhh.listas.ListaRolesDePago;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,6 +22,39 @@ public class SolicitudDePago {
     Empleado empleadoAPagar;
     RolDePagos rol;
     double montoTotal;
+    String cuentaBancaria;
+    RecursosHumanos recursos_humanos;
+    //Pago pago
+
+    public SolicitudDePago(String cuentaBancaria,double montoTotal ) {
+        this.montoTotal = montoTotal;
+        this.cuentaBancaria = cuentaBancaria;
+    }
+
+    public SolicitudDePago() {
+    }
+    
+    
+    
+    
+    public SolicitudDePago[] SolicitarPago() throws Exception{
+        
+        ListaRolesDePago r1  = new ListaRolesDePago();
+        r1.obtenerTodos();
+         
+        ArrayList<SolicitudDePago> roles = new ArrayList<>();
+        for (RolDePagos r: r1.obtenerTodos() ){
+            roles.add(new SolicitudDePago(r.getEmpleado().getCuentaBancaria(),r.getTotal())) ;  
+        }
+        SolicitudDePago[] solicitudesArray = new SolicitudDePago[roles.size()];
+        solicitudesArray = roles.toArray(solicitudesArray);
+        return solicitudesArray;
+    }
+        
+    
+   // public void EnvioSolicitudPago (Empleado empleado , ){
+        
+    
    /* public boolean autorizarSolicitud(SolicitudDePago a, boolean autoriza) {
         if(autoriza == true){
             this.estado = "Autorizado";

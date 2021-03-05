@@ -17,6 +17,7 @@ import com.epn.trappi.gui.rrhh.Permisos.Enfermedad;
 import com.epn.trappi.gui.rrhh.Permisos.Nacimiento_Hijo;
 import com.epn.trappi.gui.rrhh.Permisos.Otros_Permisos;
 import com.epn.trappi.gui.rrhh.Permisos.Permiso;
+import com.epn.trappi.models.rrhh.diego.SolicitudDePago;
 import com.epn.trappi.models.rrhh.juanjo.Administrativo;
 import com.epn.trappi.models.rrhh.juanjo.Conductor;
 import com.epn.trappi.models.rrhh.listas.Lista;
@@ -84,8 +85,8 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         btnGuardarPermiso.setEnabled(true);
         TextPrompt buscarProveedor = new TextPrompt("yyyy-MM-dd", txtfechaInicioPermiso);
         TextPrompt finpermiso = new TextPrompt("yyyy-MM-dd", txtfechaFinPermiso);
-        TextPrompt diasPermiso = new TextPrompt("Ingrese el número de días", this.txtnumDias);
-        TextPrompt descripcion = new TextPrompt("Ingrese la descripción del permiso", this.txtDescripcion);
+        TextPrompt diasPermiso = new TextPrompt("Ingrese el n�mero de d�as", this.txtnumDias);
+        TextPrompt descripcion = new TextPrompt("Ingrese la descripci�n del permiso", this.txtDescripcion);
         
     }
 
@@ -97,8 +98,8 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
             this.cmbTipoPermiso.setEnabled(true);
             txtDescripcion.setEnabled(false);
             Permisos[0]= "Seleccione";
-       Permisos[1]="muerte de padres, hermanos, hijos, cónyuge";
-       Permisos[2]="muerte de nietos, padres del cónyuge o hermanos de la pareja";
+       Permisos[1]="muerte de padres, hermanos, hijos, c�nyuge";
+       Permisos[2]="muerte de nietos, padres del c�nyuge o hermanos de la pareja";
        Permisos[3]="enfermedad de hijos o conyuge";
        Permisos[4]="enfermedad de padres o hermanos";
     }
@@ -431,7 +432,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
 
         lblfechaFinPermiso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblfechaFinPermiso.setText("Fecha de Fin de Permiso: ");
-        PanelAspirante.add(lblfechaFinPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 290, -1, -1));
+        PanelAspirante.add(lblfechaFinPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 300, -1, -1));
 
         txtfechaFinPermiso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -443,7 +444,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 txtfechaFinPermisoKeyTyped(evt);
             }
         });
-        PanelAspirante.add(txtfechaFinPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 280, 200, 28));
+        PanelAspirante.add(txtfechaFinPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 290, 200, 28));
 
         txtCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -463,7 +464,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre del Empleado", "Descripción", "Fecha Inicio", "Fecha  Fin", "Dias de Permiso", "Valor a Pagar", "Estado"
+                "Nombre del Empleado", "Descripci�n", "Fecha Inicio", "Fecha  Fin", "Dias de Permiso", "Valor a Pagar", "Estado"
             }
         ));
         jScrollPane1.setViewportView(tbllista);
@@ -483,12 +484,12 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         PanelAspirante.add(lblnombreEmpleado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
         lblfechaInicioPermiso1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblfechaInicioPermiso1.setText("Descripción");
+        lblfechaInicioPermiso1.setText("Descripci�n");
         PanelAspirante.add(lblfechaInicioPermiso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
         lblfechaInicioPermiso2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblfechaInicioPermiso2.setText("Fecha Inicio: ");
-        PanelAspirante.add(lblfechaInicioPermiso2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
+        PanelAspirante.add(lblfechaInicioPermiso2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
 
         txtvalorAPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -500,14 +501,14 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 txtvalorAPagarKeyTyped(evt);
             }
         });
-        PanelAspirante.add(txtvalorAPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 200, 28));
+        PanelAspirante.add(txtvalorAPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 240, 200, 28));
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aprobado", "Denegado" }));
-        PanelAspirante.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 160, -1));
+        PanelAspirante.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, 160, -1));
 
         lblfechaInicioPermiso3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblfechaInicioPermiso3.setText("Estado: ");
-        PanelAspirante.add(lblfechaInicioPermiso3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
+        PanelAspirante.add(lblfechaInicioPermiso3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, -1, -1));
 
         txtnumDias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -522,7 +523,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         PanelAspirante.add(txtnumDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 80, 30));
 
         lblfechaInicioPermiso4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblfechaInicioPermiso4.setText("Número de dias de Permiso:");
+        lblfechaInicioPermiso4.setText("N�mero de dias de Permiso:");
         PanelAspirante.add(lblfechaInicioPermiso4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
         txtfechaInicioPermiso.addActionListener(new java.awt.event.ActionListener() {
@@ -535,11 +536,11 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 txtfechaInicioPermisoKeyTyped(evt);
             }
         });
-        PanelAspirante.add(txtfechaInicioPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, 200, 28));
+        PanelAspirante.add(txtfechaInicioPermiso, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 200, 28));
 
         lblfechaInicioPermiso6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblfechaInicioPermiso6.setText("Valor a Pagar por Permiso: ");
-        PanelAspirante.add(lblfechaInicioPermiso6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
+        PanelAspirante.add(lblfechaInicioPermiso6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 250, -1, -1));
 
         txtDescripcion.setColumns(20);
         txtDescripcion.setRows(5);
@@ -570,7 +571,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 btnValidarFechaActionPerformed(evt);
             }
         });
-        PanelAspirante.add(btnValidarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, -1, -1));
+        PanelAspirante.add(btnValidarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, -1, -1));
 
         cmbnombreEmpleado.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -591,9 +592,9 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(PanelAspirante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(12, 12, 12))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -770,6 +771,17 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
             
             
         }
+        SolicitudDePago solicitud = new SolicitudDePago();
+        //SolicitudDePago[]= solicitud.SolicitarPago();
+    try {
+        for(int i =0; i<=solicitud.SolicitarPago().length;i++){
+            System.out.println(solicitud.SolicitarPago());
+        }
+        
+    } catch (Exception ex) {
+        Logger.getLogger(Gestor_Permiso.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
     }//GEN-LAST:event_txtnumDiasKeyPressed
 
     /**

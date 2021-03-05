@@ -149,4 +149,8 @@ public class RolDePagos {
     private Observacion[] obtenerObservaciones () throws Exception {
         return new ListaObservaciones().obtenerTodos(this.empleado.getCedula(), this.fecha.getMes());
     }
+
+
+    
+    
 }
