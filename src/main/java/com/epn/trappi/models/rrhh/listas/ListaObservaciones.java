@@ -15,6 +15,7 @@ public class ListaObservaciones implements Lista<Observacion> {
 
     @Override
     public void agregar(Observacion newObservacion) {
+        System.out.println("Creando Observacion");
         String sql = "INSERT INTO dbo.OBSERVACIONES(IDOBS, IDEMP, TIPOOBS, DESCRIPOBS, FECHAOBS, DIFERENCIAHORAS) VALUES ("
                 + (this.obtenerTodos().length + 1) + (",")
                 + newObservacion.getEmpleado().getId() + ","
