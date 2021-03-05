@@ -28,6 +28,7 @@ public class ControlAsistencias {
 
     public void registrarFinDeJornada(String cedula) throws Exception {
         Asistencia asistencia = this.listaAsistencias.buscarUno(cedula, this.fecha);
+        asistencia.setHoraFin(new Hora());
         this.listaAsistencias.registrarSalida(asistencia);
         this.comprobarHoraExtra(asistencia);
     }

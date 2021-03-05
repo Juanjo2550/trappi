@@ -24,6 +24,7 @@ public abstract class Empleado {
     private String sueldo;
     private String estado;
     private char sexo;
+    private ControlAsistencias controlAsistencias;
 
     public Empleado(int id, String nombres, String apellidos, String cedula, String cargo, String departamento, String cuentaBancaria, String banco, String sueldo, String estado, char sexo) {
         this.id = id;
@@ -37,6 +38,7 @@ public abstract class Empleado {
         this.sueldo = sueldo;
         this.estado = estado;
         this.sexo = sexo;
+        this.controlAsistencias = new ControlAsistencias();
     }
 
     public abstract void notificarEntrada();
@@ -85,5 +87,9 @@ public abstract class Empleado {
 
     public int getId() {
         return id;
+    }
+
+    public ControlAsistencias getControlAsistencias() {
+        return controlAsistencias;
     }
 }

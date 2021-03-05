@@ -17,11 +17,15 @@ public class Administrativo extends Empleado {
 
     @Override
     public void notificarEntrada() {
-
+        this.getControlAsistencias().registrarInicioDeJornada(this.getCedula());
     }
 
     @Override
     public void notificarSalida() {
-
+        try {
+            this.getControlAsistencias().registrarFinDeJornada(this.getCedula());
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
     }
 }

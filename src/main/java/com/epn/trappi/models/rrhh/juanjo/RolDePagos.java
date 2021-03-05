@@ -100,6 +100,7 @@ public class RolDePagos {
                     case "horasExtra":
                         observacionesPorHorasExtra.add(obs);
                     default:
+                        observacionesPorAtraso.add(obs);
                         System.out.println("El tipo dentro de la observacion tiene un error de sintaxis");
                 }
             }

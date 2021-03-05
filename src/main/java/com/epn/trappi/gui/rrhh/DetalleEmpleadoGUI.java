@@ -9,6 +9,7 @@ package com.epn.trappi.gui.rrhh;
 import com.epn.trappi.db.rrhh.*;
 import com.epn.trappi.models.rrhh.*;
 import com.epn.trappi.models.rrhh.juanjo.Asistencia;
+import com.epn.trappi.models.rrhh.juanjo.ControlAsistencias;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
 import com.epn.trappi.models.rrhh.listas.ListaAsistencias;
@@ -46,6 +47,7 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
         this.bancoTextField.setText(this.empleado.getBanco());
         this.estadoTextField.setText(this.empleado.getEstado());
         this.sexoTextiField.setText(this.empleado.getSexo() + "");
+        this.jButton2.setEnabled(false);
         try {
             this.fillTable(cedula);
         } catch (Exception e) {
@@ -57,15 +59,17 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
         String col [] = {
             "Id",
             "Total",
+            "Descuentos",
             "Fecha",
             "Estado"
         };
-//        new ListaRolesDePago().agregar(new RolDePagos(this.empleado, new Fecha()));
+        new ListaRolesDePago().agregar(new RolDePagos(this.empleado, new Fecha()));
         DefaultTableModel tableModel = new DefaultTableModel(col, 0);
         for(RolDePagos r : new ListaRolesDePago().obtenerTodos(cedula)){
             Object [] row = {
                 r.getNumero(),
                 r.getTotal(),
+                r.getDescuentos(),
                 r.getFecha().toString(),
                 r.getEstado()
             };
@@ -113,6 +117,7 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,13 +142,13 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addGap(19, 19, 19))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addContainerGap()
                 .addComponent(jButton4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -213,6 +218,13 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Registrar Salida");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -220,51 +232,55 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(29, 29, 29)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cuentaBancariaLabel)
+                                    .addComponent(cargoLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(departamentoLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(estadoLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(bancoLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addComponent(cedulaLabel)
+                                .addComponent(sexoLabel))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cuentaBancariaLabel)
-                                .addComponent(cargoLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(departamentoLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(estadoLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(bancoLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addComponent(cedulaLabel)
-                            .addComponent(sexoLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cedulaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sexoTextiField, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(estadoTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                .addComponent(bancoTextField)
-                                .addComponent(cargoTextField)
-                                .addComponent(departamentoTextField)
-                                .addComponent(cuentaBancariaTextField))))
+                                .addComponent(cedulaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(sexoTextiField, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(estadoTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                                    .addComponent(bancoTextField)
+                                    .addComponent(cargoTextField)
+                                    .addComponent(departamentoTextField)
+                                    .addComponent(cuentaBancariaTextField))))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
+                        .addGap(18, 18, 18)
                         .addComponent(s))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(nombreEmpleado))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(155, 155, 155)
+                        .addComponent(jButton2)))
                 .addContainerGap(44, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(16, 16, 16)
-                    .addComponent(nombreEmpleado)
-                    .addContainerGap(380, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(32, 32, 32)
+                .addComponent(nombreEmpleado)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cedulaLabel)
                     .addComponent(cedulaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -292,16 +308,11 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sexoLabel)
                     .addComponent(sexoTextiField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(s)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 30, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(113, 113, 113)
-                    .addComponent(nombreEmpleado)
-                    .addContainerGap(810, Short.MAX_VALUE)))
+                .addGap(26, 26, 26))
         );
 
         pack();
@@ -313,15 +324,16 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new ListaAsistencias().agregar(new Asistencia(
-                this.empleado,
-                new Hora(),
-                new Fecha(),
-                "N/A"
-        ));
+        this.empleado.notificarEntrada();
 
         JOptionPane.showMessageDialog(this, "El empleado ha registrado su asistencia correctamente");
+        this.jButton2.setEnabled(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.empleado.notificarSalida();
+        JOptionPane.showMessageDialog(this, "El empleado ha registrado su salida correctamente");
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -435,6 +447,7 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
     private javax.swing.JLabel estadoLabel;
     private javax.swing.JTextField estadoTextField;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
