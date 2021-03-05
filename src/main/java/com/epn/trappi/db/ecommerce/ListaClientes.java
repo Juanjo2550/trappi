@@ -125,7 +125,7 @@ public class ListaClientes {
        String Contraseña=datos[6];   
         
     try {
-            String sql ="EXEC cliente_modificar '"+Nombre+"','"+Fechadenacimiento+"','"+
+            String sql ="EXEC cliente_modificar '"+Nombre+"','"+Cedula+"','"+Fechadenacimiento+"','"+
                     Celular+"','"+Direccion+"','"+Contraseña+
                     "','"+Correo+"'";
             

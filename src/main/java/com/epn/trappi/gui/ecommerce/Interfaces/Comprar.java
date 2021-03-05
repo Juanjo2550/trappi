@@ -8,6 +8,7 @@ import com.epn.trappi.gui.ecommerce.Ecommerce.CarritoDeCompras;
 import com.epn.trappi.db.ecommerce.ListaCarrito;
 import com.epn.trappi.db.ecommerce.ListaFacturas;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
+import com.epn.trappi.gui.ecommerce.Ecommerce.Pago;
 import com.epn.trappi.gui.ecommerce.FacturaMostrar.FacturaFis;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -83,6 +84,27 @@ public class Comprar extends javax.swing.JFrame {
         cantidad1=Integer.parseInt((String)modelo.getValueAt(jTable1.getSelectedRow(),4));
     }
     
+    public String buscarTarjeta(String tarjeta){
+        String tipo = "";
+        try {
+            
+                             
+            Statement statement = connection.createStatement();
+            String sql = "select TIPO from TARJETAS T"+
+                         "where T.IDTARJETAS='"+tarjeta+"'";
+            ResultSet resultSet = statement.executeQuery(sql);
+            
+            while (resultSet.next()) {
+                 tipo= resultSet.getString("TIPO");
+            }
+            
+            return tipo;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            return tipo;
+        }
+    }
 
     
     @SuppressWarnings("unchecked")
@@ -409,25 +431,32 @@ public class Comprar extends javax.swing.JFrame {
         FacturaFis factu = new FacturaFis();
         factu.cargarDatos(nombre,cedula,detalle,subtotal,iva,total);    
         factu.setVisible(true);
-        /*ArrayList aux=carrito.factura.mostrar();
-        for (int i = 0; i < aux.size(); i++) {
-            salida+="\n"+aux.get(i).toString();
-        }
-        JOptionPane.showMessageDialog(null,salida);*/
-        /*JOptionPane.showMessageDialog(null,"Compra realizada con exito"+"\nDatos Factura"+
-                "\nNombre Cliente: "+carrito.factura.nombreCliente
-                +"\nCedula Cliente: "+carrito.factura.cedulaCliente
-                +"\nSubtotal: "+carrito.factura.calcularSubTotal()
-                +"\nImpuestos: "+carrito.factura.calcularImpuestos()
-                +"\nTotal: "+carrito.factura.calcularTotal()+"\nProductos: "+salida);*/
+        
           if(JOptionPane.showConfirmDialog(null, "¿Desea pagar?","El proceso de pago empezará",JOptionPane.YES_NO_OPTION)==YES_OPTION){
           
-              TarjetaUsuario tarjetaElegir = new TarjetaUsuario();
               
-              tarjetaElegir.setVisible(true);
               
-              String tarjeta = TarjetaUsuario.numeroDeTarjeta;
-
+              /*Pago pago = new Pago();
+              
+              String tarjeta = JOptionPane.showInputDialog("Ingresa la tarjeta para pagar");
+              String tipo = buscarTarjeta(tarjeta);
+              if(tipo.equals("Credito")){
+              
+                  
+                  
+                 
+                  
+              }
+              else if(tipo.equals("Debito")){
+                  
+              }
+              else
+              {
+                  JOptionPane.showMessageDialog(null,"No existe esa tarjeta");
+              }
+              
+              
+              JOptionPane.showMessageDialog(null, tarjeta);*/
                 
               ListaFacturas lista=new ListaFacturas();
               int id=lista.generarfacturaDatabase(Main.cliente.Nombre);
@@ -435,6 +464,9 @@ public class Comprar extends javax.swing.JFrame {
               ListaCarrito lista1=new ListaCarrito();
               lista1.registrar_detallecompra(carrito, Main.cliente.Nombre);
                             carrito.factura.conexion.enviarAfinanzas();
+                            
+                            //
+                            
               carrito.vaciarCarrito();
                 DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
                 int filas = modelo.getRowCount();

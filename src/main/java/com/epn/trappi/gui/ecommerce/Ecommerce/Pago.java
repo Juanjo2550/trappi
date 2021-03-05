@@ -15,12 +15,12 @@ import com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaDebito;
  */
 public class Pago {
     
-    TarjetaCredito tarjetacredito = new TarjetaCredito();
-    TarjetaDebito tarjetadebito = new TarjetaDebito();
+    public TarjetaCredito tarjetacredito = new TarjetaCredito();
+    public TarjetaDebito tarjetadebito = new TarjetaDebito();
     
 
 
-    public boolean validarPago(String tipo,Double valor){
+    public boolean validarPago(String tipo,String tarjeta,Double valor){
         boolean bandera=false;
         if(tarjetacredito.Tipo.equals(tipo))
         {

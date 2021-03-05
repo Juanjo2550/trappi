@@ -18,11 +18,7 @@ public class ListaTar {
     DataBaseConnection dbInstance = DataBaseConnection.getInstance();
     Connection connection = dbInstance.getConnection();
     
-    
-    public void ingresar(){
-    
-    }
-    
+
     public int idcuenta(String cedula){
         String cuenta="";
         int idcuenta=0;
