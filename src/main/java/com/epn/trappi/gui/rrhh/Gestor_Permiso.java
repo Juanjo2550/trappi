@@ -771,16 +771,6 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
             
             
         }
-        SolicitudDePago solicitud = new SolicitudDePago();
-        //SolicitudDePago[]= solicitud.SolicitarPago();
-    try {
-        for(int i =0; i<=solicitud.SolicitarPago().length;i++){
-            System.out.println(solicitud.SolicitarPago());
-        }
-        
-    } catch (Exception ex) {
-        Logger.getLogger(Gestor_Permiso.class.getName()).log(Level.SEVERE, null, ex);
-    }
         
     }//GEN-LAST:event_txtnumDiasKeyPressed
 

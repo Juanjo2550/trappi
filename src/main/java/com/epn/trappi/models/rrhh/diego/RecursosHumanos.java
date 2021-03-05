@@ -37,6 +37,7 @@ public class RecursosHumanos {
         //comentado para solucionar problemas 
        this.roles.obtenerTodos();
     }
+    
     public void iterarEmpleados(Fecha f) throws Exception{
         Empleado[] l1 = new ListaEmpleados().obtenerTodos();
             for(Empleado e1:l1){
