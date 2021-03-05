@@ -5,11 +5,13 @@
  */
 package com.epn.trappi.gui.rrhh;
 
-import com.epn.trappi.models.rrhh.*;
 import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
-import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
 import com.epn.trappi.models.rrhh.listas.ListaRolesDePago;
-
+import com.epn.trappi.models.rrhh.diego.SolicitudDePago;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,14 +21,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ListaDeRolesEmpleados extends javax.swing.JFrame {
 
-    private ListaRolesDePago roles;
-
+    private final ListaRolesDePago roles;
+    private final SolicitudDePago pagos;
     /**
      * Creates new form Ejemplo_GUI
      */
     public ListaDeRolesEmpleados() {
         initComponents();
         this.roles = new ListaRolesDePago();
+        this.pagos = new SolicitudDePago();
         inicioTable();
     }
     public final void inicioTable(){
@@ -43,6 +46,33 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
         };
         DefaultTableModel tableModel = new DefaultTableModel(col, 0);
          this.tablaEmpleados.setModel(tableModel);
+        this.tablaEmpleados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.tablaEmpleados.setDefaultEditor(Object.class, null);
+        this.tablaEmpleados.setRowSelectionAllowed(true);
+        this.tablaEmpleados.setColumnSelectionAllowed(false);
+        this.tablaEmpleados.getColumnModel().getColumn(0).setPreferredWidth(2);
+    }
+        public final void solicitudTable() throws Exception {
+
+        String col[] = {
+            "Cuenta",
+            "Monto Total",
+      
+            
+
+        };
+        DefaultTableModel tableModel = new DefaultTableModel(col, 0);
+            for (SolicitudDePago solicitud : this.pagos.SolicitarPago()) {
+            Object[] row = {
+              solicitud.getCuentaBancaria(),
+              solicitud.getMontoTotal()
+             
+              
+            };
+            tableModel.addRow(row);
+        }
+        
+        this.tablaEmpleados.setModel(tableModel);
         this.tablaEmpleados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.tablaEmpleados.setDefaultEditor(Object.class, null);
         this.tablaEmpleados.setRowSelectionAllowed(true);
@@ -281,7 +311,11 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        try {
+            solicitudTable();
+        } catch (Exception ex) {
+            Logger.getLogger(ListaDeRolesEmpleados.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**

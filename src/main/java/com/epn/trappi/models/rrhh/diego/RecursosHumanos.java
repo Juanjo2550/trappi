@@ -8,12 +8,9 @@ package com.epn.trappi.models.rrhh.diego;
 
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
-import com.epn.trappi.models.rrhh.juanjo.Observacion;
 import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
 import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
 import com.epn.trappi.models.rrhh.listas.ListaRolesDePago;
-import java.util.ArrayList;
-import java.util.Map;
 
 /**
  *
@@ -22,14 +19,14 @@ import java.util.Map;
 public class RecursosHumanos {
     public ListaEmpleados empleados;
     public RolDePagos pendiente ;
-    private ListaRolesDePago roles = new ListaRolesDePago();
+    private final ListaRolesDePago roles = new ListaRolesDePago();
     
     //comentado para solucionar problemas
    /* public RolesPagos roles = new RolesPagos();
     private ArrayList<RolPagos> pendientes;*/
-    
-    public void generarRolesDePago(){
-        
+
+
+    public void generarRolesDePago() {
     }
     public RolDePagos iteracionRoles(Empleado e,Fecha f) throws Exception{
         RolDePagos rol = new RolDePagos(e,f);

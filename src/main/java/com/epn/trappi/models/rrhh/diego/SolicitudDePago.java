@@ -31,6 +31,46 @@ public class SolicitudDePago {
         this.cuentaBancaria = cuentaBancaria;
     }
 
+    public Empleado getEmpleadoAPagar() {
+        return empleadoAPagar;
+    }
+
+    public void setEmpleadoAPagar(Empleado empleadoAPagar) {
+        this.empleadoAPagar = empleadoAPagar;
+    }
+
+    public RolDePagos getRol() {
+        return rol;
+    }
+
+    public void setRol(RolDePagos rol) {
+        this.rol = rol;
+    }
+
+    public double getMontoTotal() {
+        return montoTotal;
+    }
+
+    public void setMontoTotal(double montoTotal) {
+        this.montoTotal = montoTotal;
+    }
+
+    public String getCuentaBancaria() {
+        return cuentaBancaria;
+    }
+
+    public void setCuentaBancaria(String cuentaBancaria) {
+        this.cuentaBancaria = cuentaBancaria;
+    }
+
+    public RecursosHumanos getRecursos_humanos() {
+        return recursos_humanos;
+    }
+
+    public void setRecursos_humanos(RecursosHumanos recursos_humanos) {
+        this.recursos_humanos = recursos_humanos;
+    }
+
     public SolicitudDePago() {
     }
     
