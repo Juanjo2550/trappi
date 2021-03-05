@@ -15,7 +15,7 @@ public class ListaObservaciones implements Lista<Observacion> {
 
     @Override
     public void agregar(Observacion newObservacion) {
-        String sql = "INSERT INTO dbo.OBSERVACIONES(IDOSB, IDEMP, TIPOOBS, DESCRIPOBS, FECHAOBS, DIFERENCIAHORAS) VALUES ("
+        String sql = "INSERT INTO dbo.OBSERVACIONES(IDOBS, IDEMP, TIPOOBS, DESCRIPOBS, FECHAOBS, DIFERENCIAHORAS) VALUES ("
                 + (this.obtenerTodos().length + 1) + (",")
                 + newObservacion.getEmpleado().getId() + ","
                 + "'" + newObservacion.getTipo() + "',"
@@ -101,9 +101,9 @@ public class ListaObservaciones implements Lista<Observacion> {
         } catch (SQLException e){
             System.out.println(e.toString());
         }
-        if (observaciones.size() == 0) {
-            throw new Exception("No se han encontrado observaciones");
-        }
+//        if (observaciones.size() == 0) {
+//            throw new Exception("No se han encontrado observaciones");
+//        }
         Observacion [] observacionesArray = new Observacion[observaciones.size()];
         observacionesArray = observaciones.toArray(observacionesArray);
         return observacionesArray;

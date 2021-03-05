@@ -8,10 +8,15 @@ package com.epn.trappi.gui.rrhh;
 
 import com.epn.trappi.db.rrhh.*;
 import com.epn.trappi.models.rrhh.*;
+import com.epn.trappi.models.rrhh.juanjo.Asistencia;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
+import com.epn.trappi.models.rrhh.listas.ListaAsistencias;
+import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
+import com.epn.trappi.models.rrhh.listas.ListaRolesDePago;
+import java.sql.SQLException;
 
-import javax.swing.ListSelectionModel;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,7 +37,7 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
     public DetalleEmpleadoGUI(String cedula, javax.swing.JFrame parentForm) {
         initComponents();
         this.parentForm = parentForm;
-        /*this.empleado = new EmpleadoDb().selectOne(cedula);*/
+        this.empleado = new ListaEmpleados().buscarUno(cedula);
         this.nombreEmpleado.setText(this.empleado.getNombres() + " " + this.empleado.getApellidos());
         this.cedulaTextField.setText(this.empleado.getCedula().toString());
         this.cargoTextField.setText(this.empleado.getCargo());
@@ -41,29 +46,34 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
         this.bancoTextField.setText(this.empleado.getBanco());
         this.estadoTextField.setText(this.empleado.getEstado());
         this.sexoTextiField.setText(this.empleado.getSexo() + "");
-        /*this.roles = new RolesPagos();*/
-        fillTable(cedula);
+        try {
+            this.fillTable(cedula);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
     }
     
-    public final void fillTable(String cedula) {
+    public final void fillTable(String cedula) throws Exception {
         String col [] = {
-            "Valor total",
-            "Cuenta",
-            "Fecha"
+            "Id",
+            "Total",
+            "Fecha",
+            "Estado"
         };
-        
-    /*   DefaultTableModel tableModel = new DefaultTableModel(col, 0);
-        for(RolDePagos r : this.roles.obtenerTodos(cedula)){
+        new ListaRolesDePago().agregar(new RolDePagos(this.empleado, new Fecha()));
+        DefaultTableModel tableModel = new DefaultTableModel(col, 0);
+        for(RolDePagos r : new ListaRolesDePago().obtenerTodos(cedula)){
             Object [] row = {
-                r.getValor(),
                 r.getNumero(),
-                r.getFecha(),
+                r.getTotal(),
+                r.getFecha().toString(),
+                r.getEstado()
             };
                    
             tableModel.addRow(row);
-        }*/
+        }
         
-      /*  this.tabla.setModel(tableModel);*/
+        this.tabla.setModel(tableModel);
         this.tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.tabla.setDefaultEditor(Object.class, null);
         this.tabla.setRowSelectionAllowed(true);
@@ -102,6 +112,7 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
         nombreEmpleado = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -195,6 +206,13 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
+        jButton1.setText("RegistrarAsistencia");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -230,6 +248,10 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(44, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(16, 16, 16)
@@ -240,7 +262,9 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cedulaLabel)
                     .addComponent(cedulaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -287,6 +311,17 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
         this.parentForm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new ListaAsistencias().agregar(new Asistencia(
+                this.empleado,
+                new Hora(),
+                new Fecha(),
+                "N/A"
+        ));
+
+        JOptionPane.showMessageDialog(this, "El empleado ha registrado su asistencia correctamente");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -399,6 +434,7 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
     private javax.swing.JTextField departamentoTextField;
     private javax.swing.JLabel estadoLabel;
     private javax.swing.JTextField estadoTextField;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

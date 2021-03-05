@@ -15,6 +15,7 @@ public class ListaRolesDePago implements Lista<RolDePagos> {
 
     @Override
     public void agregar(RolDePagos newRolDePagos) {
+        System.out.println("Guardando rol....");
         String sql = "INSERT INTO dbo.ROLPAGOS (ID_ROL, IDEMP, FECHAROL, TOTALROL, DESCUENTOSROL, ESTADOROL) VALUES ("
                 + (this.obtenerTodos().length + 1) + ","
                 + newRolDePagos.getEmpleado().getId() + ","
@@ -44,7 +45,7 @@ public class ListaRolesDePago implements Lista<RolDePagos> {
     @Override
     public RolDePagos buscarUno(String cedula) {
         Empleado empleado = new ListaEmpleados().buscarUno(cedula);
-        String sql = "SELECT * FROM ROLPAGOS WHERE IDEMP=" + empleado.getId() + ";";
+        String sql = "SELECT * FROM dbo.ROLPAGOS WHERE IDEMP=" + empleado.getId() + ";";
         RolDePagos roles = null;
         try {
             Statement statement = this.connection.createStatement();
@@ -69,7 +70,7 @@ public class ListaRolesDePago implements Lista<RolDePagos> {
 
     @Override
     public RolDePagos[] obtenerTodos() {
-        String sql = "SELECT * FROM ROLPAGOS";
+        String sql = "SELECT * FROM dbo.ROLPAGOS";
         ArrayList<RolDePagos> roles = new ArrayList<>();
         try {
             Statement statement = this.connection.createStatement();
@@ -97,7 +98,7 @@ public class ListaRolesDePago implements Lista<RolDePagos> {
 
     public RolDePagos[] obtenerTodos(String cedula) {
         Empleado empleado = new ListaEmpleados().buscarUno(cedula);
-        String sql = "SELECT * FROM ROLPAGOS WHERE IDEMP=" + empleado.getId() + ";";
+        String sql = "SELECT * FROM dbo.ROLPAGOS WHERE IDEMP=" + empleado.getId() + ";";
         ArrayList<RolDePagos> roles = new ArrayList<>();
         try {
             Statement statement = this.connection.createStatement();
