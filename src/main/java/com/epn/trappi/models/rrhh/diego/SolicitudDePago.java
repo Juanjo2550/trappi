@@ -20,7 +20,7 @@ public class SolicitudDePago {
     Empleado empleadoAPagar;
     RolDePagos rol;
     double montoTotal;
-    public boolean autorizarSolicitud(SolicitudDePago a, boolean autoriza) {
+   /* public boolean autorizarSolicitud(SolicitudDePago a, boolean autoriza) {
         if(autoriza == true){
             this.estado = "Autorizado";
             System.out.print("Psgo autorizado");
@@ -31,7 +31,7 @@ public class SolicitudDePago {
             System.out.print("No se autorizo el pago");
             return false;
         }
-    }
+    }*/
         //esto es comentado para solucionar los errores 
     /*public void solicitarPago(Pago nuevoPago, SolicitudDePago p, boolean autoriza) {
         if(autorizarSolicitud(p,autoriza)){

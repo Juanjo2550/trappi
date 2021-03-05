@@ -19,6 +19,10 @@ public class Calamidad_Domestica extends Permiso{
         super(empleado, NUMDIASPERM, VALORPAGARPERM, COMENTPERM, FECHAINICIOPERM, FECHAFINPERM, ESTADOPERM);
     }
 
+    public Calamidad_Domestica(int NUMDIASPERM, String VALORPAGARPERM, String FECHAINICIOPERM, String FECHAFINPERM) {
+        super(NUMDIASPERM, VALORPAGARPERM, FECHAINICIOPERM, FECHAFINPERM);
+    }
+
 
  /*    
     public int Calcular_Numero_Dias_Permiso(String TipoPermiso) {

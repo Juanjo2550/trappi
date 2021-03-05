@@ -21,6 +21,10 @@ public class Otros_Permisos extends Permiso {
     public Otros_Permisos() {
     }
 
+    public Otros_Permisos(int NUMDIASPERM, String VALORPAGARPERM, String FECHAINICIOPERM, String FECHAFINPERM) {
+        super(NUMDIASPERM, VALORPAGARPERM, FECHAINICIOPERM, FECHAFINPERM);
+    }
+
     
  
 

@@ -22,6 +22,10 @@ public class Enfermedad extends Permiso {
     public Enfermedad() {
     }
 
+    public Enfermedad(int NUMDIASPERM, String VALORPAGARPERM, String FECHAINICIOPERM, String FECHAFINPERM) {
+        super(NUMDIASPERM, VALORPAGARPERM, FECHAINICIOPERM, FECHAFINPERM);
+    }
+
 
 
 

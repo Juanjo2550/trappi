@@ -11,9 +11,7 @@ import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.TextPrompt;
 import com.epn.trappi.db.connection.DataBaseConnection;
 
-import com.epn.trappi.gui.rrhh.Permisos.Permiso;
-import com.epn.trappi.models.rrhh.listas.Lista;
-import com.epn.trappi.models.rrhh.listas.ListaPermisos;
+
 
 import com.epn.trappi.gui.rrhh.Permisos.Enfermedad;
 import com.epn.trappi.gui.rrhh.Permisos.Nacimiento_Hijo;
@@ -48,6 +46,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Gestor_Permiso extends javax.swing.JFrame {
 Calamidad_Domestica calamidad = new Calamidad_Domestica();
+Permiso permission ;
 Nacimiento_Hijo nacimiento = new Nacimiento_Hijo();
 Otros_Permisos otro = new Otros_Permisos();
 Enfermedad enfermedad = new Enfermedad();
@@ -81,10 +80,12 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         txtCedula.setEnabled(true);
         txtfechaFinPermiso.setEnabled(true);
         txtDescripcion.setEnabled(false);
-        
+        this.txtfechaInicioPermiso.setEnabled(false);
         btnGuardarPermiso.setEnabled(true);
         TextPrompt buscarProveedor = new TextPrompt("yyyy-MM-dd", txtfechaInicioPermiso);
+        TextPrompt finpermiso = new TextPrompt("yyyy-MM-dd", txtfechaFinPermiso);
         TextPrompt diasPermiso = new TextPrompt("Ingrese el número de días", this.txtnumDias);
+        TextPrompt descripcion = new TextPrompt("Ingrese la descripción del permiso", this.txtDescripcion);
         
     }
 
@@ -650,28 +651,26 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
    String fechaFin = txtfechaFinPermiso.getText();
    String estado = (String)cmbEstado.getSelectedItem();
    Empleado id = buscarUno();
-   Calamidad_Domestica calamidad;
-   Enfermedad enfermedad;
-   Otros_Permisos otro;
+
    
    if(tipoPermiso.equals("Calamidad Domestica")){
       
-      calamidad= new Calamidad_Domestica(
+      permission= new Calamidad_Domestica(
               id,numeroDias, valorPagar,descripcionPermiso,fechaInicio,fechaFin,estado
       );    
-      permisos.agregar(calamidad);
+      permisos.agregar(permission);
    }
    if(tipoPermiso.equals("Enfermedad")){
-       enfermedad = new Enfermedad(id,numeroDias, valorPagar,descripcionPermisoEnferOtra,fechaInicio,fechaFin,estado);
-       permisos.agregar(enfermedad);
+       permission = new Enfermedad(id,numeroDias, valorPagar,descripcionPermisoEnferOtra,fechaInicio,fechaFin,estado);
+       permisos.agregar(permission);
    }
    if(tipoPermiso.equals("Nacimientos")){
-       enfermedad = new Enfermedad(id,numeroDias, valorPagar,descripcionPermiso,fechaInicio,fechaFin,estado);
-       permisos.agregar(enfermedad);
+       permission = new Enfermedad(id,numeroDias, valorPagar,descripcionPermiso,fechaInicio,fechaFin,estado);
+       permisos.agregar(permission);
    }
    else {
-       otro = new Otros_Permisos(id,numeroDias, valorPagar,descripcionPermisoEnferOtra,fechaInicio,fechaFin,estado);
-       permisos.agregar(otro);
+       permission = new Otros_Permisos(id,numeroDias, valorPagar,descripcionPermisoEnferOtra,fechaInicio,fechaFin,estado);
+       permisos.agregar(permission);
    }
     }//GEN-LAST:event_btnGuardarPermisoActionPerformed
    
@@ -706,7 +705,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
     String tipo_Permiso = this.cmbPermiso.getSelectedItem().toString();
     String tipoCalamidad = (String) cmbTipoPermiso.getSelectedItem();
     String tipoNacimiento = (String) cmbTipoPermiso.getSelectedItem();
-    Empleado sexoEmpleado = buscarUno();
+    
     if("Calamidad Domestica".equalsIgnoreCase(tipo_Permiso)){
         int numeroDias = calamidad.calcularNumeroDias(tipoCalamidad,buscarUno().getSexo());
         txtnumDias.setText(Integer.toString(numeroDias));
@@ -721,6 +720,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
     private void btnValidarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarFechaActionPerformed
     try {
         fechaInicio();
+        this.txtfechaFinPermiso.setEnabled(false);
         
     } catch (ParseException ex) {
         Logger.getLogger(Gestor_Permiso.class.getName()).log(Level.SEVERE, null, ex);
@@ -764,7 +764,9 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
             String valorPago = nacimiento.calcularProporcionalPagar(sueldoEmpleado,numeroDiasPermiso);
             
            this.txtvalorAPagar.setText(valorPago);
+           
             }
+            this.txtfechaInicioPermiso.setEnabled(true);
             
             
         }
