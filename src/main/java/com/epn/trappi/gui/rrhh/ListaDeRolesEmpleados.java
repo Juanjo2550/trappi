@@ -27,9 +27,28 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
     public ListaDeRolesEmpleados() {
         initComponents();
         this.roles = new ListaRolesDePago();
-        fillTable();
+        inicioTable();
     }
+    public final void inicioTable(){
+           String col[] = {
+            "Número",
+            "Nombre",
+            "Apellido",
+            "Fecha",
+            "Total",
+            "Descuentos",
+            "Estado"
+            
 
+        };
+        DefaultTableModel tableModel = new DefaultTableModel(col, 0);
+         this.tablaEmpleados.setModel(tableModel);
+        this.tablaEmpleados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.tablaEmpleados.setDefaultEditor(Object.class, null);
+        this.tablaEmpleados.setRowSelectionAllowed(true);
+        this.tablaEmpleados.setColumnSelectionAllowed(false);
+        this.tablaEmpleados.getColumnModel().getColumn(0).setPreferredWidth(2);
+    }
     public final void fillTable() {
 
         String col[] = {
@@ -82,6 +101,7 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jButton6 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -126,9 +146,18 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
 
+        jButton6.setBackground(new java.awt.Color(204, 153, 0));
+        jButton6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jButton6.setText("Solicitar Pagos");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         jButton3.setBackground(new java.awt.Color(204, 153, 0));
         jButton3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton3.setText("Roles de Pago");
+        jButton3.setText("Generar Roles");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -141,14 +170,21 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 51, Short.MAX_VALUE))
+                .addGap(35, 35, 35))
         );
 
         btnVolver.setBackground(new java.awt.Color(204, 153, 0));
@@ -165,7 +201,7 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,8 +277,12 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        fillTable();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -346,6 +386,7 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
     private javax.swing.JButton btnVolver;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
