@@ -22,7 +22,7 @@ public class Inventario {
     private AnalizadorDeInventario analizador = new AnalizadorDeInventario();
 
     private ProveedoresDb db = new ProveedoresDb();
-    
+
     public Inventario() throws IOException {
         this.listaDeBienes = new ListaDeBienes();
         this.listaDeBienes = db.getInventarioDb();
@@ -59,20 +59,17 @@ public class Inventario {
             }
         }
     }
-    
-    public void disminuirStock() {
-        
+
+    public void disminuirStock(ArrayList<Bien> ListaADisminuir) {
+        for (Bien bien : ListaADisminuir) {
+            try {
+                db.disminuirStock(db.getIdBien(bien.getNombre()), bien.getCantidad());
+            } catch (SQLException ex) {
+                Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     //el parámetro es la cantidad de productos nuevos para añadir a la cantidad existente y el bien
     public void aumentarStockotro(int cantidadDeProductosNuevos, Bien bienAAumentar) {
         /*for (CantidadDeBien cantidadBien : listaDeBienes.getListaBienes()) {
