@@ -12,6 +12,7 @@ public class EjemploDeUso {
         //Esto hace Logístico para comenzar a escuchar empleados
         MapaDisponibilidad mapa = new MapaDisponibilidad();
         controlAsistencias.events.suscribe("nuevo_empleado", mapa);
+        controlAsistencias.events.suscribe("salida_empleado", mapa);
 
 
         //Esto es en tiempo de ejecución

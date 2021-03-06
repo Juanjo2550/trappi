@@ -5,9 +5,11 @@
  */
 
 package com.epn.trappi.models.rrhh.juanjo;
+import com.epn.trappi.gui.rrhh.Permisos.Permiso;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.contratacion.Contrato;
 import com.epn.trappi.models.rrhh.listas.ListaObservaciones;
+import com.epn.trappi.models.rrhh.listas.ListaPermisos;
 import com.epn.trappi.models.rrhh.listas.ListaRolesDePago;
 
 import java.math.BigDecimal;
@@ -107,9 +109,10 @@ public class RolDePagos {
             double descuentosPorAtrasos = this.calcularAfectacionDeAtrasos(observacionesPorAtraso);
             double descuentosPorFaltas = this.calcularAfectacionDeFaltas(observacionesPorFaltas);
             double bonoPorHorasExtra = this.calcularAfectacionDeHorasExtra(observacionesPorHorasExtra);
+//            double bonoPorPermisos = this.calcularBonoPorPermisos(this.empleado.getCedula());
 
             this.descuentos = descuentosPorAtrasos + descuentosPorFaltas;
-            this.total = Double.parseDouble(this.empleado.getSueldo()) + bonoPorHorasExtra - descuentosPorAtrasos;
+            this.total = Double.parseDouble(this.empleado.getSueldo()) + bonoPorHorasExtra - descuentosPorAtrasos; //+ bonoPorPermisos;
         }
         this.estado = "pendiente";
     }
@@ -148,6 +151,22 @@ public class RolDePagos {
             }
         }
         return descuentos;
+    }
+
+    private double calcularReposicionPorPermisos(String cedula) {
+        ListaPermisos listaPermisos = new ListaPermisos();
+        Permiso[] permisos = listaPermisos.obtenerTodos();
+        double total = 0;
+        for(Permiso per : permisos) {
+            if(per.getEmpleado().getCedula().equals(cedula)){
+                int initialUnformattedDate = Integer.parseInt(per.getFECHAINICIOPERM().split("-")[1]);
+                int finalUnformattedDate = Integer.parseInt(per.getFECHAFINPERM().split("-")[1]);
+                if (initialUnformattedDate <= this.fecha.getMes() && this.fecha.getMes() <= finalUnformattedDate) {
+                    total = total +  Integer.parseInt(per.getVALORPAGARPERM());
+                }
+            }
+        }
+        return total;
     }
 
     private Observacion[] obtenerObservaciones () throws Exception {

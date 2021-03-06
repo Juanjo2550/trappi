@@ -82,8 +82,10 @@ public class Demo extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         log.setVisible(true);
+        //Se ejecuta el metodo que notifica el ingreso de un empleado
         controlAsistencias.registrarInicioDeJornada("1722951165");
-        log.updateEmpleados();
+
+//        log.updateEmpleados();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

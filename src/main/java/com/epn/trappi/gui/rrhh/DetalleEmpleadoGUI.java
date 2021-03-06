@@ -63,7 +63,7 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
             "Fecha",
             "Estado"
         };
-        new ListaRolesDePago().agregar(new RolDePagos(this.empleado, new Fecha()));
+//        new ListaRolesDePago().agregar(new RolDePagos(this.empleado, new Fecha()));
         DefaultTableModel tableModel = new DefaultTableModel(col, 0);
         for(RolDePagos r : new ListaRolesDePago().obtenerTodos(cedula)){
             Object [] row = {

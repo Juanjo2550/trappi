@@ -3,7 +3,6 @@ package com.epn.trappi.models.observer.publisher;
 import com.epn.trappi.models.observer.listeners.EventListener;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
