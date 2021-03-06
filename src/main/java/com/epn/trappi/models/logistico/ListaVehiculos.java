@@ -48,6 +48,7 @@ public class ListaVehiculos {
         }
         return modelo;
     }
+    
     public Boolean estaVacia(){
         if (this.vehiculos==null || this.vehiculos.size()==0){
             return true;
