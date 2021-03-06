@@ -35,6 +35,7 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
         handler = new Usos_ViewHandler();
         vehiculos = new ListaVehiculos();
         servicioDB = new ServicioDbVehiculo();
+        
     }
 
     /**
@@ -278,12 +279,13 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActualizarInformacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarInformacionActionPerformed
+        
         int kilometraje = Integer.parseInt(txtKilometraje.getText());
         int estado = cmbEstados.getSelectedIndex();
         int fila = tablaListaVehiculos.getSelectedRow();
-        String matricula = (String)tablaListaVehiculos.getValueAt(fila, 1);
+        String id = (String)tablaListaVehiculos.getValueAt(fila, 0);
         Vehiculo aux = new Vehiculo();
-        aux.setMatricula(matricula.trim());
+        aux.setID(Integer.parseInt(id.trim()));
         aux.setKilometraje(kilometraje);
         if(estado==0){
             aux.setEstado(new Habilitado(aux));
@@ -293,16 +295,14 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
             aux.setEstado(new Inhabilitado(aux));
         }
         
+        //JOptionPane.showMessageDialog(null,aux.getMatricula() + "," + aux.getKilometraje()+ ","+aux.getEstado().toString());
         try {
                 servicioDB.actualizar(aux);
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, null, "Error al actualizar veh" , JOptionPane.ERROR_MESSAGE);
             }
-        this.tablaListaVehiculos.setModel(modelo);
-    }//GEN-LAST:event_btnActualizarInformacionActionPerformed
-
-    private void btnBuscarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarVehiculoActionPerformed
-        int opcion = cmbEstados.getSelectedIndex();
+        
+         int opcion = cmbBusquedaVehiculos1.getSelectedIndex();
         String campo_busqueda = txtBusquedaVehiculos.getText();
         try{
         switch (opcion){
@@ -338,8 +338,52 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
         }catch (NumberFormatException e){
             JOptionPane.showMessageDialog(null,"Ingrese un valor entero para el número de registros");
         }
-        modelo=vehiculos.mostrarLista();
-        this.tablaListaVehiculos.setModel(modelo);
+        this.tablaListaVehiculos.setModel(vehiculos.mostrarLista());
+        }catch (SQLException e){
+                JOptionPane.showMessageDialog(null,"Base de datos fuera de servicio");
+                }
+        
+        //this.tablaListaVehiculos.setModel(vehiculos.mostrarLista());
+    }//GEN-LAST:event_btnActualizarInformacionActionPerformed
+
+    private void btnBuscarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarVehiculoActionPerformed
+        int opcion = cmbBusquedaVehiculos1.getSelectedIndex();
+        String campo_busqueda = txtBusquedaVehiculos.getText();
+        try{
+        switch (opcion){
+            case 0:
+                vehiculos.setVehiculos(servicioDB.obtenerElementos().getDatos());
+                break;
+            case 1:
+                vehiculos.setVehiculos(servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.MATRICULA,campo_busqueda).getDatos());
+                break;
+            case 2:
+                vehiculos.setVehiculos(servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.TIPO,campo_busqueda).getDatos());
+                break;
+            case 3:
+                vehiculos.setVehiculos(servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.ESTADO,campo_busqueda).getDatos());
+                break;
+            case 4:
+                vehiculos.setVehiculos(servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.KILOMETRAJE,campo_busqueda).getDatos());
+                break;
+            case 5:
+                vehiculos.setVehiculos(servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.ID_VEHICULO,campo_busqueda).getDatos());
+                break;
+        }
+        
+        int numero_registros=0;
+        try{
+            numero_registros=vehiculos.getVehiculos().size();
+            
+            ArrayList<Vehiculo> lista = new ArrayList<>();
+            for(int puntero=0;puntero<numero_registros;puntero++){
+                lista.add(vehiculos.getVehiculos().get(puntero));
+            }
+            vehiculos.setVehiculos(lista);
+        }catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null,"Ingrese un valor entero para el número de registros");
+        }
+        this.tablaListaVehiculos.setModel(vehiculos.mostrarLista());
         }catch (SQLException e){
                 JOptionPane.showMessageDialog(null,"Base de datos fuera de servicio");
                 }
