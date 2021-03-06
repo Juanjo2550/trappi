@@ -58,6 +58,7 @@ public class ListaPermisos implements Lista<Permiso>{
             
             pstm.executeUpdate();
             JOptionPane.showMessageDialog(null,"El permiso se ha registrado con exito");
+            System.out.println("hola19");
             }
             if(newPermission instanceof Enfermedad){
                 int ID = obtenerTodos().length +1;
@@ -75,6 +76,7 @@ public class ListaPermisos implements Lista<Permiso>{
             pstm.setString(9, "Enfermedad");
             pstm.executeUpdate();
             JOptionPane.showMessageDialog(null,"El permiso se ha registrado con exito");
+                System.out.println("hola20");
             }
             if(newPermission instanceof Nacimiento_Hijo){
                 int ID = obtenerTodos().length +1;
@@ -92,6 +94,7 @@ public class ListaPermisos implements Lista<Permiso>{
             pstm.setString(9, "Nacimiento_Hijo");
             pstm.executeUpdate();
             JOptionPane.showMessageDialog(null,"El permiso se ha registrado con exito");
+            System.out.println("hola21");
             }
             else if (newPermission instanceof Otros_Permisos){
                 int ID = obtenerTodos().length +1;
@@ -109,6 +112,7 @@ public class ListaPermisos implements Lista<Permiso>{
             pstm.setString(9, "Otro Permiso");
             pstm.executeUpdate();
             JOptionPane.showMessageDialog(null,"El permiso se ha registrado con exito");
+            System.out.println("hola22");
             }   
         }
         catch (Exception e) {

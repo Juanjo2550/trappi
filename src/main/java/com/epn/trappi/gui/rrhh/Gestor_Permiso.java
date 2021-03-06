@@ -71,15 +71,8 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         initComponents();
           obtenerNombre();
           listarPermisos();
-         
-          
-        
-        
-       
-        
-       
         cmbnombreEmpleado.setEnabled(true);
-        txtCedula.setEnabled(true);
+        txtCedula.setEnabled(false);
         txtfechaFinPermiso.setEnabled(true);
         txtDescripcion.setEnabled(false);
         this.txtfechaInicioPermiso.setEnabled(false);
@@ -99,16 +92,18 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
             this.cmbTipoPermiso.setEnabled(true);
             txtDescripcion.setEnabled(false);
             Permisos[0]= "Seleccione...";
-       Permisos[1]="muerte de padres, hermanos, hijos, c�nyuge";
+       Permisos[1]="muerte de padres, hermanos, hijos, cónyuge";
        Permisos[2]="muerte de nietos, padres del cónyuge o hermanos de la pareja";
        Permisos[3]="enfermedad de hijos o conyuge";
        Permisos[4]="enfermedad de padres o hermanos";
     }
         if (tipo.equalsIgnoreCase("Enfermedad")){
            this.txtDescripcion.setEnabled(true);
+           this.cmbTipoPermiso.setEnabled(false);
         }
         if (tipo.equalsIgnoreCase("Otros Permisos")){
            this.txtDescripcion.setEnabled(true);
+           this.cmbTipoPermiso.setEnabled(false);
         }
         if (tipo.equalsIgnoreCase("Nacimiento Hijos")){
              this.cmbTipoPermiso.setEnabled(true);
@@ -473,7 +468,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         ));
         jScrollPane1.setViewportView(tbllista);
 
-        PanelAspirante.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 860, 200));
+        PanelAspirante.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 860, 150));
 
         cmbTipoPermiso.setToolTipText("");
         cmbTipoPermiso.addActionListener(new java.awt.event.ActionListener() {
@@ -508,6 +503,11 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         PanelAspirante.add(txtvalorAPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, 200, 28));
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aprobado", "Denegado" }));
+        cmbEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbEstadoActionPerformed(evt);
+            }
+        });
         PanelAspirante.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 160, -1));
 
         lblfechaInicioPermiso3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -646,7 +646,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         this.cmbnombreEmpleado.setSelectedItem("Seleccione...");
         this.txtCedula.setText("");
         cmbnombreEmpleado.setEnabled(true);
-        txtCedula.setEnabled(true);
+        txtCedula.setEnabled(false);
         txtfechaFinPermiso.setEnabled(true);
       
         btnGuardarPermiso.setEnabled(true);
@@ -679,7 +679,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
        permission = new Nacimiento_Hijo(id,numeroDias, valorPagar,descripcionPermiso,fechaInicio,fechaFin,estado);
        permisos.agregar(permission);
    }
-   else {
+   if (tipoPermiso.equals("Otros Permisos")) {
        permission = new Otros_Permisos(id,numeroDias, valorPagar,descripcionPermisoEnferOtra,fechaInicio,fechaFin,estado);
        permisos.agregar(permission);
    }
@@ -727,12 +727,14 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         txtnumDias.setText(Integer.toString(numeroDias));
     }
     
+    
     }//GEN-LAST:event_cmbTipoPermisoActionPerformed
 
     private void btnValidarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarFechaActionPerformed
     try {
         fechaInicio();
         this.txtfechaFinPermiso.setEnabled(false);
+        this.cmbEstado.setEnabled(true);
         
     } catch (ParseException ex) {
         Logger.getLogger(Gestor_Permiso.class.getName()).log(Level.SEVERE, null, ex);
@@ -760,17 +762,23 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 this.cmbPermiso.setEnabled(true);
                 Empleado obtenerCedula = buscarUno();
                 txtCedula.setText(obtenerCedula.getCedula());
+                
                 //this.cmbTipoPermiso.setModel(new DefaultComboBoxModel(tipoPermiso(cmbPermiso.getSelectedItem().toString())));
             }
             else{
                 txtCedula.setText("");
                 this.cmbPermiso.setEnabled(false);
+                this.txtfechaInicioPermiso.setEnabled(false);
+                this.txtfechaFinPermiso.setEditable(false);
+                //this.txtnumDias.setEnabled(false);
+                this.cmbEstado.setEnabled(false);
             }
         }
     }//GEN-LAST:event_cmbnombreEmpleadoItemStateChanged
 
     private void txtnumDiasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumDiasKeyPressed
-       String permiso = this.cmbPermiso.getSelectedItem().toString();
+       try{
+          String permiso = this.cmbPermiso.getSelectedItem().toString();
        double sueldoEmpleado = Double.parseDouble(buscarUno().getSueldo());
             int numeroDiasPermiso = Integer.parseInt(txtnumDias.getText());
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -790,9 +798,18 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
             this.txtfechaInicioPermiso.setEnabled(true);
             
             
-        }
+        } 
+       }
+       catch (Exception e){
+           
+       }
+        
         
     }//GEN-LAST:event_txtnumDiasKeyPressed
+
+    private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
+        
+    }//GEN-LAST:event_cmbEstadoActionPerformed
 
     /**
      * @param args the command line arguments
