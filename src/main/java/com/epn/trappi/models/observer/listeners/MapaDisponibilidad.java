@@ -7,12 +7,6 @@ import java.util.ArrayList;
 
 public class MapaDisponibilidad implements EventListener{
     public ArrayList<Empleado> empleadosDisponibles;
-    private LogInterface logInterface;
-
-    public MapaDisponibilidad(LogInterface logInterface) {
-        this.empleadosDisponibles = new ArrayList<>();
-        this.logInterface = logInterface;
-    }
 
     public MapaDisponibilidad() {
         this.empleadosDisponibles = new ArrayList<>();
@@ -22,11 +16,12 @@ public class MapaDisponibilidad implements EventListener{
         if(eventType.equals("nuevo_empleado")) {
             System.out.println("Un nuevo empleado esta disponible!");
             empleadosDisponibles.add(empleado);
-            logInterface.updateEmpleados();
+            for (Empleado e: this.empleadosDisponibles) {
+                System.out.println(e.getNombres());
+            }
         } else {
             System.out.println("Un empleado marco salida, no esta disponible!");
             empleadosDisponibles.remove(empleado);
         }
-
     }
 }

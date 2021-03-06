@@ -26,7 +26,7 @@ public class LogInterface extends javax.swing.JFrame {
     
     public LogInterface(ControlAsistencias controlAsistencias) {
         initComponents();
-        this.mapa = new MapaDisponibilidad(this);
+        this.mapa = new MapaDisponibilidad();
         controlAsistencias.events.suscribe("nuevo_empleado", mapa);
 //        controlAsistencias.events.suscribe("salida_empleado", mapa);
         for(Empleado emp : this.mapa.empleadosDisponibles) {

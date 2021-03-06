@@ -28,6 +28,7 @@ public class ControlAsistencias {
         asistencia.setHoraFin(new Hora());
         this.listaAsistencias.registrarSalida(asistencia);
         asistencia.comprobarHoraExtra();
+        this.notificarSalidaConductor(asistencia.getEmpleado());
     }
 
     public void notificarEntradaConductor(Empleado empleado) {
