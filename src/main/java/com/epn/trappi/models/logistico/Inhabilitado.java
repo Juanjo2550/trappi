@@ -15,7 +15,7 @@ import com.epn.trappi.models.logistico.Vehiculo;
 public class Inhabilitado extends Estado{
 
     private boolean estado; 
-    private static String nomestado ="InHabilitado";  
+    private static String nomestado ="Inhabilitado";  
 
     public Inhabilitado(Vehiculo vehiculo) {
         super( vehiculo);
