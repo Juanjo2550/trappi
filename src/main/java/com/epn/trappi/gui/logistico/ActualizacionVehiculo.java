@@ -303,7 +303,7 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
             }
         
          int opcion = cmbBusquedaVehiculos1.getSelectedIndex();
-        String campo_busqueda = txtBusquedaVehiculos.getText();
+        String campo_busqueda = txtBusquedaVehiculos.getText().trim();
         try{
         switch (opcion){
             case 0:
@@ -348,7 +348,7 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
 
     private void btnBuscarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarVehiculoActionPerformed
         int opcion = cmbBusquedaVehiculos1.getSelectedIndex();
-        String campo_busqueda = txtBusquedaVehiculos.getText();
+        String campo_busqueda = txtBusquedaVehiculos.getText().trim();
         try{
         switch (opcion){
             case 0:

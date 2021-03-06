@@ -111,7 +111,15 @@ public class ServicioDbVehiculo implements ServicioDb<Vehiculo>, Unible<Vehiculo
         while(resultados.next()){
             Vehiculo elemento = new Vehiculo();
             elemento.setMatricula(resultados.getString(1));
-            Estado estado_vehiculo = new EnEspera(resultados.getString(2));
+            String estado = resultados.getString(2).trim();
+            Estado estado_vehiculo;
+            if(estado.equals("En Espera")){
+                estado_vehiculo = new EnEspera();
+            }else if(estado.equals("Inhabilitado")){
+                 estado_vehiculo = new Inhabilitado();   
+            }else{
+                estado_vehiculo = new Habilitado();
+            }
             elemento.setEstado(estado_vehiculo);
             elemento.setTipo(resultados.getString(3));
             elemento.setKilometraje(resultados.getInt(4));
