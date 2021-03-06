@@ -49,7 +49,12 @@ public class MainProveedores {
         
         ListaDeBienes prod = db.getInventarioDb();*/
         System.out.print(db.getServicios().get(0).toString());
-
+        
+        ArrayList<Bien> f = new ArrayList<>();
+        f.add(db.getServicios().get(0));
+        f.get(0).setCantidad(6);
+        CompraDeServicio s = new CompraDeServicio(new ListaDeBienes(f), "Pendiente");
+        s.comprar();
         //db.actualizarProveedor("7043728305001","Guayaquil","1547935481");
         /*ListaDeCompras comp = db.seleccionarCompras();
 

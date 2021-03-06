@@ -21,6 +21,8 @@ public class Servicio extends Bien {
     public Servicio(String nombre, double precio, Proveedor proveeedor, int cantidad, String marca) {
         super(nombre, precio, proveeedor, cantidad, marca);
     }
+    
+    
 
     @Override
     public void registrar() {
