@@ -39,13 +39,15 @@ public class  Pago {
 
 
     
-    public void registrarPago(Pago pago){
+    private void registrarPago(Pago pago){
 
     DataBaseConnection dbInstance = DataBaseConnection.getInstance();
         Connection connection = dbInstance.getConnection();
         try{
         Statement statement = connection.createStatement();
-        String sql = "INSERT INTO dbo.PAGO VALUES(1,1,'12345',150,28,02,2021)";
+        String sql = "INSERT INTO dbo.PAGO VALUES("+(this.libroDiario.ingresosRegistrados.size()+1)+
+                ",'"+pago.nroCuenta+"',"+pago.monto+","+pago.fechadePago.devolverDia()+
+                ","+pago.fechadePago.devolverMes()+","+pago.fechadePago.devolverAnio()+")";
         statement.executeUpdate(sql);
         }catch(Exception e){
             System.out.println(e);
@@ -68,9 +70,6 @@ public class  Pago {
     @Override
     public String toString() {
         return "Pago: " + "fechadePago=" + fechadePago + ", cuentaPagar=" + nroCuenta + ", monto=" + monto + '\n';
-    }
-    public void realizarPago(String numeroCuenta, double monto){
-        
     }
 
     public Fecha getFechadePago() {
