@@ -360,7 +360,7 @@ public class ProveedoresDb {
         ResultSet rs = ejecutarSP(spSelectAllServicios);
         List<Servicio> ss = new ArrayList<>();
         while (rs.next()) {
-            String[] res = {rs.getString(3), rs.getString(4), rs.getString(2)};
+            String[] res = {rs.getString(3), rs.getString(4), rs.getString(2),rs.getString(6)};
             ss.add(reformarServicio(res));
         }
         this.servicios = ss;
@@ -470,6 +470,7 @@ public class ProveedoresDb {
 
     private Servicio reformarServicio(String[] str) throws SQLException {
         Servicio serv = new Servicio(str[0], Double.parseDouble(str[1]), obtenerProveedor(str[2]));
+        serv.setMarca(str[3]);
         return serv;
     }
 

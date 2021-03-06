@@ -48,9 +48,7 @@ public class MainProveedores {
  /*db.getInventarioDb();
         
         ListaDeBienes prod = db.getInventarioDb();*/
-        db.buscarProductos("Jugo").forEach(p -> {
-            System.out.println(p.getNombre() + ";" + p.getPrecio() + ";" + p.getProveeedor().getRuc());
-        });
+        System.out.print(db.getServicios().get(0).toString());
 
         //db.actualizarProveedor("7043728305001","Guayaquil","1547935481");
         /*ListaDeCompras comp = db.seleccionarCompras();
