@@ -584,7 +584,7 @@ public class Logistico_GUI extends javax.swing.JFrame {
         //entregasActivas.setVisible(false);
         //mapaDisponibilidad.setVisible(true);
         ocultarPaneles(this.mapaDisponibilidad);
-        mapaDisponibilidad.setSize(1048, 770);
+        mapaDisponibilidad.setSize(1048,813);
         jPEntregasActivasGUI.add(mapaDisponibilidad);
         jPEntregasActivasGUI.revalidate();
         jPEntregasActivasGUI.repaint();
@@ -606,7 +606,7 @@ public class Logistico_GUI extends javax.swing.JFrame {
             //entregasActivas.setVisible(true);
             ocultarPaneles(this.entregasActivas);
             this.entregasActivas.actualizarContadores();
-            entregasActivas.setSize(1048, 770);
+            entregasActivas.setSize(1048, 813);
             jPEntregasActivasGUI.add(entregasActivas);
             //entregasActivas.setLocation(1048, 660);
             jPEntregasActivasGUI.revalidate();   
@@ -682,7 +682,7 @@ public class Logistico_GUI extends javax.swing.JFrame {
         //registroEntregas.setVisible(false);
         //entregasActivas.setVisible(true);
         ocultarPaneles(this.registroEntregas);
-        registroEntregas.setSize(1048, 770);
+        registroEntregas.setSize(1048,813);
         jPEntregasActivasGUI.add(registroEntregas);
         //entregasActivas.setLocation(1048, 660);
         jPEntregasActivasGUI.revalidate();
@@ -694,7 +694,7 @@ public class Logistico_GUI extends javax.swing.JFrame {
         //registroEntregas.setVisible(false);
         //entregasActivas.setVisible(true);
         ocultarPaneles(this.fichasTecnicas);
-        fichasTecnicas.setSize(1048, 770);
+        fichasTecnicas.setSize(1048, 813);
         jPEntregasActivasGUI.add(fichasTecnicas);
         //entregasActivas.setLocation(1048, 660);
         jPEntregasActivasGUI.revalidate();
@@ -706,7 +706,7 @@ public class Logistico_GUI extends javax.swing.JFrame {
         //registroEntregas.setVisible(false);
         //entregasActivas.setVisible(true);
         ocultarPaneles(this.listasVehiculos);
-        listasVehiculos.setSize(1048, 770);
+        listasVehiculos.setSize(1048, 813);
         jPEntregasActivasGUI.add(listasVehiculos);
         //entregasActivas.setLocation(1048, 660);
         jPEntregasActivasGUI.revalidate();
@@ -718,7 +718,7 @@ public class Logistico_GUI extends javax.swing.JFrame {
         //registroEntregas.setVisible(false);
         //entregasActivas.setVisible(true);
         ocultarPaneles(this.registroMantenimiento);
-        registroMantenimiento.setSize(1048, 770);
+        registroMantenimiento.setSize(1048, 813);
         jPEntregasActivasGUI.add(registroMantenimiento);
         //entregasActivas.setLocation(1048, 660);
         jPEntregasActivasGUI.revalidate();
@@ -759,7 +759,7 @@ public class Logistico_GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         ocultarPaneles(this.registroVehiculo);
-        registroVehiculo.setSize(1048, 770);
+        registroVehiculo.setSize(1048, 813);
         jPEntregasActivasGUI.add(registroVehiculo);
         //entregasActivas.setLocation(1048, 660);
         jPEntregasActivasGUI.revalidate();
