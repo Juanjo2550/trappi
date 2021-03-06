@@ -38,15 +38,15 @@ public class DataBaseConnection {
     }
 
     //EJEMPLO DE USO DE ESTA CLASE Y DE UN QUERY A LA BASE DE DATOS CENTRAL
-    public static void main(String args[]) throws SQLException {
-        DataBaseConnection dbInstance = DataBaseConnection.getInstance();
-        Connection connection = dbInstance.getConnection();
-        Statement statement = connection.createStatement();
-        String sql = "select * from sys.database_principals";
-        ResultSet resultSet = statement.executeQuery(sql);
-        System.out.println(resultSet);        
-        while (resultSet.next()) {
-            System.out.println(resultSet.getString(1) + " " + resultSet.getString(2));
-        }
-    }
+//    public static void main(String args[]) throws SQLException {
+//        DataBaseConnection dbInstance = DataBaseConnection.getInstance();
+//        Connection connection = dbInstance.getConnection();
+//        Statement statement = connection.createStatement();
+//        String sql = "select * from sys.database_principals";
+//        ResultSet resultSet = statement.executeQuery(sql);
+//        System.out.println(resultSet);
+//        while (resultSet.next()) {
+//            System.out.println(resultSet.getString(1) + " " + resultSet.getString(2));
+//        }
+//    }
 }
