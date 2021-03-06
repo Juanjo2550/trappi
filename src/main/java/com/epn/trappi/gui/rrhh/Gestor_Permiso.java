@@ -31,6 +31,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -84,6 +85,11 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         
     }
 
+    private static String getTwoDecimals(double value){
+      DecimalFormat df = new DecimalFormat("0.00"); 
+      return df.format(value);
+    }
+    
        public String[] tipoPermiso(String tipo){
        String [] Permisos = new String [10];
        char sexoEmpleado = buscarUno().getSexo();
@@ -763,18 +769,23 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
        try{
           String permiso = this.cmbPermiso.getSelectedItem().toString();
        double sueldoEmpleado = Double.parseDouble(buscarUno().getSueldo());
+       
             int numeroDiasPermiso = Integer.parseInt(txtnumDias.getText());
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             if("Enfermedad".equals(permiso)){
             String valorPago = enfermedad.calcularProporcionalPagar(sueldoEmpleado,numeroDiasPermiso);
-           this.txtvalorAPagar.setText(valorPago);
+            double valorPagoDosDecimales = Double.parseDouble(valorPago);
+            String valorPagarString = getTwoDecimals(valorPagoDosDecimales);
+           this.txtvalorAPagar.setText(valorPagarString);
            this.txtvalorAPagar.setEnabled(false);
             }
             if("Nacimiento Hijos".equals(permiso)){
-
-            String valorPago = nacimiento.calcularProporcionalPagar(sueldoEmpleado,numeroDiasPermiso);
+            String valorPago = enfermedad.calcularProporcionalPagar(sueldoEmpleado,numeroDiasPermiso);
+            double valorPagoDosDecimales = Double.parseDouble(valorPago);
+            String valorPagarString = getTwoDecimals(valorPagoDosDecimales);
             
-           this.txtvalorAPagar.setText(valorPago);
+            
+           this.txtvalorAPagar.setText(valorPagarString);
            this.txtvalorAPagar.setEnabled(false);
            
             }
