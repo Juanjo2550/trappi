@@ -19,22 +19,17 @@ public class FacturaFis extends javax.swing.JFrame {
     /**
      * Creates new form FacturaFis
      */
-    String numeroFactura="1234567890";
-    String senor;
-    String cedula;
-    String fecha="24/02/2021";
-    ArrayList<Articulo>detalle;
-    Double subtotal;
-    Double iva;
-    Double total;
+ 
+  
     public FacturaFis() {
         initComponents();
         this.setLocationRelativeTo(null);
         
     }
-        public void cargarDatos(String senor,String cedula,ArrayList<Articulo> detalle,Double subtotal,Double iva,Double total)
+        //ArrayList<Bien> detalle;
+        public void cargarDatos(int numeroFactura,String senor,String cedula,String fecha,ArrayList<Articulo> detalle,Double subtotal,Double iva,Double total)
         {
-            jTextFieldNo.setText(numeroFactura);
+            jTextFieldNo.setText(String.valueOf(numeroFactura));
             jTextFieldSr.setText(senor);
             jTextFieldCI.setText(cedula);
             jTextFieldFecha.setText(fecha);
@@ -44,15 +39,16 @@ public class FacturaFis extends javax.swing.JFrame {
             jTextFieldTotal.setText(total+"");
             
         }
-     
-         public void llenartabla(ArrayList<Articulo> articulos){
+        
+        //ArrayList<Bien> Bien;
+         public void llenartabla(ArrayList<Articulo> productos){
         
     DefaultTableModel detalle = (DefaultTableModel) jTableDetalle.getModel();
     Articulo articulo;
     detalle.setRowCount(0);
     String[] aux=new String[4];
-        for (int i = 0; i < articulos.size(); i++) {
-       articulo=articulos.get(i);
+        for (int i = 0; i < productos.size(); i++) {
+       articulo=productos.get(i);
        aux[0]=String.valueOf(i+1);
        aux[1]=articulo.nombre;
        aux[2]=String.valueOf(articulo.precio);
@@ -90,7 +86,6 @@ public class FacturaFis extends javax.swing.JFrame {
         jTextFieldSubtotal = new javax.swing.JTextField();
         jTextFieldIVA = new javax.swing.JTextField();
         jTextFieldTotal = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -166,13 +161,6 @@ public class FacturaFis extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Aceptar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -210,9 +198,7 @@ public class FacturaFis extends javax.swing.JFrame {
                             .addComponent(jScrollPane1))
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -259,8 +245,7 @@ public class FacturaFis extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextFieldIVA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jTextFieldIVA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -294,10 +279,6 @@ public class FacturaFis extends javax.swing.JFrame {
     private void jTextFieldTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTotalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldTotalActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     this.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -335,7 +316,6 @@ public class FacturaFis extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

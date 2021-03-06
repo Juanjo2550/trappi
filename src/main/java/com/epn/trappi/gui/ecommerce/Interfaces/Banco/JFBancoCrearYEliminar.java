@@ -525,7 +525,7 @@ public class JFBancoCrearYEliminar extends javax.swing.JFrame {
             String idBanco= Integer.toString(devolverIDBanco());
             String nroCuenta= jTextFieldNroCrear.getText();
             String fondos= "0";
-            String fechaApertura=Calendar.YEAR+"-"+Calendar.MONTH+"-"+Calendar.DATE;
+            String fechaApertura=Calendar.DATE+"/"+Calendar.MONTH+"/"+Calendar.YEAR;  
             DataBaseConnection dbInstance = DataBaseConnection.getInstance();
             Connection connection = dbInstance.getConnection();
             String sql = "exec cuenta_insert "+idCuenta+","+idCliente+","+idBanco+

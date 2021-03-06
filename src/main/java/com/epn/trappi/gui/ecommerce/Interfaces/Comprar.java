@@ -5,18 +5,15 @@ import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Diseño.TextPrompt;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Articulo;
 import com.epn.trappi.gui.ecommerce.Ecommerce.CarritoDeCompras;
-import com.epn.trappi.db.ecommerce.ListaCarrito;
-import com.epn.trappi.db.ecommerce.ListaFacturas;
+import com.epn.trappi.gui.ecommerce.Ecommerce.Factura;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
-import com.epn.trappi.gui.ecommerce.Ecommerce.Pago;
 import com.epn.trappi.gui.ecommerce.FacturaMostrar.FacturaFis;
-import com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaCredito;
-import com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaDebito;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -424,42 +421,26 @@ public class Comprar extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
     String salida ="";
+    
         if(carrito.confirmarContenido()==true){
-        String nombre = carrito.factura.nombreCliente;
-        String cedula=carrito.factura.cedulaCliente;
-        ArrayList<Articulo> detalle = carrito.factura.mostrar();
+        carrito.factura= new Factura(carrito.Productos);
+        String nombre = Main.cliente.Nombre;
+        String cedula=Main.cliente.Cedula;
+        //ArrayList<Bien> detalle = carrito.factura.Detalle;
+        ArrayList<Articulo> detalle = carrito.factura.Detalle;
         Double subtotal = carrito.factura.calcularSubTotal();
         Double iva=carrito.factura.calcularImpuestos();
         Double total=  carrito.factura.calcularTotal();  
         FacturaFis factu = new FacturaFis();
-        factu.cargarDatos(nombre,cedula,detalle,subtotal,iva,total);    
+        Date fecha = new Date();
+        
+        String date = fecha.getDay()+"/"+fecha.getMonth()+"/"+fecha.getYear();
+        factu.cargarDatos(000,nombre,cedula,date,detalle,subtotal,iva,total);    
         factu.setVisible(true);
         
           if(JOptionPane.showConfirmDialog(null, "¿Desea pagar?","El proceso de pago empezará",JOptionPane.YES_NO_OPTION)==YES_OPTION){
              TarjetaUsuario tarusu=new TarjetaUsuario();
              tarusu.setVisible(true);
-//             if(carrito.factura.pago.validarPago(Main.tarcre,Main.tardeb,Main.tip,total)){
-//              
-//            
-//                
-//              ListaFacturas lista=new ListaFacturas();
-//              int id=lista.generarfacturaDatabase(Main.cliente.Nombre);
-//              carrito.factura.setId(id);
-//              ListaCarrito lista1=new ListaCarrito();
-//              lista1.registrar_detallecompra(carrito, Main.cliente.Nombre);
-//                            carrito.factura.conexion.enviarAfinanzas();
-//                            
-//              carrito.vaciarCarrito();
-//                DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
-//                int filas = modelo.getRowCount();
-//                for (int i = 0; i < filas; i++) {
-//                 modelo.removeRow(0);
-//                 }
-//                
-//         }
-//             else{
-//                 JOptionPane.showMessageDialog(rootPane,"Saldo insuficiente, no se puede realizar la compra");
-//             }
                 factu.setVisible(false);
                 this.setVisible(false);   
           }
@@ -489,82 +470,7 @@ public class Comprar extends javax.swing.JFrame {
     jButtoneliminar.setVisible(true);
     }//GEN-LAST:event_jTable2MouseClicked
 
-    
-//     public String idcliente(){
-//        String idcl="";
-//        try{
-//            
-//            Statement statement = connection.createStatement();
-//            String sql = "SELECT IDCLIENTE FROM CLIENTES WHERE NOMBRECLIE='"+jt.getText()+"'";
-//            ResultSet resultSet = statement.executeQuery(sql);
-//            while (resultSet.next()) {
-//              idcl=resultSet.getString("IDCLIENTE");
-//            }  
-//            
-//       } catch (SQLException ex) {
-//            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//            return idcl;
-//    }
-//    public String direccliente(){
-//        String idcl="";
-//        try{
-//            
-//            Statement statement = connection.createStatement();
-//            String sql = "SELECT DIRECCION FROM CLIENTES WHERE NOMBRECLIE='"+jt.getText()+"'";
-//            ResultSet resultSet = statement.executeQuery(sql);
-//            while (resultSet.next()) {
-//              idcl=resultSet.getString("DIRECCION");
-//            }  
-//            
-//       } catch (SQLException ex) {
-//            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//            return idcl;
-//    }
-//    
-//    
-//    public void generarfacturaDatabase(){
-//        try{
-//            
-//            int idAletorio = idfactura();
-//            String sql = "exec factura_insert"+ idAletorio+","+Integer.parseInt(idcliente())+","+idAletorio+","+direccliente(); 
-//           
-//            PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
-//            prepsInsertProduct.execute();
-//        } catch(SQLException ex){
-//            Logger.getLogger(JFBancoInicio.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-//    
-//    public void updatefacturaDatabase(int idfac,double subtotal  ,double impuestos, double total){
-//        try{
-//            
-//            String sql = "exec actualizar_factura"+idfac+","+subtotal+","+impuestos+","+total; 
-//            PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
-//            prepsInsertProduct.execute();
-//        } catch(SQLException ex){
-//            Logger.getLogger(JFBancoInicio.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-//    public int idfactura(){
-//        int numero=0;
-//        try {
-//            String id= "";
-//                       
-//            Statement statement = connection.createStatement();
-//            String sql = "Select COUNT(IDFACTURA) from FACTURAS";
-//            ResultSet resultSet = statement.executeQuery(sql);
-//            while (resultSet.next()) {
-//                 id= resultSet.getString(1);
-//            }
-//            numero=Integer.parseInt(id)+1;
-//                        
-//        } catch (SQLException ex) {
-//            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return numero;
-//    }
+   
     /**
      * @param args the command line arguments
      */

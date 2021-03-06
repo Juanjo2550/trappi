@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class ListaFacturas {
     ArrayList<Factura> lista;
@@ -45,7 +46,9 @@ public class ListaFacturas {
         try{
             
             idAletorio = idfactura();
-            String sql = "exec factura_insert "+ idAletorio+","+Integer.parseInt(idcl)+",'"+idAletorio+"',"+subtotal+","+impuestos+","+total+", '"+dicl+"'"; 
+            
+           
+            String sql = "exec factura_insert "+ idAletorio+","+Integer.parseInt(idcl)+","+idAletorio+","+subtotal+","+impuestos+","+total+", '"+dicl+"'"; 
            
             PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
             prepsInsertProduct.execute();
@@ -72,7 +75,7 @@ public class ListaFacturas {
             String id= "";
                        
             Statement statement = connection.createStatement();
-            String sql = "Select TOP 1 IDFACTURA from FACTURAS ORDER BY IDFACTURA DESC";
+            String sql = "Select MAX(IDFACTURA) from FACTURAS";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                  id= resultSet.getString(1);

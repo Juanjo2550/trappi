@@ -23,11 +23,11 @@ public class ListaCarrito {
     public void registrar_detallecompra (CarritoDeCompras carro, String nombrecliente){
         int aux=iddetallefactura();
         Articulo articulo;
-        for (int i = 0; i <carro.articulos.size(); i++) {
-            articulo=carro.articulos.get(i);
+        for (int i = 0; i <carro.Productos.size(); i++) {
+            articulo=carro.Productos.get(i);
             
     try{
-            String sql = "exec detallefac_insert "+ aux+","+carro.factura.id+",'"+nombrecliente+"',"+Integer.parseInt(articulo.id)+","+articulo.precio+","+articulo.precio; 
+            String sql = "exec detallefac_insert "+ aux+","+carro.factura.nFactura+",'"+nombrecliente+"',"+Integer.parseInt(articulo.id)+","+articulo.precio+","+articulo.precio; 
            
             PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
             prepsInsertProduct.execute();

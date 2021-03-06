@@ -16,33 +16,36 @@ import static javax.swing.JOptionPane.YES_OPTION;
 public class CarritoDeCompras {
     
     
-    //Public ArrayList<Producto>
+
     //Asociacion con Inventario
     //public Inventario
     //public ArrayList<Bien> Productos= Invetario.getListaDeBienes().getListaBienes();
-    public ArrayList<Articulo> articulos = new ArrayList<Articulo>();
+    public ArrayList<Articulo> Productos = new ArrayList<Articulo>();
     public Factura factura;
     
       public void añadirProducto(String id, String nombre,Double precio,int cantidad,String marca)
     {
-        Articulo articulo = new Articulo();
-        articulo.id=id;
-        articulo.nombre=nombre;
-        articulo.precio=precio;
-        articulo.cantidad=cantidad;
-        articulo.marca=marca;
-
-        articulos.add(articulo);
+        Articulo producto = new Articulo();
+        producto.id=id;
+        producto.nombre=nombre;
+        producto.precio=precio;
+        producto.cantidad=cantidad;
+        producto.marca=marca;
+        
+        Productos.add(producto);
+        
+        //Producto producto= new Producto(nombre,precio,cantidad,marca);
+        //Productos.add(producto);
     }
       
     public void borrarProducto(String nombre){
 
-        for(int i=0;i<articulos.size();i++)
+        for(int i=0;i<Productos.size();i++)
         {
           
-            if(articulos.get(i).nombre.equals(nombre))
+            if(Productos.get(i).nombre.equals(nombre))
             {
-                articulos.remove(i);
+                Productos.remove(i);
                 break;
             }
         
@@ -50,11 +53,7 @@ public class CarritoDeCompras {
     }
     
     public void vaciarCarrito(){
-        for(int i=0;i<articulos.size();i++)
-            {
-                articulos.remove(i);
-            }   
-        articulos.removeAll(articulos);
+        Productos.removeAll(Productos);
     }
       
         public int cantidadCompraProducto(){
@@ -68,9 +67,7 @@ public class CarritoDeCompras {
         boolean bandera = false;
         if(JOptionPane.showConfirmDialog(null, "¿Está seguro que desea procesar su compra?","El proceso de pago empezará",JOptionPane.YES_NO_OPTION)==YES_OPTION){
            bandera=true;
-           factura = new Factura(Main.cliente.Cedula,Main.cliente.Nombre,this.articulos);
            
-          
        }
         return bandera;
     }

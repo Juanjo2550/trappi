@@ -14,26 +14,24 @@ import java.util.ArrayList;
  * @author Bryan
  */
 public class Factura {
+    
+    //public Inventario
+    //public ArrayList<Bien> Detalle;
     public ArrayList <Articulo> Detalle;
     
    public String cedulaCliente;
    public String nombreCliente;
-   public int id;
+   public int nFactura;
+   
+   String RUC;
+   public Pago pago;
+   public FachadaEcommerce fachada;
     
-    public Factura(String cedula,String nombre,ArrayList <Articulo>  detalle){
-        this.cedulaCliente=cedula;
-        this.nombreCliente=nombre;
+    public Factura(ArrayList <Articulo>  detalle){
         this.Detalle=detalle;
     }
 
-    String RUC;
-    String nFactura;
-    public Pago pago;
-    public FachadaEcommerce conexion;
-    
-
 public Double calcularSubTotal(){
-   
 
     Double total =0.0;
 
@@ -59,18 +57,14 @@ public Double calcularTotal(){
     return total;
 }
 
+//public ArrayList<Bien> mostrar(){
 public ArrayList<Articulo> mostrar(){
-    
-    ArrayList mostrarDetalle = this.Detalle;
-    Double valor = calcularTotal();
-    //Metodo de validacion de tarjeta da true, continuo con arrancar
-
-
+    ArrayList mostrarDetalle = this.Detalle; 
     return mostrarDetalle;
 }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int numeroFactura) {
+        this.nFactura = numeroFactura;
     }
 
 
