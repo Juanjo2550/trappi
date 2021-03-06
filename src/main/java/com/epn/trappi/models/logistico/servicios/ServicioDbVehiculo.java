@@ -10,6 +10,7 @@ import com.epn.trappi.models.logistico.EnEspera;
 import com.epn.trappi.models.logistico.Entrega;
 import com.epn.trappi.models.logistico.Estado;
 import com.epn.trappi.models.logistico.Habilitado;
+import com.epn.trappi.models.logistico.Inhabilitado;
 import com.epn.trappi.models.logistico.Mantenimiento;
 import com.epn.trappi.models.logistico.Vehiculo;
 import java.sql.CallableStatement;
@@ -44,11 +45,15 @@ public class ServicioDbVehiculo implements ServicioDb<Vehiculo>, Unible<Vehiculo
             Vehiculo elemento = new Vehiculo();
             elemento.setMatricula(resultados.getString(1));
             String estado = resultados.getString(2);
-            Estado estado_vehiculo;
-            if(estado.equals("Ocupado")){
-                estado_vehiculo = new EnEspera();
-            }else{
+            Estado estado_vehiculo=null;
+            if(estado=="Habilitado"){
                 estado_vehiculo = new Habilitado();
+            }
+            if(estado=="Inhabilitado"){
+                estado_vehiculo = new Inhabilitado();
+            }
+            if(estado=="En Espera"){
+                estado_vehiculo = new EnEspera();
             }
             elemento.setEstado(estado_vehiculo);
             elemento.setTipo(resultados.getString(3));
@@ -67,7 +72,17 @@ public class ServicioDbVehiculo implements ServicioDb<Vehiculo>, Unible<Vehiculo
         resultados.next();
             Vehiculo elemento = new Vehiculo();
             elemento.setMatricula(resultados.getString(1));
-            Estado estado_vehiculo = new EnEspera(resultados.getString(2));
+            String estado = resultados.getString(2);
+            Estado estado_vehiculo=null;
+            if(estado=="Habilitado"){
+                estado_vehiculo = new Habilitado();
+            }
+            if(estado=="Inhabilitado"){
+                estado_vehiculo = new Inhabilitado();
+            }
+            if(estado=="En Espera"){
+                estado_vehiculo = new EnEspera();
+            }
             elemento.setEstado(estado_vehiculo);
             elemento.setTipo(resultados.getString(3));
             elemento.setKilometraje(resultados.getInt(4));
@@ -87,17 +102,26 @@ public class ServicioDbVehiculo implements ServicioDb<Vehiculo>, Unible<Vehiculo
 
     @Override
     public void actualizar(Vehiculo elemento) throws SQLException {
-        CallableStatement statement = connection.getConnection().prepareCall("{call Actualizar_Vehiculo(?,?,?) }");
+        CallableStatement statement;
+        if(elemento.getEstado()!=null && String.valueOf(elemento.getKilometraje()).length()!=0){
+            statement = connection.getConnection().prepareCall("{call Actualizar_Vehiculo(?,?,?) }");
+            statement.setInt(1,elemento.getID());
+            statement.setString(2,elemento.getEstado().toString());
+            statement.setInt(3,elemento.getKilometraje());
+            statement.execute();
+        }
         if(String.valueOf(elemento.getKilometraje()).length()==0){
-            
+            statement = connection.getConnection().prepareCall("{call Actualizar_VehiculoEstado(?,?) }");
+            statement.setInt(1,elemento.getID());
+            statement.setString(2,elemento.getEstado().toString());
+            statement.execute();
         }
         if(elemento.getEstado()==null){
-            
+            statement = connection.getConnection().prepareCall("{call Actualizar_VehiculoKilometraje(?,?) }");
+            statement.setInt(1,elemento.getID());
+            statement.setInt(3,elemento.getKilometraje());
+            statement.execute();
         }
-        statement.setInt(1,elemento.getID());
-        statement.setString(2,elemento.getEstado().toString());
-        statement.setInt(3,elemento.getKilometraje());
-        statement.execute();
     }
 
     @Override
@@ -114,7 +138,17 @@ public class ServicioDbVehiculo implements ServicioDb<Vehiculo>, Unible<Vehiculo
         while(resultados.next()){
             Vehiculo elemento = new Vehiculo();
             elemento.setMatricula(resultados.getString(1));
-            Estado estado_vehiculo = new EnEspera(resultados.getString(2));
+            String estado = resultados.getString(2);
+            Estado estado_vehiculo=null;
+            if(estado=="Habilitado"){
+                estado_vehiculo = new Habilitado();
+            }
+            if(estado=="Inhabilitado"){
+                estado_vehiculo = new Inhabilitado();
+            }
+            if(estado=="En Espera"){
+                estado_vehiculo = new EnEspera();
+            }
             elemento.setEstado(estado_vehiculo);
             elemento.setTipo(resultados.getString(3));
             elemento.setKilometraje(resultados.getInt(4));
