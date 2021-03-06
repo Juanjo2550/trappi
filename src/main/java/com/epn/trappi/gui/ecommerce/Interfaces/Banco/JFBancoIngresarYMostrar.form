@@ -69,11 +69,6 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabelPacifico">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Christian\Documents\GitHub\trappi\src\main\resources\contents\Imagenes\BancoPacifico.png"/>
-            </Property>
-          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
@@ -84,11 +79,6 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelPichincha">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Christian\Documents\GitHub\trappi\src\main\resources\contents\Imagenes\BancoPichincha.png"/>
-            </Property>
-          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
@@ -99,11 +89,6 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelGuayaquil">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Christian\Documents\GitHub\trappi\src\main\resources\contents\Imagenes\BancoGuayaquil.jpg"/>
-            </Property>
-          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
@@ -114,11 +99,6 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelBolivariano">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Christian\Documents\GitHub\trappi\src\main\resources\contents\Imagenes\BancoBolivariano.png"/>
-            </Property>
-          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>

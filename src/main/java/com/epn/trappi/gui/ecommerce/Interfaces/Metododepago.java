@@ -36,7 +36,13 @@ public class Metododepago extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) tablatarjetas.getModel();
         jTextFieldtarjeta.setText((String)modelo.getValueAt(tablatarjetas.getSelectedRow(),0));
         jTextFieldcvv.setText((String)modelo.getValueAt(tablatarjetas.getSelectedRow(),1));
-        jTextFieldtipo.setText((String)modelo.getValueAt(tablatarjetas.getSelectedRow(),2));
+        if(((String)modelo.getValueAt(tablatarjetas.getSelectedRow(),2)).equals("Credito")){
+         jTextFieldtipo.setSelectedIndex(0);
+        }
+        else{
+            jTextFieldtipo.setSelectedIndex(1);
+        }
+        
         jTextFieldfecha.setText((String)modelo.getValueAt(tablatarjetas.getSelectedRow(),3));
         jTextFieldcvv.setEditable(false);
         jTextFieldfecha.setEditable(false);
@@ -122,7 +128,6 @@ public class Metododepago extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jTextFieldcvv = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextFieldtipo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jTextFieldfecha = new javax.swing.JTextField();
         jButtonregistrar = new javax.swing.JButton();
@@ -133,6 +138,7 @@ public class Metododepago extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jbeliminar = new javax.swing.JButton();
+        jTextFieldtipo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -275,6 +281,8 @@ public class Metododepago extends javax.swing.JFrame {
             }
         });
 
+        jTextFieldtipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Credito", "Debito" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -302,27 +310,34 @@ public class Metododepago extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(149, 149, 149)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel4))
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldtarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                            .addComponent(jTextFieldcvv)
-                            .addComponent(jTextFieldtipo)
-                            .addComponent(jTextFieldfecha))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(168, 168, 168)
-                        .addComponent(jButtoneditarconfirmarcambios, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtoneditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonregistrar)
-                            .addComponent(jbeliminar))
-                        .addGap(228, 228, 228))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(19, 19, 19)
+                                        .addComponent(jButtoneditarconfirmarcambios, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addGap(32, 32, 32)
+                                        .addComponent(jTextFieldfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtoneditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonregistrar)
+                                    .addComponent(jbeliminar))
+                                .addGap(228, 228, 228))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel4))
+                                .addGap(120, 120, 120)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jTextFieldtarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                                        .addComponent(jTextFieldcvv))
+                                    .addComponent(jTextFieldtipo, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,23 +367,29 @@ public class Metododepago extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jTextFieldcvv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldtipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextFieldfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
-                        .addGap(2, 2, 2)
-                        .addComponent(jButtonregistrar)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(39, 39, 39)
+                                        .addComponent(jButtonregistrar))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(24, 24, 24)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel8)
+                                            .addComponent(jTextFieldfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(jTextFieldtipo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(28, 28, 28)
                         .addComponent(jbeliminar)
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtoneditar1)
                             .addComponent(jButtoneditarconfirmarcambios))
-                        .addContainerGap(216, Short.MAX_VALUE))))
+                        .addContainerGap(311, Short.MAX_VALUE))))
         );
 
         pack();
@@ -416,22 +437,14 @@ public class Metododepago extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtoneditar1ActionPerformed
 
     private void jButtoneditarconfirmarcambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoneditarconfirmarcambiosActionPerformed
+                
                 Inicio nuevo= new Inicio();
                 nuevo.jt.setText(jt.getText());
                 nuevo.setVisible(true);
                 this.setVisible(false);
                 ListaTar lis=new ListaTar();
-                lis.modtarjeta(Integer.parseInt(jTextFieldtarjeta.getText()),Integer.parseInt(jTextFieldcvv.getText()),jTextFieldfecha.getText(),jTextFieldtipo.getText());
+                lis.modtarjeta(Integer.parseInt(jTextFieldtarjeta.getText()),jTextFieldcvv.getText(),jTextFieldfecha.getText(),jTextFieldtipo.getSelectedItem().toString());
         
-        /*FEdicionTarjeta fet=new FEdicionTarjeta(jTextFieldtarjeta.getText(),jTextFieldcvv.getText(),jTextFieldfecha.getText(), jTextFieldtipo.getText());
-        if(jTextFieldtipo.getText().equals("Credito")){
-        Main.cliente.editarTarjetaCredito(fet, (TarjetaCredito) obtenertarjeta());
-        }
-        else{
-        Main.cliente.editarTarjetaDebito(fet, (TarjetaDebito) obtenertarjeta());
-        }
-        JOptionPane.showMessageDialog(null,"cambios realizados con exito");
-        llenartabla();*/
         
     }//GEN-LAST:event_jButtoneditarconfirmarcambiosActionPerformed
 
@@ -444,7 +457,7 @@ public class Metododepago extends javax.swing.JFrame {
     lis.borartarjeta(Integer.parseInt(jTextFieldtarjeta.getText()));
     jTextFieldtarjeta.setText(null);
     jTextFieldcvv.setText(null);
-    jTextFieldtipo.setText(null);
+    jTextFieldtipo.setSelectedIndex(0);
     jTextFieldfecha.setText(null);
     }//GEN-LAST:event_jbeliminarActionPerformed
 
@@ -510,7 +523,7 @@ public class Metododepago extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldcvv;
     private javax.swing.JTextField jTextFieldfecha;
     private javax.swing.JTextField jTextFieldtarjeta;
-    private javax.swing.JTextField jTextFieldtipo;
+    private javax.swing.JComboBox<String> jTextFieldtipo;
     private javax.swing.JButton jbeliminar;
     private javax.swing.JTextField jt;
     private javax.swing.JTable tablatarjetas;

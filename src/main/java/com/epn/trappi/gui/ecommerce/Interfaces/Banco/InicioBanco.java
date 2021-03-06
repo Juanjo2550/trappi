@@ -1,13 +1,13 @@
 
-package com.epn.trappi.gui.ecommerce.Interfaces;
+package com.epn.trappi.gui.ecommerce.Interfaces.Banco;
 
 import java.awt.Color;
 
-public class JFEntidadBancaria extends javax.swing.JFrame {
+public class InicioBanco extends javax.swing.JFrame {
 
     public JFBancoInicio ban;
     
-    public JFEntidadBancaria() {
+    public InicioBanco() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setSize(500, 450);
@@ -25,8 +25,6 @@ public class JFEntidadBancaria extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Christian\\Documents\\GitHub\\trappi\\src\\main\\resources\\contents\\Imagenes\\92146-200.png")); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel2.setText("Entidad Bancaria");
@@ -125,20 +123,23 @@ public class JFEntidadBancaria extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFEntidadBancaria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InicioBanco.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFEntidadBancaria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InicioBanco.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFEntidadBancaria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InicioBanco.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFEntidadBancaria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InicioBanco.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFEntidadBancaria().setVisible(true);
+                new InicioBanco().setVisible(true);
             }
         });
     }

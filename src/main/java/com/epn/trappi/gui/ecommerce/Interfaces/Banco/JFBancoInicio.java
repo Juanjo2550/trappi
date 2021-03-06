@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.epn.trappi.gui.ecommerce.Interfaces;
+package com.epn.trappi.gui.ecommerce.Interfaces.Banco;
 
 import java.awt.Color;
 import java.sql.SQLException;
@@ -110,17 +110,9 @@ public class JFBancoInicio extends javax.swing.JFrame {
         );
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabelPacifico.setIcon(new javax.swing.ImageIcon("C:\\Users\\Christian\\Documents\\GitHub\\trappi\\src\\main\\resources\\contents\\Imagenes\\BancoPacifico.png")); // NOI18N
         jPanel1.add(jLabelPacifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
-
-        jLabelPichincha.setIcon(new javax.swing.ImageIcon("C:\\Users\\Christian\\Documents\\GitHub\\trappi\\src\\main\\resources\\contents\\Imagenes\\BancoPichincha.png")); // NOI18N
         jPanel1.add(jLabelPichincha, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
-
-        jLabelGuayaquil.setIcon(new javax.swing.ImageIcon("C:\\Users\\Christian\\Documents\\GitHub\\trappi\\src\\main\\resources\\contents\\Imagenes\\BancoGuayaquil.jpg")); // NOI18N
         jPanel1.add(jLabelGuayaquil, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, -1, -1));
-
-        jLabelBolivariano.setIcon(new javax.swing.ImageIcon("C:\\Users\\Christian\\Documents\\GitHub\\trappi\\src\\main\\resources\\contents\\Imagenes\\BancoBolivariano.png")); // NOI18N
         jPanel1.add(jLabelBolivariano, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -460,7 +460,8 @@ public class Comprar extends javax.swing.JFrame {
 //             else{
 //                 JOptionPane.showMessageDialog(rootPane,"Saldo insuficiente, no se puede realizar la compra");
 //             }
-                
+                factu.setVisible(false);
+                this.setVisible(false);   
           }
     }
     

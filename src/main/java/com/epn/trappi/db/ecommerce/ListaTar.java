@@ -74,9 +74,9 @@ public class ListaTar {
        
    }
     
-    public void modtarjeta(int numtarjeta, int cvv,String fecha, String tipo){
+    public void modtarjeta(int numtarjeta, String cvv,String fecha, String tipo){
        try {          
-            String sql ="EXEC trajeta_modificar "+numtarjeta+","+cvv+",'"+fecha+"','"+tipo+"'";
+            String sql ="EXEC trajeta_modificar "+numtarjeta+",'"+cvv+"','"+fecha+"','"+tipo+"'";
             PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
             prepsInsertProduct.execute();
         } catch (SQLException ex) {
@@ -86,7 +86,7 @@ public class ListaTar {
     
     public void borartarjeta(int numtarjeta){
        try {          
-            String sql ="EXEC tarjeta_borrar "+numtarjeta;
+            String sql ="EXEC tarjeta_borrar '"+numtarjeta+"'";
             PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
             prepsInsertProduct.execute();
         } catch (SQLException ex) {

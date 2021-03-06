@@ -227,7 +227,7 @@ public class TarjetaUsuario extends javax.swing.JFrame {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE,null, ex);
         }
         
-        JOptionPane.showMessageDialog(null,"Pasó cuenta");
+        
         
         String datos[]=tomarTarjeta();
         if(datos[2].equals("Credito")){
@@ -238,7 +238,7 @@ public class TarjetaUsuario extends javax.swing.JFrame {
         Main.tarcre.Fechacaducidad=datos[3];
         
         Main.tarcre.cuenta=cuenta;
-        JOptionPane.showMessageDialog(null, "Cuenta 2");
+        
         }
         else{
         Main.tardeb.Tipo=datos[2];
@@ -252,34 +252,24 @@ public class TarjetaUsuario extends javax.swing.JFrame {
         
         
         Pago pago = new Pago();
+       
         
-        JOptionPane.showMessageDialog(null,"Fondos"+Main.tardeb.cuenta.fondo);
         
-        JOptionPane.showMessageDialog(null,"Valor a pagar"+carrito.factura.calcularTotal());
-        boolean bandera=pago.validarPago(Main.tarcre,Main.tardeb,Main.tip,carrito.factura.calcularTotal(),cuenta);
-        
-        JOptionPane.showMessageDialog(null,"Esta es la bandera"+bandera);
-        
-        if(true){
-              
-            JOptionPane.showMessageDialog(null, "Entrando al if");
+        if(pago.validarPago(Main.tarcre,Main.tardeb,Main.tip,carrito.factura.calcularTotal(),cuenta)==true){
               ListaFacturas lista=new ListaFacturas();
-              int id=lista.generarfacturaDatabase(Main.cliente.Nombre);
-               JOptionPane.showMessageDialog(null, "id generarFactura");
+              int id=lista.generarfacturaDatabase(Main.cliente.Nombre,carrito.factura.calcularSubTotal(),carrito.factura.calcularImpuestos(),carrito.factura.calcularTotal());
               Comprar.carrito.factura.setId(id);
-              
-              JOptionPane.showMessageDialog(null, "Poner id en factura");
-              
               ListaCarrito lista1=new ListaCarrito();
               lista1.registrar_detallecompra(Comprar.carrito, Main.cliente.Nombre);
-                            Comprar.carrito.factura.conexion.enviarAfinanzas();
-                JOptionPane.showMessageDialog(rootPane,"compra realizada con exito");
-         }
+              carrito.vaciarCarrito();             
+                JOptionPane.showMessageDialog(rootPane,"Compra realizada con exito");
+                this.setVisible(false);
+        }
              else{
                  JOptionPane.showMessageDialog(rootPane,"Saldo insuficiente, no se puede realizar la compra");
              }
         
-        this.setVisible(false);
+        
 
     }//GEN-LAST:event_jButtonSeleccionarActionPerformed
 

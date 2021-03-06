@@ -35,7 +35,7 @@ public class TarjetaDebito implements Tarjeta{
     @Override
     public boolean validarFondos(Double valor) {
         boolean bandera=false;
-        JOptionPane.showMessageDialog(null, "el fondo de la cuenta desde validar fondo"+"valor"+valor);
+       
         if(valor<=cuenta.fondo)
         {
             bandera=true;

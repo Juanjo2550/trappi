@@ -53,7 +53,7 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
         jTextFieldTipo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jTextFieldFecha = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        jButtonRegistrar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
 
@@ -150,11 +150,11 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         jLabel8.setText("Fecha de caducidad");
 
-        jButton5.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jButton5.setText("Aceptar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRegistrar.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jButtonRegistrar.setText("Registrar");
+        jButtonRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButtonRegistrarActionPerformed(evt);
             }
         });
 
@@ -198,7 +198,7 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1011, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton5)
+                                .addComponent(jButtonRegistrar)
                                 .addGap(358, 358, 358))))))
         );
         layout.setVerticalGroup(
@@ -231,7 +231,7 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
                             .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5)
+                        .addComponent(jButtonRegistrar)
                         .addGap(203, 203, 203))))
         );
 
@@ -264,14 +264,14 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
     this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
     FRegistroTarjeta frt=new FRegistroTarjeta(jTextFieldTarjeta.getText(),jTextFieldCvv.getText(),jTextFieldFecha.getText(),jTextFieldTipo.getText());
     Main.cliente.añadirTarjeta(frt);
         ListaTar lis=new ListaTar();
         lis.creartarjeta(Main.cliente.Cedula,jTextFieldCvv.getText(),jTextFieldTarjeta.getText(),jTextFieldTipo.getText(),jTextFieldFecha.getText());
-        JOptionPane.showMessageDialog(null,"tarjeta ingresada con exito");
+        JOptionPane.showMessageDialog(null,"Tarjeta ingresada con exito");
      
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
     public void llenardatos(){
         try {
@@ -351,7 +351,7 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButtonRegistrar;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

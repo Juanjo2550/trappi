@@ -3,7 +3,7 @@ package com.epn.trappi.db.ecommerce;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Factura;
-import com.epn.trappi.gui.ecommerce.Interfaces.JFBancoInicio;
+import com.epn.trappi.gui.ecommerce.Interfaces.Banco.JFBancoInicio;
 import com.epn.trappi.gui.ecommerce.Interfaces.Login;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,7 +22,7 @@ public class ListaFacturas {
     
     
     
-    public int generarfacturaDatabase(String nombre){
+    public int generarfacturaDatabase(String nombre,Double subtotal,Double impuestos,Double total){
         String idcl="";
           String dicl="";
           int idAletorio=0;
@@ -45,7 +45,7 @@ public class ListaFacturas {
         try{
             
             idAletorio = idfactura();
-            String sql = "exec factura_insert "+ idAletorio+","+Integer.parseInt(idcl)+","+idAletorio+", '"+dicl+"'"; 
+            String sql = "exec factura_insert "+ idAletorio+","+Integer.parseInt(idcl)+",'"+idAletorio+"',"+subtotal+","+impuestos+","+total+", '"+dicl+"'"; 
            
             PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
             prepsInsertProduct.execute();

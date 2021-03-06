@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,7 +35,7 @@ public class Cuenta {
            
             PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
             prepsInsertProduct.execute();
-            JOptionPane.showMessageDialog(null,"exito");
+            
             Inicio inicio=new Inicio();
             inicio.setVisible(true);
             

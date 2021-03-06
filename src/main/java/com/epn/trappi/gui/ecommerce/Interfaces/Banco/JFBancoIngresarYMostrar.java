@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.epn.trappi.gui.ecommerce.Interfaces;
+package com.epn.trappi.gui.ecommerce.Interfaces.Banco;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
 import java.awt.Color;
@@ -130,17 +130,9 @@ public class JFBancoIngresarYMostrar extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabelPacifico.setIcon(new javax.swing.ImageIcon("C:\\Users\\Christian\\Documents\\GitHub\\trappi\\src\\main\\resources\\contents\\Imagenes\\BancoPacifico.png")); // NOI18N
         jPanel1.add(jLabelPacifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
-
-        jLabelPichincha.setIcon(new javax.swing.ImageIcon("C:\\Users\\Christian\\Documents\\GitHub\\trappi\\src\\main\\resources\\contents\\Imagenes\\BancoPichincha.png")); // NOI18N
         jPanel1.add(jLabelPichincha, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
-
-        jLabelGuayaquil.setIcon(new javax.swing.ImageIcon("C:\\Users\\Christian\\Documents\\GitHub\\trappi\\src\\main\\resources\\contents\\Imagenes\\BancoGuayaquil.jpg")); // NOI18N
         jPanel1.add(jLabelGuayaquil, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, -1, -1));
-
-        jLabelBolivariano.setIcon(new javax.swing.ImageIcon("C:\\Users\\Christian\\Documents\\GitHub\\trappi\\src\\main\\resources\\contents\\Imagenes\\BancoBolivariano.png")); // NOI18N
         jPanel1.add(jLabelBolivariano, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, -1, -1));
 
         jButtonCrearCu.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -667,11 +659,11 @@ public class JFBancoIngresarYMostrar extends javax.swing.JFrame {
 
     private void jButtonAcreditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAcreditarActionPerformed
         try {
-            int fondos=Integer.parseInt(jTextFieldSaldoAcreditar.getText())+Integer.parseInt(jTextFieldCantidadAAcreditar.getText());
+            double fondos=Double.parseDouble(jTextFieldSaldoAcreditar.getText())+Double.parseDouble(jTextFieldCantidadAAcreditar.getText());
             DataBaseConnection dbInstance = DataBaseConnection.getInstance();
             Connection connection = dbInstance.getConnection();
             String NroCuenta=jTextFieldNroCuentaIngresar.getText();
-            String sql ="Update CUENTABANCARIA SET FONDOS='"+fondos+"' where NUMERODECUENTA='"+NroCuenta+"';";
+            String sql ="Update CUENTABANCARIA SET FONDOS="+fondos+" where NUMERODECUENTA='"+NroCuenta+"';";
             PreparedStatement prepsAcreditar = connection.prepareStatement(sql);
             prepsAcreditar.execute();
             JOptionPane.showMessageDialog(null, "Fondos Acreditados Correctamente");
@@ -691,11 +683,11 @@ public class JFBancoIngresarYMostrar extends javax.swing.JFrame {
 
     private void jButtonDebitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDebitarActionPerformed
         try {
-            int fondos=Integer.parseInt(jTextFieldSaldoDebitar.getText())-Integer.parseInt(jTextFieldCantidadADebitar.getText());
+            double fondos=Double.parseDouble(jTextFieldSaldoDebitar.getText())-Double.parseDouble(jTextFieldCantidadADebitar.getText());
             DataBaseConnection dbInstance = DataBaseConnection.getInstance();
             Connection connection = dbInstance.getConnection();
             String NroCuenta=jTextFieldNroCuentaIngresar.getText();
-            String sql ="Update CUENTABANCARIA SET FONDOS='"+fondos+"' where NUMERODECUENTA='"+NroCuenta+"';";
+            String sql ="Update CUENTABANCARIA SET FONDOS="+fondos+" where NUMERODECUENTA='"+NroCuenta+"';";
             PreparedStatement prepsAcreditar = connection.prepareStatement(sql);
             prepsAcreditar.execute();
             JOptionPane.showMessageDialog(null, "Fondos Debitados Correctamente");
