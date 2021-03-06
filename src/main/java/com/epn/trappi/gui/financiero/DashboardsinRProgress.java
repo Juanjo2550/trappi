@@ -602,7 +602,7 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         this.panelIngresos.setVisible(false);
         this.panelDashboard.setVisible(false);
         this.panelGastos.setVisible(true);
-        this.mostrarTablaGastos();
+        this.mostrarTablaPagos();
     }//GEN-LAST:event_btndashboardgastosMousePressed
 
     private void btndashboardingresosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btndashboardingresosMousePressed
@@ -662,7 +662,7 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
             tab = new DefaultTableModel(null,columnastabla);
             for(Ingreso ingreso: ingresosporFecha){
             System.out.println("Está entrando");
-            datos[0] = ingreso.getIdFactura();
+            datos[0] = ingreso.getNroFactura();
             datos[1] = String.valueOf(ingreso.getTotal());
             String fecha = String.valueOf(ingreso.getFechaIngreso().devolverDia())+'/'+String.valueOf(ingreso.getFechaIngreso().devolverMes())+'/'+String.valueOf(ingreso.getFechaIngreso().devolverAnio());
             datos[2] = fecha;
@@ -672,7 +672,7 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
         this.tablaIngresos.setModel(tab);
     }
     
-    public void mostrarTablaGastos(){
+    public void mostrarTablaPagos(){
         DefaultTableModel tab = null;
         try{
             String [] columnastabla = {"Nro. Cuenta", "Monto", "Fecha"};

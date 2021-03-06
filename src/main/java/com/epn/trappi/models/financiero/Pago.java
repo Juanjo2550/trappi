@@ -15,14 +15,6 @@ public class  Pago {
     double monto;
     Presupuesto presupuesto;
 
-    public Pago(LibroDiario libroDiario, String nroCuenta, double monto) {
-        //Se calcula la fecha del pago
-        this.fechadePago = new Fecha();
-        this.libroDiario = libroDiario;
-        this.nroCuenta = nroCuenta;
-        this.monto = monto;
-    }
-
     public Pago(Fecha fechadePago, String nroCuenta, double monto) {
         this.fechadePago = fechadePago;
         this.nroCuenta = nroCuenta;

@@ -10,22 +10,21 @@ import java.util.Calendar;
 
 public class Ingreso {
     Fecha fechaIngreso;
-    String idFactura;
+    String nroFactura;
     double total;
     private LibroDiario libroDiario;
     public Ingreso(){
         
     }
 
-    public Ingreso(String idFactura, double total,LibroDiario libroDiario) {
-        this.idFactura = idFactura;
-        this.total = total;
-        this.libroDiario=libroDiario;
-    }
-
     public Ingreso(String idFactura, double total, Fecha fecha) {
         this.fechaIngreso = fecha;
-        this.idFactura = idFactura;
+        this.nroFactura = idFactura;
+        this.total = total;
+    }
+
+    public Ingreso(String nroFactura, double total) {
+        this.nroFactura = nroFactura;
         this.total = total;
     }
     
@@ -33,12 +32,15 @@ public class Ingreso {
     public void registrarIngreso(Ingreso ingreso){
         //La instanciacion de Fecha inicializa la fecha con la actual.
         fechaIngreso = new Fecha();
+        this.libroDiario=new LibroDiario();
         this.libroDiario.ingresosRegistrados.add(ingreso);
         DataBaseConnection dbInstance = DataBaseConnection.getInstance();
         Connection connection = dbInstance.getConnection();
         try{
         Statement statement = connection.createStatement();
-        String sql = "insert into dbo.INGRESO values (idIngreso,'"+ingreso.idFactura+"',"+ingreso.total+","+ingreso.fechaIngreso.devolverDia()+","+ingreso.fechaIngreso.devolverMes()+","+ingreso.fechaIngreso.devolverAnio()+"  );";
+        String sql = "insert into dbo.INGRESO values ("+(this.libroDiario.ingresosRegistrados.size()+1)+",1,'"+
+                ingreso.nroFactura+"',"+ingreso.total+","+ingreso.fechaIngreso.devolverDia()+","+
+                ingreso.fechaIngreso.devolverMes()+","+ingreso.fechaIngreso.devolverAnio()+"  );";
         statement.executeUpdate(sql);
         System.out.println("Se registró ingreso");
         }catch( Exception e){
@@ -51,8 +53,8 @@ public class Ingreso {
         return fechaIngreso;
     }
 
-    public String getIdFactura() {
-        return idFactura;
+    public String getNroFactura() {
+        return nroFactura;
     }
 
     public double getTotal() {
@@ -62,7 +64,7 @@ public class Ingreso {
     
     @Override
     public String toString() {
-        return "Ingreso: " + "Fecha de Ingreso: "+this.fechaIngreso+", idFactura=" + idFactura + ", total=" + total + '\n';
+        return "Ingreso: " + "Fecha de Ingreso: "+this.fechaIngreso+", idFactura=" + nroFactura + ", total=" + total + '\n';
     }
     
 }
