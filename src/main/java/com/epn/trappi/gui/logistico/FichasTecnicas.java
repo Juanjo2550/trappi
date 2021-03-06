@@ -20,6 +20,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -259,7 +260,7 @@ public class FichasTecnicas extends javax.swing.JPanel {
 
         jTFidSolicitud.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jTFidSolicitud.setForeground(new java.awt.Color(61, 57, 57));
-        jTFidSolicitud.setText("123");
+        jTFidSolicitud.setText("1");
         jPanel3.add(jTFidSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 50, 150, 30));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -269,7 +270,7 @@ public class FichasTecnicas extends javax.swing.JPanel {
 
         txtIdBien.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         txtIdBien.setForeground(new java.awt.Color(61, 57, 57));
-        txtIdBien.setText("123");
+        txtIdBien.setText("8");
         jPanel3.add(txtIdBien, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 200, 30));
 
         btnVerificarMantenimiento.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
@@ -345,7 +346,7 @@ public class FichasTecnicas extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(43, 43, 43)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(68, 68, 68))
         );
@@ -378,31 +379,45 @@ public class FichasTecnicas extends javax.swing.JPanel {
     private void btnVerificarBienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarBienActionPerformed
 
     }//GEN-LAST:event_btnVerificarBienActionPerformed
-
+    
+    private String getFechaSistema(){
+        String fechaActual="";
+        Calendar fecha = new GregorianCalendar();
+        int anio = fecha.get(Calendar.YEAR);
+        int mes = fecha.get(Calendar.MONTH);
+        int dia = fecha.get(Calendar.DAY_OF_MONTH);
+        int hora = fecha.get(Calendar.HOUR_OF_DAY);
+        int minuto = fecha.get(Calendar.MINUTE);
+        int segundo = fecha.get(Calendar.SECOND);
+        return anio + "-" + mes + "-" + dia + " " + hora + ":" + minuto + ":" + segundo ;
+        
+    }
+    
     private void btnRegistrarSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarSolicitudActionPerformed
+        servicioDB = new ServicioDbSolicitudMantenimiento();
         //Datos de la GUI
-        Calendar fecha = Calendar.getInstance();
-        String fechaSol = String.valueOf(fecha); 
+        String fechaSol = getFechaSistema(); 
         int numSolicitud = Integer.parseInt(jTFidSolicitud.getText());
         int identificadorBien = Integer.parseInt(txtIdBien.getText());
         int idMantenimiento = Integer.parseInt(txtIdMantenimiento.getText());
+        System.out.println("fecha: " + fechaSol);
         //Instancia
+        
         SolicitudMantenimiento solicitud = new SolicitudMantenimiento();
         solicitud.setId_Solicitud(numSolicitud);
         solicitud.setId_Bien(identificadorBien);
         solicitud.setId_Mantenimiento(idMantenimiento);
         solicitud.setEstado("En espera");
-        solicitud.setFecha((Date) fecha.getTime());
-        /*
+        solicitud.setFecha(fechaSol);
+        System.out.println("SoLICITUD: " + solicitud.toString() );
+        
         try {
-            manipulable = new ServicioDbSolicitudMantenimiento();
-            manipulable.insertar(solicitud);
-            AQUI SE ACTUALIZA EL GASTO DEL MANTENIMIENTO, PARA ESO SE DEBE OBTENER EL VALOR DEL BIEN
+            servicioDB.insertar(solicitud);
             JOptionPane.showMessageDialog(null, "Solicitud de mantenimiento ingresado exitosamente!");
         } catch (SQLException ex) {
             Logger.getLogger(FichasTecnicas.class.getName()).log(Level.SEVERE, null, ex);
         }
-        */
+        
     }//GEN-LAST:event_btnRegistrarSolicitudActionPerformed
 
     private void btnRegistrarMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarMantenimientoActionPerformed
