@@ -19,7 +19,7 @@ public class Vehiculo {
     }
     
     public Vehiculo(){
-        estado= new Habilitado(this);
+        
     }
 
     public String getMatricula() {

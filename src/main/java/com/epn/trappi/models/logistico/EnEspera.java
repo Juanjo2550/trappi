@@ -16,6 +16,7 @@ public class EnEspera extends Estado{
 
     //private boolean estado; 
     private static String nomestado ="En Espera"; 
+     
 
     public EnEspera(Vehiculo vehiculo) {
         super(vehiculo);
@@ -26,7 +27,7 @@ public class EnEspera extends Estado{
     public EnEspera(){
         
     }
-
+    
     @Override
     public String enEntrega() {
         //Si llamamos a este metodo es porque finalizo la entrega
@@ -54,7 +55,7 @@ public class EnEspera extends Estado{
     }
     @Override
     public String toString(){
-        return "Ocupado";
+        return nomestado;
     }
     
     

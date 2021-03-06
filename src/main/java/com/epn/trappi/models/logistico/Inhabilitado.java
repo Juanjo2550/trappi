@@ -47,7 +47,7 @@ public class Inhabilitado extends Estado{
     }
     @Override
     public String toString(){
-        return "Mantenimiento";
+        return nomestado;
     }
     
     

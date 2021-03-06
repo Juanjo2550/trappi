@@ -48,7 +48,7 @@ public class Habilitado extends Estado{
 
     @Override
     public String toString(){
-        return "Habilitado";
+        return nomestado;
     }
     
     

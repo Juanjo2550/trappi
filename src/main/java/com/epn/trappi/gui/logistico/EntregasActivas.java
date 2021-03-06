@@ -32,16 +32,13 @@ public class EntregasActivas extends javax.swing.JPanel {
     int automoviles_en_uso=0;
     int motos_en_uso=0;
     int camiones_en_uso=0;
-    public EntregasActivas() throws SQLException {
+    public EntregasActivas()  {
         initComponents();
         //MAPA GEOGRAFICO
         mapa = new MapaGeografico();
         this.panelDeRutas.add(mapa.grafico(),BorderLayout.CENTER);//añadimos la vista del mapa al panel de rutas
-        actualizarContadores();
-        labelConductores.setText(String.valueOf(conductores_en_servicio));
-        labelConductores.setText(String.valueOf(automoviles_en_uso));
-        labelConductores.setText(String.valueOf(motos_en_uso));
-        labelConductores.setText(String.valueOf(camiones_en_uso));
+        //actualizarContadores();
+        
         
     }
 

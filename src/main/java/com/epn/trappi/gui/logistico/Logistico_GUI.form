@@ -108,11 +108,9 @@
                                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
-                                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="panEntregas1" max="32767" attributes="0"/>
-                                      <Component id="panEntregas" max="32767" attributes="0"/>
-                                      <Component id="btnVehiculos" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="panEntregas1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="panEntregas" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnVehiculos" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -353,7 +351,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="botonListaVehiculos" pref="193" max="32767" attributes="0"/>
+                          <Component id="botonListaVehiculos" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="botonActualizarVehiculo" min="-2" pref="189" max="-2" attributes="0"/>
