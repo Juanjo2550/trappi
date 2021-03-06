@@ -302,7 +302,7 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, null, "Error al actualizar veh" , JOptionPane.ERROR_MESSAGE);
             }
         
-         int opcion = cmbEstados.getSelectedIndex();
+         int opcion = cmbBusquedaVehiculos1.getSelectedIndex();
         String campo_busqueda = txtBusquedaVehiculos.getText();
         try{
         switch (opcion){
@@ -347,7 +347,7 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
     }//GEN-LAST:event_btnActualizarInformacionActionPerformed
 
     private void btnBuscarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarVehiculoActionPerformed
-        int opcion = cmbEstados.getSelectedIndex();
+        int opcion = cmbBusquedaVehiculos1.getSelectedIndex();
         String campo_busqueda = txtBusquedaVehiculos.getText();
         try{
         switch (opcion){
