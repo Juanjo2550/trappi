@@ -6,6 +6,7 @@ import com.epn.trappi.db.ecommerce.ListaCarrito;
 import com.epn.trappi.db.ecommerce.ListaFacturas;
 import com.epn.trappi.db.ecommerce.ListaTar;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
+import com.epn.trappi.gui.ecommerce.Ecommerce.Pago;
 import static com.epn.trappi.gui.ecommerce.Interfaces.Comprar.carrito;
 
 import com.epn.trappi.gui.ecommerce.Tarjetas.Tarjeta;
@@ -226,6 +227,8 @@ public class TarjetaUsuario extends javax.swing.JFrame {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE,null, ex);
         }
         
+        JOptionPane.showMessageDialog(null,"Pasó cuenta");
+        
         String datos[]=tomarTarjeta();
         if(datos[2].equals("Credito")){
         Main.tarcre.Tipo=datos[2];
@@ -233,7 +236,9 @@ public class TarjetaUsuario extends javax.swing.JFrame {
         Main.tarcre.CVV=datos[1];
         Main.tarcre.NumeroTarjeta=datos[0];
         Main.tarcre.Fechacaducidad=datos[3];
+        
         Main.tarcre.cuenta=cuenta;
+        JOptionPane.showMessageDialog(null, "Cuenta 2");
         }
         else{
         Main.tardeb.Tipo=datos[2];
@@ -242,15 +247,29 @@ public class TarjetaUsuario extends javax.swing.JFrame {
         Main.tardeb.NumeroTarjeta=datos[0];
         Main.tardeb.Fechacaducidad=datos[3];
         Main.tardeb.cuenta=cuenta;
+      
         }
         
-        if(Comprar.carrito.factura.pago.validarPago(Main.tarcre,Main.tardeb,Main.tip,carrito.factura.calcularTotal())){
+        
+        Pago pago = new Pago();
+        
+        JOptionPane.showMessageDialog(null,"Fondos"+Main.tardeb.cuenta.fondo);
+        
+        JOptionPane.showMessageDialog(null,"Valor a pagar"+carrito.factura.calcularTotal());
+        boolean bandera=pago.validarPago(Main.tarcre,Main.tardeb,Main.tip,carrito.factura.calcularTotal(),cuenta);
+        
+        JOptionPane.showMessageDialog(null,"Esta es la bandera"+bandera);
+        
+        if(true){
               
-            
-                
+            JOptionPane.showMessageDialog(null, "Entrando al if");
               ListaFacturas lista=new ListaFacturas();
               int id=lista.generarfacturaDatabase(Main.cliente.Nombre);
+               JOptionPane.showMessageDialog(null, "id generarFactura");
               Comprar.carrito.factura.setId(id);
+              
+              JOptionPane.showMessageDialog(null, "Poner id en factura");
+              
               ListaCarrito lista1=new ListaCarrito();
               lista1.registrar_detallecompra(Comprar.carrito, Main.cliente.Nombre);
                             Comprar.carrito.factura.conexion.enviarAfinanzas();

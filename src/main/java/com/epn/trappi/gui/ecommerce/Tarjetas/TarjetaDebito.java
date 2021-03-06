@@ -6,6 +6,7 @@
 package com.epn.trappi.gui.ecommerce.Tarjetas;
 
 import com.epn.trappi.gui.ecommerce.entidadBancaria.Cuenta;
+import javax.swing.JOptionPane;
 
 
 
@@ -25,6 +26,7 @@ public class TarjetaDebito implements Tarjeta{
     public void realizarPago(Double valor) {
        if(validarFondos(valor)==true)
        {
+           
          cuenta.debitar(valor);  
        }
         
@@ -33,6 +35,7 @@ public class TarjetaDebito implements Tarjeta{
     @Override
     public boolean validarFondos(Double valor) {
         boolean bandera=false;
+        JOptionPane.showMessageDialog(null, "el fondo de la cuenta desde validar fondo"+"valor"+valor);
         if(valor<=cuenta.fondo)
         {
             bandera=true;

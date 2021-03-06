@@ -8,6 +8,8 @@ package com.epn.trappi.gui.ecommerce.Ecommerce;
 import com.epn.trappi.gui.ecommerce.Tarjetas.Tarjeta;
 import com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaCredito;
 import com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaDebito;
+import com.epn.trappi.gui.ecommerce.entidadBancaria.Cuenta;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -18,21 +20,31 @@ public class Pago {
     
 
 
-    public boolean validarPago(TarjetaCredito tc, TarjetaDebito td, String tipo,Double valor){
+    public boolean validarPago(TarjetaCredito tc, TarjetaDebito td, String tipo,Double valor,Cuenta cuenta){
         boolean bandera=false;
+        JOptionPane.showMessageDialog(null, "Entra al metodo");
         if(tipo.equals("Credito"))
         {
+            JOptionPane.showMessageDialog(null, "Entra a credito");
+            tc = new TarjetaCredito();
             
-            if(td.validarFondos(valor))
+            tc.cuenta=cuenta;
+            
+            if(tc.validarFondos(valor))
             {
-                td.realizarPago(valor);
+                JOptionPane.showMessageDialog(null, "Entra a validar fondo");
+                tc.realizarPago(valor);
                 bandera=true;
             }
         }
         else
         {    
+            td = new TarjetaDebito();
+            JOptionPane.showMessageDialog(null, "Entra a debito");
+            td.cuenta=cuenta;
             if(td.validarFondos(valor))
             {
+                JOptionPane.showMessageDialog(null, "Entra a validar fondo");
                 td.realizarPago(valor);
                 bandera=true;
             }
@@ -40,4 +52,8 @@ public class Pago {
         return bandera; 
     }
     
+    
 }
+
+
+
