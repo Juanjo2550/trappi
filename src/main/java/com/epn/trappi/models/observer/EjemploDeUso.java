@@ -5,6 +5,10 @@ import com.epn.trappi.models.rrhh.juanjo.ControlAsistencias;
 
 public class EjemploDeUso {
     public static void main(String[] args) {
+        /*
+        Esta clase no se utiliza en el ejemplo, solo es una ejemplo de todas las clases
+        que se deben instanciar y métodos que se debe ejecutar para todo
+         */
         //Esto hace RRHH
         ControlAsistencias controlAsistencias = new ControlAsistencias();
 

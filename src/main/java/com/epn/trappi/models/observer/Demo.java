@@ -33,6 +33,9 @@ public class Demo extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        /**
+         * Esta seria la interfaz de RRRHH, en dónde se registran las asistencias de los empleados
+         */
 
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();

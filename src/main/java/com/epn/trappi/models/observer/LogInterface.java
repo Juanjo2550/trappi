@@ -23,7 +23,9 @@ public class LogInterface extends javax.swing.JFrame {
     public LogInterface() {
         initComponents();
     }
-    
+    /*
+    Esta seria la intefaz de logístico, esto deben hacer ustedes en su GUI
+     */
     public LogInterface(ControlAsistencias controlAsistencias) {
         initComponents();
         this.mapa = new MapaDisponibilidad();
