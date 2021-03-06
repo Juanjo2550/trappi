@@ -18,6 +18,10 @@ public class Producto extends Bien {
         super(nombre, precio, proveeedor, cantidad, marca);
     }
 
+    public Producto(String nombre, double precio, int cantidad, String marca) {
+        super(nombre, precio, null, cantidad, marca);
+    }
+    
     public Producto(String nombre, double precio, Proveedor proveeedor) {
         super(nombre, precio, proveeedor);
     }

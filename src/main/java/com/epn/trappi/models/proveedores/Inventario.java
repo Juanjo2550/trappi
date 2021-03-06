@@ -59,7 +59,7 @@ public class Inventario {
             }
         }
     }
-
+    
     public void disminuirStock(ArrayList<Bien> ListaADisminuir) {
         for (Bien bien : ListaADisminuir) {
             try {
