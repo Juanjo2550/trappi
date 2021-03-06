@@ -17,9 +17,9 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
-public class DashboardsinRProgress extends javax.swing.JFrame {
+public class DashboardFinanciero extends javax.swing.JFrame {
     Analizador analizador;
-    public DashboardsinRProgress() {
+    public DashboardFinanciero() {
         initComponents();
         this.panelGastos.setVisible(false);
         this.panelDashboard.setVisible(false);
@@ -731,7 +731,7 @@ public class DashboardsinRProgress extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DashboardsinRProgress().setVisible(true);
+                new DashboardFinanciero().setVisible(true);
             }
         });
     }

@@ -37,8 +37,8 @@ public class  Pago {
         Connection connection = dbInstance.getConnection();
         try{
         Statement statement = connection.createStatement();
-        String sql = "INSERT INTO dbo.PAGO VALUES("+(this.libroDiario.ingresosRegistrados.size()+1)+
-                ",'"+pago.nroCuenta+"',"+pago.monto+","+pago.fechadePago.devolverDia()+
+        String sql = "INSERT INTO dbo.PAGO VALUES("+(this.libroDiario.obtenerPagosRegistrados().size()+1)+
+                ",1,'"+pago.nroCuenta+"',"+pago.monto+","+pago.fechadePago.devolverDia()+
                 ","+pago.fechadePago.devolverMes()+","+pago.fechadePago.devolverAnio()+")";
         statement.executeUpdate(sql);
         }catch(Exception e){
@@ -49,7 +49,7 @@ public class  Pago {
     public String realizarPago(Pago pago){
         this.libroDiario=new LibroDiario();
         this.presupuesto=new Presupuesto(this.libroDiario);
-        String estadoSolicitud="Pendiente";
+        String estadoSolicitud="No realizado";
         if(pago.monto<this.presupuesto.calcularPresupuesto()){
             System.out.println("El presupuesto de TRAPPI es: "+this.presupuesto.calcularPresupuesto());
             estadoSolicitud="Realizado";
