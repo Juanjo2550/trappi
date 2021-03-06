@@ -16,18 +16,18 @@ public class SolicitudMantenimiento {
     private int id_bien;
     private int id_Mantenimiento;
     private String estado;
-    private Date fecha;
+    private String fecha;
 
     public int getId_bien() {
         return id_bien;
     }
 
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
@@ -62,5 +62,12 @@ public class SolicitudMantenimiento {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        return "SolicitudMantenimiento{" + "id_Solicitud=" + id_Solicitud + ", id_bien=" + id_bien + ", id_Mantenimiento=" + id_Mantenimiento + ", estado=" + estado + ", fecha=" + fecha + '}';
+    }
+    
+    
     
 }

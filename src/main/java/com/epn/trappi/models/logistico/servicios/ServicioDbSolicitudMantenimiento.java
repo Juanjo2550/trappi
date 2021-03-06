@@ -41,7 +41,7 @@ public class ServicioDbSolicitudMantenimiento implements ServicioDb<SolicitudMan
             elemento.setId_Solicitud(resultados.getInt(1));
             elemento.setId_Bien(resultados.getInt(2));
             elemento.setId_Mantenimiento(resultados.getInt(3));
-            elemento.setFecha(resultados.getDate(4));
+            elemento.setFecha(resultados.getString(4));
             elemento.setEstado(resultados.getString(5));
             //add all data
             elementos.add(elemento);
@@ -58,7 +58,7 @@ public class ServicioDbSolicitudMantenimiento implements ServicioDb<SolicitudMan
             elemento.setId_Solicitud(resultados.getInt(1));
             elemento.setId_Bien(resultados.getInt(2));
             elemento.setId_Mantenimiento(resultados.getInt(3));
-            elemento.setFecha(resultados.getDate(4));
+            elemento.setFecha(resultados.getString(4));
             elemento.setEstado(resultados.getString(5));
         return elemento;
     }
@@ -69,7 +69,7 @@ public class ServicioDbSolicitudMantenimiento implements ServicioDb<SolicitudMan
         statement.setInt(1,elemento.getId_Solicitud());
         statement.setInt(2,elemento.getId_Bien());
         statement.setInt(3,elemento.getId_Mantenimiento());
-        statement.setDate(4,elemento.getFecha());
+        statement.setString(4,elemento.getFecha());
         statement.setString(5,elemento.getEstado());
         statement.execute();
     }
@@ -98,7 +98,7 @@ public class ServicioDbSolicitudMantenimiento implements ServicioDb<SolicitudMan
             elemento.setId_Solicitud(resultados.getInt(1));
             elemento.setId_Bien(resultados.getInt(2));
             elemento.setId_Mantenimiento(resultados.getInt(3));
-            elemento.setFecha(resultados.getDate(4));
+            elemento.setFecha(resultados.getString(4));
             elemento.setEstado(resultados.getString(5));
             //add all data
             elementos.add(elemento);
