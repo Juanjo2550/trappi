@@ -29,6 +29,8 @@ public class Logistico_GUI extends javax.swing.JFrame {
     RegistroMantenimiento registroMantenimiento = new RegistroMantenimiento();
     RegistroEntregas registroEntregas = new RegistroEntregas();
     RegistrarVehiculo1 registroVehiculo= new RegistrarVehiculo1();
+    ActualizacionVehiculo actualizarVehiculo = new ActualizacionVehiculo();
+    
     boolean bandera = false;
 
     public Logistico_GUI() {
@@ -532,6 +534,11 @@ public class Logistico_GUI extends javax.swing.JFrame {
         this.botonMantenimiento.setBorder(new RoundedBorder(radio));
         this.botonMantenimiento.setOpaque(false);
         //this.jButton8.setBorderPainted(true);
+        this.botonActualizarVehiculo.setBorder(new RoundedBorder(radio));
+        this.botonActualizarVehiculo.setOpaque(false);
+        
+        this.botonRegistrarVehiculo.setBorder(new RoundedBorder(radio));
+        this.botonRegistrarVehiculo.setOpaque(false);
     }
     private void configurarTransparencia(){
         
@@ -745,6 +752,12 @@ public class Logistico_GUI extends javax.swing.JFrame {
 
     private void botonActualizarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarVehiculoActionPerformed
         // TODO add your handling code here:
+        ocultarPaneles(this.actualizarVehiculo);
+        actualizarVehiculo.setSize(1048, 770);
+        jPEntregasActivasGUI.add(actualizarVehiculo);
+        //entregasActivas.setLocation(1048, 660);
+        jPEntregasActivasGUI.revalidate();
+        jPEntregasActivasGUI.repaint();
     }//GEN-LAST:event_botonActualizarVehiculoActionPerformed
 
     private void botonRegistrarVehiculomoveMouseOnListaV(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRegistrarVehiculomoveMouseOnListaV
@@ -774,6 +787,8 @@ public class Logistico_GUI extends javax.swing.JFrame {
         fichasTecnicas.setVisible(panel.getClass().equals(fichasTecnicas.getClass()));
         listasVehiculos.setVisible(panel.getClass().equals(listasVehiculos.getClass()));
         registroMantenimiento.setVisible(panel.getClass().equals(registroMantenimiento.getClass()));
+        actualizarVehiculo.setVisible(panel.getClass().equals(actualizarVehiculo.getClass()));
+        registroVehiculo.setVisible(panel.getClass().equals(registroVehiculo.getClass()));
     }
     /**
      * @param args the command line arguments
