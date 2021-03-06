@@ -5,6 +5,8 @@
  */
 package com.epn.trappi.gui.ecommerce.Ecommerce;
 
+//package com.epn.trappi.models.logistico;
+
 import java.util.ArrayList;
 
 /**
@@ -30,7 +32,7 @@ public class FachadaEcommerce {
     
     //Logistica
     
-    Entrega entrega = new Entrega();
+    Entrega entrega = new Entrega(dirección, detalleFactura);
     
     
     
@@ -46,7 +48,8 @@ public class FachadaEcommerce {
     
     public void enviarAfinanzas(){
       
-      //  **ingreso.registrarIngreso(numeroFactura,totalFactura)
+      //**Ingreso ingreso = new Ingreso(numerofactura,totalFactura);//String //Double
+      //ingreso.registrarIngreso(ingreso);
     }
     
     public void enviarAProovedores()
@@ -54,7 +57,8 @@ public class FachadaEcommerce {
       //**inventario.disminuirStock(detalleFactura);
     }
     public void enviarALogistica(){
-      //entrega.empezarEntrega(detalleFactura);
+      //entrega.setFactura(numeroFactura) //Entero
+      //entrega.setDirección(direcciónCliente)//String
     }
     
     

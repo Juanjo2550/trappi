@@ -17,6 +17,9 @@ public class CarritoDeCompras {
     
     
     //Public ArrayList<Producto>
+    //Asociacion con Inventario
+    //public Inventario
+    //public ArrayList<Bien> Productos= Invetario.getListaDeBienes().getListaBienes();
     public ArrayList<Articulo> articulos = new ArrayList<Articulo>();
     public Factura factura;
     
