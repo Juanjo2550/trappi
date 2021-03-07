@@ -46,7 +46,7 @@ public class FachadaEcommerce {
     
     
     
-    public void enviarDatos(int numeroFactura,Double totalFactura, ArrayList<Producto> detalle, String direccion)
+    public void enviarDatos(int numeroFactura,double totalFactura, ArrayList<Producto> detalle, String direccion)
     {
        //enviarAProveedores();
         ArrayList<Bien> bien = new ArrayList<Bien>() ;
@@ -68,7 +68,7 @@ public class FachadaEcommerce {
        System.out.println("Los datos han sido enviados satisfactoriamente");
     }
     
-    public void enviarAfinanzas(int numeroFactura,Double totalFactura){
+    public void enviarAfinanzas(int numeroFactura,double totalFactura){
       
       Ingreso ingreso = new Ingreso(String.valueOf(numeroFactura),totalFactura);//String //Double
       ingreso.registrarIngreso(ingreso);

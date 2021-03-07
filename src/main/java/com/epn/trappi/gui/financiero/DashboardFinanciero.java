@@ -638,7 +638,7 @@ public class DashboardFinanciero extends javax.swing.JFrame {
         while(resultSet.next()){
             System.out.println("Está entrando");
             datos[0] = resultSet.getString(1);
-            datos[1] = String.valueOf(resultSet.getInt(2));
+            datos[1] = String.valueOf(resultSet.getDouble(2));
             String fecha = String.valueOf(resultSet.getInt(3))+'/'+String.valueOf(resultSet.getInt(4))+'/'+String.valueOf(resultSet.getInt(5));
             datos[2] = fecha;
             tab.addRow(datos);
