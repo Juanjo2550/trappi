@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
+//import com.epn.trappi.models.rrhh;
 
 public class  Pago {
     Fecha fechadePago;
@@ -14,7 +15,7 @@ public class  Pago {
     String nroCuenta;
     double monto;
     Presupuesto presupuesto;
-
+    //SolicitudDePago solicitudPago;
     public Pago(Fecha fechadePago, String nroCuenta, double monto) {
         this.fechadePago = fechadePago;
         this.nroCuenta = nroCuenta;
@@ -30,7 +31,13 @@ public class  Pago {
     
 
 
-    
+    private void verificarSolicitudesdePago(){
+//        this.solicitudPago=new SolicitudDePago();
+//        for(SolicitudDePago solicitud: this.solicitudPago.SolicitarPago()){
+//            Pago pago = new Pago(solicitud.cuentaBancaria, solicitud.montoTotal );
+//            pago.realizarPago(pago);
+//        }
+    }
     private void registrarPago(Pago pago){
 
     DataBaseConnection dbInstance = DataBaseConnection.getInstance();
