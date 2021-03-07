@@ -9,7 +9,10 @@ import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Diseño.TextPrompt;
 import com.epn.trappi.db.ecommerce.ListaClientes;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
+import com.epn.trappi.gui.ecommerce.FormulariosTarjetas.FRegistroTarjeta;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -31,10 +34,31 @@ public class Login extends javax.swing.JFrame {
          
     }
     
-    //Luis
-    //luis@com
-    //1234567890
-    //12345
+    public void obtenerdatosdetarjetas(){
+        try {
+            String tarjeta= "";
+            String cvv ="";
+            String tipo ="";
+            String fecha ="";
+                                   
+            Statement statement = connection.createStatement();
+            String sql = "select NUMEROTARJETA, CVV, FECHADECADUCIDAD,TIPO from TARJETAS T, CUENTABANCARIA C, CLIENTES L "+
+                         "where T.IDCUENTABANCARIA=C.IDCUENTABANCARIA and C.IDCLIENTE=L.IDCLIENTE and L.NOMBRECLIE='"+Main.cliente.Nombre+"'";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                 tarjeta= resultSet.getString("NUMEROTARJETA");
+                 cvv =resultSet.getString("CVV");
+                 fecha =resultSet.getString("FECHADECADUCIDAD");
+                 tipo=resultSet.getString("TIPO");
+                 FRegistroTarjeta fr=new FRegistroTarjeta(tarjeta,cvv,fecha,tipo);
+                 Main.cliente.añadirTarjeta(fr);
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -139,6 +163,7 @@ public class Login extends javax.swing.JFrame {
     private void jButtoningresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtoningresarMouseClicked
     ListaClientes lista=new ListaClientes();
     if(lista.buscar(Main.cliente,jTextFieldUsuario.getText(),jTextFieldcontraseña.getText())){
+        obtenerdatosdetarjetas();
     Main.cliente.entrarAlSistema();
     this.setVisible(false);
     }

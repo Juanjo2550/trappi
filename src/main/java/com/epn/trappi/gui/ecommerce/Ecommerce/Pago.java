@@ -19,13 +19,14 @@ import javax.swing.JOptionPane;
 public class Pago {
     
 
-    public boolean validarPago(TarjetaCredito tc, TarjetaDebito td, String tipo,Double valor,Cuenta cuenta){
+    public boolean validarPago(Tarjeta tar,Double valor,Cuenta cuenta){
         boolean bandera=false;
       
-        if(tipo.equals("Credito"))
+        if(tar.Tipo.equals("Credito"))
         {
            
-            tc = new TarjetaCredito();
+            TarjetaCredito tc = new TarjetaCredito();
+            tc=(TarjetaCredito) tar;
             
             tc.cuenta=cuenta;
             
@@ -38,8 +39,8 @@ public class Pago {
         }
         else
         {    
-            td = new TarjetaDebito();
-            
+            TarjetaDebito td = new TarjetaDebito();
+            td=(TarjetaDebito) tar;
             td.cuenta=cuenta;
             if(td.validarFondos(valor))
             {

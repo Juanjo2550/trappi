@@ -96,7 +96,16 @@ public class TarjetaUsuario extends javax.swing.JFrame {
         return aux;
     }
    
-    
+    //toma una terjeta del arreglo de tarjetas de cliente
+    public Tarjeta obtenerTarje(){
+        Tarjeta tar=null;
+              for (int i = 0; i < Main.cliente.tarjeta.size(); i++) {
+                  if((Main.cliente.tarjeta.get(i)).NumeroTarjeta.equals(tomarTarjeta()[0])){
+                      tar=Main.cliente.tarjeta.get(i);
+                  }
+              }
+              return tar;
+          }
  
     
     
@@ -229,34 +238,11 @@ public class TarjetaUsuario extends javax.swing.JFrame {
         }
         
         
-        
-        String datos[]=tomarTarjeta();
-        if(datos[2].equals("Credito")){
-        Main.tarcre.Tipo=datos[2];
-        Main.tip=datos[2];
-        Main.tarcre.CVV=datos[1];
-        Main.tarcre.NumeroTarjeta=datos[0];
-        Main.tarcre.Fechacaducidad=datos[3];
-        
-        Main.tarcre.cuenta=cuenta;
-        
-        }
-        else{
-        Main.tardeb.Tipo=datos[2];
-        Main.tip=datos[2];
-        Main.tardeb.CVV=datos[1];
-        Main.tardeb.NumeroTarjeta=datos[0];
-        Main.tardeb.Fechacaducidad=datos[3];
-        Main.tardeb.cuenta=cuenta;
-      
-        }
-        
-        
         Pago pago = new Pago();
        
         
         
-        if(pago.validarPago(Main.tarcre,Main.tardeb,Main.tip,carrito.factura.calcularTotal(),cuenta)==true){
+        if(pago.validarPago(obtenerTarje(),Comprar.carrito.factura.calcularTotal(),cuenta)==true){
               ListaFacturas lista=new ListaFacturas();
               int id=lista.generarfacturaDatabase(Main.cliente.Nombre,carrito.factura.calcularSubTotal(),carrito.factura.calcularImpuestos(),carrito.factura.calcularTotal());
               Comprar.carrito.factura.setNumeroFactura(id);

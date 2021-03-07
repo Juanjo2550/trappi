@@ -4,6 +4,7 @@ package com.epn.trappi.gui.ecommerce.Interfaces;
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.db.ecommerce.ListaTar;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
+import com.epn.trappi.gui.ecommerce.FormulariosTarjetas.FEdicionTarjeta;
 import com.epn.trappi.gui.ecommerce.Tarjetas.Tarjeta;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
@@ -437,14 +438,19 @@ public class Metododepago extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtoneditar1ActionPerformed
 
     private void jButtoneditarconfirmarcambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoneditarconfirmarcambiosActionPerformed
-                
+          ListaTar lis=new ListaTar();
+                lis.modtarjeta(Integer.parseInt(jTextFieldtarjeta.getText()),jTextFieldcvv.getText(),jTextFieldfecha.getText(),jTextFieldtipo.getSelectedItem().toString());
+                FEdicionTarjeta fet=new FEdicionTarjeta(jTextFieldtarjeta.getText(),jTextFieldcvv.getText(),jTextFieldfecha.getText(),jTextFieldtipo.getSelectedItem().toString());
+                if(jTextFieldtipo.getSelectedItem().toString().equals("Credito")){
+                Main.cliente.editarTarjetaCredito(fet);
+                }
+                else{
+                Main.cliente.editarTarjetaDebito(fet);
+                }
                 Inicio nuevo= new Inicio();
                 nuevo.jt.setText(jt.getText());
                 nuevo.setVisible(true);
                 this.setVisible(false);
-                ListaTar lis=new ListaTar();
-                lis.modtarjeta(Integer.parseInt(jTextFieldtarjeta.getText()),jTextFieldcvv.getText(),jTextFieldfecha.getText(),jTextFieldtipo.getSelectedItem().toString());
-        
         
     }//GEN-LAST:event_jButtoneditarconfirmarcambiosActionPerformed
 
@@ -455,6 +461,7 @@ public class Metododepago extends javax.swing.JFrame {
     private void jbeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbeliminarActionPerformed
     ListaTar lis=new ListaTar();
     lis.borartarjeta(Integer.parseInt(jTextFieldtarjeta.getText()));
+    Main.cliente.eliminarTarjeta(jTextFieldtarjeta.getText());
     jTextFieldtarjeta.setText(null);
     jTextFieldcvv.setText(null);
     jTextFieldtipo.setSelectedIndex(0);

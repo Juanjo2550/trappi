@@ -1,20 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.epn.trappi.gui.ecommerce.Tarjetas;
 
-/**
- *
- * @author Bryan
- */
-public interface Tarjeta {
-    
-    
-    public void realizarPago(Double valor);
-    public boolean validarFondos(Double valor);
 
-    public String[] mostrar();
+public abstract class Tarjeta {
+    
+    
+    public String Tipo;
+    public String NumeroTarjeta;
+    public String CVV;
+    public String Fechacaducidad;
+    
+    abstract public void realizarPago(Double valor);
+    abstract public boolean validarFondos(Double valor);
+    abstract public String[] mostrar();
     
 }

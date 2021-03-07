@@ -266,9 +266,10 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
 
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
     FRegistroTarjeta frt=new FRegistroTarjeta(jTextFieldTarjeta.getText(),jTextFieldCvv.getText(),jTextFieldFecha.getText(),jTextFieldTipo.getText());
-    Main.cliente.añadirTarjeta(frt);
+    
         ListaTar lis=new ListaTar();
         lis.creartarjeta(Main.cliente.Cedula,jTextFieldCvv.getText(),jTextFieldTarjeta.getText(),jTextFieldTipo.getText(),jTextFieldFecha.getText());
+        Main.cliente.añadirTarjeta(frt);
         JOptionPane.showMessageDialog(null,"Tarjeta ingresada con exito");
      
     }//GEN-LAST:event_jButtonRegistrarActionPerformed

@@ -123,36 +123,71 @@ public class Cliente {
             
         }
      
-    public void editarTarjetaCredito(FEdicionTarjeta editar,TarjetaCredito tarjet)
+    public void editarTarjetaCredito(FEdicionTarjeta editar)
         {
+         String[] datos = editar.obtenerDatos();
             
-            editar.Tipo = "Credito";
-            tarjet = new TarjetaCredito();
-
-            String[] datos = editar.obtenerDatos();
-            JOptionPane.showMessageDialog(null,datos[0]+datos[1]+datos[2]+datos[3]);
-            tarjet.NumeroTarjeta = datos[0];
-            tarjet.CVV=datos[1];
-            tarjet.Fechacaducidad=datos[2];
-            tarjet.Tipo=datos[3];
-
+            if(datos[3].equals("Credito")){
+            for (int i = 0; i <this.tarjeta.size(); i++) {
+            if((this.tarjeta.get(i).mostrar()[0]).equals(editar.obtenerDatos())){
+            this.tarjeta.get(i).CVV=datos[1];
+            this.tarjeta.get(i).Fechacaducidad=datos[2];
+            }
+            }
+            }
+            else{
+            for (int i = 0; i <this.tarjeta.size(); i++) {
+            if((this.tarjeta.get(i).mostrar()[0]).equals(editar.obtenerDatos())){
+            this.tarjeta.remove(i);
+            }
+            }
+            TarjetaCredito tc=new TarjetaCredito();
+            tc.NumeroTarjeta=datos[0];
+            tc.CVV=datos[1];
+            tc.Fechacaducidad=datos[2];
+            tc.Tipo="Debito";
+            this.tarjeta.add(tc);
+            }
         }
 
-    public void editarTarjetaDebito(FEdicionTarjeta editar,TarjetaDebito tarjet)
+    public void editarTarjetaDebito(FEdicionTarjeta editar)
         {
-            editar.Tipo = "Debito";
-
             String[] datos = editar.obtenerDatos();
             
-            JOptionPane.showMessageDialog(null,datos[0]+datos[1]+datos[2]+datos[3]);
-
-            tarjet.NumeroTarjeta = datos[0];
-            tarjet.CVV=datos[1];
-            tarjet.Fechacaducidad=datos[2];
-            tarjet.Tipo=datos[3];
+            if(datos[3].equals("Debito")){
+            for (int i = 0; i <this.tarjeta.size(); i++) {
+            if((this.tarjeta.get(i).mostrar()[0]).equals(editar.obtenerDatos())){
+            this.tarjeta.get(i).CVV=datos[1];
+            this.tarjeta.get(i).Fechacaducidad=datos[2];
+            }
+            }
+            }
+            else{
+            for (int i = 0; i <this.tarjeta.size(); i++) {
+            if((this.tarjeta.get(i).mostrar()[0]).equals(editar.obtenerDatos())){
+            this.tarjeta.remove(i);
+            }
+            }
+            TarjetaCredito tc=new TarjetaCredito();
+            tc.NumeroTarjeta=datos[0];
+            tc.CVV=datos[1];
+            tc.Fechacaducidad=datos[2];
+            tc.Tipo="Credito";
+            this.tarjeta.add(tc);
+            }
+            
             
 
         }
     
+    public void eliminarTarjeta(String numerotar){
+        for (int i = 0; i <this.tarjeta.size(); i++) {
+            if((this.tarjeta.get(i).mostrar()[0]).equals(numerotar)){
+            this.tarjeta.remove(i);
+            }
+            }
+
+    
+    }
     
 }

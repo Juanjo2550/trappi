@@ -14,12 +14,8 @@ import javax.swing.JOptionPane;
  *
  * @author Bryan
  */
-public class TarjetaDebito implements Tarjeta{
+public class TarjetaDebito extends Tarjeta{
     
-    public String Tipo;
-    public String NumeroTarjeta;
-    public String CVV;
-    public String Fechacaducidad;
     public Cuenta cuenta;
     
     @Override

@@ -14,9 +14,6 @@ public class Main {
     public static Cliente cliente=new Cliente();
 
     public static  ArrayList<Cliente> listaclientes;
-    public static TarjetaCredito tarcre=new TarjetaCredito();
-    public static TarjetaDebito tardeb=new TarjetaDebito();
-    public static String tip;
             
     public static void main(String[] args)
     {   

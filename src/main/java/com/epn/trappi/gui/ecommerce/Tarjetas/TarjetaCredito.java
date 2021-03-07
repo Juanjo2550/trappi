@@ -13,13 +13,8 @@ import com.epn.trappi.gui.ecommerce.entidadBancaria.Cuenta;
  *
  * @author Bryan
  */
-public class TarjetaCredito implements Tarjeta{
+public class TarjetaCredito extends Tarjeta{
 
-    
-    public String Tipo;
-    public String NumeroTarjeta;
-    public String CVV;
-    public String Fechacaducidad;
     
     //Asociación Dirigida
     public Cuenta cuenta;
