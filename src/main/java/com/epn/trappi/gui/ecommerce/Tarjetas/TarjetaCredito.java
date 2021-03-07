@@ -20,6 +20,8 @@ public class TarjetaCredito implements Tarjeta{
     public String NumeroTarjeta;
     public String CVV;
     public String Fechacaducidad;
+    
+    //Asociación Dirigida
     public Cuenta cuenta;
 
     

@@ -26,7 +26,6 @@ public class TarjetaDebito implements Tarjeta{
     public void realizarPago(Double valor) {
        if(validarFondos(valor)==true)
        {
-           
          cuenta.debitar(valor);  
        }
         

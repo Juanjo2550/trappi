@@ -52,9 +52,7 @@ public class Cliente {
     }
     
     public void editarMisDato(FEdicionCliente editar){
-        
-       
-       
+
        String[] datos = editar.obtenerDatos();
        
        this.Nombre = datos[0];
@@ -156,14 +154,5 @@ public class Cliente {
 
         }
     
-  
-    
-    /////////Asociacion Con Carrito////////////////
-
-    
-    
-    
-    
-   
     
 }

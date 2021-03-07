@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * @author Bryan
  */
 public class EntidadBancaria {
+    
     String Nombre;
     String Numeroautorizacion;
     public ArrayList<Cuenta> cuentas = new ArrayList<Cuenta>();
