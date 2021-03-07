@@ -40,9 +40,7 @@ public class CompraDeProducto extends Compra {
     @Override
     public void comprar(){
         setMontoTotal();
-        ProveedoresDb db = new ProveedoresDb();
-        setMontoTotal();
-        if(solicitarAutorizacion(listaBienesAComprar.getListaBienes().get(0).getProveeedor(),montoTotal)){
+        if(solicitarAutorizacion(listaBienesAComprar.getListaBienes().get(0).getProveeedor().getCuenta(),montoTotal)){
             registrarCompra();
         }
     }

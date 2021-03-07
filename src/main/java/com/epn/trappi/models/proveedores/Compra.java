@@ -1,6 +1,7 @@
 package com.epn.trappi.models.proveedores;
 
 import com.epn.trappi.db.proveedores.ProveedoresDb;
+import com.epn.trappi.models.financiero.Pago;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -36,8 +37,6 @@ abstract public class Compra {
         this.identificador = identificador;
     }
 
-    
-    
     public Compra(Inventario inventario, ListaDeBienes listaBienesAComprar, Bien bien, String estado, Double montoTotal, int identificador) {
         this.inventario = inventario;
         this.listaBienesAComprar = listaBienesAComprar;
@@ -80,7 +79,6 @@ abstract public class Compra {
     
     
     public Compra() {
-        
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
         LocalDateTime now = LocalDateTime.now();  
         this.fecha=dtf.format(now);  
@@ -95,13 +93,10 @@ abstract public class Compra {
     public void registrarCompra() {
         int idcompra;
         try {
-            if(solicitarAutorizacion(listaBienesAComprar.getListaBienes().get(0).getProveeedor(),montoTotal)){
-                idcompra = db.insertarCompra("Pendiente", Double.toString(montoTotal), fecha);
-                for (Bien cantidadBien : listaBienesAComprar.getListaBienes()){
-                    db.insertDetalleCompra(idcompra, db.getIdBien(cantidadBien.getNombre()), cantidadBien.getCantidad());
-                }
+            idcompra = db.insertarCompra("Pendiente", Double.toString(montoTotal), fecha);
+            for (Bien cantidadBien : listaBienesAComprar.getListaBienes()){
+                db.insertDetalleCompra(idcompra, db.getIdBien(cantidadBien.getNombre()), cantidadBien.getCantidad());
             }
-            
         } catch (SQLException ex) {
              Logger.getLogger(CompraDeProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -115,8 +110,9 @@ abstract public class Compra {
         return monto;
     }
     
-    public boolean solicitarAutorizacion(Proveedor proveedor, double montoTotal) {
-        return true;
+    public boolean solicitarAutorizacion(String cuentaProveedor, double montoTotal) {
+        Pago pago = new Pago(cuentaProveedor,montoTotal);
+        return pago.realizarPago(pago).equals("Realizado");
     }
 
     public String getFecha() {
