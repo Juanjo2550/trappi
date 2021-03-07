@@ -19,16 +19,17 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 /**
  *
- * @author stali
+ * @author 
  */
 public class Logistico_GUI extends javax.swing.JFrame {
-    ControlDisponibilidad mapaDisponibilidad = new ControlDisponibilidad();
-    panelEntregasActivas entregasActivas = new panelEntregasActivas();
+    
+    PanelControlDisponibilidad mapaDisponibilidad = new PanelControlDisponibilidad();
+    PanelEntregasActivas entregasActivas = new PanelEntregasActivas();
     FichasTecnicas fichasTecnicas = new FichasTecnicas();
     ListasVehiculos listasVehiculos = new ListasVehiculos();
     RegistroMantenimiento registroMantenimiento = new RegistroMantenimiento();
     RegistroEntregas registroEntregas = new RegistroEntregas();
-    RegistrarVehiculo1 registroVehiculo= new RegistrarVehiculo1();
+    RegistrarVehiculo registroVehiculo= new RegistrarVehiculo();
     ActualizacionVehiculo actualizarVehiculo = new ActualizacionVehiculo();
     
     boolean bandera = false;
@@ -297,9 +298,7 @@ public class Logistico_GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panEntregas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(botonListaVehiculos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panEntregas1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(botonActualizarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(botonActualizarVehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panEntregas1Layout.setVerticalGroup(
@@ -620,8 +619,10 @@ public class Logistico_GUI extends javax.swing.JFrame {
         //Llamamos al panel Mapa Disponibilidad
         //entregasActivas.setVisible(false);
         //mapaDisponibilidad.setVisible(true);
+        
         ocultarPaneles(this.mapaDisponibilidad);
         mapaDisponibilidad.setSize(1048,813);
+        mapaDisponibilidad.llenarTablaVehiculos();
         jPEntregasActivasGUI.add(mapaDisponibilidad);
         jPEntregasActivasGUI.revalidate();
         jPEntregasActivasGUI.repaint();
@@ -768,11 +769,13 @@ public class Logistico_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_botonFichasMouseExited
 
     private void botonActualizarVehiculomoveMouseOnListaV(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonActualizarVehiculomoveMouseOnListaV
-        // TODO add your handling code here:
+        Color c = new Color(255, 210, 28);
+        this.botonActualizarVehiculo.setForeground(c);
     }//GEN-LAST:event_botonActualizarVehiculomoveMouseOnListaV
 
     private void botonActualizarVehiculoexitMouseOnListaV(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonActualizarVehiculoexitMouseOnListaV
-        // TODO add your handling code here:
+        Color c = new Color(255, 255,255);
+        this.botonActualizarVehiculo.setForeground(c);
     }//GEN-LAST:event_botonActualizarVehiculoexitMouseOnListaV
 
     private void botonActualizarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarVehiculoActionPerformed
@@ -786,11 +789,13 @@ public class Logistico_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_botonActualizarVehiculoActionPerformed
 
     private void botonRegistrarVehiculomoveMouseOnListaV(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRegistrarVehiculomoveMouseOnListaV
-        // TODO add your handling code here:
+        Color c = new Color(255, 210, 28);
+        this.botonRegistrarVehiculo.setForeground(c);
     }//GEN-LAST:event_botonRegistrarVehiculomoveMouseOnListaV
 
     private void botonRegistrarVehiculoexitMouseOnListaV(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRegistrarVehiculoexitMouseOnListaV
-        // TODO add your handling code here:
+        Color c = new Color(255, 255,255);
+        this.botonRegistrarVehiculo.setForeground(c);
     }//GEN-LAST:event_botonRegistrarVehiculoexitMouseOnListaV
 
     private void botonRegistrarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarVehiculoActionPerformed

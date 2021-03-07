@@ -16,6 +16,7 @@ public class Entrega extends Thread{
     private int ID_Empleado;
     private String fecha;
     private String direccion;
+    
     //METODOS
 
     @Override
@@ -110,6 +111,5 @@ public class Entrega extends Thread{
         servicioDB = new ServicioDbEntrega();
         ArrayList<Entrega> entregas =  servicioDB.obtenerElementosPorFiltro(ServicioDbEntrega.FACTURA,String.valueOf(factura)).getDatos();
         this.setID_Entrega(entregas.get(0).getID_Entrega());
-        
     }
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.epn.trappi.gui.logistico;
+package com.epn.trappi.models.logistico.servicios;
 
 import com.epn.trappi.models.logistico.Entrega;
 import com.epn.trappi.models.logistico.ListaEntregas;
@@ -142,6 +142,11 @@ public class EXPLICACION_SERVICIOSDB {
             m.setMatricula(vehiculos.get(0).getMatricula());
             servicio.insertar(m);
         }
+    }
+    
+    public void SextupleJOIN_OMG(String matricula) throws SQLException{
+        Consultable consultable = new ServicioDbMantenimiento().obtenerElementosPorFiltro(ServicioDbMantenimiento.MATRICULA, matricula);
+        ArrayList<Mantenimiento> mantenimientos = consultable.getDatos();
     }
     
 }

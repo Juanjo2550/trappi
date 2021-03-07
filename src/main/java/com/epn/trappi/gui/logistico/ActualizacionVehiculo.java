@@ -17,6 +17,7 @@ import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.PLAIN_MESSAGE;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -51,22 +52,19 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         btnBuscarVehiculo = new javax.swing.JButton();
         txtBusquedaVehiculos = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaListaVehiculos = new javax.swing.JTable();
         cmbBusquedaVehiculos1 = new javax.swing.JComboBox<>();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txtKilometraje = new javax.swing.JTextField();
-        btnActualizarInformacion = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         cmbEstados = new javax.swing.JComboBox<>();
+        btnActualizarInformacion = new javax.swing.JButton();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1048, 770));
@@ -75,7 +73,7 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
         jLabel1.setText("Actualización de Vehículos");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(61, 57, 57), 2, true));
+        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(61, 57, 57), 1, true));
         jPanel2.setForeground(new java.awt.Color(61, 57, 57));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -85,7 +83,7 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Búsqueda de vehículos");
+        jLabel3.setText("Atributos del vehículo");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -104,17 +102,12 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 40));
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Filtros de búsqueda");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 950, 40));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(61, 57, 57));
         jLabel8.setText("Atributo de Búsqueda:");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 30));
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 30));
 
         btnBuscarVehiculo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         btnBuscarVehiculo.setForeground(new java.awt.Color(61, 57, 57));
@@ -124,7 +117,7 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
                 btnBuscarVehiculoActionPerformed(evt);
             }
         });
-        jPanel2.add(btnBuscarVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 150, 30));
+        jPanel2.add(btnBuscarVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 70, 150, 30));
 
         txtBusquedaVehiculos.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
         txtBusquedaVehiculos.setForeground(new java.awt.Color(153, 153, 153));
@@ -137,12 +130,22 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
                 txtBusquedaVehiculosMouseExited(evt);
             }
         });
-        jPanel2.add(txtBusquedaVehiculos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 320, 30));
+        jPanel2.add(txtBusquedaVehiculos, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, 320, 30));
 
-        tablaListaVehiculos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setBorder(null);
+
+        tablaListaVehiculos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(228, 228, 228)));
+        tablaListaVehiculos.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         tablaListaVehiculos.setForeground(new java.awt.Color(61, 57, 57));
         tablaListaVehiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
                 {null, null, null},
                 {null, null, null},
                 {null, null, null},
@@ -161,11 +164,12 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
             }
         });
         tablaListaVehiculos.setFocusable(false);
-        tablaListaVehiculos.setGridColor(new java.awt.Color(61, 57, 57));
-        tablaListaVehiculos.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        tablaListaVehiculos.setGridColor(new java.awt.Color(204, 204, 204));
+        tablaListaVehiculos.setIntercellSpacing(new java.awt.Dimension(4, 4));
         tablaListaVehiculos.setOpaque(false);
-        tablaListaVehiculos.setRowHeight(25);
+        tablaListaVehiculos.setRowHeight(30);
         tablaListaVehiculos.setSelectionBackground(new java.awt.Color(61, 57, 57));
+        tablaListaVehiculos.setShowVerticalLines(false);
         tablaListaVehiculos.getTableHeader().setReorderingAllowed(false);
         tablaListaVehiculos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -174,59 +178,33 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tablaListaVehiculos);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 480, 300));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 860, 240));
 
         cmbBusquedaVehiculos1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbBusquedaVehiculos1.setForeground(new java.awt.Color(61, 57, 57));
         cmbBusquedaVehiculos1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Matrícula", "Tipo de Vehículo", "Estado", "Kilometraje", "ID Vehículo" }));
         cmbBusquedaVehiculos1.setBorder(null);
-        jPanel2.add(cmbBusquedaVehiculos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 140, 30));
-
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(61, 57, 57), 2, true));
-        jPanel3.setForeground(new java.awt.Color(61, 57, 57));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel8.setBackground(new java.awt.Color(61, 57, 57));
-        jPanel8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        jPanel8.setForeground(new java.awt.Color(61, 57, 57));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Información de vehículo");
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel3.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 40));
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Filtros de búsqueda");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel2.add(cmbBusquedaVehiculos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 140, 30));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(61, 57, 57));
         jLabel10.setText("Kilometraje:");
-        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, 30));
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 500, -1, 30));
 
         txtKilometraje.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         txtKilometraje.setForeground(new java.awt.Color(61, 57, 57));
-        jPanel3.add(txtKilometraje, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 160, 30));
+        jPanel2.add(txtKilometraje, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 500, 300, 30));
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(61, 57, 57));
+        jLabel14.setText("Estado del vehículo:");
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, 150, 30));
+
+        cmbEstados.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmbEstados.setForeground(new java.awt.Color(61, 57, 57));
+        cmbEstados.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Habilitado", "En Espera", "Inhabilitado" }));
+        cmbEstados.setBorder(null);
+        jPanel2.add(cmbEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 500, 210, 30));
 
         btnActualizarInformacion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         btnActualizarInformacion.setForeground(new java.awt.Color(61, 57, 57));
@@ -236,34 +214,48 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
                 btnActualizarInformacionActionPerformed(evt);
             }
         });
-        jPanel3.add(btnActualizarInformacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 290, 30));
+        jPanel2.add(btnActualizarInformacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 570, 300, 30));
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(61, 57, 57));
-        jLabel14.setText("Estado del vehículo:");
-        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, 30));
+        jPanel9.setBackground(new java.awt.Color(61, 57, 57));
+        jPanel9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        jPanel9.setForeground(new java.awt.Color(61, 57, 57));
 
-        cmbEstados.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cmbEstados.setForeground(new java.awt.Color(61, 57, 57));
-        cmbEstados.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Habilitado", "En Espera", "Inhabilitado" }));
-        cmbEstados.setBorder(null);
-        jPanel3.add(cmbEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 140, 30));
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Búsqueda de vehículos");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel2.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+                .addContainerGap(58, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(458, 458, 458))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52))))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 934, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,10 +263,8 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
                 .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -406,11 +396,15 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
     private void tablaListaVehiculosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaListaVehiculosMouseClicked
         // TODO add your handling code here:
         int fila = tablaListaVehiculos.getSelectedRow();
-        String estado = (String)tablaListaVehiculos.getValueAt(fila, 2);
-        String kilometraje = (String)tablaListaVehiculos.getValueAt(fila,4);
-        
-        cmbEstados.setSelectedItem((String)estado);
-        txtKilometraje.setText(kilometraje);
+        if((String)tablaListaVehiculos.getValueAt(fila, 2) == null){
+            JOptionPane.showMessageDialog(null, "No se escogió ningún vehículo.", "Error", PLAIN_MESSAGE);
+            return;
+        }else{
+            String estado = (String)tablaListaVehiculos.getValueAt(fila, 2);
+            String kilometraje = (String)tablaListaVehiculos.getValueAt(fila,4);
+            cmbEstados.setSelectedItem((String)estado);
+            txtKilometraje.setText(kilometraje);
+        }
     }//GEN-LAST:event_tablaListaVehiculosMouseClicked
 
 
@@ -423,14 +417,11 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaListaVehiculos;
     private javax.swing.JTextField txtBusquedaVehiculos;
