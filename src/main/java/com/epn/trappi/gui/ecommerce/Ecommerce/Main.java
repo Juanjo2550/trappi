@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 public class Main {
     
     public static Cliente cliente=new Cliente();
-    public static Stock stock;
+
     public static  ArrayList<Cliente> listaclientes;
     public static TarjetaCredito tarcre=new TarjetaCredito();
     public static TarjetaDebito tardeb=new TarjetaDebito();

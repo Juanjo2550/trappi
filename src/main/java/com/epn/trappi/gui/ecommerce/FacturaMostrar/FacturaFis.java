@@ -5,8 +5,9 @@
  */
 package com.epn.trappi.gui.ecommerce.FacturaMostrar;
 
-import com.epn.trappi.gui.ecommerce.Ecommerce.Articulo;
+
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
+import com.epn.trappi.models.proveedores.Producto;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,7 +28,7 @@ public class FacturaFis extends javax.swing.JFrame {
         
     }
         //ArrayList<Bien> detalle;
-        public void cargarDatos(int numeroFactura,String senor,String cedula,String fecha,ArrayList<Articulo> detalle,Double subtotal,Double iva,Double total)
+        public void cargarDatos(int numeroFactura,String senor,String cedula,String fecha,ArrayList<Producto> detalle,Double subtotal,Double iva,Double total)
         {
             jTextFieldNo.setText(String.valueOf(numeroFactura));
             jTextFieldSr.setText(senor);
@@ -41,10 +42,10 @@ public class FacturaFis extends javax.swing.JFrame {
         }
         
         //ArrayList<Bien> Bien;
-         public void llenartabla(ArrayList<Articulo> productos){
+         public void llenartabla(ArrayList<Producto> productos){
         
     DefaultTableModel detalle = (DefaultTableModel) jTableDetalle.getModel();
-    Articulo articulo;
+    Producto articulo;
     detalle.setRowCount(0);
     String[] aux=new String[4];
         for (int i = 0; i < productos.size(); i++) {

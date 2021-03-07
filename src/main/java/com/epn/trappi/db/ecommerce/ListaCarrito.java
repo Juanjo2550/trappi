@@ -2,9 +2,9 @@
 package com.epn.trappi.db.ecommerce;
 import com.epn.trappi.gui.ecommerce.Tarjetas.Tarjeta;
 import com.epn.trappi.db.connection.DataBaseConnection;
-import com.epn.trappi.gui.ecommerce.Ecommerce.Articulo;
 import com.epn.trappi.gui.ecommerce.Ecommerce.CarritoDeCompras;
 import com.epn.trappi.gui.ecommerce.Interfaces.Login;
+import com.epn.trappi.models.proveedores.Producto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -47,7 +47,7 @@ public class ListaCarrito {
     
     public void registrar_detallecompra (CarritoDeCompras carro, String nombrecliente){
         int aux=iddetallefactura();
-        Articulo articulo;
+        Producto articulo;
          String idProducto="";
         for (int i = 0; i <carro.Productos.size(); i++) {
             articulo=carro.Productos.get(i);

@@ -5,6 +5,7 @@
  */
 package com.epn.trappi.gui.ecommerce.Ecommerce;
 
+import com.epn.trappi.models.proveedores.Producto;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.YES_OPTION;
@@ -18,23 +19,21 @@ public class CarritoDeCompras {
     
 
     //Asociacion con Inventario
-    //public ArrayList<Bien> Productos= Invetario.getListaDeBienes().getListaBienes();
-    public ArrayList<Articulo> Productos = new ArrayList<Articulo>();
+    public ArrayList<Producto> Productos= new ArrayList<Producto>() ;
+    //public ArrayList<Articulo> Productos = new ArrayList<Articulo>();
     public Factura factura;
     
       public void añadirProducto( String nombre,Double precio,int cantidad,String marca)
     {
-        //Bien producto = new Bien();
-        Articulo producto = new Articulo();
+        Producto producto= new Producto(nombre,precio,cantidad,marca);
+        /*Articulo producto = new Articulo();
         producto.nombre=nombre;
         producto.precio=precio;
         producto.cantidad=cantidad;
-        producto.marca=marca;
+        producto.marca=marca;*/
         
         Productos.add(producto);
-        
-        //Producto producto= new Producto(nombre,precio,cantidad,marca);
-        //Productos.add(producto);
+
     }
       
     public void borrarProducto(String nombre){

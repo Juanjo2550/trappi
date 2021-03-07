@@ -6,6 +6,7 @@
 package com.epn.trappi.gui.ecommerce.Ecommerce;
 
 
+import com.epn.trappi.models.proveedores.Producto;
 import java.util.ArrayList;
 
 
@@ -16,14 +17,14 @@ import java.util.ArrayList;
 public class Factura {
     
     //public Inventario
-    //public ArrayList<Bien> Detalle;
-    public ArrayList <Articulo> Detalle;
+    public ArrayList<Producto> Detalle;
+    //public ArrayList <Articulo> Detalle;
     
     public int nFactura;
     String RUC;
     public Pago pago;
     
-    public Factura(ArrayList <Articulo>  detalle){
+    public Factura(ArrayList <Producto>  detalle){
         this.Detalle=detalle;
     }
 
@@ -54,7 +55,7 @@ public Double calcularTotal(){
 }
 
 //public ArrayList<Bien> mostrar(){
-public ArrayList<Articulo> mostrar(){
+public ArrayList<Producto> mostrar(){
     ArrayList mostrarDetalle = this.Detalle; 
     return mostrarDetalle;
 }

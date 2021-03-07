@@ -3,11 +3,12 @@ package com.epn.trappi.gui.ecommerce.Interfaces;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Diseño.TextPrompt;
-import com.epn.trappi.gui.ecommerce.Ecommerce.Articulo;
+
 import com.epn.trappi.gui.ecommerce.Ecommerce.CarritoDeCompras;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Factura;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.FacturaMostrar.FacturaFis;
+import com.epn.trappi.models.proveedores.Producto;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,10 +48,14 @@ public class Comprar extends javax.swing.JFrame {
     
     
     public void llenartabla(){
+        
+        //Controlador.inventario.
+        //Inventario productos = new Inventario();
+        //productos.getListaDeBienes().getListaBienes();
        
        try{
             DefaultTableModel productos = (DefaultTableModel) jTable1.getModel();
-            Articulo articulo;
+
             String[] aux=new String[4];
             Statement statement = connection.createStatement();
             String sql = "select NOMBREBIEN,MARCA,PRECIOBIEN,CANTIDADINVENTARIO from BIEN B, INVENTARIO I"+
@@ -426,8 +431,8 @@ public class Comprar extends javax.swing.JFrame {
         carrito.factura= new Factura(carrito.Productos);
         String nombre = Main.cliente.Nombre;
         String cedula=Main.cliente.Cedula;
-        //ArrayList<Bien> detalle = carrito.factura.Detalle;
-        ArrayList<Articulo> detalle = carrito.factura.Detalle;
+        ArrayList<Producto> detalle = carrito.factura.Detalle;
+        //ArrayList<Articulo> detalle = carrito.factura.Detalle;
         Double subtotal = carrito.factura.calcularSubTotal();
         Double iva=carrito.factura.calcularImpuestos();
         Double total=  carrito.factura.calcularTotal();  

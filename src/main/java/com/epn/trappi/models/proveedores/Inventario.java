@@ -63,6 +63,7 @@ public class Inventario {
     public void disminuirStock(ArrayList<Bien> ListaADisminuir) {
         for (Bien bien : ListaADisminuir) {
             try {
+                System.out.println(bien.getNombre());
                 db.disminuirStock(db.getIdBien(bien.getNombre()), bien.getCantidad());
             } catch (SQLException ex) {
                 Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE, null, ex);

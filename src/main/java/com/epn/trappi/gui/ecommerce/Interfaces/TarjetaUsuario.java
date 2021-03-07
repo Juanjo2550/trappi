@@ -5,6 +5,7 @@ import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.db.ecommerce.ListaCarrito;
 import com.epn.trappi.db.ecommerce.ListaFacturas;
 import com.epn.trappi.db.ecommerce.ListaTar;
+import com.epn.trappi.gui.ecommerce.Ecommerce.FachadaEcommerce;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Pago;
 import static com.epn.trappi.gui.ecommerce.Interfaces.Comprar.carrito;
@@ -261,8 +262,15 @@ public class TarjetaUsuario extends javax.swing.JFrame {
               Comprar.carrito.factura.setNumeroFactura(id);
               ListaCarrito lista1=new ListaCarrito();
               lista1.registrar_detallecompra(Comprar.carrito, Main.cliente.Nombre);
-              carrito.vaciarCarrito();             
+               
+              FachadaEcommerce datosEnviar = new FachadaEcommerce();
+                 
+                datosEnviar.enviarDatos(carrito.factura.nFactura, carrito.factura.calcularTotal(), Comprar.carrito.factura.Detalle);
+               
+                
                 JOptionPane.showMessageDialog(rootPane,"Compra realizada con exito");
+                
+                carrito.vaciarCarrito(); 
                 this.setVisible(false);
         }
              else{

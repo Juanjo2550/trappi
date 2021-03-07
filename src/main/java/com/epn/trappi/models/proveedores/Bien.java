@@ -10,11 +10,11 @@ package com.epn.trappi.models.proveedores;
  * @author franc
  */
 abstract public class Bien {
-    protected String nombre;
-    protected double precio;
+    public String nombre;
+    public double precio;
     protected Proveedor proveeedor;
-    protected int cantidad ;
-    protected String marca;
+    public int cantidad ;
+    public String marca;
 
     public String getNombre() {
         return nombre;
