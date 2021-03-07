@@ -1,4 +1,3 @@
-
 package com.epn.trappi.gui.ecommerce.Interfaces;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
@@ -8,7 +7,10 @@ import com.epn.trappi.gui.ecommerce.Ecommerce.CarritoDeCompras;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Factura;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.FacturaMostrar.FacturaFis;
+import com.epn.trappi.models.proveedores.Bien;
+import com.epn.trappi.models.proveedores.Inventario;
 import com.epn.trappi.models.proveedores.Producto;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,97 +23,109 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.YES_OPTION;
 import javax.swing.table.DefaultTableModel;
 
-
 public class Comprar extends javax.swing.JFrame {
+
     DataBaseConnection dbInstance = DataBaseConnection.getInstance();
     Connection connection = dbInstance.getConnection();
-    public static CarritoDeCompras carrito=new CarritoDeCompras();
+    public static CarritoDeCompras carrito = new CarritoDeCompras();
     String id1;
     String nombre1;
     String marca1;
     Double precio1;
     int cantidad1;
-    
-    
+
     public Comprar() {
         initComponents();
         this.setSize(1300, 700);
         this.setLocationRelativeTo(null);
         llenartabla();
-        
+
         jButtonagregar.setVisible(false);
         jButtoneliminar.setVisible(false);
         jt.setText(Main.cliente.Nombre);
         jt.setEditable(false);
         TextPrompt buscar = new TextPrompt("Busqueda", jTextFieldBuscar);
     }
-    
-    
-    public void llenartabla(){
-        
+
+    public void llenartabla() {
+
         //Controlador.inventario.
-        //Inventario productos = new Inventario();
-        //productos.getListaDeBienes().getListaBienes();
-       
-       try{
+        Inventario inventario;
+        try {
+            inventario = new Inventario();
+            ArrayList<Bien> bienes = inventario.getListaDeBienes().getListaBienes();
+            DefaultTableModel productos = (DefaultTableModel) jTable1.getModel();
+            String[] aux = new String[4];
+            bienes.forEach(bien -> {
+                if (bien.getCantidad() >= 1) {
+                    aux[0] = bien.getNombre();
+                    aux[1] = bien.getMarca();
+                    aux[2] = String.valueOf(bien.getPrecio());
+                    aux[3] = String.valueOf(bien.getCantidad());
+                    productos.addRow(aux);
+                }
+
+            });
+            jTable1.setModel(productos);
+        } catch (IOException ex) {
+            Logger.getLogger(Comprar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        /*try {
             DefaultTableModel productos = (DefaultTableModel) jTable1.getModel();
 
-            String[] aux=new String[4];
+            String[] aux = new String[4];
             Statement statement = connection.createStatement();
-            String sql = "select NOMBREBIEN,MARCA,PRECIOBIEN,CANTIDADINVENTARIO from BIEN B, INVENTARIO I"+
-                    " where B.IDENTIFICADORBIEN2=I.IDENTIFICADORBIEN2";
+            String sql = "select NOMBREBIEN,MARCA,PRECIOBIEN,CANTIDADINVENTARIO from BIEN B, INVENTARIO I"
+                    + " where B.IDENTIFICADORBIEN2=I.IDENTIFICADORBIEN2 AND CANTIDADINVENTARIO>=1";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
-                 
 
-                aux[0]=resultSet.getString("NOMBREBIEN");
-                aux[1]=resultSet.getString("MARCA");
-                aux[2]=resultSet.getString("PRECIOBIEN");
-                aux[3]=resultSet.getString("CANTIDADINVENTARIO");;
+                aux[0] = resultSet.getString("NOMBREBIEN");
+                aux[1] = resultSet.getString("MARCA");
+                aux[2] = resultSet.getString("PRECIOBIEN");
+                aux[3] = resultSet.getString("CANTIDADINVENTARIO");;
                 productos.addRow(aux);
 //                Articulo art=new Articulo(aux[0], aux[1],Double.parseDouble(aux[3]) ,Integer.parseInt(aux[4]), aux[2]);
 //                Main.stock.listaarticulos.add(art);
             }
             jTable1.setModel(productos);
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }
-    
-    public void obtenerproductodestock()
-    {   
+
+    public void obtenerproductodestock() {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-       
-        nombre1=((String)modelo.getValueAt(jTable1.getSelectedRow(),0));
-        marca1=((String)modelo.getValueAt(jTable1.getSelectedRow(),1));
-        precio1=Double.parseDouble((String)modelo.getValueAt(jTable1.getSelectedRow(),2));
-        cantidad1=Integer.parseInt((String)modelo.getValueAt(jTable1.getSelectedRow(),3));
+
+        nombre1 = ((String) modelo.getValueAt(jTable1.getSelectedRow(), 0));
+        marca1 = ((String) modelo.getValueAt(jTable1.getSelectedRow(), 1));
+        precio1 = Double.parseDouble((String) modelo.getValueAt(jTable1.getSelectedRow(), 2));
+        cantidad1 = Integer.parseInt((String) modelo.getValueAt(jTable1.getSelectedRow(), 3));
     }
-    
-    public String buscarTarjeta(String tarjeta){
+
+    public String buscarTarjeta(String tarjeta) {
         String tipo = "";
         try {
-            
-                             
+
             Statement statement = connection.createStatement();
-            String sql = "select TIPO from TARJETAS T"+
-                         "where T.IDTARJETAS='"+tarjeta+"'";
+            String sql = "select TIPO from TARJETAS T"
+                    + "where T.IDTARJETAS='" + tarjeta + "'";
             ResultSet resultSet = statement.executeQuery(sql);
-            
+
             while (resultSet.next()) {
-                 tipo= resultSet.getString("TIPO");
+                tipo = resultSet.getString("TIPO");
             }
-            
+
             return tipo;
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             return tipo;
         }
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -380,7 +394,7 @@ public class Comprar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-    
+
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -388,94 +402,92 @@ public class Comprar extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    CuentaCliente cuenta=new CuentaCliente();
-    cuenta.setVisible(true);
-    this.setVisible(false);
+        CuentaCliente cuenta = new CuentaCliente();
+        cuenta.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    Main.cliente.salirSistema();
-    this.setVisible(false);
+        Main.cliente.salirSistema();
+        this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-    Metododepago mp=new Metododepago();
-    
-    mp.llenardatos();
-    mp.llenartablat();
-    mp.setVisible(true);
-    this.setVisible(false);
+        Metododepago mp = new Metododepago();
+
+        mp.llenardatos();
+        mp.llenartablat();
+        mp.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButtonagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonagregarActionPerformed
-    obtenerproductodestock();
-    int cantidad=carrito.cantidadCompraProducto();
-    carrito.añadirProducto(nombre1,precio1,cantidad,marca1);
-    DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
-    String[] aux=new String[3];
-    aux[0]=nombre1;
-    aux[1]=String.valueOf(precio1);
-    aux[2]=Integer.toString(cantidad);
-    modelo.addRow(aux);
-    jTable2.setModel(modelo);
+        obtenerproductodestock();
+        int cantidad = carrito.cantidadCompraProducto();
+        carrito.añadirProducto(nombre1, precio1, cantidad, marca1);
+        DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
+        String[] aux = new String[3];
+        aux[0] = nombre1;
+        aux[1] = String.valueOf(precio1);
+        aux[2] = Integer.toString(cantidad);
+        modelo.addRow(aux);
+        jTable2.setModel(modelo);
     }//GEN-LAST:event_jButtonagregarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-    jButtonagregar.setVisible(true);
+        jButtonagregar.setVisible(true);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-    String salida ="";
-    
-        if(carrito.confirmarContenido()==true){
-        carrito.factura= new Factura(carrito.Productos);
-        String nombre = Main.cliente.Nombre;
-        String cedula=Main.cliente.Cedula;
-        ArrayList<Producto> detalle = carrito.factura.Detalle;
-        //ArrayList<Articulo> detalle = carrito.factura.Detalle;
-        Double subtotal = carrito.factura.calcularSubTotal();
-        Double iva=carrito.factura.calcularImpuestos();
-        Double total=  carrito.factura.calcularTotal();  
-        FacturaFis factu = new FacturaFis();
-        Date fecha = new Date();
-        
-        String date = fecha.getDay()+"/"+fecha.getMonth()+"/"+fecha.getYear();
-        factu.cargarDatos(000,nombre,cedula,date,detalle,subtotal,iva,total);    
-        factu.setVisible(true);
-        
-          if(JOptionPane.showConfirmDialog(null, "¿Desea pagar?","El proceso de pago empezará",JOptionPane.YES_NO_OPTION)==YES_OPTION){
-             TarjetaUsuario tarusu=new TarjetaUsuario();
-             tarusu.setVisible(true);
+        String salida = "";
+
+        if (carrito.confirmarContenido() == true) {
+            carrito.factura = new Factura(carrito.Productos);
+            String nombre = Main.cliente.Nombre;
+            String cedula = Main.cliente.Cedula;
+            ArrayList<Producto> detalle = carrito.factura.Detalle;
+            //ArrayList<Articulo> detalle = carrito.factura.Detalle;
+            Double subtotal = carrito.factura.calcularSubTotal();
+            Double iva = carrito.factura.calcularImpuestos();
+            Double total = carrito.factura.calcularTotal();
+            FacturaFis factu = new FacturaFis();
+            Date fecha = new Date();
+
+            String date = fecha.getDay() + "/" + fecha.getMonth() + "/" + fecha.getYear();
+            factu.cargarDatos(000, nombre, cedula, date, detalle, subtotal, iva, total);
+            factu.setVisible(true);
+
+            if (JOptionPane.showConfirmDialog(null, "¿Desea pagar?", "El proceso de pago empezará", JOptionPane.YES_NO_OPTION) == YES_OPTION) {
+                TarjetaUsuario tarusu = new TarjetaUsuario();
+                tarusu.setVisible(true);
                 factu.setVisible(false);
-                this.setVisible(false);   
-          }
-    }
-    
-    
-   
+                this.setVisible(false);
+            }
+        }
+
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-    carrito.vaciarCarrito();
-    DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
-    int filas = modelo.getRowCount();
-    for (int i = 0; i < filas; i++) {
-     modelo.removeRow(0);
-     }
+        carrito.vaciarCarrito();
+        DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
+        int filas = modelo.getRowCount();
+        for (int i = 0; i < filas; i++) {
+            modelo.removeRow(0);
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButtoneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoneliminarActionPerformed
-    DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
-    String nombre=((String)modelo.getValueAt(jTable2.getSelectedRow(),0));
-     carrito.borrarProducto(nombre);
-     modelo.removeRow(jTable2.getSelectedRow());
+        DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
+        String nombre = ((String) modelo.getValueAt(jTable2.getSelectedRow(), 0));
+        carrito.borrarProducto(nombre);
+        modelo.removeRow(jTable2.getSelectedRow());
     }//GEN-LAST:event_jButtoneliminarActionPerformed
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-    jButtoneliminar.setVisible(true);
+        jButtoneliminar.setVisible(true);
     }//GEN-LAST:event_jTable2MouseClicked
 
-   
     /**
      * @param args the command line arguments
      */
