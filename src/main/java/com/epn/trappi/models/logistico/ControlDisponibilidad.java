@@ -39,7 +39,7 @@ public final class ControlDisponibilidad implements EventListener {
     }
     private ControlDisponibilidad(){  
         lv = new ListaVehiculos();
-        le = new ArrayList<>();
+        le = new ArrayList<Empleado>();
         //lc = new ArrayList<>();
         //inicializarListas();
         /*
