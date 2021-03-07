@@ -862,7 +862,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Seleccione el tipo de empleado");
             }
             if (nuevoEmpleado != null){
-                //Se procede a registrar el contrato
+                //Se procede a registrarContrato el contrato
                 Fecha fechaInicio = new Fecha(Integer.parseInt(jTextContratoFechaInicioDia.getText()),
                         Integer.parseInt(jTextContratoFechaInicioMes.getText()),
                         Integer.parseInt(jTextContratoFechaInicioAno.getText()));
@@ -870,7 +870,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
                         Integer.parseInt(jTextContratoFechaFinMes.getText()),
                         Integer.parseInt(jTextContratoFechaFinAno.getText()));
                 Contrato contrato = new Contrato();
-                contrato.registrar(fechaInicio, fechaFin, tipoContrato, valorSueldo, cedula);               
+                contrato.registrarContrato(fechaInicio, fechaFin, tipoContrato, valorSueldo, cedula);               
                 JOptionPane.showMessageDialog(null, "El Empleado se contrató con éxito");
             }
                 

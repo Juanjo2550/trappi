@@ -1,4 +1,4 @@
-package com.epn.trappi.models.rrhh.contratacion;
+ package com.epn.trappi.models.rrhh.contratacion;
 
 /**
  *

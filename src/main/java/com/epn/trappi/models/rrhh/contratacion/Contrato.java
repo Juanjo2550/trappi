@@ -1,7 +1,9 @@
 package com.epn.trappi.models.rrhh.contratacion;
 
 import com.epn.trappi.models.rrhh.Fecha;
+import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import com.epn.trappi.models.rrhh.listas.ListaContratos;
+import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,13 +31,18 @@ public class Contrato {
         
     }
     
-    public void registrar(Fecha fechaInicio, Fecha fechaFin, String tipoContrato, String valorSueldo, String cedula) {
+    public void registrarContrato(Fecha fechaInicio, Fecha fechaFin, String tipoContrato, String valorSueldo, String cedula) {
         
         ListaContratos listaContratos = new ListaContratos();
         int idContrato = listaContratos.obtenerTodos().length + 1;
         Contrato newContrato = new Contrato(String.valueOf(idContrato), fechaInicio, fechaFin, tipoContrato, valorSueldo  );
         listaContratos.agregar(newContrato, cedula);
 
+    }
+    
+    public void registrarEmpleado(Empleado empleado){
+        ListaEmpleados listEmp = new ListaEmpleados();
+        listEmp.agregar(empleado);
     }
 
     public Fecha getFechaInicio() {
