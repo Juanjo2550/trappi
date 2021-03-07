@@ -35,7 +35,7 @@ public class  Pago {
         this.solicitudPago=new SolicitudDePago();
         for(SolicitudDePago solicitud: this.solicitudPago.SolicitarPago()){
             Pago pago = new Pago(solicitud.getCuentaBancaria(), solicitud.getMontoTotal() );
-            pago.realizarPago(pago);
+            solicitud.setEstado(pago.realizarPago(pago));
         }
     }
     private void registrarPago(Pago pago){
