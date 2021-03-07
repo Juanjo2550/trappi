@@ -265,7 +265,7 @@ public class TarjetaUsuario extends javax.swing.JFrame {
                
               FachadaEcommerce datosEnviar = new FachadaEcommerce();
                  
-                datosEnviar.enviarDatos(carrito.factura.nFactura, carrito.factura.calcularTotal(), Comprar.carrito.factura.Detalle);
+                datosEnviar.enviarDatos(carrito.factura.nFactura, carrito.factura.calcularTotal(), Comprar.carrito.factura.Detalle,Main.cliente.Direccion);
                
                 
                 JOptionPane.showMessageDialog(rootPane,"Compra realizada con exito");
