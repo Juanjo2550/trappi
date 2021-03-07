@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Alexander
+ * @author Rommel Alexander
  */
 public class Usos_ViewHandler {
     //ATRIBUTOS

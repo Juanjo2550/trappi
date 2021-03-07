@@ -23,7 +23,7 @@ import javax.swing.border.Border;
  */
 public class Logistico_GUI extends javax.swing.JFrame {
     ControlDisponibilidad mapaDisponibilidad = new ControlDisponibilidad();
-    EntregasActivas entregasActivas = new EntregasActivas();
+    panelEntregasActivas entregasActivas = new panelEntregasActivas();
     FichasTecnicas fichasTecnicas = new FichasTecnicas();
     ListasVehiculos listasVehiculos = new ListasVehiculos();
     RegistroMantenimiento registroMantenimiento = new RegistroMantenimiento();
@@ -95,12 +95,32 @@ public class Logistico_GUI extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/epn/trappi/images/logistico/Logística.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.JLabel() {
+            public javax.swing.Icon getIcon() {
+                try {
+                    return new javax.swing.ImageIcon(
+                        new java.net.URL("https://i.ibb.co/2yWzy05/Log-stica.png")
+                    );
+                } catch (java.net.MalformedURLException e) {
+                }
+                return null;
+            }
+        }.getIcon());
 
         btnVolver.setBackground(new java.awt.Color(255, 210, 28));
         btnVolver.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         btnVolver.setForeground(new java.awt.Color(255, 255, 255));
-        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/epn/trappi/images/logistico/left-arrow (1).png"))); // NOI18N
+        btnVolver.setIcon(new javax.swing.JLabel() {
+            public javax.swing.Icon getIcon() {
+                try {
+                    return new javax.swing.ImageIcon(
+                        new java.net.URL("https://i.ibb.co/TTsqKZW/left-arrow-1.png")
+                    );
+                } catch (java.net.MalformedURLException e) {
+                }
+                return null;
+            }
+        }.getIcon());
         btnVolver.setText("   Regresar");
         btnVolver.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnVolver.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -375,7 +395,17 @@ public class Logistico_GUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/epn/trappi/images/logistico/icon.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.JLabel() {
+            public javax.swing.Icon getIcon() {
+                try {
+                    return new javax.swing.ImageIcon(
+                        new java.net.URL("https://i.ibb.co/Y31bVPv/icon.png")
+                    );
+                } catch (java.net.MalformedURLException e) {
+                }
+                return null;
+            }
+        }.getIcon());
         jLabel3.setText("jLabel3");
 
         jButton1.setBackground(new java.awt.Color(255, 210, 28));
@@ -607,20 +637,15 @@ public class Logistico_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMantenimientosActionPerformed
 
     private void botonEntregasActivasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEntregasActivasActionPerformed
-        try {
-            //Llamamos al panel EntregasActivas
-            //mapaDisponibilidad.setVisible(false);
-            //entregasActivas.setVisible(true);
+
             ocultarPaneles(this.entregasActivas);
-            this.entregasActivas.actualizarContadores();
             entregasActivas.setSize(1048, 813);
             jPEntregasActivasGUI.add(entregasActivas);
             //entregasActivas.setLocation(1048, 660);
             jPEntregasActivasGUI.revalidate();   
             jPEntregasActivasGUI.repaint();
-        } catch (SQLException ex) {
-            Logger.getLogger(Logistico_GUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        
     }//GEN-LAST:event_botonEntregasActivasActionPerformed
     //MOUSE EVENTS PARA LOS BOTONES
     private void moveMouseOnVolver(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moveMouseOnVolver

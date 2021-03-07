@@ -169,7 +169,7 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/epn/trappi/images/logistico/Log&#xed;stica.png"/>
+              <Image iconType="1" name="https://i.ibb.co/2yWzy05/Log-stica.png"/>
             </Property>
           </Properties>
         </Component>
@@ -185,7 +185,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/epn/trappi/images/logistico/left-arrow (1).png"/>
+              <Image iconType="1" name="https://i.ibb.co/TTsqKZW/left-arrow-1.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="   Regresar"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -540,7 +540,7 @@
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/epn/trappi/images/logistico/icon.png"/>
+              <Image iconType="1" name="https://i.ibb.co/Y31bVPv/icon.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="jLabel3"/>
           </Properties>
