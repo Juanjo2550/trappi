@@ -23,6 +23,7 @@ import static javax.swing.JOptionPane.PLAIN_MESSAGE;
 public class PanelControlDisponibilidad extends javax.swing.JPanel {
     
     
+    
     ControlDisponibilidad controlDisponibilidad;
     ControlAsistencias controlAsistencias;
     ListaVehiculos lista_vehiculos;

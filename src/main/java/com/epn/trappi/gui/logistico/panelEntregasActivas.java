@@ -13,6 +13,7 @@ import java.awt.Dimension;
  */
 public class PanelEntregasActivas extends javax.swing.JPanel {
 
+    
     int bandera=1;
     public PanelEntregasActivas() {
         initComponents();
