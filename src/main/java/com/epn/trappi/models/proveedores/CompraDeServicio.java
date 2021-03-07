@@ -20,15 +20,13 @@ public class CompraDeServicio extends Compra{
         super(listaBienesAComprar, estado);
     }
     
-    
-    
     @Override
     public void comprar(){
-        //if(solicitarAutorizacion(listaBienesAComprar.getListaBienes().get(0).getProveeedor(),montoTotal)){
+        if(solicitarAutorizacion(listaBienesAComprar.getListaBienes().get(0).getProveeedor().getCuenta(),montoTotal)){
             for (Bien cantidadBien : listaBienesAComprar.getListaBienes()){
                 setMontoTotal();
                 registrarCompra();
             }
-        //}
+        }
     }
 }
