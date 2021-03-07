@@ -19,13 +19,9 @@ public class Factura {
     //public ArrayList<Bien> Detalle;
     public ArrayList <Articulo> Detalle;
     
-   public String cedulaCliente;
-   public String nombreCliente;
-   public int nFactura;
-   
-   String RUC;
-   public Pago pago;
-   public FachadaEcommerce fachada;
+    public int nFactura;
+    String RUC;
+    public Pago pago;
     
     public Factura(ArrayList <Articulo>  detalle){
         this.Detalle=detalle;
@@ -63,7 +59,7 @@ public ArrayList<Articulo> mostrar(){
     return mostrarDetalle;
 }
 
-    public void setId(int numeroFactura) {
+    public void setNumeroFactura(int numeroFactura) {
         this.nFactura = numeroFactura;
     }
 

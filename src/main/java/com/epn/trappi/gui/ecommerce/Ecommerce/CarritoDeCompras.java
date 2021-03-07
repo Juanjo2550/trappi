@@ -18,15 +18,14 @@ public class CarritoDeCompras {
     
 
     //Asociacion con Inventario
-    //public Inventario
     //public ArrayList<Bien> Productos= Invetario.getListaDeBienes().getListaBienes();
     public ArrayList<Articulo> Productos = new ArrayList<Articulo>();
     public Factura factura;
     
-      public void añadirProducto(String id, String nombre,Double precio,int cantidad,String marca)
+      public void añadirProducto( String nombre,Double precio,int cantidad,String marca)
     {
+        //Bien producto = new Bien();
         Articulo producto = new Articulo();
-        producto.id=id;
         producto.nombre=nombre;
         producto.precio=precio;
         producto.cantidad=cantidad;
@@ -66,8 +65,7 @@ public class CarritoDeCompras {
        
         boolean bandera = false;
         if(JOptionPane.showConfirmDialog(null, "¿Está seguro que desea procesar su compra?","El proceso de pago empezará",JOptionPane.YES_NO_OPTION)==YES_OPTION){
-           bandera=true;
-           
+           bandera=true;  
        }
         return bandera;
     }

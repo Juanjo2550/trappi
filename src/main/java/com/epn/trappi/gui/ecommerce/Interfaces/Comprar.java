@@ -51,18 +51,18 @@ public class Comprar extends javax.swing.JFrame {
        try{
             DefaultTableModel productos = (DefaultTableModel) jTable1.getModel();
             Articulo articulo;
-            String[] aux=new String[5];
+            String[] aux=new String[4];
             Statement statement = connection.createStatement();
-            String sql = "select B.IDENTIFICADORBIEN2,NOMBREBIEN,MARCA,PRECIOBIEN,CANTIDADINVENTARIO from BIEN B, INVENTARIO I"+
+            String sql = "select NOMBREBIEN,MARCA,PRECIOBIEN,CANTIDADINVENTARIO from BIEN B, INVENTARIO I"+
                     " where B.IDENTIFICADORBIEN2=I.IDENTIFICADORBIEN2";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                  
-                aux[0]=resultSet.getString("IDENTIFICADORBIEN2");
-                aux[1]=resultSet.getString("NOMBREBIEN");
-                aux[2]=resultSet.getString("MARCA");
-                aux[3]=resultSet.getString("PRECIOBIEN");
-                aux[4]=resultSet.getString("CANTIDADINVENTARIO");;
+
+                aux[0]=resultSet.getString("NOMBREBIEN");
+                aux[1]=resultSet.getString("MARCA");
+                aux[2]=resultSet.getString("PRECIOBIEN");
+                aux[3]=resultSet.getString("CANTIDADINVENTARIO");;
                 productos.addRow(aux);
 //                Articulo art=new Articulo(aux[0], aux[1],Double.parseDouble(aux[3]) ,Integer.parseInt(aux[4]), aux[2]);
 //                Main.stock.listaarticulos.add(art);
@@ -77,11 +77,11 @@ public class Comprar extends javax.swing.JFrame {
     public void obtenerproductodestock()
     {   
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        id1=((String)modelo.getValueAt(jTable1.getSelectedRow(),0));
-        nombre1=((String)modelo.getValueAt(jTable1.getSelectedRow(),1));
-        marca1=((String)modelo.getValueAt(jTable1.getSelectedRow(),2));
-        precio1=Double.parseDouble((String)modelo.getValueAt(jTable1.getSelectedRow(),3));
-        cantidad1=Integer.parseInt((String)modelo.getValueAt(jTable1.getSelectedRow(),4));
+       
+        nombre1=((String)modelo.getValueAt(jTable1.getSelectedRow(),0));
+        marca1=((String)modelo.getValueAt(jTable1.getSelectedRow(),1));
+        precio1=Double.parseDouble((String)modelo.getValueAt(jTable1.getSelectedRow(),2));
+        cantidad1=Integer.parseInt((String)modelo.getValueAt(jTable1.getSelectedRow(),3));
     }
     
     public String buscarTarjeta(String tarjeta){
@@ -221,7 +221,7 @@ public class Comprar extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nombre", "Marca", "Precio", "Cantidad"
+                "Nombre", "Marca", "Precio", "Cantidad"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -405,7 +405,7 @@ public class Comprar extends javax.swing.JFrame {
     private void jButtonagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonagregarActionPerformed
     obtenerproductodestock();
     int cantidad=carrito.cantidadCompraProducto();
-    carrito.añadirProducto(id1,nombre1,precio1,cantidad,marca1);
+    carrito.añadirProducto(nombre1,precio1,cantidad,marca1);
     DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
     String[] aux=new String[3];
     aux[0]=nombre1;

@@ -258,7 +258,7 @@ public class TarjetaUsuario extends javax.swing.JFrame {
         if(pago.validarPago(Main.tarcre,Main.tardeb,Main.tip,carrito.factura.calcularTotal(),cuenta)==true){
               ListaFacturas lista=new ListaFacturas();
               int id=lista.generarfacturaDatabase(Main.cliente.Nombre,carrito.factura.calcularSubTotal(),carrito.factura.calcularImpuestos(),carrito.factura.calcularTotal());
-              Comprar.carrito.factura.setId(id);
+              Comprar.carrito.factura.setNumeroFactura(id);
               ListaCarrito lista1=new ListaCarrito();
               lista1.registrar_detallecompra(Comprar.carrito, Main.cliente.Nombre);
               carrito.vaciarCarrito();             

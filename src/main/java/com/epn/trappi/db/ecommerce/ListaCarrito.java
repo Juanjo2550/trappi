@@ -20,14 +20,41 @@ public class ListaCarrito {
     DataBaseConnection dbInstance = DataBaseConnection.getInstance();
     Connection connection = dbInstance.getConnection();
     
+    
+    public String obtenerIdProducto(String nombre) 
+    {
+            String idProducto="";
+            String sql = "SELECT IDENTIFICADORBIEN2 FROM BIEN WHERE NOMBREBIEN='"+nombre+"'";  
+            
+        try {
+           Statement prepSelect=connection.createStatement();
+           ResultSet resultSet = prepSelect.executeQuery(sql);
+            
+             while(resultSet.next())
+             {
+                idProducto=resultSet.getString("IDENTIFICADORBIEN2"); 
+             }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ListaCarrito.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          return idProducto;
+    
+    }
+    
+      
+    
+    
     public void registrar_detallecompra (CarritoDeCompras carro, String nombrecliente){
         int aux=iddetallefactura();
         Articulo articulo;
+         String idProducto="";
         for (int i = 0; i <carro.Productos.size(); i++) {
             articulo=carro.Productos.get(i);
-            
+            String nombre = carro.Productos.get(i).nombre;
+            idProducto=obtenerIdProducto(nombre);
     try{
-            String sql = "exec detallefac_insert "+ aux+","+carro.factura.nFactura+",'"+nombrecliente+"',"+Integer.parseInt(articulo.id)+","+articulo.precio+","+articulo.precio; 
+            String sql = "exec detallefac_insert "+ aux+","+carro.factura.nFactura+",'"+nombrecliente+"',"+Integer.parseInt(idProducto)+","+articulo.precio+","+articulo.precio; 
            
             PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
             prepsInsertProduct.execute();

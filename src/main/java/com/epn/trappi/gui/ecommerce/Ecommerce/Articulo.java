@@ -5,22 +5,18 @@
  */
 package com.epn.trappi.gui.ecommerce.Ecommerce;
 
-import java.util.ArrayList;
-
-
 /**
  *
- * @author Bryan
+ * @author Grupo D
  */
 public class Articulo {
-        public String id;
         public String nombre;
         public Double precio;
         public int cantidad;
         public String marca;
 
     public Articulo(String id, String nombre, Double precio, int cantidad, String marca) {
-        this.id = id;
+
         this.nombre = nombre;
         this.precio = precio;
         this.cantidad = cantidad;
