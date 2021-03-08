@@ -33,6 +33,7 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
     String cuenta;
     String total;
     String estado;
+    int seleccion;
 
     /**
      * Creates new form Ejemplo_GUI
@@ -327,6 +328,17 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 
+                Pago pago = new Pago(cuenta, Double.parseDouble(total));
+        System.out.println(cuenta);
+        System.out.println(total);
+        String cambioEstado = pago.realizarPago(pago);
+        String query = "UPDATE ROLPAGOS SET ESTADOROL=" +"'"+ cambioEstado +"'"+ " WHERE ID_ROL=" +"'"+this.tablaEmpleados.getValueAt(seleccion, 0) +"';";
+        try {
+            PreparedStatement statement = this.connection.prepareStatement(query);
+            statement.execute();
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
         //SolicitudDePago  solicitud = new SolicitudDePago(estado,Double.parseDouble(total), cuenta);
         try {
 
@@ -338,22 +350,12 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
 
     private void tablaEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEmpleadosMouseClicked
 
-        int seleccion = this.tablaEmpleados.rowAtPoint(evt.getPoint());
+        seleccion = this.tablaEmpleados.rowAtPoint(evt.getPoint());
         cuenta = String.valueOf(tablaEmpleados.getValueAt(seleccion, 3));
         total = String.valueOf(tablaEmpleados.getValueAt(seleccion, 5));
         estado = String.valueOf(tablaEmpleados.getValueAt(seleccion, 7));
         this.jButton6.setEnabled(true);
-        Pago pago = new Pago(cuenta, Double.parseDouble(total));
-        System.out.println(cuenta);
-        System.out.println(total);
-        String cambioEstado = pago.realizarPago(pago);
-        String query = "UPDATE ROLPAGOS SET ESTADOROL=" +"'"+ cambioEstado +"'"+ " WHERE ID_ROL=" +"'"+this.tablaEmpleados.getValueAt(seleccion, 0) +"';";
-        try {
-            PreparedStatement statement = this.connection.prepareStatement(query);
-            statement.execute();
-        } catch (SQLException e) {
-            System.out.println(e.toString());
-        }
+
 
 
     }//GEN-LAST:event_tablaEmpleadosMouseClicked
