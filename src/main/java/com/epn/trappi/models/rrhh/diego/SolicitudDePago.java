@@ -53,7 +53,7 @@ public class SolicitudDePago {
     
     
 
-
+    
     public Empleado getEmpleadoAPagar() {
         return empleadoAPagar;
     }
