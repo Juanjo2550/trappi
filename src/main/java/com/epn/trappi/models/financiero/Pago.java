@@ -15,7 +15,6 @@ public class  Pago {
     String nroCuenta;
     double monto;
     Presupuesto presupuesto;
-    SolicitudDePago solicitudPago;
     public Pago(Fecha fechadePago, String nroCuenta, double monto) {
         this.fechadePago = fechadePago;
         this.nroCuenta = nroCuenta;
@@ -32,13 +31,7 @@ public class  Pago {
     }
     
     
-    private void verificarSolicitudesdePago() throws Exception{
-        this.solicitudPago=new SolicitudDePago();
-        for(SolicitudDePago solicitud: this.solicitudPago.SolicitarPago()){
-            Pago pago = new Pago(solicitud.getCuentaBancaria(), solicitud.getMontoTotal() );
-            solicitud.setEstado(pago.realizarPago(pago));
-        }
-    }
+    
     private void registrarPago(Pago pago){
 
     DataBaseConnection dbInstance = DataBaseConnection.getInstance();
