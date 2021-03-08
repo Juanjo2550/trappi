@@ -9,8 +9,11 @@ import com.epn.trappi.db.proveedores.ProveedoresDb;
 import com.epn.trappi.models.proveedores.ListaProveedores;
 import com.epn.trappi.models.proveedores.Producto;
 import com.epn.trappi.models.proveedores.Proveedor;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -275,12 +278,9 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
                 if (Double.parseDouble(precio) >= 0) {
                     Proveedor proveedor;
                     proveedor = db.obtenerProveedorRuc((String) cmbProveedores.getSelectedItem());
-                    Producto productoActualizado = new Producto(nombre, Double.parseDouble(precio), proveedor);
-                    productoActualizado.actualizar();
-                    //db.actualizarBien(db.getIdBien(nombre), nombre, Double.parseDouble(precio), proveedor.getRuc());
-
+                    db.actualizarBien(db.getIdBien(nombre), nombre, Double.parseDouble(precio), proveedor.getRuc());
                     JOptionPane.showMessageDialog(null, "Producto Actualizado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-
+                    
                     seleccionados = (ArrayList) db.getProductos();
                     cargarProductos();
 
