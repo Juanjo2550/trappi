@@ -41,7 +41,7 @@ public class MapaGeografico {
         String origen=ruta.origen.getFcids();
         String destino=ruta.destino.getFcids();
         String CLAVE = "AIzaSyCHuP7hcXW03RWo89ukuZEb3QNKSt_hwwQ";
-        String IFrame = "<iframe width=\"800\" height=\"650\"  style=\"border:0\"  allowfullscreen src=\"https://www.google.com/maps/embed/v1/directions?origin=place_id:"+origen+"&destination=place_id:"+destino+"&key="+CLAVE+"\"></iframe>";
+        String IFrame = "<iframe width=\"965\" height=\"700\"  style=\"border:0\"  allowfullscreen src=\"https://www.google.com/maps/embed/v1/directions?origin=place_id:"+origen+"&destination=place_id:"+destino+"&key="+CLAVE+"\"></iframe>";
         try {
             PrintWriter out = new PrintWriter("ruta.html");
             out.println(IFrame);

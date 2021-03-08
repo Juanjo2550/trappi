@@ -14,6 +14,7 @@ import java.awt.Insets;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
@@ -645,6 +646,12 @@ public class Logistico_GUI extends javax.swing.JFrame {
             //entregasActivas.setLocation(1048, 660);
             jPEntregasActivasGUI.revalidate();   
             jPEntregasActivasGUI.repaint();
+            /*
+        try {
+            entregasActivas.setContadores();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"No esta disponible la base de datos");
+        }*/
         
         
     }//GEN-LAST:event_botonEntregasActivasActionPerformed

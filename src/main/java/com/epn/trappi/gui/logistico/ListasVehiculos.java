@@ -9,9 +9,12 @@ import com.epn.trappi.controladores.logistico.storedProcedures;
 import com.epn.trappi.db.connection.*;
 import com.epn.trappi.gui.logistico.Logistico_GUI.RoundedBorder;
 import com.epn.trappi.models.logistico.*;
+import com.epn.trappi.models.logistico.servicios.Consultable;
 import com.epn.trappi.models.logistico.servicios.ServicioDb;
+import com.epn.trappi.models.logistico.servicios.ServicioDbConductor;
 import com.epn.trappi.models.logistico.servicios.ServicioDbEntrega;
 import com.epn.trappi.models.logistico.servicios.ServicioDbVehiculo;
+import com.epn.trappi.models.logistico.servicios.Unible;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JOptionPane;
@@ -26,11 +29,13 @@ import java.util.logging.Logger;
  */
 public class ListasVehiculos extends javax.swing.JPanel {
     ServicioDb servicioDB;
+    Consultable consultable;
+    Unible unible;
     ListaVehiculos vehiculos;
-    Usos_ViewHandler handler;
+    Usos_ViewHandler historial;
     public ListasVehiculos() {
         initComponents();
-        handler = new Usos_ViewHandler();
+        historial = new Usos_ViewHandler();
         vehiculos = new ListaVehiculos();
         servicioDB = new ServicioDbVehiculo();
         tablaListaVehiculos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -48,16 +53,17 @@ public class ListasVehiculos extends javax.swing.JPanel {
         this.btnBuscarVehiculo.setBorder(new RoundedBorder(24));
     }
     private void llenarHistorialDeUsos(java.awt.event.MouseEvent evt) throws SQLException, Exception {                                             
-        handler.reiniciarEstado();
+
+        historial.reiniciarEstado();
         int fila = tablaListaVehiculos.getSelectedRow();
         String matricula = (String)tablaListaVehiculos.getValueAt(fila, 1); //OBTENEMOS EL VALOR DE LA MATRICULA
-        //Obtenemos los registros de uso de ese vehiculo
+        
+        //Obtenemos las entregas que se hayan hecho con ese vehiculo
         servicioDB = new ServicioDbEntrega();
         ArrayList<Entrega> entregas_por_vehiculo = servicioDB.obtenerElementosPorFiltro(ServicioDbEntrega.MATRICULA, matricula).getDatos();
-        ServicioDbEntrega entrega=new ServicioDbEntrega();
-        //entregas_por_vehiculo = entrega.añadirDirecciones(entregas_por_vehiculo);
-        //handler.llenar(entregas_por_vehiculo);
-        //this.panelHistorial.add(handler.obtenerListView());
+        //Llenamos el historial con estos datos
+        historial.llenar(entregas_por_vehiculo);
+        this.panelHistorial.add(historial.obtenerListView());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -176,7 +182,7 @@ public class ListasVehiculos extends javax.swing.JPanel {
 
         btnEntregasDia.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         btnEntregasDia.setForeground(new java.awt.Color(61, 57, 57));
-        btnEntregasDia.setText("Mostrar entregas del día actual");
+        btnEntregasDia.setText("PENDIENTE");
         jPanel2.add(btnEntregasDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -186,7 +192,7 @@ public class ListasVehiculos extends javax.swing.JPanel {
 
         campoRegistros.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
         campoRegistros.setForeground(new java.awt.Color(153, 153, 153));
-        campoRegistros.setText("0");
+        campoRegistros.setText("20");
         campoRegistros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 campoRegistrosMouseClicked(evt);
@@ -197,10 +203,14 @@ public class ListasVehiculos extends javax.swing.JPanel {
         });
         jPanel2.add(campoRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 110, 210, 30));
 
-        tablaListaVehiculos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tablaListaVehiculos.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         tablaListaVehiculos.setForeground(new java.awt.Color(61, 57, 57));
         tablaListaVehiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -219,11 +229,12 @@ public class ListasVehiculos extends javax.swing.JPanel {
             }
         });
         tablaListaVehiculos.setFocusable(false);
-        tablaListaVehiculos.setGridColor(new java.awt.Color(61, 57, 57));
+        tablaListaVehiculos.setGridColor(new java.awt.Color(153, 153, 153));
         tablaListaVehiculos.setIntercellSpacing(new java.awt.Dimension(0, 0));
         tablaListaVehiculos.setOpaque(false);
-        tablaListaVehiculos.setRowHeight(25);
+        tablaListaVehiculos.setRowHeight(30);
         tablaListaVehiculos.setSelectionBackground(new java.awt.Color(61, 57, 57));
+        tablaListaVehiculos.setShowVerticalLines(false);
         tablaListaVehiculos.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaListaVehiculos);
 
@@ -372,7 +383,7 @@ public class ListasVehiculos extends javax.swing.JPanel {
         if (campoRegistros.getText().length()==0){
             campoRegistros.setForeground(new Color(153,153,153));
             campoRegistros.setFont(new Font("Segoe UI Semibold", Font.ITALIC, 14));
-            campoRegistros.setText("0");
+            campoRegistros.setText("20");
         }
     }//GEN-LAST:event_campoRegistrosMouseExited
 

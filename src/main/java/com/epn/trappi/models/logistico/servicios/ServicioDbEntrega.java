@@ -38,7 +38,8 @@ public class ServicioDbEntrega implements Unible<Entrega>,ServicioDb<Entrega> {
     @Override
     public Consultable obtenerElementos() throws SQLException {
         Statement sentencia = connection.getConnection().createStatement();
-        ResultSet resultados = sentencia.executeQuery("SELECT * FROM ENTREGA");
+        String columnas = ID_ENTREGA+","+MATRICULA+","+FECHA+","+ESTADO+","+FACTURA+","+ID_EMPLEADO+","+"DIRECCION";
+        ResultSet resultados = sentencia.executeQuery("SELECT "+columnas+" FROM ENTREGA JOIN FACTURAS  ON ENTREGA.FACTURA=FACTURAS.IDFACTURA");
         ArrayList<Entrega> entregas = new ArrayList<>();
         while(resultados.next()){
             Entrega entrega = new Entrega();
@@ -48,6 +49,7 @@ public class ServicioDbEntrega implements Unible<Entrega>,ServicioDb<Entrega> {
             entrega.setEstado(resultados.getString(4));
             entrega.setFactura(resultados.getInt(5));
             entrega.setID_Empleado(resultados.getInt(6));
+            entrega.setDireccion(resultados.getString(7));
             entregas.add(entrega);
         }
         return new Consultable(entregas);
@@ -56,7 +58,9 @@ public class ServicioDbEntrega implements Unible<Entrega>,ServicioDb<Entrega> {
     @Override
     public Entrega obtenerElemento(int llave_primaria) throws SQLException {
         Statement sentencia = connection.getConnection().createStatement();
-        ResultSet resultados = sentencia.executeQuery("SELECT * FROM ENTREGA WHERE IDENTREGA='"+String.valueOf(llave_primaria)+"'");
+        String columnas = ID_ENTREGA+","+MATRICULA+","+FECHA+","+ESTADO+","+FACTURA+","+ID_EMPLEADO+","+"DIRECCION";
+        ResultSet resultados
+                = sentencia.executeQuery("SELECT "+columnas+" FROM ENTREGA JOIN FACTURAS  ON ENTREGA.FACTURA=FACTURAS.IDFACTURA WHERE IDENTREGA='"+String.valueOf(llave_primaria)+"'");
         resultados.next();
         Entrega entrega = new Entrega();
             entrega.setID_Entrega(resultados.getInt(1));
@@ -65,6 +69,7 @@ public class ServicioDbEntrega implements Unible<Entrega>,ServicioDb<Entrega> {
             entrega.setEstado(resultados.getString(4));
             entrega.setFactura(resultados.getInt(5));
             entrega.setID_Empleado(resultados.getInt(6));
+            entrega.setDireccion(resultados.getString(7));
         return entrega;
     }
 
@@ -89,8 +94,10 @@ public class ServicioDbEntrega implements Unible<Entrega>,ServicioDb<Entrega> {
     @Override
     public Consultable obtenerElementosPorFiltro(String COLUMN_NAME_CONSTANT, String VALOR) throws SQLException {
         Statement sentencia = connection.getConnection().createStatement();
+        String columnas = ID_ENTREGA+","+MATRICULA+","+FECHA+","+ESTADO+","+FACTURA+","+ID_EMPLEADO+","+"DIRECCION";
         ResultSet resultados;
-        resultados=sentencia.executeQuery("SELECT * FROM ENTREGA WHERE "+COLUMN_NAME_CONSTANT+"='"+VALOR+"'");
+        resultados
+                =sentencia.executeQuery("SELECT "+columnas+" FROM ENTREGA JOIN FACTURAS  ON ENTREGA.FACTURA=FACTURAS.IDFACTURA WHERE "+COLUMN_NAME_CONSTANT+"='"+VALOR+"'");
         ArrayList<Entrega> entregas = new ArrayList<>();
         while(resultados.next()){
             Entrega entrega = new Entrega();
@@ -100,6 +107,7 @@ public class ServicioDbEntrega implements Unible<Entrega>,ServicioDb<Entrega> {
             entrega.setEstado(resultados.getString(4));
             entrega.setFactura(resultados.getInt(5));
             entrega.setID_Empleado(resultados.getInt(6));
+            entrega.setDireccion(resultados.getString(7));
             entregas.add(entrega);
         }
         return new Consultable(entregas);

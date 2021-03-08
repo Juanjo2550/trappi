@@ -42,7 +42,7 @@ public class Usos_ViewHandler {
             Entrega entrega = registros.get(instancia);
             Usos_ViewItem item = new Usos_ViewItem();
             //Llenamos el panel con los datos
-            item.llenarItem(entrega.getFecha(),String.valueOf(entrega.getID_Empleado()),String.valueOf(entrega.getFactura()),entrega.getDireccion());
+            item.llenarItem(entrega.getFecha(),String.valueOf(entrega.getID_Empleado()),String.valueOf(entrega.getFactura()),"Megamaxi 6 de Diciembre");
             addView(item,instancia);
         }
     }
