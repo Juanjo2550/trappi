@@ -24,6 +24,7 @@ public class PanelControlDisponibilidad extends javax.swing.JPanel {
     
     
     
+    
     ControlDisponibilidad controlDisponibilidad;
     ControlAsistencias controlAsistencias;
     ListaVehiculos lista_vehiculos;
