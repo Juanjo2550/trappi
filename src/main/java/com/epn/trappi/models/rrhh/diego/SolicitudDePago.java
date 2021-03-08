@@ -121,9 +121,9 @@ public class SolicitudDePago {
         this.cuentaBancaria = cuentaBancaria;
     }
 
-    public SolicitudDePago() {
+   /* public SolicitudDePago() {
     }
-    
+  */  
     
     public SolicitudDePago[] SolicitarPago() throws Exception{
         

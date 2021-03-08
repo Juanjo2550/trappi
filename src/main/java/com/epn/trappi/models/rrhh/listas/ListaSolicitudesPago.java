@@ -49,7 +49,8 @@ public class ListaSolicitudesPago implements Lista<SolicitudDePago> {
 
     @Override
     public SolicitudDePago buscarUno(String cedula) {
-                Empleado empleado = new ListaEmpleados().buscarUno(cedula);
+        return null;
+             /*   Empleado empleado = new ListaEmpleados().buscarUno(cedula);
         String sql = "SELECT * FROM dbo.SOLICITUDPAGOROLES WHERE IDEMP=" + empleado.getId() + ";";
         RolDePagos solicitudes = null;
         try {
@@ -71,7 +72,7 @@ public class ListaSolicitudesPago implements Lista<SolicitudDePago> {
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
-        return solicitudes;
+        return solicitudes;*/
     }
 
     @Override
