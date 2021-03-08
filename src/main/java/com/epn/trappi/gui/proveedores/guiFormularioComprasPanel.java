@@ -342,7 +342,6 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
     private void jTextFieldCantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCantidadKeyReleased
         int cantidad = Integer.parseInt(jTextFieldCantidad.getText());
         seleccionados[jTable1.getSelectedRow()][1] = cantidad;
-        System.out.print(cantidad);
     }//GEN-LAST:event_jTextFieldCantidadKeyReleased
 
     private void jCheckBoxAñadirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBoxAñadirMouseExited

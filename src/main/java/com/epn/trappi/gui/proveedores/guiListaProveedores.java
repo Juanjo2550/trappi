@@ -322,14 +322,15 @@ public class guiListaProveedores extends javax.swing.JPanel {
         if (guiProveedores.validarDireccion(direccion)) {
             if (cuenta.length() == 10) {
                 try {
-                    db.actualizarProveedor(ruc, direccion, cuenta);
+                    Proveedor proveedorActualizado = new Proveedor(ruc, "", direccion, cuenta);
+                    proveedorActualizado.actualizarProveedor();
                     JOptionPane.showMessageDialog(null, "Proveedor Actualizado.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                } catch (SQLException ex) {
+                } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "No se pudo Actualizar el Proveedor", "Error", JOptionPane.INFORMATION_MESSAGE);
                 }
                 listaP = (ArrayList<Proveedor>) db.getProveedores();
                 cargarProveedor();
-                
+
                 vaciarCampos();
 
             } else {

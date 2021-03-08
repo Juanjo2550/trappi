@@ -37,8 +37,7 @@ public class ProveedoresDb {
     private final String spGetIdBien = "getIdBien";
     private final String spUpdateProveedor = "updateProveedor";
     private final String spBuscarProducto = "BuscarProducto";
-        private final String spUpdateProducto = "updateBien";
-
+    private final String spUpdateProducto = "updateBien";
 
     private ResultSet ejecutarSP(String nombreSP) throws SQLException {
         Connection connection = dbInstance.getConnection();
@@ -125,7 +124,6 @@ public class ProveedoresDb {
         try {
             seleccionarProductos();
         } catch (Exception ex) {
-            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
         }
         return productos;
     }
@@ -134,7 +132,6 @@ public class ProveedoresDb {
         try {
             return seleccionarProductos(nombre);
         } catch (Exception ex) {
-            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -157,7 +154,6 @@ public class ProveedoresDb {
         try {
             seleccionarProveedores();
         } catch (Exception ex) {
-            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
         }
         return proveedores;
     }
@@ -166,7 +162,6 @@ public class ProveedoresDb {
         try {
             return seleccionarProveedores(ruc);
         } catch (Exception ex) {
-            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -189,7 +184,6 @@ public class ProveedoresDb {
         try {
             seleccionarServicios();
         } catch (Exception ex) {
-            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
         }
         return servicios;
     }
@@ -198,7 +192,6 @@ public class ProveedoresDb {
         try {
             seleccionarCompras();
         } catch (Exception ex) {
-            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
         }
         return compras;
     }
@@ -360,7 +353,7 @@ public class ProveedoresDb {
         ResultSet rs = ejecutarSP(spSelectAllServicios);
         List<Servicio> ss = new ArrayList<>();
         while (rs.next()) {
-            String[] res = {rs.getString(3), rs.getString(4), rs.getString(2),rs.getString(6)};
+            String[] res = {rs.getString(3), rs.getString(4), rs.getString(2), rs.getString(6)};
             ss.add(reformarServicio(res));
         }
         this.servicios = ss;
@@ -392,9 +385,9 @@ public class ProveedoresDb {
         String[] param = {"ruc:" + ruc, "direccion:" + direccion, "cuenta:" + cuenta};
         ResultSet rs = ejecutarSPParameters(spUpdateProveedor, param);
     }
-    
+
     public void actualizarBien(int idBien, String nombreBien, double precio, String proveedor) throws SQLException {
-        String[] param = {"idBien:" + idBien, "nombreBien:" + nombreBien, "precioBien:" + precio, "proveedor:"+proveedor};
+        String[] param = {"idBien:" + idBien, "nombreBien:" + nombreBien, "precioBien:" + precio, "proveedor:" + proveedor};
         ResultSet rs = ejecutarSPParameters(spUpdateProducto, param);
     }
 
@@ -510,8 +503,8 @@ public class ProveedoresDb {
         }
         return resultado;
     }
-    
-        public Proveedor obtenerProveedorRuc(String nombre) throws SQLException {
+
+    public Proveedor obtenerProveedorRuc(String nombre) throws SQLException {
         seleccionarProveedores();
         Proveedor resultado = null;
         for (Proveedor proveedor : this.proveedores) {
