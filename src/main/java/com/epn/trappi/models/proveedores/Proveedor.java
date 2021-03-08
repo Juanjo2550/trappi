@@ -2,6 +2,8 @@ package com.epn.trappi.models.proveedores;
 
 import com.epn.trappi.db.proveedores.ProveedoresDb;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -63,9 +65,12 @@ public class Proveedor {
         Proveedor prov = new Proveedor(getRuc(), getRazonSocial(), getDireccion(), getCuenta());
         db.setProveedores(prov);
     }
-    
-    private void actualizarProveedor() {
-        //Proveedor prov = new Proveedor(getRuc(), getRazonSocial(), getDireccion(), getCuenta());
-        //db.setProveedores(prov);
+
+    public void actualizarProveedor() {
+        try {
+            db.actualizarProveedor(ruc, direccion, cuenta);
+        } catch (SQLException ex) {
+            Logger.getLogger(Proveedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

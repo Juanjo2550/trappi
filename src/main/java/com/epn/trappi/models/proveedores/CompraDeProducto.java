@@ -44,7 +44,6 @@ public class CompraDeProducto extends Compra {
                 .stream()
                 .collect(Collectors.groupingBy(prod -> prod.getProveeedor().getRuc()));
         listAgrupado.forEach((String ruc, List<Bien> p) -> {
-            System.out.println(ruc);
             ListaDeBienes listaAux = new ListaDeBienes((ArrayList<Bien>) p);
             if (solicitarAutorizacion(listaBienesAComprar.getListaBienes().get(0).getProveeedor().getCuenta(), montoTotal)) {
                 registrarCompraPorProveedor(listaAux, calcularMontoPorLista(listaAux).toString());
