@@ -7,7 +7,6 @@
 package com.epn.trappi.gui.rrhh.Permisos;
 
 import com.epn.trappi.models.rrhh.juanjo.*;
-import com.epn.trappi.models.rrhh.Sueldo;
 
 /**
  * 

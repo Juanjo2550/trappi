@@ -7,6 +7,7 @@ package com.epn.trappi.gui.proveedores;
 
 import com.epn.trappi.db.proveedores.ProveedoresDb;
 import com.epn.trappi.models.proveedores.ListaProveedores;
+import com.epn.trappi.models.proveedores.Producto;
 import com.epn.trappi.models.proveedores.Proveedor;
 import com.epn.trappi.models.proveedores.Servicio;
 import java.util.ArrayList;
@@ -273,13 +274,9 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
                 if (Double.parseDouble(precio) >= 0) {
                     Proveedor proveedor;
                     proveedor = db.obtenerProveedorRuc((String) cmbProveedores.getSelectedItem());
-                    //db.actualizarBien(db.getIdBien(nombre), nombre, Double.parseDouble(precio), proveedor.getRuc());
-
-                    Servicio servicioActualizado = new Servicio(nombre, Double.parseDouble(precio), proveedor);
-                    servicioActualizado.actualizar();
-
+                    db.actualizarBien(db.getIdBien(nombre), nombre, Double.parseDouble(precio), proveedor.getRuc());
                     JOptionPane.showMessageDialog(null, "Servicio Actualizado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-
+                    
                     seleccionados = (ArrayList) db.getProductos();
                     cargarServicios();
 

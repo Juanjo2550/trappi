@@ -41,12 +41,10 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
             "Número",
             "Nombre",
             "Apellido",
-            "Numero de Cuenta",
             "Fecha",
             "Total",
             "Descuentos",
-            "Estado",
-            
+            "Estado"
             
 
         };
@@ -91,7 +89,6 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
             "Número",
             "Nombre",
             "Apellido",
-            "Numero de Cuenta",
             "Fecha",
             "Total",
             "Descuentos",
@@ -105,7 +102,6 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
                 rol.getNumero(),
                 rol.getEmpleado().getNombres(),
                 rol.getEmpleado().getApellidos(),
-                rol.getEmpleado().getCuentaBancaria(),
                 rol.getFecha(),
                 rol.getTotal(),
                 rol.getDescuentos(),
@@ -328,19 +324,19 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
        
        SolicitudDePago  solicitud = new SolicitudDePago(estado,Double.parseDouble(total), cuenta);
         try {
+
             pago.verificarSolicitudesdePago();
         } catch (Exception ex) {
             Logger.getLogger(ListaDeRolesEmpleados.class.getName()).log(Level.SEVERE, null, ex);
         }
-        /* try {
+         try {
             
             
+
             solicitudTable();
-            
-           
         } catch (Exception ex) {
             Logger.getLogger(ListaDeRolesEmpleados.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void tablaEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEmpleadosMouseClicked

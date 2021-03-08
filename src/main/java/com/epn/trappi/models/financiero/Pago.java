@@ -57,15 +57,15 @@ public class  Pago {
     public String realizarPago(Pago pago){
         this.libroDiario=new LibroDiario();
         this.presupuesto=new Presupuesto(this.libroDiario);
-        String estadoPago="Pendiente";
+        String estadoSolicitud="Pendiente";
         if(pago.monto<this.presupuesto.calcularPresupuesto()){
             System.out.println("El presupuesto de TRAPPI es: "+this.presupuesto.calcularPresupuesto());
-            estadoPago="Realizado";
+            estadoSolicitud="Realizado";
             this.registrarPago(pago);
             System.out.println("El nuevo presupuesto: "+this.presupuesto.calcularPresupuesto());
         }
-        System.out.println("Funcion Realizar Pago returns : "+estadoPago);
-        return estadoPago; 
+        System.out.println("Funcion Realizar Pago returns : "+estadoSolicitud);
+        return estadoSolicitud; 
     }
     @Override
     public String toString() {
