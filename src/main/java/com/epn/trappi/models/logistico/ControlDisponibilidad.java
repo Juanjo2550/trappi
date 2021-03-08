@@ -5,7 +5,6 @@
  */
 package com.epn.trappi.models.logistico;
 
-import com.epn.trappi.controladores.logistico.storedProcedures;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import com.epn.trappi.models.logistico.Vehiculo;

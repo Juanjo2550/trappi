@@ -1,6 +1,5 @@
 
 package com.epn.trappi.gui.logistico;
-import com.epn.trappi.controladores.logistico.storedProcedures;
 import com.epn.trappi.models.logistico.ControlDisponibilidad;
 import com.epn.trappi.models.logistico.ListaVehiculos;
 import com.epn.trappi.models.logistico.servicios.ServicioDb;

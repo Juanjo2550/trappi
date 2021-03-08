@@ -1,24 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.epn.trappi.gui.logistico;
 
-import com.epn.trappi.controladores.logistico.storedProcedures;
-import com.epn.trappi.db.connection.*;
 import com.epn.trappi.gui.logistico.Logistico_GUI.RoundedBorder;
 import com.epn.trappi.models.logistico.*;
 import com.epn.trappi.models.logistico.servicios.Consultable;
 import com.epn.trappi.models.logistico.servicios.ServicioDb;
-import com.epn.trappi.models.logistico.servicios.ServicioDbConductor;
 import com.epn.trappi.models.logistico.servicios.ServicioDbEntrega;
 import com.epn.trappi.models.logistico.servicios.ServicioDbVehiculo;
 import com.epn.trappi.models.logistico.servicios.Unible;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -83,7 +75,6 @@ public class ListasVehiculos extends javax.swing.JPanel {
         cmbBusquedaVehiculos = new javax.swing.JComboBox<>();
         txtBusquedaVehiculos = new javax.swing.JTextField();
         btnBuscarVehiculo = new javax.swing.JButton();
-        btnEntregasDia = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         campoRegistros = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -179,11 +170,6 @@ public class ListasVehiculos extends javax.swing.JPanel {
             }
         });
         jPanel2.add(btnBuscarVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 50, 100, 30));
-
-        btnEntregasDia.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        btnEntregasDia.setForeground(new java.awt.Color(61, 57, 57));
-        btnEntregasDia.setText("PENDIENTE");
-        jPanel2.add(btnEntregasDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(61, 57, 57));
@@ -414,7 +400,6 @@ public class ListasVehiculos extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarVehiculo;
-    private javax.swing.JButton btnEntregasDia;
     private javax.swing.JTextField campoRegistros;
     private javax.swing.JComboBox<String> cmbBusquedaVehiculos;
     private javax.swing.JLabel jLabel1;

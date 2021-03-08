@@ -408,7 +408,7 @@ public class RegistroEntregas extends javax.swing.JPanel {
 
         campoRegistros.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
         campoRegistros.setForeground(new java.awt.Color(153, 153, 153));
-        campoRegistros.setText("0");
+        campoRegistros.setText("20");
         campoRegistros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 campoRegistrosMouseClicked(evt);
@@ -562,7 +562,7 @@ public class RegistroEntregas extends javax.swing.JPanel {
         if (campoRegistros.getText().length()==0){
             campoRegistros.setForeground(new Color(153,153,153));
             campoRegistros.setFont(new Font("Segoe UI Semibold", Font.ITALIC, 14));
-            campoRegistros.setText("0");
+            campoRegistros.setText("20");
         }
     }//GEN-LAST:event_campoRegistrosMouseExited
 

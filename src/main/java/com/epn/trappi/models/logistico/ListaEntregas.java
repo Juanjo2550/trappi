@@ -25,7 +25,7 @@ public class ListaEntregas {
         this.entregas = entregas;
     }
     public DefaultTableModel mostrarLista(){
-        int num_columnas = 6;
+        int num_columnas = 7;
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Id Entrega");
         modelo.addColumn("Id Empleado");
@@ -42,6 +42,7 @@ public class ListaEntregas {
             registro[3]=String.valueOf(elemento.getFactura());
             registro[4]=String.valueOf(elemento.getEstado());
             registro[5]=String.valueOf(elemento.getFecha());
+            registro[6]=String.valueOf(elemento.getDireccion());
             modelo.addRow(registro);
         }
         return modelo;

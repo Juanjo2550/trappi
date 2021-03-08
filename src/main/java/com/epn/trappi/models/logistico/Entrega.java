@@ -1,6 +1,5 @@
 package com.epn.trappi.models.logistico;
 
-import com.epn.trappi.controladores.logistico.storedProcedures;
 import com.epn.trappi.models.logistico.servicios.ServicioDb;
 import com.epn.trappi.models.logistico.servicios.ServicioDbEntrega;
 import java.sql.SQLException;
