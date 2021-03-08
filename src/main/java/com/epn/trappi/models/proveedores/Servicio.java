@@ -21,8 +21,6 @@ public class Servicio extends Bien {
     public Servicio(String nombre, double precio, Proveedor proveeedor, int cantidad, String marca) {
         super(nombre, precio, proveeedor, cantidad, marca);
     }
-    
-    
 
     @Override
     public void registrar() {
@@ -36,7 +34,11 @@ public class Servicio extends Bien {
 
     @Override
     public void actualizar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            db.actualizarBien(db.getIdBien(nombre), nombre, precio, proveeedor.getRuc());
+        } catch (SQLException ex) {
+            Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
