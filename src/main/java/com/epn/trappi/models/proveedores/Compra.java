@@ -90,11 +90,11 @@ abstract public class Compra {
     public void comprarAnalizador() {
     }
     
-    public void registrarCompra() {
+    public void registrarCompraPorProveedor(ListaDeBienes listaBienesAComprarPorProveedor, String monto) {
         int idcompra;
         try {
-            idcompra = db.insertarCompra("Pendiente", Double.toString(montoTotal), fecha);
-            for (Bien cantidadBien : listaBienesAComprar.getListaBienes()){
+            idcompra = db.insertarCompra("Pendiente", monto, fecha);
+            for (Bien cantidadBien : listaBienesAComprarPorProveedor.getListaBienes()){
                 db.insertDetalleCompra(idcompra, db.getIdBien(cantidadBien.getNombre()), cantidadBien.getCantidad());
             }
         } catch (SQLException ex) {
