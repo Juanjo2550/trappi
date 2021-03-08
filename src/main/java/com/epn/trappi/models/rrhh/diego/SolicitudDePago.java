@@ -50,6 +50,8 @@ public class SolicitudDePago {
         solicitudesArray = roles.toArray(solicitudesArray);
         return solicitudesArray;
     }
+    
+    
 
 
     public Empleado getEmpleadoAPagar() {

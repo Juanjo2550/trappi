@@ -266,6 +266,11 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaEmpleadosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaEmpleados);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -317,6 +322,12 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
             Logger.getLogger(ListaDeRolesEmpleados.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void tablaEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEmpleadosMouseClicked
+     /* int seleccion =  this.tablaEmpleados.rowAtPoint(evt.getPoint());
+       String cuenta = tablaEmpleados.getT
+        */
+    }//GEN-LAST:event_tablaEmpleadosMouseClicked
 
     /**
      * @param args the command line arguments

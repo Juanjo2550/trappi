@@ -52,7 +52,7 @@ public abstract class Permiso {
     
 
 public abstract int calcularNumeroDias(String tipoPermiso, char sexo);
-public abstract String calcularProporcionalPagar(double sueldo, int numeroDias);
+    public abstract String calcularProporcionalPagar(double sueldo, int numeroDias);
     
 
 
