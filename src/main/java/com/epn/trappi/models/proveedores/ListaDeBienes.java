@@ -21,14 +21,23 @@ public class ListaDeBienes {
         this.listaBienes = listaCantidadDeBienes;
     }
 
-    public ListaDeBienes() {
-        listaBienes = new ArrayList<Bien>();
+    
+    public ListaDeBienes(){
+        listaBienes= new ArrayList<Bien>();
     }
-
+    
     public ArrayList<Bien> getListaBienes() {
         return listaBienes;
     }
+    /*
+    public ArrayList<Bien> getListaDeBienesDb() {
+        return db.g();
+    }
 
+    public ArrayList<Bien> getListaCantidadDeBienesDbCompra() {
+        return db.getListaCantidadBienesCompra();
+    }
+    */
     public void setListaBienes(ArrayList<Bien> listaBienes) {
         this.listaBienes = listaBienes;
     }
@@ -49,11 +58,13 @@ public class ListaDeBienes {
 
     @Override
     public String toString() {
-        String retorno = "";
+        String retorno="";
         for (Bien aux : listaBienes) {
-            retorno += aux.toString() + aux.getCantidad();
+            retorno+=aux.toString()+aux.getCantidad();
         }
         return retorno;
     }
+    
+    
 
 }

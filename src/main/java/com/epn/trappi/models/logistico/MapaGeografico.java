@@ -25,6 +25,7 @@ public class MapaGeografico {
     private Engine engine;
     private Browser browser;
     private BrowserView view; //componente con la representación visual del mapa
+    private Ruta ruta;
     //METODOS
     public MapaGeografico(){
         inicializar();

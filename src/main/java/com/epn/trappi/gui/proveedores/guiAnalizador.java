@@ -48,6 +48,9 @@ public class guiAnalizador extends javax.swing.JPanel {
 
     
     private void dibujarDiagrama(ArrayList<Bien> lista){
+        lista.forEach(bien -> {
+            System.out.println(bien.getNombre() + ";" + bien.getCantidad()+";"+bien.getProveeedor().getRazonSocial());
+        });
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
         
         lista.forEach(bien -> {

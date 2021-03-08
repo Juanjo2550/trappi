@@ -37,12 +37,10 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
             "Número",
             "Nombre",
             "Apellido",
-            "Numero de Cuenta",
             "Fecha",
             "Total",
             "Descuentos",
-            "Estado",
-            
+            "Estado"
             
 
         };
@@ -87,7 +85,6 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
             "Número",
             "Nombre",
             "Apellido",
-            "Numero de Cuenta",
             "Fecha",
             "Total",
             "Descuentos",
@@ -101,7 +98,6 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
                 rol.getNumero(),
                 rol.getEmpleado().getNombres(),
                 rol.getEmpleado().getApellidos(),
-                rol.getEmpleado().getCuentaBancaria(),
                 rol.getFecha(),
                 rol.getTotal(),
                 rol.getDescuentos(),
@@ -316,11 +312,7 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         try {
-            
-            
             solicitudTable();
-            
-           
         } catch (Exception ex) {
             Logger.getLogger(ListaDeRolesEmpleados.class.getName()).log(Level.SEVERE, null, ex);
         }
