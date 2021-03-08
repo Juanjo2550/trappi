@@ -175,8 +175,7 @@ public class PanelControlDisponibilidad extends javax.swing.JPanel {
         }
     }
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        llenarTablaVehiculos();
-        
+        llenarTablaVehiculos();  
         /*
         tabla = "VEHICULO";
         columna = "ESTADO";
