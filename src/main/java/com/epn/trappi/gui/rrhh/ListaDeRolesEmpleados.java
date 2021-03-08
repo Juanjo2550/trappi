@@ -332,6 +332,7 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
             String cambioEstado = pago.realizarPago(pago);
             
             
+            
         } catch (Exception ex) {
             Logger.getLogger(ListaDeRolesEmpleados.class.getName()).log(Level.SEVERE, null, ex);
         }
