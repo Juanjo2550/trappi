@@ -54,12 +54,6 @@ public Double calcularTotal(){
     return total;
 }
 
-//public ArrayList<Bien> mostrar(){
-public ArrayList<Producto> mostrar(){
-    ArrayList mostrarDetalle = this.Detalle; 
-    return mostrarDetalle;
-}
-
     public void setNumeroFactura(int numeroFactura) {
         this.nFactura = numeroFactura;
     }
