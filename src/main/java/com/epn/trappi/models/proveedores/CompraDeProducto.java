@@ -5,10 +5,11 @@
  */
 package com.epn.trappi.models.proveedores;
 
-import com.epn.trappi.db.proveedores.ProveedoresDb;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import java.util.stream.Collectors;
 
 /**
  *
@@ -24,29 +25,44 @@ public class CompraDeProducto extends Compra {
         super(listaBienesAComprar, estado, montoTotal, fecha, identificador);
     }
 
-    
     public CompraDeProducto(ListaDeBienes listaBienesAComprar, String estado) {
-        super(listaBienesAComprar,estado);
+        super(listaBienesAComprar, estado);
     }
-    
-    public CompraDeProducto(ListaDeBienes listaBienesAComprar, String estado, String fecha,Double monto) {
-        super(listaBienesAComprar,estado, fecha,monto);
+
+    public CompraDeProducto(ListaDeBienes listaBienesAComprar, String estado, String fecha, Double monto) {
+        super(listaBienesAComprar, estado, fecha, monto);
     }
 
     public CompraDeProducto(Inventario inventario, ListaDeBienes listaBienesAComprar, String estado) {
-        super(inventario,listaBienesAComprar,estado);
+        super(inventario, listaBienesAComprar, estado);
     }
-    
+
     @Override
-    public void comprar(){
+    public void comprar() {
         setMontoTotal();
-        if(solicitarAutorizacion(listaBienesAComprar.getListaBienes().get(0).getProveeedor().getCuenta(),montoTotal)){
-            registrarCompra();
-        }
+        Map<String, List<Bien>> listAgrupado = listaBienesAComprar.getListaBienes()
+                .stream()
+                .collect(Collectors.groupingBy(prod -> prod.getProveeedor().getRuc()));
+        listAgrupado.forEach((String ruc, List<Bien> p) -> {
+            System.out.println(ruc);
+            ListaDeBienes listaAux = new ListaDeBienes((ArrayList<Bien>) p);
+            if (solicitarAutorizacion(listaBienesAComprar.getListaBienes().get(0).getProveeedor().getCuenta(), montoTotal)) {
+                registrarCompraPorProveedor(listaAux, calcularMontoPorLista(listaAux).toString());
+            }
+        });
+
     }
-    
+
+    public Double calcularMontoPorLista(ListaDeBienes listaBienesA) {
+        Double monto = 0.0;
+        for (Bien bien : listaBienesA.getListaBienes()) {
+            monto += bien.getPrecio() * bien.getCantidad();
+        }
+        return monto;
+    }
+
     @Override
-    public void comprarAnalizador(){
+    public void comprarAnalizador() {
         /*setMontoTotal();
         if(solicitarAutorizacion(listaBienesAComprar.getListaBienes().get(0).getProveeedor(),montoTotal)){
             for (Bien cantidadBien : listaBienesAComprar.getListaBienes()){
@@ -58,6 +74,5 @@ public class CompraDeProducto extends Compra {
             }
         }*/
     }
-    
-    
+
 }
