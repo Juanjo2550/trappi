@@ -27,8 +27,12 @@ public class  Pago {
         this.nroCuenta = nroCuenta;
         this.monto = monto;
     }
+
+    public Pago() {
+    }
     
-    private void verificarSolicitudesdePago() throws Exception{
+    
+    public void verificarSolicitudesdePago() throws Exception{
         this.solicitudPago=new SolicitudDePago();
         for(SolicitudDePago solicitud: this.solicitudPago.SolicitarPago()){
             Pago pago = new Pago(solicitud.getCuentaBancaria(), solicitud.getMontoTotal() );

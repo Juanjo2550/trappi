@@ -31,6 +31,13 @@ public class SolicitudDePago {
         this.cuentaBancaria = cuentaBancaria;
     }
 
+    public SolicitudDePago(String estado, double montoTotal, String cuentaBancaria) {
+        this.estado = estado;
+        this.montoTotal = montoTotal;
+        this.cuentaBancaria = cuentaBancaria;
+    }
+
+    
     public SolicitudDePago() {
     }
     

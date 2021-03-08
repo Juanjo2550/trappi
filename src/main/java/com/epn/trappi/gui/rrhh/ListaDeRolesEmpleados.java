@@ -5,6 +5,7 @@
  */
 package com.epn.trappi.gui.rrhh;
 
+import com.epn.trappi.models.financiero.Pago;
 import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
 import com.epn.trappi.models.rrhh.listas.ListaRolesDePago;
 import com.epn.trappi.models.rrhh.diego.SolicitudDePago;
@@ -23,6 +24,9 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
 
     private final ListaRolesDePago roles;
     private final SolicitudDePago pagos;
+    String cuenta;
+    String total;
+    String estado;
     /**
      * Creates new form Ejemplo_GUI
      */
@@ -320,7 +324,15 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+      Pago pago = new Pago();
+       
+       SolicitudDePago  solicitud = new SolicitudDePago(estado,Double.parseDouble(total), cuenta);
         try {
+            pago.verificarSolicitudesdePago();
+        } catch (Exception ex) {
+            Logger.getLogger(ListaDeRolesEmpleados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        /* try {
             
             
             solicitudTable();
@@ -328,13 +340,19 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
            
         } catch (Exception ex) {
             Logger.getLogger(ListaDeRolesEmpleados.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void tablaEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEmpleadosMouseClicked
-     /* int seleccion =  this.tablaEmpleados.rowAtPoint(evt.getPoint());
-       String cuenta = tablaEmpleados.getT
-        */
+      int seleccion =  this.tablaEmpleados.rowAtPoint(evt.getPoint());
+        cuenta = String.valueOf(tablaEmpleados.getValueAt(seleccion, 3));
+        total = String.valueOf(tablaEmpleados.getValueAt(seleccion, 5));
+        estado = String.valueOf(tablaEmpleados.getValueAt(seleccion, 7));
+        this.jButton6.setEnabled(true);
+       
+       
+       
+        
     }//GEN-LAST:event_tablaEmpleadosMouseClicked
 
     /**
