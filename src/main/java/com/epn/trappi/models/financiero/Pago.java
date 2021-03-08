@@ -28,9 +28,6 @@ public class  Pago {
         this.monto = monto;
     }
     
-    
-
-
     private void verificarSolicitudesdePago() throws Exception{
         this.solicitudPago=new SolicitudDePago();
         for(SolicitudDePago solicitud: this.solicitudPago.SolicitarPago()){
@@ -56,7 +53,7 @@ public class  Pago {
     public String realizarPago(Pago pago){
         this.libroDiario=new LibroDiario();
         this.presupuesto=new Presupuesto(this.libroDiario);
-        String estadoSolicitud="No realizado";
+        String estadoSolicitud="Pendiente";
         if(pago.monto<this.presupuesto.calcularPresupuesto()){
             System.out.println("El presupuesto de TRAPPI es: "+this.presupuesto.calcularPresupuesto());
             estadoSolicitud="Realizado";
