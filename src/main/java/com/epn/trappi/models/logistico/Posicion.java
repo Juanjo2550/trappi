@@ -43,9 +43,6 @@ public class Posicion {
         this.direccion = direccion;
     }
     
-    public void actualizarPosicion(){
-        
-    }
     
     
     
