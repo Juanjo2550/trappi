@@ -5,11 +5,16 @@
  */
 package com.epn.trappi.gui.rrhh;
 
+import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.models.financiero.Pago;
 import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
 import com.epn.trappi.models.rrhh.listas.ListaRolesDePago;
 import com.epn.trappi.models.rrhh.diego.SolicitudDePago;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -22,6 +27,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ListaDeRolesEmpleados extends javax.swing.JFrame {
 
+    private final Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance()).getConnection();
     private final ListaRolesDePago roles;
     private final SolicitudDePago pagos;
     String cuenta;
@@ -320,18 +326,8 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        Pago pago = new Pago(cuenta, Double.parseDouble(total));
-        System.out.println(cuenta);
-        System.out.println(total);
 
         //SolicitudDePago  solicitud = new SolicitudDePago(estado,Double.parseDouble(total), cuenta);
-        try {
-
-            String cambioEstado = pago.realizarPago(pago);
-
-        } catch (Exception ex) {
-            Logger.getLogger(ListaDeRolesEmpleados.class.getName()).log(Level.SEVERE, null, ex);
-        }
         try {
 
             solicitudTable();
@@ -341,11 +337,23 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void tablaEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEmpleadosMouseClicked
+
         int seleccion = this.tablaEmpleados.rowAtPoint(evt.getPoint());
         cuenta = String.valueOf(tablaEmpleados.getValueAt(seleccion, 3));
         total = String.valueOf(tablaEmpleados.getValueAt(seleccion, 5));
         estado = String.valueOf(tablaEmpleados.getValueAt(seleccion, 7));
         this.jButton6.setEnabled(true);
+        Pago pago = new Pago(cuenta, Double.parseDouble(total));
+        System.out.println(cuenta);
+        System.out.println(total);
+        String cambioEstado = pago.realizarPago(pago);
+        String query = "UPDATE ROLPAGOS SET ESTADOROL=" +"'"+ cambioEstado +"'"+ " WHERE ID_ROL=" +"'"+this.tablaEmpleados.getValueAt(seleccion, 0) +"';";
+        try {
+            PreparedStatement statement = this.connection.prepareStatement(query);
+            statement.execute();
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
 
 
     }//GEN-LAST:event_tablaEmpleadosMouseClicked
