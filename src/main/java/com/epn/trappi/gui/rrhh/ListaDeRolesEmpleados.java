@@ -89,6 +89,7 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
             "Número",
             "Nombre",
             "Apellido",
+            "Cuenta",
             "Fecha",
             "Total",
             "Descuentos",
@@ -102,6 +103,7 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
                 rol.getNumero(),
                 rol.getEmpleado().getNombres(),
                 rol.getEmpleado().getApellidos(),
+                rol.getEmpleado().getCuentaBancaria(),
                 rol.getFecha(),
                 rol.getTotal(),
                 rol.getDescuentos(),
@@ -320,12 +322,16 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-      Pago pago = new Pago();
+      Pago pago = new Pago(cuenta,Double.parseDouble(total));
+        System.out.println(cuenta);
+        System.out.println(total);
        
-       SolicitudDePago  solicitud = new SolicitudDePago(estado,Double.parseDouble(total), cuenta);
+       //SolicitudDePago  solicitud = new SolicitudDePago(estado,Double.parseDouble(total), cuenta);
         try {
-
-            pago.verificarSolicitudesdePago();
+                
+            String cambioEstado = pago.realizarPago(pago);
+            
+            
         } catch (Exception ex) {
             Logger.getLogger(ListaDeRolesEmpleados.class.getName()).log(Level.SEVERE, null, ex);
         }
