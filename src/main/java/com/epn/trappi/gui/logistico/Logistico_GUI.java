@@ -24,8 +24,8 @@ import javax.swing.border.Border;
  */
 public class Logistico_GUI extends javax.swing.JFrame {
     
-    PanelControlDisponibilidad mapaDisponibilidad = new PanelControlDisponibilidad();
-    PanelEntregasActivas entregasActivas = new PanelEntregasActivas();
+    PanelControlDisponibilidad1 mapaDisponibilidad = new PanelControlDisponibilidad1();
+    PanelEntregasActivas1 entregasActivas = new PanelEntregasActivas1();
     FichasTecnicas fichasTecnicas = new FichasTecnicas();
     ListasVehiculos listasVehiculos = new ListasVehiculos();
     RegistroMantenimiento registroMantenimiento = new RegistroMantenimiento();

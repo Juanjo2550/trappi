@@ -11,10 +11,10 @@ import java.awt.Dimension;
  *
  * @author Rommel Alexander
  */
-public class PanelEntregasActivas extends javax.swing.JPanel {
+public class PanelEntregasActivas1 extends javax.swing.JPanel {
     
     int bandera=1;
-    public PanelEntregasActivas() {
+    public PanelEntregasActivas1() {
         initComponents();
     }
 
