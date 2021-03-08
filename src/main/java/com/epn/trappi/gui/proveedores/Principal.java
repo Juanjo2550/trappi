@@ -578,7 +578,6 @@ public class Principal extends javax.swing.JFrame {
     private void jButDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButDashboardActionPerformed
         try {
             new CambiaPanel(PanelVerTodos, new guiAnalizador(PanelVerTodos));
-            ponerTituloYsub("Dashboard", "Genere una solicitud de compra de productos con bajo stock");
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -602,7 +601,6 @@ public class Principal extends javax.swing.JFrame {
     private void jButVerTodFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButVerTodFacturaActionPerformed
         try {
             new CambiaPanel(PanelVerTodos, new guiInventarioPanel());
-            ponerTituloYsub("Inventario", "Inventario de los productos registrados");
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -611,12 +609,12 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButRegNotasVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegNotasVentaActionPerformed
         new CambiaPanel(PanelVerTodos, new guiProveedores());
-        ponerTituloYsub("Nuevo Proveedor", "Llena el formulario para registrar Proveedores.");
+        ponerTituloYsub("Proveedores", "Llena el formulario para registrar Proveedores.");
     }//GEN-LAST:event_jButRegNotasVentaActionPerformed
 
     private void jButVerTodNotasVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButVerTodNotasVentaActionPerformed
         new CambiaPanel(PanelVerTodos, new guiListaProveedores());
-        ponerTituloYsub("Lista de Proveedores", "Consulta de Proveedores para su Actualización.");
+        ponerTituloYsub("Actualizar Proveedores", "Consulta de Proveedores para su Actualización.");
     }//GEN-LAST:event_jButVerTodNotasVentaActionPerformed
 
     private void jButRegistrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegistrarProductoActionPerformed
@@ -626,7 +624,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButListarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButListarProductosActionPerformed
         new CambiaPanel(PanelVerTodos, new guiListaProductosPanel());
-        ponerTituloYsub("Lista de Productos", "Lista de los productos registrados");
+        ponerTituloYsub("Productos", "Lista de los productos registrados");
     }//GEN-LAST:event_jButListarProductosActionPerformed
 
     private void jBCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCerrarSesionActionPerformed
@@ -639,12 +637,12 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButListarServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButListarServiciosActionPerformed
         new CambiaPanel(PanelVerTodos, new guiListaServiciosPanel());
-        ponerTituloYsub("Lista de Servicios", "Lista de los servicios adquiridos");
+        ponerTituloYsub("Servicios", "Llena el formulario para registrar un nuevo servicio");
     }//GEN-LAST:event_jButListarServiciosActionPerformed
 
     private void jButRegistrarServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegistrarServiciosActionPerformed
         new CambiaPanel(PanelVerTodos, new guiRegistrarServicioPanel());
-        ponerTituloYsub("Nuevo Servicio", "Llena el formulario para registrar un nuevo servicio");
+        ponerTituloYsub("Servicios", "Lista de los servicios adquiridos");
     }//GEN-LAST:event_jButRegistrarServiciosActionPerformed
 
     private void jButServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButServiciosActionPerformed
@@ -657,7 +655,6 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButRealizarComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRealizarComprasActionPerformed
         new CambiaPanel(PanelVerTodos, new guiFormularioComprasPanel(PanelVerTodos));
-        ponerTituloYsub("Realizar Compra", "Realiza una compra de manera manual");
     }//GEN-LAST:event_jButRealizarComprasActionPerformed
 
     private void jButCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButCompraActionPerformed
@@ -667,7 +664,6 @@ public class Principal extends javax.swing.JFrame {
     private void jButVerTodFactura5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButVerTodFactura5ActionPerformed
         try {
             new CambiaPanel(PanelVerTodos, new guiComprasPanel());
-            ponerTituloYsub("Lista de Compras", "Se muestra la lista de la compras realizadas");
         } catch (IOException ex) {
            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         } 

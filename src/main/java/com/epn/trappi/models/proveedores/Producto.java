@@ -21,7 +21,7 @@ public class Producto extends Bien {
     public Producto(String nombre, double precio, int cantidad, String marca) {
         super(nombre, precio, null, cantidad, marca);
     }
-
+    
     public Producto(String nombre, double precio, Proveedor proveeedor) {
         super(nombre, precio, proveeedor);
     }
@@ -42,11 +42,7 @@ public class Producto extends Bien {
 
     @Override
     public void actualizar() {
-        try {
-            db.actualizarBien(db.getIdBien(nombre), nombre, precio, proveeedor.getRuc());
-        } catch (SQLException ex) {
-            Logger.getLogger(Producto.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

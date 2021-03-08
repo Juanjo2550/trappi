@@ -6,7 +6,7 @@
 
 package com.epn.trappi.models.rrhh.juanjo;
 
-import com.epn.trappi.models.rrhh.Sueldo;
+
 
 /**
  * 
