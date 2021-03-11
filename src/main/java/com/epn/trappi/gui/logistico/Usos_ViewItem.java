@@ -34,7 +34,18 @@ public class Usos_ViewItem extends JPanel{
         labelFecha.setFont(new Font("Segoe UI Semibold", Font.BOLD, 12));
         labelFecha.setForeground(new Color(61,57,57));
         JLabel icono = new JLabel();
-        icono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/epn/trappi/images/logistico/user (2).png")));
+        icono.setIcon(new javax.swing.JLabel() {
+            @Override
+            public javax.swing.Icon getIcon() {
+                try {
+                    return new javax.swing.ImageIcon(
+                        new java.net.URL("https://i.ibb.co/SK8yGS4/user-2.png")
+                    );
+                } catch (java.net.MalformedURLException e) {
+                }
+                return null;
+            }
+        }.getIcon());
         JLabel labelConductor = new JLabel(this.conductor+conductor);
         labelConductor.setFont(new Font("Segoe UI Semibold", Font.BOLD, 12));
         labelConductor.setForeground(new Color(61,57,57));

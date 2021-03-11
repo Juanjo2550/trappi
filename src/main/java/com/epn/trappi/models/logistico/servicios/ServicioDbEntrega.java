@@ -117,11 +117,13 @@ public class ServicioDbEntrega implements Unible<Entrega>,ServicioDb<Entrega> {
     public Object join(ArrayList<Entrega> entregas,Consultable consultable) throws SQLException{
         ArrayList<String> foreign_keys = new ArrayList<>();
         Object unibleArrayList = new Object();
-        if("Vehiculo".equals(consultable.getType())){
+        
+        Consultable consultableTest = consultable;
+        if("Vehiculo".equals(consultableTest.getType())){
             for (int i=0;i<entregas.size();i++){
                 foreign_keys.add(entregas.get(i).getMatricula());
             }
-            ArrayList<Vehiculo> vehiculos = (ArrayList<Vehiculo>) consultable.getDatos();
+            ArrayList<Vehiculo> vehiculos = (ArrayList<Vehiculo>) consultableTest.getDatos();
             int dynamic_size= vehiculos.size();
             for (int i=0;i<dynamic_size;i++){
                 String matricula = vehiculos.get(i).getMatricula();

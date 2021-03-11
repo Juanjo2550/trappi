@@ -9,6 +9,7 @@ import com.epn.trappi.models.logistico.servicios.ServicioDbEntrega;
 import com.epn.trappi.models.logistico.servicios.ServicioDbVehiculo;
 import com.epn.trappi.models.logistico.servicios.Unible;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import javax.swing.JOptionPane;
 import java.sql.*;
@@ -53,9 +54,20 @@ public class ListasVehiculos extends javax.swing.JPanel {
         //Obtenemos las entregas que se hayan hecho con ese vehiculo
         servicioDB = new ServicioDbEntrega();
         ArrayList<Entrega> entregas_por_vehiculo = servicioDB.obtenerElementosPorFiltro(ServicioDbEntrega.MATRICULA, matricula).getDatos();
+        if(entregas_por_vehiculo.size()==0){
+            JOptionPane.showMessageDialog(null,"El vehículo seleccionado aún no a sido utilizado en una entrega");
+            this.panelHistorial.setVisible(false);
+            this.panelHistorial.setVisible(true);
+            return;
+        }
         //Llenamos el historial con estos datos
+        
         historial.llenar(entregas_por_vehiculo);
-        this.panelHistorial.add(historial.obtenerListView());
+        Component lista = historial.obtenerListView();
+        this.panelHistorial.add(lista);
+        //this.panelHistorial.setPreferredSize(lista.getPreferredSize());
+        this.panelHistorial.setVisible(false);
+        this.panelHistorial.setVisible(true);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -224,11 +236,12 @@ public class ListasVehiculos extends javax.swing.JPanel {
         tablaListaVehiculos.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaListaVehiculos);
 
-        jPanel3.setBackground(new java.awt.Color(255, 210, 28));
+        jPanel3.setBackground(new java.awt.Color(34, 45, 50));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel3.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(61, 57, 57));
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Historial de uso del vehículo");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -252,22 +265,11 @@ public class ListasVehiculos extends javax.swing.JPanel {
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelHistorial.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout panelHistorialLayout = new javax.swing.GroupLayout(panelHistorial);
-        panelHistorial.setLayout(panelHistorialLayout);
-        panelHistorialLayout.setHorizontalGroup(
-            panelHistorialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 308, Short.MAX_VALUE)
-        );
-        panelHistorialLayout.setVerticalGroup(
-            panelHistorialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 348, Short.MAX_VALUE)
-        );
-
+        panelHistorial.setBackground(new java.awt.Color(204, 204, 204));
+        panelHistorial.setLayout(new javax.swing.BoxLayout(panelHistorial, javax.swing.BoxLayout.LINE_AXIS));
         jScrollPane3.setViewportView(panelHistorial);
 
-        jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 310, 350));
+        jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 330, 340));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -283,7 +285,7 @@ public class ListasVehiculos extends javax.swing.JPanel {
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)))
                 .addContainerGap(46, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()

@@ -100,7 +100,7 @@ public class Entrega extends Thread{
     
     public void confirmarEntrega() throws SQLException{
         ControlDisponibilidad control = ControlDisponibilidad.getInstance();
-        control.asignar(this);
+        control.asignarVehiculoConductor(this); //PASO 1
     }
     
     public void RegistrarEntrega() throws SQLException{

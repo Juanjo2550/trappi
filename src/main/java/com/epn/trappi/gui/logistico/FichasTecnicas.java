@@ -394,6 +394,7 @@ public class FichasTecnicas extends javax.swing.JPanel {
     }
     
     private void btnRegistrarSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarSolicitudActionPerformed
+        /*
         servicioDB = new ServicioDbSolicitudMantenimiento();
         //Datos de la GUI
         String fechaSol = getFechaSistema(); 
@@ -417,7 +418,7 @@ public class FichasTecnicas extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(FichasTecnicas.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        */
     }//GEN-LAST:event_btnRegistrarSolicitudActionPerformed
 
     private void btnRegistrarMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarMantenimientoActionPerformed

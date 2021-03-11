@@ -11,48 +11,36 @@ import com.epn.trappi.models.logistico.Vehiculo;
 import com.epn.trappi.models.logistico.servicios.ServicioDb;
 import com.epn.trappi.models.logistico.servicios.ServicioDbConductor;
 import com.epn.trappi.models.logistico.servicios.ServicioDbVehiculo;
-import com.epn.trappi.models.observer.listeners.EventListener;
-import com.epn.trappi.models.rrhh.juanjo.ControlAsistencias;
-import com.epn.trappi.models.rrhh.juanjo.Empleado;
-import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
-import com.epn.trappi.models.rrhh.juanjo.Conductor;
 import java.sql.SQLException;
 
 /**
  *
  * @author Erick
  */
-public final class ControlDisponibilidad implements EventListener {
+public final class ControlDisponibilidad{
     //ATRIBUTOS
     ServicioDb servicioDB;
     ListaVehiculos lv;
-    public ArrayList<Empleado> le;
-    //ArrayList<Conductor> lc;
+    ListaConductores lc;
     private static ControlDisponibilidad instance;
     //METODOS
-    public static ControlDisponibilidad getInstance() {
+    public static ControlDisponibilidad getInstance() throws SQLException {
         if (instance == null) {
             instance = new ControlDisponibilidad();
         }
         return instance;
     }
-    private ControlDisponibilidad(){  
+    private ControlDisponibilidad() throws SQLException{  
         lv = new ListaVehiculos();
-        le = new ArrayList<Empleado>();
-        //lc = new ArrayList<>();
-        //inicializarListas();
-        /*
-        ControlAsistencias controlAsistencias = new ControlAsistencias();
-        ControlDisponibilidad control = ControlDisponibilidad.getInstance();
-        controlAsistencias.events.suscribe("nuevo_empleado",control);
-        controlAsistencias.events.suscribe("salida_empleado",control);
-*/
+        lc = new ListaConductores();
+        inicializarListas();
     }
 
     public void inicializarListas() throws SQLException{
         servicioDB = new ServicioDbVehiculo();
         lv.setVehiculos(servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.ESTADO,"Habilitado").getDatos());
-        //lc.setListaConductores(AQUI DEBES METER ESA LISTA DE CONDUCTORES QUE ASISTIERON)
+        servicioDB = new ServicioDbConductor();
+        lc.setListaConductores(servicioDB.obtenerElementosPorFiltro(ServicioDbConductor.ESTADO,"Activo").getDatos());
     }
     public void actualizarEstados(Vehiculo vehiculo,Conductor conductor) throws SQLException{
         servicioDB = new ServicioDbVehiculo();
@@ -61,37 +49,32 @@ public final class ControlDisponibilidad implements EventListener {
         servicioDB.actualizar(conductor);
     }
     
-    public void asignar(Entrega entrega) throws SQLException{
+    public void asignarVehiculoConductor(Entrega entrega) throws SQLException{
         
-        if(lv.estaVacia() || le.isEmpty()){
-            JOptionPane.showMessageDialog(null,"NO HAY CONDUCTORES Y VEHICULOS DISPONIBLES");
+        if(lv.estaVacia() || lc.estaVacia()){
+            JOptionPane.showMessageDialog(null,"No hay vehiculos o conductores disponibles ");
         }
-        //Seleccionamos los vehiculos
-        JOptionPane.showMessageDialog(null,lv.getVehiculos().get(0).getMatricula()+"  -   "+lv.getVehiculos().get(0).getEstado());
-        //Como la lista sera añadida con vehiculos de estado ocupado momentaneamente, es necesario ignorarlos cuando lo requiera
+        //Seleccionamos un vehiculo y conductor
         Vehiculo vehiculo = lv.getVehiculos().remove(0);
-        Empleado empleado = le.remove(0);
+        Conductor conductor = lc.getConductores().remove(0);
         //Actualizamos los estados
-        vehiculo.setEstado(new EnEspera());
-        //empleado.setEstado("Ocupado");
-        ////////////////////////////////actualizarEstados(vehiculo, conductor);
+        vehiculo.setEstado(new Inhabilitado());
+        conductor.setEstado("Ocupado");
+        actualizarEstados(vehiculo, conductor);   //PASO 2
         //Creamos el registro de entrega
-        entrega.setID_Empleado(empleado.getId());
+        entrega.setID_Empleado(conductor.getID());
         entrega.setMatricula(vehiculo.getMatricula());
         entrega.setEstado("En curso");
-        entrega.RegistrarEntrega();
+        entrega.RegistrarEntrega();   //PASO 3
         //Simulamos movimiento
-        simularMovimiento(12);
+        simularMovimiento(20);   //PASO 4
         //Volvemos a actualizar los estados
         vehiculo.setEstado(new Habilitado());
-        //conductor.setEstado("Activo");
-        /////////////////////////////////actualizarEstados(vehiculo, conductor);
+        conductor.setEstado("Activo");
+        actualizarEstados(vehiculo, conductor);    //PASO 5
         //Luego actualizamos el estado de la entrega
         entrega.setEstado("Finalizado");
-        entrega.actualizarEstado();
-        //Se vuelve a añadir al vehiculo y conductor a la lista
-        //lv.agregarVehiculo(vehiculo);
-        //lc.aniadirConductor(conductor);
+        entrega.actualizarEstado();    //PASO 6
     }
     public void simularMovimiento(int segundos){
         try{
@@ -102,25 +85,4 @@ public final class ControlDisponibilidad implements EventListener {
             JOptionPane.showMessageDialog(null,"Error de concurrencia");
         }
     }
-    
-
-
-    @Override
-    public void update(String eventType, Empleado empleado) {
-        if(eventType.equals("nuevo_empleado")){
-            System.out.println("Un nuevo empleado disponible OMG!");
-            le.add(empleado);
-            //Conductor c = new Conductor()
-            //c.setId(empleado.getId())
-            //c.setEstado("Activo");
-            //lc.add(c);
-        }else{
-            System.out.println("Un empleado se largo");
-            le.remove(empleado.getCedula());
-            ////Conductor c = new Conductor()
-            //c.setId(empleado.getId())
-            //lc.remove(c)
-        }
-    }
-    
 }

@@ -33,6 +33,7 @@ public class ListaEntregas {
         modelo.addColumn("Factura");
         modelo.addColumn("Estado");
         modelo.addColumn("Fecha");
+        modelo.addColumn("Direccion");
         for (int i=0;i<this.entregas.size();i++){
             Entrega elemento = this.entregas.get(i);
             String[] registro = new String[num_columnas];
