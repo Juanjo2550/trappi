@@ -16,10 +16,7 @@ import java.awt.Dimension;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- *
- * @author Rommel Alexander
- */
+
 public class PanelEntregasActivas extends javax.swing.JPanel {
     //ATRIBUTOS
     ListaEntregas entregas;
@@ -30,12 +27,18 @@ public class PanelEntregasActivas extends javax.swing.JPanel {
     int bandera=1;
     //CONSUTRCTOR
     public PanelEntregasActivas() {
+public class PanelEntregasActivas1 extends javax.swing.JPanel {
+    
+    int bandera=1;
+    public PanelEntregasActivas1() {
+
         initComponents();
         entregas = new ListaEntregas();
         mapa_rutas = new MapaGeografico();
         panelRutas.add(mapa_rutas.grafico());
         graficarRuta();
     }
+
     //METODOS
     public void setContadores() throws SQLException{
         
@@ -97,8 +100,9 @@ public class PanelEntregasActivas extends javax.swing.JPanel {
         return id_direccion;
     }
     
+
+
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 

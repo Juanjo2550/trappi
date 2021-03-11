@@ -19,15 +19,12 @@ import javax.swing.table.TableColumnModel;
 import com.epn.trappi.models.rrhh.juanjo.ControlAsistencias;
 import static javax.swing.JOptionPane.PLAIN_MESSAGE;
 
-public class PanelControlDisponibilidad extends javax.swing.JPanel {
-    
-    
-    
+public class PanelControlDisponibilidad1 extends javax.swing.JPanel {
     ControlDisponibilidad controlDisponibilidad;
     ControlAsistencias controlAsistencias;
     ListaVehiculos lista_vehiculos;
         
-    public PanelControlDisponibilidad() {
+    public PanelControlDisponibilidad1() {
         initComponents();
         controlDisponibilidad = ControlDisponibilidad.getInstance();
         controlAsistencias = new ControlAsistencias();

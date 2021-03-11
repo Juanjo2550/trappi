@@ -5,10 +5,16 @@
  */
 package com.epn.trappi.gui.rrhh;
 
+import com.epn.trappi.db.connection.DataBaseConnection;
+import com.epn.trappi.models.financiero.Pago;
 import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
 import com.epn.trappi.models.rrhh.listas.ListaRolesDePago;
 import com.epn.trappi.models.rrhh.diego.SolicitudDePago;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -21,8 +27,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ListaDeRolesEmpleados extends javax.swing.JFrame {
 
+    private final Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance()).getConnection();
     private final ListaRolesDePago roles;
     private final SolicitudDePago pagos;
+    String cuenta;
+    String total;
+    String estado;
+    int seleccion;
+    
+
     /**
      * Creates new form Ejemplo_GUI
      */
@@ -31,47 +44,22 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
         this.roles = new ListaRolesDePago();
         this.pagos = new SolicitudDePago();
         inicioTable();
+        this.jButton6.setEnabled(false);
     }
-    public final void inicioTable(){
-           String col[] = {
+
+    public final void inicioTable() {
+        String col[] = {
             "Número",
             "Nombre",
             "Apellido",
+            "Cuenta",
             "Fecha",
             "Total",
             "Descuentos",
             "Estado"
-            
 
         };
         DefaultTableModel tableModel = new DefaultTableModel(col, 0);
-         this.tablaEmpleados.setModel(tableModel);
-        this.tablaEmpleados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.tablaEmpleados.setDefaultEditor(Object.class, null);
-        this.tablaEmpleados.setRowSelectionAllowed(true);
-        this.tablaEmpleados.setColumnSelectionAllowed(false);
-        this.tablaEmpleados.getColumnModel().getColumn(0).setPreferredWidth(2);
-    }
-        public final void solicitudTable() throws Exception {
-
-        String col[] = {
-            "Cuenta",
-            "Monto Total",
-      
-            
-
-        };
-        DefaultTableModel tableModel = new DefaultTableModel(col, 0);
-            for (SolicitudDePago solicitud : this.pagos.SolicitarPago()) {
-            Object[] row = {
-              solicitud.getCuentaBancaria(),
-              solicitud.getMontoTotal()
-             
-              
-            };
-            tableModel.addRow(row);
-        }
-        
         this.tablaEmpleados.setModel(tableModel);
         this.tablaEmpleados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.tablaEmpleados.setDefaultEditor(Object.class, null);
@@ -79,25 +67,50 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
         this.tablaEmpleados.setColumnSelectionAllowed(false);
         this.tablaEmpleados.getColumnModel().getColumn(0).setPreferredWidth(2);
     }
+
+    public final void solicitudTable() throws Exception {
+
+        String col[] = {
+            "Cuenta",
+            "Monto Total",};
+        DefaultTableModel tableModel = new DefaultTableModel(col, 0);
+        for (SolicitudDePago solicitud : this.pagos.SolicitarPago()) {
+            Object[] row = {
+                solicitud.getCuentaBancaria(),
+                solicitud.getMontoTotal()
+
+            };
+            tableModel.addRow(row);
+        }
+
+        this.tablaEmpleados.setModel(tableModel);
+        this.tablaEmpleados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.tablaEmpleados.setDefaultEditor(Object.class, null);
+        this.tablaEmpleados.setRowSelectionAllowed(true);
+        this.tablaEmpleados.setColumnSelectionAllowed(false);
+        this.tablaEmpleados.getColumnModel().getColumn(0).setPreferredWidth(2);
+    }
+
     public final void fillTable() {
 
         String col[] = {
             "Número",
             "Nombre",
             "Apellido",
+            "Cuenta",
             "Fecha",
             "Total",
             "Descuentos",
             "Estado"
-            
 
         };
         DefaultTableModel tableModel = new DefaultTableModel(col, 0);
-            for (RolDePagos rol : this.roles.obtenerTodos()) {
+        for (RolDePagos rol : this.roles.obtenerTodos()) {
             Object[] row = {
                 rol.getNumero(),
                 rol.getEmpleado().getNombres(),
                 rol.getEmpleado().getApellidos(),
+                rol.getEmpleado().getCuentaBancaria(),
                 rol.getFecha(),
                 rol.getTotal(),
                 rol.getDescuentos(),
@@ -105,7 +118,7 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
             };
             tableModel.addRow(row);
         }
-        
+
         this.tablaEmpleados.setModel(tableModel);
         this.tablaEmpleados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.tablaEmpleados.setDefaultEditor(Object.class, null);
@@ -266,6 +279,11 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaEmpleadosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaEmpleados);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -311,12 +329,48 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+
+                Pago pago = new Pago(cuenta, Double.parseDouble(total));
+        System.out.println(cuenta);
+        System.out.println(total);
+        String cambioEstado = pago.realizarPago(pago);
+        String query = "UPDATE ROLPAGOS SET ESTADOROL=" +"'"+ cambioEstado +"'"+ " WHERE ID_ROL=" +"'"+this.tablaEmpleados.getValueAt(seleccion, 0) +"';";
         try {
+            PreparedStatement statement = this.connection.prepareStatement(query);
+            statement.execute();
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        //SolicitudDePago  solicitud = new SolicitudDePago(estado,Double.parseDouble(total), cuenta);
+        try {
+
             solicitudTable();
         } catch (Exception ex) {
             Logger.getLogger(ListaDeRolesEmpleados.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void tablaEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEmpleadosMouseClicked
+
+        seleccion = this.tablaEmpleados.rowAtPoint(evt.getPoint());
+        cuenta = String.valueOf(tablaEmpleados.getValueAt(seleccion, 3));
+        total = String.valueOf(tablaEmpleados.getValueAt(seleccion, 5));
+        estado = String.valueOf(tablaEmpleados.getValueAt(seleccion, 7));
+        this.jButton6.setEnabled(true);
+          /*      Pago pago = new Pago(cuenta, Double.parseDouble(total));
+        System.out.println(cuenta);
+        System.out.println(total);
+        String cambioEstado = pago.realizarPago(pago);
+        String query = "UPDATE ROLPAGOS SET ESTADOROL=" +"'"+ cambioEstado +"'"+ " WHERE ID_ROL=" +"'"+this.tablaEmpleados.getValueAt(seleccion, 0) +"';";
+        try {
+            PreparedStatement statement = this.connection.prepareStatement(query);
+            statement.execute();
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+*/
+
+    }//GEN-LAST:event_tablaEmpleadosMouseClicked
 
     /**
      * @param args the command line arguments

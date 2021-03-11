@@ -16,7 +16,8 @@ import java.util.ArrayList;
  * @author diego
  */
 public class SolicitudDePago {
-
+    
+    int numero;
     Fecha fechaSolicitud;
     String estado;
     Empleado empleadoAPagar;
@@ -24,33 +25,51 @@ public class SolicitudDePago {
     double montoTotal;
     String cuentaBancaria;
     RecursosHumanos recursos_humanos;
-    //Pago pago
 
-    public SolicitudDePago(String cuentaBancaria,double montoTotal ) {
+    public SolicitudDePago(int numero,RolDePagos rol,Empleado empleadoAPagar, Fecha fechaSolicitud, String estado) {
+        this.numero = numero;
+        this.fechaSolicitud = fechaSolicitud;
+        this.estado = estado;
+        this.empleadoAPagar = empleadoAPagar;
+        this.rol = rol;
+    }
+
+
+    public SolicitudDePago(String estado, double montoTotal, String cuentaBancaria) {
+        this.estado = estado;
         this.montoTotal = montoTotal;
         this.cuentaBancaria = cuentaBancaria;
     }
 
+    
     public SolicitudDePago() {
     }
-    
-    
-    public SolicitudDePago[] SolicitarPago() throws Exception{
-        
-        ListaRolesDePago r1  = new ListaRolesDePago();
-        r1.obtenerTodos();
-         
-        ArrayList<SolicitudDePago> roles = new ArrayList<>();
-        for (RolDePagos r: r1.obtenerTodos() ){
-            if("pendiente".equals(r.getEstado())){
-                roles.add(new SolicitudDePago(r.getEmpleado().getCuentaBancaria(),r.getTotal())) ;
-            }       
-        }
-        SolicitudDePago[] solicitudesArray = new SolicitudDePago[roles.size()];
-        solicitudesArray = roles.toArray(solicitudesArray);
-        return solicitudesArray;
+
+    public int getNumero() {
+        return numero;
     }
 
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public Fecha getFechaSolicitud() {
+        return fechaSolicitud;
+    }
+
+    public void setFechaSolicitud(Fecha fechaSolicitud) {
+        this.fechaSolicitud = fechaSolicitud;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
+    
 
     public Empleado getEmpleadoAPagar() {
         return empleadoAPagar;
@@ -88,6 +107,43 @@ public class SolicitudDePago {
         return recursos_humanos;
     }
 
+    public void setRecursos_humanos(RecursosHumanos recursos_humanos) {
+        this.recursos_humanos = recursos_humanos;
+    }
+    
+
+ 
+    
+    
+    
+    public SolicitudDePago(String cuentaBancaria,double montoTotal ) {
+        this.montoTotal = montoTotal;
+        this.cuentaBancaria = cuentaBancaria;
+    }
+
+   /* public SolicitudDePago() {
+    }
+  */  
+    
+    public SolicitudDePago[] SolicitarPago() throws Exception{
+        
+        ListaRolesDePago r1  = new ListaRolesDePago();
+        r1.obtenerTodos();
+         
+        ArrayList<SolicitudDePago> roles = new ArrayList<>();
+        for (RolDePagos r: r1.obtenerTodos() ){
+            if("pendiente".equals(r.getEstado())){
+                roles.add(new SolicitudDePago(r.getEmpleado().getCuentaBancaria(),r.getTotal())) ;
+            }       
+        }
+        SolicitudDePago[] solicitudesArray = new SolicitudDePago[roles.size()];
+        solicitudesArray = roles.toArray(solicitudesArray);
+        return solicitudesArray;
+    }
+
+    
+
+
     // public void EnvioSolicitudPago (Empleado empleado , ){
     /* public boolean autorizarSolicitud(SolicitudDePago a, boolean autoriza) {
     if(autoriza == true){
@@ -108,24 +164,6 @@ public class SolicitudDePago {
     nuevoPago.realizarPago();
     }
     }*/
-    public void setRecursos_humanos(RecursosHumanos recursos_humanos) {
-        this.recursos_humanos = recursos_humanos;
-    }
 
-    public Fecha getFechaSolicitud() {
-        return fechaSolicitud;
-    }
-
-    public void setFechaSolicitud(Fecha fechaSolicitud) {
-        this.fechaSolicitud = fechaSolicitud;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
 
 }

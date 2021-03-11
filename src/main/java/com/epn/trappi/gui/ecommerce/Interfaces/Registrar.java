@@ -20,7 +20,7 @@ public class Registrar extends javax.swing.JFrame {
     
     public Registrar() {
         initComponents();
-        this.setSize(1300, 700);
+        this.setSize(1300, 690);
         this.setLocationRelativeTo(null);
          TextPrompt nombre = new TextPrompt("Nombre", jTextFieldNombre);
          TextPrompt correo= new TextPrompt("Correo", jTextFieldCorreo);
