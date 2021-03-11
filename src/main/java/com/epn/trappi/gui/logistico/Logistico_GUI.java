@@ -25,7 +25,8 @@ import javax.swing.border.Border;
 public class Logistico_GUI extends javax.swing.JFrame {
     
     PanelControlDisponibilidad1 mapaDisponibilidad = new PanelControlDisponibilidad1();
-    PanelEntregasActivas1 entregasActivas = new PanelEntregasActivas1();
+    //PanelEntregasActivas1 entregasActivas = new PanelEntregasActivas1();
+    Entregas_en_Curso entregasCurso = new Entregas_en_Curso();
     FichasTecnicas fichasTecnicas = new FichasTecnicas();
     ListasVehiculos listasVehiculos = new ListasVehiculos();
     RegistroMantenimiento registroMantenimiento = new RegistroMantenimiento();
@@ -544,26 +545,19 @@ public class Logistico_GUI extends javax.swing.JFrame {
         //
         this.botonRegistroEntregas.setBorder(new RoundedBorder(radio));
         this.botonRegistroEntregas.setOpaque(false);
-        //this.btnListaEntregas.setBorderPainted(true);
         this.botonControl.setBorder(new RoundedBorder(radio));
         this.botonControl.setOpaque(false);
-        //this.btnMapaDisponibilidad.setBorderPainted(true);
         this.botonEntregasActivas.setBorder(new RoundedBorder(radio));
         this.botonEntregasActivas.setOpaque(false);
-        //this.jBEntregasActivas.setBorderPainted(true);
         this.jButton1.setBorder(new RoundedBorder(radio));
         this.jButton1.setOpaque(false);
-        //this.jButton1.setBorderPainted(true);
         this.botonFichas.setBorder(new RoundedBorder(radio));
         this.botonFichas.setOpaque(false);
         this.botonFichas.setContentAreaFilled(false);
-        //this.jButton6.setBorderPainted(true);
         this.botonListaVehiculos.setBorder(new RoundedBorder(radio));
         this.botonListaVehiculos.setOpaque(false);
-        //this.jButton7.setBorderPainted(true);
         this.botonMantenimiento.setBorder(new RoundedBorder(radio));
         this.botonMantenimiento.setOpaque(false);
-        //this.jButton8.setBorderPainted(true);
         this.botonActualizarVehiculo.setBorder(new RoundedBorder(radio));
         this.botonActualizarVehiculo.setOpaque(false);
         
@@ -617,10 +611,7 @@ public class Logistico_GUI extends javax.swing.JFrame {
     }
 }
     private void botonControlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonControlActionPerformed
-        //Llamamos al panel Mapa Disponibilidad
-        //entregasActivas.setVisible(false);
-        //mapaDisponibilidad.setVisible(true);
-        
+       
         ocultarPaneles(this.mapaDisponibilidad);
         mapaDisponibilidad.setSize(1048,813);
         mapaDisponibilidad.llenarTablaVehiculos();
@@ -640,20 +631,12 @@ public class Logistico_GUI extends javax.swing.JFrame {
 
     private void botonEntregasActivasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEntregasActivasActionPerformed
 
-            ocultarPaneles(this.entregasActivas);
-            entregasActivas.setSize(1048, 813);
-            jPEntregasActivasGUI.add(entregasActivas);
-            //entregasActivas.setLocation(1048, 660);
+            ocultarPaneles(this.entregasCurso);
+            entregasCurso.setSize(1048, 813);
+            jPEntregasActivasGUI.add(entregasCurso);
             jPEntregasActivasGUI.revalidate();   
             jPEntregasActivasGUI.repaint();
-            /*
-        try {
-            entregasActivas.setContadores();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"No esta disponible la base de datos");
-        }*/
-        
-        
+            
     }//GEN-LAST:event_botonEntregasActivasActionPerformed
     //MOUSE EVENTS PARA LOS BOTONES
     private void moveMouseOnVolver(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moveMouseOnVolver
@@ -718,49 +701,38 @@ public class Logistico_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_botonControlMouseExited
 
     private void botonRegistroEntregasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistroEntregasActionPerformed
-        //Llamamos al panel RegistroEntregas
-        //registroEntregas.setVisible(false);
-        //entregasActivas.setVisible(true);
+
         ocultarPaneles(this.registroEntregas);
         registroEntregas.setSize(1048,813);
         jPEntregasActivasGUI.add(registroEntregas);
-        //entregasActivas.setLocation(1048, 660);
         jPEntregasActivasGUI.revalidate();
         jPEntregasActivasGUI.repaint();
+        
     }//GEN-LAST:event_botonRegistroEntregasActionPerformed
 
     private void botonFichasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonFichasActionPerformed
-        //Llamamos al panel RegistroEntregas
-        //registroEntregas.setVisible(false);
-        //entregasActivas.setVisible(true);
+
         ocultarPaneles(this.fichasTecnicas);
         fichasTecnicas.setSize(1048, 813);
         jPEntregasActivasGUI.add(fichasTecnicas);
-        //entregasActivas.setLocation(1048, 660);
         jPEntregasActivasGUI.revalidate();
         jPEntregasActivasGUI.repaint();
     }//GEN-LAST:event_botonFichasActionPerformed
 
     private void botonListaVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonListaVehiculosActionPerformed
-        //Llamamos al panel RegistroEntregas
-        //registroEntregas.setVisible(false);
-        //entregasActivas.setVisible(true);
+
         ocultarPaneles(this.listasVehiculos);
         listasVehiculos.setSize(1048, 813);
         jPEntregasActivasGUI.add(listasVehiculos);
-        //entregasActivas.setLocation(1048, 660);
         jPEntregasActivasGUI.revalidate();
         jPEntregasActivasGUI.repaint();
     }//GEN-LAST:event_botonListaVehiculosActionPerformed
 
     private void botonMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMantenimientoActionPerformed
-        //Llamamos al panel RegistroEntregas
-        //registroEntregas.setVisible(false);
-        //entregasActivas.setVisible(true);
+
         ocultarPaneles(this.registroMantenimiento);
         registroMantenimiento.setSize(1048, 813);
         jPEntregasActivasGUI.add(registroMantenimiento);
-        //entregasActivas.setLocation(1048, 660);
         jPEntregasActivasGUI.revalidate();
         jPEntregasActivasGUI.repaint();
     }//GEN-LAST:event_botonMantenimientoActionPerformed
@@ -786,13 +758,13 @@ public class Logistico_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_botonActualizarVehiculoexitMouseOnListaV
 
     private void botonActualizarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarVehiculoActionPerformed
-        // TODO add your handling code here:
+
         ocultarPaneles(this.actualizarVehiculo);
         actualizarVehiculo.setSize(1048, 770);
         jPEntregasActivasGUI.add(actualizarVehiculo);
-        //entregasActivas.setLocation(1048, 660);
         jPEntregasActivasGUI.revalidate();
         jPEntregasActivasGUI.repaint();
+        
     }//GEN-LAST:event_botonActualizarVehiculoActionPerformed
 
     private void botonRegistrarVehiculomoveMouseOnListaV(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRegistrarVehiculomoveMouseOnListaV
@@ -806,12 +778,10 @@ public class Logistico_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_botonRegistrarVehiculoexitMouseOnListaV
 
     private void botonRegistrarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarVehiculoActionPerformed
-        // TODO add your handling code here:
         
         ocultarPaneles(this.registroVehiculo);
         registroVehiculo.setSize(1048, 813);
         jPEntregasActivasGUI.add(registroVehiculo);
-        //entregasActivas.setLocation(1048, 660);
         jPEntregasActivasGUI.revalidate();
         jPEntregasActivasGUI.repaint();
         
@@ -820,7 +790,7 @@ public class Logistico_GUI extends javax.swing.JFrame {
     private void ocultarPaneles(JPanel panel){
         mapaDisponibilidad.setVisible(panel.getClass().equals(mapaDisponibilidad.getClass()));
         registroEntregas.setVisible(panel.getClass().equals(registroEntregas.getClass()));
-        entregasActivas.setVisible(panel.getClass().equals(entregasActivas.getClass()));
+        entregasCurso.setVisible(panel.getClass().equals(entregasCurso.getClass()));
         fichasTecnicas.setVisible(panel.getClass().equals(fichasTecnicas.getClass()));
         listasVehiculos.setVisible(panel.getClass().equals(listasVehiculos.getClass()));
         registroMantenimiento.setVisible(panel.getClass().equals(registroMantenimiento.getClass()));

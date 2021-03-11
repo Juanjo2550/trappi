@@ -20,19 +20,32 @@ import com.epn.trappi.models.rrhh.juanjo.ControlAsistencias;
 import static javax.swing.JOptionPane.PLAIN_MESSAGE;
 
 public class PanelControlDisponibilidad1 extends javax.swing.JPanel {
+    //ATRIBUTOS
     ControlDisponibilidad controlDisponibilidad;
     ControlAsistencias controlAsistencias;
-    ListaVehiculos lista_vehiculos;
-        
+    ListaVehiculos lista_vehiculos;  
+    //CONSTRUCTOR
     public PanelControlDisponibilidad1() {
         initComponents();
-        controlDisponibilidad = ControlDisponibilidad.getInstance();
-        controlAsistencias = new ControlAsistencias();
-        controlAsistencias.events.suscribe("nuevo_empleado",controlDisponibilidad);
-        controlAsistencias.events.suscribe("salida_empleado",controlDisponibilidad);
+        initComponents();
+        try {
+            controlDisponibilidad = ControlDisponibilidad.getInstance();
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelControlDisponibilidad1.class.getName()).log(Level.SEVERE, null, ex);
+        }
         lista_vehiculos = new ListaVehiculos();
     }
-    
+    //METODOS
+    public void llenarTablaVehiculos(){
+        ServicioDb servicio = new ServicioDbVehiculo();
+        try {
+            lista_vehiculos.setVehiculos(servicio.obtenerElementosPorFiltro(ServicioDbVehiculo.ESTADO,"Habilitado").getDatos());
+            DefaultTableModel modelo = lista_vehiculos.mostrarLista();
+            jTableVerificarVehiculo.setModel(modelo);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se puede mostrar la tabla de vehículos", "Error", PLAIN_MESSAGE);
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -157,73 +170,9 @@ public class PanelControlDisponibilidad1 extends javax.swing.JPanel {
                 .addContainerGap(205, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-    
-    
-    public void llenarTablaVehiculos(){
-        ServicioDb servicio = new ServicioDbVehiculo();
-        try {
-            lista_vehiculos.setVehiculos(servicio.obtenerElementosPorFiltro(ServicioDbVehiculo.ESTADO,"Habilitado").getDatos());
-            DefaultTableModel modelo = lista_vehiculos.mostrarLista();
-            jTableVerificarVehiculo.setModel(modelo);
-            //jTableVerificarVehiculo.removeColumnSelectionInterval(WIDTH, WIDTH);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se puede mostrar la tabla de vehículos", "Error", PLAIN_MESSAGE);
-        }
-    }
+
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         llenarTablaVehiculos();  
-        /*
-        tabla = "VEHICULO";
-        columna = "ESTADO";
-        valor = "Habilitado";
-        try {
-            DefaultTableModel modelo = instancia.consultarTablaColumna(tabla, columna, valor);
-            this.jTableVerificarVehiculo.setModel(modelo);
-            //Eliminar Tablas sin Importancia
-                jTableVerificarVehiculo.removeColumn(jTableVerificarVehiculo.getColumnModel().getColumn(3));
-                jTableVerificarVehiculo.removeColumn(jTableVerificarVehiculo.getColumnModel().getColumn(1));
-            //Poner Nombres
-            changeColumnNameVehiculo(0, "Matricula");
-            changeColumnNameVehiculo(1, "Tipo de Vehiculo");
-            
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(PanelControlDisponibilidad.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        ArrayList<Empleado> empleados = controlDisponibilidad.le;
-        for (Empleado empleado : empleados) {
-            JOptionPane.showMessageDialog(null, empleado.getNombres());
-        }
-        */
-        
-        /*
-        //llenar tabla Empleado
-        tabla = "EMPLEADO";
-        columna = "TIPOEMP";
-        valor = "conductor";
-        try {
-            DefaultTableModel modelo = instancia.consultarTablaColumna(tabla, columna, valor);
-            this.jTNombres.setModel(modelo);
-            jTNombres.removeColumn(jTNombres.getColumnModel().getColumn(11));
-            jTNombres.removeColumn(jTNombres.getColumnModel().getColumn(10));
-            jTNombres.removeColumn(jTNombres.getColumnModel().getColumn(9));
-            jTNombres.removeColumn(jTNombres.getColumnModel().getColumn(7));
-            jTNombres.removeColumn(jTNombres.getColumnModel().getColumn(6));
-            jTNombres.removeColumn(jTNombres.getColumnModel().getColumn(5));
-            jTNombres.removeColumn(jTNombres.getColumnModel().getColumn(4));
-            jTNombres.removeColumn(jTNombres.getColumnModel().getColumn(3));
-            jTNombres.removeColumn(jTNombres.getColumnModel().getColumn(2));
-            jTNombres.removeColumn(jTNombres.getColumnModel().getColumn(0));
-            //Poner Nombres
-            changeColumnNameConductor(0, "Nombre");
-            changeColumnNameConductor(1, "Estado");
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(panelControlDisponibilidad.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-        
-        
     }//GEN-LAST:event_btnActualizarActionPerformed
      public void changeColumnNameVehiculo(int __COLUMN__, String __NAME__){
         JTableHeader head = jTableVerificarVehiculo.getTableHeader();

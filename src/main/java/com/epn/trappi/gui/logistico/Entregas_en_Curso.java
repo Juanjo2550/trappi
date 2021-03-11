@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.epn.trappi.gui.logistico;
 
 import com.epn.trappi.models.logistico.Entrega;
@@ -15,9 +19,15 @@ import com.epn.trappi.models.logistico.servicios.Unible;
 import java.awt.Dimension;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
-
-public class PanelEntregasActivas extends javax.swing.JPanel {
+/**
+ *
+ * @author Alexander
+ */
+public class Entregas_en_Curso extends javax.swing.JPanel {
     //ATRIBUTOS
     ListaEntregas entregas;
     ServicioDb servicio;
@@ -25,84 +35,108 @@ public class PanelEntregasActivas extends javax.swing.JPanel {
     Unible unible;
     MapaGeografico mapa_rutas;
     int bandera=1;
-    //CONSUTRCTOR
-    public PanelEntregasActivas() {
-public class PanelEntregasActivas1 extends javax.swing.JPanel {
-    
-    int bandera=1;
-    public PanelEntregasActivas1() {
-
+    //CONSTRUCTOR
+    public Entregas_en_Curso() {
         initComponents();
         entregas = new ListaEntregas();
         mapa_rutas = new MapaGeografico();
         panelRutas.add(mapa_rutas.grafico());
-        graficarRuta();
+        //graficarRuta("Av. Mariscal Sucre y America");
+        tablaEntregas.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    //mostrarRuta(evt);
+                } catch (Exception ex) {
+                    Logger.getLogger(ListasVehiculos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
     }
-
     //METODOS
     public void setContadores() throws SQLException{
         
         int num_entregas;
-        int num_autos;
-        int num_motos;
-        int num_camiones;
+        int num_autos=1;
+        int num_motos=0;
+        int num_camiones=0;
         
         servicio = new ServicioDbEntrega();
         unible = new ServicioDbEntrega();
         
         ArrayList<Entrega> entregas_activas = servicio.obtenerElementosPorFiltro(ServicioDbEntrega.ESTADO,"En Curso").getDatos();
         num_entregas=entregas_activas.size();
-        
-        consultable = new ServicioDbVehiculo().obtenerElementosPorFiltro(ServicioDbVehiculo.TIPO,"Automovil");
-        ArrayList<Vehiculo> vehiculos_activos = (ArrayList<Vehiculo>) unible.join(entregas_activas, consultable);
-        num_autos=vehiculos_activos.size();
-        
-        consultable = new ServicioDbVehiculo().obtenerElementosPorFiltro(ServicioDbVehiculo.TIPO,"Motocicleta");
-        vehiculos_activos = (ArrayList<Vehiculo>) unible.join(entregas_activas, consultable);
-        num_motos=vehiculos_activos.size();
-        
-        consultable = new ServicioDbVehiculo().obtenerElementosPorFiltro(ServicioDbVehiculo.TIPO,"Camion");
-        vehiculos_activos = (ArrayList<Vehiculo>) unible.join(entregas_activas, consultable);
-        num_camiones=vehiculos_activos.size();
+        if(num_entregas<=0){
+            JOptionPane.showMessageDialog(null,"Actualmente no existen entregas activas");
+            return;
+        }
+        Consultable consultableV = new ServicioDbVehiculo().obtenerElementos();
+        ArrayList<Vehiculo> vehiculos_activos = (ArrayList<Vehiculo>) unible.join(entregas_activas, consultableV);
+        for(int i=0;i<vehiculos_activos.size();i++){
+            if("Automovil".equalsIgnoreCase(vehiculos_activos.get(i).getTipo().trim())){
+                num_autos=num_autos+1;
+            }
+            if("Motocicleta".equalsIgnoreCase(vehiculos_activos.get(i).getTipo().trim())){
+                num_motos++;
+            }
+            if("Camion".equalsIgnoreCase(vehiculos_activos.get(i).getTipo().trim())){
+                num_camiones++;
+            }
+        }
         
         contadorEntregas.setText(String.valueOf(num_entregas));
         contadorAutos.setText(String.valueOf(num_autos));
         contadorMotos.setText(String.valueOf(num_motos));
         contadorCamiones.setText(String.valueOf(num_camiones));
-        
     }
     
     public void setTablaEntregas() throws SQLException{
-        
+        entregas = new ListaEntregas();
         servicio = new ServicioDbEntrega();
         entregas.setEntregas(servicio.obtenerElementosPorFiltro(ServicioDbEntrega.ESTADO,"En curso").getDatos());
+        if(entregas.estaVacia()){
+            return;
+        }
         this.tablaEntregas.setModel(entregas.mostrarLista());
+        
     }
     
-    public void graficarRuta(){
+    public void graficarRuta(String destino){
         Ruta ruta = new Ruta();
-        String origen="Megamaxi 6 de Diciembre";
-        String destino="Quicentro Shopping Norte";
+        String origen="Quicentro Shopping Norte";
         ruta.definirRuta(new Posicion(mapeoDirecciones(origen)),new Posicion(mapeoDirecciones(destino)));
         mapa_rutas.trazarRuta(ruta);
     }
     
     public String mapeoDirecciones(String direccion){
         String id_direccion;
+        direccion=direccion.trim();
         if(direccion.equalsIgnoreCase("Quicentro Shopping Norte")){
             id_direccion="ChIJf3SFnYOa1ZEReimBvayqhDo";
         }
         if(direccion.equalsIgnoreCase("Megamaxi 6 de Diciembre")){//Origen por defecto
             id_direccion="ChIJv4XVroGa1ZERW6s47_m15Fc";
-        }else{
+        }
+        if(direccion.equalsIgnoreCase("Machachi")){
+            id_direccion="ChIJ8-NbUVOp1ZERQ_4RA_KCF7Q";
+        }
+        if(direccion.equalsIgnoreCase("Av. Mariscal Sucre y America")){
+            id_direccion="EiJBdi4gTWFyaXNjYWwgU3VjcmUsIFF1aXRvLCBFY3VhZG9yIi4qLAoUChIJa2cI9H-Z1ZERfoS-V7ofc74SFAoSCZ98QgJAmtWREXJV71jhkblE";
+        }
+        else{
             id_direccion="ChIJS9QcfhCa1ZER1J6TZk8oigg";//Destino por defecto - Escuela Politecnica Nacional
         }
         return id_direccion;
     }
     
-
-
+    private void mostrarRuta(java.awt.event.MouseEvent evt) throws SQLException, Exception {  
+        int fila = tablaEntregas.getSelectedRow();
+        String direccion = (String)tablaEntregas.getValueAt(fila, 6);
+        graficarRuta(direccion);
+    }
+    
     @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
@@ -508,7 +542,6 @@ public class PanelEntregasActivas1 extends javax.swing.JPanel {
         jPanel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(219, 223, 228)));
         jPanel12.setMaximumSize(new java.awt.Dimension(965, 40));
         jPanel12.setMinimumSize(new java.awt.Dimension(965, 40));
-        jPanel12.setPreferredSize(new java.awt.Dimension(965, 40));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(96, 97, 101));
@@ -582,7 +615,7 @@ public class PanelEntregasActivas1 extends javax.swing.JPanel {
         tablaEntregas.setForeground(new java.awt.Color(96, 97, 101));
         tablaEntregas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Rommel", "Alexander", "1634534", null},
+                {"", "", "", null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -789,7 +822,7 @@ public class PanelEntregasActivas1 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMinimizarMouseClicked
-        
+
         if(bandera==1){
             this.PANELTABLA.setVisible(false);
             this.panelTabla.setPreferredSize(new Dimension(965, 45));
