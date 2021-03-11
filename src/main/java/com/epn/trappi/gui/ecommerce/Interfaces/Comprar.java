@@ -36,7 +36,7 @@ public class Comprar extends javax.swing.JFrame {
 
     public Comprar() {
         initComponents();
-        this.setSize(1300, 700);
+        this.setSize(1300, 690);
         this.setLocationRelativeTo(null);
         llenartabla();
 
@@ -71,29 +71,7 @@ public class Comprar extends javax.swing.JFrame {
             Logger.getLogger(Comprar.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        /*try {
-            DefaultTableModel productos = (DefaultTableModel) jTable1.getModel();
-
-            String[] aux = new String[4];
-            Statement statement = connection.createStatement();
-            String sql = "select NOMBREBIEN,MARCA,PRECIOBIEN,CANTIDADINVENTARIO from BIEN B, INVENTARIO I"
-                    + " where B.IDENTIFICADORBIEN2=I.IDENTIFICADORBIEN2 AND CANTIDADINVENTARIO>=1";
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-
-                aux[0] = resultSet.getString("NOMBREBIEN");
-                aux[1] = resultSet.getString("MARCA");
-                aux[2] = resultSet.getString("PRECIOBIEN");
-                aux[3] = resultSet.getString("CANTIDADINVENTARIO");;
-                productos.addRow(aux);
-//                Articulo art=new Articulo(aux[0], aux[1],Double.parseDouble(aux[3]) ,Integer.parseInt(aux[4]), aux[2]);
-//                Main.stock.listaarticulos.add(art);
-            }
-            jTable1.setModel(productos);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+       
     }
 
     public void obtenerproductodestock() {
@@ -215,13 +193,13 @@ public class Comprar extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
+                .addContainerGap()
                 .addComponent(jt, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(126, 126, 126)
+                .addGap(54, 54, 54)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton4)
@@ -377,7 +355,7 @@ public class Comprar extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonagregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
