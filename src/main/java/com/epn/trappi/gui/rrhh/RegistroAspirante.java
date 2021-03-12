@@ -8,8 +8,8 @@ package com.epn.trappi.gui.rrhh;
 
 import com.epn.trappi.models.rrhh.contratacion.Aspirante;
 import com.epn.trappi.models.rrhh.contratacion.PruebaAdmision;
-import com.epn.trappi.models.rrhh.listas.Lista;
 import com.epn.trappi.db.rrhh.AspirantesDB;
+import com.epn.trappi.db.rrhh.ModelDb;
 import com.epn.trappi.db.rrhh.PruebasAdmisionDB;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 public class RegistroAspirante extends javax.swing.JFrame {
     
     private void listarAspirantes(){
-        Lista listaAspirantes = (Lista) new AspirantesDB();
+        ModelDb listaAspirantes =  new AspirantesDB();
         Aspirante[] aspirantes = (Aspirante[]) listaAspirantes.obtenerTodos();
         PruebasAdmisionDB listaPruebas = new PruebasAdmisionDB();
         DefaultTableModel model = (DefaultTableModel) jTableAspirantes.getModel();
@@ -438,7 +438,7 @@ public class RegistroAspirante extends javax.swing.JFrame {
 
     private void jButGuardarAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButGuardarAspiranteActionPerformed
       
-        Lista listaAspirantes = (Lista) new AspirantesDB();
+        ModelDb listaAspirantes =  new AspirantesDB();
         PruebasAdmisionDB listaPruebas = new PruebasAdmisionDB();
         Aspirante aspirante = new Aspirante(jTextNombreAspirante.getText(), jTextApellidoAspirante.getText(), jTextCedulaAspirante.getText(),
                 jTextTelefonoAspirante.getText(), jTextCargoAspirante.getText());
