@@ -45,13 +45,26 @@ public class Contrato {
     
     public Fecha obtenerFechaFin(String cedula){
         ContratoDb db = new ContratoDb();
-        return db.buscarUno(cedula).getFechaFin();
+        Contrato contrato = null;
+        contrato = db.buscarUno(cedula);
+        if (contrato != null){
+            return contrato.getFechaFin();
+        } else {
+            return null;
+        }
+        
         
     }
     
     public String obtenerTipo(String cedula){
         ContratoDb db = new ContratoDb();
-        return db.buscarUno(cedula).getTipo();
+        Contrato contrato = null;
+        contrato = db.buscarUno(cedula);
+        if (contrato != null){
+            return contrato.getTipo();
+        } else {
+            return null;
+        }
     }
     
     

@@ -209,7 +209,7 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         this.setVisible(false);
-        RegistroAspirante aspirante = new RegistroAspirante();
+        ContratacionPrincipal aspirante = new ContratacionPrincipal();
         aspirante.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton7ActionPerformed

@@ -29,14 +29,20 @@ public class Descuento {
         Contrato contrato = new Contrato();
         Fecha fecha = new Fecha();
         fecha = contrato.obtenerFechaFin(cedula);
-        int diaContrato = fecha.getDia();
-        int mesContrato = fecha.getMes();
-        int anoContrato = fecha.getAño();
+        if (fecha != null){
+            int diaContrato = fecha.getDia();
+            int mesContrato = fecha.getMes();
+            int anoContrato = fecha.getAño();
+            String tipo = contrato.obtenerTipo(cedula);
+            return (tipo.equalsIgnoreCase("indefinido") || (anoActual <= anoContrato && mesActual <= mesContrato && diaActual <= diaContrato));
+        } else
+            return false;
+        
+        
         //System.out.println("Fecha Actual: " + diaActual + "/" + mesActual + "/" + anoActual);
         //System.out.println("Fecha Contrato: " + diaContrato + "/" + mesContrato + "/" + anoContrato);
         
-        String tipo = contrato.obtenerTipo(cedula);
-        return (tipo.equalsIgnoreCase("indefinido") || (anoActual <= anoContrato && mesActual <= mesContrato && diaActual <= diaContrato));
+        
     }
     
     public double obtenerValor(String cedulaCliente){
@@ -44,18 +50,21 @@ public class Descuento {
             return this.valor;
         return 0.0;
     }
-//    public static void main(String args[]){
-//        //TEST
-//        double valor = new Descuento().obtenerValor("1722951165");
-//        System.out.println("El valor que se obtuvo fue = " + valor);
-//        double valor1 = new Descuento().obtenerValor("1706496880");
-//        System.out.println("El valor que se obtuvo fue = " + valor1);
-//        double valor2 = new Descuento().obtenerValor("1755041589");
-//        System.out.println("El valor que se obtuvo fue = " + valor2);
-//        double valor3 = new Descuento().obtenerValor("175214895");
-//        System.out.println("El valor que se obtuvo fue = " + valor3);
-//        
-//    }
+    public static void main(String args[]){
+        //TEST
+        //Caso en que no existe
+        double valor = new Descuento().obtenerValor("1258");
+        System.out.println("El valor que se obtuvo fue = " + valor);
+        //Terminado el contrato
+        double valor1 = new Descuento().obtenerValor("1706496880");
+        System.out.println("El valor que se obtuvo fue = " + valor1);
+        //Casos de empleados vigentes
+        double valor2 = new Descuento().obtenerValor("1755041589");
+        System.out.println("El valor que se obtuvo fue = " + valor2);
+        double valor3 = new Descuento().obtenerValor("175214895");
+        System.out.println("El valor que se obtuvo fue = " + valor3);
+        
+    }
     
 }
 

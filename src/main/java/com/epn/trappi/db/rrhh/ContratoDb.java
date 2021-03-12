@@ -77,18 +77,22 @@ public class ContratoDb implements ModelDb <Contrato> {
             String query = "SELECT * FROM EMPLEADO JOIN CONTRATO ON EMPLEADO.IDEMP = CONTRATO.IDEMP WHERE CEDULAEMP ='"+cedulaEmpleado+"'";
             pstm = conn.prepareStatement(query);
             rs = pstm.executeQuery();
-            rs.next();
-            
-            String fechaInicioTemp = rs.getString("FECHAINICIO");
-            String [] fechaInicioArr = fechaInicioTemp.split("-");
-            String fechaFinTemp = rs.getString("FECHAFIN");
-            String [] fechaFinArr = fechaFinTemp.split("-");
-            Fecha fechaInicio = new Fecha(Integer.parseInt(fechaInicioArr[2]), Integer.parseInt(fechaInicioArr[1]), Integer.parseInt(fechaInicioArr[0]));
-            Fecha fechaFin = new Fecha(Integer.parseInt(fechaFinArr[2]), Integer.parseInt(fechaFinArr[1]), Integer.parseInt(fechaFinArr[0]));
+            if(rs.next()){
+                String fechaInicioTemp = rs.getString("FECHAINICIO");
+                String [] fechaInicioArr = fechaInicioTemp.split("-");
+                String fechaFinTemp = rs.getString("FECHAFIN");
+                String [] fechaFinArr = fechaFinTemp.split("-");
+                Fecha fechaInicio = new Fecha(Integer.parseInt(fechaInicioArr[2]), Integer.parseInt(fechaInicioArr[1]), Integer.parseInt(fechaInicioArr[0]));
+                Fecha fechaFin = new Fecha(Integer.parseInt(fechaFinArr[2]), Integer.parseInt(fechaFinArr[1]), Integer.parseInt(fechaFinArr[0]));
 
-            contrato = new Contrato( fechaInicio, fechaFin,
-            rs.getString("TIPOCONTRATO"),String.valueOf(rs.getDouble("SUELDO")));
-            System.out.println("Consulta Buscar un contrato se hizo con exito"); 
+                contrato = new Contrato( fechaInicio, fechaFin,
+                rs.getString("TIPOCONTRATO"),String.valueOf(rs.getDouble("SUELDO")));
+                System.out.println("Consulta Buscar un contrato se hizo con exito");
+            } else {
+                System.out.println("No se encontro el contrato");
+                return null;
+            }
+            
         } catch (Exception e) {
             System.out.println("Error en consulta de buscar un contrato (" + cedulaEmpleado+"): " + e);
         }
