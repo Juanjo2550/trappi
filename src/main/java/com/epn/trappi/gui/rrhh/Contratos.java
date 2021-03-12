@@ -8,9 +8,11 @@ package com.epn.trappi.gui.rrhh;
 
 import com.epn.trappi.models.rrhh.contratacion.Contrato;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
-import com.epn.trappi.models.rrhh.listas.Lista;
+
 import com.epn.trappi.db.rrhh.ContratosDB;
-import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
+import com.epn.trappi.db.rrhh.EmpleadoDb;
+import com.epn.trappi.db.rrhh.ModelDb;
+
 import java.awt.Color;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Contratos extends javax.swing.JFrame {
     private void listarContratos(){
-        Lista listaEmpleados = new EmpleadoDb();
+        ModelDb listaEmpleados = new EmpleadoDb();
         Empleado [] empleados = (Empleado[]) listaEmpleados.obtenerTodos();
         ContratosDB listaContratos = new ContratosDB();
         DefaultTableModel model = (DefaultTableModel) jTableContratosEmpleados.getModel();

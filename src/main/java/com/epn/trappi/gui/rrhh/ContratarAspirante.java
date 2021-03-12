@@ -16,8 +16,8 @@ import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import com.epn.trappi.models.rrhh.listas.Lista;
 import com.epn.trappi.db.rrhh.AspirantesDB;
 import com.epn.trappi.db.rrhh.ContratosDB;
+import com.epn.trappi.db.rrhh.EmpleadoDb;
 import com.epn.trappi.db.rrhh.ModelDb;
-import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
 import com.epn.trappi.db.rrhh.PruebasAdmisionDB;
 
 import java.util.ArrayList;
@@ -845,7 +845,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
             String estadoEmp = "Activo";
             
             //Se realiza el registro del empleado en la base de datos 
-            Lista listaEmpleado = new EmpleadoDb();
+            ModelDb listaEmpleado = new EmpleadoDb();
             Empleado nuevoEmpleado = null;
             if (tipoEmpleado.equalsIgnoreCase("conductor")){
                 int idNuevoEmp = listaEmpleado.obtenerTodos().length + 1;

@@ -3,7 +3,8 @@ package com.epn.trappi.models.rrhh.contratacion;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import com.epn.trappi.db.rrhh.ContratosDB;
-import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
+import com.epn.trappi.db.rrhh.EmpleadoDb;
+
 import javax.swing.JOptionPane;
 
 /**
