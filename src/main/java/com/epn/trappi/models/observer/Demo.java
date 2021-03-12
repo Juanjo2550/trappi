@@ -6,8 +6,7 @@
 package com.epn.trappi.models.observer;
 
 import com.epn.trappi.models.rrhh.juanjo.ControlAsistencias;
-import com.epn.trappi.models.rrhh.juanjo.Empleado;
-import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
+import com.epn.trappi.db.rrhh.EmpleadoDb;
 
 /**
  *
@@ -112,7 +111,7 @@ public class Demo extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new ListaEmpleados().buscarUno("1722951165").notificarSalida();
+        new EmpleadoDb().buscarUno("1722951165").notificarSalida();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

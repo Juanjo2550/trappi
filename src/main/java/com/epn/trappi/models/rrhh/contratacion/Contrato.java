@@ -41,7 +41,7 @@ public class Contrato {
     }
     
     public void registrarEmpleado(Empleado empleado){
-        ListaEmpleados listEmp = new ListaEmpleados();
+        EmpleadoDb listEmp = new EmpleadoDb();
         listEmp.agregar(empleado);
     }
 

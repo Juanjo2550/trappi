@@ -6,7 +6,6 @@
 package com.epn.trappi.gui.rrhh;
 
 
-import com.epn.trappi.*;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.contratacion.Aspirante;
 import com.epn.trappi.models.rrhh.contratacion.Contrato;
@@ -21,10 +20,8 @@ import com.epn.trappi.db.rrhh.ModelDb;
 import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
 import com.epn.trappi.db.rrhh.PruebasAdmisionDB;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Vector;
-import javax.swing.ButtonModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -848,7 +845,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
             String estadoEmp = "Activo";
             
             //Se realiza el registro del empleado en la base de datos 
-            Lista listaEmpleado = new ListaEmpleados();
+            Lista listaEmpleado = new EmpleadoDb();
             Empleado nuevoEmpleado = null;
             if (tipoEmpleado.equalsIgnoreCase("conductor")){
                 int idNuevoEmp = listaEmpleado.obtenerTodos().length + 1;

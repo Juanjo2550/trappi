@@ -1,6 +1,7 @@
 
 package com.epn.trappi.models.rrhh.listas;
 import com.epn.trappi.db.connection.DataBaseConnection;
+import com.epn.trappi.db.rrhh.EmpleadoDb;
 import com.epn.trappi.gui.rrhh.Permisos.Calamidad_Domestica;
 import com.epn.trappi.gui.rrhh.Permisos.Enfermedad;
 import com.epn.trappi.gui.rrhh.Permisos.Nacimiento_Hijo;
@@ -11,9 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Objects;
 import javax.swing.JOptionPane;
 
 /**
@@ -135,7 +134,7 @@ public class ListaPermisos implements Lista<Permiso>{
 //metodo creado para obtener todos los permisos almacenados en la base de datos
     public Permiso[] obtenerTodos(){
         listaPermiso = new ArrayList<>();
-        ListaEmpleados l1 = new ListaEmpleados();
+        EmpleadoDb l1 = new EmpleadoDb();
         Empleado[] empleados = l1.obtenerTodos();
  
         try {

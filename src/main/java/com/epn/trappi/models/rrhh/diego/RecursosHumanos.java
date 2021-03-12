@@ -9,17 +9,17 @@ package com.epn.trappi.models.rrhh.diego;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
-import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
-import com.epn.trappi.models.rrhh.listas.ListaRolesDePago;
+import com.epn.trappi.db.rrhh.EmpleadoDb;
+import com.epn.trappi.db.rrhh.RolDePagosDb;
 
 /**
  *
  * @author diego
  */
 public class RecursosHumanos {
-    public ListaEmpleados empleados;
+    public EmpleadoDb empleados;
     public RolDePagos pendiente ;
-    private final ListaRolesDePago roles = new ListaRolesDePago();
+    private final RolDePagosDb roles = new RolDePagosDb();
     
     //comentado para solucionar problemas
    /* public RolesPagos roles = new RolesPagos();
@@ -39,7 +39,7 @@ public class RecursosHumanos {
     }
     
     public void iterarEmpleados(Fecha f) throws Exception{
-        Empleado[] l1 = new ListaEmpleados().obtenerTodos();
+        Empleado[] l1 = new EmpleadoDb().obtenerTodos();
             for(Empleado e1:l1){
                 this.roles.agregar(iteracionRoles(e1,f));
         }
