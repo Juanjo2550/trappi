@@ -231,6 +231,40 @@ public class ServicioVerificacion
                    }
                    return error;
            }
+        public static String verificarEstado(String telefono)
+           {
+                   String error = "";
+                   String patron = ("^Habilitado$|^Inhabilitado$|^En Espera$");
+
+                   if (telefono.equals(""))
+                           error += "Estado: Campo vacio.\n";
+                   else
+                   {
+                           if (!(telefono.matches(patron))){
+                                   //error += "Estado: Caracteres no válidos\n";
+                                   error += "Los estados pueden ser :Habilitado, Inhabilitado, En Espera\n";
+                           }
+                   }
+                   return error;
+           }
+        
+        public static String verificarTipo(String telefono)
+           {
+                   String error = "";
+                   String patron = ("^Automovil$|^Motocicleta$");
+
+                   if (telefono.equals(""))
+                           error += "Tipo: Campo vacio.\n";
+                   else
+                   {
+                           if (!(telefono.matches(patron))){
+                                   //error += "Kilometraje: Caracteres no válidos\n";
+                                   error += "Los tipos pueden ser :Automovil y Motocicleta\n";
+                           }
+                   }
+                   return error;
+           }
+        
         
 }
 
