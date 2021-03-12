@@ -6,6 +6,8 @@
 
 package com.epn.trappi.models.rrhh.juanjo;
 
+import com.epn.trappi.db.rrhh.EmpleadoDb;
+
 /**
  * 
  * @author Juan Jaramillo <juanjodev02 at juan.jaramillo02@epn.edu.ec>
@@ -14,6 +16,11 @@ public class Conductor extends Empleado {
 
     public Conductor(int id, String nombres, String apellidos, String cedula, String cargo, String departamento, String cuentaBancaria, String banco, String sueldo, String estado, char sexo) {
         super(id, nombres, apellidos, cedula, cargo, departamento, cuentaBancaria, banco, sueldo, estado, sexo);
+    }
+
+    @Override
+    public void guardar() {
+        new EmpleadoDb().agregar(this);
     }
 
     @Override
