@@ -100,7 +100,7 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPEncabezado.setBackground(new java.awt.Color(54, 112, 171));
+        jPEncabezado.setBackground(new java.awt.Color(61, 57, 57));
 
         jLabel2.setBackground(new java.awt.Color(80, 125, 180));
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -135,7 +135,7 @@ public class Principal extends javax.swing.JFrame {
 
         jPanOpcionesDeclaracion.setBackground(new java.awt.Color(51, 51, 51));
 
-        jButCompras.setBackground(new java.awt.Color(38, 35, 36));
+        jButCompras.setBackground(new java.awt.Color(255, 210, 28));
         jButCompras.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButCompras.setForeground(new java.awt.Color(240, 240, 241));
         jButCompras.setText("Proveedores");
@@ -147,7 +147,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jButProductos.setBackground(new java.awt.Color(38, 35, 36));
+        jButProductos.setBackground(new java.awt.Color(255, 210, 28));
         jButProductos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButProductos.setForeground(new java.awt.Color(240, 240, 241));
         jButProductos.setText("Productos");
@@ -273,7 +273,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jButListarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jButInventario.setBackground(new java.awt.Color(38, 35, 36));
+        jButInventario.setBackground(new java.awt.Color(255, 210, 28));
         jButInventario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButInventario.setForeground(new java.awt.Color(240, 240, 241));
         jButInventario.setText("Inventario");
@@ -285,7 +285,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jButServicios.setBackground(new java.awt.Color(38, 35, 36));
+        jButServicios.setBackground(new java.awt.Color(255, 210, 28));
         jButServicios.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButServicios.setForeground(new java.awt.Color(240, 240, 241));
         jButServicios.setText("Servicios");
@@ -297,7 +297,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jButDashboard.setBackground(new java.awt.Color(38, 35, 36));
+        jButDashboard.setBackground(new java.awt.Color(255, 210, 28));
         jButDashboard.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButDashboard.setForeground(new java.awt.Color(240, 240, 241));
         jButDashboard.setText("Dashboard");
@@ -309,7 +309,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jButRealizarCompras.setBackground(new java.awt.Color(38, 35, 36));
+        jButRealizarCompras.setBackground(new java.awt.Color(255, 210, 28));
         jButRealizarCompras.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButRealizarCompras.setForeground(new java.awt.Color(240, 240, 241));
         jButRealizarCompras.setText("Realizar Compras");
@@ -362,7 +362,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jButListarServicios, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jButCompra.setBackground(new java.awt.Color(38, 35, 36));
+        jButCompra.setBackground(new java.awt.Color(255, 210, 28));
         jButCompra.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButCompra.setForeground(new java.awt.Color(240, 240, 241));
         jButCompra.setText("Compras");
@@ -549,8 +549,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPEncabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPMod, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -559,7 +558,8 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(labelSubTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jPaCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(PanelVerTodos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(PanelVerTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPMod, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -609,22 +609,22 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButRegNotasVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegNotasVentaActionPerformed
         new CambiaPanel(PanelVerTodos, new guiProveedores());
-        ponerTituloYsub("Proveedores", "Llena el formulario para registrar Proveedores.");
+        ponerTituloYsub("Proveedores", "Llena el formulario para registrar  un Proveedor.");
     }//GEN-LAST:event_jButRegNotasVentaActionPerformed
 
     private void jButVerTodNotasVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButVerTodNotasVentaActionPerformed
         new CambiaPanel(PanelVerTodos, new guiListaProveedores());
-        ponerTituloYsub("Actualizar Proveedores", "Consulta de Proveedores para su Actualización.");
+        ponerTituloYsub("Lista de Proveedores", "Consulta de Proveedores para su Actualización.");
     }//GEN-LAST:event_jButVerTodNotasVentaActionPerformed
 
     private void jButRegistrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegistrarProductoActionPerformed
         new CambiaPanel(PanelVerTodos, new guiRegistrarProductoPanel());
-        ponerTituloYsub("Nuevo Producto", "Llena el formulario para registrar un nuevo producto");
+        ponerTituloYsub("Productos", "Llena el formulario para registrar un nuevo Producto");
     }//GEN-LAST:event_jButRegistrarProductoActionPerformed
 
     private void jButListarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButListarProductosActionPerformed
         new CambiaPanel(PanelVerTodos, new guiListaProductosPanel());
-        ponerTituloYsub("Productos", "Lista de los productos registrados");
+        ponerTituloYsub("Lista de Productos", "Consulta de Productos para su Actualización");
     }//GEN-LAST:event_jButListarProductosActionPerformed
 
     private void jBCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCerrarSesionActionPerformed
@@ -637,12 +637,12 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButListarServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButListarServiciosActionPerformed
         new CambiaPanel(PanelVerTodos, new guiListaServiciosPanel());
-        ponerTituloYsub("Servicios", "Llena el formulario para registrar un nuevo servicio");
+        ponerTituloYsub("Lista de Servicios", "Lista de los servicios Adquiridos");
     }//GEN-LAST:event_jButListarServiciosActionPerformed
 
     private void jButRegistrarServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegistrarServiciosActionPerformed
         new CambiaPanel(PanelVerTodos, new guiRegistrarServicioPanel());
-        ponerTituloYsub("Servicios", "Lista de los servicios adquiridos");
+        ponerTituloYsub("Servicios", "Llena el formulario para registrar un nuevo Servicio");
     }//GEN-LAST:event_jButRegistrarServiciosActionPerformed
 
     private void jButServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButServiciosActionPerformed
