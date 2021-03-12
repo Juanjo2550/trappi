@@ -8,79 +8,135 @@ package com.epn.trappi.db.rrhh;
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.diego.SolicitudDePago;
-import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
-import com.epn.trappi.models.rrhh.listas.Lista;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Objects;
+import java.util.ArrayList;
 
 /**
  *
  * @author diego
  */
-public class SolicitudPagoDB implements Lista<SolicitudDePago> {
-    private final Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance()).getConnection();
+public class SolicitudPagoDB implements ModelDb<SolicitudDePago> {
+
+    ArrayList<SolicitudDePago> listaSolicitudDePago;
+    PreparedStatement pstm = null;
+    ResultSet rs = null;
+    ResultSet rs1 = null;
+    DataBaseConnection dbInstance = DataBaseConnection.getInstance();
+    Connection conn = dbInstance.getConnection();
+
     @Override
     public void agregar(SolicitudDePago newSolicitudDePago) {
-                System.out.println("Generando Solicitud....");
-        String sql = "INSERT INTO dbo.SOLICITUDPAGOROLES (IDSOLPAGO, ID_ROL, IDEMP, FECHASOLIC, ESTADOSOLIC) VALUES ("
-                + (this.obtenerTodos().length + 1) + ","
-                + "'" + newSolicitudDePago.getRol().getNumero() + "',"
-                + "'" + newSolicitudDePago.getEmpleadoAPagar().getId() + "',"
-                + "'" + newSolicitudDePago.getFechaSolicitud().toString() + "',"
-                + "'" + newSolicitudDePago.getEstado() + "');";
-
-        try {
-            PreparedStatement statement = this.connection.prepareStatement(sql);
-            statement.execute();
-        }catch (SQLException e) {
-            System.out.println(e.toString());
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Boolean eliminar(String parametro) {
-        return null;
-    }
-
-    @Override
-    public SolicitudDePago buscarUno(String cedula) {
-        return null;
-             /*   Empleado empleado = new ListaEmpleados().buscarUno(cedula);
-        String sql = "SELECT * FROM dbo.SOLICITUDPAGOROLES WHERE IDEMP=" + empleado.getId() + ";";
-        RolDePagos solicitudes = null;
+    public void agregar(SolicitudDePago nuevaSolicitudDePago, String cedulaEmp) {
         try {
-            Statement statement = this.connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-            while(resultSet.next()) {
-                String unformattedDate = resultSet.getDate(3).toString();
-                String[] formattedDate = unformattedDate.split("-");
-                solicitudes = new SolicitudDePago(
-                        resultSet.getInt(1),
-                      
-                        empleado,
-                        new Fecha(Integer.parseInt(formattedDate[2]), Integer.parseInt(formattedDate[1]), Integer.parseInt(formattedDate[0])),
-                        resultSet.getBigDecimal(4).doubleValue(),
-                        resultSet.getBigDecimal(5).doubleValue(),
-                        resultSet.getString(6)
-                );
+            //String query = "SELECT * FROM EMPLEADO WHERE CEDULAEMP = " + "'" + cedulaEmp + "'";
+            String query = "SELECT EMPLEADO.CEDULAEMP,ROLPAGOS.ID_ROL FROM EMPLEADO INNER JOIN ROLPAGOS ON EMPLEADO.IDEMP=ROLPAGOS.IDEMP WHERE CEDULAEMP =" + "'" + cedulaEmp + "'";
+            pstm = conn.prepareStatement(query);
+            rs = pstm.executeQuery();
+            RolDePagos rol= new RolDePagosDb().buscarUno(cedulaEmp);
+           
+            int idEmpleado = 0;
+            
+            while (rs.next()) {
+                idEmpleado = rs.getInt("IDEMP");
+                
             }
+      
+            int idSolicitud = obtenerTodos().length + 1;
+            query = "INSERT INTO SOLICITUDPAGOROLES ( IDSOLPAGO, ID_ROL, IDEMP, FECHASOLIC, ESTADOSOLIC) VALUES (?, ?, ?, ?, ?)";
+            pstm = conn.prepareStatement(query);
+            pstm.setInt(1, idSolicitud);
+            pstm.setInt(2, rol.getNumero());
+            pstm.setInt(3, idEmpleado);
+            pstm.setString(4, nuevaSolicitudDePago.getFechaSolicitud().toString());
+            pstm.setString(5, nuevaSolicitudDePago.getEstado());
+
+            pstm.executeUpdate();
+            System.out.println("La solicitud de pago se registro con exito" + idEmpleado + " cedula " + cedulaEmp);
+
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            System.out.println("Error en insercion de Solicitud de Pago: " + e);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstm != null) {
+                    pstm.close();
+                }
+
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar rs y pstm: " + e);
+            }
         }
-        return solicitudes;*/
+    }
+
+    @Override
+    public SolicitudDePago buscarUno(String parametro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public SolicitudDePago[] obtenerTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        listaSolicitudDePago = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM SOLICITUDPAGOROLES";
+            pstm = conn.prepareStatement(query);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                String fechaTemp = rs.getString("FECHASOLIC");
+                String[] fechaArr = fechaTemp.split("-");
+                Fecha fecha = new Fecha(Integer.parseInt(fechaArr[2]), Integer.parseInt(fechaArr[1]), Integer.parseInt(fechaArr[0]));
+                 listaSolicitudDePago.add(new SolicitudDePago(rs.getInt("IDSOLPAGO"), fecha,
+               rs.getString("ESTADOSOLIC")));
+
+            }
+            System.out.println("Consulta se hizo con exito");
+
+        } catch (SQLException e) {
+            System.out.println("Error en consulta de Solicitudes de Pago: " + e);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstm != null) {
+                    pstm.close();
+                }
+
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar rs y pstm: " + e);
+            }
+        }
+        SolicitudDePago[] solicitudesDePago = new SolicitudDePago[listaSolicitudDePago.size()];
+        solicitudesDePago = listaSolicitudDePago.toArray(solicitudesDePago);
+        return solicitudesDePago;
     }
 
+    public SolicitudDePago[] obtenerTodos(String cedulaEmp) {
+        String sql = "SELECT EMPLEADO.CUENTABANCARIAEMP,ROLPAGOS.TOTALROL FROM EMPLEADO INNER JOIN ROLPAGOS ON EMPLEADO.IDEMP=ROLPAGOS.IDEMP WHERE CEDULAEMP =" + "'" + cedulaEmp + "'";
+        ArrayList<SolicitudDePago> solicitudes = new ArrayList<>();
+        
+        SolicitudDePago [] solicitudesArray = new SolicitudDePago[solicitudes.size()];
+        solicitudesArray = solicitudes.toArray(solicitudesArray);
+        return solicitudesArray;
+    }
 
-    
+    public static void main(String args[]) throws SQLException {
+        SolicitudPagoDB l1 = new SolicitudPagoDB();
+        try {
+            SolicitudDePago a = new SolicitudDePago();
+            l1.agregar(a, "1722951165");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
