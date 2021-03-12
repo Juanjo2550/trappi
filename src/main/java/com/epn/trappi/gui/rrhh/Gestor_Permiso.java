@@ -84,7 +84,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         TextPrompt finpermiso = new TextPrompt("yyyy-MM-dd", txtfechaFinPermiso);
         TextPrompt diasPermiso = new TextPrompt("Ingrese el número de días", this.txtnumDias);
         TextPrompt descripcion = new TextPrompt("Ingrese la descripción del permiso", this.txtDescripcion);
-        permission = permisos.Permisos_para_ROL(3,fecha);
+        //permission = permisos.Permisos_para_ROL(3,fecha);
         //System.out.println(permission.getFECHAINICIOPERM());
         
         
@@ -632,6 +632,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
     }//GEN-LAST:event_txtfechaFinPermisoActionPerformed
 
     private void btnNuevoPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoPermisoActionPerformed
+        
         this.txtnumDias.setText("");
         this.txtfechaInicioPermiso.setText("");
         this.txtfechaFinPermiso.setText("");
@@ -639,6 +640,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         this.cmbTipoPermiso.setSelectedItem("Seleccione...");
         this.cmbnombreEmpleado.setSelectedItem("Seleccione...");
         this.txtCedula.setText("");
+        this.txtvalorAPagar.setText("");
         cmbnombreEmpleado.setEnabled(true);
         txtCedula.setEnabled(false);
         txtfechaFinPermiso.setEnabled(true);

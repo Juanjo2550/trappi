@@ -24,6 +24,8 @@ import javax.swing.JOptionPane;
 public class Permiso_EmpleadoDb implements ModelDb <Permiso>{
     PreparedStatement pstm = null;
     ResultSet rs = null;
+     PreparedStatement pstm1 = null;
+    ResultSet rs1 = null;
     DataBaseConnection dbInstance = DataBaseConnection.getInstance();
     Connection conn = dbInstance.getConnection();
     ArrayList<Permiso> listaPermiso;
@@ -37,9 +39,30 @@ public class Permiso_EmpleadoDb implements ModelDb <Permiso>{
     @Override
     public void agregar(Permiso newPermission) {
         try{
+             String fechaInicioPermiso = newPermission.getFECHAINICIOPERM();
+             String fechaFinPermiso = newPermission.getFECHAFINPERM();
+            int idEmpleado = newPermission.getEmpleado().getId();
+            
+            //condicional para n registrar dos permisos en la misma fecha y al mismo empleado 
+            String sql = "SELECT COUNT(*) FROM dbo.PERMISO where IDEMP =" +idEmpleado+ "AND  '"
+                    +fechaInicioPermiso+"'" + "BETWEEN FECHAINICIOPERM AND FECHAFINPERM";
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            rs.next();
+            
+           
+            String sql1 = "SELECT COUNT(*) FROM dbo.PERMISO where IDEMP =" +idEmpleado+ "AND  '"
+            +fechaFinPermiso+"'" + "BETWEEN FECHAINICIOPERM AND FECHAFINPERM";
+            pstm1 = conn.prepareStatement(sql1);
+            rs1 = pstm1.executeQuery();
+            rs1.next();
+
+            if (rs.getInt(1)==0 && rs1.getInt(1)==0){
+
             if (newPermission instanceof Calamidad_Domestica){
             int ID = obtenerTodos().length +1;
-              
+            
+           
             String consultaSQL = "INSERT INTO dbo.PERMISO(IDPERM, IDEMP, NUMDIASPERM, VALORPAGARPERM, COMENTPERM, FECHAINICIOPERM,"
            + " FECHAFINPERM, ESTADOPERM,TIPOPERM) values (?,?,?,?,?,?,?,?,?)";
             
@@ -111,7 +134,12 @@ public class Permiso_EmpleadoDb implements ModelDb <Permiso>{
             pstm.setString(9, "Otro Permiso");
             pstm.executeUpdate();
             JOptionPane.showMessageDialog(null,"El permiso se ha registrado con exito");
-                        }   
+                        }
+
+        }
+            else {
+                JOptionPane.showMessageDialog(null, "Ya existe un permiso registrado en esta fecha");
+            }
         }
         catch (Exception e) {
             System.out.println("No se pudo registrar el Permiso: " + e);

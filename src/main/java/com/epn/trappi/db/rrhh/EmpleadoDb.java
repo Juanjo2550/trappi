@@ -16,6 +16,7 @@ public class EmpleadoDb implements ModelDb<Empleado> {
     public void agregar(Empleado nuevoEmpleado) {
         String insertSql;
         if (nuevoEmpleado instanceof Conductor) {
+            
             insertSql = "INSERT INTO dbo.EMPLEADO(IDEMP, NOMBREEMP, APELLIDOEMP, CEDULAEMP, CARGOEMP, DEPARTAMENTOEMP, CUENTABANCARIAEMP, BANCOEMP, ESTADOEMP, TIPOEMP, SUELDOEMP, SEXOEMP) " +
                     "VALUES (" +
                     (this.obtenerTodos().length + 1) + "," +
