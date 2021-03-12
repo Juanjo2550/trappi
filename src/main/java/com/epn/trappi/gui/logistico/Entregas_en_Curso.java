@@ -41,7 +41,7 @@ public class Entregas_en_Curso extends javax.swing.JPanel {
         entregas = new ListaEntregas();
         mapa_rutas = new MapaGeografico();
         panelRutas.add(mapa_rutas.grafico());
-        //graficarRuta("Av. Mariscal Sucre y America");
+        graficarRuta("Av. Mariscal Sucre y America");
         tablaEntregas.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -343,7 +343,7 @@ public class Entregas_en_Curso extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel20.setBackground(new java.awt.Color(221, 75, 57));
+        jPanel20.setBackground(new java.awt.Color(60, 141, 188));
 
         jLabel10.setIcon(new javax.swing.JLabel() {
             public javax.swing.Icon getIcon() {
@@ -476,7 +476,7 @@ public class Entregas_en_Curso extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel3.add(jPanel9, gridBagConstraints);
 
-        jPanel10.setBackground(new java.awt.Color(60, 141, 188));
+        jPanel10.setBackground(new java.awt.Color(96, 97, 101));
         jPanel10.setMaximumSize(new java.awt.Dimension(965, 5));
         jPanel10.setMinimumSize(new java.awt.Dimension(965, 5));
 
@@ -513,11 +513,12 @@ public class Entregas_en_Curso extends javax.swing.JPanel {
         gridBagConstraints.gridy = 2;
         jPanel2.add(jPanel4, gridBagConstraints);
 
+        panelTabla.setBackground(new java.awt.Color(255, 255, 255));
         panelTabla.setMaximumSize(new java.awt.Dimension(965, 295));
         panelTabla.setMinimumSize(new java.awt.Dimension(965, 45));
         panelTabla.setLayout(new java.awt.GridBagLayout());
 
-        jPanel11.setBackground(new java.awt.Color(60, 141, 188));
+        jPanel11.setBackground(new java.awt.Color(96, 97, 101));
         jPanel11.setForeground(new java.awt.Color(255, 255, 255));
         jPanel11.setMaximumSize(new java.awt.Dimension(965, 5));
         jPanel11.setMinimumSize(new java.awt.Dimension(965, 5));
@@ -582,17 +583,14 @@ public class Entregas_en_Curso extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 794, Short.MAX_VALUE)
                 .addComponent(botonMinimizar)
-                .addGap(33, 33, 33))
+                .addGap(34, 34, 34))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(botonMinimizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+            .addComponent(botonMinimizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -603,9 +601,10 @@ public class Entregas_en_Curso extends javax.swing.JPanel {
 
         PANELTABLA.setBackground(new java.awt.Color(255, 255, 255));
         PANELTABLA.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(219, 223, 228)));
-        PANELTABLA.setMaximumSize(new java.awt.Dimension(965, 250));
-        PANELTABLA.setMinimumSize(new java.awt.Dimension(965, 250));
+        PANELTABLA.setMaximumSize(new java.awt.Dimension(965, 245));
+        PANELTABLA.setMinimumSize(new java.awt.Dimension(965, 245));
         PANELTABLA.setName(""); // NOI18N
+        PANELTABLA.setPreferredSize(new java.awt.Dimension(965, 245));
 
         jScrollPane1.setBorder(null);
         jScrollPane1.setForeground(new java.awt.Color(96, 97, 101));
@@ -647,9 +646,9 @@ public class Entregas_en_Curso extends javax.swing.JPanel {
         PANELTABLALayout.setVerticalGroup(
             PANELTABLALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PANELTABLALayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -707,7 +706,7 @@ public class Entregas_en_Curso extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         jPanel7.add(jPanel15, gridBagConstraints);
 
-        jPanel16.setBackground(new java.awt.Color(60, 141, 188));
+        jPanel16.setBackground(new java.awt.Color(96, 97, 101));
         jPanel16.setMaximumSize(new java.awt.Dimension(965, 5));
         jPanel16.setMinimumSize(new java.awt.Dimension(965, 5));
 
@@ -816,8 +815,8 @@ public class Entregas_en_Curso extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 802, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 79, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 811, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 70, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
