@@ -8,6 +8,9 @@ package com.epn.trappi.gui.rrhh;
 
 import com.epn.trappi.*;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -213,7 +216,11 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
 
     private void btnPermisos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPermisos1ActionPerformed
         this.setVisible(false);
-        new Gestor_Permiso().setVisible(true);
+        try {
+            new Gestor_Permiso().setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(PANTALLA_PRINCIPAL.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnPermisos1ActionPerformed
 
     /**
