@@ -1,5 +1,7 @@
  package com.epn.trappi.models.rrhh.contratacion;
 
+import com.epn.trappi.db.rrhh.AspiranteDb;
+
 /**
  *
  * @author Javier Erazo
@@ -21,6 +23,12 @@ public class Aspirante {
     }
     public void solicitarRegistroPrueba(int puntaje, String actitudes, String aptitudes){
         this.prueba.registrarResultados(puntaje, actitudes, aptitudes);
+    }
+    
+    public void registrar(){
+        AspiranteDb db = new AspiranteDb();
+        db.agregar(this);
+        
     }
     public String getNombre() {
         return nombre;

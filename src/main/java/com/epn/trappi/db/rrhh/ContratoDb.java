@@ -14,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author Javier Erazo
  */
-public class ContratosDB implements ModelDb <Contrato> {
+public class ContratoDb implements ModelDb <Contrato> {
     ArrayList <Contrato> listaContratos;
     PreparedStatement pstm = null;
     ResultSet rs = null;
@@ -86,7 +86,7 @@ public class ContratosDB implements ModelDb <Contrato> {
             Fecha fechaInicio = new Fecha(Integer.parseInt(fechaInicioArr[2]), Integer.parseInt(fechaInicioArr[1]), Integer.parseInt(fechaInicioArr[0]));
             Fecha fechaFin = new Fecha(Integer.parseInt(fechaFinArr[2]), Integer.parseInt(fechaFinArr[1]), Integer.parseInt(fechaFinArr[0]));
 
-            contrato = new Contrato(String.valueOf(rs.getInt("IDCONTRATO")), fechaInicio, fechaFin,
+            contrato = new Contrato( fechaInicio, fechaFin,
             rs.getString("TIPOCONTRATO"),String.valueOf(rs.getDouble("SUELDO")));
             System.out.println("Consulta Buscar un contrato se hizo con exito"); 
         } catch (Exception e) {
@@ -120,7 +120,7 @@ public class ContratosDB implements ModelDb <Contrato> {
                Fecha fechaInicio = new Fecha(Integer.parseInt(fechaInicioArr[2]), Integer.parseInt(fechaInicioArr[1]), Integer.parseInt(fechaInicioArr[0]));
                Fecha fechaFin = new Fecha(Integer.parseInt(fechaFinArr[2]), Integer.parseInt(fechaFinArr[1]), Integer.parseInt(fechaFinArr[0]));
                
-               listaContratos.add(new Contrato(String.valueOf(rs.getInt("IDCONTRATO")), fechaInicio, fechaFin,
+               listaContratos.add(new Contrato( fechaInicio, fechaFin,
                rs.getString("TIPOCONTRATO"),String.valueOf(rs.getDouble("SUELDO"))));
             }
             System.out.println("Consulta se hizo con exito");

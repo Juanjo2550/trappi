@@ -8,9 +8,9 @@ package com.epn.trappi.gui.rrhh;
 
 import com.epn.trappi.models.rrhh.contratacion.Aspirante;
 import com.epn.trappi.models.rrhh.contratacion.PruebaAdmision;
-import com.epn.trappi.db.rrhh.AspirantesDB;
+import com.epn.trappi.db.rrhh.AspiranteDb;
 import com.epn.trappi.db.rrhh.ModelDb;
-import com.epn.trappi.db.rrhh.PruebasAdmisionDB;
+import com.epn.trappi.db.rrhh.PruebaAdmisionDb;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -22,9 +22,9 @@ import javax.swing.table.DefaultTableModel;
 public class RegistroAspirante extends javax.swing.JFrame {
     
     private void listarAspirantes(){
-        ModelDb listaAspirantes =  new AspirantesDB();
+        ModelDb listaAspirantes =  new AspiranteDb();
         Aspirante[] aspirantes = (Aspirante[]) listaAspirantes.obtenerTodos();
-        PruebasAdmisionDB listaPruebas = new PruebasAdmisionDB();
+        PruebaAdmisionDb listaPruebas = new PruebaAdmisionDb();
         DefaultTableModel model = (DefaultTableModel) jTableAspirantes.getModel();
         model.setRowCount(0);
         
@@ -437,15 +437,11 @@ public class RegistroAspirante extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButGuardarAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButGuardarAspiranteActionPerformed
-      
-        ModelDb listaAspirantes =  new AspirantesDB();
-        PruebasAdmisionDB listaPruebas = new PruebasAdmisionDB();
         Aspirante aspirante = new Aspirante(jTextNombreAspirante.getText(), jTextApellidoAspirante.getText(), jTextCedulaAspirante.getText(),
                 jTextTelefonoAspirante.getText(), jTextCargoAspirante.getText());
         PruebaAdmision prueba = new PruebaAdmision(Integer.parseInt(jTextPuntajeAspirante.getText()), jTextActitudesAspirante.getText(), jTextAptitudesAspirante.getText());
-        
-        listaAspirantes.agregar(aspirante);
-        listaPruebas.agregar(prueba, jTextCedulaAspirante.getText());
+        aspirante.registrar();
+        prueba.registrar(jTextCedulaAspirante.getText());
         listarAspirantes();
         JOptionPane.showMessageDialog(null, "Aspirante registrado con éxito");
     }//GEN-LAST:event_jButGuardarAspiranteActionPerformed

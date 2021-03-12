@@ -13,12 +13,10 @@ import com.epn.trappi.models.rrhh.contratacion.PruebaAdmision;
 import com.epn.trappi.models.rrhh.juanjo.Administrativo;
 import com.epn.trappi.models.rrhh.juanjo.Conductor;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
-import com.epn.trappi.models.rrhh.listas.Lista;
-import com.epn.trappi.db.rrhh.AspirantesDB;
-import com.epn.trappi.db.rrhh.ContratosDB;
+import com.epn.trappi.db.rrhh.AspiranteDb;
 import com.epn.trappi.db.rrhh.EmpleadoDb;
 import com.epn.trappi.db.rrhh.ModelDb;
-import com.epn.trappi.db.rrhh.PruebasAdmisionDB;
+import com.epn.trappi.db.rrhh.PruebaAdmisionDb;
 
 import java.util.ArrayList;
 import java.util.Vector;
@@ -27,13 +25,13 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author stali
+ * @author Javier Erazo
  */
 public class ContratarAspirante extends javax.swing.JFrame {
     private void listarAspirantes(){
-        ModelDb listaAspirantes = new AspirantesDB();
+        ModelDb listaAspirantes = new AspiranteDb();
         Aspirante[] aspirantes = (Aspirante[]) listaAspirantes.obtenerTodos();
-        PruebasAdmisionDB listaPruebas = new PruebasAdmisionDB();
+        PruebaAdmisionDb listaPruebas = new PruebaAdmisionDb();
         DefaultTableModel model = (DefaultTableModel) jTableAspirantesAptos.getModel();
         model.setRowCount(0);
         
@@ -721,7 +719,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
         aspirantesAptos = pruebas.obtenerAspirantesAptos(jTextContratoActitudes.getText(), jTextContratoAptitudes.getText(), Integer.parseInt(jTextContratoPuntaje.getText()));
         if (aspirantesAptos.size() > 0){
            
-            PruebasAdmisionDB listaPruebas = new PruebasAdmisionDB();
+            PruebaAdmisionDb listaPruebas = new PruebaAdmisionDb();
             DefaultTableModel model = (DefaultTableModel) jTableAspirantesAptos.getModel();
             model.setRowCount(0);
 
@@ -860,7 +858,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Seleccione el tipo de empleado");
             }
             if (nuevoEmpleado != null){
-                //Se procede a registrarContrato el contrato
+                //Se procede a registrar el contrato
                 Fecha fechaInicio = new Fecha(Integer.parseInt(jTextContratoFechaInicioDia.getText()),
                         Integer.parseInt(jTextContratoFechaInicioMes.getText()),
                         Integer.parseInt(jTextContratoFechaInicioAno.getText()));
@@ -868,7 +866,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
                         Integer.parseInt(jTextContratoFechaFinMes.getText()),
                         Integer.parseInt(jTextContratoFechaFinAno.getText()));
                 Contrato contrato = new Contrato();
-                contrato.registrarContrato(fechaInicio, fechaFin, tipoContrato, valorSueldo, cedula);               
+                contrato.registrar(fechaInicio, fechaFin, tipoContrato, valorSueldo, cedula);               
                 JOptionPane.showMessageDialog(null, "El Empleado se contrató con éxito");
             }
                 
