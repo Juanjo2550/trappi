@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.epn.trappi.models.rrhh.listas;
+package com.epn.trappi.db.rrhh;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.diego.SolicitudDePago;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
+import com.epn.trappi.models.rrhh.listas.Lista;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,7 +23,7 @@ import java.util.Objects;
  *
  * @author diego
  */
-public class ListaSolicitudesPago implements Lista<SolicitudDePago> {
+public class SolicitudPagoDB implements Lista<SolicitudDePago> {
     private final Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance()).getConnection();
     @Override
     public void agregar(SolicitudDePago newSolicitudDePago) {
