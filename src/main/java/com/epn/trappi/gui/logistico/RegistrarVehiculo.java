@@ -8,6 +8,7 @@ import com.epn.trappi.models.logistico.servicios.ServicioDbVehiculo;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static com.epn.trappi.models.logistico.servicios.ServicioVerificacion.*;
 /**
  *
  * @author cristhian.munoz
@@ -257,7 +258,7 @@ public class RegistrarVehiculo extends javax.swing.JPanel {
 
         //-------------- validar
         strErrores+=verificarMatricula(txtMatricula.getText());
-        //strErrores+=verificarKilometraje(txtKilometraje.getText());
+        strErrores+=verificarKilometraje(txtKilometraje.getText());
         if(!strErrores.equals(""))
         {
             strErrores="Errores existentes:\n"+strErrores;
@@ -284,6 +285,7 @@ public class RegistrarVehiculo extends javax.swing.JPanel {
             }
 
             //Instanciar un Vehiculo para su insercion en la DB
+            JOptionPane.showMessageDialog(null, "Vehículo Registrado Exitosamente");
 
             try {
                 servicioVH.insertar(aux);
@@ -342,37 +344,7 @@ public class RegistrarVehiculo extends javax.swing.JPanel {
         btnNuevo.setEnabled(false);
         
     }
-    public String verificarMatricula(String matricula)
-	{
-            boolean error1= true;
-            String error = "";
-            String patron = ("^[A-Z]{3}-[0-9]{3,4}$");
-            
-            if(matricula.equals(""))
-                error += "Matricula: Campo vacío.\n";
-            else
-                if (!(matricula.matches(patron)))
-                    error += "Matricula: caracteres incorrectos.\n";
-            return error;
-        }
-     public static String verificarKilometraje(String telefono)
-	{
-		String error = "";
-		String patron = ("^[0-9]{1,6}$");
-                
-		if (telefono.equals(""))
-			error += "Kilometraje: Campo vacio.\n";
-		else
-		{
-			if (!(telefono.matches(patron)))
-				error += "Kilometraje: Caracteres no válidos\n";
-                                error += "Hasta un kilometraje de 999999\n";
-                        
-		}
-		return error;
-	}
     
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnNuevo;
