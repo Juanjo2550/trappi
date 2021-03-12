@@ -83,26 +83,7 @@ public class Comprar extends javax.swing.JFrame {
         cantidad1 = Integer.parseInt((String) modelo.getValueAt(jTable1.getSelectedRow(), 3));
     }
 
-    public String buscarTarjeta(String tarjeta) {
-        String tipo = "";
-        try {
-
-            Statement statement = connection.createStatement();
-            String sql = "select TIPO from TARJETAS T"
-                    + "where T.IDTARJETAS='" + tarjeta + "'";
-            ResultSet resultSet = statement.executeQuery(sql);
-
-            while (resultSet.next()) {
-                tipo = resultSet.getString("TIPO");
-            }
-
-            return tipo;
-
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            return tipo;
-        }
-    }
+    
     
     public void agregarAlcarrito(){
     int cantidad = carrito.cantidadCompraProducto();

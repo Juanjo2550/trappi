@@ -35,7 +35,7 @@ public class Devolucion extends javax.swing.JFrame {
                 facturas.removeRow(facturas.getRowCount()-1);
             }
             Statement statement = connection.createStatement();
-            String Sql="SELECT NUMEROFACTURA, TOTAL, IMPUESTOS, F.IDCLIENTE "
+            String Sql="SELECT NUMEROFACTURA, TOTAL, IMPUESTOS, ESTADODEVOLUCION "
                     + "FROM FACTURAS F, CLIENTES C "
                     + "WHERE F.IDCLIENTE=C.IDCLIENTE AND C.CEDULA2="+Main.cliente.Cedula
                     + " ORDER BY NUMEROFACTURA;";
@@ -44,7 +44,7 @@ public class Devolucion extends javax.swing.JFrame {
                 factura[0]=resultSet.getString("NUMEROFACTURA");
                 factura[1]=resultSet.getString("TOTAL");
                 factura[2]=resultSet.getString("IMPUESTOS");
-                factura[3]="Disponible";
+                factura[3]=resultSet.getString("ESTADODEVOLUCION");
                 facturas.addRow(factura);
             }
         } catch (SQLException ex) {
