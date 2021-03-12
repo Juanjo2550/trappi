@@ -9,6 +9,7 @@ import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.models.financiero.Pago;
 import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
 import com.epn.trappi.db.rrhh.RolDePagosDb;
+import com.epn.trappi.db.rrhh.SolicitudPagoDB;
 import com.epn.trappi.models.rrhh.diego.SolicitudDePago;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,9 +24,9 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author stali
  */
-public class ListaDeRolesEmpleados extends javax.swing.JFrame {
-
-    private final Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance()).getConnection();
+public class RRHHGUI extends javax.swing.JFrame {
+    private SolicitudPagoDB sp = new SolicitudPagoDB();
+    
     private final RolDePagosDb roles;
     private final SolicitudDePago pagos;
     String cuenta;
@@ -37,7 +38,7 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
     /**
      * Creates new form Ejemplo_GUI
      */
-    public ListaDeRolesEmpleados() {
+    public RRHHGUI() {
         initComponents();
         this.roles = new RolDePagosDb();
         this.pagos = new SolicitudDePago();
@@ -93,6 +94,7 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
 
         String col[] = {
             "Número",
+            "Cedula",
             "Nombre",
             "Apellido",
             "Cuenta",
@@ -106,6 +108,7 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
         for (RolDePagos rol : this.roles.obtenerTodos()) {
             Object[] row = {
                 rol.getNumero(),
+                rol.getEmpleado().getCedula(),
                 rol.getEmpleado().getNombres(),
                 rol.getEmpleado().getApellidos(),
                 rol.getEmpleado().getCuentaBancaria(),
@@ -327,8 +330,11 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-
-                Pago pago = new Pago(cuenta, Double.parseDouble(total));
+        String cedulaSeleccionada = (String) this.tablaEmpleados.getValueAt(seleccion,1);
+        
+        this.sp.actualizarEstado(cedulaSeleccionada);
+        
+        /*Pago pago = new Pago(cuenta, Double.parseDouble(total));
         System.out.println(cuenta);
         System.out.println(total);
         String cambioEstado = pago.realizarPago(pago);
@@ -338,13 +344,13 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
             statement.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
-        }
+        }*/
         //SolicitudDePago  solicitud = new SolicitudDePago(estado,Double.parseDouble(total), cuenta);
         try {
 
             solicitudTable();
         } catch (Exception ex) {
-            Logger.getLogger(ListaDeRolesEmpleados.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RRHHGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -387,14 +393,78 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListaDeRolesEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RRHHGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListaDeRolesEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RRHHGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListaDeRolesEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RRHHGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListaDeRolesEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RRHHGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -463,7 +533,7 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListaDeRolesEmpleados().setVisible(true);
+                new RRHHGUI().setVisible(true);
             }
         });
     }

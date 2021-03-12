@@ -6,6 +6,7 @@
 package com.epn.trappi.db.rrhh;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
+import com.epn.trappi.models.financiero.Pago;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.diego.SolicitudDePago;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
@@ -121,19 +122,19 @@ public class SolicitudPagoDB implements ModelDb<SolicitudDePago> {
     }
 
     public SolicitudDePago[] obtenerTodos(String cedulaEmp) {
-        
+
         ArrayList<SolicitudDePago> solicitudes = new ArrayList<>();
-        try{
-            
+        try {
+
             String query = "SELECT EMPLEADO.CUENTABANCARIAEMP,ROLPAGOS.TOTALROL FROM EMPLEADO INNER JOIN ROLPAGOS ON EMPLEADO.IDEMP=ROLPAGOS.IDEMP WHERE CEDULAEMP =" + "'" + cedulaEmp + "'";
             pstm = conn.prepareStatement(query);
             rs = pstm.executeQuery();
             System.out.println("Consulta se hizo con exito");
-            while(rs.next()){
+            while (rs.next()) {
                 solicitudes.add(new SolicitudDePago(rs.getString("CUENTABANCARIAEMP"),
                         rs.getDouble("TOTALROL")));
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println("Error en consulta de Solicitudes de Pago: " + e);
         }
         SolicitudDePago[] solicitudesArray = new SolicitudDePago[solicitudes.size()];
@@ -141,22 +142,52 @@ public class SolicitudPagoDB implements ModelDb<SolicitudDePago> {
         return solicitudesArray;
     }
 
+    public void actualizarEstado(String cedulaEmp) {
+        Empleado empleado = new EmpleadoDb().buscarUno(cedulaEmp);
+        RolDePagos rol = new RolDePagosDb().buscarUno(cedulaEmp);
+        Pago pago = new Pago(empleado.getCuentaBancaria(), rol.getTotal());
+        System.out.println(empleado.getCuentaBancaria());
+        System.out.println(rol.getTotal());
+        String cambioEstado = pago.realizarPago(pago);
+        try {
+            String query = "UPDATE ROLPAGOS SET ESTADOROL=" + "'" + cambioEstado + "'" + " WHERE ID_ROL=" + "'" + rol.getNumero() + "';";
+            //String query2 = "UPDATE SOLICITUDPAGOROLES SET ESTADOSOLIC=" + "'" + cambioEstado + "'" + " WHERE ID_ROL=" + "'" + rol.getNumero() + "';";
+            pstm = conn.prepareStatement(query);
+            rs = pstm.executeQuery();
+            //pstm=conn.prepareStatement(query2);
+            //rs = pstm.executeQuery();
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        try {
+            // String query = "UPDATE ROLPAGOS SET ESTADOROL=" + "'" + cambioEstado + "'" + " WHERE ID_ROL=" + "'" + rol.getNumero() + "';";
+            String query2 = "UPDATE SOLICITUDPAGOROLES SET ESTADOSOLIC=" + "'" + cambioEstado + "'" + " WHERE ID_ROL=" + "'" + rol.getNumero() + "';";
+            //pstm = conn.prepareStatement(query);
+            //rs = pstm.executeQuery();
+            pstm = conn.prepareStatement(query2);
+            rs = pstm.executeQuery();
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+    }
+
     public static void main(String args[]) throws SQLException {
         SolicitudPagoDB l1 = new SolicitudPagoDB();
 
-       /* try {
+        try {
             SolicitudDePago a = new SolicitudDePago(new Fecha(), "Pendiente");
-            l1.agregar(a, "1762441094");
+            l1.agregar(a, "1725527356");
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        }*/
+        }
         try {
-            System.out.println(Arrays.stream(l1.obtenerTodos("1762441094")).count());
-            for(SolicitudDePago s:l1.obtenerTodos("1762441094")){
+            System.out.println(Arrays.stream(l1.obtenerTodos("1725527356")).count());
+            for (SolicitudDePago s : l1.obtenerTodos("1725527356")) {
                 System.out.println(s.toString());
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        l1.actualizarEstado("1725527356");
     }
 }
