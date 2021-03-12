@@ -26,8 +26,7 @@ public class Aspirante {
     }
     
     public void registrar(){
-        AspiranteDb db = new AspiranteDb();
-        db.agregar(this);
+        new AspiranteDb().agregar(this);
         
     }
     public String getNombre() {

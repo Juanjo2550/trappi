@@ -845,19 +845,16 @@ public class ContratarAspirante extends javax.swing.JFrame {
             //Se realiza el registro del empleado en la base de datos 
             ModelDb listaEmpleado = new EmpleadoDb();
             Empleado nuevoEmpleado = null;
-            if (tipoEmpleado.equalsIgnoreCase("conductor")){
-                int idNuevoEmp = listaEmpleado.obtenerTodos().length + 1;
-                nuevoEmpleado = new Conductor(idNuevoEmp, nombre, apellido, cedula, cargo, depto, numCuenta, banco, valorSueldo, estadoEmp, sexo);
-                listaEmpleado.agregar(nuevoEmpleado);
-            } else if (tipoEmpleado.equalsIgnoreCase("administrativo")) {
-                int idNuevoEmp = listaEmpleado.obtenerTodos().length + 1;
-                nuevoEmpleado = new Administrativo(idNuevoEmp, nombre, apellido, cedula, cargo, depto, numCuenta, banco, valorSueldo, estadoEmp, sexo);
-                listaEmpleado.agregar(nuevoEmpleado);
-                JOptionPane.showMessageDialog(null, "El Empleado Administrativo se contrató con éxito");
-            } else {
-                JOptionPane.showMessageDialog(null, "Seleccione el tipo de empleado");
-            }
-            if (nuevoEmpleado != null){
+            int idNuevoEmp = listaEmpleado.obtenerTodos().length + 1;
+            if(!tipoEmpleado.equalsIgnoreCase("--Seleccionar--")){
+                if (tipoEmpleado.equalsIgnoreCase("conductor")){
+                    nuevoEmpleado = new Conductor(idNuevoEmp, nombre, apellido, cedula, cargo, depto, numCuenta, banco, valorSueldo, estadoEmp, sexo);
+                
+                } else if (tipoEmpleado.equalsIgnoreCase("administrativo")) {
+                    nuevoEmpleado = new Administrativo(idNuevoEmp, nombre, apellido, cedula, cargo, depto, numCuenta, banco, valorSueldo, estadoEmp, sexo);
+                }
+                nuevoEmpleado.registrar();
+                
                 //Se procede a registrar el contrato
                 Fecha fechaInicio = new Fecha(Integer.parseInt(jTextContratoFechaInicioDia.getText()),
                         Integer.parseInt(jTextContratoFechaInicioMes.getText()),
@@ -865,13 +862,12 @@ public class ContratarAspirante extends javax.swing.JFrame {
                 Fecha fechaFin = new Fecha(Integer.parseInt(jTextContratoFechaFinDia.getText()),
                         Integer.parseInt(jTextContratoFechaFinMes.getText()),
                         Integer.parseInt(jTextContratoFechaFinAno.getText()));
-                Contrato contrato = new Contrato();
-                contrato.registrar(fechaInicio, fechaFin, tipoContrato, valorSueldo, cedula);               
+                Contrato contrato = new Contrato(fechaInicio, fechaFin, tipoContrato, valorSueldo);
+                contrato.registrar(cedula);              
                 JOptionPane.showMessageDialog(null, "El Empleado se contrató con éxito");
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione el tipo de empleado");
             }
-                
-            
-
         } else {
             JOptionPane.showMessageDialog(null, "Debe buscar y seleccionar el aspirante a contratar...");
         }

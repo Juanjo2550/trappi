@@ -30,9 +30,8 @@ public class Contrato {
         
     }
     
-    public void registrar(Fecha fechaInicio, Fecha fechaFin, String tipoContrato, String valorSueldo, String cedula) {
-        ContratoDb db = new ContratoDb();
-        db.agregar(this, cedula);
+    public void registrar(String cedula) {
+         new ContratoDb().agregar(this, cedula);
 
     }
     
