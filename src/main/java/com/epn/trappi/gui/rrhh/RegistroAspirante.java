@@ -9,8 +9,8 @@ package com.epn.trappi.gui.rrhh;
 import com.epn.trappi.models.rrhh.contratacion.Aspirante;
 import com.epn.trappi.models.rrhh.contratacion.PruebaAdmision;
 import com.epn.trappi.models.rrhh.listas.Lista;
-import com.epn.trappi.models.rrhh.listas.ListaAspirantes;
-import com.epn.trappi.models.rrhh.listas.ListaPruebasAdmision;
+import com.epn.trappi.db.rrhh.AspirantesDB;
+import com.epn.trappi.db.rrhh.PruebasAdmisionDB;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -22,9 +22,9 @@ import javax.swing.table.DefaultTableModel;
 public class RegistroAspirante extends javax.swing.JFrame {
     
     private void listarAspirantes(){
-        Lista listaAspirantes = new ListaAspirantes();
+        Lista listaAspirantes = (Lista) new AspirantesDB();
         Aspirante[] aspirantes = (Aspirante[]) listaAspirantes.obtenerTodos();
-        ListaPruebasAdmision listaPruebas = new ListaPruebasAdmision();
+        PruebasAdmisionDB listaPruebas = new PruebasAdmisionDB();
         DefaultTableModel model = (DefaultTableModel) jTableAspirantes.getModel();
         model.setRowCount(0);
         
@@ -438,8 +438,8 @@ public class RegistroAspirante extends javax.swing.JFrame {
 
     private void jButGuardarAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButGuardarAspiranteActionPerformed
       
-        Lista listaAspirantes = new ListaAspirantes();
-        ListaPruebasAdmision listaPruebas = new ListaPruebasAdmision();
+        Lista listaAspirantes = (Lista) new AspirantesDB();
+        PruebasAdmisionDB listaPruebas = new PruebasAdmisionDB();
         Aspirante aspirante = new Aspirante(jTextNombreAspirante.getText(), jTextApellidoAspirante.getText(), jTextCedulaAspirante.getText(),
                 jTextTelefonoAspirante.getText(), jTextCargoAspirante.getText());
         PruebaAdmision prueba = new PruebaAdmision(Integer.parseInt(jTextPuntajeAspirante.getText()), jTextActitudesAspirante.getText(), jTextAptitudesAspirante.getText());

@@ -1,7 +1,8 @@
-package com.epn.trappi.models.rrhh.listas;
+package com.epn.trappi.db.rrhh;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.models.rrhh.contratacion.PruebaAdmision;
+import com.epn.trappi.models.rrhh.listas.Lista;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Javier Erazo
  */
-public class ListaPruebasAdmision implements Lista <PruebaAdmision> {
+public class PruebasAdmisionDB implements ModelDb <PruebaAdmision> {
     ArrayList <PruebaAdmision> listaPruebasAdmision;
     PreparedStatement pstm = null;
     ResultSet rs = null;
@@ -114,10 +115,6 @@ public class ListaPruebasAdmision implements Lista <PruebaAdmision> {
         
     }
 
-    @Override
-    public Boolean eliminar(String parametro) {
-        return false;//To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public PruebaAdmision buscarUno(String cedulaAspirante) {
