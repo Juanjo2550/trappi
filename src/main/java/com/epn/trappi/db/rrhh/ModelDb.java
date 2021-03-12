@@ -5,5 +5,5 @@ import java.util.ArrayList;
 public interface ModelDb <T> {
     public void agregar(T newObject);
     public T buscarUno(String parametro);
-    public ArrayList<T> obtenerTodos();
+    public T[] obtenerTodos();
 }
