@@ -5,6 +5,7 @@
  */
 package com.epn.trappi.gui.rrhh.Permisos;
 
+import com.epn.trappi.db.rrhh.Permiso_EmpleadoDb;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 
@@ -48,6 +49,11 @@ public class Otros_Permisos extends Permiso {
     @Override
     public String calcularProporcionalPagar(double sueldo, int numeroDias) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void registrar() {
+        new Permiso_EmpleadoDb().agregar(this);
     }
 
 
