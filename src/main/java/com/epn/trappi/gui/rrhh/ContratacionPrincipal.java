@@ -6,15 +6,15 @@
 package com.epn.trappi.gui.rrhh;
 
 
-import com.epn.trappi.models.rrhh.contratacion.Aspirante;
-import com.epn.trappi.models.rrhh.contratacion.PruebaAdmision;
-import com.epn.trappi.db.rrhh.AspiranteDb;
-import com.epn.trappi.db.rrhh.ModelDb;
-import com.epn.trappi.db.rrhh.PruebaAdmisionDb;
-import java.util.Vector;
-import javax.swing.JOptionPane;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Insets;
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+
 
 /**
  *
@@ -30,41 +30,72 @@ public class ContratacionPrincipal extends javax.swing.JFrame {
         panelContratar.setVisible(panel.getClass().equals(panelContratar.getClass()));
         panelRegistroAsp.setVisible(panel.getClass().equals(panelRegistroAsp.getClass()));
     }
-//    private void listarAspirantes(){
-//        ModelDb listaAspirantes =  new AspiranteDb();
-//        Aspirante[] aspirantes = (Aspirante[]) listaAspirantes.obtenerTodos();
-//        PruebaAdmisionDb listaPruebas = new PruebaAdmisionDb();
-//        DefaultTableModel model = (DefaultTableModel) jTableAspirantes.getModel();
-//        model.setRowCount(0);
-//        
-//        for (Aspirante asp: aspirantes){
-//            Vector v = new Vector();
-//            PruebaAdmision prueba = new PruebaAdmision();
-//            prueba = listaPruebas.buscarUno(asp.getCedula());
-//            if (prueba != null){
-//                v.add(asp.getNombre());
-//                v.add(asp.getApellidos());
-//                v.add(asp.getTelefono());
-//                v.add(asp.getCedula());
-//                v.add(asp.getCargoAspirante());
-//                v.add(prueba.getAptitudes());
-//                v.add(prueba.getActitudes());
-//                v.add(prueba.getPuntaje());
-//                model.addRow(v); 
-//            } else {
-//                continue;
-//            }
-//            
-//            jTableAspirantes.setModel(model);
-//        }
-//    }
+    
+    private void configurarBotones(int radio){
+        this.btnRegresar.setBorder(new RoundedBorder(24));
+        this.btnRegresar.setBorderPainted(true);
+        this.btnRegresar.setOpaque(false);
+        this.btnRegresar.setContentAreaFilled(false);
+        this.btnRegresar.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        this.btnAspirantes.setBorder(new RoundedBorder(24));
+        this.btnAspirantes.setBorderPainted(true);
+        this.btnAspirantes.setOpaque(false);
+        this.btnAspirantes.setContentAreaFilled(false);
+        this.btnAspirantes.setHorizontalAlignment(SwingConstants.CENTER);
+        this.btnContratar.setBorder(new RoundedBorder(24));
+        this.btnContratar.setBorderPainted(true);
+        this.btnContratar.setOpaque(false);
+        this.btnContratar.setContentAreaFilled(false);
+        this.btnContratar.setHorizontalAlignment(SwingConstants.CENTER);
+        this.btnContratos.setBorder(new RoundedBorder(24));
+        this.btnContratos.setBorderPainted(true);
+        this.btnContratos.setOpaque(false);
+        this.btnContratos.setContentAreaFilled(false);
+        this.btnContratos.setHorizontalAlignment(SwingConstants.CENTER);
+        this.btnEmpleados.setBorder(new RoundedBorder(24));
+        this.btnEmpleados.setBorderPainted(true);
+        this.btnEmpleados.setOpaque(false);
+        this.btnEmpleados.setContentAreaFilled(false);
+        this.btnEmpleados.setHorizontalAlignment(SwingConstants.CENTER);
+        
+    }
+
 
     public ContratacionPrincipal() {
         initComponents();
         this.setSize(1366, 768);
         this.setLocationRelativeTo(null);
+        configurarBotones(20);
 
     }
+    public static class RoundedBorder implements Border {
+
+    private int radius;
+
+
+    RoundedBorder(int radius) {
+        this.radius = radius;
+    }
+
+
+    @Override
+    public Insets getBorderInsets(Component c) {
+        return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);
+    }
+
+
+    @Override
+    public boolean isBorderOpaque() {
+        return true;
+    }
+
+
+    @Override
+    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+        g.drawRoundRect(x, y, width-1, height-1, radius, radius);
+    }
+}
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -76,103 +107,180 @@ public class ContratacionPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        btnVolver = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnAspirantes = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
+        btnContratar = new javax.swing.JButton();
+        btnContratos = new javax.swing.JButton();
+        btnEmpleados = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         PanelGeneralContratacion = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(61, 57, 57));
 
-        jButton1.setBackground(new java.awt.Color(204, 153, 0));
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(51, 51, 51));
-        jButton1.setText("Aspirantes");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAspirantes.setBackground(new java.awt.Color(61, 57, 57));
+        btnAspirantes.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        btnAspirantes.setForeground(new java.awt.Color(255, 255, 255));
+        btnAspirantes.setText("Aspirantes");
+        btnAspirantes.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnAspirantesMouseMoved(evt);
+            }
+        });
+        btnAspirantes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAspirantesMouseExited(evt);
+            }
+        });
+        btnAspirantes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAspirantesActionPerformed(evt);
             }
         });
 
-        btnVolver.setBackground(new java.awt.Color(204, 153, 0));
-        btnVolver.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btnVolver.setForeground(new java.awt.Color(51, 51, 51));
-        btnVolver.setText("Volver");
-        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar.setBackground(new java.awt.Color(255, 210, 28));
+        btnRegresar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegresar.setText("Regresar");
+        btnRegresar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseMoved(evt);
+            }
+        });
+        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseExited(evt);
+            }
+        });
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolverActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(204, 153, 0));
-        jButton5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(51, 51, 51));
-        jButton5.setText("Contratar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnContratar.setBackground(new java.awt.Color(61, 57, 57));
+        btnContratar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        btnContratar.setForeground(new java.awt.Color(255, 255, 255));
+        btnContratar.setText("Contratar");
+        btnContratar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnContratarMouseMoved(evt);
+            }
+        });
+        btnContratar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnContratarMouseExited(evt);
+            }
+        });
+        btnContratar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnContratarActionPerformed(evt);
             }
         });
 
-        jButton6.setBackground(new java.awt.Color(204, 153, 0));
-        jButton6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(51, 51, 51));
-        jButton6.setText("Contratos");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnContratos.setBackground(new java.awt.Color(61, 57, 57));
+        btnContratos.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        btnContratos.setForeground(new java.awt.Color(255, 255, 255));
+        btnContratos.setText("Contratos");
+        btnContratos.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnContratosMouseMoved(evt);
+            }
+        });
+        btnContratos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnContratosMouseExited(evt);
+            }
+        });
+        btnContratos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnContratosActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(204, 153, 0));
-        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(51, 51, 51));
-        jButton2.setText("Empleados");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnEmpleados.setBackground(new java.awt.Color(61, 57, 57));
+        btnEmpleados.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        btnEmpleados.setForeground(new java.awt.Color(255, 255, 255));
+        btnEmpleados.setText("Empleados");
+        btnEmpleados.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                btnEmpleadosMouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnEmpleadosMouseMoved(evt);
+            }
+        });
+        btnEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEmpleadosMouseExited(evt);
+            }
+        });
+        btnEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnEmpleadosActionPerformed(evt);
             }
         });
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LogoRRHH.PNG"))); // NOI18N
 
+        jButton3.setBackground(new java.awt.Color(255, 210, 28));
+        jButton3.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Contratación");
+        jButton3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jButton3.setBorderPainted(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel3))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnContratos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnContratar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAspirantes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEmpleados, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE))
+                .addGap(57, 57, 57))
         );
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAspirantes, btnContratar, btnContratos, btnEmpleados});
+
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(btnAspirantes, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnContratar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(btnContratos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 258, Short.MAX_VALUE)
+                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56))
         );
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAspirantes, btnContratar, btnContratos, btnEmpleados});
 
         javax.swing.GroupLayout PanelGeneralContratacionLayout = new javax.swing.GroupLayout(PanelGeneralContratacion);
         PanelGeneralContratacion.setLayout(PanelGeneralContratacionLayout);
@@ -210,39 +318,97 @@ public class ContratacionPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAspirantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAspirantesActionPerformed
         ocultarPaneles(panelRegistroAsp);
         panelRegistroAsp.setSize(1000,800);
         PanelGeneralContratacion.add(panelRegistroAsp);
         PanelGeneralContratacion.revalidate();
         PanelGeneralContratacion.repaint();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAspirantesActionPerformed
 
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.setVisible(false);
         new PANTALLA_PRINCIPAL().setVisible(true);
-    }//GEN-LAST:event_btnVolverActionPerformed
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnContratarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContratarActionPerformed
         ocultarPaneles(panelContratar);
         panelContratar.setSize(1000,800);
         PanelGeneralContratacion.add(panelContratar);
         PanelGeneralContratacion.revalidate();
         PanelGeneralContratacion.repaint();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnContratarActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnContratosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContratosActionPerformed
         ocultarPaneles(panelContratos);
         panelContratos.setSize(1000,800);
         PanelGeneralContratacion.add(panelContratos);
         PanelGeneralContratacion.revalidate();
         PanelGeneralContratacion.repaint();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnContratosActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
         this.setVisible(false);
         new EmpleadoGui().setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnEmpleadosActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btnEmpleadosMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEmpleadosMouseMoved
+        Color c = new Color(255, 210, 28);
+        this.btnEmpleados.setForeground(c);
+    }//GEN-LAST:event_btnEmpleadosMouseMoved
+
+    private void btnEmpleadosMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEmpleadosMouseDragged
+       
+    }//GEN-LAST:event_btnEmpleadosMouseDragged
+
+    private void btnEmpleadosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEmpleadosMouseExited
+        Color c = new Color(255, 255,255);
+        this.btnEmpleados.setForeground(c);
+    }//GEN-LAST:event_btnEmpleadosMouseExited
+
+    private void btnAspirantesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAspirantesMouseExited
+        Color c = new Color(255, 255,255);
+        this.btnAspirantes.setForeground(c);
+    }//GEN-LAST:event_btnAspirantesMouseExited
+
+    private void btnAspirantesMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAspirantesMouseMoved
+        Color c = new Color(255, 210, 28);
+        this.btnAspirantes.setForeground(c);
+    }//GEN-LAST:event_btnAspirantesMouseMoved
+
+    private void btnContratarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnContratarMouseMoved
+        Color c = new Color(255, 210, 28);
+        this.btnContratar.setForeground(c);
+    }//GEN-LAST:event_btnContratarMouseMoved
+
+    private void btnContratarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnContratarMouseExited
+        Color c = new Color(255, 255,255);
+        this.btnContratar.setForeground(c);
+    }//GEN-LAST:event_btnContratarMouseExited
+
+    private void btnContratosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnContratosMouseExited
+        Color c = new Color(255, 255,255);
+        this.btnContratos.setForeground(c);
+    }//GEN-LAST:event_btnContratosMouseExited
+
+    private void btnContratosMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnContratosMouseMoved
+        Color c = new Color(255, 210, 28);
+        this.btnContratos.setForeground(c);
+    }//GEN-LAST:event_btnContratosMouseMoved
+
+    private void btnRegresarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseMoved
+        Color c = new Color(255, 210, 28);
+        this.btnRegresar.setForeground(c);
+    }//GEN-LAST:event_btnRegresarMouseMoved
+
+    private void btnRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseExited
+        Color c = new Color(255, 255,255);
+        this.btnRegresar.setForeground(c);
+    }//GEN-LAST:event_btnRegresarMouseExited
 
     /**
      * @param args the command line arguments
@@ -296,11 +462,12 @@ public class ContratacionPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelGeneralContratacion;
-    private javax.swing.JButton btnVolver;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton btnAspirantes;
+    private javax.swing.JButton btnContratar;
+    private javax.swing.JButton btnContratos;
+    private javax.swing.JButton btnEmpleados;
+    private javax.swing.JButton btnRegresar;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
