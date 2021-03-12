@@ -13,18 +13,18 @@ package com.epn.trappi.models.rrhh.juanjo;
  * @author Juan Jaramillo <juanjodev02 at juan.jaramillo02@epn.edu.ec>
  */
 public abstract class Empleado {
-    private int id;
-    private String nombres;
-    private String apellidos;
-    private String cedula;
-    private String cargo;
-    private String departamento;
-    private String cuentaBancaria;
-    private String banco;
-    private String sueldo;
-    private String estado;
-    private char sexo;
-    private ControlAsistencias controlAsistencias;
+    private final int id;
+    private final String nombres;
+    private final String apellidos;
+    private final String cedula;
+    private final String cargo;
+    private final String departamento;
+    private final String cuentaBancaria;
+    private final String banco;
+    private final String sueldo;
+    private final String estado;
+    private final char sexo;
+    private final ControlAsistencias controlAsistencias;
 
     public Empleado(int id, String nombres, String apellidos, String cedula, String cargo, String departamento, String cuentaBancaria, String banco, String sueldo, String estado, char sexo) {
         this.id = id;
@@ -43,6 +43,7 @@ public abstract class Empleado {
 
     public abstract void notificarEntrada();
     public abstract void notificarSalida();
+    public abstract void guardar();
     public void SolicitarPermiso() {}
 
     public String getNombres() {
