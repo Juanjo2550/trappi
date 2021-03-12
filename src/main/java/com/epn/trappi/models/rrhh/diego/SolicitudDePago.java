@@ -34,6 +34,18 @@ public class SolicitudDePago {
         this.rol = rol;
     }
 
+    public SolicitudDePago(int numero, Fecha fechaSolicitud, String estado) {
+        this.numero = numero;
+        this.fechaSolicitud = fechaSolicitud;
+        this.estado = estado;
+        
+    }
+
+    public SolicitudDePago(Fecha fechaSolicitud, String estado) {
+        this.fechaSolicitud = fechaSolicitud;
+        this.estado = estado;
+    }
+
 
     public SolicitudDePago(String estado, double montoTotal, String cuentaBancaria) {
         this.estado = estado;
