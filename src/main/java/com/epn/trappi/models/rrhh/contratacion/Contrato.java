@@ -26,6 +26,10 @@ public class Contrato {
         
     }
     
+    public Contrato(String cedulaEmpleado){
+        
+    }
+    
     public Contrato(){
         
     }
@@ -35,10 +39,21 @@ public class Contrato {
 
     }
     
-    public void registrarEmpleado(Empleado empleado){
-        EmpleadoDb listEmp = new EmpleadoDb();  //Modificar, debe llamar a empleado al  metodo registrar
-        listEmp.agregar(empleado);
+    public void solicitarRegistroEmpleado(Empleado empleado){
+        empleado.registrar();
     }
+    
+    public Fecha obtenerFechaFin(String cedula){
+        ContratoDb db = new ContratoDb();
+        return db.buscarUno(cedula).getFechaFin();
+        
+    }
+    
+    public String obtenerTipo(String cedula){
+        ContratoDb db = new ContratoDb();
+        return db.buscarUno(cedula).getTipo();
+    }
+    
     
     public Fecha getFechaInicio() {
         return fechaInicio;
