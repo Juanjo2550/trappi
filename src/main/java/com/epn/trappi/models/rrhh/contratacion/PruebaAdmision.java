@@ -1,8 +1,8 @@
 package com.epn.trappi.models.rrhh.contratacion;
 
 import com.epn.trappi.models.rrhh.listas.Lista;
-import com.epn.trappi.models.rrhh.listas.ListaAspirantes;
-import com.epn.trappi.models.rrhh.listas.ListaPruebasAdmision;
+import com.epn.trappi.db.rrhh.AspirantesDB;
+import com.epn.trappi.db.rrhh.PruebasAdmisionDB;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.Vector;
@@ -16,7 +16,7 @@ public class PruebaAdmision {
     private String actitudes;
     private String aptitudes;
     private String aprobacion;
-    private ListaAspirantes aspirantes;
+    private AspirantesDB aspirantes;
     private Lista pruebas;
     public PruebaAdmision(int puntaje, String actitudes, String aptitudes) {
         this.puntaje = puntaje;
@@ -26,8 +26,8 @@ public class PruebaAdmision {
         
     }
     public PruebaAdmision(){
-        pruebas = new ListaPruebasAdmision();
-        aspirantes = new ListaAspirantes();
+        pruebas = new PruebasAdmisionDB();
+        aspirantes = new AspirantesDB();
     }
     
     public void registrarResultados( int puntaje, String actitudes, String aptitudes){

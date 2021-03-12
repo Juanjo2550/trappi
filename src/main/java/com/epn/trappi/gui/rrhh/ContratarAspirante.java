@@ -15,10 +15,10 @@ import com.epn.trappi.models.rrhh.juanjo.Administrativo;
 import com.epn.trappi.models.rrhh.juanjo.Conductor;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import com.epn.trappi.models.rrhh.listas.Lista;
-import com.epn.trappi.models.rrhh.listas.ListaAspirantes;
-import com.epn.trappi.models.rrhh.listas.ListaContratos;
+import com.epn.trappi.db.rrhh.AspirantesDB;
+import com.epn.trappi.db.rrhh.ContratosDB;
 import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
-import com.epn.trappi.models.rrhh.listas.ListaPruebasAdmision;
+import com.epn.trappi.db.rrhh.PruebasAdmisionDB;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -33,9 +33,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ContratarAspirante extends javax.swing.JFrame {
     private void listarAspirantes(){
-        Lista listaAspirantes = new ListaAspirantes();
+        Lista listaAspirantes = new AspirantesDB();
         Aspirante[] aspirantes = (Aspirante[]) listaAspirantes.obtenerTodos();
-        ListaPruebasAdmision listaPruebas = new ListaPruebasAdmision();
+        PruebasAdmisionDB listaPruebas = new PruebasAdmisionDB();
         DefaultTableModel model = (DefaultTableModel) jTableAspirantesAptos.getModel();
         model.setRowCount(0);
         
@@ -723,7 +723,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
         aspirantesAptos = pruebas.obtenerAspirantesAptos(jTextContratoActitudes.getText(), jTextContratoAptitudes.getText(), Integer.parseInt(jTextContratoPuntaje.getText()));
         if (aspirantesAptos.size() > 0){
            
-            ListaPruebasAdmision listaPruebas = new ListaPruebasAdmision();
+            PruebasAdmisionDB listaPruebas = new PruebasAdmisionDB();
             DefaultTableModel model = (DefaultTableModel) jTableAspirantesAptos.getModel();
             model.setRowCount(0);
 

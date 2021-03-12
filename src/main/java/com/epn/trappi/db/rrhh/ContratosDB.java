@@ -1,9 +1,10 @@
-package com.epn.trappi.models.rrhh.listas;
+package com.epn.trappi.db.rrhh;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.contratacion.Contrato;
 import com.epn.trappi.models.rrhh.contratacion.PruebaAdmision;
+import com.epn.trappi.models.rrhh.listas.Lista;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author Javier Erazo
  */
-public class ListaContratos implements Lista<Contrato> {
+public class ContratosDB implements ModelDb <Contrato> {
     ArrayList <Contrato> listaContratos;
     PreparedStatement pstm = null;
     ResultSet rs = null;
@@ -68,10 +69,6 @@ public class ListaContratos implements Lista<Contrato> {
         }
     }
 
-    @Override
-    public Boolean eliminar(String parametro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public Contrato buscarUno(String cedulaEmpleado) {
