@@ -8,7 +8,8 @@ package com.epn.trappi.models.rrhh.juanjo;
 import com.epn.trappi.gui.rrhh.Permisos.Permiso;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.db.rrhh.ObservacionDb;
-import com.epn.trappi.models.rrhh.listas.ListaPermisos;
+import com.epn.trappi.db.rrhh.Permiso_EmpleadoDb;
+
 
 import java.util.ArrayList;
 
@@ -150,7 +151,8 @@ public class RolDePagos {
     }
 
     private double calcularReposicionPorPermisos(String cedula) {
-        ListaPermisos listaPermisos = new ListaPermisos();
+        Permiso_EmpleadoDb listaPermisos = new Permiso_EmpleadoDb();
+        
         Permiso[] permisos = listaPermisos.obtenerTodos();
         double total = 0;
         for(Permiso per : permisos) {

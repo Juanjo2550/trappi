@@ -10,6 +10,8 @@ import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.TextPrompt;
 import com.epn.trappi.db.connection.DataBaseConnection;
+import com.epn.trappi.db.rrhh.ModelDb;
+import com.epn.trappi.db.rrhh.Permiso_EmpleadoDb;
 
 
 
@@ -21,7 +23,7 @@ import com.epn.trappi.models.rrhh.diego.SolicitudDePago;
 import com.epn.trappi.models.rrhh.juanjo.Administrativo;
 import com.epn.trappi.models.rrhh.juanjo.Conductor;
 import com.epn.trappi.models.rrhh.listas.Lista;
-import com.epn.trappi.models.rrhh.listas.ListaPermisos;
+//import com.epn.trappi.models.rrhh.listas.ListaPermisos;
 import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
@@ -56,7 +58,7 @@ Enfermedad enfermedad = new Enfermedad();
 Fecha fecha = new Fecha();
 Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance()).getConnection();
 
- ListaPermisos permisos = new ListaPermisos();
+ Permiso_EmpleadoDb permisos = new Permiso_EmpleadoDb();
     
     /*
      * Creates new form Ejemplo_GUI
@@ -156,7 +158,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
      
      // este metodo se utiliza para mostrar los permisos en la tabla 
          private void listarPermisos(){
-        Lista listaPermisos = new ListaPermisos();
+        ModelDb listaPermisos = new Permiso_EmpleadoDb();
         Permiso[] permisos = (Permiso[]) listaPermisos.obtenerTodos();
 
         DefaultTableModel model = (DefaultTableModel) tbllista.getModel();
