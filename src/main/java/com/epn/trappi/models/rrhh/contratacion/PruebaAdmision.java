@@ -80,8 +80,7 @@ public class PruebaAdmision {
     }
     
     public void registrar(String cedula){
-        PruebaAdmisionDb db = new PruebaAdmisionDb();
-        db.agregar(this, cedula);
+        new PruebaAdmisionDb().agregar(this, cedula);
     }
     
     public int getPuntaje() {
