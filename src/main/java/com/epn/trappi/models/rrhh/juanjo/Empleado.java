@@ -43,7 +43,7 @@ public abstract class Empleado {
 
     public abstract void notificarEntrada();
     public abstract void notificarSalida();
-    public abstract void guardar();
+    public abstract void registrar();
     public void SolicitarPermiso() {}
 
     public String getNombres() {

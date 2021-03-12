@@ -19,7 +19,7 @@ public class Conductor extends Empleado {
     }
 
     @Override
-    public void guardar() {
+    public void registrar() {
         new EmpleadoDb().agregar(this);
     }
 
