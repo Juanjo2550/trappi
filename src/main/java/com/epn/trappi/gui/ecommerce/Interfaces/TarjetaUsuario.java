@@ -5,6 +5,7 @@ import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.db.ecommerce.ListaCarrito;
 import com.epn.trappi.db.ecommerce.ListaFacturas;
 import com.epn.trappi.db.ecommerce.ListaTar;
+import com.epn.trappi.db.ecommerce.Listacuenta;
 import com.epn.trappi.gui.ecommerce.Ecommerce.FachadaEcommerce;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Pago;
@@ -36,71 +37,26 @@ public class TarjetaUsuario extends javax.swing.JFrame {
         llenartabla();
     }
     
-    public void obtenerdatoscuenta(Cuenta cuenta){
-    try{
-            Statement statement = connection.createStatement();
-            String sql = "SELECT NUMERODECUENTA, FONDOS FROM CUENTABANCARIA WHERE IDCLIENTE="+idsuario();
-            ResultSet resultSet = statement.executeQuery(sql);
-            while(resultSet.next()){
-              cuenta.fondo=Double.valueOf(resultSet.getString("FONDOS"));
-              cuenta.NumeroCuenta=resultSet.getString("NUMERODECUENTA");
-              cuenta.CedulaPropietario=Main.cliente.Cedula;
-            }
-            
-       } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE,null, ex);
-        }
-    
-    }
-    
-    public int idsuario(){
-        int numero=0;
-        try {
-            String id= "";
-                       
-            Statement statement = connection.createStatement();
-            String sql = "Select CLIENTES.IDCLIENTE from CLIENTES, CUENTABANCARIA  "+
-                         "WHERE CLIENTES.IDCLIENTE=CUENTABANCARIA.IDCLIENTE AND CLIENTES.CEDULA2="+Integer.parseInt(Main.cliente.Cedula);
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                 id= resultSet.getString(1);
-            }
-            numero=Integer.parseInt(id);
-                        
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return numero;
-    }
-    
-    
         
     public void llenartabla(){
-       
-       try{
+       Tarjeta tarjeta1=null;
             DefaultTableModel tarjeta = (DefaultTableModel) tablatarjetas.getModel();
             String[] aux=new String[4];
-            Statement statement = connection.createStatement();
-            String sql = "select NUMEROTARJETA, CVV, FECHADECADUCIDAD, TIPO from TARJETAS T, CUENTABANCARIA C "+
-                         "where T.IDCUENTABANCARIA=C.IDCUENTABANCARIA and C.IDCLIENTE="+idsuario();
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                 
-                aux[0]=resultSet.getString("NUMEROTARJETA");
-                aux[1]=resultSet.getString("CVV");
-                aux[2]=resultSet.getString("TIPO");
-                aux[3]=resultSet.getString("FECHADECADUCIDAD");
+            for (int i = 0; i <Main.cliente.tarjeta.size(); i++) {
+                tarjeta1=Main.cliente.tarjeta.get(i);
+                aux[0]=tarjeta1.NumeroTarjeta;
+                aux[1]=tarjeta1.CVV;
+                aux[2]=tarjeta1.Tipo;
+                aux[3]=tarjeta1.Fechacaducidad;
                 tarjeta.addRow(aux);
             }
             tablatarjetas.setModel(tarjeta);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }
     public void realizarcompra(){
     Cuenta cuenta=new Cuenta();
-        obtenerdatoscuenta(cuenta);
+    Listacuenta lisc=new Listacuenta();
+        lisc.obtenerdatoscuenta(cuenta);
         if(Comprar.carrito.factura.pago.validarPago(obtenerTarje(),Comprar.carrito.factura.calcularTotal(),cuenta)==true){
               ListaFacturas lista=new ListaFacturas();
               int id=lista.generarfacturaDatabase(Main.cliente.Nombre,carrito.factura.calcularSubTotal(),carrito.factura.calcularImpuestos(),carrito.factura.calcularTotal());
