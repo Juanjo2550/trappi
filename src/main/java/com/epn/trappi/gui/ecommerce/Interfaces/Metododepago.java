@@ -67,8 +67,7 @@ public class Metododepago extends javax.swing.JFrame {
             String fecha ="";
                                    
             Statement statement = connection.createStatement();
-            String sql = "select NUMEROTARJETA, CVV, FECHADECADUCIDAD,TIPO from TARJETAS T, CUENTABANCARIA C, CLIENTES L "+
-                         "where T.IDCUENTABANCARIA=C.IDCUENTABANCARIA and C.IDCLIENTE=L.IDCLIENTE and L.NOMBRECLIE='"+jt.getText()+"'";
+            String sql = "EXEC tarjeta_Consulta '"+Main.cliente.Cedula+"'";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                  tarjeta= resultSet.getString("NUMEROTARJETA");
@@ -89,8 +88,7 @@ public class Metododepago extends javax.swing.JFrame {
             DefaultTableModel tarjeta = (DefaultTableModel) tablatarjetas.getModel();
             String[] aux=new String[4];
             Statement statement = connection.createStatement();
-            String sql = "select NUMEROTARJETA, CVV, FECHADECADUCIDAD, TIPO from TARJETAS T, CUENTABANCARIA C, CLIENTES L "+
-                         "where T.IDCUENTABANCARIA=C.IDCUENTABANCARIA and C.IDCLIENTE=L.IDCLIENTE and L.NOMBRECLIE='"+jt.getText()+"'";
+            String sql = "EXEC TarjetaCLiente_consulta '"+Main.cliente.Cedula+"'";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                  

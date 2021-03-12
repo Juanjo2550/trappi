@@ -202,7 +202,7 @@ public class CuentaCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(59, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 1046, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -233,11 +233,11 @@ public class CuentaCliente extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(204, 204, 204)
                                 .addComponent(jButtonaceptarcambios)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton5)
-                                .addGap(138, 138, 138)
-                                .addComponent(jButton6)
-                                .addGap(192, 192, 192)))))
+                                .addGap(471, 471, 471)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -332,7 +332,7 @@ public class CuentaCliente extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
     ListaClientes lista=new ListaClientes();
-    lista.eliminar(Main.cliente.Nombre);
+    lista.eliminar(Main.cliente.Cedula);
     Main.cliente.eliminarse();
     this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed

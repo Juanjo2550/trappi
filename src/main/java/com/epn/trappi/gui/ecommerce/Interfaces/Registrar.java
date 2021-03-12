@@ -243,8 +243,7 @@ public class Registrar extends javax.swing.JFrame {
             String contra ="";
                        
             Statement statement = connection.createStatement();
-            String sql = "select * from CLIENTES where NOMBRECLIE ='"+
-                        jTextFieldNombre.getText()+"'";
+            String sql = "EXEC cliente_consultadatos '"+Main.cliente.Cedula+"'";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                  nombre= resultSet.getString("NOMBRECLIE");

@@ -286,13 +286,13 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
             String fecha ="";
                                    
             Statement statement = connection.createStatement();
-            String sql = "select NUMEROTARJETA, CVV, FECHADECADUCIDAD from TARJETAS T, CUENTABANCARIA C, CLIENTES L "+
-                         "where T.IDCUENTABANCARIA=C.IDCUENTABANCARIA and C.IDCLIENTE=L.IDCLIENTE and L.NOMBRECLIE='"+jt.getText()+"'";
+            String sql = "EXEC tarjeta_Consulta '"+Main.cliente.Cedula+"'";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                  tarjeta= resultSet.getString("NUMEROTARJETA");
                  cvv =resultSet.getString("CVV");
                  fecha =resultSet.getString("FECHADECADUCIDAD");}
+                 tipo= resultSet.getString("TIPO");
             System.out.println(tarjeta);
             System.out.println("estoy aqui");
             jTextFieldTarjeta.setText(tarjeta);
