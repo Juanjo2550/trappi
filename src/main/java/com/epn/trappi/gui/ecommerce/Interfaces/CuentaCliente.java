@@ -43,6 +43,17 @@ public class CuentaCliente extends javax.swing.JFrame {
         jt.setText(Main.cliente.Nombre);
         jt.setEditable(false);
     }
+    
+    
+    public void habilitarjtfield(){
+    jTextFieldcelular.setEditable(true);
+        jTextFieldcontrasena.setEditable(true);
+        jTextFieldcorreo.setEditable(true);
+        jTextFieldnombre.setEditable(true);
+        jTextFielddireccion.setEditable(true);
+        jTextFieldfecha.setEditable(true);
+        jButtonaceptarcambios.setVisible(true);
+    }
 
     
     @SuppressWarnings("unchecked")
@@ -314,13 +325,7 @@ public class CuentaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-     jTextFieldcelular.setEditable(true);
-        jTextFieldcontrasena.setEditable(true);
-        jTextFieldcorreo.setEditable(true);
-        jTextFieldnombre.setEditable(true);
-        jTextFielddireccion.setEditable(true);
-        jTextFieldfecha.setEditable(true);
-        jButtonaceptarcambios.setVisible(true);
+     habilitarjtfield();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButtonaceptarcambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaceptarcambiosActionPerformed

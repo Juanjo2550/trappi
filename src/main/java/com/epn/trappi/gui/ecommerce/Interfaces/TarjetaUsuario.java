@@ -34,9 +34,23 @@ public class TarjetaUsuario extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
        
         llenartabla();
-
-       
-        
+    }
+    
+    public void obtenerdatoscuenta(Cuenta cuenta){
+    try{
+            Statement statement = connection.createStatement();
+            String sql = "SELECT NUMERODECUENTA, FONDOS FROM CUENTABANCARIA WHERE IDCLIENTE="+idsuario();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while(resultSet.next()){
+              cuenta.fondo=Double.valueOf(resultSet.getString("FONDOS"));
+              cuenta.NumeroCuenta=resultSet.getString("NUMERODECUENTA");
+              cuenta.CedulaPropietario=Main.cliente.Cedula;
+            }
+            
+       } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE,null, ex);
+        }
+    
     }
     
     public int idsuario(){
@@ -84,7 +98,29 @@ public class TarjetaUsuario extends javax.swing.JFrame {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    public void realizarcompra(){
+    Cuenta cuenta=new Cuenta();
+        obtenerdatoscuenta(cuenta);
+        if(Comprar.carrito.factura.pago.validarPago(obtenerTarje(),Comprar.carrito.factura.calcularTotal(),cuenta)==true){
+              ListaFacturas lista=new ListaFacturas();
+              int id=lista.generarfacturaDatabase(Main.cliente.Nombre,carrito.factura.calcularSubTotal(),carrito.factura.calcularImpuestos(),carrito.factura.calcularTotal());
+              Comprar.carrito.factura.setNumeroFactura(id);
+              ListaCarrito lista1=new ListaCarrito();
+              lista1.registrar_detallecompra(Comprar.carrito, Main.cliente.Nombre);
+               
+              FachadaEcommerce datosEnviar = new FachadaEcommerce();
+                 
+                datosEnviar.enviarDatos(carrito.factura.nFactura, carrito.factura.calcularTotal(), Comprar.carrito.factura.Detalle,Main.cliente.Direccion);
+         
+                JOptionPane.showMessageDialog(rootPane,"Compra realizada con exito");
+                
+                carrito.vaciarCarrito(); 
+                this.setVisible(false);
+        }
+             else{
+                 JOptionPane.showMessageDialog(rootPane,"Saldo insuficiente, no se puede realizar la compra");
+             }
+    }
    
     public String[] tomarTarjeta()
     {   String[] aux=new String[4];
@@ -219,51 +255,7 @@ public class TarjetaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_tablatarjetasMouseClicked
 
     private void jButtonSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSeleccionarActionPerformed
-        Cuenta cuenta=new Cuenta();
-
-        
-        
-        try{
-            Statement statement = connection.createStatement();
-            String sql = "SELECT NUMERODECUENTA, FONDOS FROM CUENTABANCARIA WHERE IDCLIENTE="+idsuario();
-            ResultSet resultSet = statement.executeQuery(sql);
-            while(resultSet.next()){
-              cuenta.fondo=Double.valueOf(resultSet.getString("FONDOS"));
-              cuenta.NumeroCuenta=resultSet.getString("NUMERODECUENTA");
-              cuenta.CedulaPropietario=Main.cliente.Cedula;
-            }
-            
-       } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE,null, ex);
-        }
-        
-        
-        Pago pago = new Pago();
-       
-        
-        
-        if(pago.validarPago(obtenerTarje(),Comprar.carrito.factura.calcularTotal(),cuenta)==true){
-              ListaFacturas lista=new ListaFacturas();
-              int id=lista.generarfacturaDatabase(Main.cliente.Nombre,carrito.factura.calcularSubTotal(),carrito.factura.calcularImpuestos(),carrito.factura.calcularTotal());
-              Comprar.carrito.factura.setNumeroFactura(id);
-              ListaCarrito lista1=new ListaCarrito();
-              lista1.registrar_detallecompra(Comprar.carrito, Main.cliente.Nombre);
-               
-              FachadaEcommerce datosEnviar = new FachadaEcommerce();
-                 
-                datosEnviar.enviarDatos(carrito.factura.nFactura, carrito.factura.calcularTotal(), Comprar.carrito.factura.Detalle,Main.cliente.Direccion);
-               
-                
-                JOptionPane.showMessageDialog(rootPane,"Compra realizada con exito");
-                
-                carrito.vaciarCarrito(); 
-                this.setVisible(false);
-        }
-             else{
-                 JOptionPane.showMessageDialog(rootPane,"Saldo insuficiente, no se puede realizar la compra");
-             }
-        
-        
+        realizarcompra();
 
     }//GEN-LAST:event_jButtonSeleccionarActionPerformed
 

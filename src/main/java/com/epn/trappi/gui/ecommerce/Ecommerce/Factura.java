@@ -26,6 +26,7 @@ public class Factura {
     
     public Factura(ArrayList <Producto>  detalle){
         this.Detalle=detalle;
+        this.pago=new Pago();
     }
 
 public Double calcularSubTotal(){
