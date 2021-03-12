@@ -9,7 +9,7 @@ package com.epn.trappi.gui.rrhh;
 import com.epn.trappi.models.rrhh.contratacion.Contrato;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 
-import com.epn.trappi.db.rrhh.ContratosDB;
+import com.epn.trappi.db.rrhh.ContratoDb;
 import com.epn.trappi.db.rrhh.EmpleadoDb;
 import com.epn.trappi.db.rrhh.ModelDb;
 
@@ -25,7 +25,7 @@ public class Contratos extends javax.swing.JFrame {
     private void listarContratos(){
         ModelDb listaEmpleados = new EmpleadoDb();
         Empleado [] empleados = (Empleado[]) listaEmpleados.obtenerTodos();
-        ContratosDB listaContratos = new ContratosDB();
+        ContratoDb listaContratos = new ContratoDb();
         DefaultTableModel model = (DefaultTableModel) jTableContratosEmpleados.getModel();
         model.setRowCount(0);
         
