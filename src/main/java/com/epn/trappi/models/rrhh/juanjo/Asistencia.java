@@ -1,15 +1,15 @@
 package com.epn.trappi.models.rrhh.juanjo;
 
+import com.epn.trappi.db.rrhh.AsistenciaDb;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.Hora;
-import com.epn.trappi.db.rrhh.ObservacionDb;
 
 public class Asistencia {
-    private Empleado empleado;
-    private Hora horaInicio;
+    private final Empleado empleado;
+    private final Hora horaInicio;
     private Hora horaFin;
-    private Fecha fecha;
-    private String observaciones;
+    private final Fecha fecha;
+    private final String observaciones;
     private final Hora horaLimiteEntrada = new Hora(7, 0, 0);
     private final Hora horaLimiteSalida = new Hora(15, 0, 0);
 
@@ -27,6 +27,33 @@ public class Asistencia {
         this.horaFin = null;
         this.fecha = fecha;
         this.observaciones = observaciones;
+    }
+
+    public void registrar() {
+        new AsistenciaDb().agregar(this);
+    }
+
+    public void registrarSalida() {
+        this.setHoraFin(new Hora());
+        new AsistenciaDb().registrarSalida(this);
+    }
+
+    public void comprobarAtraso() {
+        if(this.getHoraInicio().getHora() > this.horaLimiteEntrada.getHora()) {
+            int diferencia = Math.abs(this.getHoraInicio().getHora() - this.horaLimiteEntrada.getHora());
+            new Observacion(this.empleado, "atraso", "N/A", this.fecha, new Hora(diferencia, 0, 0))
+                    .agregar();
+        }
+    }
+
+    public void comprobarHoraExtra() {
+        if(this.getHoraFin() != null) {
+            if (this.getHoraFin().getHora() > this.horaLimiteSalida.getHora()){
+                int diferencia = Math.abs(this.getHoraFin().getHora() - this.horaLimiteSalida.getHora());
+                new Observacion(this.empleado, "tiempoExtra", "N/A", this.fecha, new Hora(diferencia, 0, 0))
+                        .agregar();
+            }
+        }
     }
 
     public Empleado getEmpleado() {
@@ -51,26 +78,5 @@ public class Asistencia {
 
     public void setHoraFin(Hora horaFin) {
         this.horaFin = horaFin;
-    }
-
-    public void comprobarAtraso() {
-        if(this.getHoraInicio().getHora() > this.horaLimiteEntrada.getHora()) {
-            int diferencia = Math.abs(this.getHoraInicio().getHora() - this.horaLimiteEntrada.getHora());
-            this.crearObservacion("atraso", this.getEmpleado(), diferencia);
-        }
-    }
-
-    public void comprobarHoraExtra() {
-        if(this.getHoraFin() != null) {
-            if (this.getHoraFin().getHora() > this.horaLimiteSalida.getHora()){
-                int diferencia = Math.abs(this.getHoraFin().getHora() - this.horaLimiteSalida.getHora());
-                this.crearObservacion("tiempoExtra", this.getEmpleado(), diferencia);
-            }
-        }
-    }
-
-    private void crearObservacion(String tipo, Empleado empleado, int horasDeDiferencia) {
-        ObservacionDb observacionDb = new ObservacionDb();
-        observacionDb.agregar(new Observacion(empleado, tipo, "N/A", this.fecha, new Hora(horasDeDiferencia, 0, 0)));
     }
 }
