@@ -1,4 +1,4 @@
-package com.epn.trappi.models.rrhh.listas;
+package com.epn.trappi.db.rrhh;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.models.rrhh.Fecha;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class ListaRolesDePago implements Lista<RolDePagos> {
+public class RolDePagosDb implements ModelDb<RolDePagos> {
     private final Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance()).getConnection();
 
     @Override
@@ -32,11 +32,6 @@ public class ListaRolesDePago implements Lista<RolDePagos> {
         }
     }
 
-    @Override
-    public Boolean eliminar(String parametro) {
-        return null;
-    }
-
     /**
      * Este método trae el último rol registrado en la base de datos
      * @param cedula
@@ -44,7 +39,7 @@ public class ListaRolesDePago implements Lista<RolDePagos> {
      */
     @Override
     public RolDePagos buscarUno(String cedula) {
-        Empleado empleado = new ListaEmpleados().buscarUno(cedula);
+        Empleado empleado = new EmpleadoDb().buscarUno(cedula);
         String sql = "SELECT * FROM dbo.ROLPAGOS WHERE IDEMP=" + empleado.getId() + ";";
         RolDePagos roles = null;
         try {
@@ -80,7 +75,7 @@ public class ListaRolesDePago implements Lista<RolDePagos> {
                 String[] formattedDate = unformattedDate.split("-");
                 roles.add(new RolDePagos(
                         resultSet.getInt(1),
-                        new ListaEmpleados().buscarUno(resultSet.getInt(2)),
+                        new EmpleadoDb().buscarUno(resultSet.getInt(2)),
                         new Fecha(Integer.parseInt(formattedDate[2]), Integer.parseInt(formattedDate[1]), Integer.parseInt(formattedDate[0])),
                         resultSet.getBigDecimal(4).doubleValue(),
                         resultSet.getBigDecimal(5).doubleValue(),
@@ -97,7 +92,7 @@ public class ListaRolesDePago implements Lista<RolDePagos> {
     }
 
     public RolDePagos[] obtenerTodos(String cedula) {
-        Empleado empleado = new ListaEmpleados().buscarUno(cedula);
+        Empleado empleado = new EmpleadoDb().buscarUno(cedula);
         String sql = "SELECT * FROM dbo.ROLPAGOS WHERE IDEMP=" + empleado.getId() + ";";
         ArrayList<RolDePagos> roles = new ArrayList<>();
         try {
@@ -125,7 +120,7 @@ public class ListaRolesDePago implements Lista<RolDePagos> {
     }
 
     public static void main(String args[]) throws SQLException {
-        ListaRolesDePago l1 = new ListaRolesDePago();
+        RolDePagosDb l1 = new RolDePagosDb();
         try {
             System.out.println(Arrays.stream(l1.obtenerTodos()).count());
         }catch (Exception e) {

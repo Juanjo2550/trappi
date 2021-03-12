@@ -7,13 +7,9 @@
 package com.epn.trappi.models.rrhh.juanjo;
 import com.epn.trappi.gui.rrhh.Permisos.Permiso;
 import com.epn.trappi.models.rrhh.Fecha;
-import com.epn.trappi.models.rrhh.contratacion.Contrato;
-import com.epn.trappi.models.rrhh.listas.ListaObservaciones;
+import com.epn.trappi.db.rrhh.ObservacionDb;
 import com.epn.trappi.models.rrhh.listas.ListaPermisos;
-import com.epn.trappi.models.rrhh.listas.ListaRolesDePago;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.ArrayList;
 
 /**
@@ -170,7 +166,7 @@ public class RolDePagos {
     }
 
     private Observacion[] obtenerObservaciones () throws Exception {
-        return new ListaObservaciones().obtenerTodos(this.empleado.getCedula(), this.fecha.getMes());
+        return new ObservacionDb().obtenerTodos(this.empleado.getCedula(), this.fecha.getMes());
     }
 
 

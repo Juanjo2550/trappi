@@ -6,16 +6,10 @@
 package com.epn.trappi.gui.rrhh;
 
 
-import com.epn.trappi.db.rrhh.*;
-import com.epn.trappi.models.rrhh.*;
-import com.epn.trappi.models.rrhh.juanjo.Asistencia;
-import com.epn.trappi.models.rrhh.juanjo.ControlAsistencias;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
-import com.epn.trappi.models.rrhh.listas.ListaAsistencias;
-import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
-import com.epn.trappi.models.rrhh.listas.ListaRolesDePago;
-import java.sql.SQLException;
+import com.epn.trappi.db.rrhh.EmpleadoDb;
+import com.epn.trappi.db.rrhh.RolDePagosDb;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -38,7 +32,7 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
     public DetalleEmpleadoGUI(String cedula, javax.swing.JFrame parentForm) {
         initComponents();
         this.parentForm = parentForm;
-        this.empleado = new ListaEmpleados().buscarUno(cedula);
+        this.empleado = new EmpleadoDb().buscarUno(cedula);
         this.nombreEmpleado.setText(this.empleado.getNombres() + " " + this.empleado.getApellidos());
         this.cedulaTextField.setText(this.empleado.getCedula().toString());
         this.cargoTextField.setText(this.empleado.getCargo());
@@ -65,7 +59,7 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
         };
 //        new ListaRolesDePago().agregar(new RolDePagos(this.empleado, new Fecha()));
         DefaultTableModel tableModel = new DefaultTableModel(col, 0);
-        for(RolDePagos r : new ListaRolesDePago().obtenerTodos(cedula)){
+        for(RolDePagos r : new RolDePagosDb().obtenerTodos(cedula)){
             Object [] row = {
                 r.getNumero(),
                 r.getTotal(),

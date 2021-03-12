@@ -8,16 +8,14 @@ package com.epn.trappi.gui.rrhh;
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.models.financiero.Pago;
 import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
-import com.epn.trappi.models.rrhh.listas.ListaRolesDePago;
+import com.epn.trappi.db.rrhh.RolDePagosDb;
 import com.epn.trappi.models.rrhh.diego.SolicitudDePago;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
 public class ListaDeRolesEmpleados extends javax.swing.JFrame {
 
     private final Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance()).getConnection();
-    private final ListaRolesDePago roles;
+    private final RolDePagosDb roles;
     private final SolicitudDePago pagos;
     String cuenta;
     String total;
@@ -41,7 +39,7 @@ public class ListaDeRolesEmpleados extends javax.swing.JFrame {
      */
     public ListaDeRolesEmpleados() {
         initComponents();
-        this.roles = new ListaRolesDePago();
+        this.roles = new RolDePagosDb();
         this.pagos = new SolicitudDePago();
         inicioTable();
         this.jButton6.setEnabled(false);
