@@ -20,8 +20,8 @@ public class Demo extends javax.swing.JFrame {
      */
     public Demo() {
         initComponents();
-        this.controlAsistencias = new ControlAsistencias();
-        this.log = new LogInterface(this.controlAsistencias);
+//        this.controlAsistencias = new ControlAsistencias();
+//        this.log = new LogInterface(this.controlAsistencias);
     }
 
     /**
@@ -101,17 +101,17 @@ public class Demo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        log.setVisible(true);
+//        log.setVisible(true);
         //Se ejecuta el metodo que notifica el ingreso de un empleado
-        this.controlAsistencias.registrarInicioDeJornada("1722951165");
+//        this.controlAsistencias.registrarInicioDeJornada("1722951165");
         //new ListaEmpleados().buscarUno("1722951165").notificarEntrada();
-        log.updateEmpleados();
+//        log.updateEmpleados();
 //        log.updateEmpleados();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new EmpleadoDb().buscarUno("1722951165").notificarSalida();
+//        new EmpleadoDb().buscarUno("1722951165").notificarSalida();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Javier Erazo
  */
-public class PruebasAdmisionDB implements ModelDb <PruebaAdmision> {
+public class PruebaAdmisionDb implements ModelDb <PruebaAdmision> {
     ArrayList <PruebaAdmision> listaPruebasAdmision;
     PreparedStatement pstm = null;
     ResultSet rs = null;

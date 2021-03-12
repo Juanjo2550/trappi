@@ -103,7 +103,54 @@ public class Comprar extends javax.swing.JFrame {
             return tipo;
         }
     }
+    
+    public void agregarAlcarrito(){
+    int cantidad = carrito.cantidadCompraProducto();
+        carrito.añadirProducto(nombre1, precio1, cantidad, marca1);
+        DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
+        String[] aux = new String[3];
+        aux[0] = nombre1;
+        aux[1] = String.valueOf(precio1);
+        aux[2] = Integer.toString(cantidad);
+        modelo.addRow(aux);
+        jTable2.setModel(modelo);
+    }
+    
+    public void confirmarcompra(){
+     String salida = "";
 
+        if (carrito.confirmarContenido() == true) {
+            carrito.factura = new Factura(carrito.Productos);
+            String nombre = Main.cliente.Nombre;
+            String cedula = Main.cliente.Cedula;
+            ArrayList<Producto> detalle = carrito.factura.Detalle;
+            //ArrayList<Articulo> detalle = carrito.factura.Detalle;
+            Double subtotal = carrito.factura.calcularSubTotal();
+            Double iva = carrito.factura.calcularImpuestos();
+            Double total = carrito.factura.calcularTotal();
+            FacturaFis factu = new FacturaFis();
+            Date fecha = new Date();
+
+            String date = fecha.getDay() + "/" + fecha.getMonth() + "/" + fecha.getYear();
+            factu.cargarDatos(000, nombre, cedula, date, detalle, subtotal, iva, total);
+            factu.setVisible(true);
+
+            if (JOptionPane.showConfirmDialog(null, "¿Desea pagar?", "El proceso de pago empezará", JOptionPane.YES_NO_OPTION) == YES_OPTION) {
+                TarjetaUsuario tarusu = new TarjetaUsuario();
+                tarusu.setVisible(true);
+                factu.setVisible(false);
+                this.setVisible(false);
+            }
+        }
+    }
+    
+    public void vaciarcarro(){
+    DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
+        int filas = modelo.getRowCount();
+        for (int i = 0; i < filas; i++) {
+            modelo.removeRow(0);
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -401,15 +448,7 @@ public class Comprar extends javax.swing.JFrame {
 
     private void jButtonagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonagregarActionPerformed
         obtenerproductodestock();
-        int cantidad = carrito.cantidadCompraProducto();
-        carrito.añadirProducto(nombre1, precio1, cantidad, marca1);
-        DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
-        String[] aux = new String[3];
-        aux[0] = nombre1;
-        aux[1] = String.valueOf(precio1);
-        aux[2] = Integer.toString(cantidad);
-        modelo.addRow(aux);
-        jTable2.setModel(modelo);
+        agregarAlcarrito();
     }//GEN-LAST:event_jButtonagregarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -417,42 +456,14 @@ public class Comprar extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        String salida = "";
-
-        if (carrito.confirmarContenido() == true) {
-            carrito.factura = new Factura(carrito.Productos);
-            String nombre = Main.cliente.Nombre;
-            String cedula = Main.cliente.Cedula;
-            ArrayList<Producto> detalle = carrito.factura.Detalle;
-            //ArrayList<Articulo> detalle = carrito.factura.Detalle;
-            Double subtotal = carrito.factura.calcularSubTotal();
-            Double iva = carrito.factura.calcularImpuestos();
-            Double total = carrito.factura.calcularTotal();
-            FacturaFis factu = new FacturaFis();
-            Date fecha = new Date();
-
-            String date = fecha.getDay() + "/" + fecha.getMonth() + "/" + fecha.getYear();
-            factu.cargarDatos(000, nombre, cedula, date, detalle, subtotal, iva, total);
-            factu.setVisible(true);
-
-            if (JOptionPane.showConfirmDialog(null, "¿Desea pagar?", "El proceso de pago empezará", JOptionPane.YES_NO_OPTION) == YES_OPTION) {
-                TarjetaUsuario tarusu = new TarjetaUsuario();
-                tarusu.setVisible(true);
-                factu.setVisible(false);
-                this.setVisible(false);
-            }
-        }
+    confirmarcompra();
 
 
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         carrito.vaciarCarrito();
-        DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
-        int filas = modelo.getRowCount();
-        for (int i = 0; i < filas; i++) {
-            modelo.removeRow(0);
-        }
+        vaciarcarro();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButtoneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoneliminarActionPerformed

@@ -59,6 +59,13 @@ public class Metododepago extends javax.swing.JFrame {
     return tar;
    }
    
+   public void vaciardatosdelosjtfield(){
+   jTextFieldtarjeta.setText(null);
+    jTextFieldcvv.setText(null);
+    jTextFieldtipo.setSelectedIndex(0);
+    jTextFieldfecha.setText(null);
+   }
+   
    public void llenardatos(){
         try {
             String tarjeta= "";
@@ -67,8 +74,7 @@ public class Metododepago extends javax.swing.JFrame {
             String fecha ="";
                                    
             Statement statement = connection.createStatement();
-            String sql = "select NUMEROTARJETA, CVV, FECHADECADUCIDAD,TIPO from TARJETAS T, CUENTABANCARIA C, CLIENTES L "+
-                         "where T.IDCUENTABANCARIA=C.IDCUENTABANCARIA and C.IDCLIENTE=L.IDCLIENTE and L.NOMBRECLIE='"+jt.getText()+"'";
+            String sql = "EXEC tarjeta_Consulta '"+Main.cliente.Cedula+"'";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                  tarjeta= resultSet.getString("NUMEROTARJETA");
@@ -89,8 +95,7 @@ public class Metododepago extends javax.swing.JFrame {
             DefaultTableModel tarjeta = (DefaultTableModel) tablatarjetas.getModel();
             String[] aux=new String[4];
             Statement statement = connection.createStatement();
-            String sql = "select NUMEROTARJETA, CVV, FECHADECADUCIDAD, TIPO from TARJETAS T, CUENTABANCARIA C, CLIENTES L "+
-                         "where T.IDCUENTABANCARIA=C.IDCUENTABANCARIA and C.IDCLIENTE=L.IDCLIENTE and L.NOMBRECLIE='"+jt.getText()+"'";
+            String sql = "EXEC TarjetaCLiente_consulta '"+Main.cliente.Cedula+"'";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                  
@@ -105,6 +110,14 @@ public class Metododepago extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void habilitarjtfield(){
+    jTextFieldcvv.setEditable(true);
+        jTextFieldfecha.setEditable(true);
+        jTextFieldtarjeta.setEditable(false);
+        jTextFieldtipo.setEditable(true);  
+        jButtoneditarconfirmarcambios.setVisible(true);
     }
     
     
@@ -422,7 +435,6 @@ public class Metododepago extends javax.swing.JFrame {
     RegistrarMetododepago rmp=new RegistrarMetododepago();
     rmp.setVisible(true);
     this.setVisible(false);
-    rmp.nombretitulo(jt.getText());
     
     }//GEN-LAST:event_jButtonregistrarActionPerformed
 
@@ -433,11 +445,7 @@ public class Metododepago extends javax.swing.JFrame {
     }//GEN-LAST:event_tablatarjetasMouseClicked
 
     private void jButtoneditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoneditar1ActionPerformed
-        jTextFieldcvv.setEditable(true);
-        jTextFieldfecha.setEditable(true);
-        jTextFieldtarjeta.setEditable(false);
-        jTextFieldtipo.setEditable(true);  
-        jButtoneditarconfirmarcambios.setVisible(true);
+    habilitarjtfield();
         
     }//GEN-LAST:event_jButtoneditar1ActionPerformed
 
@@ -466,10 +474,7 @@ public class Metododepago extends javax.swing.JFrame {
     ListaTar lis=new ListaTar();
     lis.borartarjeta(Integer.parseInt(jTextFieldtarjeta.getText()));
     Main.cliente.eliminarTarjeta(jTextFieldtarjeta.getText());
-    jTextFieldtarjeta.setText(null);
-    jTextFieldcvv.setText(null);
-    jTextFieldtipo.setSelectedIndex(0);
-    jTextFieldfecha.setText(null);
+    vaciardatosdelosjtfield();
     }//GEN-LAST:event_jbeliminarActionPerformed
 
     

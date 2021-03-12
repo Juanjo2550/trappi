@@ -42,8 +42,7 @@ public class Login extends javax.swing.JFrame {
             String fecha ="";
                                    
             Statement statement = connection.createStatement();
-            String sql = "select NUMEROTARJETA, CVV, FECHADECADUCIDAD,TIPO from TARJETAS T, CUENTABANCARIA C, CLIENTES L "+
-                         "where T.IDCUENTABANCARIA=C.IDCUENTABANCARIA and C.IDCLIENTE=L.IDCLIENTE and L.NOMBRECLIE='"+Main.cliente.Nombre+"'";
+            String sql = "EXEC tarjeta_Consulta '"+Main.cliente.Cedula+"'";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                  tarjeta= resultSet.getString("NUMEROTARJETA");

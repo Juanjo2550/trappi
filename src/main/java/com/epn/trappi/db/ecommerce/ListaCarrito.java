@@ -24,7 +24,7 @@ public class ListaCarrito {
     public String obtenerIdProducto(String nombre) 
     {
             String idProducto="";
-            String sql = "SELECT IDENTIFICADORBIEN2 FROM BIEN WHERE NOMBREBIEN='"+nombre+"'";  
+            String sql = "EXEC CarritoIdbien_Consulta '"+nombre+"'";  
             
         try {
            Statement prepSelect=connection.createStatement();
