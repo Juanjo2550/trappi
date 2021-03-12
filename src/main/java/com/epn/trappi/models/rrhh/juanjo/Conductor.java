@@ -24,14 +24,14 @@ public class Conductor extends Empleado {
     }
 
     @Override
-    public void notificarEntrada() {
-        this.getControlAsistencias().registrarInicioDeJornada(this.getCedula());
+    public void notificarEntrada(ControlAsistencias controlAsistencias) {
+        controlAsistencias.registrarInicioDeJornada(this);
     }
 
     @Override
-    public void notificarSalida() {
+    public void notificarSalida(ControlAsistencias controlAsistencias) {
         try {
-            this.getControlAsistencias().registrarFinDeJornada(this.getCedula());
+            controlAsistencias.registrarFinDeJornada(this.getCedula());
         } catch (Exception e) {
             System.out.println(e.toString());
         }

@@ -24,7 +24,6 @@ public abstract class Empleado {
     private final String sueldo;
     private final String estado;
     private final char sexo;
-    private final ControlAsistencias controlAsistencias;
 
     public Empleado(int id, String nombres, String apellidos, String cedula, String cargo, String departamento, String cuentaBancaria, String banco, String sueldo, String estado, char sexo) {
         this.id = id;
@@ -38,11 +37,10 @@ public abstract class Empleado {
         this.sueldo = sueldo;
         this.estado = estado;
         this.sexo = sexo;
-        this.controlAsistencias = new ControlAsistencias();
     }
 
-    public abstract void notificarEntrada();
-    public abstract void notificarSalida();
+    public abstract void notificarEntrada(ControlAsistencias controlAsistencias);
+    public abstract void notificarSalida(ControlAsistencias controlAsistencias);
     public abstract void registrar();
     public void SolicitarPermiso() {}
 
@@ -88,9 +86,5 @@ public abstract class Empleado {
 
     public int getId() {
         return id;
-    }
-
-    public ControlAsistencias getControlAsistencias() {
-        return controlAsistencias;
     }
 }
