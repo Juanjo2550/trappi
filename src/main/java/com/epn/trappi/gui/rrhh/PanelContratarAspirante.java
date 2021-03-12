@@ -181,7 +181,7 @@ public class PanelContratarAspirante extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTableAspirantesAptos);
 
-        PanelAspirante.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 950, 220));
+        PanelAspirante.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 950, 350));
 
         jTextContratoFechaInicioDia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -532,20 +532,20 @@ public class PanelContratarAspirante extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1012, Short.MAX_VALUE)
+            .addGap(0, 1014, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(PanelAspirante, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+                    .addComponent(PanelAspirante, javax.swing.GroupLayout.DEFAULT_SIZE, 1002, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 562, Short.MAX_VALUE)
+            .addGap(0, 848, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(PanelAspirante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanelAspirante, javax.swing.GroupLayout.DEFAULT_SIZE, 836, Short.MAX_VALUE)
                     .addContainerGap()))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -700,8 +700,9 @@ public class PanelContratarAspirante extends javax.swing.JPanel {
                     Integer.parseInt(jTextContratoFechaFinMes.getText()),
                     Integer.parseInt(jTextContratoFechaFinAno.getText()));
                 Contrato contrato = new Contrato(fechaInicio, fechaFin, tipoContrato, valorSueldo);
-                contrato.registrar(cedula);
                 contrato.solicitarRegistroEmpleado(nuevoEmpleado);
+                contrato.registrar(cedula);
+                
                 JOptionPane.showMessageDialog(null, "El Empleado se contrató con éxito");
             } else {
                 JOptionPane.showMessageDialog(null, "Seleccione el tipo de empleado");

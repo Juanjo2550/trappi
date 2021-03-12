@@ -61,25 +61,26 @@ public class PanelContratos extends javax.swing.JPanel {
     private void initComponents() {
 
         PanelAspirante = new javax.swing.JPanel();
-        jButRegCliente2 = new javax.swing.JButton();
+        jButVerContrato = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableContratosEmpleados = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
+        jButVerContrato1 = new javax.swing.JButton();
 
         PanelAspirante.setBackground(new java.awt.Color(255, 255, 255));
         PanelAspirante.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButRegCliente2.setBackground(new java.awt.Color(38, 112, 171));
-        jButRegCliente2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButRegCliente2.setForeground(new java.awt.Color(240, 240, 241));
-        jButRegCliente2.setText("Ver");
-        jButRegCliente2.setBorderPainted(false);
-        jButRegCliente2.addActionListener(new java.awt.event.ActionListener() {
+        jButVerContrato.setBackground(new java.awt.Color(38, 112, 171));
+        jButVerContrato.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButVerContrato.setForeground(new java.awt.Color(240, 240, 241));
+        jButVerContrato.setText("Ver");
+        jButVerContrato.setBorderPainted(false);
+        jButVerContrato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButRegCliente2ActionPerformed(evt);
+                jButVerContratoActionPerformed(evt);
             }
         });
-        PanelAspirante.add(jButRegCliente2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 180, -1));
+        PanelAspirante.add(jButVerContrato, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 180, -1));
 
         jTableContratosEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -94,13 +95,25 @@ public class PanelContratos extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTableContratosEmpleados);
 
-        PanelAspirante.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 960, 390));
+        PanelAspirante.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 920, 460));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 35)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(38, 35, 36));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Contratos Empleados");
         PanelAspirante.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        jButVerContrato1.setBackground(new java.awt.Color(0, 153, 153));
+        jButVerContrato1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButVerContrato1.setForeground(new java.awt.Color(240, 240, 241));
+        jButVerContrato1.setText("Actualizar");
+        jButVerContrato1.setBorderPainted(false);
+        jButVerContrato1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButVerContrato1ActionPerformed(evt);
+            }
+        });
+        PanelAspirante.add(jButVerContrato1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 180, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -111,27 +124,32 @@ public class PanelContratos extends javax.swing.JPanel {
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(PanelAspirante, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(14, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 622, Short.MAX_VALUE)
+            .addGap(0, 840, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(PanelAspirante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+                    .addComponent(PanelAspirante, javax.swing.GroupLayout.PREFERRED_SIZE, 828, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButRegCliente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegCliente2ActionPerformed
+    private void jButVerContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButVerContratoActionPerformed
         new VistaContrato().setVisible(true);
-    }//GEN-LAST:event_jButRegCliente2ActionPerformed
+    }//GEN-LAST:event_jButVerContratoActionPerformed
+
+    private void jButVerContrato1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButVerContrato1ActionPerformed
+        listarContratos();
+    }//GEN-LAST:event_jButVerContrato1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelAspirante;
-    private javax.swing.JButton jButRegCliente2;
+    private javax.swing.JButton jButVerContrato;
+    private javax.swing.JButton jButVerContrato1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableContratosEmpleados;
