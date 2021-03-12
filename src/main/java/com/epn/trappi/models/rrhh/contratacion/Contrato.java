@@ -3,8 +3,7 @@ package com.epn.trappi.models.rrhh.contratacion;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import com.epn.trappi.models.rrhh.listas.ListaContratos;
-import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
-import javax.swing.JOptionPane;
+import com.epn.trappi.db.rrhh.EmpleadoDb;
 
 /**
  *
@@ -41,7 +40,7 @@ public class Contrato {
     }
     
     public void registrarEmpleado(Empleado empleado){
-        ListaEmpleados listEmp = new ListaEmpleados();
+        EmpleadoDb listEmp = new EmpleadoDb();
         listEmp.agregar(empleado);
     }
 

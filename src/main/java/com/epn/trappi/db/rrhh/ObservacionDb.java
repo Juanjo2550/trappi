@@ -1,4 +1,4 @@
-package com.epn.trappi.models.rrhh.listas;
+package com.epn.trappi.db.rrhh;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.models.rrhh.Fecha;
@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ListaObservaciones implements Lista<Observacion> {
+public class ObservacionDb implements ModelDb<Observacion> {
     private final Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance()).getConnection();
 
     @Override
@@ -31,11 +31,6 @@ public class ListaObservaciones implements Lista<Observacion> {
         }
     }
 
-    @Override
-    public Boolean eliminar(String parametro) {
-        return false;
-    }
-
     @Deprecated
     @Override
     public Observacion buscarUno(String parametro) {
@@ -43,7 +38,7 @@ public class ListaObservaciones implements Lista<Observacion> {
     }
 
     public Observacion[] obtenerTodos(String cedula, Fecha fecha) throws Exception {
-        Empleado empleado = new ListaEmpleados().buscarUno(cedula);
+        Empleado empleado = new EmpleadoDb().buscarUno(cedula);
         String sql = "SELECT * FROM dbo.OBSERVACIONES WHERE IDEMP = "
                 + empleado.getId() + " AND FECHAOBS ="
                 + "'" + fecha.toString() + "';";
@@ -78,10 +73,9 @@ public class ListaObservaciones implements Lista<Observacion> {
      * @param cedula
      * @param mes
      * @return
-     * @throws Exception
      */
-    public Observacion[] obtenerTodos(String cedula, int mes) throws Exception {
-        Empleado empleado = new ListaEmpleados().buscarUno(cedula);
+    public Observacion[] obtenerTodos(String cedula, int mes) {
+        Empleado empleado = new EmpleadoDb().buscarUno(cedula);
         String sql = "SELECT * FROM dbo.OBSERVACIONES WHERE IDEMP = "
                 + empleado.getId() + " AND MONTH(FECHAOBS) =" + mes + ";";
         ArrayList<Observacion> observaciones = new ArrayList<>();
@@ -111,7 +105,7 @@ public class ListaObservaciones implements Lista<Observacion> {
     }
 
     public Observacion[] obtenerTodos(String cedula) throws Exception {
-        Empleado empleado = new ListaEmpleados().buscarUno(cedula);
+        Empleado empleado = new EmpleadoDb().buscarUno(cedula);
         String sql = "SELECT * FROM dbo.OBSERVACIONES WHERE IDEMP = "
                 + empleado.getId() + ";";
         ArrayList<Observacion> observaciones = new ArrayList<>();
@@ -133,7 +127,7 @@ public class ListaObservaciones implements Lista<Observacion> {
             System.out.println(e.toString());
         }
         if (observaciones.size() == 0) {
-            throw new Exception("No se han encontrado observaciones");
+            System.out.println("No se han encontrado asistencias");
         }
         Observacion [] observacionesArray = new Observacion[observaciones.size()];
         observacionesArray = observaciones.toArray(observacionesArray);
@@ -151,7 +145,7 @@ public class ListaObservaciones implements Lista<Observacion> {
                 String unformattedDate = resultSet.getDate(5).toString();
                 String[] formattedDate = unformattedDate.split("-");
                 observaciones.add(new Observacion(
-                        new ListaEmpleados().buscarUno(resultSet.getInt(2)),
+                        new EmpleadoDb().buscarUno(resultSet.getInt(2)),
                         resultSet.getString(3),
                         resultSet.getString(4),
                         new Fecha(Integer.parseInt(formattedDate[2]), Integer.parseInt(formattedDate[1]), Integer.parseInt(formattedDate[0])),
@@ -170,7 +164,7 @@ public class ListaObservaciones implements Lista<Observacion> {
     }
 
     public static void main(String args[]) throws SQLException {
-        ListaObservaciones l1 = new ListaObservaciones();
+        ObservacionDb l1 = new ObservacionDb();
         try {
             l1.obtenerTodos("1722951165");
         }catch (Exception e) {

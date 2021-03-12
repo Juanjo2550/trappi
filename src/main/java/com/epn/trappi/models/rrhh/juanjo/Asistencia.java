@@ -2,7 +2,7 @@ package com.epn.trappi.models.rrhh.juanjo;
 
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.Hora;
-import com.epn.trappi.models.rrhh.listas.ListaObservaciones;
+import com.epn.trappi.db.rrhh.ObservacionDb;
 
 public class Asistencia {
     private Empleado empleado;
@@ -70,7 +70,7 @@ public class Asistencia {
     }
 
     private void crearObservacion(String tipo, Empleado empleado, int horasDeDiferencia) {
-        ListaObservaciones listaObservaciones = new ListaObservaciones();
-        listaObservaciones.agregar(new Observacion(empleado, tipo, "N/A", this.fecha, new Hora(horasDeDiferencia, 0, 0)));
+        ObservacionDb observacionDb = new ObservacionDb();
+        observacionDb.agregar(new Observacion(empleado, tipo, "N/A", this.fecha, new Hora(horasDeDiferencia, 0, 0)));
     }
 }
