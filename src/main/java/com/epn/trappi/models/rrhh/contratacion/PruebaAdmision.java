@@ -17,7 +17,7 @@ public class PruebaAdmision {
     private String aptitudes;
     private String aprobacion;
     private AspirantesDB aspirantes;
-    private Lista pruebas;
+    private PruebasAdmisionDB pruebas;
     public PruebaAdmision(int puntaje, String actitudes, String aptitudes) {
         this.puntaje = puntaje;
         this.actitudes = actitudes;
@@ -26,7 +26,7 @@ public class PruebaAdmision {
         
     }
     public PruebaAdmision(){
-        pruebas = (Lista) new PruebasAdmisionDB();
+        pruebas =  new PruebasAdmisionDB();
         aspirantes = new AspirantesDB();
     }
     
