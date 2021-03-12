@@ -44,18 +44,18 @@ public class DashboardFinanciero extends javax.swing.JFrame {
         labelDashboardSalir = new javax.swing.JLabel();
         panelDespliegue = new javax.swing.JPanel();
         panelDashboard = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        panelCircular = new javax.swing.JPanel();
+        panelBarrasGastos = new javax.swing.JPanel();
+        panelBarrasIngresos = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         labelIngresosTotales = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         labelGastosTotales = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         labelPresupuesto = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        panelCircular = new javax.swing.JPanel();
-        panelBarrasGastos = new javax.swing.JPanel();
-        panelBarrasIngresos = new javax.swing.JPanel();
+        panelCircular1 = new javax.swing.JPanel();
         panelGastos = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaGastos = new javax.swing.JTable();
@@ -198,43 +198,6 @@ public class DashboardFinanciero extends javax.swing.JFrame {
 
         panelDashboard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel10.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel10.setText("INGRESOS TOTALES");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 140, 32));
-
-        labelIngresosTotales.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        labelIngresosTotales.setForeground(new java.awt.Color(0, 51, 255));
-        labelIngresosTotales.setText("$450000.00");
-        jPanel2.add(labelIngresosTotales, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 130, 20));
-
-        jLabel16.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel16.setText("GASTOS TOTALES");
-        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
-
-        labelGastosTotales.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        labelGastosTotales.setForeground(new java.awt.Color(255, 51, 51));
-        labelGastosTotales.setText("$700000.00");
-        jPanel2.add(labelGastosTotales, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 120, -1));
-
-        jLabel18.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel18.setText("PRESUPUESTO");
-        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 180, 50));
-
-        labelPresupuesto.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
-        labelPresupuesto.setForeground(new java.awt.Color(0, 153, 51));
-        labelPresupuesto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelPresupuesto.setText("$300000.00");
-        jPanel2.add(labelPresupuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 190, 30));
-
-        panelDashboard.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 370, 475, 230));
-
         jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(61, 57, 57));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -253,7 +216,7 @@ public class DashboardFinanciero extends javax.swing.JFrame {
             .addGap(0, 250, Short.MAX_VALUE)
         );
 
-        panelDashboard.add(panelCircular, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, 475, 250));
+        panelDashboard.add(panelCircular, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 460, 475, 250));
 
         javax.swing.GroupLayout panelBarrasGastosLayout = new javax.swing.GroupLayout(panelBarrasGastos);
         panelBarrasGastos.setLayout(panelBarrasGastosLayout);
@@ -266,7 +229,7 @@ public class DashboardFinanciero extends javax.swing.JFrame {
             .addGap(0, 250, Short.MAX_VALUE)
         );
 
-        panelDashboard.add(panelBarrasGastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 90, 475, 250));
+        panelDashboard.add(panelBarrasGastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 170, 475, 250));
 
         javax.swing.GroupLayout panelBarrasIngresosLayout = new javax.swing.GroupLayout(panelBarrasIngresos);
         panelBarrasIngresos.setLayout(panelBarrasIngresosLayout);
@@ -279,9 +242,54 @@ public class DashboardFinanciero extends javax.swing.JFrame {
             .addGap(0, 250, Short.MAX_VALUE)
         );
 
-        panelDashboard.add(panelBarrasIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 475, 250));
+        panelDashboard.add(panelBarrasIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 475, 250));
 
-        panelDespliegue.add(panelDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 690));
+        jLabel10.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel10.setText("INGRESOS TOTALES");
+        panelDashboard.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 140, 32));
+
+        labelIngresosTotales.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        labelIngresosTotales.setForeground(new java.awt.Color(0, 51, 255));
+        labelIngresosTotales.setText("$450000.00");
+        panelDashboard.add(labelIngresosTotales, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 130, -1));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel16.setText("GASTOS TOTALES");
+        panelDashboard.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, -1, -1));
+
+        labelGastosTotales.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        labelGastosTotales.setForeground(new java.awt.Color(255, 51, 51));
+        labelGastosTotales.setText("$700000.00");
+        panelDashboard.add(labelGastosTotales, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 110, 120, -1));
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText("PRESUPUESTO");
+        panelDashboard.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 90, 180, 50));
+
+        labelPresupuesto.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        labelPresupuesto.setForeground(new java.awt.Color(0, 153, 51));
+        labelPresupuesto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelPresupuesto.setText("$300000.00");
+        panelDashboard.add(labelPresupuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 100, 190, 30));
+
+        javax.swing.GroupLayout panelCircular1Layout = new javax.swing.GroupLayout(panelCircular1);
+        panelCircular1.setLayout(panelCircular1Layout);
+        panelCircular1Layout.setHorizontalGroup(
+            panelCircular1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 475, Short.MAX_VALUE)
+        );
+        panelCircular1Layout.setVerticalGroup(
+            panelCircular1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 250, Short.MAX_VALUE)
+        );
+
+        panelDashboard.add(panelCircular1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 460, 475, 250));
+
+        panelDespliegue.add(panelDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 740));
 
         panelGastos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -696,7 +704,6 @@ public class DashboardFinanciero extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
@@ -712,6 +719,7 @@ public class DashboardFinanciero extends javax.swing.JFrame {
     private javax.swing.JPanel panelBarrasGastos;
     private javax.swing.JPanel panelBarrasIngresos;
     private javax.swing.JPanel panelCircular;
+    private javax.swing.JPanel panelCircular1;
     private javax.swing.JPanel panelDashboard;
     private javax.swing.JPanel panelDespliegue;
     private javax.swing.JPanel panelGastos;
