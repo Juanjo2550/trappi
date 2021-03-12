@@ -17,6 +17,7 @@ import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import com.epn.trappi.models.rrhh.listas.Lista;
 import com.epn.trappi.db.rrhh.AspirantesDB;
 import com.epn.trappi.db.rrhh.ContratosDB;
+import com.epn.trappi.db.rrhh.ModelDb;
 import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
 import com.epn.trappi.db.rrhh.PruebasAdmisionDB;
 
@@ -33,7 +34,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ContratarAspirante extends javax.swing.JFrame {
     private void listarAspirantes(){
-        Lista listaAspirantes = new AspirantesDB();
+        ModelDb listaAspirantes = new AspirantesDB();
         Aspirante[] aspirantes = (Aspirante[]) listaAspirantes.obtenerTodos();
         PruebasAdmisionDB listaPruebas = new PruebasAdmisionDB();
         DefaultTableModel model = (DefaultTableModel) jTableAspirantesAptos.getModel();
