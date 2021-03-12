@@ -34,8 +34,10 @@ public class SolicitudDePago {
         this.rol = rol;
     }
 
-    public SolicitudDePago(int numero, Fecha fechaSolicitud, String estado) {
+    public SolicitudDePago(int numero,String cuenta,double total, Fecha fechaSolicitud, String estado) {
         this.numero = numero;
+        this.empleadoAPagar.getCuentaBancaria();
+        this.rol.getTotal();
         this.fechaSolicitud = fechaSolicitud;
         this.estado = estado;
         

@@ -95,7 +95,8 @@ public class SolicitudPagoDB implements ModelDb<SolicitudDePago> {
                 String fechaTemp = rs.getString("FECHASOLIC");
                 String[] fechaArr = fechaTemp.split("-");
                 Fecha fecha = new Fecha(Integer.parseInt(fechaArr[2]), Integer.parseInt(fechaArr[1]), Integer.parseInt(fechaArr[0]));
-                listaSolicitudDePago.add(new SolicitudDePago(rs.getInt("IDSOLPAGO"), fecha,
+                listaSolicitudDePago.add(new SolicitudDePago(rs.getInt("IDSOLPAGO"), rs.getString("CUENTABANCARIAEMP"),
+                        rs.getDouble("TOTALROL"), fecha,
                         rs.getString("ESTADOSOLIC")));
 
             }
@@ -131,6 +132,7 @@ public class SolicitudPagoDB implements ModelDb<SolicitudDePago> {
             rs = pstm.executeQuery();
             System.out.println("Consulta se hizo con exito");
             while (rs.next()) {
+
                 solicitudes.add(new SolicitudDePago(rs.getString("CUENTABANCARIAEMP"),
                         rs.getDouble("TOTALROL")));
             }

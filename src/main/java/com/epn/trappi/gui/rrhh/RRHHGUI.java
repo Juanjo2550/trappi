@@ -25,15 +25,15 @@ import javax.swing.table.DefaultTableModel;
  * @author stali
  */
 public class RRHHGUI extends javax.swing.JFrame {
-    private SolicitudPagoDB sp = new SolicitudPagoDB();
-    
+
+    private final SolicitudPagoDB sp;
+
     private final RolDePagosDb roles;
     private final SolicitudDePago pagos;
     String cuenta;
     String total;
     String estado;
     int seleccion;
-    
 
     /**
      * Creates new form Ejemplo_GUI
@@ -41,6 +41,7 @@ public class RRHHGUI extends javax.swing.JFrame {
     public RRHHGUI() {
         initComponents();
         this.roles = new RolDePagosDb();
+        this.sp = new SolicitudPagoDB();
         this.pagos = new SolicitudDePago();
         inicioTable();
         this.jButton6.setEnabled(false);
@@ -77,6 +78,35 @@ public class RRHHGUI extends javax.swing.JFrame {
             Object[] row = {
                 solicitud.getCuentaBancaria(),
                 solicitud.getMontoTotal()
+
+            };
+            tableModel.addRow(row);
+        }
+
+        this.tablaEmpleados.setModel(tableModel);
+        this.tablaEmpleados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.tablaEmpleados.setDefaultEditor(Object.class, null);
+        this.tablaEmpleados.setRowSelectionAllowed(true);
+        this.tablaEmpleados.setColumnSelectionAllowed(false);
+        this.tablaEmpleados.getColumnModel().getColumn(0).setPreferredWidth(2);
+    }
+
+    public final void solicitudTable1(String cedula) throws Exception {
+
+        String col[] = {
+            
+            "Numero de Cuenta",
+            "Monto",
+         
+
+        };
+        DefaultTableModel tableModel = new DefaultTableModel(col, 0);
+        for (SolicitudDePago solicitud : this.sp.obtenerTodos(cedula)) {
+            Object[] row = {
+           
+                solicitud.getCuentaBancaria(),
+                solicitud.getMontoTotal(),
+           
 
             };
             tableModel.addRow(row);
@@ -148,9 +178,10 @@ public class RRHHGUI extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaEmpleados = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -161,6 +192,11 @@ public class RRHHGUI extends javax.swing.JFrame {
 
         jButton4.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jButton4.setText("Salir");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -218,7 +254,7 @@ public class RRHHGUI extends javax.swing.JFrame {
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 10, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -241,6 +277,15 @@ public class RRHHGUI extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setBackground(new java.awt.Color(204, 153, 0));
+        jButton5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jButton5.setText("Lista de Roles por Empleado");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -249,9 +294,15 @@ public class RRHHGUI extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,15 +310,12 @@ public class RRHHGUI extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 35)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(38, 35, 36));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Lista de Roles de Pago");
 
         tablaEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -287,6 +335,9 @@ public class RRHHGUI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaEmpleados);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        jLabel3.setText("Seleccione una fila antes de continuar:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -294,13 +345,10 @@ public class RRHHGUI extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1002, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1002, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -311,10 +359,11 @@ public class RRHHGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(47, 47, 47)
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel3)
+                        .addGap(38, 38, 38)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 32, Short.MAX_VALUE))))
+                        .addGap(0, 23, Short.MAX_VALUE))))
         );
 
         pack();
@@ -330,10 +379,10 @@ public class RRHHGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        String cedulaSeleccionada = (String) this.tablaEmpleados.getValueAt(seleccion,1);
-        
+        String cedulaSeleccionada = (String) this.tablaEmpleados.getValueAt(seleccion, 1);
+
         this.sp.actualizarEstado(cedulaSeleccionada);
-        
+
         /*Pago pago = new Pago(cuenta, Double.parseDouble(total));
         System.out.println(cuenta);
         System.out.println(total);
@@ -348,7 +397,7 @@ public class RRHHGUI extends javax.swing.JFrame {
         //SolicitudDePago  solicitud = new SolicitudDePago(estado,Double.parseDouble(total), cuenta);
         try {
 
-            solicitudTable();
+            solicitudTable1(cedulaSeleccionada);
         } catch (Exception ex) {
             Logger.getLogger(RRHHGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -361,7 +410,7 @@ public class RRHHGUI extends javax.swing.JFrame {
         total = String.valueOf(tablaEmpleados.getValueAt(seleccion, 5));
         estado = String.valueOf(tablaEmpleados.getValueAt(seleccion, 7));
         this.jButton6.setEnabled(true);
-          /*      Pago pago = new Pago(cuenta, Double.parseDouble(total));
+        /*      Pago pago = new Pago(cuenta, Double.parseDouble(total));
         System.out.println(cuenta);
         System.out.println(total);
         String cambioEstado = pago.realizarPago(pago);
@@ -372,9 +421,22 @@ public class RRHHGUI extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
-*/
+         */
 
     }//GEN-LAST:event_tablaEmpleadosMouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        String cedulaSeleccionada = (String) this.tablaEmpleados.getValueAt(seleccion, 1);
+        try {
+            solicitudTable1(cedulaSeleccionada);
+        } catch (Exception ex) {
+            Logger.getLogger(RRHHGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -542,10 +604,11 @@ public class RRHHGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnVolver;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
