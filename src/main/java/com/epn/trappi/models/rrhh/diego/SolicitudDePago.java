@@ -177,5 +177,10 @@ public class SolicitudDePago {
     }
     }*/
 
+    @Override
+    public String toString() {
+        return "SolicitudDePago{" + "montoTotal=" + montoTotal + ", cuentaBancaria=" + cuentaBancaria + '}';
+    }
+
 
 }
