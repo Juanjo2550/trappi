@@ -69,7 +69,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         return super.size(); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Gestor_Permiso() {
+    public Gestor_Permiso() throws SQLException {
         
         initComponents();
           obtenerNombre();
@@ -84,6 +84,9 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         TextPrompt finpermiso = new TextPrompt("yyyy-MM-dd", txtfechaFinPermiso);
         TextPrompt diasPermiso = new TextPrompt("Ingrese el número de días", this.txtnumDias);
         TextPrompt descripcion = new TextPrompt("Ingrese la descripción del permiso", this.txtDescripcion);
+        permission = permisos.Permisos_para_ROL(3,fecha);
+        //System.out.println(permission.getFECHAINICIOPERM());
+        
         
     }
 
@@ -852,7 +855,11 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Gestor_Permiso().setVisible(true);
+                try {
+                    new Gestor_Permiso().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Gestor_Permiso.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
