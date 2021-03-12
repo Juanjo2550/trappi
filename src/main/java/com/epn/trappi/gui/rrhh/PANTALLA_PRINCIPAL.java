@@ -201,7 +201,7 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
     private void btnPermisosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPermisosActionPerformed
       
        this.setVisible(false);
-        new ListaDeRolesEmpleados().setVisible(true);
+        new RRHHGUI().setVisible(true);
     }//GEN-LAST:event_btnPermisosActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
