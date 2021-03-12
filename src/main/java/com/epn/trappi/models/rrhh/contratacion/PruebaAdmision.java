@@ -26,7 +26,7 @@ public class PruebaAdmision {
         
     }
     public PruebaAdmision(){
-        pruebas = new PruebasAdmisionDB();
+        pruebas = (Lista) new PruebasAdmisionDB();
         aspirantes = new AspirantesDB();
     }
     

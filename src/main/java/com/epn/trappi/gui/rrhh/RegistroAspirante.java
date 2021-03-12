@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 public class RegistroAspirante extends javax.swing.JFrame {
     
     private void listarAspirantes(){
-        Lista listaAspirantes = new AspirantesDB();
+        Lista listaAspirantes = (Lista) new AspirantesDB();
         Aspirante[] aspirantes = (Aspirante[]) listaAspirantes.obtenerTodos();
         PruebasAdmisionDB listaPruebas = new PruebasAdmisionDB();
         DefaultTableModel model = (DefaultTableModel) jTableAspirantes.getModel();
@@ -438,7 +438,7 @@ public class RegistroAspirante extends javax.swing.JFrame {
 
     private void jButGuardarAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButGuardarAspiranteActionPerformed
       
-        Lista listaAspirantes = new AspirantesDB();
+        Lista listaAspirantes = (Lista) new AspirantesDB();
         PruebasAdmisionDB listaPruebas = new PruebasAdmisionDB();
         Aspirante aspirante = new Aspirante(jTextNombreAspirante.getText(), jTextApellidoAspirante.getText(), jTextCedulaAspirante.getText(),
                 jTextTelefonoAspirante.getText(), jTextCargoAspirante.getText());
