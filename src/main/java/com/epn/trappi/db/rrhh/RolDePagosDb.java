@@ -15,7 +15,6 @@ public class RolDePagosDb implements ModelDb<RolDePagos> {
 
     @Override
     public void agregar(RolDePagos newRolDePagos) {
-        System.out.println("Guardando rol....");
         String sql = "INSERT INTO dbo.ROLPAGOS (ID_ROL, IDEMP, FECHAROL, TOTALROL, DESCUENTOSROL, ESTADOROL) VALUES ("
                 + (this.obtenerTodos().length + 1) + ","
                 + newRolDePagos.getEmpleado().getId() + ","

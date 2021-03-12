@@ -8,6 +8,7 @@ import com.epn.trappi.gui.rrhh.Permisos.Enfermedad;
 import com.epn.trappi.gui.rrhh.Permisos.Nacimiento_Hijo;
 import com.epn.trappi.gui.rrhh.Permisos.Otros_Permisos;
 import com.epn.trappi.gui.rrhh.Permisos.Permiso;
+import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,10 +27,8 @@ public class Permiso_EmpleadoDb implements ModelDb <Permiso>{
     DataBaseConnection dbInstance = DataBaseConnection.getInstance();
     Connection conn = dbInstance.getConnection();
     ArrayList<Permiso> listaPermiso;
-    Calamidad_Domestica calamidad;
-    Enfermedad enfermedad ;
-    Nacimiento_Hijo nacimiento ;
-    Otros_Permisos otro ; 
+    Permiso permiso_especifico = null;
+  
     
     
     
@@ -128,6 +127,36 @@ public class Permiso_EmpleadoDb implements ModelDb <Permiso>{
         }
       
     }
+  //metodo para validar los permisos de un empleado para generar el rol de pagos   
+    public Permiso Permisos_para_ROL(int idEmpleado, Fecha fecha ) throws SQLException{
+        String fecha_a_Validar = fecha.toString();
+        //System.out.println(fecha_a_Validar);
+        String sql = "SELECT * FROM dbo.PERMISO where IDEMP =" +idEmpleado+ "AND  '" +fecha_a_Validar+"'" + "BETWEEN FECHAINICIOPERM AND FECHAFINPERM";
+        pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            rs.next();
+            
+            if (rs.getString("TIPOPERM").equals("Calamidad Domestica")){
+                permiso_especifico =new Calamidad_Domestica(rs.getInt("NUMDIASPERM"), rs.getString("VALORPAGARPERM"),
+            rs.getString("FECHAINICIOPERM"),rs.getString("FECHAFINPERM"));
+            }
+            
+            if (rs.getString("TIPOPERM").equals("Enfermedad")){
+                
+                permiso_especifico =new Enfermedad(rs.getInt("NUMDIASPERM"), rs.getString("VALORPAGARPERM"),
+            rs.getString("FECHAINICIOPERM"),rs.getString("FECHAFINPERM"));
+            }
+            if (rs.getString("TIPOPERM").equals("Nacimiento Hijos")){
+                permiso_especifico =new Nacimiento_Hijo(rs.getInt("NUMDIASPERM"), rs.getString("VALORPAGARPERM"),
+            rs.getString("FECHAINICIOPERM"),rs.getString("FECHAFINPERM"));
+
+            }
+            if (rs.getString("TIPOPERM").equals("Otros Permisos")){
+                permiso_especifico =new Otros_Permisos(rs.getInt("NUMDIASPERM"), rs.getString("VALORPAGARPERM"),
+            rs.getString("FECHAINICIOPERM"),rs.getString("FECHAFINPERM"));
+            }
+            return permiso_especifico;
+    }
 
     
   
@@ -219,7 +248,7 @@ public class Permiso_EmpleadoDb implements ModelDb <Permiso>{
     @Override
     public Permiso buscarUno(String cedulaEmpleado) {
         
-         Permiso permiso_especifico = null;
+         
         try {
             String query = "SELECT * FROM PERMISO JOIN EMPLEADO on PERMISO.IDEMP = EMPLEADO.ID_EMP WHERE CEDULAEMP ='"+cedulaEmpleado+"'";
            // System.out.println(query);
