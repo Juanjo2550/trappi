@@ -20,14 +20,17 @@ public class ListaDeCompras {
     public ListaDeCompras(ArrayList<Compra> compras) {
         this.compras = compras;
     }
-
+    
+    public ListaDeCompras() {
+        this.compras = new ArrayList<>();
+    }
 
     public void añadirCompra(Compra compra){
         compras.add(compra);
     }
     
-    public void retirarCompra(Compra compra){
-        compras.remove(compra);
+    public void retirarCompra(int indice){
+        compras.remove(indice);
     }
     
     public void realizarCompraEnConjunto(){
