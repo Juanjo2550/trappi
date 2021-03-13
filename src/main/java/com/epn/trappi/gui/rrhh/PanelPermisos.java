@@ -761,7 +761,7 @@ public class PanelPermisos extends javax.swing.JPanel {
             fechaInicio();
 
         } catch (ParseException ex) {
-            Logger.getLogger(Gestor_Permiso.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(Gestor_Permiso.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnValidarFechaActionPerformed
