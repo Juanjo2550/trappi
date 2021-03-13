@@ -89,7 +89,7 @@ public class Principal extends javax.swing.JFrame {
         jButCompra = new javax.swing.JButton();
         jPanOpcCompras = new javax.swing.JPanel();
         jButVerTodFactura5 = new javax.swing.JButton();
-        jButServicios1 = new javax.swing.JButton();
+        jbtVolver = new javax.swing.JButton();
         jLabNombreContribuyente1 = new javax.swing.JLabel();
         labelTitulo = new javax.swing.JLabel();
         labelSubTitulo = new javax.swing.JLabel();
@@ -421,18 +421,23 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButServicios1.setBackground(new java.awt.Color(255, 210, 28));
-        jButServicios1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButServicios1.setForeground(new java.awt.Color(240, 240, 241));
-        jButServicios1.setText("Volver");
-        jButServicios1.setBorderPainted(false);
-        jButServicios1.setFocusPainted(false);
-        jButServicios1.setMaximumSize(new java.awt.Dimension(110, 25));
-        jButServicios1.setMinimumSize(new java.awt.Dimension(110, 25));
-        jButServicios1.setPreferredSize(new java.awt.Dimension(110, 25));
-        jButServicios1.addActionListener(new java.awt.event.ActionListener() {
+        jbtVolver.setBackground(new java.awt.Color(255, 210, 28));
+        jbtVolver.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jbtVolver.setForeground(new java.awt.Color(240, 240, 241));
+        jbtVolver.setText("Volver");
+        jbtVolver.setBorderPainted(false);
+        jbtVolver.setFocusPainted(false);
+        jbtVolver.setMaximumSize(new java.awt.Dimension(110, 25));
+        jbtVolver.setMinimumSize(new java.awt.Dimension(110, 25));
+        jbtVolver.setPreferredSize(new java.awt.Dimension(110, 25));
+        jbtVolver.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbtVolverMouseClicked(evt);
+            }
+        });
+        jbtVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButServicios1ActionPerformed(evt);
+                jbtVolverActionPerformed(evt);
             }
         });
 
@@ -456,7 +461,7 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(jPanOpcionesDeclaracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jButProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jPanOpcProductos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButServicios1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbtVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanOpcionesDeclaracionLayout.setVerticalGroup(
@@ -487,7 +492,7 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanOpcServicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(jButServicios1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbtVolver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
         );
 
@@ -696,9 +701,16 @@ public class Principal extends javax.swing.JFrame {
         showPanel(null);
     }//GEN-LAST:event_jButVerTodFactura5ActionPerformed
 
-    private void jButServicios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButServicios1ActionPerformed
+    private void jbtVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtVolverActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButServicios1ActionPerformed
+    }//GEN-LAST:event_jbtVolverActionPerformed
+
+    private void jbtVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtVolverMouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        Menu_Trappi menu = new Menu_Trappi();
+        menu.setVisible(true);
+    }//GEN-LAST:event_jbtVolverMouseClicked
 
     /**
      * @param args the command line arguments
@@ -755,7 +767,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButRegistrarProducto;
     private javax.swing.JButton jButRegistrarServicios;
     private javax.swing.JButton jButServicios;
-    private javax.swing.JButton jButServicios1;
     private javax.swing.JButton jButVerTodFactura;
     private javax.swing.JButton jButVerTodFactura5;
     private javax.swing.JButton jButVerTodNotasVenta;
@@ -773,6 +784,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanOpcServicios;
     private javax.swing.JPanel jPanOpcionesDeclaracion;
     private javax.swing.JLabel jValor;
+    private javax.swing.JButton jbtVolver;
     private javax.swing.JLabel labelSubTitulo;
     private javax.swing.JLabel labelTitulo;
     // End of variables declaration//GEN-END:variables

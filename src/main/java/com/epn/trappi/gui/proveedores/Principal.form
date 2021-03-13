@@ -187,7 +187,7 @@
                               <Component id="jButProductos" alignment="1" min="-2" pref="221" max="-2" attributes="0"/>
                               <Component id="jPanOpcProductos" alignment="0" min="-2" pref="220" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jButServicios1" min="-2" pref="221" max="-2" attributes="0"/>
+                          <Component id="jbtVolver" min="-2" pref="221" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -221,7 +221,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanOpcServicios" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="40" max="32767" attributes="0"/>
-                      <Component id="jButServicios1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbtVolver" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -707,7 +707,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="jButServicios1">
+            <Component class="javax.swing.JButton" name="jbtVolver">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="1c" green="d2" red="ff" type="rgb"/>
@@ -732,7 +732,8 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButServicios1ActionPerformed"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbtVolverMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtVolverActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

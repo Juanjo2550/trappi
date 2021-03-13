@@ -129,15 +129,11 @@ public class Main_Trappi extends javax.swing.JFrame {
         String usuario = "administrador@trappi.com";
         String contrasena = "123456789";
         Menu_Trappi inicio = new Menu_Trappi();
-        if (usuario.equals(txtUsuario.getText())) {
-            if (contrasena.equals(txtContraseña.getText())) {
+        if (usuario.equals(txtUsuario.getText())&&(contrasena.equals(txtContraseña.getText()))) {
                 this.setVisible(false);
                 inicio.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, " Contraseña Incorrectos", "Error", JOptionPane.INFORMATION_MESSAGE);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Nombre de Usuario ", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButtoningresarActionPerformed
 

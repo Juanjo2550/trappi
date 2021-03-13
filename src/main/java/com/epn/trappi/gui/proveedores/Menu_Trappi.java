@@ -5,6 +5,10 @@
  */
 package com.epn.trappi.gui.proveedores;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author David Morales
@@ -35,16 +39,16 @@ public class Menu_Trappi extends javax.swing.JFrame {
         jLSidimLogo = new javax.swing.JLabel();
         jPMod = new javax.swing.JPanel();
         jPanOpcionesDeclaracion = new javax.swing.JPanel();
-        jButCompras = new javax.swing.JButton();
+        jbtProveedores = new javax.swing.JButton();
         jPanOpcInventario = new javax.swing.JPanel();
         jPanOpcProveedores = new javax.swing.JPanel();
         jPanOpcProductos = new javax.swing.JPanel();
-        jButInventario = new javax.swing.JButton();
-        jButDashboard = new javax.swing.JButton();
+        jbtInventario = new javax.swing.JButton();
+        jbtLogístico = new javax.swing.JButton();
         jPanOpcServicios = new javax.swing.JPanel();
-        jButCompra = new javax.swing.JButton();
-        jPanOpcCompras = new javax.swing.JPanel();
         jtbCerrarSesion = new javax.swing.JButton();
+        jbtCompras = new javax.swing.JButton();
+        jPanOpcCompras = new javax.swing.JPanel();
         jLabNombreContribuyente1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -92,19 +96,25 @@ public class Menu_Trappi extends javax.swing.JFrame {
         jPMod.setPreferredSize(new java.awt.Dimension(300, 280));
 
         jPanOpcionesDeclaracion.setBackground(new java.awt.Color(51, 51, 51));
+        jPanOpcionesDeclaracion.setPreferredSize(new java.awt.Dimension(468, 700));
 
-        jButCompras.setBackground(new java.awt.Color(255, 210, 28));
-        jButCompras.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButCompras.setForeground(new java.awt.Color(240, 240, 241));
-        jButCompras.setText("Proveedores");
-        jButCompras.setBorderPainted(false);
-        jButCompras.setFocusPainted(false);
-        jButCompras.setMaximumSize(new java.awt.Dimension(110, 50));
-        jButCompras.setMinimumSize(new java.awt.Dimension(110, 50));
-        jButCompras.setPreferredSize(new java.awt.Dimension(110, 50));
-        jButCompras.addActionListener(new java.awt.event.ActionListener() {
+        jbtProveedores.setBackground(new java.awt.Color(255, 210, 28));
+        jbtProveedores.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jbtProveedores.setForeground(new java.awt.Color(240, 240, 241));
+        jbtProveedores.setText("Proveedores");
+        jbtProveedores.setBorderPainted(false);
+        jbtProveedores.setFocusPainted(false);
+        jbtProveedores.setMaximumSize(new java.awt.Dimension(110, 50));
+        jbtProveedores.setMinimumSize(new java.awt.Dimension(110, 50));
+        jbtProveedores.setPreferredSize(new java.awt.Dimension(110, 50));
+        jbtProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbtProveedoresMouseClicked(evt);
+            }
+        });
+        jbtProveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButComprasActionPerformed(evt);
+                jbtProveedoresActionPerformed(evt);
             }
         });
 
@@ -147,76 +157,37 @@ public class Menu_Trappi extends javax.swing.JFrame {
             .addGap(0, 64, Short.MAX_VALUE)
         );
 
-        jButInventario.setBackground(new java.awt.Color(255, 210, 28));
-        jButInventario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButInventario.setForeground(new java.awt.Color(240, 240, 241));
-        jButInventario.setText("Inventario");
-        jButInventario.setBorderPainted(false);
-        jButInventario.setFocusPainted(false);
-        jButInventario.setMaximumSize(new java.awt.Dimension(110, 50));
-        jButInventario.setMinimumSize(new java.awt.Dimension(110, 50));
-        jButInventario.setPreferredSize(new java.awt.Dimension(110, 50));
-        jButInventario.addActionListener(new java.awt.event.ActionListener() {
+        jbtInventario.setBackground(new java.awt.Color(255, 210, 28));
+        jbtInventario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jbtInventario.setForeground(new java.awt.Color(240, 240, 241));
+        jbtInventario.setText("Inventario");
+        jbtInventario.setBorderPainted(false);
+        jbtInventario.setFocusPainted(false);
+        jbtInventario.setMaximumSize(new java.awt.Dimension(110, 50));
+        jbtInventario.setMinimumSize(new java.awt.Dimension(110, 50));
+        jbtInventario.setPreferredSize(new java.awt.Dimension(110, 50));
+        jbtInventario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButInventarioActionPerformed(evt);
+                jbtInventarioActionPerformed(evt);
             }
         });
 
-        jButDashboard.setBackground(new java.awt.Color(255, 210, 28));
-        jButDashboard.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButDashboard.setForeground(new java.awt.Color(240, 240, 241));
-        jButDashboard.setText("Logístico");
-        jButDashboard.setBorderPainted(false);
-        jButDashboard.setFocusPainted(false);
-        jButDashboard.setMaximumSize(new java.awt.Dimension(110, 50));
-        jButDashboard.setMinimumSize(new java.awt.Dimension(110, 50));
-        jButDashboard.setPreferredSize(new java.awt.Dimension(110, 50));
-        jButDashboard.addActionListener(new java.awt.event.ActionListener() {
+        jbtLogístico.setBackground(new java.awt.Color(255, 210, 28));
+        jbtLogístico.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jbtLogístico.setForeground(new java.awt.Color(240, 240, 241));
+        jbtLogístico.setText("Logístico");
+        jbtLogístico.setBorderPainted(false);
+        jbtLogístico.setFocusPainted(false);
+        jbtLogístico.setMaximumSize(new java.awt.Dimension(110, 50));
+        jbtLogístico.setMinimumSize(new java.awt.Dimension(110, 50));
+        jbtLogístico.setPreferredSize(new java.awt.Dimension(110, 50));
+        jbtLogístico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButDashboardActionPerformed(evt);
+                jbtLogísticoActionPerformed(evt);
             }
         });
 
         jPanOpcServicios.setBackground(new java.awt.Color(51, 51, 51));
-
-        javax.swing.GroupLayout jPanOpcServiciosLayout = new javax.swing.GroupLayout(jPanOpcServicios);
-        jPanOpcServicios.setLayout(jPanOpcServiciosLayout);
-        jPanOpcServiciosLayout.setHorizontalGroup(
-            jPanOpcServiciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 221, Short.MAX_VALUE)
-        );
-        jPanOpcServiciosLayout.setVerticalGroup(
-            jPanOpcServiciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-
-        jButCompra.setBackground(new java.awt.Color(255, 210, 28));
-        jButCompra.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButCompra.setForeground(new java.awt.Color(240, 240, 241));
-        jButCompra.setText("Compras");
-        jButCompra.setBorderPainted(false);
-        jButCompra.setFocusPainted(false);
-        jButCompra.setMaximumSize(new java.awt.Dimension(110, 50));
-        jButCompra.setMinimumSize(new java.awt.Dimension(110, 50));
-        jButCompra.setPreferredSize(new java.awt.Dimension(110, 50));
-        jButCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButCompraActionPerformed(evt);
-            }
-        });
-
-        jPanOpcCompras.setBackground(new java.awt.Color(51, 51, 51));
-
-        javax.swing.GroupLayout jPanOpcComprasLayout = new javax.swing.GroupLayout(jPanOpcCompras);
-        jPanOpcCompras.setLayout(jPanOpcComprasLayout);
-        jPanOpcComprasLayout.setHorizontalGroup(
-            jPanOpcComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 221, Short.MAX_VALUE)
-        );
-        jPanOpcComprasLayout.setVerticalGroup(
-            jPanOpcComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 45, Short.MAX_VALUE)
-        );
 
         jtbCerrarSesion.setBackground(new java.awt.Color(255, 210, 28));
         jtbCerrarSesion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -233,6 +204,50 @@ public class Menu_Trappi extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout jPanOpcServiciosLayout = new javax.swing.GroupLayout(jPanOpcServicios);
+        jPanOpcServicios.setLayout(jPanOpcServiciosLayout);
+        jPanOpcServiciosLayout.setHorizontalGroup(
+            jPanOpcServiciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanOpcServiciosLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jtbCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanOpcServiciosLayout.setVerticalGroup(
+            jPanOpcServiciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanOpcServiciosLayout.createSequentialGroup()
+                .addContainerGap(41, Short.MAX_VALUE)
+                .addComponent(jtbCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jbtCompras.setBackground(new java.awt.Color(255, 210, 28));
+        jbtCompras.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jbtCompras.setForeground(new java.awt.Color(240, 240, 241));
+        jbtCompras.setText("Compras");
+        jbtCompras.setBorderPainted(false);
+        jbtCompras.setFocusPainted(false);
+        jbtCompras.setMaximumSize(new java.awt.Dimension(110, 50));
+        jbtCompras.setMinimumSize(new java.awt.Dimension(110, 50));
+        jbtCompras.setPreferredSize(new java.awt.Dimension(110, 50));
+        jbtCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtComprasActionPerformed(evt);
+            }
+        });
+
+        jPanOpcCompras.setBackground(new java.awt.Color(51, 51, 51));
+
+        javax.swing.GroupLayout jPanOpcComprasLayout = new javax.swing.GroupLayout(jPanOpcCompras);
+        jPanOpcCompras.setLayout(jPanOpcComprasLayout);
+        jPanOpcComprasLayout.setHorizontalGroup(
+            jPanOpcComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 221, Short.MAX_VALUE)
+        );
+        jPanOpcComprasLayout.setVerticalGroup(
+            jPanOpcComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 45, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanOpcionesDeclaracionLayout = new javax.swing.GroupLayout(jPanOpcionesDeclaracion);
         jPanOpcionesDeclaracion.setLayout(jPanOpcionesDeclaracionLayout);
         jPanOpcionesDeclaracionLayout.setHorizontalGroup(
@@ -240,54 +255,51 @@ public class Menu_Trappi extends javax.swing.JFrame {
             .addGroup(jPanOpcionesDeclaracionLayout.createSequentialGroup()
                 .addGroup(jPanOpcionesDeclaracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanOpcionesDeclaracionLayout.createSequentialGroup()
-                        .addComponent(jButCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbtProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanOpcInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanOpcProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtLogístico, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanOpcServicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanOpcionesDeclaracionLayout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(jPanOpcProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanOpcionesDeclaracionLayout.createSequentialGroup()
                         .addGroup(jPanOpcionesDeclaracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButCompra, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-                            .addComponent(jButInventario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
+                            .addComponent(jbtCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                            .addComponent(jbtInventario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanOpcCompras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jtbCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanOpcCompras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanOpcionesDeclaracionLayout.setVerticalGroup(
             jPanOpcionesDeclaracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanOpcionesDeclaracionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbtLogístico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanOpcionesDeclaracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanOpcionesDeclaracionLayout.createSequentialGroup()
                         .addGap(93, 93, 93)
                         .addComponent(jPanOpcCompras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanOpcionesDeclaracionLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jButCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbtCompras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbtInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanOpcionesDeclaracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanOpcionesDeclaracionLayout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addComponent(jPanOpcInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanOpcionesDeclaracionLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jButCompras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbtProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(37, 37, 37)
                 .addComponent(jPanOpcProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(jPanOpcProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(jPanOpcServicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtbCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         jLabNombreContribuyente1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
@@ -312,8 +324,8 @@ public class Menu_Trappi extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabNombreContribuyente1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanOpcionesDeclaracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanOpcionesDeclaracion, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -332,9 +344,9 @@ public class Menu_Trappi extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPEncabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPMod, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PanelVerTodos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(PanelVerTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 717, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -345,13 +357,13 @@ public class Menu_Trappi extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jLabel2MouseClicked
 
-    private void jButComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButComprasActionPerformed
+    private void jbtProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtProveedoresActionPerformed
 
-    }//GEN-LAST:event_jButComprasActionPerformed
+    }//GEN-LAST:event_jbtProveedoresActionPerformed
 
-    private void jButInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButInventarioActionPerformed
+    private void jbtInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtInventarioActionPerformed
 
-    }//GEN-LAST:event_jButInventarioActionPerformed
+    }//GEN-LAST:event_jbtInventarioActionPerformed
 
     private void jtbCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtbCerrarSesionActionPerformed
         this.setVisible(false);
@@ -359,13 +371,25 @@ public class Menu_Trappi extends javax.swing.JFrame {
         log.setVisible(true);
     }//GEN-LAST:event_jtbCerrarSesionActionPerformed
 
-    private void jButDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButDashboardActionPerformed
+    private void jbtLogísticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtLogísticoActionPerformed
 
-    }//GEN-LAST:event_jButDashboardActionPerformed
+    }//GEN-LAST:event_jbtLogísticoActionPerformed
 
-    private void jButCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButCompraActionPerformed
+    private void jbtComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtComprasActionPerformed
 
-    }//GEN-LAST:event_jButCompraActionPerformed
+    }//GEN-LAST:event_jbtComprasActionPerformed
+
+    private void jbtProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtProveedoresMouseClicked
+        // TODO add your handling code here:
+
+        try {
+            this.setVisible(false);
+            Principal proveedores = new Principal();
+            proveedores.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Menu_Trappi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbtProveedoresMouseClicked
 
     /**
      * @param args the command line arguments
@@ -404,10 +428,6 @@ public class Menu_Trappi extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelVerTodos;
-    private javax.swing.JButton jButCompra;
-    private javax.swing.JButton jButCompras;
-    private javax.swing.JButton jButDashboard;
-    private javax.swing.JButton jButInventario;
     private javax.swing.JLabel jIVA;
     private javax.swing.JLabel jLSidimLogo;
     private javax.swing.JLabel jLabNombreContribuyente1;
@@ -421,6 +441,10 @@ public class Menu_Trappi extends javax.swing.JFrame {
     private javax.swing.JPanel jPanOpcServicios;
     private javax.swing.JPanel jPanOpcionesDeclaracion;
     private javax.swing.JLabel jValor;
+    private javax.swing.JButton jbtCompras;
+    private javax.swing.JButton jbtInventario;
+    private javax.swing.JButton jbtLogístico;
+    private javax.swing.JButton jbtProveedores;
     private javax.swing.JButton jtbCerrarSesion;
     // End of variables declaration//GEN-END:variables
 }

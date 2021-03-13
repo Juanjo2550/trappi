@@ -255,27 +255,9 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtPrecioKeyTyped
 
     private void btnRegistrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarProductoActionPerformed
-        // Atributos
-        /*String nombre = txtNombre.getText();
-        String precio = txtPrecio.getText();
-        String prov = cmbProvedor.getSelectedItem().toString();
-        String marca = txtMarca.getText();
-        String cantidad = txtCantidad.getText();
-        String categoria = cmbProvedor1.getSelectedItem().toString();
-        Proveedor proveedor;
-
-        try {
-            proveedor = obtenerProveedor(prov);
-            Producto nuevoP = new Producto(nombre, Double.parseDouble(precio), proveedor, Integer.parseInt(cantidad), marca);
-            nuevoP.registrar();
-            vaciarCampos(txtNombre, txtPrecio, cmbProvedor, txtMarca, txtCantidad);
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }*/
-        
-        new Producto(txtNombre.getText(), Double.parseDouble(txtPrecio.getText()), 
-                obtenerProveedor(cmbProvedor.getSelectedItem().toString()), 
-                Integer.parseInt(txtCantidad.getText()),txtMarca.getText(),cmbProvedor1.getSelectedItem().toString() ).registrar();
+        new Producto(txtNombre.getText(), Double.parseDouble(txtPrecio.getText()),
+                obtenerProveedor(cmbProvedor.getSelectedItem().toString()),
+                Integer.parseInt(txtCantidad.getText()), txtMarca.getText(), cmbProvedor1.getSelectedItem().toString()).registrar();
         vaciarCampos(txtNombre, txtPrecio, cmbProvedor, txtMarca, txtCantidad);
     }//GEN-LAST:event_btnRegistrarProductoActionPerformed
 
