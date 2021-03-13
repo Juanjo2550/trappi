@@ -58,6 +58,7 @@ public class Registrar extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jTextFieldNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,7 +114,7 @@ public class Registrar extends javax.swing.JFrame {
         jLabel5.setText("Direccion");
 
         jLabel6.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jLabel6.setText("Cedula");
+        jLabel6.setText("Documento de Identidad");
 
         jLabel7.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel7.setText("Contraseña");
@@ -133,7 +134,7 @@ public class Registrar extends javax.swing.JFrame {
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 1044, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(376, 376, 376)
+                .addGap(316, 316, 316)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
