@@ -5,7 +5,8 @@ import com.epn.trappi.models.logistico.Vehiculo;
 
 public class Habilitado extends Estado{
     
-    private static String nomestado ="Habilitado"; 
+    private static String nomestado ="Habilitado";
+    private boolean enMantenimiento= false;
     
     public Habilitado(Vehiculo vehiculo) {
         super( vehiculo);
@@ -15,17 +16,17 @@ public class Habilitado extends Estado{
     }
     @Override
     public String cambiarEstado() {
-        if(darMantenimiento()){
-            vehiculo.actualizarEstado(new Inhabilitado(vehiculo));
+        if(enMantenimiento){
+            vehiculo.setEstado(new Inhabilitado(vehiculo));
             return "En Mantenimiento";
         }else{
-            vehiculo.actualizarEstado(new EnEspera(vehiculo));
+            vehiculo.setEstado(new EnEspera(vehiculo));
             return "Entrega en Curso";
         }
     }
 
     public boolean darMantenimiento(){
-        return true;
+        return enMantenimiento=true;
     }
     
     @Override

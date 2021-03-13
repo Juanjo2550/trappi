@@ -67,7 +67,6 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
         txtKilometraje = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         btnActualizarInformacion = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
         jPanel8 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -238,12 +237,12 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
 
         txtKilometraje.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         txtKilometraje.setForeground(new java.awt.Color(61, 57, 57));
-        jPanel1.add(txtKilometraje, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 230, -1));
+        jPanel1.add(txtKilometraje, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 90, 260, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(61, 57, 57));
         jLabel10.setText("Kilometraje:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, 30));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, -1, 30));
 
         btnActualizarInformacion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         btnActualizarInformacion.setForeground(new java.awt.Color(61, 57, 57));
@@ -264,13 +263,7 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
                 btnActualizarInformacionActionPerformed(evt);
             }
         });
-        jPanel1.add(btnActualizarInformacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 140, 320, 30));
-
-        jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(61, 57, 57));
-        jCheckBox1.setText("Obtener reporte del estado del vehículo");
-        jPanel1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 90, 320, -1));
+        jPanel1.add(btnActualizarInformacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, 320, 30));
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(219, 223, 228), 1, true));
@@ -555,7 +548,6 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
     private javax.swing.JButton btnBuscarVehiculo;
     private javax.swing.JComboBox<String> cmbBusquedaVehiculos1;
     private javax.swing.JComboBox<String> cmbEstados;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
