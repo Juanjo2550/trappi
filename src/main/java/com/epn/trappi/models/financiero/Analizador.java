@@ -89,6 +89,41 @@ public class Analizador {
         }
         return pagosporIntervalo;
     }
+    public double[] calcularDevolucionesPorIntervaloDeMeses(){
+        this.librodiario=new LibroDiario();
+        double[] devoluciones = new double[5];
+        
+        for(int i=0;i<5;i++){
+            int acumulador=0;
+            int variableaux = 1; 
+            for(Devolucion devolucion: this.librodiario.obtenerDevolucionesRegistradas()){
+                if(this.calcularIntervaloMensualInt()[i]>calcularIntervaloMensualInt()[variableaux]){
+                    if(devolucion.fechaDeDevolucion.devolverMes()==this.calcularIntervaloMensualInt()[i]&&devolucion.fechaDeDevolucion.devolverAnio()==this.fechaHasta.devolverAnio()-1){
+                        acumulador+=devolucion.valorDevolucion;
+                    }
+                }
+                if(variableaux==4){
+                    if(devolucion.fechaDeDevolucion.devolverMes()==this.calcularIntervaloMensualInt()[i]&&devolucion.fechaDeDevolucion.devolverAnio()==this.fechaHasta.devolverAnio()-1){
+                        acumulador+=devolucion.valorDevolucion;
+                    }
+                }
+                if(this.calcularIntervaloMensualInt()[i]<this.calcularIntervaloMensualInt()[variableaux]){
+                    if(devolucion.fechaDeDevolucion.devolverMes()==this.calcularIntervaloMensualInt()[i]&&devolucion.fechaDeDevolucion.devolverAnio()==this.fechaHasta.devolverAnio()){
+                        acumulador+=devolucion.valorDevolucion;
+                    }
+                }
+                
+            }
+            if(variableaux!=4){
+                variableaux++;
+            }
+            devoluciones[i]=acumulador;
+        }
+        for(int i=0;i<5;i++){
+            System.out.println("Ingreso:"+devoluciones[i]+" Mes:"+this.calcularIntervaloMensualString()[i]);
+        }
+        return devoluciones;
+    }
     public int[] calcularIntervaloMensualInt(){
         int[] mesesdeIntervalo= new int[5];
         int[] mesedelAnio={1, 2, 3,4,5,6,7,8,9,10,11,12};
@@ -255,7 +290,21 @@ public class Analizador {
         }
       return pagosPorFecha;
     }
-
+    public ArrayList<Devolucion> buscarDevolucionesPorFecha(int dia, int mes, int anio){
+        ArrayList<Devolucion> devolucionesPorFecha = new ArrayList<Devolucion>();
+        this.librodiario=new LibroDiario();
+        this.librodiario.devolucionesRegistradas = this.librodiario.obtenerDevolucionesRegistradas();
+        for(Devolucion devolucion : this.librodiario.obtenerDevolucionesRegistradas()){
+            if(devolucion.fechaDeDevolucion.devolverDia()==dia && devolucion.fechaDeDevolucion.devolverMes()==mes && devolucion.fechaDeDevolucion.devolverAnio()==anio){
+                devolucionesPorFecha.add(devolucion);
+            }
+        }
+        if(devolucionesPorFecha.isEmpty()){
+            devolucionesPorFecha=this.librodiario.devolucionesRegistradas;
+            JOptionPane.showMessageDialog(null, "No se encotraron pagos en la fecha determinada.","Mensaje", JOptionPane.INFORMATION_MESSAGE);
+        }
+      return devolucionesPorFecha;
+    }
     public LibroDiario getLibrodiario() {
         return librodiario;
     }

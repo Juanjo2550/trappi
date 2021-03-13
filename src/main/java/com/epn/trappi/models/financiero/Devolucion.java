@@ -7,13 +7,13 @@ import com.epn.trappi.gui.ecommerce.entidadBancaria.Cuenta;
 public class Devolucion {
     Fecha fechaDeDevolucion;
     //SolicitudDevolucion solicitudDevolucion;
-    String nroFactura;
+    int nroFactura;
     double valorDevolucion;
 
     public Devolucion() {
     }
 
-    public Devolucion(Fecha fechaDeDevolucion, String nroFactura, double valorDevolucion) {
+    public Devolucion(Fecha fechaDeDevolucion, int nroFactura, double valorDevolucion) {
         this.fechaDeDevolucion = fechaDeDevolucion;
         this.nroFactura = nroFactura;
         this.valorDevolucion = valorDevolucion;
@@ -45,5 +45,14 @@ public class Devolucion {
 
         return valorDevolucion;
     }
+
+    public Fecha getFechaDeDevolucion() {
+        return fechaDeDevolucion;
+    }
+
+    public int getNroFactura() {
+        return nroFactura;
+    }
+    
     
 }

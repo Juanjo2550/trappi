@@ -81,7 +81,7 @@ public class FinancieroDb {
         ResultSet resultSet = statement.executeQuery(sql);
         while(resultSet.next()){
             Fecha fecha = new Fecha(resultSet.getInt(3),resultSet.getInt(4),resultSet.getInt(5));
-            Devolucion devoluciontemporal = new Devolucion(fecha,String.valueOf(resultSet.getInt(1)),resultSet.getDouble(2));
+            Devolucion devoluciontemporal = new Devolucion(fecha,resultSet.getInt(1),resultSet.getDouble(2));
             deovolucionesRegistradas.add(devoluciontemporal);           
         }
         }catch( Exception e){
