@@ -10,6 +10,7 @@ import com.epn.trappi.models.logistico.Entrega;
 import com.epn.trappi.models.logistico.ListaEntregas;
 import com.epn.trappi.models.logistico.servicios.ServicioDb;
 import com.epn.trappi.models.logistico.servicios.ServicioDbEntrega;
+import static com.epn.trappi.models.logistico.servicios.ServicioVerificacion.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.SQLException;
@@ -584,26 +585,84 @@ public class RegistroEntregas extends javax.swing.JPanel {
         try{
         switch (opcion){
             case 0:
+                
                 entregas.setEntregas(servicioDB.obtenerElementos().getDatos());
                 break;
+                
             case 1:
+                strErrores+=verificarID(campo_busqueda);
+                if(!strErrores.equals(""))
+                {
+                    strErrores="Errores existentes:\n"+strErrores;
+                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar ID Factura" , JOptionPane.ERROR_MESSAGE);
+                    strErrores="";
+                    return;
+                }else {
                 entregas.setEntregas(servicioDB.obtenerElementosPorFiltro(ServicioDbEntrega.FACTURA,campo_busqueda).getDatos());
                 break;
+                }   
             case 2:
+                strErrores+=verificarMatricula(campo_busqueda);
+                if(!strErrores.equals(""))
+                {
+                    strErrores="Errores existentes:\n"+strErrores;
+                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar Matrícula" , JOptionPane.ERROR_MESSAGE);
+                    strErrores="";
+                    return;
+                }else {
                 entregas.setEntregas(servicioDB.obtenerElementosPorFiltro(ServicioDbEntrega.MATRICULA,campo_busqueda).getDatos());
                 break;
+                }
             case 3:
+                strErrores+=verificarID(campo_busqueda);
+                if(!strErrores.equals(""))
+                {
+                    strErrores="Errores existentes:\n"+strErrores;
+                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar ID Empleado" , JOptionPane.ERROR_MESSAGE);
+                    strErrores="";
+                    return;
+                }else {
                 entregas.setEntregas(servicioDB.obtenerElementosPorFiltro(ServicioDbEntrega.ID_EMPLEADO,campo_busqueda).getDatos());
                 break;
+                }
             case 4:
+                strErrores+=verificarEstadoEntrega(campo_busqueda);
+                if(!strErrores.equals(""))
+                {
+                    strErrores="Errores existentes:\n"+strErrores;
+                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar por Estado de Entrega" , JOptionPane.ERROR_MESSAGE);
+                    strErrores="";
+                    return;
+                }else {
                 entregas.setEntregas(servicioDB.obtenerElementosPorFiltro(ServicioDbEntrega.ESTADO,campo_busqueda).getDatos());
                 break;
+                }
             case 5:
+                strErrores+=verificarID(campo_busqueda);
+                if(!strErrores.equals(""))
+                {
+                    strErrores="Errores existentes:\n"+strErrores;
+                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar por ID Entrega" , JOptionPane.ERROR_MESSAGE);
+                    strErrores="";
+                    return;
+                }else {
                 entregas.setEntregas(servicioDB.obtenerElementosPorFiltro(ServicioDbEntrega.ID_ENTREGA,campo_busqueda).getDatos());
                 break;
+                }
             case 6:
+                campo_busqueda="";
+                campo_busqueda=campoAño.getText().trim()+"-"+campoMes.getText().trim()+"-"+campoDia.getText().trim();
+                strErrores+=verificarFecha(campo_busqueda);
+                if(!strErrores.equals(""))
+                {
+                    strErrores="Errores existentes:\n"+strErrores;
+                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar por Fecha" , JOptionPane.ERROR_MESSAGE);
+                    strErrores="";
+                    return;
+                }else {
                 entregas.setEntregas(servicioDB.obtenerElementosPorFiltro(ServicioDbEntrega.FECHA,campo_busqueda).getDatos());
                 break;
+                }
         }
         int numero_registros=0;
         String numero = campoRegistros.getText();
@@ -664,4 +723,5 @@ public class RegistroEntregas extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaRegistroEntregas;
     // End of variables declaration//GEN-END:variables
+    private String strErrores="";
 }

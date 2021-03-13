@@ -296,6 +296,37 @@ public class ServicioVerificacion
                    }
                    return error;
            }
+        public static String verificarEstadoEntrega(String telefono)
+           {
+                   String error = "";
+                   String patron = ("^Finalizado$|^En curso$");
+
+                   if (telefono.equals(""))
+                           error += "Estado de Entrega: Campo vacio.\n";
+                   else
+                   {
+                           if (!(telefono.matches(patron))){
+                                   error += "Los Estados pueden ser :Finalizado y En curso\n";
+                           }
+                   }
+                   return error;
+           }
+        public static String verificarFecha(String telefono)
+           {
+                   String error = "";
+                   String patron = ("^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}$");
+
+                   if (telefono.equals(""))
+                           error += "Estado de Entrega: Campo vacio.\n";
+                   else
+                   {
+                           if (!(telefono.matches(patron))){
+                                   error += "Gasto: Caracteres no válidos\n";
+                                   error += "Ejemplo 2021-03-12 (año-mes-día)\n";
+                           }
+                   }
+                   return error;
+           }
         
         
 }
