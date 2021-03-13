@@ -57,6 +57,47 @@ public class FinancieroDb {
             System.out.println(e);
         }
     }
+    public void insertarDevolucion(Devolucion devolucion){
+        try{
+        Statement statement = connection.createStatement();
+        String sql = "INSERT INTO dbo.DEVOLUCION VALUES("+(this.consultarDevolucionesRegistradas().size()+1)+
+                ","+devolucion.getNroFactura()+","+devolucion.getValorDevolucion()+","+devolucion.getFechaDeDevolucion().devolverDia()+
+                ","+devolucion.getFechaDeDevolucion().devolverMes()+","+devolucion.getFechaDeDevolucion().devolverAnio()+")";
+        statement.executeUpdate(sql);
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    public void removerIngreso(Ingreso ingreso){
+        try{
+            Statement statement = this.connection.createStatement();
+            String sql = "delete from dbo.INGRESO where NROFACTURA2 like '"+ingreso.getNroFactura()+"';";
+            statement.executeUpdate(sql);
+            System.out.println("Se eliminó ingreso");
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    public void removerPago(Pago pago){
+        try{
+            Statement statement = this.connection.createStatement();
+            String sql = "delete from dbo.PAGO where NROCUENTA like '"+pago.getNroCuenta()+"';";
+            statement.executeUpdate(sql);
+            System.out.println("Se eliminó PAGO");
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    public void removerDevolucion(Devolucion devolucion){
+        try{
+            Statement statement = this.connection.createStatement();
+            String sql = "delete from dbo.DEVOLUCION where nroFactura="+devolucion.getNroFactura()+";";
+            statement.executeUpdate(sql);
+            System.out.println("Se eliminó DEVOLUCION");
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
     public ArrayList<Pago> consultarPagosRegistrados(){
         ArrayList<Pago> pagosRegistrados = new ArrayList<Pago>();
         try{

@@ -20,17 +20,21 @@ public class Devolucion {
     }
     
     public boolean procesarDevolucion(int idFactura){
-        double devolucion=0;
-        devolucion=this.calcularValorDevolucion(idFactura);
+        double valorDevolucion=0;
+        valorDevolucion=this.calcularValorDevolucion(idFactura);
         FinancieroDb db = new FinancieroDb();
-        if(devolucion==0){
+        if(valorDevolucion==0){
             System.out.println("Devolucion no realizada");
             return false;
         }
-        if(devolucion>0){
+        if(valorDevolucion>0){
             db.acutalizarEstadoFactura(idFactura);
             Cuenta cuentaDevolucion = new Cuenta();
-            cuentaDevolucion.acreditar(devolucion);
+            cuentaDevolucion.acreditar(valorDevolucion);
+            LibroDiario libroDiario = new LibroDiario();
+            this.fechaDeDevolucion=new Fecha();
+            Devolucion devolucion = new Devolucion(fechaDeDevolucion, idFactura, valorDevolucion);
+            libroDiario.agregarDevolucion(devolucion);
         }
         System.out.println("devolucion realizada con exito");
         return true;

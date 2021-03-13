@@ -39,6 +39,28 @@ public class LibroDiario {
         FinancieroDb pagoDb = new FinancieroDb();
         pagoDb.insertarPago(pago);
     }
+    public void agregarDevolucion(Devolucion devolucion){
+        FinancieroDb devolucionDb = new FinancieroDb();
+        devolucionDb.insertarDevolucion(devolucion);
+    }
+    public void quitarIngreso(int nroFactura){
+        FinancieroDb ingresoDb = new FinancieroDb();
+        Ingreso ingreso = new Ingreso();
+        ingreso.nroFactura=nroFactura;
+        ingresoDb.removerIngreso(ingreso);
+    }
+    public void quitarPago(int nroCuenta){
+        FinancieroDb pagoDb = new FinancieroDb();
+        Pago pago =  new Pago();
+        pago.nroCuenta=String.valueOf(nroCuenta);
+        pagoDb.removerPago(pago);
+    }
+    public void quitarDevolucion(int nroFactura){
+        FinancieroDb devolucionDb = new FinancieroDb();
+        Devolucion devolucion = new Devolucion();
+        devolucion.nroFactura=nroFactura;
+        devolucionDb.removerDevolucion(devolucion);
+    }
     public ArrayList<Ingreso> obtenerIngresosRegistrados(){
         FinancieroDb db = new FinancieroDb();
         this.ingresosRegistrados= new ArrayList<Ingreso>();
