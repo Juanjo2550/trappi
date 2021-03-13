@@ -29,6 +29,11 @@ public class Inventario {
         this.listaDeBienes = new ListaDeBienes();
         this.listaDeBienes = db.getInventarioDb();
     }
+    
+    public Inventario(String vip) throws IOException {
+        this.listaDeBienes = new ListaDeBienes();
+        this.listaDeBienes = db.getInventarioDb();
+    }
 
     public Inventario(ListaDeBienes listDeBienes) {
         this.listaDeBienes = listDeBienes;
