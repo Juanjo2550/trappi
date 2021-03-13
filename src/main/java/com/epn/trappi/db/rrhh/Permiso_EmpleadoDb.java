@@ -1,8 +1,6 @@
 
 package com.epn.trappi.db.rrhh;
-import com.epn.trappi.models.rrhh.listas.*;
 import com.epn.trappi.db.connection.DataBaseConnection;
-import com.epn.trappi.db.rrhh.EmpleadoDb;
 import com.epn.trappi.gui.rrhh.Permisos.Calamidad_Domestica;
 import com.epn.trappi.gui.rrhh.Permisos.Enfermedad;
 import com.epn.trappi.gui.rrhh.Permisos.Nacimiento_Hijo;

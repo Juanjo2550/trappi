@@ -16,19 +16,49 @@ public class ControlAsistencias {
     }
 
     public void registrarInicioDeJornada(Empleado empleado) {
-        Asistencia asistencia = new Asistencia(empleado, new Hora(), this.fecha, "N/A");
-        asistencia.registrar();
-        asistencia.comprobarAtraso();
-        if (empleado instanceof Conductor) {
-            this.notificarEntradaConductor(empleado);
+        if (comprobarSiPuedoRegistrarUnaAsistencia(empleado.getCedula())) {
+            Asistencia asistencia = new Asistencia(empleado, new Hora(), this.fecha, "N/A");
+            asistencia.registrar();
+            asistencia.comprobarAtraso();
+            if (empleado instanceof Conductor) {
+                this.notificarEntradaConductor(empleado);
+            }
         }
     }
 
     public void registrarFinDeJornada(String cedula) throws Exception {
-        Asistencia asistencia = this.asistenciaDb.buscarUno(cedula, this.fecha);
-        asistencia.registrarSalida();
-        asistencia.comprobarHoraExtra();
-        this.notificarSalidaConductor(asistencia.getEmpleado());
+        if (comprobarSiPuedoRegistrarFinDeJornada(cedula)) {
+            Asistencia asistencia = this.asistenciaDb.buscarUno(cedula, this.fecha);
+            asistencia.registrarSalida();
+            asistencia.comprobarHoraExtra();
+            this.notificarSalidaConductor(asistencia.getEmpleado());
+        }
+    }
+
+    public boolean comprobarSiPuedoRegistrarFinDeJornada (String cedula) {
+        boolean resultado = false; //No hay una asistencia registrada en la fecha del sistema
+        Asistencia asistencia = null;
+        try {
+            asistencia = new AsistenciaDb().buscarUno(cedula, new Fecha());
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        if(asistencia != null) {
+            resultado = asistencia.getHoraFin() == null;
+        }
+        return resultado;
+    }
+
+    public boolean comprobarSiPuedoRegistrarUnaAsistencia (String cedula) {
+        boolean resultado = false; //No hay una asistencia registrada en la fecha del sistema
+        Asistencia asistencia = null;
+        try {
+            new AsistenciaDb().buscarUno(cedula, new Fecha());
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            resultado = true;
+        }
+        return resultado;
     }
 
     public void notificarEntradaConductor(Empleado empleado) {

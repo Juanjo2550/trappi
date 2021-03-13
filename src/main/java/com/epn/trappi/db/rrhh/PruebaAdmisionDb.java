@@ -2,7 +2,6 @@ package com.epn.trappi.db.rrhh;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.models.rrhh.contratacion.PruebaAdmision;
-import com.epn.trappi.models.rrhh.listas.Lista;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -41,9 +41,19 @@ public class Asistencia {
     public void comprobarAtraso() {
         if(this.getHoraInicio().getHora() > this.horaLimiteEntrada.getHora()) {
             int diferencia = Math.abs(this.getHoraInicio().getHora() - this.horaLimiteEntrada.getHora());
-            new Observacion(this.empleado, "atraso", "N/A", this.fecha, new Hora(diferencia, 0, 0))
-                    .agregar();
+            if (diferencia > 8) {
+                this.registrarFalta(diferencia);
+            } else {
+                new Observacion(this.empleado, "atraso", "N/A", this.fecha, new Hora(diferencia, 0, 0))
+                        .agregar();
+            }
         }
+    }
+
+    private void registrarFalta(int diferencia) {
+        new Observacion(this.empleado, "falta", "N/A", this.fecha, new Hora(diferencia, 0, 0))
+                .agregar();
+        this.registrarSalida();
     }
 
     public void comprobarHoraExtra() {

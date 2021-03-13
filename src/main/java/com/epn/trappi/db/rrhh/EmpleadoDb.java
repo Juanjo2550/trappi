@@ -4,7 +4,6 @@ import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.models.rrhh.juanjo.Administrativo;
 import com.epn.trappi.models.rrhh.juanjo.Conductor;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
-import com.epn.trappi.models.rrhh.listas.Lista;
 
 import java.sql.*;
 import java.util.ArrayList;

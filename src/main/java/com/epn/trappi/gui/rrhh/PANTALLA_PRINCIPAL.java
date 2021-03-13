@@ -8,6 +8,7 @@ package com.epn.trappi.gui.rrhh;
 
 import com.epn.trappi.*;
 import com.epn.trappi.gui.logistico.Logistico_GUI.RoundedBorder;
+import com.epn.trappi.models.rrhh.juanjo.ControlAsistencias;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -25,6 +26,7 @@ import javax.swing.border.Border;
  */
 public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
     PanelPermisos panelPermisos = new PanelPermisos();
+    ControlAsistencias controlAsistencias;
         public void ocultarPaneles(JPanel panel){
         
         panelPermisos.setVisible(panel.getClass().equals(panelPermisos.getClass()));
@@ -36,6 +38,15 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
      */
     public PANTALLA_PRINCIPAL() {
         initComponents();
+        this.controlAsistencias = new ControlAsistencias();
+        configurarBotones(20);
+        this.setSize(1366, 768);
+        this.setLocationRelativeTo(null);
+    }
+    
+    public PANTALLA_PRINCIPAL(ControlAsistencias control) {
+        initComponents();
+        this.controlAsistencias = control;
         configurarBotones(20);
         this.setSize(1366, 768);
         this.setLocationRelativeTo(null);
@@ -246,7 +257,7 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPermisosActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        ContratacionPrincipal contratacion = new ContratacionPrincipal();
+        ContratacionPrincipal contratacion = new ContratacionPrincipal(this.controlAsistencias);
         this.setVisible(false);
         contratacion.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed

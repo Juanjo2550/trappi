@@ -7,6 +7,7 @@ package com.epn.trappi.gui.rrhh;
 
 
 
+import com.epn.trappi.models.rrhh.juanjo.ControlAsistencias;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -24,11 +25,14 @@ public class ContratacionPrincipal extends javax.swing.JFrame {
     PanelContratos panelContratos = new PanelContratos();
     PanelContratarAspirante panelContratar = new PanelContratarAspirante();
     PanelRegistroAspirante panelRegistroAsp = new PanelRegistroAspirante();
+    PanelEmpleado panelEmpleado = new PanelEmpleado(this);
+    public ControlAsistencias controlAsistencias;
     public void ocultarPaneles(JPanel panel){
         
         panelContratos.setVisible(panel.getClass().equals(panelContratos.getClass()));
         panelContratar.setVisible(panel.getClass().equals(panelContratar.getClass()));
         panelRegistroAsp.setVisible(panel.getClass().equals(panelRegistroAsp.getClass()));
+        panelEmpleado.setVisible(panel.getClass().equals(panelEmpleado.getClass()));
     }
     
     private void configurarBotones(int radio){
@@ -62,13 +66,28 @@ public class ContratacionPrincipal extends javax.swing.JFrame {
     }
 
 
-    public ContratacionPrincipal() {
+    public ContratacionPrincipal(ControlAsistencias control) {
         initComponents();
+        this.controlAsistencias = control;
         this.setSize(1366, 768);
         this.setLocationRelativeTo(null);
         configurarBotones(20);
 
     }
+    
+    public ContratacionPrincipal() {
+        initComponents();
+        this.controlAsistencias = new ControlAsistencias();
+        this.setSize(1366, 768);
+        this.setLocationRelativeTo(null);
+        configurarBotones(20);
+
+    }
+
+    public ControlAsistencias getControlAsistencias() {
+        return controlAsistencias;
+    }
+    
     public static class RoundedBorder implements Border {
 
     private int radius;
@@ -349,8 +368,11 @@ public class ContratacionPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnContratosActionPerformed
 
     private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
-        this.setVisible(false);
-        new EmpleadoGui().setVisible(true);
+        ocultarPaneles(panelEmpleado);
+        panelEmpleado.setSize(1000, 800);
+        PanelGeneralContratacion.add(panelEmpleado);
+        PanelGeneralContratacion.revalidate();
+        PanelGeneralContratacion.repaint();
     }//GEN-LAST:event_btnEmpleadosActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
