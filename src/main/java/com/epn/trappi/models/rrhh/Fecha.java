@@ -44,6 +44,13 @@ public class Fecha {
         this.año = año;
     }
 
+    public Fecha(String formattedDate) {
+        String[] formattedDateString = formattedDate.split("-");
+        this.dia = Integer.parseInt(formattedDateString[0]);
+        this.mes = Integer.parseInt(formattedDateString[1]);
+        this.año = Integer.parseInt(formattedDateString[2]);
+    }
+
     public int getDia() {
         return dia;
     }

@@ -42,7 +42,6 @@ public abstract class Empleado {
     public abstract void notificarEntrada(ControlAsistencias controlAsistencias);
     public abstract void notificarSalida(ControlAsistencias controlAsistencias);
     public abstract void registrar();
-    public void SolicitarPermiso() {}
 
     public String getNombres() {
         return nombres;
