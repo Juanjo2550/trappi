@@ -155,6 +155,10 @@ public class Permiso_EmpleadoDb implements ModelDb <Permiso>{
         }
       
     }
+    
+    
+
+    
   //metodo para validar los permisos de un empleado para generar el rol de pagos   
     public Permiso Permisos_para_ROL(int idEmpleado, Fecha fecha ) throws SQLException{
         String fecha_a_Validar = fecha.toString();
@@ -186,8 +190,82 @@ public class Permiso_EmpleadoDb implements ModelDb <Permiso>{
             return permiso_especifico;
     }
 
+public Permiso[] ObtenerTodosPermisos(String cedula) throws SQLException{
+    listaPermiso = new ArrayList<>();
+        EmpleadoDb l1 = new EmpleadoDb();
+        Empleado[] empleados = l1.obtenerTodos();
+         try {
+            String sql = "SELECT * FROM PERMISO JOIN EMPLEADO on PERMISO.IDEMP = EMPLEADO.IDEMP WHERE CEDULAEMP ='"+cedula+"'";;
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            while(rs.next()) {
+                 Empleado currentEmpleado = null;
+                for (Empleado emp : empleados) {
+                    if (emp.getId() == rs.getInt(2)){
+                        currentEmpleado = emp;
+                    }
+                }
+                switch (rs.getString(9)) {
+                    case "Calamidad Domestica":
+                        listaPermiso.add(new Calamidad_Domestica(
 
-    
+                                currentEmpleado,
+                                rs.getInt(3),
+                                rs.getString(4),
+                                rs.getString(5),
+                                rs.getString(6),
+                                rs.getString(7),
+                                rs.getString(8)
+                        ));
+                        break;
+                    case "Enfermedad":
+                        listaPermiso.add(new Enfermedad(
+
+                                currentEmpleado,
+                                rs.getInt(3),
+                                rs.getString(4),
+                                rs.getString(5),
+                                rs.getString(6),
+                                rs.getString(7),
+                                rs.getString(8)
+                        ));
+                        break;
+                    case "Nacimiento Hijos":
+                        listaPermiso.add(new Nacimiento_Hijo(
+
+                                currentEmpleado,
+                                rs.getInt(3),
+                                rs.getString(4),
+                                rs.getString(5),
+                                rs.getString(6),
+                                rs.getString(7),
+                                rs.getString(8)
+                        ));
+                        break;
+                    default:
+                        listaPermiso.add(new Otros_Permisos(
+
+                                currentEmpleado,
+                                rs.getInt(3),
+                                rs.getString(4),
+                                rs.getString(5),
+                                rs.getString(6),
+                                rs.getString(7),
+                                rs.getString(8)
+
+                        ));
+                        break;
+                }
+        } 
+               } 
+        catch (SQLException e){
+            System.out.println(e.toString());
+        }
+        Permiso[] Lista_Permisos = new Permiso[listaPermiso.size()];
+        Lista_Permisos = listaPermiso.toArray(Lista_Permisos);
+        return Lista_Permisos;
+    } 
+   
   
 //metodo creado para obtener todos los permisos almacenados en la base de datos
     public Permiso[] obtenerTodos(){
@@ -280,32 +358,42 @@ public class Permiso_EmpleadoDb implements ModelDb <Permiso>{
         
          
         try {
+        
+            EmpleadoDb l1 = new EmpleadoDb();
+            Empleado[] empleados = l1.obtenerTodos();
             String query = "SELECT * FROM PERMISO JOIN EMPLEADO on PERMISO.IDEMP = EMPLEADO.ID_EMP WHERE CEDULAEMP ='"+cedulaEmpleado+"'";
            // System.out.println(query);
             pstm = conn.prepareStatement(query);
             //pstm.setString(0, cedulaAspirante);
             rs = pstm.executeQuery();
             rs.next();
+           Empleado currentEmpleado = null;
+                for (Empleado emp : empleados) {
+                    if (emp.getId() == rs.getInt(2)){
+                        currentEmpleado = emp;
+                    }
+                }
             
             if (rs.getString("TIPOPERM").equals("Calamidad Domestica")){
-               permiso_especifico =new Calamidad_Domestica(rs.getInt("NUMDIASPERM"), rs.getString("VALORPAGARPERM"),
-            rs.getString("FECHAINICIOPERM"),rs.getString("FECHAFINPERM"));
+               permiso_especifico =new Calamidad_Domestica(currentEmpleado,rs.getInt("NUMDIASPERM"),rs.getString("VALORPAGARPERM"),
+                      rs.getString("COMENTPERM"),rs.getString("FECHAINICIOPERM"),rs.getString("FECHAFINPERM"),rs.getString("ESTADOPERM"));
+            
              System.out.println("Consulta Buscar un permiso se hizo con exito"); 
             }
              if (rs.getString(21).equals("Enfermedad")){
-               permiso_especifico =new Enfermedad(rs.getInt("NUMDIASPERM"), rs.getString("VALORPAGARPERM"),
-            rs.getString("FECHAINICIOPERM"),rs.getString("FECHAFINPERM"));
+               permiso_especifico =new Enfermedad(currentEmpleado,rs.getInt("NUMDIASPERM"),rs.getString("VALORPAGARPERM"),
+                      rs.getString("COMENTPERM"),rs.getString("FECHAINICIOPERM"),rs.getString("FECHAFINPERM"),rs.getString("ESTADOPERM"));
              System.out.println("Consulta Buscar una permiso se hizo con exito"); 
             }
               if (rs.getString(21).equals("Nacimiento Hijos")){
-               permiso_especifico =new Nacimiento_Hijo(rs.getInt("NUMDIASPERM"), rs.getString("VALORPAGARPERM"),
-            rs.getString("FECHAINICIOPERM"),rs.getString("FECHAFINPERM"));
+               permiso_especifico =new Nacimiento_Hijo(currentEmpleado,rs.getInt("NUMDIASPERM"),rs.getString("VALORPAGARPERM"),
+                      rs.getString("COMENTPERM"),rs.getString("FECHAINICIOPERM"),rs.getString("FECHAFINPERM"),rs.getString("ESTADOPERM"));
              System.out.println("Consulta Buscar una permiso se hizo con exito"); 
             }
 
                if (rs.getString(21).equals("Otros Permisos")){
-               permiso_especifico =new Otros_Permisos(rs.getInt("NUMDIASPERM"), rs.getString("VALORPAGARPERM"),
-            rs.getString("FECHAINICIOPERM"),rs.getString("FECHAFINPERM"));
+               permiso_especifico =new Otros_Permisos(currentEmpleado,rs.getInt("NUMDIASPERM"),rs.getString("VALORPAGARPERM"),
+                      rs.getString("COMENTPERM"),rs.getString("FECHAINICIOPERM"),rs.getString("FECHAFINPERM"),rs.getString("ESTADOPERM"));
              System.out.println("Consulta Buscar una permiso se hizo con exito"); 
             }
             

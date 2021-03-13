@@ -149,7 +149,7 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
 
         btnVolver.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         btnVolver.setForeground(new java.awt.Color(255, 255, 255));
-        btnVolver.setText("Volver");
+        btnVolver.setText("Regresar");
 
         btnRRHH.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         btnRRHH.setForeground(new java.awt.Color(255, 255, 255));
