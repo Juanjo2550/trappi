@@ -10,6 +10,7 @@ import com.epn.trappi.models.logistico.Mantenimiento;
 import com.epn.trappi.models.logistico.servicios.Consultable;
 import com.epn.trappi.models.logistico.servicios.ServicioDb;
 import com.epn.trappi.models.logistico.servicios.ServicioDbMantenimiento;
+import static com.epn.trappi.models.logistico.servicios.ServicioVerificacion.*;
 import com.epn.trappi.models.logistico.servicios.Unible;
 import java.awt.Color;
 import java.awt.Font;
@@ -404,14 +405,41 @@ public class RegistroMantenimiento extends javax.swing.JPanel {
                 lista.setMantenimientos(servicioDB.obtenerElementos().getDatos());
                 break;
                 case 1:
-                lista.setMantenimientos(servicioDB.obtenerElementosPorFiltro(ServicioDbMantenimiento.MATRICULA,campo_busqueda).getDatos());
-                break;
+                        strErrores+=verificarMatricula(campo_busqueda);
+                    if(!strErrores.equals(""))
+                    {
+                        strErrores="Errores existentes:\n"+strErrores;
+                        JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar por Matricula" , JOptionPane.ERROR_MESSAGE);
+                        strErrores="";
+                        return;
+                    }else {
+                        lista.setMantenimientos(servicioDB.obtenerElementosPorFiltro(ServicioDbMantenimiento.MATRICULA,campo_busqueda).getDatos());
+                        break;
+                    }
                 case 2:
-                lista.setMantenimientos(servicioDB.obtenerElementosPorFiltro(ServicioDbMantenimiento.ID_MANTENIMIENTO,campo_busqueda).getDatos());
-                break;
+                        strErrores+=verificarID(campo_busqueda);
+                    if(!strErrores.equals(""))
+                    {
+                        strErrores="Errores existentes:\n"+strErrores;
+                        JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar por ID" , JOptionPane.ERROR_MESSAGE);
+                        strErrores="";
+                        return;
+                    }else {
+                        lista.setMantenimientos(servicioDB.obtenerElementosPorFiltro(ServicioDbMantenimiento.ID_MANTENIMIENTO,campo_busqueda).getDatos());
+                        break;
+                    }
                 case 3:
-                lista.setMantenimientos(servicioDB.obtenerElementosPorFiltro(ServicioDbMantenimiento.GASTO,campo_busqueda).getDatos());
-                break;
+                        strErrores+=verificarGasto(campo_busqueda);
+                    if(!strErrores.equals(""))
+                    {
+                        strErrores="Errores existentes:\n"+strErrores;
+                        JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar por Gasto" , JOptionPane.ERROR_MESSAGE);
+                        strErrores="";
+                        return;
+                    }else {
+                    lista.setMantenimientos(servicioDB.obtenerElementosPorFiltro(ServicioDbMantenimiento.GASTO,campo_busqueda).getDatos());
+                    break;
+                    }
             }
             int numero_registros=0;
             String numero = campoRegistros.getText();
@@ -465,4 +493,5 @@ public class RegistroMantenimiento extends javax.swing.JPanel {
     private javax.swing.JTable tablaMantenimientos;
     private javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables
+    private String strErrores="";
 }

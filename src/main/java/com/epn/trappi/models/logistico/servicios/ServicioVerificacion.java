@@ -264,6 +264,38 @@ public class ServicioVerificacion
                    }
                    return error;
            }
+        public static String verificarID(String telefono)
+           {
+                   String error = "";
+                   String patron = ("^[0-9]{1,6}$");
+
+                   if (telefono.equals(""))
+                           error += "ID: Campo vacio.\n";
+                   else
+                   {
+                           if (!(telefono.matches(patron))){
+                                   error += "ID: Caracteres no válidos\n";
+                                   //error += "Hasta un kilometraje de 999999\n";
+                           }
+                   }
+                   return error;
+           }
+        public static String verificarGasto(String telefono)
+           {
+                   String error = "";
+                   String patron = ("^[0-9]{1,6}.[0-9]{1,2}$");
+
+                   if (telefono.equals(""))
+                           error += "ID: Campo vacio.\n";
+                   else
+                   {
+                           if (!(telefono.matches(patron))){
+                                   error += "Gasto: Caracteres no válidos\n";
+                                   error += "Ejemplo 24.05\n";
+                           }
+                   }
+                   return error;
+           }
         
         
 }

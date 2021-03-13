@@ -17,6 +17,7 @@ import com.epn.trappi.models.logistico.servicios.ServicioDb;
 import com.epn.trappi.models.logistico.servicios.ServicioDbMantenimiento;
 import com.epn.trappi.models.logistico.servicios.ServicioDbSolicitudMantenimiento;
 import com.epn.trappi.models.logistico.servicios.ServicioDbVehiculo;
+import static com.epn.trappi.models.logistico.servicios.ServicioVerificacion.*;
 import java.awt.Color;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -111,6 +112,11 @@ public class FichasTecnicas extends javax.swing.JPanel {
         jTFidMantenimiento.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jTFidMantenimiento.setForeground(new java.awt.Color(61, 57, 57));
         jTFidMantenimiento.setText("123");
+        jTFidMantenimiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFidMantenimientoActionPerformed(evt);
+            }
+        });
         jPanel2.add(jTFidMantenimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 70, 130, 30));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -402,24 +408,44 @@ public class FichasTecnicas extends javax.swing.JPanel {
         ListaVehiculos vehiculos = new ListaVehiculos();
         servicioDB = new ServicioDbVehiculo();
         String valor = txtMatriculaVehiculo.getText();
-        try {
-            vehiculos.setVehiculos(servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.MATRICULA, valor).getDatos());
-            this.jTableVerificarVehiculo.setModel(vehiculos.mostrarLista());
-        } catch (SQLException ex) {
-            Logger.getLogger(FichasTecnicas.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        strErrores+=verificarMatricula(valor);
+                if(!strErrores.equals(""))
+                {
+                    strErrores="Errores existentes:\n"+strErrores;
+                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar el Vehículo" , JOptionPane.ERROR_MESSAGE);
+                    strErrores="";
+                    return;
+                }else {
+                        try {
+                            vehiculos.setVehiculos(servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.MATRICULA, valor).getDatos());
+                            this.jTableVerificarVehiculo.setModel(vehiculos.mostrarLista());
+                        } catch (SQLException ex) {
+                            Logger.getLogger(FichasTecnicas.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                }
     }//GEN-LAST:event_btnVerificarVehiculoActionPerformed
 
     private void btnVerificarMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarMantenimientoActionPerformed
         ListaMantenimientos mantenimientos = new ListaMantenimientos();
         servicioDB = new ServicioDbMantenimiento();
         String valor = txtIdMantenimiento.getText();
-        try {
-            mantenimientos.setMantenimientos(servicioDB.obtenerElementosPorFiltro(ServicioDbMantenimiento.ID_MANTENIMIENTO, valor).getDatos());
-            this.jTVerificarMantenimiento.setModel(mantenimientos.mostrarLista());
-        } catch (SQLException ex) {
-            Logger.getLogger(FichasTecnicas.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        
+        strErrores+=verificarID(valor);
+                if(!strErrores.equals(""))
+                {
+                    strErrores="Errores existentes:\n"+strErrores;
+                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar el Mantenimiento" , JOptionPane.ERROR_MESSAGE);
+                    strErrores="";
+                    return;
+                }else {
+                        try {
+                            mantenimientos.setMantenimientos(servicioDB.obtenerElementosPorFiltro(ServicioDbMantenimiento.ID_MANTENIMIENTO, valor).getDatos());
+                            this.jTVerificarMantenimiento.setModel(mantenimientos.mostrarLista());
+                        } catch (SQLException ex) {
+                            Logger.getLogger(FichasTecnicas.class.getName()).log(Level.SEVERE, null, ex);
+                        } 
+                }
     }//GEN-LAST:event_btnVerificarMantenimientoActionPerformed
 
     private void btnVerificarBienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarBienActionPerformed
@@ -509,6 +535,10 @@ public class FichasTecnicas extends javax.swing.JPanel {
         this.btnRegistrarSolicitud.setForeground(c);
     }//GEN-LAST:event_btnRegistrarSolicitudMouseExited
 
+    private void jTFidMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFidMantenimientoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFidMantenimientoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrarMantenimiento;
@@ -547,4 +577,5 @@ public class FichasTecnicas extends javax.swing.JPanel {
     private javax.swing.JTextField txtIdMantenimiento;
     private javax.swing.JTextField txtMatriculaVehiculo;
     // End of variables declaration//GEN-END:variables
+    private String strErrores="";
 }

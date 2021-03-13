@@ -431,7 +431,7 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
                 if(!strErrores.equals(""))
                 {
                     strErrores="Errores existentes:\n"+strErrores;
-                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar" , JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar por Tipo" , JOptionPane.ERROR_MESSAGE);
                     strErrores="";
                     return;
                 }else {
@@ -443,7 +443,7 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
                 if(!strErrores.equals(""))
                 {
                     strErrores="Errores existentes:\n"+strErrores;
-                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar" , JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar por Estado" , JOptionPane.ERROR_MESSAGE);
                     strErrores="";
                     return;
                 }else {
@@ -455,7 +455,7 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
                 if(!strErrores.equals(""))
                 {
                     strErrores="Errores existentes:\n"+strErrores;
-                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar" , JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar Kilometraje" , JOptionPane.ERROR_MESSAGE);
                     strErrores="";
                     return;
                 }else {
@@ -463,11 +463,11 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
                 break;
                 }
             case 5:
-                strErrores+=verificarKilometraje(campo_busqueda);
+                strErrores+=verificarID(campo_busqueda);
                 if(!strErrores.equals(""))
                 {
                     strErrores="Errores existentes:\n"+strErrores;
-                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar" , JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar ID" , JOptionPane.ERROR_MESSAGE);
                     strErrores="";
                     return;
                 }else {

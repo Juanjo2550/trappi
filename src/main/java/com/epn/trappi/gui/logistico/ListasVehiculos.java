@@ -8,6 +8,7 @@ import com.epn.trappi.models.logistico.servicios.ServicioDb;
 import com.epn.trappi.models.logistico.servicios.ServicioDbEntrega;
 import com.epn.trappi.models.logistico.servicios.ServicioDbVehiculo;
 import com.epn.trappi.models.logistico.servicios.Unible;
+import static com.epn.trappi.models.logistico.servicios.ServicioVerificacion.*;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -407,20 +408,65 @@ public class ListasVehiculos extends javax.swing.JPanel {
                 vehiculos.setVehiculos(servicioDB.obtenerElementos().getDatos());
                 break;
             case 1:
-                vehiculos.setVehiculos(servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.MATRICULA,campo_busqueda).getDatos());
-                break;
+                strErrores+=verificarMatricula(campo_busqueda);
+                if(!strErrores.equals(""))
+                {
+                    strErrores="Errores existentes:\n"+strErrores;
+                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar el Vehículo" , JOptionPane.ERROR_MESSAGE);
+                    strErrores="";
+                    return;
+                }else {
+                    vehiculos.setVehiculos(servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.MATRICULA,campo_busqueda).getDatos());
+                    break;
+                }
             case 2:
+                strErrores+=verificarTipo(campo_busqueda);
+                if(!strErrores.equals(""))
+                {
+                    strErrores="Errores existentes:\n"+strErrores;
+                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar por Tipo" , JOptionPane.ERROR_MESSAGE);
+                    strErrores="";
+                    return;
+                }else {
                 vehiculos.setVehiculos(servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.TIPO,campo_busqueda).getDatos());
                 break;
+                }
             case 3:
+                strErrores+=verificarEstado(campo_busqueda);
+                if(!strErrores.equals(""))
+                {
+                    strErrores="Errores existentes:\n"+strErrores;
+                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar por Estado" , JOptionPane.ERROR_MESSAGE);
+                    strErrores="";
+                    return;
+                }else {
                 vehiculos.setVehiculos(servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.ESTADO,campo_busqueda).getDatos());
                 break;
+                }
             case 4:
+                strErrores+=verificarKilometraje(campo_busqueda);
+                if(!strErrores.equals(""))
+                {
+                    strErrores="Errores existentes:\n"+strErrores;
+                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar por Kilometraje" , JOptionPane.ERROR_MESSAGE);
+                    strErrores="";
+                    return;
+                }else {
                 vehiculos.setVehiculos(servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.KILOMETRAJE,campo_busqueda).getDatos());
                 break;
+                }
             case 5:
+                strErrores+=verificarID(campo_busqueda);
+                if(!strErrores.equals(""))
+                {
+                    strErrores="Errores existentes:\n"+strErrores;
+                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar por ID" , JOptionPane.ERROR_MESSAGE);
+                    strErrores="";
+                    return;
+                }else {
                 vehiculos.setVehiculos(servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.ID_VEHICULO,campo_busqueda).getDatos());
                 break;
+                }
         }
         int numero_registros=0;
         String numero = campoRegistros.getText();
@@ -512,4 +558,5 @@ public class ListasVehiculos extends javax.swing.JPanel {
     private javax.swing.JTable tablaListaVehiculos;
     private javax.swing.JTextField txtBusquedaVehiculos;
     // End of variables declaration//GEN-END:variables
+    private String strErrores="";
 }
