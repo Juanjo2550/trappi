@@ -193,7 +193,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jPanOpcCompras" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jButServicios" min="-2" pref="221" max="-2" attributes="0"/>
+                          <Component id="jtbCerrarSesion" min="-2" pref="221" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -233,7 +233,7 @@
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="jPanOpcServicios" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButServicios" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtbCerrarSesion" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="57" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -452,7 +452,7 @@
                 </DimensionLayout>
               </Layout>
             </Container>
-            <Component class="javax.swing.JButton" name="jButServicios">
+            <Component class="javax.swing.JButton" name="jtbCerrarSesion">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="1c" green="d2" red="ff" type="rgb"/>
@@ -477,7 +477,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButServiciosActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtbCerrarSesionActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

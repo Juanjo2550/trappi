@@ -183,18 +183,21 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
                     .addComponent(cmbProvedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(PanelVerTodosLayout.createSequentialGroup()
                         .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14)
-                            .addComponent(btnRegistrarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(PanelVerTodosLayout.createSequentialGroup()
+                                .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel12))
+                                .addGap(0, 281, Short.MAX_VALUE))
+                            .addComponent(cmbProvedor1, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(PanelVerTodosLayout.createSequentialGroup()
                         .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel12))
-                        .addContainerGap(292, Short.MAX_VALUE))
-                    .addComponent(cmbProvedor1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel14)
+                            .addComponent(btnRegistrarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         PanelVerTodosLayout.setVerticalGroup(
             PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,9 +224,9 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
                 .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmbProvedor1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addComponent(btnRegistrarProducto)
                 .addGap(21, 21, 21))
         );
@@ -272,7 +275,7 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
         
         new Producto(txtNombre.getText(), Double.parseDouble(txtPrecio.getText()), 
                 obtenerProveedor(cmbProvedor.getSelectedItem().toString()), 
-                Integer.parseInt(txtCantidad.toString()),txtMarca.getText(),cmbProvedor1.getSelectedItem().toString() ).registrar();
+                Integer.parseInt(txtCantidad.getText()),txtMarca.getText(),cmbProvedor1.getSelectedItem().toString() ).registrar();
         vaciarCampos(txtNombre, txtPrecio, cmbProvedor, txtMarca, txtCantidad);
     }//GEN-LAST:event_btnRegistrarProductoActionPerformed
 

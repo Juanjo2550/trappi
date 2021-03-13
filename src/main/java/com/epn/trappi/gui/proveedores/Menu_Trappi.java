@@ -44,7 +44,7 @@ public class Menu_Trappi extends javax.swing.JFrame {
         jPanOpcServicios = new javax.swing.JPanel();
         jButCompra = new javax.swing.JButton();
         jPanOpcCompras = new javax.swing.JPanel();
-        jButServicios = new javax.swing.JButton();
+        jtbCerrarSesion = new javax.swing.JButton();
         jLabNombreContribuyente1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -218,18 +218,18 @@ public class Menu_Trappi extends javax.swing.JFrame {
             .addGap(0, 45, Short.MAX_VALUE)
         );
 
-        jButServicios.setBackground(new java.awt.Color(255, 210, 28));
-        jButServicios.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButServicios.setForeground(new java.awt.Color(240, 240, 241));
-        jButServicios.setText("Cerrar Sesión ");
-        jButServicios.setBorderPainted(false);
-        jButServicios.setFocusPainted(false);
-        jButServicios.setMaximumSize(new java.awt.Dimension(110, 50));
-        jButServicios.setMinimumSize(new java.awt.Dimension(110, 50));
-        jButServicios.setPreferredSize(new java.awt.Dimension(110, 50));
-        jButServicios.addActionListener(new java.awt.event.ActionListener() {
+        jtbCerrarSesion.setBackground(new java.awt.Color(255, 210, 28));
+        jtbCerrarSesion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jtbCerrarSesion.setForeground(new java.awt.Color(240, 240, 241));
+        jtbCerrarSesion.setText("Cerrar Sesión ");
+        jtbCerrarSesion.setBorderPainted(false);
+        jtbCerrarSesion.setFocusPainted(false);
+        jtbCerrarSesion.setMaximumSize(new java.awt.Dimension(110, 50));
+        jtbCerrarSesion.setMinimumSize(new java.awt.Dimension(110, 50));
+        jtbCerrarSesion.setPreferredSize(new java.awt.Dimension(110, 50));
+        jtbCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButServiciosActionPerformed(evt);
+                jtbCerrarSesionActionPerformed(evt);
             }
         });
 
@@ -255,7 +255,7 @@ public class Menu_Trappi extends javax.swing.JFrame {
                             .addComponent(jButInventario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanOpcCompras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButServicios, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtbCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanOpcionesDeclaracionLayout.setVerticalGroup(
@@ -286,7 +286,7 @@ public class Menu_Trappi extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addComponent(jPanOpcServicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButServicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtbCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(57, Short.MAX_VALUE))
         );
 
@@ -353,9 +353,11 @@ public class Menu_Trappi extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButInventarioActionPerformed
 
-    private void jButServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButServiciosActionPerformed
-
-    }//GEN-LAST:event_jButServiciosActionPerformed
+    private void jtbCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtbCerrarSesionActionPerformed
+        this.setVisible(false);
+        Main_Trappi log = new Main_Trappi();
+        log.setVisible(true);
+    }//GEN-LAST:event_jtbCerrarSesionActionPerformed
 
     private void jButDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButDashboardActionPerformed
 
@@ -406,7 +408,6 @@ public class Menu_Trappi extends javax.swing.JFrame {
     private javax.swing.JButton jButCompras;
     private javax.swing.JButton jButDashboard;
     private javax.swing.JButton jButInventario;
-    private javax.swing.JButton jButServicios;
     private javax.swing.JLabel jIVA;
     private javax.swing.JLabel jLSidimLogo;
     private javax.swing.JLabel jLabNombreContribuyente1;
@@ -420,5 +421,6 @@ public class Menu_Trappi extends javax.swing.JFrame {
     private javax.swing.JPanel jPanOpcServicios;
     private javax.swing.JPanel jPanOpcionesDeclaracion;
     private javax.swing.JLabel jValor;
+    private javax.swing.JButton jtbCerrarSesion;
     // End of variables declaration//GEN-END:variables
 }
