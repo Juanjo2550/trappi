@@ -45,6 +45,8 @@ public class RRHHGUI extends javax.swing.JFrame {
         this.pagos = new SolicitudDePago();
         inicioTable();
         this.jButton6.setEnabled(false);
+        this.setSize(1366, 768);
+        this.setLocationRelativeTo(null);
     }
 
     public final void inicioTable() {
