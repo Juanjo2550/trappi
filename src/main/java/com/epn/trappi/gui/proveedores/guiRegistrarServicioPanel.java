@@ -27,6 +27,8 @@ public class guiRegistrarServicioPanel extends javax.swing.JPanel {
      */
     public guiRegistrarServicioPanel() {
         initComponents();
+        cmbProvedor1.addItem("Normal");
+        cmbProvedor1.addItem("VIP");
         listaProveedores.cargarProveedorCombobox(cmbProvedor);
     }
 
@@ -64,6 +66,8 @@ public class guiRegistrarServicioPanel extends javax.swing.JPanel {
         txtPrecio = new javax.swing.JTextField();
         btnRegistrarProducto = new javax.swing.JButton();
         cmbProvedor = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
+        cmbProvedor1 = new javax.swing.JComboBox<>();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -114,6 +118,11 @@ public class guiRegistrarServicioPanel extends javax.swing.JPanel {
 
         cmbProvedor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel12.setText("Categoría:");
+
+        cmbProvedor1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
         javax.swing.GroupLayout PanelVerTodosLayout = new javax.swing.GroupLayout(PanelVerTodos);
         PanelVerTodos.setLayout(PanelVerTodosLayout);
         PanelVerTodosLayout.setHorizontalGroup(
@@ -125,14 +134,17 @@ public class guiRegistrarServicioPanel extends javax.swing.JPanel {
                     .addComponent(txtPrecio)
                     .addGroup(PanelVerTodosLayout.createSequentialGroup()
                         .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(btnRegistrarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(PanelVerTodosLayout.createSequentialGroup()
+                        .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(jLabel10)
                             .addComponent(jLabel11))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(PanelVerTodosLayout.createSequentialGroup()
-                        .addComponent(btnRegistrarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 205, Short.MAX_VALUE))
-                    .addComponent(cmbProvedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap(292, Short.MAX_VALUE))
+                    .addComponent(cmbProvedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbProvedor1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         PanelVerTodosLayout.setVerticalGroup(
             PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,11 +159,15 @@ public class guiRegistrarServicioPanel extends javax.swing.JPanel {
                 .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel11)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmbProvedor, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addGap(40, 40, 40)
+                .addComponent(jLabel12)
+                .addGap(18, 18, 18)
+                .addComponent(cmbProvedor1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
                 .addComponent(btnRegistrarProducto)
-                .addGap(155, 155, 155))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         add(PanelVerTodos);
@@ -179,20 +195,9 @@ public class guiRegistrarServicioPanel extends javax.swing.JPanel {
 
     private void btnRegistrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarProductoActionPerformed
         // Atributos
-        String nombre = txtNombre.getText();
-        String precio = txtPrecio.getText();
-        String prov = cmbProvedor.getSelectedItem().toString();
-        Proveedor proveedor;
-
-        try {
-            proveedor = obtenerProveedor(prov);
-            Servicio nuevoS = new Servicio(nombre, Double.parseDouble(precio), proveedor);
-            nuevoS.registrar();
-            vaciarCampos(txtNombre, txtPrecio, cmbProvedor);
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
-
+        new Servicio(txtNombre.getText(), Double.parseDouble(txtPrecio.getText()),
+                obtenerProveedor(cmbProvedor.getSelectedItem().toString()), cmbProvedor1.getSelectedItem().toString()).registrar();
+        vaciarCampos(txtNombre, txtPrecio, cmbProvedor);
     }//GEN-LAST:event_btnRegistrarProductoActionPerformed
 
 
@@ -200,8 +205,10 @@ public class guiRegistrarServicioPanel extends javax.swing.JPanel {
     private javax.swing.JPanel PanelVerTodos;
     private javax.swing.JButton btnRegistrarProducto;
     private javax.swing.JComboBox<String> cmbProvedor;
+    private javax.swing.JComboBox<String> cmbProvedor1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecio;

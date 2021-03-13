@@ -360,7 +360,7 @@ public class ProveedoresDb {
         ResultSet rs = ejecutarSP(spSelectAllServicios);
         List<Servicio> ss = new ArrayList<>();
         while (rs.next()) {
-            String[] res = {rs.getString(3), rs.getString(4), rs.getString(2),rs.getString(6)};
+            String[] res = {rs.getString(3), rs.getString(4), rs.getString(2),rs.getString(6),rs.getString(7)};
             ss.add(reformarServicio(res));
         }
         this.servicios = ss;
@@ -393,8 +393,8 @@ public class ProveedoresDb {
         ResultSet rs = ejecutarSPParameters(spUpdateProveedor, param);
     }
     
-    public void actualizarBien(int idBien, String nombreBien, double precio, String proveedor) throws SQLException {
-        String[] param = {"idBien:" + idBien, "nombreBien:" + nombreBien, "precioBien:" + precio, "proveedor:"+proveedor};
+    public void actualizarBien(int idBien, String nombreBien, double precio, String proveedor, String categoria) throws SQLException {
+        String[] param = {"idBien:" + idBien, "nombreBien:" + nombreBien, "precioBien:" + precio, "proveedor:"+proveedor, "categoria:"+categoria};
         ResultSet rs = ejecutarSPParameters(spUpdateProducto, param);
     }
 
@@ -449,7 +449,7 @@ public class ProveedoresDb {
 
     private String[] transformarServicio(Servicio s) {
         String[] params = {"ruc:" + s.getProveeedor().getRuc(), "nombrebien:"
-            + s.getNombre(), "preciobien:" + s.getPrecio(), "tipobien:Servicio", "cantidad:" + s.getCantidad(), "marca:" + s.getMarca()};
+            + s.getNombre(), "preciobien:" + s.getPrecio(), "tipobien:Servicio", "cantidad:" + s.getCantidad(), "marca:" + s.getMarca(),"categoria:"+s.categoria};
         return params;
     }
 
@@ -469,7 +469,7 @@ public class ProveedoresDb {
     }
 
     private Servicio reformarServicio(String[] str) throws SQLException {
-        Servicio serv = new Servicio(str[0], Double.parseDouble(str[1]), obtenerProveedor(str[2]));
+        Servicio serv = new Servicio(str[0], Double.parseDouble(str[1]), obtenerProveedor(str[2]),str[4]);
         serv.setMarca(str[3]);
         return serv;
     }

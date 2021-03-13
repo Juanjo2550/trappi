@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,7 +38,8 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
     public guiListaProductosPanel() {
         initComponents();
 //        listaP.getListaBienes(jtbProductos);
-        seleccionados = (ArrayList) db.getProductos();
+        cmbProveedores1.addItem("Normal");
+        cmbProveedores1.addItem("VIP");
         cargarProductos();
         cargarProveedor();
     }
@@ -49,8 +51,9 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
     }
 
     private void cargarProductos() {
-        String[] titulos = {"Nombre Producto", "Precio unitario", "Proveedor"};
-        String[] fila = new String[3];
+        seleccionados = (ArrayList) db.getProductos();
+        String[] titulos = {"Nombre Producto", "Precio unitario", "Proveedor","Categoría"};
+        String[] fila = new String[4];
         modelo = new DefaultTableModel(null, titulos);
         //Aquí cambie algo para que sirva, puse este iterador y luego castee la clase producto
         for (Iterator it = seleccionados.iterator(); it.hasNext();) {
@@ -58,6 +61,7 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
             fila[0] = producto.getNombre();
             fila[1] = "" + producto.getPrecio();
             fila[2] = "" + producto.getProveeedor().getRazonSocial();
+            fila[3] = "" + producto.getCategoria();
             modelo.addRow(fila);
         }
         jtbProductos.setModel(modelo);
@@ -91,6 +95,8 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbProductos = new javax.swing.JTable();
         cmbProveedores = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        cmbProveedores1 = new javax.swing.JComboBox<>();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -164,17 +170,17 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
         jtbProductos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jtbProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Nombre del Producto", "Precio", "Proveedor"
+                "Nombre del Producto", "Precio", "Proveedor", "Categoría"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -195,6 +201,16 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel14.setText("Categoría:");
+
+        cmbProveedores1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        cmbProveedores1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbProveedores1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelVerTodosLayout = new javax.swing.GroupLayout(PanelVerTodos);
         PanelVerTodos.setLayout(PanelVerTodosLayout);
         PanelVerTodosLayout.setHorizontalGroup(
@@ -207,20 +223,27 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
                     .addGroup(PanelVerTodosLayout.createSequentialGroup()
                         .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
-                            .addComponent(jLabel13)
                             .addComponent(jLabel10)
                             .addComponent(jLabel11)
-                            .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(PanelVerTodosLayout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addGap(254, 254, 254)
+                                .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbProveedores1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel14))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(PanelVerTodosLayout.createSequentialGroup()
                         .addComponent(jScrollPane1)
                         .addGap(112, 112, 112))
                     .addGroup(PanelVerTodosLayout.createSequentialGroup()
-                        .addComponent(txtNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(cmbProveedores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelVerTodosLayout.createSequentialGroup()
+                                .addComponent(txtNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         PanelVerTodosLayout.setVerticalGroup(
             PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,9 +264,13 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
                 .addGap(6, 6, 6)
                 .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
-                .addComponent(jLabel13)
+                .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14))
                 .addGap(18, 18, 18)
-                .addComponent(cmbProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbProveedores1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnActualizar)
                 .addContainerGap())
@@ -271,9 +298,14 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
 
     }//GEN-LAST:event_txtNombreKeyTyped
+    public void vaciarCampos(JTextField txtNombre, JTextField txtPrecio) {
+        txtNombre.setText("");
+        txtPrecio.setText("");
 
+    }
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-       listaP.getListaBienes().get(jtbProductos.getSelectedRow()).actualizar(jtbProductos.getSelectedRow(),txtNombre,txtPrecio, cmbProveedores);
+       ((Producto)seleccionados.get(jtbProductos.getSelectedRow())).actualizar(txtNombre.getText(),Double.parseDouble(txtPrecio.getText()), cmbProveedores.getSelectedItem().toString(),cmbProveedores1.getSelectedItem().toString());
+       vaciarCampos(txtNombre, txtPrecio);
        cargarProductos();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
@@ -320,15 +352,21 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_cmbProveedoresActionPerformed
 
+    private void cmbProveedores1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProveedores1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbProveedores1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelVerTodos;
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JComboBox<String> cmbProveedores;
+    private javax.swing.JComboBox<String> cmbProveedores1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtbProductos;

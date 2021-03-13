@@ -13,6 +13,7 @@ import com.epn.trappi.models.proveedores.Servicio;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,6 +32,8 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
      */
     public guiListaServiciosPanel() {
         initComponents();
+        cmbProveedores1.addItem("Normal");
+        cmbProveedores1.addItem("VIP");
         cargarServicios();
         cargarProveedor();
     }
@@ -42,14 +45,16 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
     }
 
     public void cargarServicios() {
-        String[] titulos = {"Nombre Producto", "Precio unitario", "Proveedor"};
-        String[] fila = new String[3];
+        seleccionados = (ArrayList) db.getServicios();
+        String[] titulos = {"Nombre Producto", "Precio unitario", "Proveedor","Categoria"};
+        String[] fila = new String[4];
         modelo = new DefaultTableModel(null, titulos);
-        for (Iterator<Servicio> it = db.getServicios().iterator(); it.hasNext();) {
+        for (Iterator<Servicio> it = seleccionados.iterator(); it.hasNext();) {
             Servicio servicio = it.next();
             fila[0] = servicio.getNombre();
             fila[1] = "" + servicio.getPrecio();
             fila[2] = "" + servicio.getProveeedor().getRazonSocial();
+            fila[3] = "" + servicio.getCategoria();
             modelo.addRow(fila);
         }
         jtbProductos.setModel(modelo);
@@ -83,6 +88,8 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbProductos = new javax.swing.JTable();
         cmbProveedores = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        cmbProveedores1 = new javax.swing.JComboBox<>();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -190,6 +197,11 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
 
         cmbProveedores.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel14.setText("Categoría:");
+
+        cmbProveedores1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
         javax.swing.GroupLayout PanelVerTodosLayout = new javax.swing.GroupLayout(PanelVerTodos);
         PanelVerTodos.setLayout(PanelVerTodosLayout);
         PanelVerTodosLayout.setHorizontalGroup(
@@ -202,20 +214,27 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
                     .addGroup(PanelVerTodosLayout.createSequentialGroup()
                         .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
-                            .addComponent(jLabel13)
                             .addComponent(jLabel10)
                             .addComponent(jLabel11)
-                            .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(PanelVerTodosLayout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addGap(252, 252, 252)
+                                .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbProveedores1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel14))))
+                        .addGap(344, 344, Short.MAX_VALUE))
                     .addGroup(PanelVerTodosLayout.createSequentialGroup()
                         .addComponent(jScrollPane1)
                         .addGap(112, 112, 112))
                     .addGroup(PanelVerTodosLayout.createSequentialGroup()
-                        .addComponent(txtNombreServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(cmbProveedores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelVerTodosLayout.createSequentialGroup()
+                                .addComponent(txtNombreServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         PanelVerTodosLayout.setVerticalGroup(
             PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,12 +255,16 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
                 .addGap(6, 6, 6)
                 .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
-                .addComponent(jLabel13)
-                .addGap(18, 18, 18)
-                .addComponent(cmbProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbProveedores1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
                 .addComponent(btnActualizar)
-                .addContainerGap())
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         add(PanelVerTodos);
@@ -268,10 +291,7 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        String nombre = txtNombre.getText();
-        String precio = txtPrecio.getText();
-
-        try {
+        /*try {
             if (nombre.length() >= 1) {
                 if (Double.parseDouble(precio) >= 0) {
                     Proveedor proveedor;
@@ -292,9 +312,17 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error no se pudo Actualizar el Servicio", "Error", JOptionPane.INFORMATION_MESSAGE);
-        }
+        }*/
+        ((Servicio)seleccionados.get(jtbProductos.getSelectedRow())).actualizar(txtNombre.getText(),Double.parseDouble(txtPrecio.getText()), cmbProveedores.getSelectedItem().toString(),cmbProveedores1.getSelectedItem().toString());
+       vaciarCampos(txtNombre, txtPrecio);
+       cargarServicios();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
+    public void vaciarCampos(JTextField txtNombre, JTextField txtPrecio) {
+        txtNombre.setText("");
+        txtPrecio.setText("");
+
+    }
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String servicio = txtNombreServicio.getText();
         try {
@@ -342,9 +370,11 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JComboBox<String> cmbProveedores;
+    private javax.swing.JComboBox<String> cmbProveedores1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtbProductos;

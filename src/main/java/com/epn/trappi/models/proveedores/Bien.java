@@ -94,7 +94,7 @@ abstract public class Bien {
     }
     
     public abstract void registrar();
-    public abstract void actualizar(int id, JTextField txtNombre, JTextField txtPrecio, JComboBox cmbProveedores);
+    public abstract void actualizar(String nombre, Double precio, String Proveedor, String categoria);
 
     @Override
     public String toString() {

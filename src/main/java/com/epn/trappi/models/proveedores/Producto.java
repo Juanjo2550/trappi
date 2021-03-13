@@ -65,23 +65,17 @@ public class Producto extends Bien {
     }
 
     @Override
-    public void actualizar(int id, JTextField txtNombre, JTextField txtPrecio, JComboBox cmbProveedores) {
-        ArrayList seleccionados = new ArrayList();
-        String nombre = txtNombre.getText();
-        String precio = txtPrecio.getText();
-        String prov = cmbProveedores.getSelectedItem().toString();
+    public void actualizar(String nombre,Double precio,String prov, String categoria) {
 
         try {
             if (nombre.length() >= 1) {
-                if ((Double.parseDouble(precio)) >= 0) {
+                if (precio >= 0) {
                     Proveedor proveedor;
                     proveedor = db.obtenerProveedorRuc(prov);
-                    db.actualizarBien(db.getIdBien(nombre), nombre, Double.parseDouble(precio), proveedor.getRuc());
+                    db.actualizarBien(db.getIdBien(nombre), nombre, precio, proveedor.getRuc(),categoria);
                     JOptionPane.showMessageDialog(null, "Producto Actualizado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
-                    seleccionados = (ArrayList) db.getProductos();
-
-                    vaciarCampos(txtNombre, txtPrecio);
+                    
                 } else {
                     JOptionPane.showMessageDialog(null, "Precio Incorrecto", "Error", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -130,12 +124,6 @@ public class Producto extends Bien {
         } catch (Exception ex) {
             return false;
         }
-    }
-
-    public void vaciarCampos(JTextField txtNombre, JTextField txtPrecio) {
-        txtNombre.setText("");
-        txtPrecio.setText("");
-
     }
 
 }

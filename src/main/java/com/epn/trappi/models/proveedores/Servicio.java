@@ -2,6 +2,7 @@ package com.epn.trappi.models.proveedores;
 
 import com.epn.trappi.db.proveedores.ProveedoresDb;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
@@ -21,6 +22,9 @@ public class Servicio extends Bien {
     public Servicio(String nombre, double precio, Proveedor proveeedor) {
         super(nombre, precio, proveeedor);
     }
+     public Servicio(String nombre, double precio, Proveedor proveeedor, String categoria) {
+        super(nombre, precio, proveeedor, 0, null, categoria);
+    }
 
     /*public Servicio(String nombre, double precio, Proveedor proveeedor, int cantidad, String marca) {
         super(nombre, precio, proveeedor, cantidad, marca);
@@ -28,7 +32,7 @@ public class Servicio extends Bien {
 
     @Override
     public void registrar() {
-        Servicio serv = new Servicio(nombre, precio, proveeedor, cantidad, marca);
+        Servicio serv = new Servicio(nombre, precio, proveeedor, categoria);
         try {
             if (validarNombre(nombre)) {
                 if (validarPrecio(Double.toString(precio))) {
@@ -62,8 +66,27 @@ public class Servicio extends Bien {
     }
 
     @Override
-    public void actualizar(int id, JTextField txtNombre, JTextField txtPrecio, JComboBox cmbProveedores) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void actualizar(String nombre,Double precio,String prov, String categoria) {
+        try {
+            if (nombre.length() >= 1) {
+                if (precio >= 0) {
+                    Proveedor proveedor;
+                    proveedor = db.obtenerProveedorRuc(prov);
+                    db.actualizarBien(db.getIdBien(nombre), nombre, precio, proveedor.getRuc(),categoria);
+                    JOptionPane.showMessageDialog(null, "Servicio actualizado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+                    
+                } else {
+                    JOptionPane.showMessageDialog(null, "Precio Incorrecto", "Error", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Nombre Incorrecto", "Error", JOptionPane.INFORMATION_MESSAGE);
+
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error no se pudo actualizar el Servicio", "Error", JOptionPane.INFORMATION_MESSAGE);
+
+        }
     }
 
 }
