@@ -647,17 +647,18 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 if("Enfermedad".equals(permiso)){
                     String valorPago = enfermedad.calcularProporcionalPagar(sueldoEmpleado,numeroDiasPermiso);
-                    double valorPagoDosDecimales = Double.parseDouble(valorPago);
-                    String valorPagarString = getTwoDecimals(valorPagoDosDecimales);
-                    this.txtvalorAPagar.setText(valorPagarString);
+                    //double valorPagoDosDecimales = Double.parseDouble(valorPago);
+                    
+                    //String valorPagarString = getTwoDecimals(valorPagoDosDecimales);
+                    this.txtvalorAPagar.setText(valorPago);
                     this.txtvalorAPagar.setEnabled(false);
                 }
                 if("Nacimiento Hijos".equals(permiso)){
                     String valorPago = enfermedad.calcularProporcionalPagar(sueldoEmpleado,numeroDiasPermiso);
-                    double valorPagoDosDecimales = Double.parseDouble(valorPago);
-                    String valorPagarString = getTwoDecimals(valorPagoDosDecimales);
+                  //  double valorPagoDosDecimales = Double.parseDouble(valorPago);
+                    //String valorPagarString = getTwoDecimals(valorPagoDosDecimales);
 
-                    this.txtvalorAPagar.setText(valorPagarString);
+                    this.txtvalorAPagar.setText(valorPago);
                     this.txtvalorAPagar.setEnabled(false);
 
                 }
