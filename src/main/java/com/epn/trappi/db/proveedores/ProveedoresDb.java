@@ -291,7 +291,7 @@ public class ProveedoresDb {
         List<Producto> pp = new ArrayList<>();
         while (rs.next()) {
             //Producto(String nombre, double precio, Proveedor proveeedor, int cantidad, String marca)
-            String[] res = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)};
+            String[] res = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6)};
             pp.add(reformarProducto(res));
         }
         return pp;
