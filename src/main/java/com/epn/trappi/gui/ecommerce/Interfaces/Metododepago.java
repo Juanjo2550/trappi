@@ -26,7 +26,6 @@ public class Metododepago extends javax.swing.JFrame {
         jbeliminar.setVisible(false);
         jButtoneditar1.setVisible(false);
         jTextFieldtarjeta.setEditable(false);
-        jButtonregistrar.setVisible(false);
         this.setLocationRelativeTo(null);
         
         llenartabla();
@@ -438,7 +437,6 @@ public class Metododepago extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     Comprar comprar=new Comprar();
     comprar.setVisible(true);
-    comprar.llenartabla();
     this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
