@@ -9,7 +9,9 @@ import com.epn.trappi.db.proveedores.ProveedoresDb;
 import com.epn.trappi.models.proveedores.ListaProveedores;
 import com.epn.trappi.models.proveedores.Producto;
 import com.epn.trappi.models.proveedores.Proveedor;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -34,31 +36,6 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
         });
     }
 
-    private boolean validarNombre(String direccion) {
-        if (direccion.length() > 50 || direccion.trim().equals("")) {
-            return false;
-        }
-        return direccion.matches("[[0-9]*[ ]]*[A-Za-zñÑÁÉÍÓÚáéíóú]+[0-9]*[[ ][A-Za-zñÑÁÉÍÓÚáéíóú]+[0-9]*]*");
-    }
-
-    private boolean validarMarca(String marca) {
-        if (marca.length() > 50 || marca.trim().equals("")) {
-            return false;
-        }
-        return marca.matches("[[0-9]*[ ]]*[A-Za-zñÑÁÉÍÓÚáéíóú]+[0-9]*[[ ][A-Za-zñÑÁÉÍÓÚáéíóú]+[0-9]*]*");
-    }
-
-    private boolean validarPrecio(String precio) {
-        try {
-            if (Double.parseDouble(precio) >= 0) {
-                return true;
-            }
-            return false;
-        } catch (Exception ex) {
-            return false;
-        }
-    }
-
     private Proveedor obtenerProveedor(String nombre) {
         Proveedor resultado = null;
         for (Proveedor proveedor : this.listaProveedores.getListaDeProveedores()) {
@@ -70,15 +47,12 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
         return resultado;
     }
 
-    private boolean validarCantidad(String cantidad) {
-        try {
-            if (Integer.parseInt(cantidad) >= 0) {
-                return true;
-            }
-            return false;
-        } catch (Exception ex) {
-            return false;
-        }
+    public void vaciarCampos(JTextField txtNombre, JTextField txtPrecio, JComboBox cmbProvedor, JTextField txtMarca, JTextField txtCantidad) {
+        txtNombre.setText("");
+        txtPrecio.setText("");
+        cmbProvedor.setSelectedIndex(0);
+        txtMarca.setText("");
+        txtCantidad.setText("");
     }
 
     /**
@@ -258,49 +232,22 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
 
     private void btnRegistrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarProductoActionPerformed
         // Atributos
-        String nombre;
-        String precio;
-        String prov;
-        String marca;
-        String cantidad;
+        String nombre = txtNombre.getText();
+        String precio = txtPrecio.getText();
+        String prov = cmbProvedor.getSelectedItem().toString();
+        String marca = txtMarca.getText();
+        String cantidad = txtCantidad.getText();
         Proveedor proveedor;
 
-        nombre = txtNombre.getText();
-        precio = txtPrecio.getText();
-        prov = cmbProvedor.getSelectedItem().toString();
-        marca = txtMarca.getText();
-        cantidad = txtCantidad.getText();
-
-        if (validarNombre(nombre)) {
-            try {
-                if (validarPrecio(precio)) {
-                    if (validarMarca(marca)) {
-                        if (validarCantidad(cantidad)) {
-                            proveedor = obtenerProveedor(prov);
-                            Producto nuevoP = new Producto(nombre, Double.parseDouble(precio), proveedor, Integer.parseInt(cantidad), marca);
-                            nuevoP.registrar();
-                            JOptionPane.showMessageDialog(null, "Producto registrado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                            txtNombre.setText("");
-                            txtPrecio.setText("");
-                            cmbProvedor.setSelectedIndex(0);
-                            txtMarca.setText("");
-                            txtCantidad.setText("");
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Debe ingresar una cantidad válida", "Error", JOptionPane.INFORMATION_MESSAGE);
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Debe ingresar un nombre de marca válida", "Error", JOptionPane.INFORMATION_MESSAGE);
-                    }
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "Debe ingresar un precio válido", "Error", JOptionPane.INFORMATION_MESSAGE);
-                }
-            } catch (Exception e) {
-                System.out.println(e.toString());
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Nombre de producto incorrecto.", "Error", JOptionPane.INFORMATION_MESSAGE);
+        try {
+            proveedor = obtenerProveedor(prov);
+            Producto nuevoP = new Producto(nombre, Double.parseDouble(precio), proveedor, Integer.parseInt(cantidad), marca);
+            nuevoP.registrar();
+            vaciarCampos(txtNombre, txtPrecio, cmbProvedor, txtMarca, txtCantidad);
+        } catch (Exception e) {
+            System.out.println(e.toString());
         }
+
     }//GEN-LAST:event_btnRegistrarProductoActionPerformed
 
     private void txtMarcaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMarcaKeyPressed

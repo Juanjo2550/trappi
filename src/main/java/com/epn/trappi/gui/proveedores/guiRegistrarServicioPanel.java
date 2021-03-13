@@ -9,7 +9,9 @@ import com.epn.trappi.db.proveedores.ProveedoresDb;
 import com.epn.trappi.models.proveedores.ListaProveedores;
 import com.epn.trappi.models.proveedores.Proveedor;
 import com.epn.trappi.models.proveedores.Servicio;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -28,24 +30,6 @@ public class guiRegistrarServicioPanel extends javax.swing.JPanel {
         listaProveedores.cargarProveedorCombobox(cmbProvedor);
     }
 
-    
-
-    private boolean validarNombre(String direccion) {
-        if (direccion.length() > 50 || direccion.trim().equals("")) {
-            return false;
-        }
-        return direccion.matches("[[0-9]*[ ]]*[A-Za-zñÑÁÉÍÓÚáéíóú]+[0-9]*[[ ][A-Za-zñÑÁÉÍÓÚáéíóú]+[0-9]*]*");
-    }
-
-    private boolean validarPrecio(String precio) {
-        try {
-            Double.parseDouble(precio);
-            return true;
-        } catch (Exception ex) {
-            return false;
-        }
-    }
-
     private Proveedor obtenerProveedor(String nombre) {
         Proveedor resultado = null;
         for (Proveedor proveedor : this.listaProveedores.getListaDeProveedores()) {
@@ -55,6 +39,12 @@ public class guiRegistrarServicioPanel extends javax.swing.JPanel {
             }
         }
         return resultado;
+    }
+
+    public void vaciarCampos(JTextField txtNombre, JTextField txtPrecio, JComboBox cmbProvedor) {
+        txtNombre.setText("");
+        txtPrecio.setText("");
+        cmbProvedor.setSelectedIndex(0);
     }
 
     /**
@@ -189,34 +179,20 @@ public class guiRegistrarServicioPanel extends javax.swing.JPanel {
 
     private void btnRegistrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarProductoActionPerformed
         // Atributos
-        String nombre;
-        String precio;
-        String prov;
+        String nombre = txtNombre.getText();
+        String precio = txtPrecio.getText();
+        String prov = cmbProvedor.getSelectedItem().toString();
         Proveedor proveedor;
 
-        nombre = txtNombre.getText();
-        precio = txtPrecio.getText();
-        prov = cmbProvedor.getSelectedItem().toString();
-
-        if (validarNombre(nombre)) {
-            try {
-                if (validarPrecio(precio)) {
-                    proveedor = obtenerProveedor(prov);
-                    Servicio nuevoP = new Servicio(nombre, Double.parseDouble(precio), proveedor);
-                    nuevoP.registrar();
-                    JOptionPane.showMessageDialog(null, "Servicio registrado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    txtNombre.setText("");
-                    txtPrecio.setText("");
-                    cmbProvedor.setSelectedIndex(0);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Debes ingresar un precio válido", "Error", JOptionPane.INFORMATION_MESSAGE);
-                }
-            } catch (Exception e) {
-                System.out.println(e.toString());
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Nombre de servicio incorrecto.", "Error", JOptionPane.INFORMATION_MESSAGE);
+        try {
+            proveedor = obtenerProveedor(prov);
+            Servicio nuevoS = new Servicio(nombre, Double.parseDouble(precio), proveedor);
+            nuevoS.registrar();
+            vaciarCampos(txtNombre, txtPrecio, cmbProvedor);
+        } catch (Exception e) {
+            System.out.println(e.toString());
         }
+
     }//GEN-LAST:event_btnRegistrarProductoActionPerformed
 
 

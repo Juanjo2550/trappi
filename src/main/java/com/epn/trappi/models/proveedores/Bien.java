@@ -83,7 +83,6 @@ abstract public class Bien {
         this.nombre = nombre;
     }
     
-    
     public abstract void registrar();
     public abstract void actualizar();
 

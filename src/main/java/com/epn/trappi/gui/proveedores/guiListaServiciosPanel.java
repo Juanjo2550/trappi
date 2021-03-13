@@ -11,6 +11,7 @@ import com.epn.trappi.models.proveedores.Producto;
 import com.epn.trappi.models.proveedores.Proveedor;
 import com.epn.trappi.models.proveedores.Servicio;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -44,7 +45,8 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
         String[] titulos = {"Nombre Producto", "Precio unitario", "Proveedor"};
         String[] fila = new String[3];
         modelo = new DefaultTableModel(null, titulos);
-        for (Servicio servicio : db.getServicios()) {
+        for (Iterator<Servicio> it = db.getServicios().iterator(); it.hasNext();) {
+            Servicio servicio = it.next();
             fila[0] = servicio.getNombre();
             fila[1] = "" + servicio.getPrecio();
             fila[2] = "" + servicio.getProveeedor().getRazonSocial();
@@ -87,7 +89,7 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
         PanelVerTodos.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel9.setText("Nombre del producto:");
+        jLabel9.setText("Nombre del servicio:");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel10.setText("Nombre:");
@@ -168,7 +170,7 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Nombre del Producto", "Precio", "Proveedor"
+                "Nombre del Servicio", "Precio", "Proveedor"
             }
         ) {
             boolean[] canEdit = new boolean [] {

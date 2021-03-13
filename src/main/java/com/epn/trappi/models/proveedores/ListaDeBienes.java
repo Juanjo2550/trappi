@@ -2,6 +2,9 @@ package com.epn.trappi.models.proveedores;
 
 import com.epn.trappi.db.proveedores.ProveedoresDb;
 import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,14 +24,14 @@ public class ListaDeBienes {
         this.listaBienes = listaCantidadDeBienes;
     }
 
-    
-    public ListaDeBienes(){
-        listaBienes= new ArrayList<Bien>();
+    public ListaDeBienes() {
+        listaBienes = new ArrayList<Bien>();
     }
-    
+
     public ArrayList<Bien> getListaBienes() {
         return listaBienes;
     }
+
     /*
     public ArrayList<Bien> getListaDeBienesDb() {
         return db.g();
@@ -37,7 +40,7 @@ public class ListaDeBienes {
     public ArrayList<Bien> getListaCantidadDeBienesDbCompra() {
         return db.getListaCantidadBienesCompra();
     }
-    */
+     */
     public void setListaBienes(ArrayList<Bien> listaBienes) {
         this.listaBienes = listaBienes;
     }
@@ -56,15 +59,28 @@ public class ListaDeBienes {
         }
     }
 
+//    private void cargarProductos() {
+//        String[] titulos = {"Nombre Producto", "Precio unitario", "Proveedor"};
+//        String[] fila = new String[3];
+//        modelo = new DefaultTableModel(null, titulos);
+//        //Aquí cambie algo para que sirva, puse este iterador y luego castee la clase producto
+//        for (Iterator it = seleccionados.iterator(); it.hasNext();) {
+//            Producto producto = (Producto) it.next();
+//            fila[0] = producto.getNombre();
+//            fila[1] = "" + producto.getPrecio();
+//            fila[2] = "" + producto.getProveeedor().getRazonSocial();
+//            modelo.addRow(fila);
+//        }
+//        jtbProductos.setModel(modelo);
+//    }
+
     @Override
     public String toString() {
-        String retorno="";
+        String retorno = "";
         for (Bien aux : listaBienes) {
-            retorno+=aux.toString()+aux.getCantidad();
+            retorno += aux.toString() + aux.getCantidad();
         }
         return retorno;
     }
-    
-    
 
 }

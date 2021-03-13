@@ -6,6 +6,7 @@
 package com.epn.trappi.gui.proveedores;
 
 import com.epn.trappi.db.proveedores.ProveedoresDb;
+import com.epn.trappi.models.proveedores.ListaDeBienes;
 import com.epn.trappi.models.proveedores.ListaProveedores;
 import com.epn.trappi.models.proveedores.Producto;
 import com.epn.trappi.models.proveedores.Proveedor;
@@ -25,6 +26,7 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
 
     DefaultTableModel modelo;
     private final ProveedoresDb db = new ProveedoresDb();
+    ListaDeBienes listaP = new ListaDeBienes();
     public ArrayList seleccionados = new ArrayList();
 
     ListaProveedores listaProveedores = new ListaProveedores();
@@ -34,6 +36,7 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
      */
     public guiListaProductosPanel() {
         initComponents();
+//        listaP.getListaBienes(jtbProductos);
         seleccionados = (ArrayList) db.getProductos();
         cargarProductos();
         cargarProveedor();
@@ -270,35 +273,12 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        String nombre = txtNombre.getText();
-        String precio = txtPrecio.getText();
-
-        try {
-            if (nombre.length() >= 1) {
-                if (Double.parseDouble(precio) >= 0) {
-                    Proveedor proveedor;
-                    proveedor = db.obtenerProveedorRuc((String) cmbProveedores.getSelectedItem());
-                    db.actualizarBien(db.getIdBien(nombre), nombre, Double.parseDouble(precio), proveedor.getRuc());
-                    JOptionPane.showMessageDialog(null, "Producto Actualizado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    
-                    seleccionados = (ArrayList) db.getProductos();
-                    cargarProductos();
-
-                    txtNombre.setText("");
-                    txtPrecio.setText("");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Precio Incorrecto", "Error", JOptionPane.INFORMATION_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Nombre Incorrecto", "Error", JOptionPane.INFORMATION_MESSAGE);
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error no se pudo Actualizar el Producto", "Error", JOptionPane.INFORMATION_MESSAGE);
-        }
+//        seleccionados.actualizar(txtNombre, txtPrecio, cmbProveedores);
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String producto = txtNombreProducto.getText();
+
         try {
             if (producto.length() >= 1) {
                 seleccionados = (ArrayList) db.buscarProductos(producto);
