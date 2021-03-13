@@ -22,10 +22,10 @@ public class Ingreso {
     }
     
     
-    public void registrarIngreso(int nrofactura,double monto){
+    public void registrarIngreso(int numfactura,double monto){
         //La instanciacion de Fecha inicializa la fecha con la actual.
         fechaIngreso = new Fecha();
-        Ingreso ingreso = new Ingreso(nroFactura,monto,fechaIngreso);
+        Ingreso ingreso = new Ingreso(numfactura,monto,fechaIngreso);
         this.libroDiario=new LibroDiario();
         libroDiario.agregarIngreso(ingreso);
     }

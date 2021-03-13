@@ -49,7 +49,7 @@ public class LibroDiario {
         ingreso.nroFactura=nroFactura;
         ingresoDb.removerIngreso(ingreso);
     }
-    public void quitarPago(int nroCuenta){
+    public void quitarPago(String nroCuenta){
         FinancieroDb pagoDb = new FinancieroDb();
         Pago pago =  new Pago();
         pago.nroCuenta=String.valueOf(nroCuenta);

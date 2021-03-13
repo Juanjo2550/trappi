@@ -30,7 +30,7 @@ public class Devolucion {
         if(valorDevolucion>0){
             db.acutalizarEstadoFactura(idFactura);
             Cuenta cuentaDevolucion = new Cuenta();
-            cuentaDevolucion.acreditar(valorDevolucion);
+            //cuentaDevolucion.acreditar(valorDevolucion);
             LibroDiario libroDiario = new LibroDiario();
             this.fechaDeDevolucion=new Fecha();
             Devolucion devolucion = new Devolucion(fechaDeDevolucion, idFactura, valorDevolucion);

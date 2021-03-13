@@ -94,6 +94,9 @@ public class FinancieroDb {
             String sql = "delete from dbo.DEVOLUCION where nroFactura="+devolucion.getNroFactura()+";";
             statement.executeUpdate(sql);
             System.out.println("Se eliminó DEVOLUCION");
+            Statement stEstado = this.connection.createStatement();
+            String actualizaEstado = "update dbo.FACTURAS set ESTADODEVOLUCION='SIN DEVOLUCION' where NUMEROFACTURA="+devolucion.getNroFactura()+";";
+            stEstado.executeUpdate(actualizaEstado);
         }catch(Exception e){
             System.out.println(e);
         }
@@ -137,8 +140,8 @@ public class FinancieroDb {
         String sql = "select TOTAL from dbo.FACTURAS WHERE NUMEROFACTURA="+nroFactura;
         ResultSet resultSet = statement.executeQuery(sql);
         while(resultSet.next()){
-            valorADevolver=resultSet.getInt(1);
-            System.out.println("El valor a devolver es:"+String.valueOf(valorADevolver));
+            valorADevolver=resultSet.getDouble(1);
+            System.out.println("El valor a total de Factura es:"+String.valueOf(valorADevolver));
         }
         }catch( Exception e){
             System.out.println(e);
