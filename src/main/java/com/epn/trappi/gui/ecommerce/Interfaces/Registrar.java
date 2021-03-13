@@ -241,56 +241,7 @@ public class Registrar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public  void llenardato(){
-        try {
-            String nombre= "";
-            String cedula ="";
-            String correo ="";
-            String fecha ="";
-            String celular ="";
-            String direc ="";
-            String contra ="";
-                       
-            Statement statement = connection.createStatement();
-            String sql = "EXEC cliente_consultadatos '"+Main.cliente.Cedula+"'";
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                 nombre= resultSet.getString("NOMBRECLIE");
-                 cedula =resultSet.getString("CEDULA2");
-                 correo =resultSet.getString("CORREO");
-                 fecha =resultSet.getString("FECHADENACIMIENTO");
-                 celular =resultSet.getString("CELULAR");
-                 direc =resultSet.getString("DIRECCION");
-                 contra =resultSet.getString("CONTRASENA");
-               
-            }
-            CuentaCliente cuenta=new CuentaCliente();
-            cuenta.setVisible(true);
-            this.setVisible(false);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public int idsuario(){
-        int numero=0;
-        try {
-            String id= "";
-                       
-            Statement statement = connection.createStatement();
-            String sql = "Select COUNT(IDCLIENTE) from CLIENTES";
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                 id= resultSet.getString(1);
-            }
-            numero=Integer.parseInt(id)+1;
-                        
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return numero;
-    }
+   
     
     /**
      * @param args the command line arguments
