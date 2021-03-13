@@ -1,4 +1,8 @@
 package com.epn.trappi.models.proveedores;
+
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -84,7 +88,7 @@ abstract public class Bien {
     }
     
     public abstract void registrar();
-    public abstract void actualizar();
+    public abstract void actualizar(int id, JTextField txtNombre, JTextField txtPrecio, JComboBox cmbProveedores);
 
     @Override
     public String toString() {

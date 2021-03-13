@@ -3,11 +3,13 @@ package com.epn.trappi.models.proveedores;
 import com.epn.trappi.db.proveedores.ProveedoresDb;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -63,35 +65,36 @@ public class Producto extends Bien {
     }
 
     @Override
-    public void actualizar() {
-//    public void actualizar(JTextField txtNombre, JTextField txtPrecio, JComboBox cmbProveedores) {
-//        String nombre = txtNombre.getText();
-//        String precio = txtPrecio.getText();
-//        String prov = cmbProveedores.getSelectedItem().toString();
-//
-//        try {
-//            if (nombre.length() >= 1) {
-//                if ((Double.parseDouble(precio)) >= 0) {
-//                    Proveedor proveedor;
-//                    proveedor = db.obtenerProveedorRuc(prov);
-//                    db.actualizarBien(db.getIdBien(nombre), nombre, Double.parseDouble(precio), proveedor.getRuc());
-//                    JOptionPane.showMessageDialog(null, "Producto Actualizado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-//
-//                    seleccionados = (ArrayList) db.getProductos();
-//                    cargarProductos();
-//
-//                    vaciarCampos(txtNombre, txtPrecio);
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "Precio Incorrecto", "Error", JOptionPane.INFORMATION_MESSAGE);
-//                }
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Nombre Incorrecto", "Error", JOptionPane.INFORMATION_MESSAGE);
-//            }
-//        } catch  {
-//            JOptionPane.showMessageDialog(null, "Error no se pudo Actualizar el Producto", "Error", JOptionPane.INFORMATION_MESSAGE);
-//        }
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void actualizar(int id, JTextField txtNombre, JTextField txtPrecio, JComboBox cmbProveedores) {
+        ArrayList seleccionados = new ArrayList();
+        String nombre = txtNombre.getText();
+        String precio = txtPrecio.getText();
+        String prov = cmbProveedores.getSelectedItem().toString();
+
+        try {
+            if (nombre.length() >= 1) {
+                if ((Double.parseDouble(precio)) >= 0) {
+                    Proveedor proveedor;
+                    proveedor = db.obtenerProveedorRuc(prov);
+                    db.actualizarBien(db.getIdBien(nombre), nombre, Double.parseDouble(precio), proveedor.getRuc());
+                    JOptionPane.showMessageDialog(null, "Producto Actualizado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+                    seleccionados = (ArrayList) db.getProductos();
+
+                    vaciarCampos(txtNombre, txtPrecio);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Precio Incorrecto", "Error", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Nombre Incorrecto", "Error", JOptionPane.INFORMATION_MESSAGE);
+
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error no se pudo Actualizar el Producto", "Error", JOptionPane.INFORMATION_MESSAGE);
+
+        }
     }
+
 
     private boolean validarCantidad(String cantidad) {
         try {

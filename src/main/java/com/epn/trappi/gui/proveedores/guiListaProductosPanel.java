@@ -273,7 +273,8 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-//        seleccionados.actualizar(txtNombre, txtPrecio, cmbProveedores);
+       listaP.getListaBienes().get(jtbProductos.getSelectedRow()).actualizar(jtbProductos.getSelectedRow(),txtNombre,txtPrecio, cmbProveedores);
+       cargarProductos();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
