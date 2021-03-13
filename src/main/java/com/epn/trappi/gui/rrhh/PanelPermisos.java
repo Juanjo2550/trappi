@@ -5,30 +5,21 @@
  */
 package com.epn.trappi.gui.rrhh;
 
-import com.epn.trappi.gui.rrhh.Permisos.Calamidad_Domestica;
-import com.epn.trappi.models.rrhh.juanjo.Empleado;
-import com.epn.trappi.models.rrhh.Fecha;
-import com.epn.trappi.models.rrhh.TextPrompt;
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.db.rrhh.ModelDb;
 import com.epn.trappi.db.rrhh.Permiso_EmpleadoDb;
-
-
-
+import com.epn.trappi.gui.rrhh.Permisos.Calamidad_Domestica;
 import com.epn.trappi.gui.rrhh.Permisos.Enfermedad;
 import com.epn.trappi.gui.rrhh.Permisos.Nacimiento_Hijo;
 import com.epn.trappi.gui.rrhh.Permisos.Otros_Permisos;
 import com.epn.trappi.gui.rrhh.Permisos.Permiso;
-import com.epn.trappi.models.rrhh.diego.SolicitudDePago;
+import com.epn.trappi.models.rrhh.Fecha;
+import com.epn.trappi.models.rrhh.TextPrompt;
 import com.epn.trappi.models.rrhh.juanjo.Administrativo;
 import com.epn.trappi.models.rrhh.juanjo.Conductor;
-import com.epn.trappi.models.rrhh.listas.Lista;
-//import com.epn.trappi.models.rrhh.listas.ListaPermisos;
-import java.awt.Dimension;
+import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
-
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,7 +27,6 @@ import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -47,10 +37,10 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author stali
+ * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class Gestor_Permiso extends javax.swing.JFrame {
-Calamidad_Domestica calamidad = new Calamidad_Domestica();
+public class PanelPermisos extends javax.swing.JPanel {
+    Calamidad_Domestica calamidad = new Calamidad_Domestica();
 Permiso permission ;
 Nacimiento_Hijo nacimiento = new Nacimiento_Hijo();
 Otros_Permisos otro = new Otros_Permisos();
@@ -58,21 +48,12 @@ Enfermedad enfermedad = new Enfermedad();
 Fecha fecha = new Fecha();
 Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance()).getConnection();
 
- //Permiso_EmpleadoDb permisos = new Permiso_EmpleadoDb();
-    
-    /*
-     * Creates new form Ejemplo_GUI
+    /**
+     * Creates new form PanelPermisos
      */
-
-    @Override
-    public Dimension size() {
-        return super.size(); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public Gestor_Permiso() throws SQLException {
-        
-        initComponents();
-          obtenerNombre();
+    public PanelPermisos() {
+     initComponents();
+     obtenerNombre();
           
         cmbnombreEmpleado.setEnabled(true);
         txtCedula.setEnabled(false);
@@ -84,33 +65,56 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         TextPrompt finpermiso = new TextPrompt("yyyy-MM-dd", txtfechaFinPermiso);
         TextPrompt diasPermiso = new TextPrompt("Ingrese el número de días", this.txtnumDias);
         TextPrompt descripcion = new TextPrompt("Ingrese la descripción del permiso", this.txtDescripcion);
-        //permission = permisos.Permisos_para_ROL(3,fecha);
-        //System.out.println(permission.getFECHAINICIOPERM());
-        
         
     }
-
-    private static String getTwoDecimals(double value){
-      DecimalFormat df = new DecimalFormat("0.00"); 
-      return df.format(value);
-    }
-   public void nuevoPermiso(){
-              
-        this.txtnumDias.setText("");
-        this.txtfechaInicioPermiso.setText("");
-        this.txtfechaFinPermiso.setText("");
-        this.cmbPermiso.setSelectedItem("Seleccione...");
-        this.cmbTipoPermiso.setSelectedItem("Seleccione...");
-        this.cmbnombreEmpleado.setSelectedItem("Seleccione...");
-        this.txtCedula.setText("");
-        this.txtvalorAPagar.setText("");
-        cmbnombreEmpleado.setEnabled(true);
-        txtCedula.setEnabled(false);
-        txtfechaFinPermiso.setEnabled(true);
-      
-        btnGuardarPermiso.setEnabled(true);
-   } 
     
+    //metodo para obtener el nombre y apellido de la persona que quiere solicitar el permiso
+     public void obtenerNombre(){
+        String sql = "SELECT * FROM dbo.EMPLEADO";
+        ArrayList<Empleado> empleados = new ArrayList<>();
+        try {
+        Statement createdStatment = connection.createStatement();
+            ResultSet resultSet = createdStatment.executeQuery(sql);
+             cmbnombreEmpleado.addItem("Seleccione...");
+             this.cmbBuscarNombre.addItem("Seleccione...");
+            while(resultSet.next()) {
+                String nombre = resultSet.getString("NOMBREEMP");
+                String apellido = resultSet.getString("APELLIDOEMP");
+                String nombre_completo = nombre + "_" + apellido;
+              cmbnombreEmpleado.addItem(nombre_completo);
+              this.cmbBuscarNombre.addItem(nombre_completo);
+            }
+            
+        } catch (SQLException e){
+            System.out.println(e.toString());
+        }
+    }
+    // este metodo se utiliza para mostrar los permisos en la tabla 
+         private void listarPermisos(){
+        ModelDb listaPermisos = new Permiso_EmpleadoDb();
+        Permiso[] permisos = (Permiso[]) listaPermisos.obtenerTodos();
+
+        DefaultTableModel model = (DefaultTableModel) tbllista.getModel();
+        model.setRowCount(0);
+        
+        for (Permiso asp: permisos){
+            Vector v = new Vector();
+
+                v.add(asp.getEmpleado().getNombres() + " " + asp.getEmpleado().getApellidos());
+                v.add(asp.getCOMENTPERM());
+                v.add(asp.getFECHAINICIOPERM());
+                v.add(asp.getFECHAFINPERM());
+                v.add(asp.getNUMDIASPERM());
+                v.add(asp.getVALORPAGARPERM());
+                v.add(asp.getESTADOPERM());
+
+                model.addRow(v); 
+
+            tbllista.setModel(model);
+        }
+    }
+         
+             
        public String[] tipoPermiso(String tipo){
        String [] Permisos = new String [10];
        char sexoEmpleado = buscarUno().getSexo();
@@ -151,56 +155,8 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         }
             return Permisos;
      }  
-      
-//metodo para obtener el nombre y apellido de la persona que quiere solicitar el permiso
-     public void obtenerNombre(){
-        String sql = "SELECT * FROM dbo.EMPLEADO";
-        ArrayList<Empleado> empleados = new ArrayList<>();
-        try {
-        Statement createdStatment = connection.createStatement();
-            ResultSet resultSet = createdStatment.executeQuery(sql);
-             cmbnombreEmpleado.addItem("Seleccione...");
-             this.cmbBuscarNombre.addItem("Seleccione...");
-            while(resultSet.next()) {
-                String nombre = resultSet.getString("NOMBREEMP");
-                String apellido = resultSet.getString("APELLIDOEMP");
-                String nombre_completo = nombre + "_" + apellido;
-              cmbnombreEmpleado.addItem(nombre_completo);
-              this.cmbBuscarNombre.addItem(nombre_completo);
-            }
-            
-        } catch (SQLException e){
-            System.out.println(e.toString());
-        }
-    }
-     
-     // este metodo se utiliza para mostrar los permisos en la tabla 
-         private void listarPermisos(){
-        ModelDb listaPermisos = new Permiso_EmpleadoDb();
-        Permiso[] permisos = (Permiso[]) listaPermisos.obtenerTodos();
-
-        DefaultTableModel model = (DefaultTableModel) tbllista.getModel();
-        model.setRowCount(0);
-        
-        for (Permiso asp: permisos){
-            Vector v = new Vector();
-
-                v.add(asp.getEmpleado().getNombres() + " " + asp.getEmpleado().getApellidos());
-                v.add(asp.getCOMENTPERM());
-                v.add(asp.getFECHAINICIOPERM());
-                v.add(asp.getFECHAFINPERM());
-                v.add(asp.getNUMDIASPERM());
-                v.add(asp.getVALORPAGARPERM());
-                v.add(asp.getESTADOPERM());
-
-                model.addRow(v); 
-
-            tbllista.setModel(model);
-        }
-    }
-
-    
-         public void registrarPermiso(){
+    //metodo para registrar permisos
+             public void registrarPermiso(){
              String tipoPermiso = (String) cmbPermiso.getSelectedItem();
             int numeroDias = Integer.parseInt(txtnumDias.getText());
             String valorPagar = txtvalorAPagar.getText();
@@ -234,8 +190,13 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
             }
             listarPermisos();
          }
+             
+              private static String getTwoDecimals(double value){
+      DecimalFormat df = new DecimalFormat("0.00"); 
+      return df.format(value);
+    }
 
-  // este metodo se utiliza para obtener un empleado en especifico   
+               // este metodo se utiliza para obtener un empleado en especifico   
           public Empleado buscarUno(){
               Empleado empleadoObtenido = null;
           
@@ -289,9 +250,23 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
 
           return empleadoObtenido;
     }
-    
-          
-    public void  fechaInicio() throws ParseException{
+             public void nuevoPermiso(){
+              
+        this.txtnumDias.setText("");
+        this.txtfechaInicioPermiso.setText("");
+        this.txtfechaFinPermiso.setText("");
+        this.cmbPermiso.setSelectedItem("Seleccione...");
+        this.cmbTipoPermiso.setSelectedItem("Seleccione...");
+        this.cmbnombreEmpleado.setSelectedItem("Seleccione...");
+        this.txtCedula.setText("");
+        this.txtvalorAPagar.setText("");
+        cmbnombreEmpleado.setEnabled(true);
+        txtCedula.setEnabled(false);
+        txtfechaFinPermiso.setEnabled(true);
+      
+        btnGuardarPermiso.setEnabled(true);
+   }
+                 public void  fechaInicio() throws ParseException{
         try{
              String dia;
         String mes;
@@ -318,19 +293,15 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
          this.txtfechaFinPermiso.setEnabled(false);
         this.cmbEstado.setEnabled(true);
     }
-
-
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        btnVolver = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         PanelAspirante = new javax.swing.JPanel();
         lblCedula = new javax.swing.JLabel();
         btnGuardarPermiso = new javax.swing.JButton();
@@ -361,80 +332,6 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         jBtnBuscarAspirantes = new javax.swing.JButton();
         jBtnBuscarAspirantes1 = new javax.swing.JButton();
         cmbBuscarNombre = new javax.swing.JComboBox<>();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LOGOtrappi.jpeg"))); // NOI18N
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jButton4.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jButton4.setText("Salir");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jButton4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
-
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Gestor De Permisos");
-
-        btnVolver.setBackground(new java.awt.Color(204, 153, 0));
-        btnVolver.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btnVolver.setForeground(new java.awt.Color(51, 51, 51));
-        btnVolver.setText("Volver");
-        btnVolver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolverActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LogoRRHH.PNG"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 603, Short.MAX_VALUE)
-                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(114, 114, 114))
-        );
 
         PanelAspirante.setBackground(new java.awt.Color(255, 255, 255));
         PanelAspirante.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -667,62 +564,64 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         });
         PanelAspirante.add(cmbBuscarNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, 240, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(PanelAspirante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(12, 12, 12))
+                .addContainerGap()
+                .addComponent(PanelAspirante, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(PanelAspirante, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 12, Short.MAX_VALUE))))
+                .addContainerGap()
+                .addComponent(PanelAspirante, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
+                .addContainerGap())
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        PANTALLA_PRINCIPAL principal = new PANTALLA_PRINCIPAL();
-        principal.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnVolverActionPerformed
-
-    private void txtCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCedulaKeyTyped
-
-    private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCedulaActionPerformed
-
-    private void txtfechaFinPermisoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfechaFinPermisoKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfechaFinPermisoKeyTyped
-
-    private void txtfechaFinPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfechaFinPermisoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfechaFinPermisoActionPerformed
+    private void btnGuardarPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPermisoActionPerformed
+        registrarPermiso();
+    }//GEN-LAST:event_btnGuardarPermisoActionPerformed
 
     private void btnNuevoPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoPermisoActionPerformed
         nuevoPermiso();
     }//GEN-LAST:event_btnNuevoPermisoActionPerformed
 
-    private void btnGuardarPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPermisoActionPerformed
-        registrarPermiso();
-    }//GEN-LAST:event_btnGuardarPermisoActionPerformed
-   
+    private void txtfechaFinPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfechaFinPermisoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfechaFinPermisoActionPerformed
+
+    private void txtfechaFinPermisoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfechaFinPermisoKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfechaFinPermisoKeyTyped
+
+    private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCedulaActionPerformed
+
+    private void txtCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCedulaKeyTyped
+
+    private void cmbTipoPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoPermisoActionPerformed
+        String tipo_Permiso = this.cmbPermiso.getSelectedItem().toString();
+        String tipoCalamidad = (String) cmbTipoPermiso.getSelectedItem();
+        String tipoNacimiento = (String) cmbTipoPermiso.getSelectedItem();
+
+        if("Calamidad Domestica".equalsIgnoreCase(tipo_Permiso)){
+            int numeroDias = calamidad.calcularNumeroDias(tipoCalamidad,buscarUno().getSexo());
+            txtnumDias.setText(Integer.toString(numeroDias));
+        }
+        if ("Nacimiento Hijos".equalsIgnoreCase(tipo_Permiso)){
+            int numeroDias = nacimiento.calcularNumeroDias(tipoCalamidad,buscarUno().getSexo());
+            txtnumDias.setText(Integer.toString(numeroDias));
+        }
+
+    }//GEN-LAST:event_cmbTipoPermisoActionPerformed
+
     private void txtvalorAPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtvalorAPagarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtvalorAPagarActionPerformed
@@ -731,66 +630,77 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         // TODO add your handling code here:
     }//GEN-LAST:event_txtvalorAPagarKeyTyped
 
+    private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
+
+    }//GEN-LAST:event_cmbEstadoActionPerformed
+
     private void txtnumDiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnumDiasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtnumDiasActionPerformed
 
+    private void txtnumDiasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumDiasKeyPressed
+        try{
+            String permiso = this.cmbPermiso.getSelectedItem().toString();
+            double sueldoEmpleado = Double.parseDouble(buscarUno().getSueldo());
+
+            int numeroDiasPermiso = Integer.parseInt(txtnumDias.getText());
+            if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+                if("Enfermedad".equals(permiso)){
+                    String valorPago = enfermedad.calcularProporcionalPagar(sueldoEmpleado,numeroDiasPermiso);
+                    double valorPagoDosDecimales = Double.parseDouble(valorPago);
+                    String valorPagarString = getTwoDecimals(valorPagoDosDecimales);
+                    this.txtvalorAPagar.setText(valorPagarString);
+                    this.txtvalorAPagar.setEnabled(false);
+                }
+                if("Nacimiento Hijos".equals(permiso)){
+                    String valorPago = enfermedad.calcularProporcionalPagar(sueldoEmpleado,numeroDiasPermiso);
+                    double valorPagoDosDecimales = Double.parseDouble(valorPago);
+                    String valorPagarString = getTwoDecimals(valorPagoDosDecimales);
+
+                    this.txtvalorAPagar.setText(valorPagarString);
+                    this.txtvalorAPagar.setEnabled(false);
+
+                }
+                this.txtfechaInicioPermiso.setEnabled(true);
+
+            }
+        }
+        catch (Exception e){
+
+        }
+
+    }//GEN-LAST:event_txtnumDiasKeyPressed
+
     private void txtfechaInicioPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfechaInicioPermisoActionPerformed
-       
+
     }//GEN-LAST:event_txtfechaInicioPermisoActionPerformed
 
     private void txtfechaInicioPermisoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfechaInicioPermisoKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_txtfechaInicioPermisoKeyTyped
 
-    private void cmbPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPermisoActionPerformed
-   
-        
-        
-        
-    }//GEN-LAST:event_cmbPermisoActionPerformed
-
-    private void cmbTipoPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoPermisoActionPerformed
-    String tipo_Permiso = this.cmbPermiso.getSelectedItem().toString();
-    String tipoCalamidad = (String) cmbTipoPermiso.getSelectedItem();
-    String tipoNacimiento = (String) cmbTipoPermiso.getSelectedItem();
-    
-    if("Calamidad Domestica".equalsIgnoreCase(tipo_Permiso)){
-        int numeroDias = calamidad.calcularNumeroDias(tipoCalamidad,buscarUno().getSexo());
-        txtnumDias.setText(Integer.toString(numeroDias));
-    }
-    if ("Nacimiento Hijos".equalsIgnoreCase(tipo_Permiso)){
-        int numeroDias = nacimiento.calcularNumeroDias(tipoCalamidad,buscarUno().getSexo());
-        txtnumDias.setText(Integer.toString(numeroDias));
-    }
-    
-    
-    }//GEN-LAST:event_cmbTipoPermisoActionPerformed
-
-    private void btnValidarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarFechaActionPerformed
-    try {
-        fechaInicio();
-       
-        
-    } catch (ParseException ex) {
-        Logger.getLogger(Gestor_Permiso.class.getName()).log(Level.SEVERE, null, ex);
-    }
-        
-    }//GEN-LAST:event_btnValidarFechaActionPerformed
-
-    private void cmbnombreEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbnombreEmpleadoActionPerformed
-        
-        
-    }//GEN-LAST:event_cmbnombreEmpleadoActionPerformed
-
     private void cmbPermisoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbPermisoItemStateChanged
         if(evt.getStateChange()==ItemEvent.SELECTED){
             if(cmbPermiso.getSelectedIndex()>0){
                 this.cmbTipoPermiso.setModel(new DefaultComboBoxModel(tipoPermiso(cmbPermiso.getSelectedItem().toString())));
             }
-           
+
         }
     }//GEN-LAST:event_cmbPermisoItemStateChanged
+
+    private void cmbPermisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPermisoActionPerformed
+
+    }//GEN-LAST:event_cmbPermisoActionPerformed
+
+    private void btnValidarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarFechaActionPerformed
+        try {
+            fechaInicio();
+
+        } catch (ParseException ex) {
+            Logger.getLogger(Gestor_Permiso.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnValidarFechaActionPerformed
 
     private void cmbnombreEmpleadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbnombreEmpleadoItemStateChanged
         if(evt.getStateChange()==ItemEvent.SELECTED){
@@ -798,7 +708,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
                 this.cmbPermiso.setEnabled(true);
                 Empleado obtenerCedula = buscarUno();
                 txtCedula.setText(obtenerCedula.getCedula());
-                
+
                 //this.cmbTipoPermiso.setModel(new DefaultComboBoxModel(tipoPermiso(cmbPermiso.getSelectedItem().toString())));
             }
             else{
@@ -812,51 +722,12 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         }
     }//GEN-LAST:event_cmbnombreEmpleadoItemStateChanged
 
-    private void txtnumDiasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumDiasKeyPressed
-       try{
-          String permiso = this.cmbPermiso.getSelectedItem().toString();
-       double sueldoEmpleado = Double.parseDouble(buscarUno().getSueldo());
-       
-            int numeroDiasPermiso = Integer.parseInt(txtnumDias.getText());
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            if("Enfermedad".equals(permiso)){
-            String valorPago = enfermedad.calcularProporcionalPagar(sueldoEmpleado,numeroDiasPermiso);
-            double valorPagoDosDecimales = Double.parseDouble(valorPago);
-            String valorPagarString = getTwoDecimals(valorPagoDosDecimales);
-           this.txtvalorAPagar.setText(valorPagarString);
-           this.txtvalorAPagar.setEnabled(false);
-            }
-            if("Nacimiento Hijos".equals(permiso)){
-            String valorPago = enfermedad.calcularProporcionalPagar(sueldoEmpleado,numeroDiasPermiso);
-            double valorPagoDosDecimales = Double.parseDouble(valorPago);
-            String valorPagarString = getTwoDecimals(valorPagoDosDecimales);
-            
-            
-           this.txtvalorAPagar.setText(valorPagarString);
-           this.txtvalorAPagar.setEnabled(false);
-           
-            }
-            this.txtfechaInicioPermiso.setEnabled(true);
-            
-            
-        } 
-       }
-       catch (Exception e){
-           
-       }
-        
-        
-    }//GEN-LAST:event_txtnumDiasKeyPressed
+    private void cmbnombreEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbnombreEmpleadoActionPerformed
 
-    private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
-        
-    }//GEN-LAST:event_cmbEstadoActionPerformed
+    }//GEN-LAST:event_cmbnombreEmpleadoActionPerformed
 
     private void jBtnBuscarAspirantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarAspirantesActionPerformed
-     
-          
-     
-        
+
     }//GEN-LAST:event_jBtnBuscarAspirantesActionPerformed
 
     private void jBtnBuscarAspirantes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarAspirantes1ActionPerformed
@@ -867,7 +738,7 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         if(evt.getStateChange()==ItemEvent.SELECTED){
             if(this.cmbBuscarNombre.getSelectedIndex()>0){
                 String cedula = buscarUno().getCedula();
-                
+
                 //this.cmbTipoPermiso.setModel(new DefaultComboBoxModel(tipoPermiso(cmbPermiso.getSelectedItem().toString())));
             }
         }
@@ -877,66 +748,12 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbBuscarNombreActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Gestor_Permiso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Gestor_Permiso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Gestor_Permiso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Gestor_Permiso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new Gestor_Permiso().setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Gestor_Permiso.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelAspirante;
     private javax.swing.JButton btnGuardarPermiso;
     private javax.swing.JButton btnNuevoPermiso;
     private javax.swing.JButton btnValidarFecha;
-    private javax.swing.JButton btnVolver;
     private javax.swing.JComboBox<String> cmbBuscarNombre;
     private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JComboBox<String> cmbPermiso;
@@ -944,14 +761,8 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
     private javax.swing.JComboBox<String> cmbnombreEmpleado;
     private javax.swing.JButton jBtnBuscarAspirantes;
     private javax.swing.JButton jBtnBuscarAspirantes1;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblCedula;
@@ -970,9 +781,4 @@ Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance())
     private javax.swing.JTextField txtnumDias;
     private javax.swing.JTextField txtvalorAPagar;
     // End of variables declaration//GEN-END:variables
-
-    private void clasefecha(int parseInt, int parseInt0, int parseInt1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

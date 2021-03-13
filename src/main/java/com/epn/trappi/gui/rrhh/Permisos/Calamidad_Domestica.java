@@ -16,7 +16,8 @@ import com.epn.trappi.models.rrhh.juanjo.Empleado;
  */
 public class Calamidad_Domestica extends Permiso{
 
-    public Calamidad_Domestica(Empleado empleado, int NUMDIASPERM, String VALORPAGARPERM, String COMENTPERM, String FECHAINICIOPERM, String FECHAFINPERM, String ESTADOPERM) {
+    public Calamidad_Domestica(Empleado empleado, int NUMDIASPERM, String VALORPAGARPERM, String COMENTPERM,
+            String FECHAINICIOPERM, String FECHAFINPERM, String ESTADOPERM) {
         super(empleado, NUMDIASPERM, VALORPAGARPERM, COMENTPERM, FECHAINICIOPERM, FECHAFINPERM, ESTADOPERM);
     }
 

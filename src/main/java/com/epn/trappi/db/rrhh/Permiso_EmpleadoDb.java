@@ -186,6 +186,7 @@ public class Permiso_EmpleadoDb implements ModelDb <Permiso>{
             return permiso_especifico;
     }
 
+
     
   
 //metodo creado para obtener todos los permisos almacenados en la base de datos
@@ -259,7 +260,7 @@ public class Permiso_EmpleadoDb implements ModelDb <Permiso>{
                 
 
             }
-          System.out.println("Consulta se hizo con exito");
+         
         } 
         catch (SQLException e){
             System.out.println(e.toString());
@@ -273,6 +274,7 @@ public class Permiso_EmpleadoDb implements ModelDb <Permiso>{
         return null; //To change body of generated methods, choose Tools | Templates.
     }
 
+      
     @Override
     public Permiso buscarUno(String cedulaEmpleado) {
         
@@ -285,7 +287,7 @@ public class Permiso_EmpleadoDb implements ModelDb <Permiso>{
             rs = pstm.executeQuery();
             rs.next();
             
-            if (rs.getString(21).equals("Calamidad Domestica")){
+            if (rs.getString("TIPOPERM").equals("Calamidad Domestica")){
                permiso_especifico =new Calamidad_Domestica(rs.getInt("NUMDIASPERM"), rs.getString("VALORPAGARPERM"),
             rs.getString("FECHAINICIOPERM"),rs.getString("FECHAFINPERM"));
              System.out.println("Consulta Buscar un permiso se hizo con exito"); 
