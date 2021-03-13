@@ -6,11 +6,8 @@
 package com.epn.trappi.gui.proveedores;
 
 import com.epn.trappi.db.proveedores.ProveedoresDb;
+import com.epn.trappi.models.proveedores.ListaProveedores;
 import com.epn.trappi.models.proveedores.Proveedor;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,33 +17,19 @@ import javax.swing.table.DefaultTableModel;
  */
 public class guiListaProveedores extends javax.swing.JPanel {
 
-    DefaultTableModel modelo = new DefaultTableModel();
     boolean clic = false;
-    ArrayList<Proveedor> listaP;
+    ListaProveedores listaP = new ListaProveedores();
     Proveedor proveedorSeleccionado;
     private final ProveedoresDb db = new ProveedoresDb();
+    DefaultTableModel modelo = new DefaultTableModel();
 
     /**
      * Creates new form guiListaProveedores1
      */
     public guiListaProveedores() {
         initComponents();
-        listaP = (ArrayList<Proveedor>) db.getProveedores();
-        cargarProveedor();
-    }
-
-    private void cargarProveedor() {
-        String[] titulos = {"Ruc", "Razón Social", "Dirección", "Número de Cuenta"};
-        String[] fila = new String[4];
-        modelo = new DefaultTableModel(null, titulos);
-        for (Proveedor proveedor : listaP) {
-            fila[0] = proveedor.getRuc();
-            fila[1] = "" + proveedor.getRazonSocial();
-            fila[2] = "" + proveedor.getDireccion();
-            fila[3] = "" + proveedor.getCuenta();
-            modelo.addRow(fila);
-        }
-        jtbProveedores.setModel(modelo);
+        listaP.cargarProveedorTabla(jtbProveedores);
+        modelo = (DefaultTableModel) jtbProveedores.getModel();
     }
 
     private void mostrarProveedor(String ruc, String razonsocial, String direccion, String cuenta) {
@@ -272,13 +255,7 @@ public class guiListaProveedores extends javax.swing.JPanel {
     }//GEN-LAST:event_txtBuscarRUCKeyPressed
 
     private void txtBuscarRUCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarRUCKeyTyped
-        // Busqueda
-        // Atributos
-        String ruc = txtBuscarRUC.getText();
-        if (ruc.length() >= 1) {
-            listaP = (ArrayList<Proveedor>) db.buscarProveedores(ruc);
-            cargarProveedor();
-        }
+        listaP.buscarProveedor(txtBuscarRUC, jtbProveedores);
     }//GEN-LAST:event_txtBuscarRUCKeyTyped
 
     private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
@@ -310,58 +287,12 @@ public class guiListaProveedores extends javax.swing.JPanel {
     }//GEN-LAST:event_txtNCuentaKeyTyped
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        // Atributos
-        String ruc;
-        String direccion;
-        String cuenta;
-
-        ruc = txtBuscarRUC.getText();
-        direccion = txtDireccion.getText();
-        cuenta = txtNCuenta.getText();
-
-        if (guiProveedores.validarDireccion(direccion)) {
-            if (cuenta.length() == 10) {
-                try {
-                    db.actualizarProveedor(ruc, direccion, cuenta);
-                    JOptionPane.showMessageDialog(null, "Proveedor Actualizado.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(null, "No se pudo Actualizar el Proveedor", "Error", JOptionPane.INFORMATION_MESSAGE);
-                }
-                listaP = (ArrayList<Proveedor>) db.getProveedores();
-                cargarProveedor();
-                
-                vaciarCampos();
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Número de Cuenta Incorrecta");
-                this.vaciarCampos();
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Dirección Incorrecta");
-            this.vaciarCampos();
-        }
+        listaP.actualizarProveedor(txtBuscarRUC, txtDireccion, txtNCuenta, txtRazonSocial, jtbProveedores);
     }//GEN-LAST:event_btnActualizarActionPerformed
 
-    public void vaciarCampos() {
-        txtDireccion.setText("");
-        txtNCuenta.setText("");
-        txtRazonSocial.setText("");
-        txtBuscarRUC.setText("");
-    }
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-//         TODO add your handling code here:
-        // Atributos
-        String ruc = txtBuscarRUC.getText();
-        try {
-            if (ruc.length() >= 1) {
-                listaP = (ArrayList<Proveedor>) db.buscarProveedores(ruc);
-                cargarProveedor();
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Proveedor no encontrado", "Error", JOptionPane.INFORMATION_MESSAGE);
-        }
-
+        listaP.buscarProveedor(txtBuscarRUC, jtbProveedores);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
 
@@ -373,6 +304,7 @@ public class guiListaProveedores extends javax.swing.JPanel {
         if (c == 0) {
             int fila = jtbProveedores.getSelectedRow();
             modelo.removeRow(fila);
+            //modelo.removeRow(fila);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 

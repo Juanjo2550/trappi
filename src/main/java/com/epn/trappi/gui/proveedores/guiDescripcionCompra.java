@@ -27,19 +27,7 @@ public class guiDescripcionCompra extends javax.swing.JPanel {
     public guiDescripcionCompra(ListaDeCompras lista) {
         initComponents();
         this.lista = lista;
-        dibujarTabla();
-    }
-
-    private void dibujarTabla() {
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Producto");
-        model.addColumn("Cantidad");
-        for (Compra compra : lista.getCompras()) {
-            for (Bien cantidadBien : compra.getListaCantidadDeBienes().getListaBienes()) {
-                model.addRow(new Object[]{cantidadBien.getNombre(), cantidadBien.getCantidad()});
-            }
-        }
-        jTable1.setModel(model);
+        lista.mostrarLista(jTable1);
     }
 
     /**
@@ -53,9 +41,9 @@ public class guiDescripcionCompra extends javax.swing.JPanel {
 
         PanelVerTodos = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jButRegFactCompNotaCred = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        btnNuevo7 = new javax.swing.JButton();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -63,17 +51,6 @@ public class guiDescripcionCompra extends javax.swing.JPanel {
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel8.setText("Detalle de la solicitud de compra:");
-
-        jButRegFactCompNotaCred.setBackground(new java.awt.Color(38, 112, 171));
-        jButRegFactCompNotaCred.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButRegFactCompNotaCred.setForeground(new java.awt.Color(240, 240, 241));
-        jButRegFactCompNotaCred.setText("Comprar");
-        jButRegFactCompNotaCred.setBorderPainted(false);
-        jButRegFactCompNotaCred.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButRegFactCompNotaCredActionPerformed(evt);
-            }
-        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -85,21 +62,31 @@ public class guiDescripcionCompra extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        btnNuevo7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnNuevo7.setText("Comprar");
+        btnNuevo7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevo7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelVerTodosLayout = new javax.swing.GroupLayout(PanelVerTodos);
         PanelVerTodos.setLayout(PanelVerTodosLayout);
         PanelVerTodosLayout.setHorizontalGroup(
             PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelVerTodosLayout.createSequentialGroup()
-                .addContainerGap(100, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelVerTodosLayout.createSequentialGroup()
+                .addContainerGap(89, Short.MAX_VALUE)
                 .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(PanelVerTodosLayout.createSequentialGroup()
-                            .addComponent(jLabel8)
-                            .addGap(508, 508, 508)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelVerTodosLayout.createSequentialGroup()
-                        .addComponent(jButRegFactCompNotaCred, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40))))
+                        .addComponent(jLabel8)
+                        .addGap(519, 519, 519))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelVerTodosLayout.createSequentialGroup()
+                        .addComponent(btnNuevo7, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(89, 89, 89))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelVerTodosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         PanelVerTodosLayout.setVerticalGroup(
             PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,28 +94,33 @@ public class guiDescripcionCompra extends javax.swing.JPanel {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addComponent(jButRegFactCompNotaCred)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71)
+                .addComponent(btnNuevo7, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         add(PanelVerTodos);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButRegFactCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegFactCompNotaCredActionPerformed
-        ProveedoresDb db = new ProveedoresDb();
-        for (Compra compra : lista.getCompras()) {
-            //compra.comprar();
-            compra.comprar();
-        }
+    private void btnNuevo7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo7ActionPerformed
+        // TODO add your handling code here:
+        lista.realizarCompraEnConjunto();
         JOptionPane.showMessageDialog(null, "Compra realizada con éxito!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_jButRegFactCompNotaCredActionPerformed
+
+    }//GEN-LAST:event_btnNuevo7ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelVerTodos;
-    private javax.swing.JButton jButRegFactCompNotaCred;
+    private javax.swing.JButton btnNuevo;
+    private javax.swing.JButton btnNuevo1;
+    private javax.swing.JButton btnNuevo2;
+    private javax.swing.JButton btnNuevo3;
+    private javax.swing.JButton btnNuevo4;
+    private javax.swing.JButton btnNuevo5;
+    private javax.swing.JButton btnNuevo6;
+    private javax.swing.JButton btnNuevo7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

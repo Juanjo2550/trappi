@@ -1,4 +1,8 @@
 package com.epn.trappi.models.proveedores;
+
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,7 +19,8 @@ abstract public class Bien {
     protected Proveedor proveeedor;
     public int cantidad ;
     public String marca;
-
+    public String categoria;
+    
     public String getNombre() {
         return nombre;
     }
@@ -64,12 +69,17 @@ abstract public class Bien {
         cantidad-=cantidadADisminuir;
     }
 
-    public Bien(String nombre, double precio, Proveedor proveeedor, int cantidad, String marca) {
+    public Bien(String nombre, double precio, Proveedor proveeedor, int cantidad, String marca, String categoria) {
         this.nombre = nombre;
         this.precio = precio;
         this.proveeedor = proveeedor;
         this.cantidad = cantidad;
         this.marca = marca;
+        this.categoria = categoria;
+    }
+
+    public String getCategoria() {
+        return categoria;
     }
     
 
@@ -83,9 +93,8 @@ abstract public class Bien {
         this.nombre = nombre;
     }
     
-    
     public abstract void registrar();
-    public abstract void actualizar();
+    public abstract void actualizar(String nombre, Double precio, String Proveedor, String categoria);
 
     @Override
     public String toString() {

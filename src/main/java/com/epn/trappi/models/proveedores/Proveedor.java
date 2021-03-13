@@ -1,7 +1,10 @@
 package com.epn.trappi.models.proveedores;
 
 import com.epn.trappi.db.proveedores.ProveedoresDb;
+import com.epn.trappi.gui.proveedores.guiProveedores;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -64,8 +67,5 @@ public class Proveedor {
         db.setProveedores(prov);
     }
     
-    private void actualizarProveedor() {
-        //Proveedor prov = new Proveedor(getRuc(), getRazonSocial(), getDireccion(), getCuenta());
-        //db.setProveedores(prov);
-    }
+    
 }

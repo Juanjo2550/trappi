@@ -25,6 +25,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 public class guiAnalizador extends javax.swing.JPanel {
 
     private Inventario inventario;
+    private AnalizadorDeInventario analizador;
 /**
      * Creates new form guiAnalizador
      */
@@ -32,34 +33,15 @@ public class guiAnalizador extends javax.swing.JPanel {
     private ListaDeCompras solicitud;
     
     public guiAnalizador(JPanel verTodo) throws IOException {
-        this.inventario = new Inventario();
         initComponents();
-        jButRegFactCompNotaCred1.setEnabled(false);
+        this.inventario = new Inventario();
+        this.analizador = new AnalizadorDeInventario();
         this.verTodo=verTodo;
-        ArrayList<Bien> lista;
-        lista=inventario.getListaDeBienes().getListaBienes();
-        dibujarDiagrama(lista);
-        AnalizadorDeInventario analizador = new AnalizadorDeInventario();
+        analizador.mostrarGrafica(jPanel1);
         this.solicitud=analizador.analizarStock();
-        if(solicitud.getCompras().size()!=0){
-            jButRegFactCompNotaCred1.setEnabled(true);
+        if(solicitud.getCompras().size()==0){
+            btnNuevo7.setEnabled(false);
         }
-    }
-
-    
-    private void dibujarDiagrama(ArrayList<Bien> lista){
-        lista.forEach(bien -> {
-            System.out.println(bien.getNombre() + ";" + bien.getCantidad()+";"+bien.getProveeedor().getRazonSocial());
-        });
-        DefaultCategoryDataset datos = new DefaultCategoryDataset();
-        
-        lista.forEach(bien -> {
-            datos.setValue(bien.getCantidad(), bien.getNombre(), bien.getNombre());
-        });
-        JFreeChart ch = ChartFactory.createBarChart("Análisis del stock", "Producto", "Cantidad", datos,PlotOrientation.VERTICAL, true, true, false);
-        ChartPanel cp = new ChartPanel(ch);
-        jPanel1.add(cp);
-        cp.setBounds(0,0,1000,450);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -71,19 +53,15 @@ public class guiAnalizador extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButRegFactCompNotaCred1 = new javax.swing.JButton();
+        btnNuevo7 = new javax.swing.JButton();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
-        jButRegFactCompNotaCred1.setBackground(new java.awt.Color(38, 112, 171));
-        jButRegFactCompNotaCred1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButRegFactCompNotaCred1.setForeground(new java.awt.Color(240, 240, 241));
-        jButRegFactCompNotaCred1.setText("Generar solicitud de compra");
-        jButRegFactCompNotaCred1.setBorderPainted(false);
-        jButRegFactCompNotaCred1.setName("GenButton"); // NOI18N
-        jButRegFactCompNotaCred1.addActionListener(new java.awt.event.ActionListener() {
+        btnNuevo7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnNuevo7.setText("Generar solicitud de compra");
+        btnNuevo7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButRegFactCompNotaCred1ActionPerformed(evt);
+                btnNuevo7ActionPerformed(evt);
             }
         });
 
@@ -92,29 +70,29 @@ public class guiAnalizador extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(624, Short.MAX_VALUE)
-                .addComponent(jButRegFactCompNotaCred1)
-                .addGap(28, 28, 28))
+                .addContainerGap(324, Short.MAX_VALUE)
+                .addComponent(btnNuevo7)
+                .addGap(66, 66, 66))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButRegFactCompNotaCred1)
-                .addGap(52, 52, 52))
+                .addContainerGap(219, Short.MAX_VALUE)
+                .addComponent(btnNuevo7)
+                .addGap(56, 56, 56))
         );
 
         add(jPanel1);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButRegFactCompNotaCred1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegFactCompNotaCred1ActionPerformed
-        new CambiaPanel(verTodo, new guiDescripcionCompra(solicitud));
+    private void btnNuevo7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo7ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButRegFactCompNotaCred1ActionPerformed
+       new CambiaPanel(verTodo, new guiDescripcionCompra(solicitud));
+    }//GEN-LAST:event_btnNuevo7ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButRegFactCompNotaCred1;
+    private javax.swing.JButton btnNuevo7;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
