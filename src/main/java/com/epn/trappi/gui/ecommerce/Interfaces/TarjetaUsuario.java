@@ -5,6 +5,7 @@ import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.db.ecommerce.ListaCarrito;
 import com.epn.trappi.db.ecommerce.ListaFacturas;
 import com.epn.trappi.db.ecommerce.ListaTar;
+import com.epn.trappi.db.ecommerce.Listacuenta;
 import com.epn.trappi.gui.ecommerce.Ecommerce.FachadaEcommerce;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Pago;
@@ -29,78 +30,33 @@ public class TarjetaUsuario extends javax.swing.JFrame {
     
     public TarjetaUsuario() {
         initComponents();
-        this.setSize(1300, 700);
+        this.setSize(1060, 560);
       
         this.setLocationRelativeTo(null);
        
         llenartabla();
     }
     
-    public void obtenerdatoscuenta(Cuenta cuenta){
-    try{
-            Statement statement = connection.createStatement();
-            String sql = "SELECT NUMERODECUENTA, FONDOS FROM CUENTABANCARIA WHERE IDCLIENTE="+idsuario();
-            ResultSet resultSet = statement.executeQuery(sql);
-            while(resultSet.next()){
-              cuenta.fondo=Double.valueOf(resultSet.getString("FONDOS"));
-              cuenta.NumeroCuenta=resultSet.getString("NUMERODECUENTA");
-              cuenta.CedulaPropietario=Main.cliente.Cedula;
-            }
-            
-       } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE,null, ex);
-        }
-    
-    }
-    
-    public int idsuario(){
-        int numero=0;
-        try {
-            String id= "";
-                       
-            Statement statement = connection.createStatement();
-            String sql = "Select CLIENTES.IDCLIENTE from CLIENTES, CUENTABANCARIA  "+
-                         "WHERE CLIENTES.IDCLIENTE=CUENTABANCARIA.IDCLIENTE AND CLIENTES.CEDULA2="+Integer.parseInt(Main.cliente.Cedula);
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                 id= resultSet.getString(1);
-            }
-            numero=Integer.parseInt(id);
-                        
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return numero;
-    }
-    
-    
         
     public void llenartabla(){
-       
-       try{
+       Tarjeta tarjeta1=null;
             DefaultTableModel tarjeta = (DefaultTableModel) tablatarjetas.getModel();
             String[] aux=new String[4];
-            Statement statement = connection.createStatement();
-            String sql = "select NUMEROTARJETA, CVV, FECHADECADUCIDAD, TIPO from TARJETAS T, CUENTABANCARIA C "+
-                         "where T.IDCUENTABANCARIA=C.IDCUENTABANCARIA and C.IDCLIENTE="+idsuario();
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                 
-                aux[0]=resultSet.getString("NUMEROTARJETA");
-                aux[1]=resultSet.getString("CVV");
-                aux[2]=resultSet.getString("TIPO");
-                aux[3]=resultSet.getString("FECHADECADUCIDAD");
+            for (int i = 0; i <Main.cliente.tarjeta.size(); i++) {
+                tarjeta1=Main.cliente.tarjeta.get(i);
+                aux[0]=tarjeta1.NumeroTarjeta;
+                aux[1]=tarjeta1.CVV;
+                aux[2]=tarjeta1.Tipo;
+                aux[3]=tarjeta1.Fechacaducidad;
                 tarjeta.addRow(aux);
             }
             tablatarjetas.setModel(tarjeta);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }
     public void realizarcompra(){
     Cuenta cuenta=new Cuenta();
-        obtenerdatoscuenta(cuenta);
+    Listacuenta lisc=new Listacuenta();
+        lisc.obtenerdatoscuenta(cuenta);
         if(Comprar.carrito.factura.pago.validarPago(obtenerTarje(),Comprar.carrito.factura.calcularTotal(),cuenta)==true){
               ListaFacturas lista=new ListaFacturas();
               int id=lista.generarfacturaDatabase(Main.cliente.Nombre,carrito.factura.calcularSubTotal(),carrito.factura.calcularImpuestos(),carrito.factura.calcularTotal());
@@ -152,7 +108,6 @@ public class TarjetaUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButtonSeleccionar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -161,9 +116,6 @@ public class TarjetaUsuario extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
-        jLabel1.setText("Agregados:");
 
         jLabel2.setFont(new java.awt.Font("Sylfaen", 0, 36)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -199,50 +151,39 @@ public class TarjetaUsuario extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 1044, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1039, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(91, 91, 91)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButtonSeleccionar)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 837, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(241, 241, 241)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 6, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1039, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonSeleccionar)
-                .addGap(92, 92, 92))
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 881, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(28, 28, 28)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(34, 34, 34)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(48, 48, 48)
                 .addComponent(jButtonSeleccionar)
-                .addGap(51, 51, 51))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
 
         pack();
@@ -305,7 +246,6 @@ public class TarjetaUsuario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton jButtonSeleccionar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;

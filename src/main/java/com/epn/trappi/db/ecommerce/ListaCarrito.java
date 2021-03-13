@@ -4,6 +4,7 @@ import com.epn.trappi.gui.ecommerce.Tarjetas.Tarjeta;
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Ecommerce.CarritoDeCompras;
 import com.epn.trappi.gui.ecommerce.Interfaces.Login;
+import com.epn.trappi.models.proveedores.Bien;
 import com.epn.trappi.models.proveedores.Producto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +14,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 
 public class ListaCarrito {
@@ -87,6 +89,34 @@ public class ListaCarrito {
         return numero;
     }
     
+    
+    public ArrayList<Bien> buscar(String nombreproducto){
+        String nombre;
+        int cantidad;
+        String marca;
+        double precio;
+        ArrayList<Bien> listab = new ArrayList<>();
+    try {       
+            Statement statement = connection.createStatement();
+            String sql = "SELECT NOMBREBIEN, MARCA, PRECIOBIEN, i.CANTIDADINVENTARIO FROM BIEN b join INVENTARIO i on b.IDENTIFICADORBIEN2=i.IDENTIFICADORBIEN2 where i.CANTIDADINVENTARIO>=1 AND b.NOMBREBIEN LIKE '%"+nombreproducto+"%'";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                
+            nombre= resultSet.getString("NOMBREBIEN");
+            marca=resultSet.getString("MARCA");
+            precio=resultSet.getDouble("PRECIOBIEN");
+            cantidad=resultSet.getInt("CANTIDADINVENTARIO");
+            Bien bien=new Producto(nombre, precio, cantidad, marca);
+            listab.add(bien);
+            }
+            
+                        
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,ex);
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return listab;
+    }
     
     
 }

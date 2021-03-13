@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class ListaTar {
     ArrayList<Tarjeta> lista;
@@ -69,6 +70,7 @@ public class ListaTar {
             PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
             prepsInsertProduct.execute();
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,ex);
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
           }
        

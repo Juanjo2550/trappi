@@ -27,7 +27,7 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
         jt.setEditable(false);
          TextPrompt tarjeta = new TextPrompt("Número de Tarjeeta", jTextFieldTarjeta);
          TextPrompt cvv = new TextPrompt("CVV", jTextFieldCvv);
-         TextPrompt tipo = new TextPrompt("Tipo ", jTextFieldTipo);
+         
          TextPrompt fecha = new TextPrompt("Fecha de Caducidad", jTextFieldFecha);
          
     }
@@ -44,21 +44,22 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jt = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jTextFieldTarjeta = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextFieldCvv = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextFieldTipo = new javax.swing.JTextField();
+        jTextFieldCvv = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jTextFieldFecha = new javax.swing.JTextField();
         jButtonRegistrar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jTextFieldTipo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
 
@@ -106,26 +107,31 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
             }
         });
 
+        jButton11.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jButton11.setText("VIP");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jt, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(62, 62, 62))))
+                .addContainerGap(33, Short.MAX_VALUE)
+                .addComponent(jt, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addComponent(jButton8)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -138,12 +144,14 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton4)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
 
         jLabel2.setFont(new java.awt.Font("Sylfaen", 0, 36)); // NOI18N
@@ -152,9 +160,6 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         jLabel3.setText("Tarjeta");
-
-        jLabel4.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
-        jLabel4.setText("Datos");
 
         jLabel5.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         jLabel5.setText("CVV");
@@ -177,6 +182,8 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logo_solotexto_resize.jpg"))); // NOI18N
 
+        jTextFieldTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Credito", "Debito" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -184,37 +191,33 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 1015, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 1018, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(45, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(258, 258, 258)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel8))
-                            .addComponent(jLabel4))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1011, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel8))
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldCvv, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1011, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButtonRegistrar)
-                                .addGap(358, 358, 358))))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextFieldTarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                                .addComponent(jTextFieldCvv)
+                                .addComponent(jTextFieldFecha))
+                            .addComponent(jTextFieldTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(336, 336, 336))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonRegistrar)
+                        .addGap(221, 221, 221))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,9 +231,7 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(80, 80, 80)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jTextFieldTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -246,12 +247,13 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                         .addComponent(jButtonRegistrar)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(192, 192, 192))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, 0)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         pack();
@@ -270,24 +272,23 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     Comprar comprar=new Comprar();
-    comprar.llenartabla();
     comprar.setVisible(true);
     this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
     Metododepago mp=new Metododepago();
-    mp.llenardatos();
-    mp.llenartablat();
     mp.setVisible(true);
     this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
-    FRegistroTarjeta frt=new FRegistroTarjeta(jTextFieldTarjeta.getText(),jTextFieldCvv.getText(),jTextFieldFecha.getText(),jTextFieldTipo.getText());
+    FRegistroTarjeta frt=new FRegistroTarjeta(jTextFieldTarjeta.getText(),jTextFieldCvv.getText(),jTextFieldFecha.getText(),jTextFieldTipo.getSelectedItem().toString());
     
         ListaTar lis=new ListaTar();
-        lis.creartarjeta(Main.cliente.Cedula,jTextFieldCvv.getText(),jTextFieldTarjeta.getText(),jTextFieldTipo.getText(),jTextFieldFecha.getText());
+       
+        lis.creartarjeta(Main.cliente.Cedula,jTextFieldCvv.getText(),jTextFieldTarjeta.getText(),jTextFieldTipo.getSelectedItem().toString(),jTextFieldFecha.getText());
+        
         Main.cliente.añadirTarjeta(frt);
         JOptionPane.showMessageDialog(null,"Tarjeta ingresada con exito");
      
@@ -299,36 +300,13 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
         devolucion.setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    public void llenardatos(){
-        try {
-            String tarjeta= "";
-            String cvv ="";
-            String tipo ="";
-            String fecha ="";
-                                   
-            Statement statement = connection.createStatement();
-            String sql = "EXEC tarjeta_Consulta '"+Main.cliente.Cedula+"'";
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                 tarjeta= resultSet.getString("NUMEROTARJETA");
-                 cvv =resultSet.getString("CVV");
-                 fecha =resultSet.getString("FECHADECADUCIDAD");}
-                 tipo= resultSet.getString("TIPO");
-            System.out.println(tarjeta);
-            System.out.println("estoy aqui");
-            jTextFieldTarjeta.setText(tarjeta);
-            jTextFieldCvv.setText(cvv);
-            jTextFieldTipo.setText(tipo);
-            jTextFieldFecha.setText(fecha);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    public void nombretitulo(String name){
-     jt.setText(name);
-        System.out.println(name);
-    }
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        ComprarVIP cv=new ComprarVIP();
+        cv.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    
     
     /**
      * @param args the command line arguments
@@ -374,6 +352,7 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -382,7 +361,6 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
@@ -391,7 +369,7 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldCvv;
     private javax.swing.JTextField jTextFieldFecha;
     private javax.swing.JTextField jTextFieldTarjeta;
-    private javax.swing.JTextField jTextFieldTipo;
+    private javax.swing.JComboBox<String> jTextFieldTipo;
     private javax.swing.JTextField jt;
     // End of variables declaration//GEN-END:variables
 }

@@ -55,10 +55,21 @@ public Double calcularTotal(){
     return total;
 }
 
+public Double calcularTotalConDescuento(String cedula){
+    Double total = calcularTotal();
+    Descuento descuento = new Descuento();
+    Double valorDescuento=descuento.obtenerValor(cedula);
+    
+    Double resultado = total-(total*valorDescuento);
+    return resultado; 
+}
+
     public void setNumeroFactura(int numeroFactura) {
         this.nFactura = numeroFactura;
     }
 
 
+    
+    
    
 }

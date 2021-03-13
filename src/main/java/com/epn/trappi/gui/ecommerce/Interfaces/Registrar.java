@@ -58,6 +58,7 @@ public class Registrar extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jTextFieldNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,7 +114,7 @@ public class Registrar extends javax.swing.JFrame {
         jLabel5.setText("Direccion");
 
         jLabel6.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        jLabel6.setText("Cedula");
+        jLabel6.setText("Documento de Identidad");
 
         jLabel7.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel7.setText("Contraseña");
@@ -133,7 +134,7 @@ public class Registrar extends javax.swing.JFrame {
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 1044, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(376, 376, 376)
+                .addGap(316, 316, 316)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,56 +242,7 @@ public class Registrar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public  void llenardato(){
-        try {
-            String nombre= "";
-            String cedula ="";
-            String correo ="";
-            String fecha ="";
-            String celular ="";
-            String direc ="";
-            String contra ="";
-                       
-            Statement statement = connection.createStatement();
-            String sql = "EXEC cliente_consultadatos '"+Main.cliente.Cedula+"'";
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                 nombre= resultSet.getString("NOMBRECLIE");
-                 cedula =resultSet.getString("CEDULA2");
-                 correo =resultSet.getString("CORREO");
-                 fecha =resultSet.getString("FECHADENACIMIENTO");
-                 celular =resultSet.getString("CELULAR");
-                 direc =resultSet.getString("DIRECCION");
-                 contra =resultSet.getString("CONTRASENA");
-               
-            }
-            CuentaCliente cuenta=new CuentaCliente();
-            cuenta.setVisible(true);
-            this.setVisible(false);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public int idsuario(){
-        int numero=0;
-        try {
-            String id= "";
-                       
-            Statement statement = connection.createStatement();
-            String sql = "Select COUNT(IDCLIENTE) from CLIENTES";
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                 id= resultSet.getString(1);
-            }
-            numero=Integer.parseInt(id)+1;
-                        
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return numero;
-    }
+   
     
     /**
      * @param args the command line arguments
