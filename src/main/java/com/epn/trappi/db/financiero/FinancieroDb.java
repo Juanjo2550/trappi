@@ -25,7 +25,7 @@ public class FinancieroDb {
         ResultSet resultSet = statement.executeQuery(sql);
         while(resultSet.next()){
             Fecha fecha = new Fecha(resultSet.getInt(3),resultSet.getInt(4),resultSet.getInt(5));
-            Ingreso ingresotemporal = new Ingreso(resultSet.getString(1),resultSet.getDouble(2),fecha);
+            Ingreso ingresotemporal = new Ingreso(resultSet.getInt(1),resultSet.getDouble(2),fecha);
             ingresosRegistrados.add(ingresotemporal);           
         }
         }catch( Exception e){

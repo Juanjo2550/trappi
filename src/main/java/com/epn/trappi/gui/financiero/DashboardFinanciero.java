@@ -771,7 +771,7 @@ public class DashboardFinanciero extends javax.swing.JFrame {
             tab = new DefaultTableModel(null,columnastabla);
             for(Ingreso ingreso: ingresosporFecha){
             System.out.println("Está entrando");
-            datos[0] = ingreso.getNroFactura();
+            datos[0] = String.valueOf(ingreso.getNroFactura());
             datos[1] = String.valueOf(ingreso.getTotal());
             String fecha = String.valueOf(ingreso.getFechaIngreso().devolverDia())+'/'+String.valueOf(ingreso.getFechaIngreso().devolverMes())+'/'+String.valueOf(ingreso.getFechaIngreso().devolverAnio());
             datos[2] = fecha;

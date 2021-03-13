@@ -1,39 +1,31 @@
 
 package com.epn.trappi.models.financiero;
 
-import com.epn.trappi.db.connection.DataBaseConnection;
-import com.epn.trappi.db.financiero.FinancieroDb;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.Calendar;
-
-
 public class Ingreso {
     Fecha fechaIngreso;
-    String nroFactura;
+    int nroFactura;
     double total;
     LibroDiario libroDiario;
     public Ingreso(){
         
     }
 
-    public Ingreso(String idFactura, double total, Fecha fecha) {
+    public Ingreso(int idFactura, double total, Fecha fecha) {
         this.fechaIngreso = fecha;
         this.nroFactura = idFactura;
         this.total = total;
     }
 
-    public Ingreso(String nroFactura, double total) {
+    public Ingreso(int nroFactura, double total) {
         this.nroFactura = nroFactura;
         this.total = total;
     }
     
     
-    public void registrarIngreso(String nrofactura,double monto){
+    public void registrarIngreso(int nrofactura,double monto){
         //La instanciacion de Fecha inicializa la fecha con la actual.
         fechaIngreso = new Fecha();
-        Ingreso ingreso = new Ingreso(nrofactura,monto,fechaIngreso);
+        Ingreso ingreso = new Ingreso(nroFactura,monto,fechaIngreso);
         this.libroDiario=new LibroDiario();
         libroDiario.agregarIngreso(ingreso);
     }
@@ -42,7 +34,7 @@ public class Ingreso {
         return fechaIngreso;
     }
 
-    public String getNroFactura() {
+    public int getNroFactura() {
         return nroFactura;
     }
 
