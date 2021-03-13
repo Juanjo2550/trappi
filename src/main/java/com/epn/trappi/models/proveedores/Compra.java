@@ -22,16 +22,16 @@ abstract public class Compra {
     protected Inventario inventario;
     protected ListaDeBienes listaBienesAComprar;
     protected Bien bien;
-    protected String estado;
     protected Double montoTotal;
     protected String fecha;
     protected int identificador;
+    protected  EstadoCompra estado;
     
     private ProveedoresDb db=new ProveedoresDb();
 
     public Compra(ListaDeBienes listaBienesAComprar, String estado, Double montoTotal, String fecha, int identificador) {
         this.listaBienesAComprar = listaBienesAComprar;
-        this.estado = estado;
+        this.estado = new EstadoCompraEntregado(this,estado);
         this.montoTotal = montoTotal;
         this.fecha = fecha;
         this.identificador = identificador;
@@ -41,7 +41,7 @@ abstract public class Compra {
         this.inventario = inventario;
         this.listaBienesAComprar = listaBienesAComprar;
         this.bien = bien;
-        this.estado = estado;
+        this.estado = new EstadoCompraEntregado(this,estado);
         this.montoTotal = montoTotal;
         this.identificador = identificador;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
@@ -52,14 +52,14 @@ abstract public class Compra {
     public Compra(Inventario inventario, ListaDeBienes listaBienesAComprar, String estado) {
         this.inventario = inventario;
         this.listaBienesAComprar = listaBienesAComprar;
-        this.estado = estado;
+        this.estado = new EstadoCompraEntregado(this,estado);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
         LocalDateTime now = LocalDateTime.now();  
         this.fecha=dtf.format(now);  
     }
     public Compra(ListaDeBienes listaBienesAComprar, String estado) {
         this.listaBienesAComprar = listaBienesAComprar;
-        this.estado = estado;
+        this.estado = new EstadoCompraEntregado(this,estado);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
         LocalDateTime now = LocalDateTime.now();  
         this.fecha=dtf.format(now);  
@@ -67,12 +67,12 @@ abstract public class Compra {
     public Compra(Inventario inventario, ListaDeBienes listaBienesAComprar, String estado, String fecha) {
         this.inventario = inventario;
         this.listaBienesAComprar = listaBienesAComprar;
-        this.estado = estado;
+        this.estado = new EstadoCompraEntregado(this,estado);
         this.fecha=fecha;
     }
     public Compra(ListaDeBienes listaBienesAComprar, String estado, String fecha, Double monto) {
         this.listaBienesAComprar = listaBienesAComprar;
-        this.estado = estado;
+        this.estado = new EstadoCompraEntregado(this,estado);
         this.fecha=fecha;
         this.montoTotal=monto;
     }
@@ -88,6 +88,10 @@ abstract public class Compra {
     }
     
     public void comprarAnalizador() {
+    }
+    
+    public boolean cambiarEstado(){
+       return estado.cambiarEstado();
     }
     
     public void registrarCompraPorProveedor(ListaDeBienes listaBienesAComprarPorProveedor, String monto) {
@@ -146,12 +150,12 @@ abstract public class Compra {
     public void setListaCantidadDeBienes(ListaDeBienes listaCantidadDeBienes) {
         this.listaBienesAComprar = listaCantidadDeBienes;
     }
-    
-    public String getEstado() {
+
+    public EstadoCompra getEstadoCompra() {
         return estado;
     }
-    
-    public void setEstado(String estado) {
+
+    public void setEstadoCompra(EstadoCompra estado) {
         this.estado = estado;
     }
 

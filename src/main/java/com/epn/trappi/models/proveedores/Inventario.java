@@ -52,7 +52,8 @@ public class Inventario {
         return false;
     }
 
-    public void aumentarStock() {
+    public void aumentarStock(int indentificador, String estado) throws SQLException {
+        db.actualizarCompras(indentificador,estado);
         for (Bien bien : listaDeBienes.getListaBienes()) {
             try {
                 db.actualizarStock(db.getIdBien(bien.getNombre()), bien.getCantidad());
