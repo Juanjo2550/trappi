@@ -32,17 +32,21 @@ public class ListaDeBienes {
         return listaBienes;
     }
 
-    /*
-    public ArrayList<Bien> getListaDeBienesDb() {
-        return db.g();
-    }
-
-    public ArrayList<Bien> getListaCantidadDeBienesDbCompra() {
-        return db.getListaCantidadBienesCompra();
-    }
-     */
+    
     public void setListaBienes(ArrayList<Bien> listaBienes) {
         this.listaBienes = listaBienes;
+    }
+    
+    public void mostrarLista(JTable jTable1){
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Producto");
+        model.addColumn("Marca");
+        model.addColumn("Precio Unitario");
+        model.addColumn("Proveedor");
+        for ( Bien bien:listaBienes) {
+            model.addRow(new Object[]{bien.getNombre(),bien.getMarca(),bien.getPrecio()+"",bien.getProveeedor().getRazonSocial()});
+        }
+        jTable1.setModel(model);
     }
 
     //recibimos el bien y la cantidad y se hace el objeto CantidadDeBien

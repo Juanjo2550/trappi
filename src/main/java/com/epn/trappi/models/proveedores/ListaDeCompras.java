@@ -48,6 +48,18 @@ public class ListaDeCompras {
         jTable1.setModel(model);
     }
     
+    public void mostrarListaConDescripcion(JTable jTable1){
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Número de Compra");
+        model.addColumn("Fecha");
+        model.addColumn("Estado");
+        model.addColumn("Monto");
+        for ( Compra compra:compras) {
+            model.addRow(new Object[]{compra.getIdentificador(), compra.getFecha(),compra.getEstadoCompra().getEstado(),compra.getMontoTotal()});
+        }
+        jTable1.setModel(model);
+    }
+    
     public ArrayList<Compra> getCompras() {
         return compras;
     }

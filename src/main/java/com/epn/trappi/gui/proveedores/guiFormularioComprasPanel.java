@@ -49,17 +49,7 @@ public class guiFormularioComprasPanel extends javax.swing.JPanel {
 
     public void cargar() {
         int auxiliarTamañoBuffer = 0;
-        String[] titulos = {"Producto", "Precio unitario", "Proveedor"};
-        String[] fila = new String[3];
-        modelo = new DefaultTableModel(null, titulos);
-        for (Bien producto : listaDeProductos.getListaBienes()) {
-            fila[0] = producto.getNombre();
-            fila[1] = "" + producto.getPrecio();
-            fila[2] = producto.getProveeedor().getRazonSocial();
-            modelo.addRow(fila);
-            auxiliarTamañoBuffer++;
-        }
-        jTable1.setModel(modelo);
+        listaDeProductos.mostrarLista(jTable1);
         iniciarBufferSeleccionar(auxiliarTamañoBuffer);
     }
 

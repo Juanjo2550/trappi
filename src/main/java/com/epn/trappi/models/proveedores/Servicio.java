@@ -22,9 +22,9 @@ public class Servicio extends Bien {
         super(nombre, precio, proveeedor);
     }
 
-    public Servicio(String nombre, double precio, Proveedor proveeedor, int cantidad, String marca) {
+    /*public Servicio(String nombre, double precio, Proveedor proveeedor, int cantidad, String marca) {
         super(nombre, precio, proveeedor, cantidad, marca);
-    }
+    }*/
 
     @Override
     public void registrar() {

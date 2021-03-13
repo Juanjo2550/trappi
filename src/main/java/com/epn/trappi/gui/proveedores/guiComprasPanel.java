@@ -37,59 +37,11 @@ public class guiComprasPanel extends javax.swing.JPanel {
         initComponents();
         jComboBox1.setSelectedIndex(2);
         jComboBox1.setEnabled(false);
-        iniciarTablas();
-    }
-    
-    public void iniciarTablas() throws IOException{
-        //instanciamos la tabla llena
-        String[] titulos = {"Número de Compra","Fecha","Estado","Monto"};
-        String[] fila = new String [4];
-        modelo = new DefaultTableModel(null, titulos);
         compras =  db.getCompras();
-        for (Compra compraAuxiliar : compras.getCompras()){
-            fila[0]= String.valueOf(compraAuxiliar.getIdentificador());
-            fila[1]= compraAuxiliar.getFecha();
-            if(compraAuxiliar.getEstadoCompra().getEstado().equalsIgnoreCase("Entregado"))
-                fila[2]="Entregado";
-            
-            else
-                fila[2]="Pendiente";
-            
-            fila[3]= compraAuxiliar.getMontoTotal()+"";
-            modelo.addRow(fila);
-        }
-        jTable1.setModel(modelo);
-        
-        
-        //instanciamos la tabla vacía
-        String[] titulos2 = {"Producto","Marca","Cantidad","Proveedor"};
-        modelo = new DefaultTableModel(null, titulos2);
-        fila = new String [4];
-        fila[0]= "";
-        fila[1]= "";
-        fila[2]= "";
-        fila[3]= "";
-        modelo.addRow(fila);
-        jTable2.setModel(modelo);
+        compras.mostrarListaConDescripcion(jTable1);
     }
     
-    public void cargarDetalleCompras(int identificadorDeCompra) throws IOException{
-        String[] titulos2 = {"Producto","Marca","Cantidad","Proveedor"};
-        modelo = new DefaultTableModel(null, titulos2);
-        String[] fila = new String [4];
-        for (Compra compraAuxiliar : compras.getCompras()){
-            if(compraAuxiliar.getIdentificador()==identificadorDeCompra){
-                for (Bien bienAux : compraAuxiliar.getListaCantidadDeBienes().getListaBienes()){
-                    fila[0]= bienAux.getNombre()+"";
-                    fila[1]= bienAux.getMarca();
-                    fila[2]= bienAux.getCantidad()+"";
-                    fila[3]= bienAux.getProveeedor().getRazonSocial();
-                    modelo.addRow(fila);
-                }
-            }
-        }
-        jTable2.setModel(modelo);
-    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -194,20 +146,12 @@ public class guiComprasPanel extends javax.swing.JPanel {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable2MouseClicked(evt);
-            }
-        });
         jScrollPane2.setViewportView(jTable2);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -326,49 +270,26 @@ public class guiComprasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButRegFactCompNotaCred1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        try {
-            jComboBox1.setEnabled(true);
-            if(compras.getCompras().get(jTable1.getSelectedRow()).getEstadoCompra().getEstado().equalsIgnoreCase("Entregado")){
-                jComboBox1.setSelectedIndex(0);
-                jComboBox1.setEnabled(false);
-            }
-            else
-                jComboBox1.setSelectedIndex(1);
-            cargarDetalleCompras(compras.getCompras().get(jTable1.getSelectedRow()).getIdentificador());
-        } catch (IOException ex) {
-            Logger.getLogger(guiComprasPanel.class.getName()).log(Level.SEVERE, null, ex);
+        jComboBox1.setEnabled(true);
+        if(compras.getCompras().get(jTable1.getSelectedRow()).getEstadoCompra().getEstado().equalsIgnoreCase("Entregado")){
+            jComboBox1.setSelectedIndex(0);
+            jComboBox1.setEnabled(false);
         }
+        else
+            jComboBox1.setSelectedIndex(1);
+        compras.getCompras().get(jTable1.getSelectedRow()).getListaCantidadDeBienes().mostrarLista(jTable2);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButRegFactCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegFactCompNotaCredActionPerformed
         
-        /*
-        if(!compras.getCompras().get(jTable1.getSelectedRow()).getEstadoCompra().getEstado().equals(String.valueOf(jComboBox1.getSelectedItem()))){
-        try {
-        compras.getCompras().get(jTable1.getSelectedRow()).setEstado(String.valueOf(jComboBox1.getSelectedItem()));
-        db.actualizarCompras(compras.getCompras().get(jTable1.getSelectedRow()).getIdentificador(),compras.getCompras().get(jTable1.getSelectedRow()).getEstado());
-        Inventario inv = new Inventario(new ListaDeBienes(compras.getCompras().get(jTable1.getSelectedRow()).getListaCantidadDeBienes().getListaBienes()));
-        inv.aumentarStock();
-        iniciarTablas();
-        } catch (IOException ex) {
-        Logger.getLogger(guiComprasPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }
-        */
-        try {
-            if(compras.getCompras().get(jTable1.getSelectedRow()).cambiarEstado())
-                JOptionPane.showMessageDialog(null, "Compra Actualizada");
-            else
-                JOptionPane.showMessageDialog(null, "La compra no ha podido ser actualizada");
-            iniciarTablas();
-        } catch (IOException ex) {
-            Logger.getLogger(guiComprasPanel.class.getName()).log(Level.SEVERE, null, ex);
+        
+        if (compras.getCompras().get(jTable1.getSelectedRow()).cambiarEstado()) {
+            JOptionPane.showMessageDialog(null, "Compra Actualizada");
+            compras.mostrarLista(jTable1);
+        } else {
+            JOptionPane.showMessageDialog(null, "La compra no ha podido ser actualizada");
         }
     }//GEN-LAST:event_jButRegFactCompNotaCredActionPerformed
-
-    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTable2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
