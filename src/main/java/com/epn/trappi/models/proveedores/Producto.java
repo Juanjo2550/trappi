@@ -20,12 +20,12 @@ public class Producto extends Bien {
 
     private final ProveedoresDb db = new ProveedoresDb();
 
-    public Producto(String nombre, double precio, Proveedor proveeedor, int cantidad, String marca) {
-        super(nombre, precio, proveeedor, cantidad, marca);
+    public Producto(String nombre, double precio, Proveedor proveeedor, int cantidad, String marca, String categoria) {
+        super(nombre, precio, proveeedor, cantidad, marca, categoria);
     }
 
     public Producto(String nombre, double precio, int cantidad, String marca) {
-        super(nombre, precio, null, cantidad, marca);
+        super(nombre, precio, null, cantidad, marca, null);
     }
 
     public Producto(String nombre, double precio, Proveedor proveeedor) {
@@ -38,7 +38,7 @@ public class Producto extends Bien {
 
     @Override
     public void registrar() {
-        Producto prod = new Producto(nombre, precio, proveeedor, cantidad, marca);
+        Producto prod = new Producto(nombre, precio, proveeedor, cantidad, marca,categoria);
         try {
             if (validarNombre(nombre)) {
                 if (validarPrecio(Double.toString(precio))) {

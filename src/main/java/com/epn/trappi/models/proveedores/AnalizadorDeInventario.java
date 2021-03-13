@@ -38,13 +38,13 @@ public class AnalizadorDeInventario {
                                 cantidadBien.getProveeedor().getRazonSocial())) {
                             proveedor = true;
                             compra.getListaCantidadDeBienes().añadirBien(new Producto(
-                                    cantidadBien.getNombre(), cantidadBien.getPrecio(), cantidadBien.getProveeedor(), 100, cantidadBien.getMarca()));
+                                    cantidadBien.getNombre(), cantidadBien.getPrecio(), cantidadBien.getProveeedor(), 100, cantidadBien.getMarca(),cantidadBien.getCategoria()));
                         }
                     }
                     if (proveedor == false) {
                         ListaDeBienes lista = new ListaDeBienes();
                         lista.añadirBien(new Producto(
-                                cantidadBien.getNombre(), cantidadBien.getPrecio(), cantidadBien.getProveeedor(), 100, cantidadBien.getMarca()));
+                                cantidadBien.getNombre(), cantidadBien.getPrecio(), cantidadBien.getProveeedor(), 100, cantidadBien.getMarca(),cantidadBien.getCategoria()));
                         solicitud.añadirCompra(new CompraDeProducto(inventario, lista, "Pendiente"));
                     }
                 }

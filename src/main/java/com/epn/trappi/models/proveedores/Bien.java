@@ -19,7 +19,8 @@ abstract public class Bien {
     protected Proveedor proveeedor;
     public int cantidad ;
     public String marca;
-
+    public String categoria;
+    
     public String getNombre() {
         return nombre;
     }
@@ -68,12 +69,17 @@ abstract public class Bien {
         cantidad-=cantidadADisminuir;
     }
 
-    public Bien(String nombre, double precio, Proveedor proveeedor, int cantidad, String marca) {
+    public Bien(String nombre, double precio, Proveedor proveeedor, int cantidad, String marca, String categoria) {
         this.nombre = nombre;
         this.precio = precio;
         this.proveeedor = proveeedor;
         this.cantidad = cantidad;
         this.marca = marca;
+        this.categoria = categoria;
+    }
+
+    public String getCategoria() {
+        return categoria;
     }
     
 

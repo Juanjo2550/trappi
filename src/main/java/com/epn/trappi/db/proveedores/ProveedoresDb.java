@@ -254,7 +254,7 @@ public class ProveedoresDb {
         ResultSet rs = ejecutarSP(spSelectAllProductos);
         List<Producto> pp = new ArrayList<>();
         while (rs.next()) {
-            String[] res = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)};
+            String[] res = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6)};
             pp.add(reformarProducto(res));
         }
         this.productos = pp;
@@ -438,7 +438,7 @@ public class ProveedoresDb {
     }*/
     private String[] transformarProducto(Producto p) {
         String[] params = {"ruc:" + p.getProveeedor().getRuc(), "nombrebien:"
-            + p.getNombre(), "preciobien:" + p.getPrecio(), "tipobien:Producto", "cantidad:" + p.getCantidad(), "marca:" + p.getMarca()};
+            + p.getNombre(), "preciobien:" + p.getPrecio(), "tipobien:Producto", "cantidad:" + p.getCantidad(), "marca:" + p.getMarca(), "categoria:" + p.getCategoria()};
         return params;
     }
 
@@ -459,7 +459,7 @@ public class ProveedoresDb {
     }
 
     private Producto reformarProducto(String[] str) throws SQLException {
-        Producto np = new Producto(str[0], Double.parseDouble(str[1]), obtenerProveedor(str[2]), Integer.parseInt(str[3]), str[4]);
+        Producto np = new Producto(str[0], Double.parseDouble(str[1]), obtenerProveedor(str[2]), Integer.parseInt(str[3]), str[4],str[5]);
         return np;
     }
 
