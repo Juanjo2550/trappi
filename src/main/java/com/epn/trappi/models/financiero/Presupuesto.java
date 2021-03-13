@@ -14,7 +14,8 @@ public class Presupuesto {
         double presupuesto=0;
         double ingresosTotal=libroDiario.calcularTotalIngresos();
         double pagoTotal=libroDiario.calcularTotalPagos();
-        presupuesto = ingresosTotal-pagoTotal;
+        double devolucionTotal=libroDiario.calcularTotalDevoluciones();
+        presupuesto = ingresosTotal-pagoTotal-devolucionTotal;
         return presupuesto;
     }
 }

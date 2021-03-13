@@ -34,17 +34,30 @@ public class DashboardFinanciero extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         panelVerticalIzquierdo = new javax.swing.JPanel();
-        btndashboardgastos = new javax.swing.JPanel();
-        btndashboardgeneral = new javax.swing.JPanel();
-        lableGeneralDashboard = new javax.swing.JLabel();
         btndashboardingresos = new javax.swing.JPanel();
         labelIngresos = new javax.swing.JLabel();
         btnDashboardSalir = new javax.swing.JPanel();
         labelDashboardSalir = new javax.swing.JLabel();
+        btndashboardgastos = new javax.swing.JPanel();
         labelGastos1 = new javax.swing.JLabel();
+        btndashboardgeneral = new javax.swing.JPanel();
+        lableGeneralDashboard = new javax.swing.JLabel();
         btndashboarddevoluciones = new javax.swing.JPanel();
         labelDevoluciones = new javax.swing.JLabel();
         panelDespliegue = new javax.swing.JPanel();
+        panelDashboard = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        panelCircular = new javax.swing.JPanel();
+        panelBarrasGastos = new javax.swing.JPanel();
+        panelBarrasIngresos = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        labelIngresosTotales = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        labelGastosTotales = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        labelPresupuesto = new javax.swing.JLabel();
+        panelCircular1 = new javax.swing.JPanel();
         panelDevoluciones = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
@@ -71,19 +84,6 @@ public class DashboardFinanciero extends javax.swing.JFrame {
         btnConsultarGastosporFecha = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        panelDashboard = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        panelCircular = new javax.swing.JPanel();
-        panelBarrasGastos = new javax.swing.JPanel();
-        panelBarrasIngresos = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        labelIngresosTotales = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        labelGastosTotales = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        labelPresupuesto = new javax.swing.JLabel();
-        panelCircular1 = new javax.swing.JPanel();
         panelIngresos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaIngresos = new javax.swing.JTable();
@@ -105,52 +105,6 @@ public class DashboardFinanciero extends javax.swing.JFrame {
 
         panelVerticalIzquierdo.setBackground(new java.awt.Color(61, 57, 57));
         panelVerticalIzquierdo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btndashboardgastos.setBackground(new java.awt.Color(255, 210, 28));
-        btndashboardgastos.setOpaque(false);
-        btndashboardgastos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btndashboardgastosMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btndashboardgastosMouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btndashboardgastosMousePressed(evt);
-            }
-        });
-        btndashboardgastos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelVerticalIzquierdo.add(btndashboardgastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 160, 41));
-
-        btndashboardgeneral.setBackground(new java.awt.Color(255, 210, 28));
-        btndashboardgeneral.setOpaque(false);
-        btndashboardgeneral.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                btndashboardgeneralMouseMoved(evt);
-            }
-        });
-        btndashboardgeneral.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btndashboardgeneralMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btndashboardgeneralMouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btndashboardgeneralMousePressed(evt);
-            }
-        });
-        btndashboardgeneral.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lableGeneralDashboard.setBackground(new java.awt.Color(255, 210, 28));
-        lableGeneralDashboard.setFont(new java.awt.Font("Segoe UI Semibold", 1, 16)); // NOI18N
-        lableGeneralDashboard.setForeground(new java.awt.Color(255, 255, 255));
-        lableGeneralDashboard.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lableGeneralDashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/epn/trappi/gui/financiero/imagenesFinanciero/icons8_increase_32px.png"))); // NOI18N
-        lableGeneralDashboard.setText("Dashboard");
-        btndashboardgeneral.add(lableGeneralDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 41));
-
-        panelVerticalIzquierdo.add(btndashboardgeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 160, 41));
 
         btndashboardingresos.setBackground(new java.awt.Color(255, 210, 28));
         btndashboardingresos.setOpaque(false);
@@ -198,13 +152,60 @@ public class DashboardFinanciero extends javax.swing.JFrame {
 
         panelVerticalIzquierdo.add(btnDashboardSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 570, 160, 41));
 
+        btndashboardgastos.setBackground(new java.awt.Color(255, 210, 28));
+        btndashboardgastos.setOpaque(false);
+        btndashboardgastos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btndashboardgastosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btndashboardgastosMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btndashboardgastosMousePressed(evt);
+            }
+        });
+        btndashboardgastos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         labelGastos1.setBackground(new java.awt.Color(255, 210, 28));
         labelGastos1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 16)); // NOI18N
         labelGastos1.setForeground(new java.awt.Color(255, 255, 255));
         labelGastos1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelGastos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/epn/trappi/gui/financiero/imagenesFinanciero/icons8_receive_cash_32px.png"))); // NOI18N
         labelGastos1.setText("Gastos");
-        panelVerticalIzquierdo.add(labelGastos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 160, 40));
+        btndashboardgastos.add(labelGastos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 40));
+
+        panelVerticalIzquierdo.add(btndashboardgastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 170, 40));
+
+        btndashboardgeneral.setBackground(new java.awt.Color(255, 210, 28));
+        btndashboardgeneral.setOpaque(false);
+        btndashboardgeneral.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btndashboardgeneralMouseMoved(evt);
+            }
+        });
+        btndashboardgeneral.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btndashboardgeneralMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btndashboardgeneralMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btndashboardgeneralMousePressed(evt);
+            }
+        });
+        btndashboardgeneral.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lableGeneralDashboard.setBackground(new java.awt.Color(255, 210, 28));
+        lableGeneralDashboard.setFont(new java.awt.Font("Segoe UI Semibold", 1, 16)); // NOI18N
+        lableGeneralDashboard.setForeground(new java.awt.Color(255, 255, 255));
+        lableGeneralDashboard.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lableGeneralDashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/epn/trappi/gui/financiero/imagenesFinanciero/icons8_increase_32px.png"))); // NOI18N
+        lableGeneralDashboard.setText("Dashboard");
+        btndashboardgeneral.add(lableGeneralDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 41));
+
+        panelVerticalIzquierdo.add(btndashboardgeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 160, 40));
 
         btndashboarddevoluciones.setBackground(new java.awt.Color(255, 210, 28));
         btndashboarddevoluciones.setOpaque(false);
@@ -229,12 +230,118 @@ public class DashboardFinanciero extends javax.swing.JFrame {
         labelDevoluciones.setText("Devoluciones");
         btndashboarddevoluciones.add(labelDevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 40));
 
-        panelVerticalIzquierdo.add(btndashboarddevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 160, 41));
+        panelVerticalIzquierdo.add(btndashboarddevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 160, 40));
 
         jPanel1.add(panelVerticalIzquierdo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 780));
 
         panelDespliegue.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        panelDashboard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(61, 57, 57));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("RESUMEN DE INGRESOS Y GASTOS");
+        panelDashboard.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1120, 48));
+        panelDashboard.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 1190, 10));
+
+        javax.swing.GroupLayout panelCircularLayout = new javax.swing.GroupLayout(panelCircular);
+        panelCircular.setLayout(panelCircularLayout);
+        panelCircularLayout.setHorizontalGroup(
+            panelCircularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 475, Short.MAX_VALUE)
+        );
+        panelCircularLayout.setVerticalGroup(
+            panelCircularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 250, Short.MAX_VALUE)
+        );
+
+        panelDashboard.add(panelCircular, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 460, 475, 250));
+
+        javax.swing.GroupLayout panelBarrasGastosLayout = new javax.swing.GroupLayout(panelBarrasGastos);
+        panelBarrasGastos.setLayout(panelBarrasGastosLayout);
+        panelBarrasGastosLayout.setHorizontalGroup(
+            panelBarrasGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 475, Short.MAX_VALUE)
+        );
+        panelBarrasGastosLayout.setVerticalGroup(
+            panelBarrasGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 250, Short.MAX_VALUE)
+        );
+
+        panelDashboard.add(panelBarrasGastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 170, 475, 250));
+
+        javax.swing.GroupLayout panelBarrasIngresosLayout = new javax.swing.GroupLayout(panelBarrasIngresos);
+        panelBarrasIngresos.setLayout(panelBarrasIngresosLayout);
+        panelBarrasIngresosLayout.setHorizontalGroup(
+            panelBarrasIngresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 475, Short.MAX_VALUE)
+        );
+        panelBarrasIngresosLayout.setVerticalGroup(
+            panelBarrasIngresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 250, Short.MAX_VALUE)
+        );
+
+        panelDashboard.add(panelBarrasIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 475, 250));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel10.setText("INGRESOS TOTALES");
+        panelDashboard.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 140, 32));
+
+        labelIngresosTotales.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        labelIngresosTotales.setForeground(new java.awt.Color(0, 51, 255));
+        labelIngresosTotales.setText("$450000.00");
+        panelDashboard.add(labelIngresosTotales, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 130, -1));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel16.setText("GASTOS TOTALES");
+        panelDashboard.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, -1, -1));
+
+        labelGastosTotales.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        labelGastosTotales.setForeground(new java.awt.Color(255, 51, 51));
+        labelGastosTotales.setText("$700000.00");
+        panelDashboard.add(labelGastosTotales, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 110, 120, -1));
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText("PRESUPUESTO");
+        panelDashboard.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 90, 180, 50));
+
+        labelPresupuesto.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        labelPresupuesto.setForeground(new java.awt.Color(0, 153, 51));
+        labelPresupuesto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelPresupuesto.setText("$300000.00");
+        panelDashboard.add(labelPresupuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 100, 190, 30));
+
+        javax.swing.GroupLayout panelCircular1Layout = new javax.swing.GroupLayout(panelCircular1);
+        panelCircular1.setLayout(panelCircular1Layout);
+        panelCircular1Layout.setHorizontalGroup(
+            panelCircular1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 475, Short.MAX_VALUE)
+        );
+        panelCircular1Layout.setVerticalGroup(
+            panelCircular1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 250, Short.MAX_VALUE)
+        );
+
+        panelDashboard.add(panelCircular1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 460, 475, 250));
+
+        panelDespliegue.add(panelDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 740));
+
+        panelDevoluciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelDevolucionesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelDevolucionesMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                panelDevolucionesMousePressed(evt);
+            }
+        });
         panelDevoluciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel19.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
@@ -364,101 +471,6 @@ public class DashboardFinanciero extends javax.swing.JFrame {
 
         panelDespliegue.add(panelGastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 690));
 
-        panelDashboard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(61, 57, 57));
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("RESUMEN DE INGRESOS Y GASTOS");
-        panelDashboard.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1120, 48));
-        panelDashboard.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 1190, 10));
-
-        javax.swing.GroupLayout panelCircularLayout = new javax.swing.GroupLayout(panelCircular);
-        panelCircular.setLayout(panelCircularLayout);
-        panelCircularLayout.setHorizontalGroup(
-            panelCircularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 475, Short.MAX_VALUE)
-        );
-        panelCircularLayout.setVerticalGroup(
-            panelCircularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
-        );
-
-        panelDashboard.add(panelCircular, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 460, 475, 250));
-
-        javax.swing.GroupLayout panelBarrasGastosLayout = new javax.swing.GroupLayout(panelBarrasGastos);
-        panelBarrasGastos.setLayout(panelBarrasGastosLayout);
-        panelBarrasGastosLayout.setHorizontalGroup(
-            panelBarrasGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 475, Short.MAX_VALUE)
-        );
-        panelBarrasGastosLayout.setVerticalGroup(
-            panelBarrasGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
-        );
-
-        panelDashboard.add(panelBarrasGastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 170, 475, 250));
-
-        javax.swing.GroupLayout panelBarrasIngresosLayout = new javax.swing.GroupLayout(panelBarrasIngresos);
-        panelBarrasIngresos.setLayout(panelBarrasIngresosLayout);
-        panelBarrasIngresosLayout.setHorizontalGroup(
-            panelBarrasIngresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 475, Short.MAX_VALUE)
-        );
-        panelBarrasIngresosLayout.setVerticalGroup(
-            panelBarrasIngresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
-        );
-
-        panelDashboard.add(panelBarrasIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 475, 250));
-
-        jLabel10.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel10.setText("INGRESOS TOTALES");
-        panelDashboard.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 140, 32));
-
-        labelIngresosTotales.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        labelIngresosTotales.setForeground(new java.awt.Color(0, 51, 255));
-        labelIngresosTotales.setText("$450000.00");
-        panelDashboard.add(labelIngresosTotales, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 130, -1));
-
-        jLabel16.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel16.setText("GASTOS TOTALES");
-        panelDashboard.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, -1, -1));
-
-        labelGastosTotales.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        labelGastosTotales.setForeground(new java.awt.Color(255, 51, 51));
-        labelGastosTotales.setText("$700000.00");
-        panelDashboard.add(labelGastosTotales, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 110, 120, -1));
-
-        jLabel18.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel18.setText("PRESUPUESTO");
-        panelDashboard.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 90, 180, 50));
-
-        labelPresupuesto.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
-        labelPresupuesto.setForeground(new java.awt.Color(0, 153, 51));
-        labelPresupuesto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelPresupuesto.setText("$300000.00");
-        panelDashboard.add(labelPresupuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 100, 190, 30));
-
-        javax.swing.GroupLayout panelCircular1Layout = new javax.swing.GroupLayout(panelCircular1);
-        panelCircular1.setLayout(panelCircular1Layout);
-        panelCircular1Layout.setHorizontalGroup(
-            panelCircular1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 475, Short.MAX_VALUE)
-        );
-        panelCircular1Layout.setVerticalGroup(
-            panelCircular1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
-        );
-
-        panelDashboard.add(panelCircular1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 460, 475, 250));
-
-        panelDespliegue.add(panelDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 740));
-
         panelIngresos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tablaIngresos.setModel(new javax.swing.table.DefaultTableModel(
@@ -560,13 +572,15 @@ public class DashboardFinanciero extends javax.swing.JFrame {
 
     private void btndashboardgeneralMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btndashboardgeneralMouseExited
         this.btndashboardgeneral.setBackground(new java.awt.Color(61,57,57));
-        this.btndashboardgeneral.setOpaque(false);
+       this.btndashboardgeneral.setBackground(new java.awt.Color(61,57,57));
+        this.btndashboardgeneral.setOpaque(false); this.btndashboardgeneral.setOpaque(false);
     }//GEN-LAST:event_btndashboardgeneralMouseExited
 
     private void btndashboardgeneralMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btndashboardgeneralMousePressed
         this.vaciarCampos();
         this.panelGastos.setVisible(false);
         this.panelIngresos.setVisible(false);
+        this.panelDevoluciones.setVisible(false);
         DefaultCategoryDataset dts = new DefaultCategoryDataset();
         analizador=new Analizador();
         String[] mesesCalculados = this.analizador.calcularIntervaloMensualString();
@@ -651,6 +665,7 @@ public class DashboardFinanciero extends javax.swing.JFrame {
         this.vaciarCampos();
         this.panelIngresos.setVisible(false);
         this.panelDashboard.setVisible(false);
+        this.panelDevoluciones.setVisible(false);
         this.panelGastos.setVisible(true);
         this.mostrarTablaPagos();
     }//GEN-LAST:event_btndashboardgastosMousePressed
@@ -659,6 +674,7 @@ public class DashboardFinanciero extends javax.swing.JFrame {
         this.vaciarCampos();
         this.panelGastos.setVisible(false);
         this.panelDashboard.setVisible(false);
+        this.panelDevoluciones.setVisible(false);
         this.panelIngresos.setVisible(true);
         this.mostrarTablaIngresos();
     }//GEN-LAST:event_btndashboardingresosMousePressed
@@ -696,6 +712,25 @@ public class DashboardFinanciero extends javax.swing.JFrame {
     private void btnConsultarDevolucionesporFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarDevolucionesporFechaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnConsultarDevolucionesporFechaActionPerformed
+
+    private void panelDevolucionesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDevolucionesMouseEntered
+        btnDashboardSalir.setBackground(new java.awt.Color(255,210,28));
+        btnDashboardSalir.setOpaque(true);
+    }//GEN-LAST:event_panelDevolucionesMouseEntered
+
+    private void panelDevolucionesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDevolucionesMouseExited
+        this.btndashboardgeneral.setBackground(new java.awt.Color(61,57,57));
+        this.btndashboardgeneral.setOpaque(false);
+    }//GEN-LAST:event_panelDevolucionesMouseExited
+
+    private void panelDevolucionesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDevolucionesMousePressed
+        this.vaciarCampos();
+        this.panelGastos.setVisible(false);
+        this.panelDashboard.setVisible(false);
+        this.panelIngresos.setVisible(false);
+        this.panelDevoluciones.setVisible(true);
+        this.mostrarTablaIngresos();
+    }//GEN-LAST:event_panelDevolucionesMousePressed
 
     public void mostrarTablaIngresos(){
         DefaultTableModel tab = null;
