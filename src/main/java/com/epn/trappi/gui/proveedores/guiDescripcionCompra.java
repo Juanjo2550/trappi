@@ -63,7 +63,7 @@ public class guiDescripcionCompra extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         btnNuevo7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnNuevo7.setText("Nuevo");
+        btnNuevo7.setText("Comprar");
         btnNuevo7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevo7ActionPerformed(evt);
