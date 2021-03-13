@@ -2,9 +2,9 @@ package com.epn.trappi.models.rrhh.contratacion;
 
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
-import com.epn.trappi.models.rrhh.listas.ListaContratos;
-import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
-import javax.swing.JOptionPane;
+import com.epn.trappi.db.rrhh.ContratoDb;
+import com.epn.trappi.db.rrhh.EmpleadoDb;
+
 
 /**
  *
@@ -14,16 +14,19 @@ public class Contrato {
     private Fecha fechaInicio;
     private Fecha fechaFin;
     private String tipo;
-    private String numero;
+   //private String numero;
     private String sueldo;
     
 
-    public Contrato(String numero, Fecha fechaInicio, Fecha fechaFin, String tipo,  String sueldo) {
+    public Contrato(Fecha fechaInicio, Fecha fechaFin, String tipo,  String sueldo) {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.tipo = tipo;
-        this.numero = numero;
         this.sueldo = sueldo;
+        
+    }
+    
+    public Contrato(String cedulaEmpleado){
         
     }
     
@@ -31,20 +34,40 @@ public class Contrato {
         
     }
     
-    public void registrarContrato(Fecha fechaInicio, Fecha fechaFin, String tipoContrato, String valorSueldo, String cedula) {
-        
-        ListaContratos listaContratos = new ListaContratos();
-        int idContrato = listaContratos.obtenerTodos().length + 1;
-        Contrato newContrato = new Contrato(String.valueOf(idContrato), fechaInicio, fechaFin, tipoContrato, valorSueldo  );
-        listaContratos.agregar(newContrato, cedula);
+    public void registrar(String cedula) {
+         new ContratoDb().agregar(this, cedula);
 
     }
     
-    public void registrarEmpleado(Empleado empleado){
-        ListaEmpleados listEmp = new ListaEmpleados();
-        listEmp.agregar(empleado);
+    public void solicitarRegistroEmpleado(Empleado empleado){
+        empleado.registrar();
     }
-
+    
+    public Fecha obtenerFechaFin(String cedula){
+        ContratoDb db = new ContratoDb();
+        Contrato contrato = null;
+        contrato = db.buscarUno(cedula);
+        if (contrato != null){
+            return contrato.getFechaFin();
+        } else {
+            return null;
+        }
+        
+        
+    }
+    
+    public String obtenerTipo(String cedula){
+        ContratoDb db = new ContratoDb();
+        Contrato contrato = null;
+        contrato = db.buscarUno(cedula);
+        if (contrato != null){
+            return contrato.getTipo();
+        } else {
+            return null;
+        }
+    }
+    
+    
     public Fecha getFechaInicio() {
         return fechaInicio;
     }
@@ -55,10 +78,6 @@ public class Contrato {
 
     public String getTipo() {
         return tipo;
-    }
-
-    public String getNumero() {
-        return numero;
     }
 
     public String getSueldo() {

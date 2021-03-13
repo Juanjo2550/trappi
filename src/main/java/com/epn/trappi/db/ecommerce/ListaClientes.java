@@ -74,9 +74,9 @@ public class ListaClientes {
     }
     
     
-    public void eliminar(String nombre){
+    public void eliminar(String cedula){
     try {
-            String sql = "EXEC cliente_borrar '"+nombre+"'";
+            String sql = "EXEC cliente_borrar1 '"+cedula+"'";
             PreparedStatement prepsInsertProduct = connection.prepareStatement(sql);
             prepsInsertProduct.execute();
             JOptionPane.showMessageDialog(null,"eliminación exitosa");
@@ -91,8 +91,7 @@ public class ListaClientes {
     try {   
           
             Statement statement = connection.createStatement();
-            String sql = "select * from CLIENTES where CORREO ='"+
-                        usuario+"' and CONTRASENA='"+contraseña+"'";
+            String sql = "EXEC cliente_consulta '"+usuario+"','"+contraseña+"'";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 on_off=true;

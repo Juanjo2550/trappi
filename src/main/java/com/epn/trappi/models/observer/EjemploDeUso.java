@@ -20,6 +20,6 @@ public class EjemploDeUso {
 
 
         //Esto es en tiempo de ejecución
-        controlAsistencias.registrarInicioDeJornada("1722951165");
+//        controlAsistencias.registrarInicioDeJornada("1722951165");
     }
 }

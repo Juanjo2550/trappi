@@ -7,19 +7,109 @@ package com.epn.trappi.gui.rrhh;
 
 
 import com.epn.trappi.*;
+import com.epn.trappi.gui.logistico.Logistico_GUI.RoundedBorder;
+import com.epn.trappi.models.rrhh.juanjo.ControlAsistencias;
 import java.awt.Color;
-
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Insets;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 /**
  *
  * @author stali
  */
 public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
-
+    PanelPermisos panelPermisos = new PanelPermisos();
+    ControlAsistencias controlAsistencias;
+        public void ocultarPaneles(JPanel panel){
+        
+        panelPermisos.setVisible(panel.getClass().equals(panelPermisos.getClass()));
+       // panelContratar.setVisible(panel.getClass().equals(panelContratar.getClass()));
+        //panelRegistroAsp.setVisible(panel.getClass().equals(panelRegistroAsp.getClass()));
+    }
     /**
      * Creates new form Ejemplo_GUI
      */
     public PANTALLA_PRINCIPAL() {
         initComponents();
+        this.controlAsistencias = new ControlAsistencias();
+        configurarBotones(20);
+        this.setSize(1366, 768);
+        this.setLocationRelativeTo(null);
+    }
+    
+    public PANTALLA_PRINCIPAL(ControlAsistencias control) {
+        initComponents();
+        this.controlAsistencias = control;
+        configurarBotones(20);
+        this.setSize(1366, 768);
+        this.setLocationRelativeTo(null);
+    }
+        public static class RoundedBorder implements Border {
+
+    private int radius;
+
+
+    RoundedBorder(int radius) {
+        this.radius = radius;
+    }
+
+
+    @Override
+    public Insets getBorderInsets(Component c) {
+        return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);
+    }
+
+
+    @Override
+    public boolean isBorderOpaque() {
+        return true;
+    }
+
+
+    @Override
+    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+        g.drawRoundRect(x, y, width-1, height-1, radius, radius);
+    }
+}
+        //configuracion de botones
+        private void configurarBotones(int radio){
+        this.jButton7.setBorder(new RoundedBorder(24));
+        this.jButton7.setBorderPainted(true);
+        this.jButton7.setOpaque(false);
+        this.jButton7.setContentAreaFilled(false);
+        this.jButton7.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        this.btnRegistroAsistencia.setBorder(new RoundedBorder(24));
+        this.btnRegistroAsistencia.setBorderPainted(true);
+        this.btnRegistroAsistencia.setOpaque(false);
+        this.btnRegistroAsistencia.setContentAreaFilled(false);
+        this.btnRegistroAsistencia.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        this.btnPermisos.setBorder(new RoundedBorder(24));
+        this.btnPermisos.setBorderPainted(true);
+        this.btnPermisos.setOpaque(false);
+        this.btnPermisos.setContentAreaFilled(false);
+        this.btnPermisos.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        this.btnRRHH.setBorder(new RoundedBorder(24));
+        this.btnRRHH.setBorderPainted(true);
+        this.btnRRHH.setOpaque(false);
+        this.btnRRHH.setContentAreaFilled(false);
+        this.btnRRHH.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        this.btnVolver.setBorder(new RoundedBorder(24));
+        this.btnVolver.setBorderPainted(true);
+        this.btnVolver.setOpaque(false);
+        this.btnVolver.setContentAreaFilled(false);
+        this.btnVolver.setHorizontalAlignment(SwingConstants.CENTER);
+        
     }
     
     /**
@@ -32,189 +122,145 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        btnRegistroAsistencia = new javax.swing.JButton();
-        btnVolver = new javax.swing.JButton();
-        btnPermisos = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
-        btnPermisos1 = new javax.swing.JButton();
+        btnRegistroAsistencia = new javax.swing.JButton();
+        btnPermisos = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
+        btnRRHH = new javax.swing.JButton();
+        pnlPrincipal = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(61, 57, 57));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LOGOtrappi.jpeg"))); // NOI18N
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LogoRRHH.PNG"))); // NOI18N
 
-        jButton4.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jButton4.setText("Salir");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 780, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jButton4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
-
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("RECURSOS HUMANOS");
-
-        btnRegistroAsistencia.setBackground(new java.awt.Color(204, 153, 0));
-        btnRegistroAsistencia.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btnRegistroAsistencia.setForeground(new java.awt.Color(51, 51, 51));
-        btnRegistroAsistencia.setText("Asistencia");
-        btnRegistroAsistencia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistroAsistenciaActionPerformed(evt);
-            }
-        });
-
-        btnVolver.setBackground(new java.awt.Color(204, 153, 0));
-        btnVolver.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btnVolver.setForeground(new java.awt.Color(51, 51, 51));
-        btnVolver.setText("Volver");
-        btnVolver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolverActionPerformed(evt);
-            }
-        });
-
-        btnPermisos.setBackground(new java.awt.Color(204, 153, 0));
-        btnPermisos.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btnPermisos.setForeground(new java.awt.Color(51, 51, 51));
-        btnPermisos.setText("RRHH");
-        btnPermisos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPermisosActionPerformed(evt);
-            }
-        });
-
-        jButton7.setBackground(new java.awt.Color(204, 153, 0));
-        jButton7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(51, 51, 51));
-        jButton7.setText("Contratación");
+        jButton7.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(255, 255, 255));
+        jButton7.setText("Contratacíon");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
         });
 
-        btnPermisos1.setBackground(new java.awt.Color(204, 153, 0));
-        btnPermisos1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btnPermisos1.setForeground(new java.awt.Color(51, 51, 51));
-        btnPermisos1.setText("Permisos");
-        btnPermisos1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistroAsistencia.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        btnRegistroAsistencia.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistroAsistencia.setText("Registro de Asistencia");
+
+        btnPermisos.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        btnPermisos.setForeground(new java.awt.Color(255, 255, 255));
+        btnPermisos.setText("Permisos");
+        btnPermisos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPermisos1ActionPerformed(evt);
+                btnPermisosActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRegistroAsistencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPermisos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(btnPermisos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+        btnVolver.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        btnVolver.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolver.setText("Regresar");
+
+        btnRRHH.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        btnRRHH.setForeground(new java.awt.Color(255, 255, 255));
+        btnRRHH.setText("Recursos Humanos");
+        btnRRHH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRRHHActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnRegistroAsistencia, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                            .addComponent(btnPermisos, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                            .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                            .addComponent(btnRRHH, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnRegistroAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73)
+                .addGap(18, 18, 18)
                 .addComponent(btnPermisos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 312, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
+                .addComponent(btnRRHH, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 278, Short.MAX_VALUE)
                 .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(189, 189, 189)
-                    .addComponent(btnPermisos1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(433, Short.MAX_VALUE)))
+                .addGap(76, 76, 76))
+        );
+
+        javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
+        pnlPrincipal.setLayout(pnlPrincipalLayout);
+        pnlPrincipalLayout.setHorizontalGroup(
+            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 943, Short.MAX_VALUE)
+        );
+        pnlPrincipalLayout.setVerticalGroup(
+            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(925, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegistroAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroAsistenciaActionPerformed
-        RegistroAsistencia asistencia = new RegistroAsistencia();
-        asistencia.setVisible(true)
-;
+    private void btnRRHHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRRHHActionPerformed
+        RRHHGUI recursosHumanos = new RRHHGUI();
         this.setVisible(false);
-    }//GEN-LAST:event_btnRegistroAsistenciaActionPerformed
-
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnVolverActionPerformed
+        recursosHumanos.setVisible(true);
+    }//GEN-LAST:event_btnRRHHActionPerformed
 
     private void btnPermisosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPermisosActionPerformed
-      
-       this.setVisible(false);
-        new ListaDeRolesEmpleados().setVisible(true);
+          ocultarPaneles(panelPermisos);
+        panelPermisos.setSize(1000,800);
+        this.pnlPrincipal.add(panelPermisos);
+        pnlPrincipal.revalidate();
+        pnlPrincipal.repaint();
     }//GEN-LAST:event_btnPermisosActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        ContratacionPrincipal contratacion = new ContratacionPrincipal(this.controlAsistencias);
         this.setVisible(false);
-        RegistroAspirante aspirante = new RegistroAspirante();
-        aspirante.setVisible(true);
-        this.setVisible(false);
+        contratacion.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void btnPermisos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPermisos1ActionPerformed
-        this.setVisible(false);
-        new Gestor_Permiso().setVisible(true);
-    }//GEN-LAST:event_btnPermisos1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -284,14 +330,12 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPermisos;
-    private javax.swing.JButton btnPermisos1;
+    private javax.swing.JButton btnRRHH;
     private javax.swing.JButton btnRegistroAsistencia;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton7;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel pnlPrincipal;
     // End of variables declaration//GEN-END:variables
 }

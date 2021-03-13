@@ -5,15 +5,15 @@
  */
 
 package com.epn.trappi.models.rrhh.juanjo;
-import com.epn.trappi.gui.rrhh.Permisos.Permiso;
+import com.epn.trappi.db.rrhh.RolDePagosDb;
+import com.epn.trappi.gui.rrhh.Permisos.*;
 import com.epn.trappi.models.rrhh.Fecha;
-import com.epn.trappi.models.rrhh.contratacion.Contrato;
-import com.epn.trappi.models.rrhh.listas.ListaObservaciones;
-import com.epn.trappi.models.rrhh.listas.ListaPermisos;
-import com.epn.trappi.models.rrhh.listas.ListaRolesDePago;
+import com.epn.trappi.db.rrhh.ObservacionDb;
+import com.epn.trappi.db.rrhh.Permiso_EmpleadoDb;
+import com.teamdev.jxbrowser.deps.org.checkerframework.checker.units.qual.A;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -54,11 +54,110 @@ public class RolDePagos {
      * @param descuentos
      * @param estado
      */
-    public RolDePagos(Empleado empleado, Fecha fecha) throws Exception {
+    public RolDePagos(Empleado empleado, Fecha fecha) {
         this.empleado = empleado;
         this.fecha = fecha;
         this.calcularTotal();
     }
+
+    public void registrar() {
+        new RolDePagosDb().agregar(this);
+    }
+
+    private void calcularTotal() {
+        Observacion[] observaciones = new ObservacionDb().obtenerTodos(this.empleado.getCedula(), this.fecha.getMes());
+        if(observaciones.length == 0) {
+            //No hay novedades relacionadas con este empleado
+            this.total = Double.parseDouble(this.empleado.getSueldo());
+            this.descuentos = 0;
+        }
+        else {
+            //Hay novedades relacionadas con este empleado
+            ArrayList<Observacion> observacionesPorAtraso = new ArrayList<>();
+            ArrayList<Observacion> observacionesPorFaltas = new ArrayList<>();
+            ArrayList<Observacion> observacionesPorHorasExtra= new ArrayList<>();
+
+            for (Observacion obs : observaciones) {
+                switch (obs.getTipo()) {
+                    case "atraso":
+                        observacionesPorAtraso.add(obs);
+                    case "falta":
+                        observacionesPorFaltas.add(obs);
+                    case "tiempoExtra":
+                        observacionesPorHorasExtra.add(obs);
+                    default:
+                        observacionesPorAtraso.add(obs);
+                        System.out.println("El tipo dentro de la observación tiene un error de sintaxis, clasificándola como atraso");
+                }
+            }
+            double descuentosPorAtrasos = this.calcularAfectacionDeAtrasos(observacionesPorAtraso);
+            double bonoPorFaltas = this.calcularAfectacionDeFaltas(observacionesPorFaltas);
+            double bonoPorHorasExtra = this.calcularAfectacionDeHorasExtra(observacionesPorHorasExtra);
+
+            this.total = Double.parseDouble(this.empleado.getSueldo()) + bonoPorHorasExtra + bonoPorFaltas - descuentosPorAtrasos;
+        }
+        this.estado = "pendiente";
+    }
+
+    private double calcularAfectacionDeAtrasos(ArrayList<Observacion> observaciones) {
+        double descuentos = 0;
+        for (Observacion obs : observaciones) {
+            //El descuento es del 1% del sueldo por cada atraso, en caso de que el atraso sea menor de 3 horas
+            if (obs.getHorasImplicadas().getHora() <= 3) {
+                descuentos = descuentos + Double.parseDouble(this.empleado.getSueldo()) * 0.01;
+            }
+            //El descuento es del 2% del sueldo por cada atraso, en caso de que el atraso sea mayor de 3 horas
+            if (obs.getHorasImplicadas().getHora() > 3) {
+                descuentos = descuentos + Double.parseDouble(this.empleado.getSueldo()) * 0.02;
+            }
+        }
+        return descuentos;
+    }
+
+    /**
+     * Devuelve las recompensaciones por permisos solicitados
+     * @param observaciones
+     * @return
+     */
+    private double calcularAfectacionDeFaltas(ArrayList<Observacion> observaciones) {
+        double descuentos = 0;
+        double recompensacionPorFaltasJustificadas = 0;
+        ArrayList<Permiso> permisosAConsiderar = new ArrayList<>();
+        for (Observacion obs : observaciones) {
+            try {
+                Permiso permiso = new Permiso_EmpleadoDb().Permisos_para_ROL(obs.getEmpleado().getId(), obs.getFecha());
+                if(permiso != null) {
+                    if (!permisosAConsiderar.contains(permiso)) {
+                        permisosAConsiderar.add(permiso);
+                    }
+                }
+                descuentos += Double.parseDouble(obs.getEmpleado().getSueldo()) * 0.01;
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }
+        }
+
+        for (Permiso per : permisosAConsiderar) {
+            recompensacionPorFaltasJustificadas += Double.parseDouble(per.getVALORPAGARPERM());
+        }
+
+        return recompensacionPorFaltasJustificadas - descuentos;
+    }
+
+    private double calcularAfectacionDeHorasExtra(ArrayList<Observacion> observaciones) {
+        double descuentos = 0;
+        for (Observacion obs : observaciones) {
+            if (obs.getHorasImplicadas().getHora() <= 3) {
+                descuentos = descuentos + Double.parseDouble(this.empleado.getSueldo()) * 0.02;
+            }
+
+            if (obs.getHorasImplicadas().getHora() > 3) {
+                descuentos = descuentos + Double.parseDouble(this.empleado.getSueldo()) * 0.03;
+            }
+        }
+        return descuentos;
+    }
+
 
     public Empleado getEmpleado() {
         return empleado;
@@ -79,100 +178,6 @@ public class RolDePagos {
     public String getEstado() {
         return estado;
     }
-
-    private void calcularTotal() throws Exception {
-        Observacion[] observaciones = this.obtenerObservaciones();
-        if(observaciones.length == 0) {
-            //No hay novedades relacionadas con este empleado
-            this.total = Double.parseDouble(this.empleado.getSueldo());
-            this.descuentos = 0;
-        }
-        else {
-            //Hay novedades relacionadas con este empleado
-            ArrayList<Observacion> observacionesPorAtraso = new ArrayList<>();
-            ArrayList<Observacion> observacionesPorFaltas = new ArrayList<>();
-            ArrayList<Observacion> observacionesPorHorasExtra= new ArrayList<>();
-
-            for (Observacion obs : observaciones) {
-                switch (obs.getTipo()) {
-                    case "atraso":
-                        observacionesPorAtraso.add(obs);
-                    case "falta":
-                        observacionesPorFaltas.add(obs);
-                    case "horasExtra":
-                        observacionesPorHorasExtra.add(obs);
-                    default:
-                        observacionesPorAtraso.add(obs);
-                        System.out.println("El tipo dentro de la observacion tiene un error de sintaxis");
-                }
-            }
-            double descuentosPorAtrasos = this.calcularAfectacionDeAtrasos(observacionesPorAtraso);
-            double descuentosPorFaltas = this.calcularAfectacionDeFaltas(observacionesPorFaltas);
-            double bonoPorHorasExtra = this.calcularAfectacionDeHorasExtra(observacionesPorHorasExtra);
-//            double bonoPorPermisos = this.calcularBonoPorPermisos(this.empleado.getCedula());
-
-            this.descuentos = descuentosPorAtrasos + descuentosPorFaltas;
-            this.total = Double.parseDouble(this.empleado.getSueldo()) + bonoPorHorasExtra - descuentosPorAtrasos; //+ bonoPorPermisos;
-        }
-        this.estado = "pendiente";
-    }
-
-    private double calcularAfectacionDeAtrasos(ArrayList<Observacion> observaciones) {
-        double descuentos = 0;
-        for (Observacion obs : observaciones) {
-            if (obs.getHorasImplicadas().getHora() <= 3) {
-                descuentos = descuentos + Double.parseDouble(this.empleado.getSueldo()) * 0.01;
-            }
-
-            if (obs.getHorasImplicadas().getHora() > 3) {
-                descuentos = descuentos + Double.parseDouble(this.empleado.getSueldo()) * 0.02;
-            }
-        }
-        return descuentos;
-    }
-
-    private double calcularAfectacionDeFaltas(ArrayList<Observacion> observaciones) {
-        double descuentos = 0;
-        for (Observacion obs : observaciones) {
-            descuentos = descuentos + Double.parseDouble(this.empleado.getSueldo()) * 0.03;
-        }
-        return descuentos;
-    }
-
-    private double calcularAfectacionDeHorasExtra(ArrayList<Observacion> observaciones) {
-        double descuentos = 0;
-        for (Observacion obs : observaciones) {
-            if (obs.getHorasImplicadas().getHora() <= 3) {
-                descuentos = descuentos + Double.parseDouble(this.empleado.getSueldo()) * 0.02;
-            }
-
-            if (obs.getHorasImplicadas().getHora() > 3) {
-                descuentos = descuentos + Double.parseDouble(this.empleado.getSueldo()) * 0.03;
-            }
-        }
-        return descuentos;
-    }
-
-    private double calcularReposicionPorPermisos(String cedula) {
-        ListaPermisos listaPermisos = new ListaPermisos();
-        Permiso[] permisos = listaPermisos.obtenerTodos();
-        double total = 0;
-        for(Permiso per : permisos) {
-            if(per.getEmpleado().getCedula().equals(cedula)){
-                int initialUnformattedDate = Integer.parseInt(per.getFECHAINICIOPERM().split("-")[1]);
-                int finalUnformattedDate = Integer.parseInt(per.getFECHAFINPERM().split("-")[1]);
-                if (initialUnformattedDate <= this.fecha.getMes() && this.fecha.getMes() <= finalUnformattedDate) {
-                    total = total +  Integer.parseInt(per.getVALORPAGARPERM());
-                }
-            }
-        }
-        return total;
-    }
-
-    private Observacion[] obtenerObservaciones () throws Exception {
-        return new ListaObservaciones().obtenerTodos(this.empleado.getCedula(), this.fecha.getMes());
-    }
-
 
     public int getNumero() {
         return numero;

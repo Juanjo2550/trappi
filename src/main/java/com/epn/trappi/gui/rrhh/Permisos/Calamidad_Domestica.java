@@ -5,8 +5,9 @@
  */
 package com.epn.trappi.gui.rrhh.Permisos;
 
+import com.epn.trappi.db.rrhh.Permiso_EmpleadoDb;
 import com.epn.trappi.models.rrhh.Fecha;
-import com.epn.trappi.gui.rrhh.Gestor_Permiso;
+
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 
 /**
@@ -15,7 +16,8 @@ import com.epn.trappi.models.rrhh.juanjo.Empleado;
  */
 public class Calamidad_Domestica extends Permiso{
 
-    public Calamidad_Domestica(Empleado empleado, int NUMDIASPERM, String VALORPAGARPERM, String COMENTPERM, String FECHAINICIOPERM, String FECHAFINPERM, String ESTADOPERM) {
+    public Calamidad_Domestica(Empleado empleado, int NUMDIASPERM, String VALORPAGARPERM, String COMENTPERM,
+            String FECHAINICIOPERM, String FECHAFINPERM, String ESTADOPERM) {
         super(empleado, NUMDIASPERM, VALORPAGARPERM, COMENTPERM, FECHAINICIOPERM, FECHAFINPERM, ESTADOPERM);
     }
 
@@ -24,24 +26,7 @@ public class Calamidad_Domestica extends Permiso{
     }
 
 
- /*    
-    public int Calcular_Numero_Dias_Permiso(String TipoPermiso) {
-        this.tipoPermiso = TipoPermiso;
-        if("muerte de padres, hermanos, hijos, cónyuge".equals(TipoPermiso)){
-            this.numeroDias = 3;
-        }
-        if("muerte de nietos, padres del cónyuge o hermanos de la pareja".equals(TipoPermiso)){
-            this.numeroDias = 2;
-        }
-        if("enfermedad de hijos o conyuge".equals(TipoPermiso)){
-            this.numeroDias =8;
-        }
-        if("enfermedad de padres o hermanos".equals(TipoPermiso)){
-            this.numeroDias = 2;
-        }
-        return this.numeroDias;
-    }
-*/
+ 
 
     public Calamidad_Domestica() {
     }
@@ -72,6 +57,11 @@ public class Calamidad_Domestica extends Permiso{
     @Override
     public String calcularProporcionalPagar(double sueldo, int numeroDias) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void registrar() {
+        new Permiso_EmpleadoDb().agregar(this);
     }
 
 

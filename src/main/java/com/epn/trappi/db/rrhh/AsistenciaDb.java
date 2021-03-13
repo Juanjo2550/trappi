@@ -1,4 +1,4 @@
-package com.epn.trappi.models.rrhh.listas;
+package com.epn.trappi.db.rrhh;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.models.rrhh.Fecha;
@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ListaAsistencias implements Lista<Asistencia>{
+public class AsistenciaDb implements ModelDb<Asistencia> {
     private final Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance()).getConnection();
 
     @Override
@@ -25,7 +25,7 @@ public class ListaAsistencias implements Lista<Asistencia>{
     private void agregarEntrada(Asistencia nuevaAsistencia) {
         String sql = "INSERT INTO dbo.ASISTENCIA (IDREGASIS, IDEMP, FECHAREGASIS, OBSASIS, HORAINGRESO) VALUES ("
                 + (this.obtenerTodos().length + 1) + ","
-                + new ListaEmpleados().buscarUno(nuevaAsistencia.getEmpleado().getCedula()).getId() + ","
+                + new EmpleadoDb().buscarUno(nuevaAsistencia.getEmpleado().getCedula()).getId() + ","
                 + "'" + nuevaAsistencia.getFecha().toString() + "',"
                 + "'" + nuevaAsistencia.getObservaciones() + "',"
                 + "'" + nuevaAsistencia.getHoraInicio().toString() + "');";
@@ -53,11 +53,7 @@ public class ListaAsistencias implements Lista<Asistencia>{
         }
     }
 
-    @Override
-    public Boolean eliminar(String cedula) {
-        return false;
-    }
-
+    @Deprecated
     @Override
     public Asistencia buscarUno(String parametro) {
 //        throw new NotImplementedException();
@@ -66,7 +62,7 @@ public class ListaAsistencias implements Lista<Asistencia>{
 
     public Asistencia buscarUno(String cedula, Fecha fecha) throws Exception {
         Asistencia asistencia = null;
-        ListaEmpleados l1 = new ListaEmpleados();
+        EmpleadoDb l1 = new EmpleadoDb();
         Empleado empleado = l1.buscarUno(cedula);
         String sql =
                 "SELECT * FROM dbo.ASISTENCIA WHERE IDEMP = "
@@ -109,7 +105,7 @@ public class ListaAsistencias implements Lista<Asistencia>{
     @Override
     public Asistencia[] obtenerTodos() {
         ArrayList<Asistencia> asistencia = new ArrayList<>();
-        ListaEmpleados l1 = new ListaEmpleados();
+        EmpleadoDb l1 = new EmpleadoDb();
         Empleado[] empleados = l1.obtenerTodos();
         String sql = "SELECT * FROM dbo.ASISTENCIA";
         try{
@@ -152,7 +148,7 @@ public class ListaAsistencias implements Lista<Asistencia>{
 
     public Asistencia[] obtenerTodos(String cedula) throws Exception {
         ArrayList<Asistencia> asistencia = new ArrayList<>();
-        ListaEmpleados l1 = new ListaEmpleados();
+        EmpleadoDb l1 = new EmpleadoDb();
         Empleado empleado = l1.buscarUno(cedula);
         String sql =
                 "SELECT * FROM dbo.ASISTENCIA WHERE IDEMP = "
@@ -194,9 +190,9 @@ public class ListaAsistencias implements Lista<Asistencia>{
     }
 
     public static void main(String args[]) throws SQLException {
-        ListaAsistencias l1 = new ListaAsistencias();
+        AsistenciaDb l1 = new AsistenciaDb();
         try {
-            Asistencia a = new Asistencia(new ListaEmpleados().buscarUno("1722951165"), new Hora(), new Fecha(), "N/A");
+            Asistencia a = new Asistencia(new EmpleadoDb().buscarUno("1722951165"), new Hora(), new Fecha(), "N/A");
             l1.agregar(a);
 //            System.out.println(l1.obtenerTodos("1722951165").length);
 //            System.out.print(l1.buscarUno("1722951165", new Fecha(02, 03, 2021)).getEmpleado().getNombres());

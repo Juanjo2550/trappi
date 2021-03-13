@@ -59,6 +59,13 @@ public class Metododepago extends javax.swing.JFrame {
     return tar;
    }
    
+   public void vaciardatosdelosjtfield(){
+   jTextFieldtarjeta.setText(null);
+    jTextFieldcvv.setText(null);
+    jTextFieldtipo.setSelectedIndex(0);
+    jTextFieldfecha.setText(null);
+   }
+   
    public void llenardatos(){
         try {
             String tarjeta= "";
@@ -67,8 +74,7 @@ public class Metododepago extends javax.swing.JFrame {
             String fecha ="";
                                    
             Statement statement = connection.createStatement();
-            String sql = "select NUMEROTARJETA, CVV, FECHADECADUCIDAD,TIPO from TARJETAS T, CUENTABANCARIA C, CLIENTES L "+
-                         "where T.IDCUENTABANCARIA=C.IDCUENTABANCARIA and C.IDCLIENTE=L.IDCLIENTE and L.NOMBRECLIE='"+jt.getText()+"'";
+            String sql = "EXEC tarjeta_Consulta '"+Main.cliente.Cedula+"'";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                  tarjeta= resultSet.getString("NUMEROTARJETA");
@@ -89,8 +95,7 @@ public class Metododepago extends javax.swing.JFrame {
             DefaultTableModel tarjeta = (DefaultTableModel) tablatarjetas.getModel();
             String[] aux=new String[4];
             Statement statement = connection.createStatement();
-            String sql = "select NUMEROTARJETA, CVV, FECHADECADUCIDAD, TIPO from TARJETAS T, CUENTABANCARIA C, CLIENTES L "+
-                         "where T.IDCUENTABANCARIA=C.IDCUENTABANCARIA and C.IDCLIENTE=L.IDCLIENTE and L.NOMBRECLIE='"+jt.getText()+"'";
+            String sql = "EXEC TarjetaCLiente_consulta '"+Main.cliente.Cedula+"'";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                  
@@ -107,6 +112,14 @@ public class Metododepago extends javax.swing.JFrame {
         }
     }
     
+    public void habilitarjtfield(){
+    jTextFieldcvv.setEditable(true);
+        jTextFieldfecha.setEditable(true);
+        jTextFieldtarjeta.setEditable(false);
+        jTextFieldtipo.setEditable(true);  
+        jButtoneditarconfirmarcambios.setVisible(true);
+    }
+    
     
     
 
@@ -121,6 +134,7 @@ public class Metododepago extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jt = new javax.swing.JTextField();
+        jButton8 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -175,18 +189,32 @@ public class Metododepago extends javax.swing.JFrame {
         jt.setBackground(new java.awt.Color(0, 102, 102));
         jt.setForeground(new java.awt.Color(255, 255, 255));
 
+        jButton8.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jButton8.setText("Devolucion");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jt, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 1, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jt, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(1, 1, 1)))
                 .addGap(32, 32, 32))
         );
         jPanel1Layout.setVerticalGroup(
@@ -200,7 +228,9 @@ public class Metododepago extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 295, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 256, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addGap(26, 26, 26))
         );
@@ -422,7 +452,6 @@ public class Metododepago extends javax.swing.JFrame {
     RegistrarMetododepago rmp=new RegistrarMetododepago();
     rmp.setVisible(true);
     this.setVisible(false);
-    rmp.nombretitulo(jt.getText());
     
     }//GEN-LAST:event_jButtonregistrarActionPerformed
 
@@ -433,11 +462,7 @@ public class Metododepago extends javax.swing.JFrame {
     }//GEN-LAST:event_tablatarjetasMouseClicked
 
     private void jButtoneditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoneditar1ActionPerformed
-        jTextFieldcvv.setEditable(true);
-        jTextFieldfecha.setEditable(true);
-        jTextFieldtarjeta.setEditable(false);
-        jTextFieldtipo.setEditable(true);  
-        jButtoneditarconfirmarcambios.setVisible(true);
+    habilitarjtfield();
         
     }//GEN-LAST:event_jButtoneditar1ActionPerformed
 
@@ -466,11 +491,14 @@ public class Metododepago extends javax.swing.JFrame {
     ListaTar lis=new ListaTar();
     lis.borartarjeta(Integer.parseInt(jTextFieldtarjeta.getText()));
     Main.cliente.eliminarTarjeta(jTextFieldtarjeta.getText());
-    jTextFieldtarjeta.setText(null);
-    jTextFieldcvv.setText(null);
-    jTextFieldtipo.setSelectedIndex(0);
-    jTextFieldfecha.setText(null);
+    vaciardatosdelosjtfield();
     }//GEN-LAST:event_jbeliminarActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        Devolucion devolucion=new Devolucion();
+        this.setVisible(false);
+        devolucion.setVisible(true);
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     
     
@@ -517,6 +545,7 @@ public class Metododepago extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButtoneditar1;
     private javax.swing.JButton jButtoneditarconfirmarcambios;
     private javax.swing.JButton jButtonregistrar;

@@ -1,9 +1,7 @@
-package com.epn.trappi.models.rrhh.listas;
+package com.epn.trappi.db.rrhh;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
-import com.epn.trappi.models.rrhh.contratacion.PruebaAdmision;
 import com.epn.trappi.models.rrhh.contratacion.Aspirante;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,14 +11,14 @@ import java.util.ArrayList;
  *
  * @author Javier Erazo
  */
-public class ListaAspirantes implements Lista <Aspirante> {
+public class AspiranteDb implements ModelDb <Aspirante> {
     ArrayList <Aspirante> listaAspirantes;
     PreparedStatement pstm = null;
     ResultSet rs = null;
     DataBaseConnection dbInstance = DataBaseConnection.getInstance();
     Connection conn = dbInstance.getConnection();
     
-    public ListaAspirantes() {
+    public AspiranteDb() {
        // this.listaAspirantes = new ArrayList<>();
     }
     
@@ -86,10 +84,7 @@ public class ListaAspirantes implements Lista <Aspirante> {
         
     }
 
-    @Override
-    public Boolean eliminar(String parametro) {
-        return false; //To change body of generated methods, choose Tools | Templates.
-    }
+
 
     @Override
     public Aspirante buscarUno(String idAspirante) {

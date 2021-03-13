@@ -5,26 +5,25 @@
  */
 package com.epn.trappi.gui.rrhh;
 
-
+import com.epn.trappi.db.rrhh.AspiranteDb;
+import com.epn.trappi.db.rrhh.ModelDb;
+import com.epn.trappi.db.rrhh.PruebaAdmisionDb;
 import com.epn.trappi.models.rrhh.contratacion.Aspirante;
 import com.epn.trappi.models.rrhh.contratacion.PruebaAdmision;
-import com.epn.trappi.models.rrhh.listas.Lista;
-import com.epn.trappi.models.rrhh.listas.ListaAspirantes;
-import com.epn.trappi.models.rrhh.listas.ListaPruebasAdmision;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Javier Erazo
+ * @author Admin
  */
-public class RegistroAspirante extends javax.swing.JFrame {
-    
+public class PanelRegistroAspirante extends javax.swing.JPanel {
+
     private void listarAspirantes(){
-        Lista listaAspirantes = new ListaAspirantes();
+        ModelDb listaAspirantes =  new AspiranteDb();
         Aspirante[] aspirantes = (Aspirante[]) listaAspirantes.obtenerTodos();
-        ListaPruebasAdmision listaPruebas = new ListaPruebasAdmision();
+        PruebaAdmisionDb listaPruebas = new PruebaAdmisionDb();
         DefaultTableModel model = (DefaultTableModel) jTableAspirantes.getModel();
         model.setRowCount(0);
         
@@ -49,8 +48,7 @@ public class RegistroAspirante extends javax.swing.JFrame {
             jTableAspirantes.setModel(model);
         }
     }
-
-    public RegistroAspirante() {
+    public PanelRegistroAspirante() {
         initComponents();
         jTextActitudesAspirante.setEnabled(false);
         jTextCedulaAspirante.setEnabled(false);
@@ -61,11 +59,9 @@ public class RegistroAspirante extends javax.swing.JFrame {
         jTextApellidoAspirante.setEnabled(false);
         jTextAptitudesAspirante.setEnabled(false);
         jButGuardarAspirante.setEnabled(false);
-        
-        //Conexion a la base de datos 
         listarAspirantes();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,16 +71,6 @@ public class RegistroAspirante extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        btnVolver = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         PanelAspirante = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jTextNombreAspirante = new javax.swing.JTextField();
@@ -106,124 +92,6 @@ public class RegistroAspirante extends javax.swing.JFrame {
         jTableAspirantes = new javax.swing.JTable();
         jTextCargoAspirante = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LOGOtrappi.jpeg"))); // NOI18N
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jButton4.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jButton4.setText("Salir");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jButton4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
-
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("RECURSOS HUMANOS");
-
-        jButton1.setBackground(new java.awt.Color(204, 153, 0));
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(51, 51, 51));
-        jButton1.setText("Aspirantes");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        btnVolver.setBackground(new java.awt.Color(204, 153, 0));
-        btnVolver.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btnVolver.setForeground(new java.awt.Color(51, 51, 51));
-        btnVolver.setText("Volver");
-        btnVolver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolverActionPerformed(evt);
-            }
-        });
-
-        jButton5.setBackground(new java.awt.Color(204, 153, 0));
-        jButton5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(51, 51, 51));
-        jButton5.setText("Contratación");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jButton6.setBackground(new java.awt.Color(204, 153, 0));
-        jButton6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(51, 51, 51));
-        jButton6.setText("Contratos");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setBackground(new java.awt.Color(204, 153, 0));
-        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(51, 51, 51));
-        jButton2.setText("Empleados");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
 
         PanelAspirante.setBackground(new java.awt.Color(255, 255, 255));
         PanelAspirante.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -338,7 +206,7 @@ public class RegistroAspirante extends javax.swing.JFrame {
                 jTextPuntajeAspiranteKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextPuntajeAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 140, 110, 28));
+        PanelAspirante.add(jTextPuntajeAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 140, 190, 28));
 
         jTextActitudesAspirante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -350,7 +218,7 @@ public class RegistroAspirante extends javax.swing.JFrame {
                 jTextActitudesAspiranteKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextActitudesAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, 350, 28));
+        PanelAspirante.add(jTextActitudesAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, 440, 28));
 
         jTextAptitudesAspirante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -362,7 +230,7 @@ public class RegistroAspirante extends javax.swing.JFrame {
                 jTextAptitudesAspiranteKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextAptitudesAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, 350, 28));
+        PanelAspirante.add(jTextAptitudesAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, 440, 28));
 
         jTableAspirantes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -377,7 +245,7 @@ public class RegistroAspirante extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableAspirantes);
 
-        PanelAspirante.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 860, 450));
+        PanelAspirante.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 950, 440));
 
         jTextCargoAspirante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -389,75 +257,52 @@ public class RegistroAspirante extends javax.swing.JFrame {
                 jTextCargoAspiranteKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextCargoAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 140, 170, 28));
+        PanelAspirante.add(jTextCargoAspirante, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 140, 170, 28));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel18.setText("Cargo:");
-        PanelAspirante.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 140, -1, -1));
+        PanelAspirante.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 140, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(PanelAspirante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 1012, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(PanelAspirante, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(PanelAspirante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+            .addGap(0, 743, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(PanelAspirante, javax.swing.GroupLayout.PREFERRED_SIZE, 731, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.setVisible(false);
-        new RegistroAspirante().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        this.setVisible(false);
-        new PANTALLA_PRINCIPAL().setVisible(true);
-    }//GEN-LAST:event_btnVolverActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        this.setVisible(false);
-        new ContratarAspirante().setVisible(true);
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButGuardarAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButGuardarAspiranteActionPerformed
-      
-        Lista listaAspirantes = new ListaAspirantes();
-        ListaPruebasAdmision listaPruebas = new ListaPruebasAdmision();
-        Aspirante aspirante = new Aspirante(jTextNombreAspirante.getText(), jTextApellidoAspirante.getText(), jTextCedulaAspirante.getText(),
-                jTextTelefonoAspirante.getText(), jTextCargoAspirante.getText());
-        PruebaAdmision prueba = new PruebaAdmision(Integer.parseInt(jTextPuntajeAspirante.getText()), jTextActitudesAspirante.getText(), jTextAptitudesAspirante.getText());
-        
-        listaAspirantes.agregar(aspirante);
-        listaPruebas.agregar(prueba, jTextCedulaAspirante.getText());
-        listarAspirantes();
-        JOptionPane.showMessageDialog(null, "Aspirante registrado con éxito");
-    }//GEN-LAST:event_jButGuardarAspiranteActionPerformed
-
-    private void jTextNombreAspiranteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNombreAspiranteKeyTyped
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jTextNombreAspiranteKeyTyped
 
     private void jTextNombreAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNombreAspiranteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextNombreAspiranteActionPerformed
+
+    private void jTextNombreAspiranteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNombreAspiranteKeyTyped
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jTextNombreAspiranteKeyTyped
+
+    private void jButGuardarAspiranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButGuardarAspiranteActionPerformed
+        Aspirante aspirante = new Aspirante(jTextNombreAspirante.getText(), jTextApellidoAspirante.getText(), jTextCedulaAspirante.getText(),
+            jTextTelefonoAspirante.getText(), jTextCargoAspirante.getText());
+        PruebaAdmision prueba = new PruebaAdmision(Integer.parseInt(jTextPuntajeAspirante.getText()), jTextActitudesAspirante.getText(), jTextAptitudesAspirante.getText());
+        aspirante.registrar();
+        prueba.registrar(jTextCedulaAspirante.getText());
+        listarAspirantes();
+        JOptionPane.showMessageDialog(null, "Aspirante registrado con éxito");
+    }//GEN-LAST:event_jButGuardarAspiranteActionPerformed
 
     private void jButRegCliente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegCliente2ActionPerformed
         jTextActitudesAspirante.setEnabled(true);
@@ -527,69 +372,11 @@ public class RegistroAspirante extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextCargoAspiranteKeyTyped
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        this.setVisible(false);
-        new Contratos().setVisible(true);
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.setVisible(false);
-        new EmpleadoGui().setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistroAspirante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistroAspirante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistroAspirante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistroAspirante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RegistroAspirante().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelAspirante;
-    private javax.swing.JButton btnVolver;
     private javax.swing.JButton jButGuardarAspirante;
     private javax.swing.JButton jButRegCliente2;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -598,9 +385,6 @@ public class RegistroAspirante extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableAspirantes;
     private javax.swing.JTextField jTextActitudesAspirante;

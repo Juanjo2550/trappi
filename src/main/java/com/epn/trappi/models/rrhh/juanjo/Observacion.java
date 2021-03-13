@@ -1,14 +1,15 @@
 package com.epn.trappi.models.rrhh.juanjo;
 
+import com.epn.trappi.db.rrhh.ObservacionDb;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.Hora;
 
 public class Observacion {
-    private Empleado empleado;
-    private String tipo;
-    private String descripcion;
-    private Fecha fecha;
-    private Hora horasImplicadas;
+    private final Empleado empleado;
+    private final String tipo;
+    private final String descripcion;
+    private final Fecha fecha;
+    private final Hora horasImplicadas;
 
     public Observacion(Empleado empleado, String tipo, String descripcion, Fecha fecha, Hora horasImplicadas) {
         this.empleado = empleado;
@@ -20,6 +21,10 @@ public class Observacion {
 
     public Empleado getEmpleado() {
         return empleado;
+    }
+
+    public void agregar() {
+        new ObservacionDb().agregar(this);
     }
 
     public String getTipo() {

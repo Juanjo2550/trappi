@@ -5,6 +5,7 @@
  */
 package com.epn.trappi.gui.rrhh.Permisos;
 
+import com.epn.trappi.db.rrhh.Permiso_EmpleadoDb;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 
@@ -89,6 +90,11 @@ public class Enfermedad extends Permiso {
         }
         System.out.println(valorPagoPatrono + "hola");
         return Double.toString(valorPagoPatrono)  ;
+    }
+
+    @Override
+    public void registrar() {
+        new Permiso_EmpleadoDb().agregar(this);
     }
 
 }

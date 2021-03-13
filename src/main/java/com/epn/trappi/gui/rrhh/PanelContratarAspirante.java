@@ -5,8 +5,10 @@
  */
 package com.epn.trappi.gui.rrhh;
 
-
-import com.epn.trappi.*;
+import com.epn.trappi.db.rrhh.AspiranteDb;
+import com.epn.trappi.db.rrhh.EmpleadoDb;
+import com.epn.trappi.db.rrhh.ModelDb;
+import com.epn.trappi.db.rrhh.PruebaAdmisionDb;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.contratacion.Aspirante;
 import com.epn.trappi.models.rrhh.contratacion.Contrato;
@@ -14,28 +16,21 @@ import com.epn.trappi.models.rrhh.contratacion.PruebaAdmision;
 import com.epn.trappi.models.rrhh.juanjo.Administrativo;
 import com.epn.trappi.models.rrhh.juanjo.Conductor;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
-import com.epn.trappi.models.rrhh.listas.Lista;
-import com.epn.trappi.models.rrhh.listas.ListaAspirantes;
-import com.epn.trappi.models.rrhh.listas.ListaContratos;
-import com.epn.trappi.models.rrhh.listas.ListaEmpleados;
-import com.epn.trappi.models.rrhh.listas.ListaPruebasAdmision;
-
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Vector;
-import javax.swing.ButtonModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author stali
+ * @author Admin
  */
-public class ContratarAspirante extends javax.swing.JFrame {
+public class PanelContratarAspirante extends javax.swing.JPanel {
+
     private void listarAspirantes(){
-        Lista listaAspirantes = new ListaAspirantes();
+        ModelDb listaAspirantes = new AspiranteDb();
         Aspirante[] aspirantes = (Aspirante[]) listaAspirantes.obtenerTodos();
-        ListaPruebasAdmision listaPruebas = new ListaPruebasAdmision();
+        PruebaAdmisionDb listaPruebas = new PruebaAdmisionDb();
         DefaultTableModel model = (DefaultTableModel) jTableAspirantesAptos.getModel();
         model.setRowCount(0);
         
@@ -60,7 +55,8 @@ public class ContratarAspirante extends javax.swing.JFrame {
             jTableAspirantesAptos.setModel(model);
         }
     }
-    public ContratarAspirante() {
+    
+    public PanelContratarAspirante() {
         initComponents();
         jBtnContratar.setEnabled(false);
         jTextContratoFechaInicioDia.setEnabled(false);
@@ -78,7 +74,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
         jCmbContratoTipoEmpleado.setEnabled(false);
         jCmbContratoTipo.setEnabled(false);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -88,20 +84,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnGrpCopiaCedula = new javax.swing.ButtonGroup();
-        btnGrpCopiaTitulo = new javax.swing.ButtonGroup();
-        btnGrpREvisionMedica = new javax.swing.ButtonGroup();
         btnGrpSexo = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        btnVolver = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         PanelAspirante = new javax.swing.JPanel();
         jBtnBuscarAspirantes = new javax.swing.JButton();
         jBtnNuevoContrato = new javax.swing.JButton();
@@ -154,124 +137,6 @@ public class ContratarAspirante extends javax.swing.JFrame {
         jLabel40 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LOGOtrappi.jpeg"))); // NOI18N
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jButton4.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jButton4.setText("Salir");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jButton4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
-
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("RECURSOS HUMANOS");
-
-        jButton1.setBackground(new java.awt.Color(204, 153, 0));
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(51, 51, 51));
-        jButton1.setText("Aspirantes");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        btnVolver.setBackground(new java.awt.Color(204, 153, 0));
-        btnVolver.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btnVolver.setForeground(new java.awt.Color(51, 51, 51));
-        btnVolver.setText("Volver");
-        btnVolver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolverActionPerformed(evt);
-            }
-        });
-
-        jButton6.setBackground(new java.awt.Color(204, 153, 0));
-        jButton6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(51, 51, 51));
-        jButton6.setText("Contratos");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
-        jButton7.setBackground(new java.awt.Color(204, 153, 0));
-        jButton7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(51, 51, 51));
-        jButton7.setText("Contratación");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setBackground(new java.awt.Color(204, 153, 0));
-        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(51, 51, 51));
-        jButton2.setText("Empleados");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 346, Short.MAX_VALUE)
-                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
         PanelAspirante.setBackground(new java.awt.Color(255, 255, 255));
         PanelAspirante.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -297,11 +162,11 @@ public class ContratarAspirante extends javax.swing.JFrame {
                 jBtnNuevoContratoActionPerformed(evt);
             }
         });
-        PanelAspirante.add(jBtnNuevoContrato, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 99, -1));
+        PanelAspirante.add(jBtnNuevoContrato, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 99, -1));
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel14.setText("Usted está a punto de contratar un nuevo empleado, ingrese actitudes, aptitudes y puntaje deseado para mostrar sus opciones.");
-        PanelAspirante.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        PanelAspirante.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         jTableAspirantesAptos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -316,7 +181,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableAspirantesAptos);
 
-        PanelAspirante.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 840, 250));
+        PanelAspirante.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 950, 350));
 
         jTextContratoFechaInicioDia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -332,7 +197,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel18.setText("Tipo:");
-        PanelAspirante.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
+        PanelAspirante.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, -1));
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel20.setText("Fecha Fin:");
@@ -344,11 +209,11 @@ public class ContratarAspirante extends javax.swing.JFrame {
                 jCmbContratoTipoEmpleadoActionPerformed(evt);
             }
         });
-        PanelAspirante.add(jCmbContratoTipoEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 190, 110, 30));
+        PanelAspirante.add(jCmbContratoTipoEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 190, 130, 30));
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel16.setText("Datos Contrato");
-        PanelAspirante.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, 20));
+        PanelAspirante.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, 20));
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel21.setText("Fecha Inicio:");
@@ -356,7 +221,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel24.setText("Actitudes");
-        PanelAspirante.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, -1, -1));
+        PanelAspirante.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, -1, -1));
 
         jTextContratoPuntaje.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -368,11 +233,11 @@ public class ContratarAspirante extends javax.swing.JFrame {
                 jTextContratoPuntajeKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextContratoPuntaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 250, 90, 28));
+        PanelAspirante.add(jTextContratoPuntaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 250, 150, 28));
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel25.setText("Puntaje");
-        PanelAspirante.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 260, -1, -1));
+        PanelAspirante.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 260, -1, -1));
 
         jTextContratoBanco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -384,11 +249,11 @@ public class ContratarAspirante extends javax.swing.JFrame {
                 jTextContratoBancoKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextContratoBanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 110, 250, 28));
+        PanelAspirante.add(jTextContratoBanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 110, 290, 28));
 
         jLabel26.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel26.setText("Sueldo($)");
-        PanelAspirante.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 60, -1));
+        PanelAspirante.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 60, -1));
 
         jTextContratoSueldo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -400,11 +265,11 @@ public class ContratarAspirante extends javax.swing.JFrame {
                 jTextContratoSueldoKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextContratoSueldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, 160, 28));
+        PanelAspirante.add(jTextContratoSueldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, 160, 28));
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel27.setText("Depto.");
-        PanelAspirante.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, 50, -1));
+        PanelAspirante.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 50, -1));
 
         jTextContratoDepto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -416,11 +281,11 @@ public class ContratarAspirante extends javax.swing.JFrame {
                 jTextContratoDeptoKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextContratoDepto, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, 160, 28));
+        PanelAspirante.add(jTextContratoDepto, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 190, 160, 28));
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel28.setText("Cargo");
-        PanelAspirante.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, -1, -1));
+        PanelAspirante.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 150, -1, -1));
 
         jTextContratoCargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -432,15 +297,15 @@ public class ContratarAspirante extends javax.swing.JFrame {
                 jTextContratoCargoKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextContratoCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 150, 250, 28));
+        PanelAspirante.add(jTextContratoCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 150, 290, 28));
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel29.setText("Sexo");
-        PanelAspirante.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 200, -1, -1));
+        PanelAspirante.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, -1, -1));
 
         btnGrpSexo.add(rdbtFemenino);
         rdbtFemenino.setText("F");
-        PanelAspirante.add(rdbtFemenino, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 200, -1, -1));
+        PanelAspirante.add(rdbtFemenino, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 190, -1, -1));
 
         btnGrpSexo.add(rdbtMasculino);
         rdbtMasculino.setText("M");
@@ -449,7 +314,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
                 rdbtMasculinoActionPerformed(evt);
             }
         });
-        PanelAspirante.add(rdbtMasculino, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 200, -1, -1));
+        PanelAspirante.add(rdbtMasculino, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 190, -1, -1));
 
         jBtnContratar.setBackground(new java.awt.Color(0, 153, 153));
         jBtnContratar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -461,7 +326,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
                 jBtnContratarActionPerformed(evt);
             }
         });
-        PanelAspirante.add(jBtnContratar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, -1, -1));
+        PanelAspirante.add(jBtnContratar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, -1, -1));
 
         jTextContratoNumCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -473,7 +338,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
                 jTextContratoNumCuentaKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextContratoNumCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, 160, 28));
+        PanelAspirante.add(jTextContratoNumCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, 160, 28));
 
         jTextContratoAptitudes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -485,7 +350,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
                 jTextContratoAptitudesKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextContratoAptitudes, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 250, 180, 28));
+        PanelAspirante.add(jTextContratoAptitudes, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 250, 180, 28));
 
         jTextContratoActitudes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -497,19 +362,19 @@ public class ContratarAspirante extends javax.swing.JFrame {
                 jTextContratoActitudesKeyTyped(evt);
             }
         });
-        PanelAspirante.add(jTextContratoActitudes, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 190, 28));
+        PanelAspirante.add(jTextContratoActitudes, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, 210, 28));
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel30.setText("Tipo");
-        PanelAspirante.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 200, -1, -1));
+        PanelAspirante.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 190, -1, -1));
 
         jLabel31.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel31.setText("Banco");
-        PanelAspirante.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, -1, -1));
+        PanelAspirante.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 110, -1, -1));
 
         jLabel32.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel32.setText("Aptitudes");
-        PanelAspirante.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 260, -1, -1));
+        PanelAspirante.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, -1, -1));
 
         jLabel33.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel33.setText("DD");
@@ -521,7 +386,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
                 jCmbContratoTipoActionPerformed(evt);
             }
         });
-        PanelAspirante.add(jCmbContratoTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 110, 30));
+        PanelAspirante.add(jCmbContratoTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 190, 30));
 
         jBtnBuscarAspirantes1.setBackground(new java.awt.Color(0, 153, 153));
         jBtnBuscarAspirantes1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -537,7 +402,7 @@ public class ContratarAspirante extends javax.swing.JFrame {
 
         jLabel34.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel34.setText("# Cuenta");
-        PanelAspirante.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 60, -1));
+        PanelAspirante.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, 60, -1));
 
         jTextContratoFechaInicioMes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -663,41 +528,63 @@ public class ContratarAspirante extends javax.swing.JFrame {
         jLabel41.setText("MM");
         PanelAspirante.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(PanelAspirante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 1014, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(PanelAspirante, javax.swing.GroupLayout.DEFAULT_SIZE, 1002, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(PanelAspirante, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
-                        .addContainerGap())))
+            .addGap(0, 848, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(PanelAspirante, javax.swing.GroupLayout.DEFAULT_SIZE, 836, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.setVisible(false);
-        new RegistroAspirante().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jBtnBuscarAspirantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarAspirantesActionPerformed
+        PruebaAdmision pruebas = new PruebaAdmision();
+        ArrayList <Aspirante> aspirantesAptos = new ArrayList<>();
+        aspirantesAptos = pruebas.obtenerAspirantesAptos(jTextContratoActitudes.getText(), jTextContratoAptitudes.getText(), Integer.parseInt(jTextContratoPuntaje.getText()));
+        if (aspirantesAptos.size() > 0){
 
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        this.setVisible(false);
-        new PANTALLA_PRINCIPAL().setVisible(true);
-    }//GEN-LAST:event_btnVolverActionPerformed
+            PruebaAdmisionDb listaPruebas = new PruebaAdmisionDb();
+            DefaultTableModel model = (DefaultTableModel) jTableAspirantesAptos.getModel();
+            model.setRowCount(0);
+
+            for (Aspirante asp: aspirantesAptos){
+                Vector v = new Vector();
+                PruebaAdmision prueba = new PruebaAdmision();
+                prueba = listaPruebas.buscarUno(asp.getCedula());
+                if (prueba != null){
+                    v.add(asp.getNombre());
+                    v.add(asp.getApellidos());
+                    v.add(asp.getTelefono());
+                    v.add(asp.getCedula());
+                    v.add(asp.getCargoAspirante());
+                    v.add(prueba.getActitudes());
+                    v.add(prueba.getAptitudes());
+                    v.add(prueba.getPuntaje());
+                    model.addRow(v);
+                } else {
+                    continue;
+                }
+
+                jTableAspirantesAptos.setModel(model);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No existen aspirantes con esos resultados");
+        }
+
+    }//GEN-LAST:event_jBtnBuscarAspirantesActionPerformed
 
     private void jBtnNuevoContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNuevoContratoActionPerformed
         jBtnContratar.setEnabled(true);
@@ -716,43 +603,6 @@ public class ContratarAspirante extends javax.swing.JFrame {
         jCmbContratoTipoEmpleado.setEnabled(true);
         jCmbContratoTipo.setEnabled(true);
     }//GEN-LAST:event_jBtnNuevoContratoActionPerformed
-
-    private void jBtnBuscarAspirantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarAspirantesActionPerformed
-        PruebaAdmision pruebas = new PruebaAdmision();
-        ArrayList <Aspirante> aspirantesAptos = new ArrayList<>();
-        aspirantesAptos = pruebas.obtenerAspirantesAptos(jTextContratoActitudes.getText(), jTextContratoAptitudes.getText(), Integer.parseInt(jTextContratoPuntaje.getText()));
-        if (aspirantesAptos.size() > 0){
-           
-            ListaPruebasAdmision listaPruebas = new ListaPruebasAdmision();
-            DefaultTableModel model = (DefaultTableModel) jTableAspirantesAptos.getModel();
-            model.setRowCount(0);
-
-            for (Aspirante asp: aspirantesAptos){
-                Vector v = new Vector();
-                PruebaAdmision prueba = new PruebaAdmision();
-                prueba = listaPruebas.buscarUno(asp.getCedula());
-                if (prueba != null){
-                    v.add(asp.getNombre());
-                    v.add(asp.getApellidos());
-                    v.add(asp.getTelefono());
-                    v.add(asp.getCedula());
-                    v.add(asp.getCargoAspirante());
-                    v.add(prueba.getActitudes());
-                    v.add(prueba.getAptitudes());
-                    v.add(prueba.getPuntaje());
-                    model.addRow(v); 
-                } else {
-                    continue;
-                }
-
-                jTableAspirantesAptos.setModel(model);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "No existen aspirantes con esos resultados");
-        }
-        
-        
-    }//GEN-LAST:event_jBtnBuscarAspirantesActionPerformed
 
     private void jTextContratoFechaInicioDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextContratoFechaInicioDiaActionPerformed
         // TODO add your handling code here:
@@ -806,21 +656,6 @@ public class ContratarAspirante extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextContratoCargoKeyTyped
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        this.setVisible(false);
-        new Contratos().setVisible(true);
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        this.setVisible(false);
-        new ContratarAspirante().setVisible(true);
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.setVisible(false);
-        new EmpleadoGui().setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void rdbtMasculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbtMasculinoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rdbtMasculinoActionPerformed
@@ -845,41 +680,37 @@ public class ContratarAspirante extends javax.swing.JFrame {
             String tipoContrato = (String) jCmbContratoTipo.getSelectedItem();
             String tipoEmpleado = (String) jCmbContratoTipoEmpleado.getSelectedItem();
             String estadoEmp = "Activo";
-            
-            //Se realiza el registro del empleado en la base de datos 
-            Lista listaEmpleado = new ListaEmpleados();
+
+            //Se realiza el registro del empleado en la base de datos
+            ModelDb listaEmpleado = new EmpleadoDb();
             Empleado nuevoEmpleado = null;
-            if (tipoEmpleado.equalsIgnoreCase("conductor")){
-                int idNuevoEmp = listaEmpleado.obtenerTodos().length + 1;
-                nuevoEmpleado = new Conductor(idNuevoEmp, nombre, apellido, cedula, cargo, depto, numCuenta, banco, valorSueldo, estadoEmp, sexo);
-                listaEmpleado.agregar(nuevoEmpleado);
-            } else if (tipoEmpleado.equalsIgnoreCase("administrativo")) {
-                int idNuevoEmp = listaEmpleado.obtenerTodos().length + 1;
-                nuevoEmpleado = new Administrativo(idNuevoEmp, nombre, apellido, cedula, cargo, depto, numCuenta, banco, valorSueldo, estadoEmp, sexo);
-                listaEmpleado.agregar(nuevoEmpleado);
-                JOptionPane.showMessageDialog(null, "El Empleado Administrativo se contrató con éxito");
+            int idNuevoEmp = listaEmpleado.obtenerTodos().length + 1;
+            if(!tipoEmpleado.equalsIgnoreCase("--Seleccionar--")){
+                if (tipoEmpleado.equalsIgnoreCase("conductor")){
+                    nuevoEmpleado = new Conductor(idNuevoEmp, nombre, apellido, cedula, cargo, depto, numCuenta, banco, valorSueldo, estadoEmp, sexo);
+
+                } else if (tipoEmpleado.equalsIgnoreCase("administrativo")) {
+                    nuevoEmpleado = new Administrativo(idNuevoEmp, nombre, apellido, cedula, cargo, depto, numCuenta, banco, valorSueldo, estadoEmp, sexo);
+                }
+                //Se procede a registrar el contrato
+                Fecha fechaInicio = new Fecha(Integer.parseInt(jTextContratoFechaInicioDia.getText()),
+                    Integer.parseInt(jTextContratoFechaInicioMes.getText()),
+                    Integer.parseInt(jTextContratoFechaInicioAno.getText()));
+                Fecha fechaFin = new Fecha(Integer.parseInt(jTextContratoFechaFinDia.getText()),
+                    Integer.parseInt(jTextContratoFechaFinMes.getText()),
+                    Integer.parseInt(jTextContratoFechaFinAno.getText()));
+                Contrato contrato = new Contrato(fechaInicio, fechaFin, tipoContrato, valorSueldo);
+                contrato.solicitarRegistroEmpleado(nuevoEmpleado);
+                contrato.registrar(cedula);
+                
+                JOptionPane.showMessageDialog(null, "El Empleado se contrató con éxito");
             } else {
                 JOptionPane.showMessageDialog(null, "Seleccione el tipo de empleado");
             }
-            if (nuevoEmpleado != null){
-                //Se procede a registrarContrato el contrato
-                Fecha fechaInicio = new Fecha(Integer.parseInt(jTextContratoFechaInicioDia.getText()),
-                        Integer.parseInt(jTextContratoFechaInicioMes.getText()),
-                        Integer.parseInt(jTextContratoFechaInicioAno.getText()));
-                Fecha fechaFin = new Fecha(Integer.parseInt(jTextContratoFechaFinDia.getText()),
-                        Integer.parseInt(jTextContratoFechaFinMes.getText()),
-                        Integer.parseInt(jTextContratoFechaFinAno.getText()));
-                Contrato contrato = new Contrato();
-                contrato.registrarContrato(fechaInicio, fechaFin, tipoContrato, valorSueldo, cedula);               
-                JOptionPane.showMessageDialog(null, "El Empleado se contrató con éxito");
-            }
-                
-            
-
         } else {
             JOptionPane.showMessageDialog(null, "Debe buscar y seleccionar el aspirante a contratar...");
         }
-        
+
     }//GEN-LAST:event_jBtnContratarActionPerformed
 
     private void jTextContratoNumCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextContratoNumCuentaActionPerformed
@@ -978,79 +809,19 @@ public class ContratarAspirante extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextContratoFechaFinDiaKeyTyped
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ContratarAspirante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ContratarAspirante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ContratarAspirante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ContratarAspirante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ContratarAspirante().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelAspirante;
-    private javax.swing.ButtonGroup btnGrpCopiaCedula;
-    private javax.swing.ButtonGroup btnGrpCopiaTitulo;
-    private javax.swing.ButtonGroup btnGrpREvisionMedica;
     private javax.swing.ButtonGroup btnGrpSexo;
-    private javax.swing.JButton btnVolver;
     private javax.swing.JButton jBtnBuscarAspirantes;
     private javax.swing.JButton jBtnBuscarAspirantes1;
     private javax.swing.JButton jBtnContratar;
     private javax.swing.JButton jBtnNuevoContrato;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JComboBox<String> jCmbContratoTipo;
     private javax.swing.JComboBox<String> jCmbContratoTipoEmpleado;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel24;
@@ -1071,8 +842,6 @@ public class ContratarAspirante extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableAspirantesAptos;
     private javax.swing.JTextField jTextContratoActitudes;

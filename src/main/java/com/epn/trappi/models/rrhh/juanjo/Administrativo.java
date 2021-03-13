@@ -6,6 +6,8 @@
 
 package com.epn.trappi.models.rrhh.juanjo;
 
+import com.epn.trappi.db.rrhh.EmpleadoDb;
+
 /**
  * 
  * @author Juan Jaramillo <juanjodev02 at juan.jaramillo02@epn.edu.ec>
@@ -16,14 +18,19 @@ public class Administrativo extends Empleado {
     }
 
     @Override
-    public void notificarEntrada() {
-        this.getControlAsistencias().registrarInicioDeJornada(this.getCedula());
+    public void registrar() {
+        new EmpleadoDb().agregar(this);
     }
 
     @Override
-    public void notificarSalida() {
+    public void notificarEntrada(ControlAsistencias controlAsistencias) {
+        controlAsistencias.registrarInicioDeJornada(this);
+    }
+
+    @Override
+    public void notificarSalida(ControlAsistencias controlAsistencias) {
         try {
-            this.getControlAsistencias().registrarFinDeJornada(this.getCedula());
+            controlAsistencias.registrarFinDeJornada(this.getCedula());
         } catch (Exception e) {
             System.out.println(e.toString());
         }

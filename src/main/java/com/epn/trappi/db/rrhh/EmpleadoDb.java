@@ -1,8 +1,7 @@
-package com.epn.trappi.models.rrhh.listas;
+package com.epn.trappi.db.rrhh;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.models.rrhh.juanjo.Administrativo;
-import com.epn.trappi.models.rrhh.juanjo.Asistencia;
 import com.epn.trappi.models.rrhh.juanjo.Conductor;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 
@@ -10,12 +9,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ListaEmpleados implements Lista<Empleado> {
+public class EmpleadoDb implements ModelDb<Empleado> {
     private final Connection connection = Objects.requireNonNull(DataBaseConnection.getInstance()).getConnection();
 
     public void agregar(Empleado nuevoEmpleado) {
         String insertSql;
         if (nuevoEmpleado instanceof Conductor) {
+            
             insertSql = "INSERT INTO dbo.EMPLEADO(IDEMP, NOMBREEMP, APELLIDOEMP, CEDULAEMP, CARGOEMP, DEPARTAMENTOEMP, CUENTABANCARIAEMP, BANCOEMP, ESTADOEMP, TIPOEMP, SUELDOEMP, SEXOEMP) " +
                     "VALUES (" +
                     (this.obtenerTodos().length + 1) + "," +
@@ -46,25 +46,12 @@ public class ListaEmpleados implements Lista<Empleado> {
                     "'" + nuevoEmpleado.getSueldo() + "'," +
                     "'" + nuevoEmpleado.getSexo() + "');";
         }
-        ResultSet resultSet;
         try {
             PreparedStatement prepsInsertProduct = this.connection.prepareStatement(insertSql);
             prepsInsertProduct.execute();
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
-    }
-    public Boolean eliminar(String cedula){
-        String sql = "DELETE FROM dbo.EMPLEADO WHERE CEDULAEMP='" + cedula + "';";
-        boolean success = false;
-        try {
-            Statement createdStatment = this.connection.createStatement();
-            createdStatment.executeQuery(sql);
-            success = true;
-        } catch (SQLException e) {
-            System.out.println(e.toString());
-        }
-        return success;
     }
     public Empleado buscarUno(String cedula){
         String sql = "SELECT * FROM dbo.EMPLEADO WHERE CEDULAEMP='" + cedula + "';";
@@ -206,7 +193,7 @@ public class ListaEmpleados implements Lista<Empleado> {
     }
 
     public static void main(String args[]) throws SQLException {
-        ListaEmpleados l1 = new ListaEmpleados();
+        EmpleadoDb l1 = new EmpleadoDb();
 //        l1.agregar(new Conductor(
 //                "Alisson Dayana",
 //                "Taco Almachi",

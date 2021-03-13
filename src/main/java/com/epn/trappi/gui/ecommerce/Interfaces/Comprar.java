@@ -83,27 +83,55 @@ public class Comprar extends javax.swing.JFrame {
         cantidad1 = Integer.parseInt((String) modelo.getValueAt(jTable1.getSelectedRow(), 3));
     }
 
-    public String buscarTarjeta(String tarjeta) {
-        String tipo = "";
-        try {
+    
+    
+    public void agregarAlcarrito(){
+    int cantidad = carrito.cantidadCompraProducto();
+        carrito.añadirProducto(nombre1, precio1, cantidad, marca1);
+        DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
+        String[] aux = new String[3];
+        aux[0] = nombre1;
+        aux[1] = String.valueOf(precio1);
+        aux[2] = Integer.toString(cantidad);
+        modelo.addRow(aux);
+        jTable2.setModel(modelo);
+    }
+    
+    public void confirmarcompra(){
+     String salida = "";
 
-            Statement statement = connection.createStatement();
-            String sql = "select TIPO from TARJETAS T"
-                    + "where T.IDTARJETAS='" + tarjeta + "'";
-            ResultSet resultSet = statement.executeQuery(sql);
+        if (carrito.confirmarContenido() == true) {
+            carrito.factura = new Factura(carrito.Productos);
+            String nombre = Main.cliente.Nombre;
+            String cedula = Main.cliente.Cedula;
+            ArrayList<Producto> detalle = carrito.factura.Detalle;
+            //ArrayList<Articulo> detalle = carrito.factura.Detalle;
+            Double subtotal = carrito.factura.calcularSubTotal();
+            Double iva = carrito.factura.calcularImpuestos();
+            Double total = carrito.factura.calcularTotal();
+            FacturaFis factu = new FacturaFis();
+            Date fecha = new Date();
 
-            while (resultSet.next()) {
-                tipo = resultSet.getString("TIPO");
+            String date = fecha.getDay() + "/" + fecha.getMonth() + "/" + fecha.getYear();
+            factu.cargarDatos(000, nombre, cedula, date, detalle, subtotal, iva, total);
+            factu.setVisible(true);
+
+            if (JOptionPane.showConfirmDialog(null, "¿Desea pagar?", "El proceso de pago empezará", JOptionPane.YES_NO_OPTION) == YES_OPTION) {
+                TarjetaUsuario tarusu = new TarjetaUsuario();
+                tarusu.setVisible(true);
+                factu.setVisible(false);
+                this.setVisible(false);
             }
-
-            return tipo;
-
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            return tipo;
         }
     }
-
+    
+    public void vaciarcarro(){
+    DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
+        int filas = modelo.getRowCount();
+        for (int i = 0; i < filas; i++) {
+            modelo.removeRow(0);
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -114,6 +142,7 @@ public class Comprar extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jt = new javax.swing.JTextField();
+        jButton8 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jTextFieldBuscar = new javax.swing.JTextField();
@@ -174,6 +203,19 @@ public class Comprar extends javax.swing.JFrame {
         jt.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jt.setForeground(new java.awt.Color(255, 255, 255));
         jt.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtActionPerformed(evt);
+            }
+        });
+
+        jButton8.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jButton8.setText("Devolucion");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -187,7 +229,8 @@ public class Comprar extends javax.swing.JFrame {
                     .addComponent(jt, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)))
+                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                        .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -201,6 +244,8 @@ public class Comprar extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addGap(43, 43, 43))
@@ -376,7 +421,7 @@ public class Comprar extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -401,15 +446,7 @@ public class Comprar extends javax.swing.JFrame {
 
     private void jButtonagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonagregarActionPerformed
         obtenerproductodestock();
-        int cantidad = carrito.cantidadCompraProducto();
-        carrito.añadirProducto(nombre1, precio1, cantidad, marca1);
-        DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
-        String[] aux = new String[3];
-        aux[0] = nombre1;
-        aux[1] = String.valueOf(precio1);
-        aux[2] = Integer.toString(cantidad);
-        modelo.addRow(aux);
-        jTable2.setModel(modelo);
+        agregarAlcarrito();
     }//GEN-LAST:event_jButtonagregarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -417,42 +454,14 @@ public class Comprar extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        String salida = "";
-
-        if (carrito.confirmarContenido() == true) {
-            carrito.factura = new Factura(carrito.Productos);
-            String nombre = Main.cliente.Nombre;
-            String cedula = Main.cliente.Cedula;
-            ArrayList<Producto> detalle = carrito.factura.Detalle;
-            //ArrayList<Articulo> detalle = carrito.factura.Detalle;
-            Double subtotal = carrito.factura.calcularSubTotal();
-            Double iva = carrito.factura.calcularImpuestos();
-            Double total = carrito.factura.calcularTotal();
-            FacturaFis factu = new FacturaFis();
-            Date fecha = new Date();
-
-            String date = fecha.getDay() + "/" + fecha.getMonth() + "/" + fecha.getYear();
-            factu.cargarDatos(000, nombre, cedula, date, detalle, subtotal, iva, total);
-            factu.setVisible(true);
-
-            if (JOptionPane.showConfirmDialog(null, "¿Desea pagar?", "El proceso de pago empezará", JOptionPane.YES_NO_OPTION) == YES_OPTION) {
-                TarjetaUsuario tarusu = new TarjetaUsuario();
-                tarusu.setVisible(true);
-                factu.setVisible(false);
-                this.setVisible(false);
-            }
-        }
+    confirmarcompra();
 
 
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         carrito.vaciarCarrito();
-        DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
-        int filas = modelo.getRowCount();
-        for (int i = 0; i < filas; i++) {
-            modelo.removeRow(0);
-        }
+        vaciarcarro();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButtoneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoneliminarActionPerformed
@@ -465,6 +474,16 @@ public class Comprar extends javax.swing.JFrame {
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
         jButtoneliminar.setVisible(true);
     }//GEN-LAST:event_jTable2MouseClicked
+
+    private void jtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        Devolucion devolucion=new Devolucion();
+        this.setVisible(false);
+        devolucion.setVisible(true);
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -510,6 +529,7 @@ public class Comprar extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButtonagregar;
     private javax.swing.JButton jButtoneliminar;
     private javax.swing.JLabel jLabel1;

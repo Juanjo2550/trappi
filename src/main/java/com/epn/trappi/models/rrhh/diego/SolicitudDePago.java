@@ -8,7 +8,7 @@ package com.epn.trappi.models.rrhh.diego;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
-import com.epn.trappi.models.rrhh.listas.ListaRolesDePago;
+import com.epn.trappi.db.rrhh.RolDePagosDb;
 import java.util.ArrayList;
 
 /**
@@ -32,6 +32,20 @@ public class SolicitudDePago {
         this.estado = estado;
         this.empleadoAPagar = empleadoAPagar;
         this.rol = rol;
+    }
+
+    public SolicitudDePago(int numero,String cuenta,double total, Fecha fechaSolicitud, String estado) {
+        this.numero = numero;
+        this.empleadoAPagar.getCuentaBancaria();
+        this.rol.getTotal();
+        this.fechaSolicitud = fechaSolicitud;
+        this.estado = estado;
+        
+    }
+
+    public SolicitudDePago(Fecha fechaSolicitud, String estado) {
+        this.fechaSolicitud = fechaSolicitud;
+        this.estado = estado;
     }
 
 
@@ -127,7 +141,7 @@ public class SolicitudDePago {
     
     public SolicitudDePago[] SolicitarPago() throws Exception{
         
-        ListaRolesDePago r1  = new ListaRolesDePago();
+        RolDePagosDb r1  = new RolDePagosDb();
         r1.obtenerTodos();
          
         ArrayList<SolicitudDePago> roles = new ArrayList<>();
@@ -164,6 +178,11 @@ public class SolicitudDePago {
     nuevoPago.realizarPago();
     }
     }*/
+
+    @Override
+    public String toString() {
+        return "SolicitudDePago{" + "montoTotal=" + montoTotal + ", cuentaBancaria=" + cuentaBancaria + '}';
+    }
 
 
 }
