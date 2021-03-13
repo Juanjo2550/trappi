@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -59,7 +61,7 @@ public class Inventario {
             }
         }
     }
-    
+
     public void disminuirStock(ArrayList<Bien> ListaADisminuir) {
         for (Bien bien : ListaADisminuir) {
             try {
@@ -97,5 +99,21 @@ public class Inventario {
             }
         }
         analizador.analizarStock();*/
+    }
+
+    public void cargarInventario(JTable jtbProductos) {
+
+        String[] titulos = {"Nombre Producto", "Marca", "Precio unitario", "Proveedor", "Cantidad"};
+        String[] fila = new String[5];
+        DefaultTableModel modelo = new DefaultTableModel(null, titulos);
+        for (Bien cantBien : this.getListaDeBienes().getListaBienes()) {
+            fila[0] = cantBien.getNombre();
+            fila[1] = "" + cantBien.getMarca();
+            fila[2] = "" + cantBien.getPrecio();
+            fila[3] = "" + cantBien.getProveeedor().getRazonSocial();
+            fila[4] = "" + cantBien.getCantidad();
+            modelo.addRow(fila);
+        }
+        jtbProductos.setModel(modelo);
     }
 }

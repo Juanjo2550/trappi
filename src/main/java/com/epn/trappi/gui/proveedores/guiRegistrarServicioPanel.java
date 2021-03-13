@@ -7,7 +7,6 @@ package com.epn.trappi.gui.proveedores;
 
 import com.epn.trappi.db.proveedores.ProveedoresDb;
 import com.epn.trappi.models.proveedores.ListaProveedores;
-import com.epn.trappi.models.proveedores.Producto;
 import com.epn.trappi.models.proveedores.Proveedor;
 import com.epn.trappi.models.proveedores.Servicio;
 import javax.swing.JOptionPane;
@@ -26,14 +25,10 @@ public class guiRegistrarServicioPanel extends javax.swing.JPanel {
      */
     public guiRegistrarServicioPanel() {
         initComponents();
-        cargarProveedor();
+        listaProveedores.cargarProveedorCombobox(cmbProvedor);
     }
 
-    private void cargarProveedor() {
-        listaProveedores.getListaDeProveedores().forEach(prov -> {
-            cmbProvedor.addItem(prov.getRazonSocial());
-        });
-    }
+    
 
     private boolean validarNombre(String direccion) {
         if (direccion.length() > 50 || direccion.trim().equals("")) {

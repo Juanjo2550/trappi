@@ -16,7 +16,7 @@ import javax.swing.JPanel;
  * @author Peterca
  */
 public class Principal extends javax.swing.JFrame {
-    
+
     private ArrayList<JPanel> panelesOpciones = new ArrayList<>();
 
     /**
@@ -34,7 +34,7 @@ public class Principal extends javax.swing.JFrame {
         jBCerrarSesion.setVisible(false);
         showPanel(null);
     }
-    
+
     private void showPanel(JPanel panel) {
         panelesOpciones.forEach(p
                 -> {
@@ -49,7 +49,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void ponerTituloYsub(String titulo, String subtitulo) {
         labelTitulo.setText(titulo);
         labelSubTitulo.setText(subtitulo);
@@ -567,7 +567,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        
+
         if (jPaCerrarSesion.isVisible()) {
             jPaCerrarSesion.setVisible(false);
         } else {
@@ -585,17 +585,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButDashboardActionPerformed
 
     private void jButComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButComprasActionPerformed
-        if (jPanOpcInventario.isVisible()) {
-            jPanOpcInventario.setVisible(false);
-        }
-        if (jPanOpcProductos.isVisible()) {
-            jPanOpcProductos.setVisible(false);
-        }
-        if (jPanOpcProveedores.isVisible()) {
-            jPanOpcProveedores.setVisible(false);
-        } else {
-            jPanOpcProveedores.setVisible(true);
-        }
+        showPanel(jPanOpcProveedores);
     }//GEN-LAST:event_jButComprasActionPerformed
 
     private void jButVerTodFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButVerTodFacturaActionPerformed
@@ -665,8 +655,8 @@ public class Principal extends javax.swing.JFrame {
         try {
             new CambiaPanel(PanelVerTodos, new guiComprasPanel());
         } catch (IOException ex) {
-           Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         showPanel(null);
     }//GEN-LAST:event_jButVerTodFactura5ActionPerformed
 

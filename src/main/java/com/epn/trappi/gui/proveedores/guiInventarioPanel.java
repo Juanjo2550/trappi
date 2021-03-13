@@ -5,10 +5,8 @@
  */
 package com.epn.trappi.gui.proveedores;
 
-import com.epn.trappi.models.proveedores.Bien;
 import com.epn.trappi.models.proveedores.Inventario;
 import java.io.IOException;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,31 +14,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class guiInventarioPanel extends javax.swing.JPanel {
 
-    DefaultTableModel modelo;
-    private Inventario inventario;
+    private final Inventario inventario;
 
     /**
      * Creates new form guiListaProductosPanel
+     *
+     * @throws java.io.IOException
      */
     public guiInventarioPanel() throws IOException {
         this.inventario = new Inventario();
         initComponents();
-        cargarInventario();
-    }
-
-    public void cargarInventario() {
-        String[] titulos = {"Nombre Producto", "Marca","Precio unitario", "Proveedor", "Cantidad"};
-        String[] fila = new String[5];
-        modelo = new DefaultTableModel(null, titulos);
-        for (Bien cantBien : inventario.getListaDeBienes().getListaBienes()) {
-            fila[0] = cantBien.getNombre();
-            fila[1] = "" + cantBien.getMarca();
-            fila[2] = "" + cantBien.getPrecio();
-            fila[3] = "" + cantBien.getProveeedor().getRazonSocial();
-            fila[4] = "" + cantBien.getCantidad();
-            modelo.addRow(fila);
-        }
-        jtbProductos.setModel(modelo);
+        inventario.cargarInventario(jtbProductos);
     }
 
     /**
@@ -80,11 +64,6 @@ public class guiInventarioPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jtbProductos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtbProductosMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(jtbProductos);
 
         javax.swing.GroupLayout PanelVerTodosLayout = new javax.swing.GroupLayout(PanelVerTodos);
@@ -106,10 +85,6 @@ public class guiInventarioPanel extends javax.swing.JPanel {
 
         add(PanelVerTodos);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jtbProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbProductosMouseClicked
-
-    }//GEN-LAST:event_jtbProductosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
