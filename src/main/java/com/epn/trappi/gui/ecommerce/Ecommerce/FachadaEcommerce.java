@@ -49,8 +49,8 @@ public class FachadaEcommerce {
     
     public void enviarAfinanzas(int numeroFactura,double totalFactura){
       
-      Ingreso ingreso = new Ingreso(String.valueOf(numeroFactura),totalFactura);//String //Double
-      ingreso.registrarIngreso(ingreso);
+      Ingreso ingreso = new Ingreso();//String //Double
+      ingreso.registrarIngreso(numeroFactura,totalFactura);
     }
     
     public void enviarAProovedores(ArrayList<Bien> detalle)

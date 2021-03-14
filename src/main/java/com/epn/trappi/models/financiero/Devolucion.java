@@ -45,7 +45,7 @@ public class Devolucion {
     }
     private double calcularValorDevolucion(int nroFactura){
         FinancieroDb db = new FinancieroDb();
-        this.valorDevolucion= 0.12 * db.consultarFacturaPorNroFactura(nroFactura);
+        this.valorDevolucion= (0.12/1.12 )* db.consultarFacturaPorNroFactura(nroFactura);
         return valorDevolucion;
     }
 

@@ -4,6 +4,7 @@ package com.epn.trappi.gui.ecommerce.Interfaces;
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.Ecommerce.SolicitudDevolucion;
+import com.epn.trappi.models.financiero.Devolucion;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,11 +14,11 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class Devolucion extends javax.swing.JFrame {
+public class DevolucionEcommerce extends javax.swing.JFrame {
 
     DataBaseConnection dbInstance = DataBaseConnection.getInstance();
     Connection connection = dbInstance.getConnection();
-    public Devolucion() {
+    public DevolucionEcommerce() {
         initComponents();
         this.setSize(1300, 690);
         this.setLocationRelativeTo(null);
@@ -48,7 +49,7 @@ public class Devolucion extends javax.swing.JFrame {
                 facturas.addRow(factura);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Devolucion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DevolucionEcommerce.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
@@ -308,8 +309,11 @@ public class Devolucion extends javax.swing.JFrame {
 
     private void jButtonSolicitarDevolucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSolicitarDevolucionActionPerformed
         SolicitudDevolucion sd=new SolicitudDevolucion();
-        sd.solicitarDevolucion(Integer.parseInt(jTextFieldFactura.getText()));
-        JOptionPane.showMessageDialog(null, "La devolucion se ha realizado correctamente");
+        Devolucion devolucion = new Devolucion();
+        devolucion.procesarDevolucion(sd.solicitarDevolucion(Integer.parseInt(jTextFieldFactura.getText())));
+        this.setVisible(false);
+        DevolucionEcommerce devolucionEc = new DevolucionEcommerce();
+        devolucionEc.setVisible(true);
     }//GEN-LAST:event_jButtonSolicitarDevolucionActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -341,20 +345,21 @@ public class Devolucion extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Devolucion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DevolucionEcommerce.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Devolucion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DevolucionEcommerce.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Devolucion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DevolucionEcommerce.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Devolucion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DevolucionEcommerce.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Devolucion().setVisible(true);
+                new DevolucionEcommerce().setVisible(true);
             }
         });
     }

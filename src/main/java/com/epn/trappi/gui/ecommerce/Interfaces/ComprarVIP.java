@@ -580,7 +580,7 @@ public class ComprarVIP extends javax.swing.JFrame {
     }//GEN-LAST:event_jtActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        Devolucion devolucion = new Devolucion();
+        DevolucionEcommerce devolucion = new DevolucionEcommerce();
         devolucion.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton8ActionPerformed

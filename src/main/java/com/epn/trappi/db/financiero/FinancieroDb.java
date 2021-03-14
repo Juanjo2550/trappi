@@ -148,6 +148,21 @@ public class FinancieroDb {
         }
         return valorADevolver;
     }
+    public double consultarSubtotalFacturaPorNroFactura(int nroFactura){
+        double valorADevolver=0;
+        try{
+        Statement statement = connection.createStatement();
+        String sql = "select SUBTOTAL from dbo.FACTURAS WHERE NUMEROFACTURA="+nroFactura;
+        ResultSet resultSet = statement.executeQuery(sql);
+        while(resultSet.next()){
+            valorADevolver=resultSet.getDouble(1);
+            System.out.println("El valor a total de Factura es:"+String.valueOf(valorADevolver));
+        }
+        }catch( Exception e){
+            System.out.println(e);
+        }
+        return valorADevolver;
+    }
     public String buscarCedulaPorNroFactura(int nroFactura){
         String cedulaPropietario="";
         try{

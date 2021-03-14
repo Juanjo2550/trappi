@@ -574,7 +574,7 @@ public class Comprar extends javax.swing.JFrame {
     }//GEN-LAST:event_jtActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        Devolucion devolucion=new Devolucion();
+        DevolucionEcommerce devolucion=new DevolucionEcommerce();
         this.setVisible(false);
         devolucion.setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
