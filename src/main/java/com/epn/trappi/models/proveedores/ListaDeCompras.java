@@ -1,5 +1,6 @@
 package com.epn.trappi.models.proveedores;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -31,6 +32,17 @@ public class ListaDeCompras {
     
     public void retirarCompra(int indice){
         compras.remove(indice);
+    }
+    
+    public Compra obtenerCompra(int indentificacion) {
+        Compra resultado = null;
+        for (Compra compra : compras) {
+            if (compra.getIdentificador()==indentificacion) {
+                resultado = compra;
+                break;
+            }
+        }
+        return resultado;
     }
     
     public void realizarCompraEnConjunto(){

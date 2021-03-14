@@ -42,6 +42,7 @@ abstract public class Compra {
         this.fecha = fecha;
         this.identificador = identificador;
         this.inventario = new Inventario();
+        this.inventario.setListaDeBienes(listaBienesAComprar);
     }
 
     public Compra(Inventario inventario, ListaDeBienes listaBienesAComprar, Bien bien, String estado, Double montoTotal, int identificador) {
