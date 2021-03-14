@@ -12,9 +12,14 @@ import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
 import com.epn.trappi.db.rrhh.EmpleadoDb;
 import com.epn.trappi.db.rrhh.ObservacionDb;
 import com.epn.trappi.db.rrhh.RolDePagosDb;
+import com.epn.trappi.models.logistico.Conductor;
+import com.epn.trappi.models.logistico.ControlDisponibilidad;
 import com.epn.trappi.models.rrhh.juanjo.Asistencia;
 import com.epn.trappi.models.rrhh.juanjo.Observacion;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -440,11 +445,31 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.empleado.notificarEntrada(this.parentForm.getControlAsistencias());
         JOptionPane.showMessageDialog(this, "El empleado ha registrado su asistencia correctamente");
+        //Aqui se envia el empleado a la clase control disponibilidad de logistico
+        try {
+            ControlDisponibilidad control = ControlDisponibilidad.getInstance();
+            Conductor c = new Conductor();
+            c.setID(this.empleado.getId());
+            c.setEstado("Activo");
+            control.lc.aniadirConductor(c);
+        } catch (SQLException ex) {
+            //
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.empleado.notificarSalida(this.parentForm.getControlAsistencias());
         JOptionPane.showMessageDialog(this, "El empleado ha registrado su salida correctamente");
+        //Aqui se retira el empleado a la clase control disponibilidad de logistico
+        try {
+            ControlDisponibilidad control = ControlDisponibilidad.getInstance();
+            Conductor c = new Conductor();
+            c.setID(this.empleado.getId());
+            control.lc.removerConductor(c);
+        } catch (SQLException ex) {
+            //
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

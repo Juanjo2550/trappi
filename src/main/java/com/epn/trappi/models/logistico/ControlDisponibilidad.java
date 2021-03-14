@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.epn.trappi.models.logistico;
 
 import javax.swing.JOptionPane;
@@ -22,8 +18,8 @@ import java.sql.SQLException;
 public final class ControlDisponibilidad implements EventListener {
     //ATRIBUTOS
     ServicioDb servicioDB;
-    ListaVehiculos lv;
-    ListaConductores lc;
+    public ListaVehiculos lv;
+    public ListaConductores lc;
     private static ControlDisponibilidad instance;
     //METODOS
     public static ControlDisponibilidad getInstance() throws SQLException {
@@ -41,8 +37,8 @@ public final class ControlDisponibilidad implements EventListener {
     public void inicializarListas() throws SQLException{
         servicioDB = new ServicioDbVehiculo();
         lv.setVehiculos(servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.ESTADO,"Habilitado").getDatos());
-        servicioDB = new ServicioDbConductor();
-        lc.setListaConductores(servicioDB.obtenerElementosPorFiltro(ServicioDbConductor.ESTADO,"Activo").getDatos());
+        //servicioDB = new ServicioDbConductor();
+        //lc.setListaConductores(servicioDB.obtenerElementosPorFiltro(ServicioDbConductor.ESTADO,"Activo").getDatos());
     }
     public void actualizarEstados(Vehiculo vehiculo,Conductor conductor) throws SQLException{
         servicioDB = new ServicioDbVehiculo();
@@ -55,6 +51,7 @@ public final class ControlDisponibilidad implements EventListener {
         
         if(lv.estaVacia() || lc.estaVacia()){
             JOptionPane.showMessageDialog(null,"No hay vehiculos o conductores disponibles ");
+            return;
         }
         //Seleccionamos un vehiculo y conductor
         Vehiculo vehiculo = lv.getVehiculos().remove(0);
@@ -69,7 +66,7 @@ public final class ControlDisponibilidad implements EventListener {
         entrega.setEstado("En curso");
         entrega.RegistrarEntrega();   //PASO 3
         //Simulamos movimiento
-        simularMovimiento(20);   //PASO 4
+        simularMovimiento(22);   //PASO 4
         //Volvemos a actualizar los estados
         vehiculo.setEstado(new Habilitado());
         conductor.setEstado("Activo");
@@ -87,9 +84,10 @@ public final class ControlDisponibilidad implements EventListener {
             JOptionPane.showMessageDialog(null,"Error de concurrencia");
         }
     }
-
+    
     @Override
     public void update(String eventType, Empleado empleado) {
+        /*
         Conductor con = new Conductor();
         con.setID(empleado.getId());
         con.setEstado("activo");
@@ -99,6 +97,6 @@ public final class ControlDisponibilidad implements EventListener {
         } else {
             System.out.println("Un empleado marco salida, no esta disponible!");
             lc.removerConductor(con);
-        }
+        }*/
     }
 }
