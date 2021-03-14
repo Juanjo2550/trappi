@@ -44,6 +44,7 @@ public class DashboardFinanciero extends javax.swing.JFrame {
         lableGeneralDashboard = new javax.swing.JLabel();
         btndashboarddevoluciones = new javax.swing.JPanel();
         labelDevoluciones = new javax.swing.JLabel();
+        labelLogoFinanciero = new javax.swing.JLabel();
         panelDespliegue = new javax.swing.JPanel();
         panelDevoluciones = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
@@ -233,6 +234,9 @@ public class DashboardFinanciero extends javax.swing.JFrame {
         btndashboarddevoluciones.add(labelDevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 150, 40));
 
         panelVerticalIzquierdo.add(btndashboarddevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 170, 40));
+
+        labelLogoFinanciero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/epn/trappi/gui/financiero/imagenesFinanciero/log4-1fin.png"))); // NOI18N
+        panelVerticalIzquierdo.add(labelLogoFinanciero, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 220, -1));
 
         jPanel1.add(panelVerticalIzquierdo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 780));
 
@@ -954,6 +958,7 @@ public class DashboardFinanciero extends javax.swing.JFrame {
     private javax.swing.JLabel labelGastosTotales;
     private javax.swing.JLabel labelIngresos;
     private javax.swing.JLabel labelIngresosTotales;
+    private javax.swing.JLabel labelLogoFinanciero;
     private javax.swing.JLabel labelPresupuesto;
     private javax.swing.JLabel lableGeneralDashboard;
     private javax.swing.JPanel panelBarrasDevoluciones;
