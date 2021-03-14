@@ -20,7 +20,7 @@ public class ControlAsistencias {
             Asistencia asistencia = new Asistencia(empleado, new Hora(), this.fecha, "N/A");
             asistencia.registrar();
             asistencia.comprobarAtraso();
-            if (empleado instanceof Conductor) {
+            if (empleado instanceof Conductores) {
                 this.notificarEntradaConductor(empleado);
             }
         }

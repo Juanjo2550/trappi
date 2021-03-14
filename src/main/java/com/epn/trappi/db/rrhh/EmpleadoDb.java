@@ -2,7 +2,7 @@ package com.epn.trappi.db.rrhh;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.models.rrhh.juanjo.Administrativo;
-import com.epn.trappi.models.rrhh.juanjo.Conductor;
+import com.epn.trappi.models.rrhh.juanjo.Conductores;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 
 import java.sql.*;
@@ -14,7 +14,7 @@ public class EmpleadoDb implements ModelDb<Empleado> {
 
     public void agregar(Empleado nuevoEmpleado) {
         String insertSql;
-        if (nuevoEmpleado instanceof Conductor) {
+        if (nuevoEmpleado instanceof Conductores) {
             
             insertSql = "INSERT INTO dbo.EMPLEADO(IDEMP, NOMBREEMP, APELLIDOEMP, CEDULAEMP, CARGOEMP, DEPARTAMENTOEMP, CUENTABANCARIAEMP, BANCOEMP, ESTADOEMP, TIPOEMP, SUELDOEMP, SEXOEMP) " +
                     "VALUES (" +
@@ -61,7 +61,7 @@ public class EmpleadoDb implements ModelDb<Empleado> {
             ResultSet resultSet = createdStatement.executeQuery(sql);
             while(resultSet.next()) {
                 if (resultSet.getString(10).equals("conductor")) {
-                    empleadoObtenido = new Conductor(
+                    empleadoObtenido = new Conductores(
                             resultSet.getInt(1),
                             resultSet.getString(2),
                             resultSet.getString(3),
@@ -106,7 +106,7 @@ public class EmpleadoDb implements ModelDb<Empleado> {
             ResultSet resultSet = createdStatement.executeQuery(sql);
             while(resultSet.next()) {
                 if (resultSet.getString(10).equals("conductor")) {
-                    empleadoObtenido = new Conductor(
+                    empleadoObtenido = new Conductores(
                             resultSet.getInt(1),
                             resultSet.getString(2),
                             resultSet.getString(3),
@@ -151,7 +151,7 @@ public class EmpleadoDb implements ModelDb<Empleado> {
             ResultSet resultSet = createdStatement.executeQuery(sql);
             while(resultSet.next()) {
                 if(resultSet.getString(10).equals("conductor")) {
-                    empleados.add(new Conductor(
+                    empleados.add(new Conductores(
                             resultSet.getInt(1),
                             resultSet.getString(2),
                             resultSet.getString(3),
