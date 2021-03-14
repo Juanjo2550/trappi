@@ -30,6 +30,10 @@ public class Cliente {
    public String Direccion;
    public String Cedula;
    public String Contraseña;
+
+    public String getDireccion() {
+        return Direccion;
+    }
     
     public void entrarAlSistema(){
         Inicio inicio=new Inicio();
