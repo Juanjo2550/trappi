@@ -26,7 +26,7 @@ import javax.swing.border.Border;
  */
 public class Logistico_GUI extends javax.swing.JFrame {
     
-    PanelControlDisponibilidad1 mapaDisponibilidad = new PanelControlDisponibilidad1();
+    PanelControlDisponibilidad1 mapaDisponibilidad;
     //PanelEntregasActivas1 entregasActivas = new PanelEntregasActivas1();
     Entregas_en_Curso entregasCurso = new Entregas_en_Curso();
     FichasTecnicas fichasTecnicas = new FichasTecnicas();
@@ -35,13 +35,16 @@ public class Logistico_GUI extends javax.swing.JFrame {
     RegistroEntregas registroEntregas = new RegistroEntregas();
     RegistrarVehiculo registroVehiculo= new RegistrarVehiculo();
     ActualizacionVehiculo actualizarVehiculo = new ActualizacionVehiculo();
+    ControlDisponibilidad controlD;
     
     boolean bandera = false;
 
-    public Logistico_GUI() {
+    public Logistico_GUI(){
         this.setSize(1366, 768);
         initComponents();
+        //this.controlD = new ControlDisponibilidad();
         this.setLocationRelativeTo(null);
+        mapaDisponibilidad= new PanelControlDisponibilidad1();
         configurarRadiosBotones(20);
         
     }
@@ -49,6 +52,8 @@ public class Logistico_GUI extends javax.swing.JFrame {
     public Logistico_GUI(ControlDisponibilidad control) {
         this.setSize(1366, 768);
         initComponents();
+        this.controlD=control;
+        mapaDisponibilidad= new PanelControlDisponibilidad1(control);
         this.setLocationRelativeTo(null);
         configurarRadiosBotones(20);
     }
