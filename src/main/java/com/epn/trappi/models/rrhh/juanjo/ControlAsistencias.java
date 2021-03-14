@@ -62,8 +62,8 @@ public class ControlAsistencias {
     }
 
     public void notificarEntradaConductor(Empleado empleado) {
-        events.notify("ingreso", empleado);
+        events.notify("nuevo_empleado", empleado);
     }
 
-    public void notificarSalidaConductor(Empleado empleado) { events.notify("salida", empleado);}
+    public void notificarSalidaConductor(Empleado empleado) { events.notify("salida_empleado", empleado);}
 }

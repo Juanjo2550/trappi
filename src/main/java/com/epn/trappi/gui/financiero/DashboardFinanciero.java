@@ -20,6 +20,7 @@ public class DashboardFinanciero extends javax.swing.JFrame {
     Analizador analizador;
     public DashboardFinanciero() {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.panelGastos.setVisible(false);
         this.panelDashboard.setVisible(false);
         this.panelIngresos.setVisible(false);
@@ -46,19 +47,6 @@ public class DashboardFinanciero extends javax.swing.JFrame {
         labelDevoluciones = new javax.swing.JLabel();
         labelLogoFinanciero = new javax.swing.JLabel();
         panelDespliegue = new javax.swing.JPanel();
-        panelDevoluciones = new javax.swing.JPanel();
-        jLabel19 = new javax.swing.JLabel();
-        jSeparator4 = new javax.swing.JSeparator();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        txtDiaDevolucion = new javax.swing.JTextField();
-        jLabel22 = new javax.swing.JLabel();
-        txtMesDevolucion = new javax.swing.JTextField();
-        jLabel23 = new javax.swing.JLabel();
-        txtAnioDevolucion = new javax.swing.JTextField();
-        btnConsultarDevolucionesporFecha = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tablaDevoluciones = new javax.swing.JTable();
         panelIngresos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaIngresos = new javax.swing.JTable();
@@ -72,19 +60,19 @@ public class DashboardFinanciero extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        panelGastos = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tablaGastos = new javax.swing.JTable();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        txtDiaGasto = new javax.swing.JTextField();
-        txtMesGasto = new javax.swing.JTextField();
-        txtAnioGasto = new javax.swing.JTextField();
-        btnConsultarGastosporFecha = new javax.swing.JButton();
-        jLabel17 = new javax.swing.JLabel();
-        jSeparator3 = new javax.swing.JSeparator();
+        panelDevoluciones = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        txtDiaDevolucion = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        txtMesDevolucion = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        txtAnioDevolucion = new javax.swing.JTextField();
+        btnConsultarDevolucionesporFecha = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablaDevoluciones = new javax.swing.JTable();
         panelDashboard = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -100,6 +88,19 @@ public class DashboardFinanciero extends javax.swing.JFrame {
         panelBarrasDevoluciones = new javax.swing.JPanel();
         labelDevolucionesDashboard = new javax.swing.JLabel();
         labelDevolucionesTotal = new javax.swing.JLabel();
+        panelGastos = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaGastos = new javax.swing.JTable();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        txtDiaGasto = new javax.swing.JTextField();
+        txtMesGasto = new javax.swing.JTextField();
+        txtAnioGasto = new javax.swing.JTextField();
+        btnConsultarGastosporFecha = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -151,9 +152,9 @@ public class DashboardFinanciero extends javax.swing.JFrame {
         labelDashboardSalir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelDashboardSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/epn/trappi/gui/financiero/imagenesFinanciero/icons8_left_20px.png"))); // NOI18N
         labelDashboardSalir.setText("Salir");
-        btnDashboardSalir.add(labelDashboardSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 41));
+        btnDashboardSalir.add(labelDashboardSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 120, 41));
 
-        panelVerticalIzquierdo.add(btnDashboardSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 570, 160, 41));
+        panelVerticalIzquierdo.add(btnDashboardSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 570, 140, 41));
 
         btndashboardgastos.setBackground(new java.awt.Color(255, 210, 28));
         btndashboardgastos.setOpaque(false);
@@ -176,9 +177,9 @@ public class DashboardFinanciero extends javax.swing.JFrame {
         labelGastos1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         labelGastos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/epn/trappi/gui/financiero/imagenesFinanciero/icons8_receive_cash_32px.png"))); // NOI18N
         labelGastos1.setText("Gastos");
-        btndashboardgastos.add(labelGastos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 40));
+        btndashboardgastos.add(labelGastos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 150, 40));
 
-        panelVerticalIzquierdo.add(btndashboardgastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 160, 40));
+        panelVerticalIzquierdo.add(btndashboardgastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 150, 40));
 
         btndashboardgeneral.setBackground(new java.awt.Color(255, 210, 28));
         btndashboardgeneral.setOpaque(false);
@@ -233,14 +234,80 @@ public class DashboardFinanciero extends javax.swing.JFrame {
         labelDevoluciones.setText("Devoluciones");
         btndashboarddevoluciones.add(labelDevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 150, 40));
 
-        panelVerticalIzquierdo.add(btndashboarddevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 170, 40));
+        panelVerticalIzquierdo.add(btndashboarddevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 150, 40));
 
         labelLogoFinanciero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/epn/trappi/gui/financiero/imagenesFinanciero/log4-1fin.png"))); // NOI18N
         panelVerticalIzquierdo.add(labelLogoFinanciero, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 220, -1));
 
-        jPanel1.add(panelVerticalIzquierdo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 780));
+        jPanel1.add(panelVerticalIzquierdo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 260, 770));
 
         panelDespliegue.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelIngresos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tablaIngresos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaIngresos);
+
+        panelIngresos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, 740, 360));
+        panelIngresos.add(txtDiaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 40, -1));
+
+        txtMesIngreso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMesIngresoActionPerformed(evt);
+            }
+        });
+        panelIngresos.add(txtMesIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, 40, -1));
+        panelIngresos.add(txtAnioIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 140, 60, -1));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel1.setText("Día:");
+        panelIngresos.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel2.setText("Mes:");
+        panelIngresos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 140, 40, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel3.setText("Año:");
+        panelIngresos.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, 30, 20));
+
+        btnConsultarIngresosporFecha.setBackground(new java.awt.Color(61, 57, 57));
+        btnConsultarIngresosporFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnConsultarIngresosporFecha.setForeground(new java.awt.Color(255, 255, 255));
+        btnConsultarIngresosporFecha.setText("Consultar");
+        btnConsultarIngresosporFecha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnConsultarIngresosporFechaMousePressed(evt);
+            }
+        });
+        btnConsultarIngresosporFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarIngresosporFechaActionPerformed(evt);
+            }
+        });
+        panelIngresos.add(btnConsultarIngresosporFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 130, 100, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel5.setText("Ingresos del: ");
+        panelIngresos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("INGRESOS DE TRAPPI");
+        panelIngresos.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1120, 48));
+        panelIngresos.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 1190, 10));
+
+        panelDespliegue.add(panelIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 690));
 
         panelDevoluciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -264,28 +331,28 @@ public class DashboardFinanciero extends javax.swing.JFrame {
 
         jLabel20.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabel20.setText("Devoluciones del: ");
-        panelDevoluciones.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, -1, -1));
+        panelDevoluciones.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, -1, -1));
 
         jLabel21.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabel21.setText("Día:");
-        panelDevoluciones.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, -1, -1));
-        panelDevoluciones.add(txtDiaDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 40, -1));
+        panelDevoluciones.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, -1, -1));
+        panelDevoluciones.add(txtDiaDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 40, -1));
 
         jLabel22.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabel22.setText("Mes:");
-        panelDevoluciones.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 120, 30, -1));
+        panelDevoluciones.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 140, 40, -1));
 
         txtMesDevolucion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMesDevolucionActionPerformed(evt);
             }
         });
-        panelDevoluciones.add(txtMesDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, 40, -1));
+        panelDevoluciones.add(txtMesDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, 40, -1));
 
         jLabel23.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabel23.setText("Año:");
-        panelDevoluciones.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 120, 30, 20));
-        panelDevoluciones.add(txtAnioDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 120, 60, -1));
+        panelDevoluciones.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, 30, 20));
+        panelDevoluciones.add(txtAnioDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 140, 60, -1));
 
         btnConsultarDevolucionesporFecha.setBackground(new java.awt.Color(61, 57, 57));
         btnConsultarDevolucionesporFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
@@ -301,7 +368,7 @@ public class DashboardFinanciero extends javax.swing.JFrame {
                 btnConsultarDevolucionesporFechaActionPerformed(evt);
             }
         });
-        panelDevoluciones.add(btnConsultarDevolucionesporFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 110, 100, -1));
+        panelDevoluciones.add(btnConsultarDevolucionesporFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 130, 100, -1));
 
         tablaDevoluciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -316,141 +383,9 @@ public class DashboardFinanciero extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tablaDevoluciones);
 
-        panelDevoluciones.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 730, 360));
+        panelDevoluciones.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, 740, 360));
 
         panelDespliegue.add(panelDevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1120, 780));
-
-        panelIngresos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tablaIngresos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tablaIngresos);
-
-        panelIngresos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 890, 360));
-        panelIngresos.add(txtDiaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 40, -1));
-
-        txtMesIngreso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMesIngresoActionPerformed(evt);
-            }
-        });
-        panelIngresos.add(txtMesIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 140, 40, -1));
-        panelIngresos.add(txtAnioIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 140, 60, -1));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel1.setText("Día:");
-        panelIngresos.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel2.setText("Mes:");
-        panelIngresos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, 30, -1));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel3.setText("Año:");
-        panelIngresos.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 140, 30, 20));
-
-        btnConsultarIngresosporFecha.setBackground(new java.awt.Color(61, 57, 57));
-        btnConsultarIngresosporFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        btnConsultarIngresosporFecha.setForeground(new java.awt.Color(255, 255, 255));
-        btnConsultarIngresosporFecha.setText("Consultar");
-        btnConsultarIngresosporFecha.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnConsultarIngresosporFechaMousePressed(evt);
-            }
-        });
-        btnConsultarIngresosporFecha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultarIngresosporFechaActionPerformed(evt);
-            }
-        });
-        panelIngresos.add(btnConsultarIngresosporFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 130, -1, -1));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel5.setText("Ingresos del: ");
-        panelIngresos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, -1, -1));
-
-        jLabel15.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("INGRESOS DE TRAPPI");
-        panelIngresos.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1120, 48));
-        panelIngresos.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 1190, 10));
-
-        panelDespliegue.add(panelIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 690));
-
-        panelGastos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tablaGastos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(tablaGastos);
-
-        panelGastos.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 730, 360));
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel11.setText("Gastos del: ");
-        panelGastos.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, -1, -1));
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel12.setText("Día:");
-        panelGastos.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, -1, -1));
-
-        jLabel13.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel13.setText("Mes:");
-        panelGastos.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 120, 30, -1));
-
-        jLabel14.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel14.setText("Año:");
-        panelGastos.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 120, 40, 20));
-        panelGastos.add(txtDiaGasto, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 40, -1));
-
-        txtMesGasto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMesGastoActionPerformed(evt);
-            }
-        });
-        panelGastos.add(txtMesGasto, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 40, -1));
-        panelGastos.add(txtAnioGasto, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 120, 60, -1));
-
-        btnConsultarGastosporFecha.setBackground(new java.awt.Color(61, 57, 57));
-        btnConsultarGastosporFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        btnConsultarGastosporFecha.setForeground(new java.awt.Color(255, 255, 255));
-        btnConsultarGastosporFecha.setText("Consultar");
-        btnConsultarGastosporFecha.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnConsultarGastosporFechaMousePressed(evt);
-            }
-        });
-        btnConsultarGastosporFecha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultarGastosporFechaActionPerformed(evt);
-            }
-        });
-        panelGastos.add(btnConsultarGastosporFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 110, 100, -1));
-
-        jLabel17.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setText("GASTOS DE TRAPPI");
-        panelGastos.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 300, 48));
-        panelGastos.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 1190, 10));
-
-        panelDespliegue.add(panelGastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 690));
 
         panelDashboard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -557,17 +492,85 @@ public class DashboardFinanciero extends javax.swing.JFrame {
 
         panelDespliegue.add(panelDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 740));
 
+        panelGastos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tablaGastos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tablaGastos);
+
+        panelGastos.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, 740, 360));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel11.setText("Gastos del: ");
+        panelGastos.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel12.setText("Día:");
+        panelGastos.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel13.setText("Mes:");
+        panelGastos.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 140, 40, -1));
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel14.setText("Año:");
+        panelGastos.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, 30, 20));
+        panelGastos.add(txtDiaGasto, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 40, -1));
+
+        txtMesGasto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMesGastoActionPerformed(evt);
+            }
+        });
+        panelGastos.add(txtMesGasto, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, 40, -1));
+        panelGastos.add(txtAnioGasto, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 140, 60, -1));
+
+        btnConsultarGastosporFecha.setBackground(new java.awt.Color(61, 57, 57));
+        btnConsultarGastosporFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnConsultarGastosporFecha.setForeground(new java.awt.Color(255, 255, 255));
+        btnConsultarGastosporFecha.setText("Consultar");
+        btnConsultarGastosporFecha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnConsultarGastosporFechaMousePressed(evt);
+            }
+        });
+        btnConsultarGastosporFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarGastosporFechaActionPerformed(evt);
+            }
+        });
+        panelGastos.add(btnConsultarGastosporFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 130, 100, -1));
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("GASTOS DE TRAPPI");
+        panelGastos.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 300, 48));
+        panelGastos.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 1190, 10));
+
+        panelDespliegue.add(panelGastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 690));
+
         jPanel1.add(panelDespliegue, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 1120, 780));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1360, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 769, Short.MAX_VALUE)
         );
 
         pack();

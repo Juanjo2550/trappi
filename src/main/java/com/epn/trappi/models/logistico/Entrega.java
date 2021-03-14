@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class Entrega extends Thread{
     private int ID_Entrega;
@@ -110,5 +111,11 @@ public class Entrega extends Thread{
         servicioDB = new ServicioDbEntrega();
         ArrayList<Entrega> entregas =  servicioDB.obtenerElementosPorFiltro(ServicioDbEntrega.FACTURA,String.valueOf(factura)).getDatos();
         this.setID_Entrega(entregas.get(0).getID_Entrega());
+    }
+    
+    public static void crearEntrega(int factura1){
+        Entrega e=new Entrega();
+        e.setFactura(factura1);
+        e.start();
     }
 }

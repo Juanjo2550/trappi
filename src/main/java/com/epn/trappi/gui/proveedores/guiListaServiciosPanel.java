@@ -6,14 +6,8 @@
 package com.epn.trappi.gui.proveedores;
 
 import com.epn.trappi.db.proveedores.ProveedoresDb;
+import com.epn.trappi.models.proveedores.ListaDeBienes;
 import com.epn.trappi.models.proveedores.ListaProveedores;
-import com.epn.trappi.models.proveedores.Producto;
-import com.epn.trappi.models.proveedores.Proveedor;
-import com.epn.trappi.models.proveedores.Servicio;
-import java.util.ArrayList;
-import java.util.Iterator;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,8 +17,7 @@ import javax.swing.table.DefaultTableModel;
 public class guiListaServiciosPanel extends javax.swing.JPanel {
 
     DefaultTableModel modelo;
-    private final ProveedoresDb db = new ProveedoresDb();
-    public ArrayList seleccionados = new ArrayList();
+    ListaDeBienes listaS = new ListaDeBienes();
     ListaProveedores listaProveedores = new ListaProveedores();
 
     /**
@@ -32,38 +25,10 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
      */
     public guiListaServiciosPanel() {
         initComponents();
-        cmbProveedores1.addItem("Normal");
-        cmbProveedores1.addItem("VIP");
-        cargarServicios();
-        cargarProveedor();
-    }
-
-    private void cargarProveedor() {
-        listaProveedores.getListaDeProveedores().forEach(prov -> {
-            cmbProveedores.addItem(prov.getRazonSocial());
-        });
-    }
-
-    public void cargarServicios() {
-        seleccionados = (ArrayList) db.getServicios();
-        String[] titulos = {"Nombre Producto", "Precio unitario", "Proveedor","Categoria"};
-        String[] fila = new String[4];
-        modelo = new DefaultTableModel(null, titulos);
-        for (Iterator<Servicio> it = seleccionados.iterator(); it.hasNext();) {
-            Servicio servicio = it.next();
-            fila[0] = servicio.getNombre();
-            fila[1] = "" + servicio.getPrecio();
-            fila[2] = "" + servicio.getProveeedor().getRazonSocial();
-            fila[3] = "" + servicio.getCategoria();
-            modelo.addRow(fila);
-        }
-        jtbProductos.setModel(modelo);
-    }
-
-    private void mostrarProducto(String nombre, String precio, String proveedor) {
-        txtNombre.setText(nombre);
-        txtPrecio.setText(precio);
-        cmbProveedores.setSelectedItem(proveedor);
+        listaS.cargarServicios();
+        listaS.cargarServiciosTabla(jtbServicios);
+        listaProveedores.cargarProveedorCombobox(cmbProveedores);
+        modelo = (DefaultTableModel) jtbServicios.getModel();
     }
 
     /**
@@ -86,10 +51,10 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
         btnActualizar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtbProductos = new javax.swing.JTable();
+        jtbServicios = new javax.swing.JTable();
         cmbProveedores = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
-        cmbProveedores1 = new javax.swing.JComboBox<>();
+        cmbCategoria = new javax.swing.JComboBox<>();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -110,38 +75,15 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
             }
         });
         txtNombreServicio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtNombreServicioKeyPressed(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreServicioKeyTyped(evt);
             }
         });
 
         txtPrecio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtPrecio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrecioActionPerformed(evt);
-            }
-        });
-        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtPrecioKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPrecioKeyTyped(evt);
-            }
-        });
 
+        txtNombre.setEditable(false);
         txtNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtNombreKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNombreKeyTyped(evt);
-            }
-        });
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel13.setText("Proveedor:");
@@ -168,8 +110,8 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
             }
         });
 
-        jtbProductos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jtbProductos.setModel(new javax.swing.table.DefaultTableModel(
+        jtbServicios.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jtbServicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -188,19 +130,20 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jtbProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtbServicios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtbProductosMouseClicked(evt);
+                jtbServiciosMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jtbProductos);
+        jScrollPane1.setViewportView(jtbServicios);
 
         cmbProveedores.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel14.setText("Categoría:");
 
-        cmbProveedores1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        cmbCategoria.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "VIP" }));
 
         javax.swing.GroupLayout PanelVerTodosLayout = new javax.swing.GroupLayout(PanelVerTodos);
         PanelVerTodos.setLayout(PanelVerTodosLayout);
@@ -221,7 +164,7 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel13)
                                 .addGap(252, 252, 252)
                                 .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmbProveedores1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel14))))
                         .addGap(344, 344, Short.MAX_VALUE))
                     .addGroup(PanelVerTodosLayout.createSequentialGroup()
@@ -261,7 +204,7 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbProveedores1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addComponent(btnActualizar)
                 .addContainerGap(20, Short.MAX_VALUE))
@@ -270,114 +213,40 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
         add(PanelVerTodos);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecioActionPerformed
-
-    private void txtPrecioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyPressed
-
-    }//GEN-LAST:event_txtPrecioKeyPressed
-
-    private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
-
-    }//GEN-LAST:event_txtPrecioKeyTyped
-
-    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
-
-    }//GEN-LAST:event_txtNombreKeyPressed
-
-    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-
-    }//GEN-LAST:event_txtNombreKeyTyped
-
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        /*try {
-            if (nombre.length() >= 1) {
-                if (Double.parseDouble(precio) >= 0) {
-                    Proveedor proveedor;
-                    proveedor = db.obtenerProveedorRuc((String) cmbProveedores.getSelectedItem());
-                    db.actualizarBien(db.getIdBien(nombre), nombre, Double.parseDouble(precio), proveedor.getRuc());
-                    JOptionPane.showMessageDialog(null, "Servicio Actualizado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    
-                    seleccionados = (ArrayList) db.getProductos();
-                    cargarServicios();
-
-                    txtNombre.setText("");
-                    txtPrecio.setText("");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Precio Incorrecto", "Error", JOptionPane.INFORMATION_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Nombre Incorrecto", "Error", JOptionPane.INFORMATION_MESSAGE);
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error no se pudo Actualizar el Servicio", "Error", JOptionPane.INFORMATION_MESSAGE);
-        }*/
-        ((Servicio)seleccionados.get(jtbProductos.getSelectedRow())).actualizar(txtNombre.getText(),Double.parseDouble(txtPrecio.getText()), cmbProveedores.getSelectedItem().toString(),cmbProveedores1.getSelectedItem().toString());
-       vaciarCampos(txtNombre, txtPrecio);
-       cargarServicios();
+        listaS.actualizarServicio(jtbServicios, txtNombre, txtPrecio, cmbProveedores, cmbCategoria);
     }//GEN-LAST:event_btnActualizarActionPerformed
 
-    public void vaciarCampos(JTextField txtNombre, JTextField txtPrecio) {
-        txtNombre.setText("");
-        txtPrecio.setText("");
-
-    }
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String servicio = txtNombreServicio.getText();
-        try {
-            if (servicio.length() >= 1) {
-                seleccionados = (ArrayList) db.buscarProductos(servicio);
-                cargarServicios();
-                cargarProveedor();
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Proveedor no encontrado", "Error", JOptionPane.INFORMATION_MESSAGE);
-        }
+        listaS.buscarServicios(txtNombreServicio, jtbServicios);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void jtbProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbProductosMouseClicked
-        int row = jtbProductos.rowAtPoint(evt.getPoint());
-        int col = jtbProductos.columnAtPoint(evt.getPoint());
-        if (row >= 0 && col >= 0) {
-            mostrarProducto(modelo.getValueAt(row, 0).toString(), modelo.getValueAt(row, 1).toString(), modelo.getValueAt(row, 2).toString());
-        }
-    }//GEN-LAST:event_jtbProductosMouseClicked
-
-    private void txtNombreServicioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreServicioKeyTyped
-        String servicio = txtNombreServicio.getText();
-        try {
-            if (servicio.length() >= 1) {
-                seleccionados = (ArrayList) db.buscarProductos(servicio);
-                cargarServicios();
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Proveedor no encontrado", "Error", JOptionPane.INFORMATION_MESSAGE);
-        }
-    }//GEN-LAST:event_txtNombreServicioKeyTyped
-
-    private void txtNombreServicioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreServicioKeyPressed
-
-    }//GEN-LAST:event_txtNombreServicioKeyPressed
+    private void jtbServiciosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbServiciosMouseClicked
+        listaS.mostrarServicio(evt, jtbServicios, modelo, txtNombre, txtPrecio, cmbProveedores, cmbCategoria);
+    }//GEN-LAST:event_jtbServiciosMouseClicked
 
     private void txtNombreServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreServicioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreServicioActionPerformed
+
+    private void txtNombreServicioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreServicioKeyTyped
+        listaS.buscarServicios(txtNombreServicio, jtbServicios);
+    }//GEN-LAST:event_txtNombreServicioKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelVerTodos;
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JComboBox<String> cmbCategoria;
     private javax.swing.JComboBox<String> cmbProveedores;
-    private javax.swing.JComboBox<String> cmbProveedores1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtbProductos;
+    private javax.swing.JTable jtbServicios;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNombreServicio;
     private javax.swing.JTextField txtPrecio;

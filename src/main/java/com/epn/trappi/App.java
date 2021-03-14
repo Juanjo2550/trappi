@@ -18,12 +18,12 @@ public class App {
 //        mainWindow.setVisible(true);
         try {
             ControlAsistencias controlAsistencias = new ControlAsistencias();
-            ControlDisponibilidad controlDisponibilidad = new ControlDisponibilidad();
+            ControlDisponibilidad controlDisponibilidad = ControlDisponibilidad.getInstance();
             controlAsistencias.events.suscribe("nuevo_empleado", controlDisponibilidad);
             controlAsistencias.events.suscribe("salida_empleado", controlDisponibilidad);
             PANTALLA_PRINCIPAL RRHH = new PANTALLA_PRINCIPAL(controlAsistencias);
             RRHH.setVisible(true);
-            Logistico_GUI logistico_gui = new Logistico_GUI();
+            Logistico_GUI logistico_gui = new Logistico_GUI(controlDisponibilidad);
             logistico_gui.setVisible(true);
         } catch (SQLException e) {
             System.out.println(e.toString());

@@ -87,8 +87,11 @@ public class TEST_ENTREGA extends javax.swing.JFrame {
     
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Entrega e = new Entrega();
+
         String factura = campoFactura.getText();
+        //String dirrecion = "Nayon";
+        //Entrega.crearEntrega(dirrecion,Integer.parseInt(factura));
+        Entrega e = new Entrega();
         e.setFactura(Integer.parseInt(factura));
         e.start();
     }//GEN-LAST:event_jButton1ActionPerformed
