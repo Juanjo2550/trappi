@@ -31,16 +31,22 @@ public class guiAnalizador extends javax.swing.JPanel {
      */
     private JPanel verTodo;
     private ListaDeCompras solicitud;
+    private ListaDeCompras solicitudVIP;
     
     public guiAnalizador(JPanel verTodo) throws IOException {
         initComponents();
         this.inventario = new Inventario();
         this.analizador = new AnalizadorDeInventario();
         this.verTodo=verTodo;
-        analizador.mostrarGrafica(jPanel1);
-        this.solicitud=analizador.analizarStock();
+        analizador.mostrarGraficaNormal(jPanel1);
+        analizador.mostrarGraficaVIP(jPanel2);
+        this.solicitud=analizador.analizarStockNormal();
+        this.solicitudVIP=analizador.analizarStockVIP();
         if(solicitud.getCompras().size()==0){
             btnNuevo7.setEnabled(false);
+        }
+        if(solicitudVIP.getCompras().size()==0){
+            btnNuevo8.setEnabled(false);
         }
     }
     /**
@@ -54,6 +60,8 @@ public class guiAnalizador extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         btnNuevo7 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        btnNuevo8 = new javax.swing.JButton();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -70,7 +78,7 @@ public class guiAnalizador extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(324, Short.MAX_VALUE)
+                .addContainerGap(30, Short.MAX_VALUE)
                 .addComponent(btnNuevo7)
                 .addGap(66, 66, 66))
         );
@@ -83,16 +91,50 @@ public class guiAnalizador extends javax.swing.JPanel {
         );
 
         add(jPanel1);
+
+        btnNuevo8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnNuevo8.setText("Generar solicitud de compra");
+        btnNuevo8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevo8ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addComponent(btnNuevo8)
+                .addGap(66, 66, 66))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(219, Short.MAX_VALUE)
+                .addComponent(btnNuevo8)
+                .addGap(56, 56, 56))
+        );
+
+        add(jPanel2);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevo7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo7ActionPerformed
         // TODO add your handling code here:
-       new CambiaPanel(verTodo, new guiDescripcionCompra(solicitud));
+        new CambiaPanel(verTodo, new guiDescripcionCompra(solicitud));
     }//GEN-LAST:event_btnNuevo7ActionPerformed
+
+    private void btnNuevo8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo8ActionPerformed
+        new CambiaPanel(verTodo, new guiDescripcionCompra(solicitudVIP));
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevo8ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNuevo7;
+    private javax.swing.JButton btnNuevo8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
