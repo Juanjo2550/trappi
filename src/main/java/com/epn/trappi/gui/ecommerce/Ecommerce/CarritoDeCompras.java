@@ -12,26 +12,21 @@ import static javax.swing.JOptionPane.YES_OPTION;
 
 /**
  *
- * @author Bryan
+ * @author GrupoD
  */
 public class CarritoDeCompras {
     
     
 
-    //Asociacion con Inventario
+
     public ArrayList<Producto> Productos= new ArrayList<Producto>() ;
-    //public ArrayList<Articulo> Productos = new ArrayList<Articulo>();
+
     public Factura factura;
     
       public void añadirProducto( String nombre,Double precio,int cantidad,String marca)
     {
         Producto producto= new Producto(nombre,precio,cantidad,marca);
-        /*Articulo producto = new Articulo();
-        producto.nombre=nombre;
-        producto.precio=precio;
-        producto.cantidad=cantidad;
-        producto.marca=marca;*/
-        
+
         Productos.add(producto);
 
     }

@@ -121,20 +121,6 @@ public class ComprarVIP extends javax.swing.JFrame {
         cantidad1 = Integer.parseInt((String) modelo.getValueAt(jTable1.getSelectedRow(), 3));
     }
 
-    
-    
-//    public void agregarAlcarrito(){
-//    int cantidad = carrito.cantidadCompraProducto();
-//        carrito.añadirProducto(nombre1, precio1, cantidad, marca1);
-//        DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
-//        String[] aux = new String[3];
-//        aux[0] = nombre1;
-//        aux[1] = String.valueOf(precio1);
-//        aux[2] = Integer.toString(cantidad);
-//        modelo.addRow(aux);
-//        jTable2.setModel(modelo);
-//    }
-//    
     public void agregarAlcarrito(){
     int cantidad = carrito.cantidadCompraProducto();
     boolean cantidaAdecuada = controlarCantidad(cantidad);

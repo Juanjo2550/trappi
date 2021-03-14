@@ -20,7 +20,7 @@ import static javax.swing.JOptionPane.YES_OPTION;
 
 /**
  *
- * @author Bryan
+ * @author GrupoD
  */
 public class Cliente {
    public String Nombre;

@@ -7,7 +7,7 @@ package com.epn.trappi.gui.ecommerce.Ecommerce;
 
 /**
  *
- * @author Bryan
+ * @author GrupoD
  */
 public class SolicitudDevolucion {
     

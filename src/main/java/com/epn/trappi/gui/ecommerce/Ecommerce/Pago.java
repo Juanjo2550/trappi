@@ -9,12 +9,11 @@ import com.epn.trappi.gui.ecommerce.Tarjetas.Tarjeta;
 import com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaCredito;
 import com.epn.trappi.gui.ecommerce.Tarjetas.TarjetaDebito;
 import com.epn.trappi.gui.ecommerce.entidadBancaria.Cuenta;
-import javax.swing.JOptionPane;
 
 
 /**
  *
- * @author Bryan
+ * @author GrupoD
  */
 public class Pago {
     

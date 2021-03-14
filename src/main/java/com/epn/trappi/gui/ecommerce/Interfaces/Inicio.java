@@ -16,7 +16,7 @@ public class Inicio extends javax.swing.JFrame {
     
     public Inicio() {
         initComponents();
-        this.setSize(1290, 690);
+        this.setSize(1300, 690);
         this.setLocationRelativeTo(null);
         jt.setText(Main.cliente.Nombre);
         jt.setEditable(false);

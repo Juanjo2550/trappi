@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Bryan
+ * @author GrupoD
  */
 public class Factura {
     

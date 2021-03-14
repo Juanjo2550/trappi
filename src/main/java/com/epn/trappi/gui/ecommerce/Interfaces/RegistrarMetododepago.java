@@ -21,7 +21,7 @@ public class RegistrarMetododepago extends javax.swing.JFrame {
     
     public RegistrarMetododepago() {
         initComponents();
-        this.setSize(1300, 700);
+        this.setSize(1300, 690);
         this.setLocationRelativeTo(null);
         jt.setText(Main.cliente.Nombre);
         jt.setEditable(false);

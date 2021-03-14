@@ -13,6 +13,7 @@ import com.epn.trappi.gui.ecommerce.FormulariosTarjetas.FRegistroTarjeta;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -165,6 +166,14 @@ public class Login extends javax.swing.JFrame {
         obtenerdatosdetarjetas();
     Main.cliente.entrarAlSistema();
     this.setVisible(false);
+    }
+    else
+        
+    {
+        JOptionPane.showMessageDialog(null,"Usuario o Contraseña incorrectos, intente nuevamente");
+        Login login = new Login();
+        login.setVisible(true);
+        this.setVisible(false);
     }
     }//GEN-LAST:event_jButtoningresarMouseClicked
 

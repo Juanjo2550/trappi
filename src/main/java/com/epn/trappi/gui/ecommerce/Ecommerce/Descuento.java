@@ -12,7 +12,7 @@ import java.util.GregorianCalendar;
 
 /**
  *
- * @author Javier Erazo
+ * @author GrupoD
  */
 public class Descuento {
     private double valor;

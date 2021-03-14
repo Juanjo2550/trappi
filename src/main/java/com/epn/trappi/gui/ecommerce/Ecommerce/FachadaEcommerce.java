@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Bryan
+ * @author GrupoD
  */
 public class FachadaEcommerce {
     
