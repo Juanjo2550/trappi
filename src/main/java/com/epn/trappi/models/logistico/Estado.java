@@ -22,15 +22,11 @@ public abstract class Estado {
     Estado(String estado){
         this.estado=estado;
     }
-    Estado(){
-        
+    
+    Estado(){    
     }
     
     //public abstract void verificarVehiculo();
     
-    public abstract String enEntrega();
-    public abstract String enMantenimiento();
-    public abstract String enAccidente();
-    public abstract String enPicoPlaca();
-    
+    public abstract String cambiarEstado();
 }

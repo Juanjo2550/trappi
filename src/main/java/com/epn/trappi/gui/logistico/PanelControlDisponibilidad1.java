@@ -174,20 +174,7 @@ public class PanelControlDisponibilidad1 extends javax.swing.JPanel {
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         llenarTablaVehiculos();  
     }//GEN-LAST:event_btnActualizarActionPerformed
-     public void changeColumnNameVehiculo(int __COLUMN__, String __NAME__){
-        JTableHeader head = jTableVerificarVehiculo.getTableHeader();
-        TableColumnModel tcm = head.getColumnModel();
-        TableColumn tabCM = tcm.getColumn(__COLUMN__);
-        tabCM.setHeaderValue(__NAME__);
-        jTableVerificarVehiculo.repaint();
-    }
-     public void changeColumnNameConductor(int __COLUMN__, String __NAME__){
-        JTableHeader head = jTNombres.getTableHeader();
-        TableColumnModel tcm = head.getColumnModel();
-        TableColumn tabCM = tcm.getColumn(__COLUMN__);
-        tabCM.setHeaderValue(__NAME__);
-        jTNombres.repaint();
-    }
+
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
