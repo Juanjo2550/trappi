@@ -148,6 +148,61 @@ public class FinancieroDb {
         }
         return valorADevolver;
     }
+    public String buscarCedulaPorNroFactura(int nroFactura){
+        String cedulaPropietario="";
+        try{
+        Statement statement = connection.createStatement();
+        String sql = "select C.CEDULA2 from dbo.FACTURAS F join dbo.CLIENTES C on C.IDCLIENTE=F.IDCLIENTE where F.NUMEROFACTURA="+nroFactura;
+        ResultSet resultSet = statement.executeQuery(sql);
+        while(resultSet.next()){
+            cedulaPropietario=resultSet.getString(1);
+            System.out.println("La cedula del cliente es:"+cedulaPropietario);
+        }
+        }catch( Exception e){
+            System.out.println(e);
+        }
+        return cedulaPropietario;
+    }
+    public double buscarFondoPorNroFactura(int nroFactura){
+        double valorADevolver=0;
+        try{
+        Statement statement = connection.createStatement();
+        String sql = "select C.FONDOS from dbo.FACTURAS F join dbo.CUENTABANCARIA C on C.IDCLIENTE=F.IDCLIENTE where F.NUMEROFACTURA="+nroFactura;
+        ResultSet resultSet = statement.executeQuery(sql);
+        while(resultSet.next()){
+            valorADevolver=resultSet.getDouble(1);
+            System.out.println("El fondo del cliente es:"+String.valueOf(valorADevolver));
+        }
+        }catch( Exception e){
+            System.out.println(e);
+        }
+        return valorADevolver;
+    }
+    public String recuperarCuentaBancariaPorNroFactura(int nroFactura){
+        String cuentaBancaria="";
+        try{
+        Statement statement = connection.createStatement();
+        String sql = "select C.NUMERODECUENTA from dbo.FACTURAS F join dbo.CUENTABANCARIA C on C.IDCLIENTE=F.IDCLIENTE where F.NUMEROFACTURA="+nroFactura;
+        ResultSet resultSet = statement.executeQuery(sql);
+        while(resultSet.next()){
+            cuentaBancaria=resultSet.getString(1);
+            System.out.println("CuentaBancaria del cliente es:"+cuentaBancaria);
+        }
+        }catch( Exception e){
+            System.out.println(e);
+        }
+        return cuentaBancaria;
+    }
+    public void actualizarFondoCliente(int nroFactura,double fondoIncrementado){
+        try{
+        Statement statement = connection.createStatement();
+        String sql = "update dbo.CUENTABANCARIA set FONDOS="+fondoIncrementado +" WHERE NUMERODECUENTA like '"+this.recuperarCuentaBancariaPorNroFactura(nroFactura)+"';";
+        statement.executeUpdate(sql);
+            System.out.println("Fondo incrementado con éxito");
+        }catch( Exception e){
+            System.out.println(e);
+        }
+    }
     public void acutalizarEstadoFactura(int idFactura){
         try{
         Statement statement = connection.createStatement();

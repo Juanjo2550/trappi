@@ -30,7 +30,11 @@ public class Devolucion {
         if(valorDevolucion>0){
             db.acutalizarEstadoFactura(idFactura);
             Cuenta cuentaDevolucion = new Cuenta();
-            //cuentaDevolucion.acreditar(valorDevolucion);
+            cuentaDevolucion.CedulaPropietario=db.buscarCedulaPorNroFactura(idFactura);
+            cuentaDevolucion.NumeroCuenta=db.recuperarCuentaBancariaPorNroFactura(idFactura);
+            cuentaDevolucion.fondo=db.buscarFondoPorNroFactura(idFactura);
+            cuentaDevolucion.acreditar(valorDevolucion);
+            db.actualizarFondoCliente(idFactura,cuentaDevolucion.fondo );
             LibroDiario libroDiario = new LibroDiario();
             this.fechaDeDevolucion=new Fecha();
             Devolucion devolucion = new Devolucion(fechaDeDevolucion, idFactura, valorDevolucion);
