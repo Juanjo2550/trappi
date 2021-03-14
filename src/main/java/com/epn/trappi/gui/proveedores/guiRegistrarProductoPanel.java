@@ -49,12 +49,11 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
         return resultado;
     }
 
-    public void vaciarCampos(JTextField txtNombre, JTextField txtPrecio, JComboBox cmbProvedor, JTextField txtMarca, JTextField txtCantidad) {
+    public void vaciarCampos(JTextField txtNombre, JTextField txtPrecio, JComboBox cmbProvedor, JTextField txtMarca) {
         txtNombre.setText("");
         txtPrecio.setText("");
         cmbProvedor.setSelectedIndex(0);
         txtMarca.setText("");
-        txtCantidad.setText("");
     }
 
     /**
@@ -76,8 +75,6 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
         cmbProvedor = new javax.swing.JComboBox<>();
         txtMarca = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        txtCantidad = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         cmbProvedor1 = new javax.swing.JComboBox<>();
 
@@ -142,23 +139,6 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel12.setText("Marca:");
 
-        txtCantidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCantidadActionPerformed(evt);
-            }
-        });
-        txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtCantidadKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtCantidadKeyTyped(evt);
-            }
-        });
-
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel13.setText("Cantidad:");
-
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel14.setText("Categoria:");
 
@@ -178,26 +158,21 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
                 .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNombre)
                     .addComponent(txtPrecio)
-                    .addComponent(txtCantidad)
                     .addComponent(txtMarca)
                     .addComponent(cmbProvedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(PanelVerTodosLayout.createSequentialGroup()
                         .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelVerTodosLayout.createSequentialGroup()
-                                .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel12))
-                                .addGap(0, 281, Short.MAX_VALUE))
-                            .addComponent(cmbProvedor1, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12))
+                        .addContainerGap(292, Short.MAX_VALUE))
                     .addGroup(PanelVerTodosLayout.createSequentialGroup()
                         .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14)
                             .addComponent(btnRegistrarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(cmbProvedor1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         PanelVerTodosLayout.setVerticalGroup(
             PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,20 +190,16 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(cmbProvedor, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel13)
-                .addGap(6, 6, 6)
-                .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jLabel12)
-                .addGap(6, 6, 6)
+                .addGap(18, 18, 18)
                 .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(cmbProvedor1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnRegistrarProducto)
-                .addGap(21, 21, 21))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         add(PanelVerTodos);
@@ -257,8 +228,8 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
     private void btnRegistrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarProductoActionPerformed
         new Producto(txtNombre.getText(), Double.parseDouble(txtPrecio.getText()),
                 obtenerProveedor(cmbProvedor.getSelectedItem().toString()),
-                Integer.parseInt(txtCantidad.getText()), txtMarca.getText(), cmbProvedor1.getSelectedItem().toString()).registrar();
-        vaciarCampos(txtNombre, txtPrecio, cmbProvedor, txtMarca, txtCantidad);
+                0, txtMarca.getText(), cmbProvedor1.getSelectedItem().toString()).registrar();
+        vaciarCampos(txtNombre, txtPrecio, cmbProvedor, txtMarca);
     }//GEN-LAST:event_btnRegistrarProductoActionPerformed
 
     private void txtMarcaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMarcaKeyPressed
@@ -268,18 +239,6 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
     private void txtMarcaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMarcaKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMarcaKeyTyped
-
-    private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCantidadActionPerformed
-
-    private void txtCantidadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCantidadKeyPressed
-
-    private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCantidadKeyTyped
 
     private void cmbProvedor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProvedor1ActionPerformed
         // TODO add your handling code here:
@@ -294,10 +253,8 @@ public class guiRegistrarProductoPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecio;
