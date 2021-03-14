@@ -7,9 +7,11 @@
 package com.epn.trappi.models.rrhh.juanjo;
 import com.epn.trappi.db.rrhh.RolDePagosDb;
 import com.epn.trappi.gui.rrhh.Permisos.*;
+import com.epn.trappi.models.logistico.ListaEntregas;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.db.rrhh.ObservacionDb;
 import com.epn.trappi.db.rrhh.Permiso_EmpleadoDb;
+import com.epn.trappi.models.rrhh.Hora;
 import com.teamdev.jxbrowser.deps.org.checkerframework.checker.units.qual.A;
 
 
@@ -94,7 +96,7 @@ public class RolDePagos {
             double bonoPorFaltas = this.calcularAfectacionDeFaltas(observacionesPorFaltas);
             double bonoPorHorasExtra = this.calcularAfectacionDeHorasExtra(observacionesPorHorasExtra);
 
-            this.total = Double.parseDouble(this.empleado.getSueldo()) + bonoPorHorasExtra + bonoPorFaltas - descuentosPorAtrasos;
+            this.total = Double.parseDouble(this.empleado.getSueldo()) + bonoPorHorasExtra + bonoPorFaltas - descuentosPorAtrasos + calcularBonoPorEntregas();
         }
         this.estado = "pendiente";
     }
@@ -158,6 +160,19 @@ public class RolDePagos {
         return descuentos;
     }
 
+    private double calcularBonoPorEntregas() {
+        int bono = 0;
+        try {
+            int viajesPorConductor = ListaEntregas.numViajesPorConductor(this.fecha.getAño(), this.fecha.getMes(), this.getEmpleado().getId());
+            if (viajesPorConductor >= 20) {
+                bono = 100;
+                new Observacion(this.empleado, "bono", "Bono por más de 20 entregas", this.fecha, new Hora());
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return  bono;
+    }
 
     public Empleado getEmpleado() {
         return empleado;
