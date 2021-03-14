@@ -111,4 +111,11 @@ public class Entrega extends Thread{
         ArrayList<Entrega> entregas =  servicioDB.obtenerElementosPorFiltro(ServicioDbEntrega.FACTURA,String.valueOf(factura)).getDatos();
         this.setID_Entrega(entregas.get(0).getID_Entrega());
     }
+    
+    public static void crearEntrega(String direccion1, int factura1){
+        Entrega e=new Entrega();
+        e.setDireccion(direccion1);
+        e.setFactura(factura1);
+        e.start();
+    }
 }

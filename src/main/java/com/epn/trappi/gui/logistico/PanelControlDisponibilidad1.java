@@ -27,7 +27,7 @@ public class PanelControlDisponibilidad1 extends javax.swing.JPanel {
     //CONSTRUCTOR
     public PanelControlDisponibilidad1() {
         initComponents();
-        initComponents();
+        //initComponents();
         try {
             controlDisponibilidad = ControlDisponibilidad.getInstance();
         } catch (SQLException ex) {
@@ -35,6 +35,14 @@ public class PanelControlDisponibilidad1 extends javax.swing.JPanel {
         }
         lista_vehiculos = new ListaVehiculos();
     }
+    
+    public PanelControlDisponibilidad1(ControlDisponibilidad control) {
+        initComponents();
+        initComponents();
+        controlDisponibilidad = control;
+        lista_vehiculos = new ListaVehiculos();
+    }
+    
     //METODOS
     public void llenarTablaVehiculos(){
         ServicioDb servicio = new ServicioDbVehiculo();

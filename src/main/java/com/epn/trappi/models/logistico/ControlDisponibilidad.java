@@ -44,7 +44,7 @@ public final class ControlDisponibilidad implements EventListener {
         servicioDB = new ServicioDbConductor();
         lc.setListaConductores(servicioDB.obtenerElementosPorFiltro(ServicioDbConductor.ESTADO,"Activo").getDatos());
     }
-    public void actualizarEstados(Vehiculo vehiculo, com.epn.trappi.models.logistico.Conductor conductor) throws SQLException{
+    public void actualizarEstados(Vehiculo vehiculo,Conductor conductor) throws SQLException{
         servicioDB = new ServicioDbVehiculo();
         servicioDB.actualizar(vehiculo);
         servicioDB = new ServicioDbConductor();
@@ -58,7 +58,7 @@ public final class ControlDisponibilidad implements EventListener {
         }
         //Seleccionamos un vehiculo y conductor
         Vehiculo vehiculo = lv.getVehiculos().remove(0);
-        com.epn.trappi.models.logistico.Conductor conductor = lc.getConductores().remove(0);
+        Conductor conductor = lc.getConductores().remove(0);
         //Actualizamos los estados
         vehiculo.setEstado(new Inhabilitado());
         conductor.setEstado("Ocupado");
