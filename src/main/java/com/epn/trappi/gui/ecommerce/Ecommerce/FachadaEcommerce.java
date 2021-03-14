@@ -68,9 +68,8 @@ public class FachadaEcommerce {
     public void enviarALogistico(int numeroFactura,String direccion)
     {
         Entrega entrega = new Entrega();
-       entrega.setFactura(numeroFactura);
-       entrega.setDireccion(direccion);
-       entrega.start();
+       //Entrega.crearEntrega(direccion,numeroFactura);
+       
     }
    
     
