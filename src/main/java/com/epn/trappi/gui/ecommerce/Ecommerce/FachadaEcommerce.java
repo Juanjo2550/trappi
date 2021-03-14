@@ -25,27 +25,6 @@ public class FachadaEcommerce {
     
     
 
-
-    
-    //Financiero
-   // Ingreso ingreso = new Ingreso();
-    
-    
-    
-    //Proveedores
-    
-  
-    
-    
-    
-    //Logistica
-    
-    
-    
-    
-    
-    
-    
     public void enviarDatos(int numeroFactura,double totalFactura, ArrayList<Producto> detalle, String direccion)
     {
        //enviarAProveedores();
@@ -94,6 +73,5 @@ public class FachadaEcommerce {
        entrega.start();
     }
    
-    
     
 }

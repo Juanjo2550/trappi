@@ -54,7 +54,7 @@ public class ComprarVIP extends javax.swing.JFrame {
         //Controlador.inventario.
         Inventario inventario;
         try {
-            inventario = new Inventario();
+            inventario = new Inventario("hola");
             ArrayList<Bien> bienes = inventario.getListaDeBienes().getListaBienes();
             DefaultTableModel productos = (DefaultTableModel) jTable1.getModel();
             String[] aux = new String[4];
