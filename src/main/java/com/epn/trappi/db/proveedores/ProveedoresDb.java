@@ -21,16 +21,15 @@ public class ProveedoresDb {
     private List<Proveedor> proveedores;
     private List<Servicio> servicios;
     private ListaDeCompras compras;
-    //private ArrayList<CantidadDeBien> listaCantidadBienes;
-    //private  ArrayList<CantidadDeBien> inventarioDb;
     private final String spSelectAllProductos = "selectAllInventarioProductos";
+    private final String spSelectAllProductosVIP = "selectAllInventarioProductosVIP";
+    private final String spSelectAllProductosNormales = "selectAllInventarioProductosNormales";
     private final String spSelectAllProveedor = "selectAllProveedor";
     private final String spSelectAllServicios = "selectAllServicios";
     private final String spSelectAllCompras = "selectAllCompra";
     private final String spSelectAllDetalleCompra = "selectAllDetalleCompra";
     private final String spBuscarProveedor = "BuscarProveedor";
     private final String spUpdateCompras = "updateCompras";
-
     private final String spInsertCompra = "insertCompra";
     private final String spInsertCompraBien = "insertCompraBien";
     private final String spUpdateStock = "updateStock";
@@ -123,6 +122,24 @@ public class ProveedoresDb {
     public List<Producto> getProductos() {
         try {
             seleccionarProductos();
+        } catch (Exception ex) {
+            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return productos;
+    }
+
+    public List<Producto> getProductosVIP() {
+        try {
+            seleccionarProductosVIP();
+        } catch (Exception ex) {
+            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return productos;
+    }
+
+    public List<Producto> getProductosNormales() {
+        try {
+            seleccionarProductosNormales();
         } catch (Exception ex) {
             Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -268,6 +285,26 @@ public class ProveedoresDb {
         this.productos = pp;
     }
 
+    private void seleccionarProductosVIP() throws SQLException {
+        ResultSet rs = ejecutarSP(spSelectAllProductosVIP);
+        List<Producto> pp = new ArrayList<>();
+        while (rs.next()) {
+            String[] res = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)};
+            pp.add(reformarProducto(res));
+        }
+        this.productos = pp;
+    }
+    
+    private void seleccionarProductosNormales() throws SQLException {
+        ResultSet rs = ejecutarSP(spSelectAllProductosNormales);
+        List<Producto> pp = new ArrayList<>();
+        while (rs.next()) {
+            String[] res = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)};
+            pp.add(reformarProducto(res));
+        }
+        this.productos = pp;
+    }
+
     private ListaDeCompras seleccionarCompras() throws SQLException, IOException {
         ResultSet rs = ejecutarSP(spSelectAllCompras);
 
@@ -342,7 +379,7 @@ public class ProveedoresDb {
         ResultSet rs = ejecutarSPParameters(spBuscarServicio, clave);
         List<Servicio> ss = new ArrayList<>();
         while (rs.next()) {
-            String[] res = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)};
+            String[] res = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(6)};
             ss.add(reformarServicio(res));
         }
         return ss;
@@ -547,8 +584,27 @@ public class ProveedoresDb {
     }
 
     public ListaDeBienes getInventarioDb() throws IOException {
-
         List<Producto> listaProductos = getProductos();
+        ArrayList<Bien> auxiliar = new ArrayList<>();
+
+        listaProductos.forEach(products -> {
+            auxiliar.add(products);
+        });
+        return new ListaDeBienes(auxiliar);
+    }
+
+    public ListaDeBienes getInventarioVIPDb() throws IOException {
+        List<Producto> listaProductos = getProductosVIP();
+        ArrayList<Bien> auxiliar = new ArrayList<>();
+
+        listaProductos.forEach(products -> {
+            auxiliar.add(products);
+        });
+        return new ListaDeBienes(auxiliar);
+    }
+
+    public ListaDeBienes getInventarioNormalDb() throws IOException {
+        List<Producto> listaProductos = getProductosNormales();
         ArrayList<Bien> auxiliar = new ArrayList<>();
 
         listaProductos.forEach(products -> {

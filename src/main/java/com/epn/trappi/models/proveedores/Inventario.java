@@ -29,10 +29,10 @@ public class Inventario {
         this.listaDeBienes = new ListaDeBienes();
         this.listaDeBienes = db.getInventarioDb();
     }
-    
+
     public Inventario(String vip) throws IOException {
         this.listaDeBienes = new ListaDeBienes();
-        this.listaDeBienes = db.getInventarioDb();
+        this.listaDeBienes = db.getInventarioVIPDb();
     }
 
     public Inventario(ListaDeBienes listDeBienes) {
@@ -40,6 +40,16 @@ public class Inventario {
     }
 
     public ListaDeBienes getListaDeBienes() {
+        return listaDeBienes;
+    }
+
+    public ListaDeBienes getListaDeBienesNormales() throws IOException {
+        this.listaDeBienes = db.getInventarioNormalDb();
+        return listaDeBienes;
+    }
+
+    public ListaDeBienes getListaDeBienesVIP() throws IOException {
+        this.listaDeBienes = db.getInventarioVIPDb();
         return listaDeBienes;
     }
 
@@ -58,7 +68,7 @@ public class Inventario {
     }
 
     public void aumentarStock(int indentificador, String estado) throws SQLException {
-        db.actualizarCompras(indentificador,estado);
+        db.actualizarCompras(indentificador, estado);
         for (Bien bien : listaDeBienes.getListaBienes()) {
             try {
                 db.actualizarStock(db.getIdBien(bien.getNombre()), bien.getCantidad());
@@ -108,7 +118,6 @@ public class Inventario {
     }
 
     public void cargarInventario(JTable jtbProductos) {
-
         String[] titulos = {"Nombre Producto", "Marca", "Precio unitario", "Proveedor", "Cantidad"};
         String[] fila = new String[5];
         DefaultTableModel modelo = new DefaultTableModel(null, titulos);
