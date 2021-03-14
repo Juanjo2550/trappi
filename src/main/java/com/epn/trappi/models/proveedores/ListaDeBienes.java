@@ -42,9 +42,10 @@ public class ListaDeBienes {
         model.addColumn("Producto");
         model.addColumn("Marca");
         model.addColumn("Precio Unitario");
+        model.addColumn("Cantidad");
         model.addColumn("Proveedor");
         for ( Bien bien:listaBienes) {
-            model.addRow(new Object[]{bien.getNombre(),bien.getMarca(),bien.getPrecio()+"",bien.getProveeedor().getRazonSocial()});
+            model.addRow(new Object[]{bien.getNombre(),bien.getMarca(),bien.getPrecio()+"",bien.getCantidad(),bien.getProveeedor().getRazonSocial()});
         }
         jTable1.setModel(model);
     }

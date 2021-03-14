@@ -260,7 +260,7 @@ public class ProveedoresDb {
         this.productos = pp;
     }
 
-    private ListaDeCompras seleccionarCompras() throws SQLException {
+    private ListaDeCompras seleccionarCompras() throws SQLException, IOException {
         ResultSet rs = ejecutarSP(spSelectAllCompras);
 
         ArrayList<Compra> listaCompra = new ArrayList<>();

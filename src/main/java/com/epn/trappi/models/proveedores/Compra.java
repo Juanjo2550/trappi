@@ -2,6 +2,7 @@ package com.epn.trappi.models.proveedores;
 
 import com.epn.trappi.db.proveedores.ProveedoresDb;
 import com.epn.trappi.models.financiero.Pago;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -29,7 +30,7 @@ abstract public class Compra {
     
     private ProveedoresDb db=new ProveedoresDb();
 
-    public Compra(ListaDeBienes listaBienesAComprar, String estado, Double montoTotal, String fecha, int identificador) {
+    public Compra(ListaDeBienes listaBienesAComprar, String estado, Double montoTotal, String fecha, int identificador) throws IOException {
         this.listaBienesAComprar = listaBienesAComprar;
         if(estado.equalsIgnoreCase("Entregado")){
             this.estado = new EstadoCompraEntregado(this,estado);
@@ -40,6 +41,7 @@ abstract public class Compra {
         this.montoTotal = montoTotal;
         this.fecha = fecha;
         this.identificador = identificador;
+        this.inventario = new Inventario();
     }
 
     public Compra(Inventario inventario, ListaDeBienes listaBienesAComprar, Bien bien, String estado, Double montoTotal, int identificador) {
