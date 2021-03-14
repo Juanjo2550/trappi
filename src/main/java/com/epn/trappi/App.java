@@ -5,7 +5,6 @@ import com.epn.trappi.gui.logistico.Logistico_GUI;
 import com.epn.trappi.gui.rrhh.PANTALLA_PRINCIPAL;
 import com.epn.trappi.models.logistico.ControlDisponibilidad;
 import com.epn.trappi.models.rrhh.juanjo.ControlAsistencias;
-import com.teamdev.jxbrowser.deps.org.checkerframework.checker.units.qual.C;
 
 import java.sql.SQLException;
 
