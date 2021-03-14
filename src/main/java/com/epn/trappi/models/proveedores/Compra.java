@@ -33,10 +33,10 @@ abstract public class Compra {
     public Compra(ListaDeBienes listaBienesAComprar, String estado, Double montoTotal, String fecha, int identificador) throws IOException {
         this.listaBienesAComprar = listaBienesAComprar;
         if(estado.equalsIgnoreCase("Entregado")){
-            this.estado = new EstadoCompraEntregado(this,estado);
+            this.estado = new EstadoCompraEntregado(this,"Entregado");
         }
         else{
-            this.estado = new EstadoCompraPendiente(this,estado);
+            this.estado = new EstadoCompraPendiente(this,"Pendiente");
         }
         this.montoTotal = montoTotal;
         this.fecha = fecha;
@@ -49,10 +49,10 @@ abstract public class Compra {
         this.listaBienesAComprar = listaBienesAComprar;
         this.bien = bien;
         if(estado.equalsIgnoreCase("Entregado")){
-            this.estado = new EstadoCompraEntregado(this,estado);
+            this.estado = new EstadoCompraEntregado(this,"Entregado");
         }
         else{
-            this.estado = new EstadoCompraPendiente(this,estado);
+            this.estado = new EstadoCompraPendiente(this,"Pendiente");
         }
         this.montoTotal = montoTotal;
         this.identificador = identificador;
@@ -65,10 +65,10 @@ abstract public class Compra {
         this.inventario = inventario;
         this.listaBienesAComprar = listaBienesAComprar;
         if(estado.equalsIgnoreCase("Entregado")){
-            this.estado = new EstadoCompraEntregado(this,estado);
+            this.estado = new EstadoCompraEntregado(this,"Entregado");
         }
         else{
-            this.estado = new EstadoCompraPendiente(this,estado);
+            this.estado = new EstadoCompraPendiente(this,"Pendiente");
         }
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
         LocalDateTime now = LocalDateTime.now();  
@@ -77,10 +77,10 @@ abstract public class Compra {
     public Compra(ListaDeBienes listaBienesAComprar, String estado) {
         this.listaBienesAComprar = listaBienesAComprar;
         if(estado.equalsIgnoreCase("Entregado")){
-            this.estado = new EstadoCompraEntregado(this,estado);
+            this.estado = new EstadoCompraEntregado(this,"Entregado");
         }
         else{
-            this.estado = new EstadoCompraPendiente(this,estado);
+            this.estado = new EstadoCompraPendiente(this,"Pendiente");
         }
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
         LocalDateTime now = LocalDateTime.now();  
@@ -90,20 +90,20 @@ abstract public class Compra {
         this.inventario = inventario;
         this.listaBienesAComprar = listaBienesAComprar;
         if(estado.equalsIgnoreCase("Entregado")){
-            this.estado = new EstadoCompraEntregado(this,estado);
+            this.estado = new EstadoCompraEntregado(this,"Entregado");
         }
         else{
-            this.estado = new EstadoCompraPendiente(this,estado);
+            this.estado = new EstadoCompraPendiente(this,"Pendiente");
         }
         this.fecha=fecha;
     }
     public Compra(ListaDeBienes listaBienesAComprar, String estado, String fecha, Double monto) {
         this.listaBienesAComprar = listaBienesAComprar;
         if(estado.equalsIgnoreCase("Entregado")){
-            this.estado = new EstadoCompraEntregado(this,estado);
+            this.estado = new EstadoCompraEntregado(this,"Entregado");
         }
         else{
-            this.estado = new EstadoCompraPendiente(this,estado);
+            this.estado = new EstadoCompraPendiente(this,"Pendiente");
         }
         this.fecha=fecha;
         this.montoTotal=monto;
