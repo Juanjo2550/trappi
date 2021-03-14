@@ -14,7 +14,7 @@ import com.epn.trappi.models.rrhh.contratacion.Aspirante;
 import com.epn.trappi.models.rrhh.contratacion.Contrato;
 import com.epn.trappi.models.rrhh.contratacion.PruebaAdmision;
 import com.epn.trappi.models.rrhh.juanjo.Administrativo;
-import com.epn.trappi.models.rrhh.juanjo.Conductor;
+import com.epn.trappi.models.rrhh.juanjo.Conductores;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -687,7 +687,7 @@ public class PanelContratarAspirante extends javax.swing.JPanel {
             int idNuevoEmp = listaEmpleado.obtenerTodos().length + 1;
             if(!tipoEmpleado.equalsIgnoreCase("--Seleccionar--")){
                 if (tipoEmpleado.equalsIgnoreCase("conductor")){
-                    nuevoEmpleado = new Conductor(idNuevoEmp, nombre, apellido, cedula, cargo, depto, numCuenta, banco, valorSueldo, estadoEmp, sexo);
+                    nuevoEmpleado = new Conductores(idNuevoEmp, nombre, apellido, cedula, cargo, depto, numCuenta, banco, valorSueldo, estadoEmp, sexo);
 
                 } else if (tipoEmpleado.equalsIgnoreCase("administrativo")) {
                     nuevoEmpleado = new Administrativo(idNuevoEmp, nombre, apellido, cedula, cargo, depto, numCuenta, banco, valorSueldo, estadoEmp, sexo);

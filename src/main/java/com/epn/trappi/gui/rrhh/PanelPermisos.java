@@ -16,7 +16,7 @@ import com.epn.trappi.gui.rrhh.Permisos.Permiso;
 import com.epn.trappi.models.rrhh.Fecha;
 import com.epn.trappi.models.rrhh.TextPrompt;
 import com.epn.trappi.models.rrhh.juanjo.Administrativo;
-import com.epn.trappi.models.rrhh.juanjo.Conductor;
+import com.epn.trappi.models.rrhh.juanjo.Conductores;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
@@ -29,8 +29,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -272,7 +270,7 @@ public class PanelPermisos extends javax.swing.JPanel {
             ResultSet resultSet = createdStatement.executeQuery(sql);
             while (resultSet.next()) {
                 if (resultSet.getString(10).equals("conductor")) {
-                    empleadoObtenido = new Conductor(
+                    empleadoObtenido = new Conductores(
                             resultSet.getInt(1),
                             resultSet.getString(2),
                             resultSet.getString(3),

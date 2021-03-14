@@ -7,6 +7,8 @@ package com.epn.trappi.gui.logistico;
 
 
 import com.epn.trappi.*;
+import com.epn.trappi.models.logistico.ControlDisponibilidad;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -42,6 +44,13 @@ public class Logistico_GUI extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         configurarRadiosBotones(20);
         
+    }
+
+    public Logistico_GUI(ControlDisponibilidad control) {
+        this.setSize(1366, 768);
+        initComponents();
+        this.setLocationRelativeTo(null);
+        configurarRadiosBotones(20);
     }
     
     /**

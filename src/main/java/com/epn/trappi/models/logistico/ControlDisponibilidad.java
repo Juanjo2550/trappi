@@ -5,19 +5,21 @@
  */
 package com.epn.trappi.models.logistico;
 
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import com.epn.trappi.models.logistico.Vehiculo;
+
 import com.epn.trappi.models.logistico.servicios.ServicioDb;
 import com.epn.trappi.models.logistico.servicios.ServicioDbConductor;
 import com.epn.trappi.models.logistico.servicios.ServicioDbVehiculo;
+import com.epn.trappi.models.observer.listeners.EventListener;
+import com.epn.trappi.models.rrhh.juanjo.Empleado;
+
 import java.sql.SQLException;
 
 /**
  *
  * @author Erick
  */
-public final class ControlDisponibilidad{
+public final class ControlDisponibilidad implements EventListener {
     //ATRIBUTOS
     ServicioDb servicioDB;
     ListaVehiculos lv;
@@ -30,7 +32,7 @@ public final class ControlDisponibilidad{
         }
         return instance;
     }
-    private ControlDisponibilidad() throws SQLException{  
+    public ControlDisponibilidad() throws SQLException{
         lv = new ListaVehiculos();
         lc = new ListaConductores();
         inicializarListas();
@@ -42,7 +44,7 @@ public final class ControlDisponibilidad{
         servicioDB = new ServicioDbConductor();
         lc.setListaConductores(servicioDB.obtenerElementosPorFiltro(ServicioDbConductor.ESTADO,"Activo").getDatos());
     }
-    public void actualizarEstados(Vehiculo vehiculo,Conductor conductor) throws SQLException{
+    public void actualizarEstados(Vehiculo vehiculo, com.epn.trappi.models.logistico.Conductor conductor) throws SQLException{
         servicioDB = new ServicioDbVehiculo();
         servicioDB.actualizar(vehiculo);
         servicioDB = new ServicioDbConductor();
@@ -56,7 +58,7 @@ public final class ControlDisponibilidad{
         }
         //Seleccionamos un vehiculo y conductor
         Vehiculo vehiculo = lv.getVehiculos().remove(0);
-        Conductor conductor = lc.getConductores().remove(0);
+        com.epn.trappi.models.logistico.Conductor conductor = lc.getConductores().remove(0);
         //Actualizamos los estados
         vehiculo.setEstado(new Inhabilitado());
         conductor.setEstado("Ocupado");
@@ -83,6 +85,20 @@ public final class ControlDisponibilidad{
         } catch (InterruptedException e){
             Thread.currentThread().interrupt();
             JOptionPane.showMessageDialog(null,"Error de concurrencia");
+        }
+    }
+
+    @Override
+    public void update(String eventType, Empleado empleado) {
+        Conductor con = new Conductor();
+        con.setID(empleado.getId());
+        con.setEstado("activo");
+        if(eventType.equals("nuevo_empleado")) {
+            System.out.println("Un nuevo empleado esta disponible!");
+            lc.aniadirConductor(con);
+        } else {
+            System.out.println("Un empleado marco salida, no esta disponible!");
+            lc.removerConductor(con);
         }
     }
 }

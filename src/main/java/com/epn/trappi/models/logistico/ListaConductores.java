@@ -15,6 +15,10 @@ public class ListaConductores {
     public void aniadirConductor(Conductor nuevo){
         this.listaConductores.add(nuevo);
     }
+
+    public void removerConductor(Conductor conductor) {
+        this.listaConductores.remove(conductor);
+    }
     public ArrayList<Conductor> getConductores(){
         return this.listaConductores;
     }

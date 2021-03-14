@@ -281,11 +281,9 @@ public class guiComprasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButRegFactCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegFactCompNotaCredActionPerformed
-        
-        
         if (compras.getCompras().get(jTable1.getSelectedRow()).cambiarEstado()) {
             JOptionPane.showMessageDialog(null, "Compra Actualizada");
-            compras.mostrarLista(jTable1);
+            compras.mostrarListaConDescripcion(jTable1);
         } else {
             JOptionPane.showMessageDialog(null, "La compra no ha podido ser actualizada");
         }
