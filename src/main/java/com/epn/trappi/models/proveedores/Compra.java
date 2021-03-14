@@ -117,8 +117,7 @@ abstract public class Compra {
         this.fecha=dtf.format(now);  
     }
     
-    public void comprar() {
-    }
+    public abstract boolean comprar();
     
     public void comprarAnalizador() {
     }

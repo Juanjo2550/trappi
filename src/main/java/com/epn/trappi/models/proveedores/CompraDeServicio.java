@@ -26,17 +26,24 @@ public class CompraDeServicio extends Compra {
     }
 
     @Override
-    public void comprar() {
+    public boolean comprar() {
+        boolean flag = true;
         setMontoTotal();
         Map<String, List<Bien>> listAgrupado = listaBienesAComprar.getListaBienes()
                 .stream()
                 .collect(Collectors.groupingBy(p -> p.getProveeedor().getRuc()));
-        listAgrupado.forEach((String ruc, List<Bien> p) -> {
-            ListaDeBienes listaAux = new ListaDeBienes((ArrayList<Bien>) p);
+        
+        for (Map.Entry<String, List<Bien>> m : listAgrupado.entrySet()) {
+            System.out.println(m.getKey());
+            ListaDeBienes listaAux = new ListaDeBienes((ArrayList<Bien>) m.getValue());
             if (solicitarAutorizacion(listaBienesAComprar.getListaBienes().get(0).getProveeedor().getCuenta(), montoTotal)) {
                 registrarCompraPorProveedor(listaAux, calcularMontoPorLista(listaAux).toString());
             }
-        });
+            else{
+                flag=false;
+            }
+        }
+        return flag;
 
     }
 

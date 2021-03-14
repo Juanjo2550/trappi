@@ -105,9 +105,10 @@ public class guiDescripcionCompra extends javax.swing.JPanel {
 
     private void btnNuevo7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo7ActionPerformed
         // TODO add your handling code here:
-        lista.realizarCompraEnConjunto();
-        JOptionPane.showMessageDialog(null, "Compra realizada con éxito!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-
+        if(lista.realizarCompraEnConjunto())
+            JOptionPane.showMessageDialog(null, "Compra realizada con éxito!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        else
+            JOptionPane.showMessageDialog(null, "La compra no pudo completarse,\nrevise la lista de compras.", "Falla", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btnNuevo7ActionPerformed
 
 

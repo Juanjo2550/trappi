@@ -39,19 +39,31 @@ public class CompraDeProducto extends Compra {
     }
 
     @Override
-    public void comprar() {
+    public boolean  comprar() {
+        boolean flag = true;
         setMontoTotal();
         Map<String, List<Bien>> listAgrupado = listaBienesAComprar.getListaBienes()
                 .stream()
                 .collect(Collectors.groupingBy(prod -> prod.getProveeedor().getRuc()));
-        listAgrupado.forEach((String ruc, List<Bien> p) -> {
+        /*listAgrupado.forEach((String ruc, List<Bien> p) -> {
             System.out.println(ruc);
             ListaDeBienes listaAux = new ListaDeBienes((ArrayList<Bien>) p);
             if (solicitarAutorizacion(listaBienesAComprar.getListaBienes().get(0).getProveeedor().getCuenta(), montoTotal)) {
                 registrarCompraPorProveedor(listaAux, calcularMontoPorLista(listaAux).toString());
             }
-        });
-
+        });*/
+        
+        for (Map.Entry<String, List<Bien>> m : listAgrupado.entrySet()) {
+            System.out.println(m.getKey());
+            ListaDeBienes listaAux = new ListaDeBienes((ArrayList<Bien>) m.getValue());
+            if (solicitarAutorizacion(listaBienesAComprar.getListaBienes().get(0).getProveeedor().getCuenta(), montoTotal)) {
+                registrarCompraPorProveedor(listaAux, calcularMontoPorLista(listaAux).toString());
+            }
+            else{
+                flag=false;
+            }
+        }
+        return flag;
     }
 
     public Double calcularMontoPorLista(ListaDeBienes listaBienesA) {

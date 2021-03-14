@@ -45,10 +45,13 @@ public class ListaDeCompras {
         return resultado;
     }
     
-    public void realizarCompraEnConjunto(){
+    public boolean realizarCompraEnConjunto(){
+        boolean flag=true;
         for(Compra compra: compras){
-            compra.comprar();
+            if(!compra.comprar())
+                flag=false;
         }
+        return flag;
     }
     
     public void mostrarLista(JTable jTable1){

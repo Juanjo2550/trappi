@@ -686,6 +686,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButRealizarComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRealizarComprasActionPerformed
         new CambiaPanel(PanelVerTodos, new guiFormularioComprasPanel(PanelVerTodos));
+        ponerTituloYsub("Compras", "Llena la cantidad y selecciona el producto para su compra");
     }//GEN-LAST:event_jButRealizarComprasActionPerformed
 
     private void jButCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButCompraActionPerformed
@@ -694,6 +695,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButVerTodFactura5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButVerTodFactura5ActionPerformed
         try {
+            ponerTituloYsub("Compras", "Lista y detalle de compras");
             new CambiaPanel(PanelVerTodos, new guiComprasPanel());
         } catch (IOException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
