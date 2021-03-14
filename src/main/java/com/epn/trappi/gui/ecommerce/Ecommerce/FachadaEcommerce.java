@@ -27,7 +27,7 @@ public class FachadaEcommerce {
 
     public void enviarDatos(int numeroFactura,double totalFactura, ArrayList<Producto> detalle, String direccion)
     {
-       //enviarAProveedores();
+       
         ArrayList<Bien> bien = new ArrayList<Bien>() ;
         
         detalle.forEach(producto->{
@@ -35,6 +35,8 @@ public class FachadaEcommerce {
         bien.add((Bien)producto);
         
         });
+        
+        //enviarAProveedores();
        enviarAProovedores(bien);
        
        //enviarALogistico
