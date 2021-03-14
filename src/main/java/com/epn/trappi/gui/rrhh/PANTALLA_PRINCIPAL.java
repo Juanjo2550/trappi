@@ -27,6 +27,7 @@ import javax.swing.border.Border;
 public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
     PanelPermisos panelPermisos = new PanelPermisos();
     ControlAsistencias controlAsistencias;
+    private javax.swing.JFrame parent;
         public void ocultarPaneles(JPanel panel){
         
         panelPermisos.setVisible(panel.getClass().equals(panelPermisos.getClass()));
@@ -44,7 +45,16 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
     
-    public PANTALLA_PRINCIPAL(ControlAsistencias control) {
+    public PANTALLA_PRINCIPAL(ControlAsistencias control, javax.swing.JFrame parent) {
+        initComponents();
+        this.parent = parent;
+        this.controlAsistencias = control;
+        configurarBotones(20);
+        this.setSize(1366, 768);
+        this.setLocationRelativeTo(null);
+    }
+    
+     public PANTALLA_PRINCIPAL(ControlAsistencias control) {
         initComponents();
         this.controlAsistencias = control;
         configurarBotones(20);
@@ -161,6 +171,11 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
         btnVolver.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         btnVolver.setForeground(new java.awt.Color(255, 255, 255));
         btnVolver.setText("Regresar");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
 
         btnRRHH.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         btnRRHH.setForeground(new java.awt.Color(255, 255, 255));
@@ -261,6 +276,11 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
         this.setVisible(false);
         contratacion.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        this.setVisible(false);
+        this.parent.setVisible(true);
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments

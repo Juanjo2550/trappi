@@ -5,7 +5,11 @@
  */
 package com.epn.trappi.gui.proveedores;
 
+import com.epn.trappi.gui.rrhh.PANTALLA_PRINCIPAL;
+import com.epn.trappi.models.logistico.ControlDisponibilidad;
+import com.epn.trappi.models.rrhh.juanjo.ControlAsistencias;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,11 +18,23 @@ import java.util.logging.Logger;
  * @author David Morales
  */
 public class Menu_Trappi extends javax.swing.JFrame {
-
+    private PANTALLA_PRINCIPAL rrhh;
+    private ControlAsistencias controlAsistencias;
+    private ControlDisponibilidad controlDisponibilidad;
     /**
      * Creates new form Menu_Trappi
      */
     public Menu_Trappi() {
+        try {
+            this.controlAsistencias = new ControlAsistencias();
+            this.rrhh = new PANTALLA_PRINCIPAL(this.controlAsistencias, this);
+            this.controlDisponibilidad = ControlDisponibilidad.getInstance();
+            this.controlAsistencias.events.suscribe("nuevo_empleado", controlDisponibilidad);
+            this.controlAsistencias.events.suscribe("salida_empleado", controlDisponibilidad);
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        
         initComponents();
     }
 
@@ -42,6 +58,7 @@ public class Menu_Trappi extends javax.swing.JFrame {
         jbtProveedores = new javax.swing.JButton();
         jPanOpcInventario = new javax.swing.JPanel();
         jPanOpcProveedores = new javax.swing.JPanel();
+        Recursosboton = new javax.swing.JButton();
         jPanOpcProductos = new javax.swing.JPanel();
         jbtInventario = new javax.swing.JButton();
         jbtLogístico = new javax.swing.JButton();
@@ -133,15 +150,40 @@ public class Menu_Trappi extends javax.swing.JFrame {
 
         jPanOpcProveedores.setBackground(new java.awt.Color(51, 51, 51));
 
+        Recursosboton.setBackground(new java.awt.Color(255, 210, 28));
+        Recursosboton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Recursosboton.setForeground(new java.awt.Color(240, 240, 241));
+        Recursosboton.setText("RRHH");
+        Recursosboton.setBorderPainted(false);
+        Recursosboton.setFocusPainted(false);
+        Recursosboton.setMaximumSize(new java.awt.Dimension(110, 50));
+        Recursosboton.setMinimumSize(new java.awt.Dimension(110, 50));
+        Recursosboton.setPreferredSize(new java.awt.Dimension(110, 50));
+        Recursosboton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RecursosbotonMouseClicked(evt);
+            }
+        });
+        Recursosboton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RecursosbotonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanOpcProveedoresLayout = new javax.swing.GroupLayout(jPanOpcProveedores);
         jPanOpcProveedores.setLayout(jPanOpcProveedoresLayout);
         jPanOpcProveedoresLayout.setHorizontalGroup(
             jPanOpcProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
+            .addGroup(jPanOpcProveedoresLayout.createSequentialGroup()
+                .addComponent(Recursosboton, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 21, Short.MAX_VALUE))
         );
         jPanOpcProveedoresLayout.setVerticalGroup(
             jPanOpcProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 71, Short.MAX_VALUE)
+            .addGroup(jPanOpcProveedoresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Recursosboton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         jPanOpcProductos.setBackground(new java.awt.Color(51, 51, 51));
@@ -293,13 +335,13 @@ public class Menu_Trappi extends javax.swing.JFrame {
                     .addGroup(jPanOpcionesDeclaracionLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jbtProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
                 .addComponent(jPanOpcProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(jPanOpcProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(jPanOpcServicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jLabNombreContribuyente1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
@@ -324,7 +366,7 @@ public class Menu_Trappi extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabNombreContribuyente1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanOpcionesDeclaracion, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
+                .addComponent(jPanOpcionesDeclaracion, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -391,6 +433,15 @@ public class Menu_Trappi extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbtProveedoresMouseClicked
 
+    private void RecursosbotonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RecursosbotonMouseClicked
+        this.rrhh.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_RecursosbotonMouseClicked
+
+    private void RecursosbotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecursosbotonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RecursosbotonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -428,6 +479,7 @@ public class Menu_Trappi extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelVerTodos;
+    private javax.swing.JButton Recursosboton;
     private javax.swing.JLabel jIVA;
     private javax.swing.JLabel jLSidimLogo;
     private javax.swing.JLabel jLabNombreContribuyente1;

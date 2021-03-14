@@ -11,6 +11,7 @@ import com.epn.trappi.gui.rrhh.PANTALLA_PRINCIPAL;
 import com.epn.trappi.models.logistico.ControlDisponibilidad;
 import com.epn.trappi.models.rrhh.juanjo.ControlAsistencias;
 import java.sql.SQLException;
+import javax.swing.JFrame;
 
 /**
  *
@@ -22,7 +23,7 @@ public class Conexion_RRHH_Logistica {
         //ControlDisponibilidad controlDisponibilidad = ControlDisponibilidad.getInstance();
         //control.events.suscribe("nuevo_empleado", controlDisponibilidad);
         //control.events.suscribe("salida_empleado", controlDisponibilidad);
-        PANTALLA_PRINCIPAL pantalla_rrhh = new PANTALLA_PRINCIPAL(control);
+        PANTALLA_PRINCIPAL pantalla_rrhh = new PANTALLA_PRINCIPAL(control, new JFrame());
         Logistico_GUI pantalla_logistico = new Logistico_GUI();
         pantalla_rrhh.setVisible(true);
         pantalla_logistico.setVisible(true);
