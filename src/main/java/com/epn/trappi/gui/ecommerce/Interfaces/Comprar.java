@@ -54,6 +54,7 @@ public class Comprar extends javax.swing.JFrame {
         Inventario inventario;
         try {
             inventario = new Inventario();
+            inventario.getListaDeBienesNormales();
             ArrayList<Bien> bienes = inventario.getListaDeBienes().getListaBienes();
             DefaultTableModel productos = (DefaultTableModel) jTable1.getModel();
             String[] aux = new String[4];
