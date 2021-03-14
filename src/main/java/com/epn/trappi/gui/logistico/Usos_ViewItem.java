@@ -5,6 +5,7 @@
  */
 package com.epn.trappi.gui.logistico;
 
+import com.epn.trappi.models.logistico.Entrega;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -29,8 +30,9 @@ public class Usos_ViewItem extends JPanel{
         this.setLayout(new GridBagLayout());
         this.setBackground(new Color(255,255,255));
     }
-    public void llenarItem(String fecha,String conductor,String factura,String direccion){
-        JLabel labelFecha = new JLabel(this.fecha+fecha);
+    public void llenarItem(Object o){
+        Entrega e=(Entrega) o;
+        JLabel labelFecha = new JLabel(this.fecha+e.getFecha());
         labelFecha.setFont(new Font("Segoe UI Semibold", Font.BOLD, 12));
         labelFecha.setForeground(new Color(61,57,57));
         JLabel icono = new JLabel();
@@ -46,13 +48,13 @@ public class Usos_ViewItem extends JPanel{
                 return null;
             }
         }.getIcon());
-        JLabel labelConductor = new JLabel(this.conductor+conductor);
+        JLabel labelConductor = new JLabel(this.conductor+e.getID_Empleado());
         labelConductor.setFont(new Font("Segoe UI Semibold", Font.BOLD, 12));
         labelConductor.setForeground(new Color(61,57,57));
-        JLabel labelFactura = new JLabel(this.factura+factura);
+        JLabel labelFactura = new JLabel(this.factura+e.getFactura());
         labelFactura.setFont(new Font("Segoe UI Semibold", Font.BOLD, 12));
         labelFactura.setForeground(new Color(61,57,57));
-        JLabel labelDireccion = new JLabel(this.direccion+direccion);
+        JLabel labelDireccion = new JLabel(this.direccion+e.getDireccion());
         labelDireccion.setFont(new Font("Segoe UI Semibold", Font.BOLD, 12));
         labelDireccion.setForeground(new Color(61,57,57));
         //Restricciones

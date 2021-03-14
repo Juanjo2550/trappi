@@ -5,19 +5,18 @@
  */
 package com.epn.trappi.gui.logistico;
 
-import com.epn.trappi.models.logistico.Entrega;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
  *
  * @author Rommel Alexander
+ * @param <Tipo>
  */
-public class Usos_ViewHandler {
+public class Usos_ViewHandler <Tipo> {
     //ATRIBUTOS
     JPanel viewList;
     //METODOS
@@ -25,7 +24,7 @@ public class Usos_ViewHandler {
         viewList = new JPanel(new GridBagLayout());  
         this.viewList.setBackground(new Color(255,255,255));
     }
-    private void addView(Usos_ViewItem vista,int fila){
+    private void addView(JPanel vista,int fila){
         GridBagConstraints c = new GridBagConstraints();
         c.gridx=0;
         c.gridy=fila;
@@ -37,14 +36,19 @@ public class Usos_ViewHandler {
     public void reiniciarEstado(){
         viewList.removeAll();
     }
-    public void llenar(ArrayList<Entrega> registros){
-        //Recibe Fecha ID conductor Factura y Direccion.
+    public void llenar(ArrayList<Tipo> registros,JPanel vista){
         for (int instancia=0;instancia<registros.size();instancia++){
-            Entrega entrega = registros.get(instancia);
-            Usos_ViewItem item = new Usos_ViewItem();
-            //Llenamos el panel con los datos
-            item.llenarItem(entrega.getFecha(),String.valueOf(entrega.getID_Empleado()),String.valueOf(entrega.getFactura()),"Megamaxi 6 de Diciembre");
-            addView(item,instancia);
+            Tipo o = registros.get(instancia);
+            if(vista.getClass().getSimpleName().equalsIgnoreCase("Usos_ViewItem")){
+                Usos_ViewItem item = new Usos_ViewItem();
+                item.llenarItem(o);
+                addView(item,instancia);
+            }
+            if(vista.getClass().getSimpleName().equalsIgnoreCase("Solicitudes_ViewItem")){
+                Solicitudes_ViewItem item = new Solicitudes_ViewItem();
+                item.llenarItem(o);
+                addView(item,instancia);
+            }    
         }
     }
     public JPanel obtenerListView(){

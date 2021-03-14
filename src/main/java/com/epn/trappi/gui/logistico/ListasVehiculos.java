@@ -59,12 +59,11 @@ public class ListasVehiculos extends javax.swing.JPanel {
             this.panelHistorial.setVisible(true);
             return;
         }
-        //Llenamos el historial con estos datos
         
-        historial.llenar(entregas_por_vehiculo);
+        //Llenamos el historial con estos datos
+        historial.llenar(entregas_por_vehiculo, new Usos_ViewItem());
         Component lista = historial.obtenerListView();
         this.panelHistorial.add(lista);
-        //this.panelHistorial.setPreferredSize(lista.getPreferredSize());
         this.panelHistorial.setVisible(false);
         this.panelHistorial.setVisible(true);
     }

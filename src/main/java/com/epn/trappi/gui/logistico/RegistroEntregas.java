@@ -307,7 +307,7 @@ public class RegistroEntregas extends javax.swing.JPanel {
 
         campoAño.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
         campoAño.setForeground(new java.awt.Color(153, 153, 153));
-        campoAño.setText("  año");
+        campoAño.setText("año");
         campoAño.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 campoAñoMouseClicked(evt);
@@ -366,7 +366,7 @@ public class RegistroEntregas extends javax.swing.JPanel {
 
         campoDia.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
         campoDia.setForeground(new java.awt.Color(153, 153, 153));
-        campoDia.setText("  día");
+        campoDia.setText("día");
         campoDia.setActionCommand("<Not Set>");
         campoDia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -398,7 +398,7 @@ public class RegistroEntregas extends javax.swing.JPanel {
 
         campoMes.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
         campoMes.setForeground(new java.awt.Color(153, 153, 153));
-        campoMes.setText("  mes");
+        campoMes.setText("mes");
         campoMes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 campoMesMouseClicked(evt);
@@ -533,7 +533,7 @@ public class RegistroEntregas extends javax.swing.JPanel {
         if (campoDia.getText().length()==0){
             campoDia.setForeground(new Color(153,153,153));
             campoDia.setFont(new Font("Segoe UI Semibold", Font.ITALIC, 14));
-            campoDia.setText("  día");
+            campoDia.setText("día");
         }
     }//GEN-LAST:event_campoDiaMouseExited
 
@@ -547,7 +547,7 @@ public class RegistroEntregas extends javax.swing.JPanel {
         if (campoMes.getText().length()==0){
             campoMes.setForeground(new Color(153,153,153));
             campoMes.setFont(new Font("Segoe UI Semibold", Font.ITALIC, 14));
-            campoMes.setText("  mes");
+            campoMes.setText("mes");
         }
     }//GEN-LAST:event_campoMesMouseExited
 
@@ -561,7 +561,7 @@ public class RegistroEntregas extends javax.swing.JPanel {
         if (campoAño.getText().length()==0){
             campoAño.setForeground(new Color(153,153,153));
             campoAño.setFont(new Font("Segoe UI Semibold", Font.ITALIC, 14));
-            campoAño.setText("  año");
+            campoAño.setText("año");
         }
     }//GEN-LAST:event_campoAñoMouseExited
 
@@ -651,7 +651,16 @@ public class RegistroEntregas extends javax.swing.JPanel {
                 }
             case 6:
                 campo_busqueda="";
-                campo_busqueda=campoAño.getText().trim()+"-"+campoMes.getText().trim()+"-"+campoDia.getText().trim();
+                String año=campoAño.getText().trim();
+                String mes=campoMes.getText().trim();
+                String dia=campoDia.getText().trim();
+                if("".equals(mes) || "mes".equals(mes) || mes==null){
+                    mes="99";
+                }
+                if("".equals(dia) || "dia".equals(dia) || dia==null){
+                    dia="99";
+                }
+                campo_busqueda=año+"-"+mes+"-"+dia;
                 strErrores+=verificarFecha(campo_busqueda);
                 if(!strErrores.equals(""))
                 {

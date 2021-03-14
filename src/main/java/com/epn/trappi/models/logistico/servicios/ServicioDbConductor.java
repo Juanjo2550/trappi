@@ -7,6 +7,7 @@ package com.epn.trappi.models.logistico.servicios;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.models.logistico.Conductor;
+import com.epn.trappi.models.logistico.Entrega;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +19,7 @@ import java.util.Set;
  *
  * @author Alexander
  */
-public class ServicioDbConductor implements ServicioDb<Conductor>{
+public class ServicioDbConductor implements ServicioDb<Conductor>, Unible<Conductor>{
     //Atributos
     DataBaseConnection connection;
     public static String ID_CONDUCTOR="IDEMP";
@@ -84,6 +85,29 @@ public class ServicioDbConductor implements ServicioDb<Conductor>{
     @Override
     public void insertar(Conductor elemento) throws SQLException {
         //
+    }
+
+    @Override
+    public Object join(ArrayList<Conductor> usado_para_join, Consultable consultable) throws SQLException {
+        ArrayList<String> foreign_keys = new ArrayList<>();
+        Object unibleArrayList = new Object();
+        if("Entrega".equals(consultable.getType())){
+            for (int i=0;i<usado_para_join.size();i++){
+                foreign_keys.add(String.valueOf(usado_para_join.get(i).getID()));
+            }
+            ArrayList<Entrega> entregas = (ArrayList<Entrega>) consultable.getDatos();
+            int dynamic_size= entregas.size();
+            for (int i=0;i<dynamic_size;i++){
+                String id = String.valueOf(entregas.get(i).getID_Empleado());
+                if (foreign_keys.contains(id)==false){
+                    entregas.remove(i);
+                    i=i-1;
+                    dynamic_size=entregas.size();
+                }
+            }
+            unibleArrayList = entregas;
+        }
+        return unibleArrayList;
     }
   
 }

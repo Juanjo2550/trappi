@@ -7,19 +7,21 @@ package com.epn.trappi.gui.logistico;
 
 import com.epn.trappi.models.logistico.ListaMantenimientos;
 import com.epn.trappi.models.logistico.Mantenimiento;
+import com.epn.trappi.models.logistico.SolicitudMantenimiento;
 import com.epn.trappi.models.logistico.servicios.Consultable;
 import com.epn.trappi.models.logistico.servicios.ServicioDb;
 import com.epn.trappi.models.logistico.servicios.ServicioDbMantenimiento;
+import com.epn.trappi.models.logistico.servicios.ServicioDbSolicitudMantenimiento;
 import static com.epn.trappi.models.logistico.servicios.ServicioVerificacion.*;
 import com.epn.trappi.models.logistico.servicios.Unible;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -31,11 +33,50 @@ public class RegistroMantenimiento extends javax.swing.JPanel {
     Consultable consultable;
     Unible unible;
     ListaMantenimientos lista;
+    Usos_ViewHandler historial;
     public RegistroMantenimiento() {
         initComponents();
         servicioDB = new ServicioDbMantenimiento();
         lista = new ListaMantenimientos();
+        historial = new Usos_ViewHandler();
         this.btnBuscar.setBorder(new Logistico_GUI.RoundedBorder(24));
+        tablaMantenimientos.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    llenarHistorialDeSolicitudes(evt);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ListasVehiculos.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex) {
+                    Logger.getLogger(ListasVehiculos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
+    
+        private void llenarHistorialDeSolicitudes(java.awt.event.MouseEvent evt) throws SQLException, Exception {                                             
+
+        historial.reiniciarEstado();
+        int fila = tablaMantenimientos.getSelectedRow();
+        String id_mant = (String)tablaMantenimientos.getValueAt(fila, 0); //OBTENEMOS EL ID DEL MANTENIMIENTO
+        
+        //Obtenemos las entregas que se hayan hecho con ese vehiculo
+        ServicioDb servicioM = new ServicioDbSolicitudMantenimiento();
+        ArrayList<SolicitudMantenimiento> sol_por_mant = servicioM.obtenerElementosPorFiltro(ServicioDbSolicitudMantenimiento.ID_MANTENIMIENTO,id_mant).getDatos();
+        if(sol_por_mant.isEmpty()){
+            JOptionPane.showMessageDialog(null,"No existen solicitudes para este mantenimiento");
+            this.panelHistorial.setVisible(false);
+            this.panelHistorial.setVisible(true);
+            return;
+        }
+        
+        //Llenamos el historial con estos datos
+        historial.llenar(sol_por_mant, new Solicitudes_ViewItem());
+        Component lista_solicitudes = historial.obtenerListView();
+        this.panelHistorial.add(lista_solicitudes);
+        this.panelHistorial.setVisible(false);
+        this.panelHistorial.setVisible(true);
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

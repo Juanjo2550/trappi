@@ -96,8 +96,25 @@ public class ServicioDbEntrega implements Unible<Entrega>,ServicioDb<Entrega> {
         Statement sentencia = connection.getConnection().createStatement();
         String columnas = ID_ENTREGA+","+MATRICULA+","+FECHA+","+ESTADO+","+FACTURA+","+ID_EMPLEADO+","+"DIRECCION";
         ResultSet resultados;
-        resultados
+        if(COLUMN_NAME_CONSTANT.equalsIgnoreCase(FECHA)){
+            String date_parts[] = VALOR.split("-|/");
+            int año = Integer.parseInt(date_parts[0]);
+            int mes = Integer.parseInt(date_parts[1]);
+            int dia = Integer.parseInt(date_parts[2]);
+            String consulta = "SELECT "+columnas+" FROM ENTREGA JOIN FACTURAS ON ENTREGA.FACTURA=FACTURAS.IDFACTURA " +
+            "WHERE  DATEPART(yy, FECHA) = "+año;
+            if(mes<=12 & mes>=1){
+                consulta = consulta + " AND DATEPART(mm, FECHA) = "+mes;
+            }
+            if (dia<=31 & dia>=1){
+                consulta = consulta + " AND DATEPART(dd, FECHA) = "+dia;
+            }
+            resultados
+                    =sentencia.executeQuery(consulta);
+        }else{
+            resultados
                 =sentencia.executeQuery("SELECT "+columnas+" FROM ENTREGA JOIN FACTURAS  ON ENTREGA.FACTURA=FACTURAS.IDFACTURA WHERE "+COLUMN_NAME_CONSTANT+"='"+VALOR+"'");
+        }
         ArrayList<Entrega> entregas = new ArrayList<>();
         while(resultados.next()){
             Entrega entrega = new Entrega();
@@ -153,4 +170,5 @@ public class ServicioDbEntrega implements Unible<Entrega>,ServicioDb<Entrega> {
         }
         return unibleArrayList;
     }
+    
 }

@@ -25,7 +25,8 @@ public class Solicitudes_ViewItem extends JPanel{
         this.setLayout(new GridBagLayout());
         this.setBackground(new Color(255,255,255));
     }
-    public void llenarItem(SolicitudMantenimiento s){
+    public void llenarItem(Object o){
+        SolicitudMantenimiento s = (SolicitudMantenimiento) o;
         JLabel labelFecha = new JLabel(this.fecha+s.getFecha());
         labelFecha.setFont(new Font("Segoe UI Semibold", Font.BOLD, 12));
         labelFecha.setForeground(new Color(61,57,57));
@@ -35,7 +36,7 @@ public class Solicitudes_ViewItem extends JPanel{
             public javax.swing.Icon getIcon() {
                 try {
                     return new javax.swing.ImageIcon(
-                        new java.net.URL("https://i.ibb.co/SK8yGS4/user-2.png")
+                        new java.net.URL("https://i.ibb.co/BtRLJgv/configuraciones.png")
                     );
                 } catch (java.net.MalformedURLException e) {
                 }

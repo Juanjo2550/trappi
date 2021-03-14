@@ -491,7 +491,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="99" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="  a&#xf1;o"/>
+            <Property name="text" type="java.lang.String" value="a&#xf1;o"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="campoA&#xf1;oMouseClicked"/>
@@ -570,7 +570,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="99" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="  d&#xed;a"/>
+            <Property name="text" type="java.lang.String" value="d&#xed;a"/>
             <Property name="actionCommand" type="java.lang.String" value="&lt;Not Set&gt;"/>
           </Properties>
           <Events>
@@ -612,7 +612,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="99" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="  mes"/>
+            <Property name="text" type="java.lang.String" value="mes"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="campoMesMouseClicked"/>
