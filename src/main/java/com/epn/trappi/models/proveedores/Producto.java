@@ -66,22 +66,18 @@ public class Producto extends Bien {
 
     @Override
     public void actualizar(String nombre,Double precio,String prov, String categoria) {
-
         try {
             if (nombre.length() >= 1) {
                 if (precio >= 0) {
                     Proveedor proveedor;
                     proveedor = db.obtenerProveedorRuc(prov);
                     db.actualizarBien(db.getIdBien(nombre), nombre, precio, proveedor.getRuc(),categoria);
-                    JOptionPane.showMessageDialog(null, "Producto Actualizado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-
-                    
+                    JOptionPane.showMessageDialog(null, "Producto Actualizado", "Éxito", JOptionPane.INFORMATION_MESSAGE);                   
                 } else {
                     JOptionPane.showMessageDialog(null, "Precio Incorrecto", "Error", JOptionPane.INFORMATION_MESSAGE);
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Nombre Incorrecto", "Error", JOptionPane.INFORMATION_MESSAGE);
-
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error no se pudo Actualizar el Producto", "Error", JOptionPane.INFORMATION_MESSAGE);

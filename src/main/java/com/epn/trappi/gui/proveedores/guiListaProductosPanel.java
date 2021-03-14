@@ -8,15 +8,6 @@ package com.epn.trappi.gui.proveedores;
 import com.epn.trappi.db.proveedores.ProveedoresDb;
 import com.epn.trappi.models.proveedores.ListaDeBienes;
 import com.epn.trappi.models.proveedores.ListaProveedores;
-import com.epn.trappi.models.proveedores.Producto;
-import com.epn.trappi.models.proveedores.Proveedor;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,10 +17,7 @@ import javax.swing.table.DefaultTableModel;
 public class guiListaProductosPanel extends javax.swing.JPanel {
 
     DefaultTableModel modelo;
-    private final ProveedoresDb db = new ProveedoresDb();
     ListaDeBienes listaP = new ListaDeBienes();
-    public ArrayList seleccionados = new ArrayList();
-
     ListaProveedores listaProveedores = new ListaProveedores();
 
     /**
@@ -37,42 +25,18 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
      */
     public guiListaProductosPanel() {
         initComponents();
-//        listaP.getListaBienes(jtbProductos);
-        cmbProveedores1.addItem("Normal");
-        cmbProveedores1.addItem("VIP");
-        cargarProductos();
-        cargarProveedor();
+        listaP.cargarProductos();
+        listaP.cargarProductosTabla(jtbProductos);
+        listaProveedores.cargarProveedorCombobox(cmbProveedores);
+        modelo = (DefaultTableModel) jtbProductos.getModel();
     }
 
-    private void cargarProveedor() {
-        listaProveedores.getListaDeProveedores().forEach(prov -> {
-            cmbProveedores.addItem(prov.getRazonSocial());
-        });
-    }
-
-    private void cargarProductos() {
-        seleccionados = (ArrayList) db.getProductos();
-        String[] titulos = {"Nombre Producto", "Precio unitario", "Proveedor","Categoría"};
-        String[] fila = new String[4];
-        modelo = new DefaultTableModel(null, titulos);
-        //Aquí cambie algo para que sirva, puse este iterador y luego castee la clase producto
-        for (Iterator it = seleccionados.iterator(); it.hasNext();) {
-            Producto producto = (Producto) it.next();
-            fila[0] = producto.getNombre();
-            fila[1] = "" + producto.getPrecio();
-            fila[2] = "" + producto.getProveeedor().getRazonSocial();
-            fila[3] = "" + producto.getCategoria();
-            modelo.addRow(fila);
-        }
-        jtbProductos.setModel(modelo);
-    }
-
-    private void mostrarProducto(String nombre, String precio, String proveedor) {
-        txtNombre.setText(nombre);
-        txtPrecio.setText(precio);
-        cmbProveedores.setSelectedItem(proveedor);
-    }
-
+    /*public void ocultarColumnaTabla(JTable jtb, int col) {
+        jtb.getColumnModel().getColumn(col).setMaxWidth(0);
+        jtb.getColumnModel().getColumn(col).setMinWidth(0);
+        jtb.getTableHeader().getColumnModel().getColumn(col).setMaxWidth(0);
+        jtb.getTableHeader().getColumnModel().getColumn(col).setMinWidth(0);
+    }*/
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -96,7 +60,7 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
         jtbProductos = new javax.swing.JTable();
         cmbProveedores = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
-        cmbProveedores1 = new javax.swing.JComboBox<>();
+        cmbCategoria = new javax.swing.JComboBox<>();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -118,29 +82,9 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
         });
 
         txtPrecio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtPrecio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrecioActionPerformed(evt);
-            }
-        });
-        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtPrecioKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPrecioKeyTyped(evt);
-            }
-        });
 
+        txtNombre.setEditable(false);
         txtNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtNombreKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNombreKeyTyped(evt);
-            }
-        });
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel13.setText("Proveedor:");
@@ -195,21 +139,12 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jtbProductos);
 
         cmbProveedores.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        cmbProveedores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbProveedoresActionPerformed(evt);
-            }
-        });
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel14.setText("Categoría:");
 
-        cmbProveedores1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        cmbProveedores1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbProveedores1ActionPerformed(evt);
-            }
-        });
+        cmbCategoria.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "VIP" }));
 
         javax.swing.GroupLayout PanelVerTodosLayout = new javax.swing.GroupLayout(PanelVerTodos);
         PanelVerTodos.setLayout(PanelVerTodosLayout);
@@ -230,7 +165,7 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel13)
                                 .addGap(254, 254, 254)
                                 .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmbProveedores1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel14))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(PanelVerTodosLayout.createSequentialGroup()
@@ -270,7 +205,7 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(PanelVerTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbProveedores1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnActualizar)
                 .addContainerGap())
@@ -279,90 +214,29 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
         add(PanelVerTodos);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecioActionPerformed
-
-    private void txtPrecioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyPressed
-
-    }//GEN-LAST:event_txtPrecioKeyPressed
-
-    private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
-
-    }//GEN-LAST:event_txtPrecioKeyTyped
-
-    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
-
-    }//GEN-LAST:event_txtNombreKeyPressed
-
-    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-
-    }//GEN-LAST:event_txtNombreKeyTyped
-    public void vaciarCampos(JTextField txtNombre, JTextField txtPrecio) {
-        txtNombre.setText("");
-        txtPrecio.setText("");
-
-    }
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-       ((Producto)seleccionados.get(jtbProductos.getSelectedRow())).actualizar(txtNombre.getText(),Double.parseDouble(txtPrecio.getText()), cmbProveedores.getSelectedItem().toString(),cmbProveedores1.getSelectedItem().toString());
-       vaciarCampos(txtNombre, txtPrecio);
-       cargarProductos();
+        listaP.actualizarProducto(jtbProductos, txtNombre, txtPrecio, cmbProveedores, cmbCategoria);
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String producto = txtNombreProducto.getText();
-
-        try {
-            if (producto.length() >= 1) {
-                seleccionados = (ArrayList) db.buscarProductos(producto);
-                cargarProductos();
-            } else {
-                cargarProductos();
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Proveedor no encontrado", "Error", JOptionPane.INFORMATION_MESSAGE);
-        }
+        listaP.buscarProductos(txtNombreProducto, jtbProductos);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void jtbProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbProductosMouseClicked
-        int row = jtbProductos.rowAtPoint(evt.getPoint());
-        int col = jtbProductos.columnAtPoint(evt.getPoint());
-        if (row >= 0 && col >= 0) {
-            mostrarProducto(modelo.getValueAt(row, 0).toString(), modelo.getValueAt(row, 1).toString(), modelo.getValueAt(row, 2).toString());
-        }
+        listaP.mostrarProducto(evt, jtbProductos, modelo, txtNombre, txtPrecio, cmbProveedores, cmbCategoria);
     }//GEN-LAST:event_jtbProductosMouseClicked
 
     private void txtNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProductoKeyTyped
-        // TODO add your handling code here:
-        String producto = txtNombreProducto.getText();
-        try {
-            if (producto.length() >= 1) {
-                seleccionados = (ArrayList) db.buscarProductos(producto);
-                cargarProductos();
-            } else {
-                cargarProductos();
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Proveedor no encontrado", "Error", JOptionPane.INFORMATION_MESSAGE);
-        }
+        listaP.buscarProductos(txtNombreProducto, jtbProductos);
     }//GEN-LAST:event_txtNombreProductoKeyTyped
-
-    private void cmbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProveedoresActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_cmbProveedoresActionPerformed
-
-    private void cmbProveedores1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProveedores1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbProveedores1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelVerTodos;
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JComboBox<String> cmbCategoria;
     private javax.swing.JComboBox<String> cmbProveedores;
-    private javax.swing.JComboBox<String> cmbProveedores1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;

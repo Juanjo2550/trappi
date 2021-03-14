@@ -37,8 +37,8 @@ public class ProveedoresDb {
     private final String spGetIdBien = "getIdBien";
     private final String spUpdateProveedor = "updateProveedor";
     private final String spBuscarProducto = "BuscarProducto";
-        private final String spUpdateProducto = "updateBien";
-
+    private final String spBuscarServicio = "BuscarServicio";
+    private final String spUpdateProducto = "updateBien";
 
     private ResultSet ejecutarSP(String nombreSP) throws SQLException {
         Connection connection = dbInstance.getConnection();
@@ -87,7 +87,6 @@ public class ProveedoresDb {
 
     private ResultSet ejecutarSPParameters(String nombreSP, String[] parametros) throws SQLException {
         CallableStatement cstmt = crearStatement(nombreSP, parametros);
-
         return obtenerResultado(cstmt);
     }
 
@@ -133,6 +132,15 @@ public class ProveedoresDb {
     public List<Producto> buscarProductos(String nombre) {
         try {
             return seleccionarProductos(nombre);
+        } catch (Exception ex) {
+            Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public List<Servicio> buscarServicios(String nombre) {
+        try {
+            return seleccionarServicios(nombre);
         } catch (Exception ex) {
             Logger.getLogger(Archivo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -254,7 +262,7 @@ public class ProveedoresDb {
         ResultSet rs = ejecutarSP(spSelectAllProductos);
         List<Producto> pp = new ArrayList<>();
         while (rs.next()) {
-            String[] res = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6)};
+            String[] res = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)};
             pp.add(reformarProducto(res));
         }
         this.productos = pp;
@@ -291,7 +299,7 @@ public class ProveedoresDb {
         List<Producto> pp = new ArrayList<>();
         while (rs.next()) {
             //Producto(String nombre, double precio, Proveedor proveeedor, int cantidad, String marca)
-            String[] res = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6)};
+            String[] res = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)};
             pp.add(reformarProducto(res));
         }
         return pp;
@@ -323,10 +331,21 @@ public class ProveedoresDb {
         ResultSet rs = ejecutarSPParameters(spBuscarProducto, clave);
         List<Producto> pp = new ArrayList<>();
         while (rs.next()) {
-            String[] res = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)};
+            String[] res = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)};
             pp.add(reformarProducto(res));
         }
         return pp;
+    }
+
+    private List<Servicio> seleccionarServicios(String nombre) throws SQLException {
+        String[] clave = {"nombre:" + nombre};
+        ResultSet rs = ejecutarSPParameters(spBuscarServicio, clave);
+        List<Servicio> ss = new ArrayList<>();
+        while (rs.next()) {
+            String[] res = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)};
+            ss.add(reformarServicio(res));
+        }
+        return ss;
     }
 
     /*private void seleccionarCantidadDeBienesCompra() {
@@ -360,7 +379,7 @@ public class ProveedoresDb {
         ResultSet rs = ejecutarSP(spSelectAllServicios);
         List<Servicio> ss = new ArrayList<>();
         while (rs.next()) {
-            String[] res = {rs.getString(3), rs.getString(4), rs.getString(2),rs.getString(6),rs.getString(7)};
+            String[] res = {rs.getString(3), rs.getString(4), rs.getString(2), rs.getString(6), rs.getString(7)};
             ss.add(reformarServicio(res));
         }
         this.servicios = ss;
@@ -392,9 +411,9 @@ public class ProveedoresDb {
         String[] param = {"ruc:" + ruc, "direccion:" + direccion, "cuenta:" + cuenta};
         ResultSet rs = ejecutarSPParameters(spUpdateProveedor, param);
     }
-    
+
     public void actualizarBien(int idBien, String nombreBien, double precio, String proveedor, String categoria) throws SQLException {
-        String[] param = {"idBien:" + idBien, "nombreBien:" + nombreBien, "precioBien:" + precio, "proveedor:"+proveedor, "categoria:"+categoria};
+        String[] param = {"idBien:" + idBien, "nombreBien:" + nombreBien, "precioBien:" + precio, "proveedor:" + proveedor, "categoria:" + categoria};
         ResultSet rs = ejecutarSPParameters(spUpdateProducto, param);
     }
 
@@ -449,7 +468,7 @@ public class ProveedoresDb {
 
     private String[] transformarServicio(Servicio s) {
         String[] params = {"ruc:" + s.getProveeedor().getRuc(), "nombrebien:"
-            + s.getNombre(), "preciobien:" + s.getPrecio(), "tipobien:Servicio", "cantidad:" + s.getCantidad(), "marca:" + s.getMarca(),"categoria:"+s.categoria};
+            + s.getNombre(), "preciobien:" + s.getPrecio(), "tipobien:Servicio", "cantidad:" + s.getCantidad(), "marca:" + s.getMarca(), "categoria:" + s.categoria};
         return params;
     }
 
@@ -459,7 +478,7 @@ public class ProveedoresDb {
     }
 
     private Producto reformarProducto(String[] str) throws SQLException {
-        Producto np = new Producto(str[0], Double.parseDouble(str[1]), obtenerProveedor(str[2]), Integer.parseInt(str[3]), str[4],str[5]);
+        Producto np = new Producto(str[0], Double.parseDouble(str[1]), obtenerProveedor(str[2]), Integer.parseInt(str[3]), str[4], str[5]);
         return np;
     }
 
@@ -469,7 +488,7 @@ public class ProveedoresDb {
     }
 
     private Servicio reformarServicio(String[] str) throws SQLException {
-        Servicio serv = new Servicio(str[0], Double.parseDouble(str[1]), obtenerProveedor(str[2]),str[4]);
+        Servicio serv = new Servicio(str[0], Double.parseDouble(str[1]), obtenerProveedor(str[2]), str[4]);
         serv.setMarca(str[3]);
         return serv;
     }
@@ -510,8 +529,8 @@ public class ProveedoresDb {
         }
         return resultado;
     }
-    
-        public Proveedor obtenerProveedorRuc(String nombre) throws SQLException {
+
+    public Proveedor obtenerProveedorRuc(String nombre) throws SQLException {
         seleccionarProveedores();
         Proveedor resultado = null;
         for (Proveedor proveedor : this.proveedores) {

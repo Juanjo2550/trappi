@@ -24,6 +24,9 @@ public class MainProveedores {
 
     public static void main(String args[]) throws SQLException, IOException {
         ProveedoresDb db = new ProveedoresDb();
+        int id = db.getIdBien("pasta dental Colgate");
+        //int id = db.getIdBien("Pasta dental Colgate");
+        System.out.println(id);
         /*DataBaseConnection dbInstance = DataBaseConnection.getInstance();
         Connection connection = dbInstance.getConnection();
         Statement statement = connection.createStatement();
@@ -48,13 +51,13 @@ public class MainProveedores {
  /*db.getInventarioDb();
         
         ListaDeBienes prod = db.getInventarioDb();*/
-        System.out.print(db.getServicios().get(0).toString());
+        /*System.out.print(db.getServicios().get(0).toString());
         
         ArrayList<Bien> f = new ArrayList<>();
         f.add(db.getServicios().get(0));
         f.get(0).setCantidad(6);
         CompraDeServicio s = new CompraDeServicio(new ListaDeBienes(f), "Pendiente");
-        s.comprar();
+        s.comprar();*/
         //db.actualizarProveedor("7043728305001","Guayaquil","1547935481");
         /*ListaDeCompras comp = db.seleccionarCompras();
 
