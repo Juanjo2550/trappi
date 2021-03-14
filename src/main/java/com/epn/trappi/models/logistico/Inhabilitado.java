@@ -25,34 +25,13 @@ public class Inhabilitado extends Estado{
     }
 
     @Override
-    public String enEntrega() {
-        return null;
+    public String cambiarEstado() {
+        vehiculo.actualizarEstado(new Habilitado(vehiculo));
+        return "Vehículo Habilitado";
     }
     
-    @Override
-    public String enMantenimiento() {
-        //vehiculo.actualizarEstado(new EnEspera(vehiculo));
-        return "Mantenimiento";
-    }
-
-    @Override
-    public String enAccidente() {
-        return null;
-    }
-
-    @Override
-    public String enPicoPlaca() {
-        vehiculo.actualizarEstado(new Habilitado(vehiculo));
-        return "No hay restricción Vehicular";
-    }
     @Override
     public String toString(){
         return nomestado;
     }
-    
-    
-    
-    
-    
-    
 }

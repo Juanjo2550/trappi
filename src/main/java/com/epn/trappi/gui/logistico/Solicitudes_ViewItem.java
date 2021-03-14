@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.epn.trappi.gui.logistico;
 
-import com.epn.trappi.models.logistico.Entrega;
+import com.epn.trappi.models.logistico.SolicitudMantenimiento;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -16,23 +12,22 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Rommel Alexander
+ * @author Alexander
  */
-public class Usos_ViewItem extends JPanel{
+public class Solicitudes_ViewItem extends JPanel{
     //ATRIBUTOS
     String fecha="Fecha: ";
-    String hora ="Hora: ";
-    String conductor="ID Conductor: ";
-    String factura="Factura: ";
-    String direccion="Direccion: ";
+    String num_solicitud="No Solicitud: ";
+    String bien="No Bien: ";
+    String estado="Estado: ";
     //METODOS
-    public Usos_ViewItem(){
+    public Solicitudes_ViewItem(){
         this.setLayout(new GridBagLayout());
         this.setBackground(new Color(255,255,255));
     }
     public void llenarItem(Object o){
-        Entrega e=(Entrega) o;
-        JLabel labelFecha = new JLabel(this.fecha+e.getFecha());
+        SolicitudMantenimiento s = (SolicitudMantenimiento) o;
+        JLabel labelFecha = new JLabel(this.fecha+s.getFecha());
         labelFecha.setFont(new Font("Segoe UI Semibold", Font.BOLD, 12));
         labelFecha.setForeground(new Color(61,57,57));
         JLabel icono = new JLabel();
@@ -41,22 +36,22 @@ public class Usos_ViewItem extends JPanel{
             public javax.swing.Icon getIcon() {
                 try {
                     return new javax.swing.ImageIcon(
-                        new java.net.URL("https://i.ibb.co/SK8yGS4/user-2.png")
+                        new java.net.URL("https://i.ibb.co/BtRLJgv/configuraciones.png")
                     );
                 } catch (java.net.MalformedURLException e) {
                 }
                 return null;
             }
         }.getIcon());
-        JLabel labelConductor = new JLabel(this.conductor+e.getID_Empleado());
-        labelConductor.setFont(new Font("Segoe UI Semibold", Font.BOLD, 12));
-        labelConductor.setForeground(new Color(61,57,57));
-        JLabel labelFactura = new JLabel(this.factura+e.getFactura());
-        labelFactura.setFont(new Font("Segoe UI Semibold", Font.BOLD, 12));
-        labelFactura.setForeground(new Color(61,57,57));
-        JLabel labelDireccion = new JLabel(this.direccion+e.getDireccion());
-        labelDireccion.setFont(new Font("Segoe UI Semibold", Font.BOLD, 12));
-        labelDireccion.setForeground(new Color(61,57,57));
+        JLabel labelSolicitud = new JLabel(this.num_solicitud+s.getId_Solicitud());
+        labelSolicitud.setFont(new Font("Segoe UI Semibold", Font.BOLD, 12));
+        labelSolicitud.setForeground(new Color(61,57,57));
+        JLabel labelBien = new JLabel(this.bien+s.getId_Bien());
+        labelBien.setFont(new Font("Segoe UI Semibold", Font.BOLD, 12));
+        labelBien.setForeground(new Color(61,57,57));
+        JLabel labelEstado = new JLabel(this.estado+s.getEstado());
+        labelEstado.setFont(new Font("Segoe UI Semibold", Font.BOLD, 12));
+        labelEstado.setForeground(new Color(61,57,57));
         //Restricciones
         GridBagConstraints c1 = new GridBagConstraints();
         c1.gridx=0;
@@ -85,12 +80,12 @@ public class Usos_ViewItem extends JPanel{
         JPanel panel2 = new JPanel(new GridBagLayout());
         panel1.setBackground(new Color(255,255,255));
         panel2.setBackground(new Color(255,255,255));
-        panel1.add(labelConductor);
-        panel1.add(labelFactura);
+        panel1.add(labelSolicitud);
+        panel1.add(labelBien);
         panel2.add(icono,c4_1);
         panel2.add(panel1,c4_2);
         this.add(labelFecha,c1);
         this.add(panel2,c2);
-        this.add(labelDireccion,c3);
+        this.add(labelEstado,c3);
     }
 }

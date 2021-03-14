@@ -3,6 +3,12 @@ package com.epn.trappi.models.logistico;
 import java.util.ArrayList;
 
 import com.epn.trappi.models.logistico.Entrega;
+import com.epn.trappi.models.logistico.servicios.Consultable;
+import com.epn.trappi.models.logistico.servicios.ServicioDb;
+import com.epn.trappi.models.logistico.servicios.ServicioDbConductor;
+import com.epn.trappi.models.logistico.servicios.ServicioDbEntrega;
+import com.epn.trappi.models.logistico.servicios.Unible;
+import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 
 public class ListaEntregas {
@@ -55,4 +61,13 @@ public class ListaEntregas {
             return false;
         }
     }
+       public static int numViajesPorConductor(int año,int mes,int id) throws SQLException{
+	ServicioDb servicio = new ServicioDbConductor();
+	Unible joiner = new ServicioDbConductor();
+	String fecha = año+"-"+mes+"-"+"99";
+	Consultable entregas = new ServicioDbEntrega().obtenerElementosPorFiltro(ServicioDbEntrega.FECHA,fecha);
+	ArrayList<Conductor> conductor = servicio.obtenerElementosPorFiltro(ServicioDbConductor.ID_CONDUCTOR,String.valueOf(id)).getDatos();	
+	ArrayList<Entrega> entregas_por_conductor = (ArrayList<Entrega>) joiner.join(conductor,entregas);
+	return entregas_por_conductor.size();
+    } 
 }

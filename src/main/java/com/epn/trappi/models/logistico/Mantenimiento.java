@@ -48,8 +48,5 @@ public class Mantenimiento {
 
     public void setValorGasto(double valorGasto) {
         this.valorGasto = valorGasto;
-    }
-    
-    
-        
+    }      
 }

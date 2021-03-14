@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.PLAIN_MESSAGE;
 import javax.swing.table.DefaultTableModel;
+import static com.epn.trappi.models.logistico.servicios.ServicioVerificacion.*;
 
 /**
  *
@@ -36,7 +37,8 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
         handler = new Usos_ViewHandler();
         vehiculos = new ListaVehiculos();
         servicioDB = new ServicioDbVehiculo();
-        
+        this.btnBuscarVehiculo.setBorder(new Logistico_GUI.RoundedBorder(24));
+        this.btnActualizarInformacion.setBorder(new Logistico_GUI.RoundedBorder(24));
     }
 
     /**
@@ -50,59 +52,36 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         btnBuscarVehiculo = new javax.swing.JButton();
         txtBusquedaVehiculos = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaListaVehiculos = new javax.swing.JTable();
         cmbBusquedaVehiculos1 = new javax.swing.JComboBox<>();
-        jLabel10 = new javax.swing.JLabel();
-        txtKilometraje = new javax.swing.JTextField();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         cmbEstados = new javax.swing.JComboBox<>();
+        txtKilometraje = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
         btnActualizarInformacion = new javax.swing.JButton();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1048, 770));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(96, 97, 101));
         jLabel1.setText("Actualización de Vehículos");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(61, 57, 57), 1, true));
+        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(219, 223, 228), 1, true));
         jPanel2.setForeground(new java.awt.Color(61, 57, 57));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel7.setBackground(new java.awt.Color(61, 57, 57));
-        jPanel7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        jPanel7.setForeground(new java.awt.Color(61, 57, 57));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Atributos del vehículo");
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 950, 40));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(61, 57, 57));
@@ -112,6 +91,17 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
         btnBuscarVehiculo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         btnBuscarVehiculo.setForeground(new java.awt.Color(61, 57, 57));
         btnBuscarVehiculo.setText("Buscar");
+        btnBuscarVehiculo.setContentAreaFilled(false);
+        btnBuscarVehiculo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnBuscarVehiculoMouseMoved(evt);
+            }
+        });
+        btnBuscarVehiculo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBuscarVehiculoMouseExited(evt);
+            }
+        });
         btnBuscarVehiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarVehiculoActionPerformed(evt);
@@ -135,11 +125,14 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(null);
 
-        tablaListaVehiculos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(228, 228, 228)));
-        tablaListaVehiculos.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        tablaListaVehiculos.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         tablaListaVehiculos.setForeground(new java.awt.Color(61, 57, 57));
         tablaListaVehiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
                 {null, null, null},
                 {null, null, null},
                 {null, null, null},
@@ -164,12 +157,13 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
             }
         });
         tablaListaVehiculos.setFocusable(false);
-        tablaListaVehiculos.setGridColor(new java.awt.Color(204, 204, 204));
-        tablaListaVehiculos.setIntercellSpacing(new java.awt.Dimension(4, 4));
+        tablaListaVehiculos.setGridColor(new java.awt.Color(255, 255, 255));
+        tablaListaVehiculos.setIntercellSpacing(new java.awt.Dimension(0, 0));
         tablaListaVehiculos.setOpaque(false);
         tablaListaVehiculos.setRowHeight(30);
         tablaListaVehiculos.setSelectionBackground(new java.awt.Color(61, 57, 57));
-        tablaListaVehiculos.setShowVerticalLines(false);
+        tablaListaVehiculos.setShowGrid(false);
+        tablaListaVehiculos.setShowHorizontalLines(true);
         tablaListaVehiculos.getTableHeader().setReorderingAllowed(false);
         tablaListaVehiculos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -178,7 +172,7 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tablaListaVehiculos);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 860, 240));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 860, 230));
 
         cmbBusquedaVehiculos1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbBusquedaVehiculos1.setForeground(new java.awt.Color(61, 57, 57));
@@ -186,105 +180,181 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
         cmbBusquedaVehiculos1.setBorder(null);
         jPanel2.add(cmbBusquedaVehiculos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 140, 30));
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(61, 57, 57));
-        jLabel10.setText("Kilometraje:");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 500, -1, 30));
+        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(219, 223, 228), 1, true));
+        jPanel10.setForeground(new java.awt.Color(61, 57, 57));
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtKilometraje.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        txtKilometraje.setForeground(new java.awt.Color(61, 57, 57));
-        jPanel2.add(txtKilometraje, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 500, 300, 30));
+        jLabel11.setBackground(new java.awt.Color(34, 45, 50));
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(34, 45, 50));
+        jLabel11.setIcon(new javax.swing.JLabel() {
+            public javax.swing.Icon getIcon() {
+                try {
+                    return new javax.swing.ImageIcon(
+                        new java.net.URL("https://i.ibb.co/X4N1R0x/buscando-en-la-tierra.png")
+                    );
+                } catch (java.net.MalformedURLException e) {
+                }
+                return null;
+            }
+        }.getIcon());
+        jLabel11.setText("  Buscar");
+        jPanel10.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 14, 210, 30));
+
+        jPanel7.setBackground(new java.awt.Color(19, 155, 151));
+        jPanel7.setPreferredSize(new java.awt.Dimension(970, 5));
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 970, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 5, Short.MAX_VALUE)
+        );
+
+        jPanel10.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, -1));
+
+        jPanel2.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 50));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(219, 223, 228)));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(61, 57, 57));
         jLabel14.setText("Estado del vehículo:");
-        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, 150, 30));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 140, 30));
 
         cmbEstados.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbEstados.setForeground(new java.awt.Color(61, 57, 57));
         cmbEstados.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Habilitado", "En Espera", "Inhabilitado" }));
         cmbEstados.setBorder(null);
-        jPanel2.add(cmbEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 500, 210, 30));
+        jPanel1.add(cmbEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 230, 30));
+
+        txtKilometraje.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        txtKilometraje.setForeground(new java.awt.Color(61, 57, 57));
+        jPanel1.add(txtKilometraje, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 90, 260, -1));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(61, 57, 57));
+        jLabel10.setText("Kilometraje:");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, -1, 30));
 
         btnActualizarInformacion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         btnActualizarInformacion.setForeground(new java.awt.Color(61, 57, 57));
         btnActualizarInformacion.setText("Actualizar Información");
+        btnActualizarInformacion.setContentAreaFilled(false);
+        btnActualizarInformacion.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnActualizarInformacionMouseMoved(evt);
+            }
+        });
+        btnActualizarInformacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnActualizarInformacionMouseExited(evt);
+            }
+        });
         btnActualizarInformacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarInformacionActionPerformed(evt);
             }
         });
-        jPanel2.add(btnActualizarInformacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 570, 300, 30));
+        jPanel1.add(btnActualizarInformacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, 320, 30));
 
-        jPanel9.setBackground(new java.awt.Color(61, 57, 57));
-        jPanel9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        jPanel9.setForeground(new java.awt.Color(61, 57, 57));
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(219, 223, 228), 1, true));
+        jPanel8.setForeground(new java.awt.Color(61, 57, 57));
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Búsqueda de vehículos");
+        jLabel9.setBackground(new java.awt.Color(34, 45, 50));
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(34, 45, 50));
+        jLabel9.setIcon(new javax.swing.JLabel() {
+            public javax.swing.Icon getIcon() {
+                try {
+                    return new javax.swing.ImageIcon(
+                        new java.net.URL("https://i.ibb.co/WKk5jJ7/colision-de-coche.png")
+                    );
+                } catch (java.net.MalformedURLException e) {
+                }
+                return null;
+            }
+        }.getIcon());
+        jLabel9.setText("  Actualización de datos");
+        jPanel8.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 14, 210, 30));
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        jPanel6.setBackground(new java.awt.Color(19, 155, 151));
+        jPanel6.setPreferredSize(new java.awt.Dimension(970, 5));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 970, Short.MAX_VALUE)
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 5, Short.MAX_VALUE)
         );
 
-        jPanel2.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 40));
+        jPanel8.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, -1));
+
+        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(458, 458, 458))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 934, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(48, 48, 48)
                 .addComponent(jLabel1)
-                .addGap(43, 43, 43)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActualizarInformacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarInformacionActionPerformed
-        
-        int kilometraje = Integer.parseInt(txtKilometraje.getText());
-        int estado = cmbEstados.getSelectedIndex();
-        int fila = tablaListaVehiculos.getSelectedRow();
-        String id = (String)tablaListaVehiculos.getValueAt(fila, 0);
         Vehiculo aux = new Vehiculo();
-        aux.setID(Integer.parseInt(id.trim()));
-        aux.setKilometraje(kilometraje);
-        if(estado==0){
-            aux.setEstado(new Habilitado(aux));
-        }else if(estado==1){
-            aux.setEstado(new EnEspera(aux));
-        }else{
-            aux.setEstado(new Inhabilitado(aux));
-        }
-        
+                strErrores+=verificarKilometraje(txtKilometraje.getText());
+                if(!strErrores.equals(""))
+                {
+                    strErrores="Errores existentes:\n"+strErrores;
+                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar" , JOptionPane.ERROR_MESSAGE);
+                    strErrores="";
+                    return;
+                }else {
+                int kilometraje = Integer.parseInt(txtKilometraje.getText());
+                int estado = cmbEstados.getSelectedIndex();
+                int fila = tablaListaVehiculos.getSelectedRow();
+                String id = (String)tablaListaVehiculos.getValueAt(fila, 0);
+                //Vehiculo aux = new Vehiculo();
+                aux.setID(Integer.parseInt(id.trim()));
+                aux.setKilometraje(kilometraje);
+                if(estado==0){
+                    aux.setEstado(new Habilitado(aux));
+                }else if(estado==1){
+                    aux.setEstado(new EnEspera(aux));
+                }else{
+                    aux.setEstado(new Inhabilitado(aux));
+                }
+              }
         //JOptionPane.showMessageDialog(null,aux.getMatricula() + "," + aux.getKilometraje()+ ","+aux.getEstado().toString());
         try {
                 servicioDB.actualizar(aux);
@@ -345,20 +415,65 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
                 vehiculos.setVehiculos(servicioDB.obtenerElementos().getDatos());
                 break;
             case 1:
-                vehiculos.setVehiculos(servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.MATRICULA,campo_busqueda).getDatos());
-                break;
+                strErrores+=verificarMatricula(campo_busqueda);
+                if(!strErrores.equals(""))
+                {
+                    strErrores="Errores existentes:\n"+strErrores;
+                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar el Vehículo" , JOptionPane.ERROR_MESSAGE);
+                    strErrores="";
+                    return;
+                }else {
+                    vehiculos.setVehiculos(servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.MATRICULA,campo_busqueda).getDatos());
+                    break;
+                }
             case 2:
+                strErrores+=verificarTipo(campo_busqueda);
+                if(!strErrores.equals(""))
+                {
+                    strErrores="Errores existentes:\n"+strErrores;
+                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar por Tipo" , JOptionPane.ERROR_MESSAGE);
+                    strErrores="";
+                    return;
+                }else {
                 vehiculos.setVehiculos(servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.TIPO,campo_busqueda).getDatos());
                 break;
+                }
             case 3:
+                strErrores+=verificarEstado(campo_busqueda);
+                if(!strErrores.equals(""))
+                {
+                    strErrores="Errores existentes:\n"+strErrores;
+                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar por Estado" , JOptionPane.ERROR_MESSAGE);
+                    strErrores="";
+                    return;
+                }else {
                 vehiculos.setVehiculos(servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.ESTADO,campo_busqueda).getDatos());
                 break;
+                }
             case 4:
+                strErrores+=verificarKilometraje(campo_busqueda);
+                if(!strErrores.equals(""))
+                {
+                    strErrores="Errores existentes:\n"+strErrores;
+                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar Kilometraje" , JOptionPane.ERROR_MESSAGE);
+                    strErrores="";
+                    return;
+                }else {
                 vehiculos.setVehiculos(servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.KILOMETRAJE,campo_busqueda).getDatos());
                 break;
+                }
             case 5:
+                strErrores+=verificarID(campo_busqueda);
+                if(!strErrores.equals(""))
+                {
+                    strErrores="Errores existentes:\n"+strErrores;
+                    JOptionPane.showMessageDialog(null, strErrores , "Error al Buscar ID" , JOptionPane.ERROR_MESSAGE);
+                    strErrores="";
+                    return;
+                }else {
                 vehiculos.setVehiculos(servicioDB.obtenerElementosPorFiltro(ServicioDbVehiculo.ID_VEHICULO,campo_busqueda).getDatos());
                 break;
+                }
         }
         
         int numero_registros=0;
@@ -407,6 +522,26 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tablaListaVehiculosMouseClicked
 
+    private void btnBuscarVehiculoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarVehiculoMouseMoved
+        Color c = new Color(19,155,151);
+        this.btnBuscarVehiculo.setForeground(c);
+    }//GEN-LAST:event_btnBuscarVehiculoMouseMoved
+
+    private void btnBuscarVehiculoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarVehiculoMouseExited
+        Color c = new Color(61,57,57);
+        this.btnBuscarVehiculo.setForeground(c);
+    }//GEN-LAST:event_btnBuscarVehiculoMouseExited
+
+    private void btnActualizarInformacionMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarInformacionMouseMoved
+        Color c = new Color(19,155,151);
+        this.btnActualizarInformacion.setForeground(c);
+    }//GEN-LAST:event_btnActualizarInformacionMouseMoved
+
+    private void btnActualizarInformacionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarInformacionMouseExited
+        Color c = new Color(61,57,57);
+        this.btnActualizarInformacion.setForeground(c);
+    }//GEN-LAST:event_btnActualizarInformacionMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizarInformacion;
@@ -415,16 +550,20 @@ public class ActualizacionVehiculo extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cmbEstados;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaListaVehiculos;
     private javax.swing.JTextField txtBusquedaVehiculos;
     private javax.swing.JTextField txtKilometraje;
     // End of variables declaration//GEN-END:variables
+    private String strErrores="";
 }
