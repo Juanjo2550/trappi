@@ -35,31 +35,7 @@ public class Login extends javax.swing.JFrame {
          
     }
     
-    public void obtenerdatosdetarjetas(){
-        try {
-            String tarjeta= "";
-            String cvv ="";
-            String tipo ="";
-            String fecha ="";
-                                   
-            Statement statement = connection.createStatement();
-            String sql = "EXEC tarjeta_Consulta '"+Main.cliente.Cedula+"'";
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                 tarjeta= resultSet.getString("NUMEROTARJETA");
-                 cvv =resultSet.getString("CVV");
-                 fecha =resultSet.getString("FECHADECADUCIDAD");
-                 tipo=resultSet.getString("TIPO");
-                 FRegistroTarjeta fr=new FRegistroTarjeta(tarjeta,cvv,fecha,tipo);
-                 Main.cliente.añadirTarjeta(fr);
-            }
-            
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -163,7 +139,7 @@ public class Login extends javax.swing.JFrame {
     private void jButtoningresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtoningresarMouseClicked
     ListaClientes lista=new ListaClientes();
     if(lista.buscar(Main.cliente,jTextFieldUsuario.getText(),jTextFieldcontraseña.getText())){
-        obtenerdatosdetarjetas();
+    lista.obtenerdatosdetarjetas(Main.cliente);
     Main.cliente.entrarAlSistema();
     this.setVisible(false);
     }

@@ -3,7 +3,9 @@ package com.epn.trappi.db.ecommerce;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Factura;
+import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.Interfaces.Banco.JFBancoInicio;
+import com.epn.trappi.gui.ecommerce.Interfaces.DevolucionEcommerce;
 import com.epn.trappi.gui.ecommerce.Interfaces.Login;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -88,6 +90,31 @@ public class ListaFacturas {
         return numero;
     }
     
+    
+    
+    public ArrayList<String[]> obtenerfacturas(){
+        ArrayList<String[]> listaf=new ArrayList<>();
+        try {
+            
+            Statement statement = connection.createStatement();
+            String Sql="SELECT NUMEROFACTURA, TOTAL, IMPUESTOS, ESTADODEVOLUCION "
+                    + "FROM FACTURAS F, CLIENTES C "
+                    + "WHERE F.IDCLIENTE=C.IDCLIENTE AND C.CEDULA2="+Main.cliente.Cedula
+                    + " ORDER BY NUMEROFACTURA;";
+            ResultSet resultSet = statement.executeQuery(Sql);
+            while(resultSet.next()){
+                String[] factura= new String[4];
+                factura[0]=resultSet.getString("NUMEROFACTURA");
+                factura[1]=resultSet.getString("TOTAL");
+                factura[2]=resultSet.getString("IMPUESTOS");
+                factura[3]=resultSet.getString("ESTADODEVOLUCION");
+            listaf.add(factura);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DevolucionEcommerce.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaf;
+    }
     
     
 }

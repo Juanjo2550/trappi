@@ -68,30 +68,6 @@ public class Metododepago extends javax.swing.JFrame {
     jTextFieldfecha.setText(null);
    }
    
-   
-    
-    public void llenartablat(){
-       
-       try{
-            DefaultTableModel tarjeta = (DefaultTableModel) tablatarjetas.getModel();
-            String[] aux=new String[4];
-            Statement statement = connection.createStatement();
-            String sql = "EXEC TarjetaCLiente_consulta '"+Main.cliente.Cedula+"'";
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                 
-                aux[0]=resultSet.getString("NUMEROTARJETA");
-                aux[1]=resultSet.getString("CVV");
-                aux[2]=resultSet.getString("TIPO");
-                aux[3]=resultSet.getString("FECHADECADUCIDAD");
-                tarjeta.addRow(aux);
-            }
-            tablatarjetas.setModel(tarjeta);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     
     
     public void llenartabla(){

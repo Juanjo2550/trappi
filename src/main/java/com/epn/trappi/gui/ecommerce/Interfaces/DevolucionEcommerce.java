@@ -2,6 +2,7 @@
 package com.epn.trappi.gui.ecommerce.Interfaces;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
+import com.epn.trappi.db.ecommerce.ListaFacturas;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Main;
 import com.epn.trappi.gui.ecommerce.Ecommerce.SolicitudDevolucion;
 import com.epn.trappi.models.financiero.Devolucion;
@@ -9,6 +10,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -28,29 +30,15 @@ public class DevolucionEcommerce extends javax.swing.JFrame {
     }
 
     public void llenartabla(){
-        try {
+        ListaFacturas lf=new ListaFacturas();
+        ArrayList<String[]> lis=lf.obtenerfacturas();
             String[] factura= new String[4];
             DefaultTableModel facturas=(DefaultTableModel) jTable1.getModel();
-            int a = jTable1.getRowCount()-1;
-            for (int i = a; i >= 0; i--) {          
-                facturas.removeRow(facturas.getRowCount()-1);
-            }
-            Statement statement = connection.createStatement();
-            String Sql="SELECT NUMEROFACTURA, TOTAL, IMPUESTOS, ESTADODEVOLUCION "
-                    + "FROM FACTURAS F, CLIENTES C "
-                    + "WHERE F.IDCLIENTE=C.IDCLIENTE AND C.CEDULA2="+Main.cliente.Cedula
-                    + " ORDER BY NUMEROFACTURA;";
-            ResultSet resultSet = statement.executeQuery(Sql);
-            while(resultSet.next()){
-                factura[0]=resultSet.getString("NUMEROFACTURA");
-                factura[1]=resultSet.getString("TOTAL");
-                factura[2]=resultSet.getString("IMPUESTOS");
-                factura[3]=resultSet.getString("ESTADODEVOLUCION");
+            for (int i=0; i<lis.size(); i++) {          
+            factura=lis.get(i);
                 facturas.addRow(factura);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(DevolucionEcommerce.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
         
     }
     

@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Cliente;
 import com.epn.trappi.gui.ecommerce.Ecommerce.Cliente;
+import com.epn.trappi.gui.ecommerce.FormulariosTarjetas.FRegistroTarjeta;
 import java.util.ArrayList;
 
 public class ListaClientes {
@@ -136,6 +137,33 @@ public class ListaClientes {
         }
     
     
+    }
+    
+    
+    
+    public void obtenerdatosdetarjetas(Cliente cliente){
+        try {
+            String tarjeta= "";
+            String cvv ="";
+            String tipo ="";
+            String fecha ="";
+                                   
+            Statement statement = connection.createStatement();
+            String sql = "EXEC tarjeta_Consulta '"+cliente.Cedula+"'";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                 tarjeta= resultSet.getString("NUMEROTARJETA");
+                 cvv =resultSet.getString("CVV");
+                 fecha =resultSet.getString("FECHADECADUCIDAD");
+                 tipo=resultSet.getString("TIPO");
+                 FRegistroTarjeta fr=new FRegistroTarjeta(tarjeta,cvv,fecha,tipo);
+                 cliente.añadirTarjeta(fr);
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
