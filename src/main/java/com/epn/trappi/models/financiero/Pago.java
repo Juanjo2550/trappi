@@ -2,6 +2,7 @@
 package com.epn.trappi.models.financiero;
 
 import com.epn.trappi.db.connection.DataBaseConnection;
+import com.epn.trappi.db.financiero.FinancieroDb;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.Calendar;
@@ -33,20 +34,10 @@ public class  Pago {
     
     
     private void registrarPago(Pago pago){
-
-    DataBaseConnection dbInstance = DataBaseConnection.getInstance();
-        Connection connection = dbInstance.getConnection();
-        try{
-        Statement statement = connection.createStatement();
-        String sql = "INSERT INTO dbo.PAGO VALUES("+(this.libroDiario.obtenerPagosRegistrados().size()+1)+
-                ",1,'"+pago.nroCuenta+"',"+pago.monto+","+pago.fechadePago.devolverDia()+
-                ","+pago.fechadePago.devolverMes()+","+pago.fechadePago.devolverAnio()+")";
-        statement.executeUpdate(sql);
-        }catch(Exception e){
-            System.out.println(e);
-        }
-        
+        this.libroDiario= new LibroDiario();
+        libroDiario.agregarPago(pago);
     }
+    
     public String realizarPago(Pago pago){
         this.libroDiario=new LibroDiario();
         this.presupuesto=new Presupuesto(this.libroDiario);
