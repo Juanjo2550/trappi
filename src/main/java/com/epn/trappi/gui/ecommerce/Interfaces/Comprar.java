@@ -185,12 +185,13 @@ public class Comprar extends javax.swing.JFrame {
             //ArrayList<Articulo> detalle = carrito.factura.Detalle;
             Double subtotal = carrito.factura.calcularSubTotal();
             Double iva = carrito.factura.calcularImpuestos();
-            Double total = carrito.factura.calcularTotalConDescuento(Main.cliente.Cedula);
+            Double totalConDescuento = carrito.factura.calcularTotalConDescuento(Main.cliente.Cedula);
+            Double descuento=totalConDescuento-carrito.factura.calcularTotal();
             FacturaFis factu = new FacturaFis();
             Date fecha = new Date();
 
             String date = fecha.getDay() + "/" + fecha.getMonth() + "/" + fecha.getYear();
-            factu.cargarDatos(000, nombre, cedula, date, detalle, subtotal, iva, total);
+            factu.cargarDatos(000, nombre, cedula, date, detalle, subtotal, iva,descuento, totalConDescuento);
             factu.setVisible(true);
 
             if (JOptionPane.showConfirmDialog(null, "¿Desea pagar?", "El proceso de pago empezará", JOptionPane.YES_NO_OPTION) == YES_OPTION) {
