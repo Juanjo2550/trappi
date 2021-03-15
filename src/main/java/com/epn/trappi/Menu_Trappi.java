@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.epn.trappi.gui.proveedores;
+package com.epn.trappi;
 
 import com.epn.trappi.gui.logistico.Logistico_GUI;
+import com.epn.trappi.gui.proveedores.Principal;
 import com.epn.trappi.gui.rrhh.PANTALLA_PRINCIPAL;
 import com.epn.trappi.models.logistico.ControlDisponibilidad;
 import com.epn.trappi.models.rrhh.juanjo.ControlAsistencias;
@@ -107,7 +108,7 @@ public class Menu_Trappi extends javax.swing.JFrame {
         jbtCompras.setBackground(new java.awt.Color(255, 210, 28));
         jbtCompras.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jbtCompras.setForeground(new java.awt.Color(51, 51, 51));
-        jbtCompras.setText("Compras");
+        jbtCompras.setText("Financiero");
         jbtCompras.setBorderPainted(false);
         jbtCompras.setFocusPainted(false);
         jbtCompras.setMaximumSize(new java.awt.Dimension(110, 50));
@@ -248,6 +249,7 @@ public class Menu_Trappi extends javax.swing.JFrame {
 
     private void RecursosbotonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RecursosbotonMouseClicked
         PANTALLA_PRINCIPAL rrhh = new PANTALLA_PRINCIPAL(controlAsistencias, this);
+        rrhh.setExtendedState(rrhh.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         rrhh.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_RecursosbotonMouseClicked
