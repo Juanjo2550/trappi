@@ -5,6 +5,7 @@
  */
 package com.epn.trappi.models.proveedores;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,11 @@ public class CompraDeServicio extends Compra {
 
     public CompraDeServicio(Inventario inventario, ListaDeBienes listaBienesAComprar, String estado) {
         super(inventario, listaBienesAComprar, estado);
-        comprar();
+        //comprar();
+    }
+
+    public CompraDeServicio(ListaDeBienes listaBienesAComprar, String estado, Double montoTotal, String fecha, int identificador) throws IOException {
+        super(listaBienesAComprar, estado, montoTotal, fecha, identificador);
     }
 
     public CompraDeServicio(ListaDeBienes listaBienesAComprar, String estado) {

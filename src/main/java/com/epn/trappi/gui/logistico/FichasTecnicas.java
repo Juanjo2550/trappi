@@ -18,6 +18,9 @@ import com.epn.trappi.models.logistico.servicios.ServicioDbMantenimiento;
 import com.epn.trappi.models.logistico.servicios.ServicioDbSolicitudMantenimiento;
 import com.epn.trappi.models.logistico.servicios.ServicioDbVehiculo;
 import static com.epn.trappi.models.logistico.servicios.ServicioVerificacion.*;
+import com.epn.trappi.models.proveedores.Bien;
+import com.epn.trappi.models.proveedores.CompraDeServicio;
+import com.epn.trappi.models.proveedores.ListaDeBienes;
 import java.awt.Color;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -36,11 +39,16 @@ import javax.swing.table.DefaultTableModel;
 public class FichasTecnicas extends javax.swing.JPanel {
     //ATRIBUTOS
     ServicioDb servicioDB;
+    ListaDeBienes bienes = new ListaDeBienes();
     //METODOS
     public FichasTecnicas() {
         initComponents();
         this.btnRegistrarMantenimiento.setBorder(new RoundedBorder(24));
         this.btnRegistrarSolicitud.setBorder(new RoundedBorder(24));
+        bienes.cargarServicios();
+        for (Bien aux : bienes.getListaBienes()) {
+            comboServicios.addItem(aux.getNombre());
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -348,7 +356,6 @@ public class FichasTecnicas extends javax.swing.JPanel {
         jPanel3.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 50));
 
         comboServicios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        comboServicios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mantenimiento de rutina", "Revisión por mecánico", "Reparación por mecánico" }));
         jPanel3.add(comboServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 120, 270, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 10)); // NOI18N
@@ -473,11 +480,19 @@ public class FichasTecnicas extends javax.swing.JPanel {
                 break;
         }
         //Registramos la solicitud
+        
+        ListaDeBienes seleccionados=new ListaDeBienes();
+        seleccionados.añadirBien(bienes.getListaBienes().get(comboServicios.getSelectedIndex()));
+        CompraDeServicio compra = new CompraDeServicio(seleccionados ,"Entregado");
+        boolean estadoSolicitud = compra.comprar();
+        double gasto = compra.getMontoTotal();
+        
         SolicitudMantenimiento solicitud = new SolicitudMantenimiento();
         solicitud.setId_Solicitud(numSolicitud);
         solicitud.setId_Bien(identificadorBien);
         solicitud.setId_Mantenimiento(idMantenimiento);
-        solicitud.setEstado("En espera");
+        //solicitud.setEstado("En espera");
+        solicitud.setEstado(estadoSolicitud+"");
         solicitud.setFecha(fechaSol);
         try{
             servicio.insertar(solicitud);
