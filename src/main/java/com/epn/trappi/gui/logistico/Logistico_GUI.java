@@ -53,7 +53,7 @@ public class Logistico_GUI extends javax.swing.JFrame {
     public Logistico_GUI(ControlDisponibilidad control, javax.swing.JFrame parent) {
         initComponents();
         this.parent = parent;
-        this.setSize(1366, 768);
+        this.setSize(1366, 800);
         this.controlD=control;
         mapaDisponibilidad= new PanelControlDisponibilidad1(control);
         this.setLocationRelativeTo(null);
