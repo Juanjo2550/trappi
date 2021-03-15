@@ -5,6 +5,7 @@
  */
 package com.epn.trappi.gui.proveedores;
 
+import com.epn.trappi.Main_Trappi;
 import com.epn.trappi.Menu_Trappi;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() throws IOException {
         initComponents();
+        this.setTitle("Proveedores e Inventario");
         new CambiaPanel(PanelVerTodos, new guiAnalizador(PanelVerTodos));
         ponerTituloYsub("Dashboard", "Genere una solicitud de compra de productos con bajo stock");
         panelesOpciones.add(jPanOpcProductos);
@@ -92,7 +94,6 @@ public class Principal extends javax.swing.JFrame {
         jPanOpcCompras = new javax.swing.JPanel();
         jButVerTodFactura5 = new javax.swing.JButton();
         jbtVolver = new javax.swing.JButton();
-        jLabNombreContribuyente1 = new javax.swing.JLabel();
         labelTitulo = new javax.swing.JLabel();
         labelSubTitulo = new javax.swing.JLabel();
         jPaCerrarSesion = new javax.swing.JPanel();
@@ -120,14 +121,16 @@ public class Principal extends javax.swing.JFrame {
         jPEncabezadoLayout.setHorizontalGroup(
             jPEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPEncabezadoLayout.createSequentialGroup()
-                .addComponent(jLSidimLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLSidimLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(23, 23, 23))
         );
         jPEncabezadoLayout.setVerticalGroup(
             jPEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPEncabezadoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jLSidimLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -140,7 +143,7 @@ public class Principal extends javax.swing.JFrame {
 
         jButCompras.setBackground(new java.awt.Color(255, 210, 28));
         jButCompras.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButCompras.setForeground(new java.awt.Color(240, 240, 241));
+        jButCompras.setForeground(new java.awt.Color(51, 51, 51));
         jButCompras.setText("Proveedores");
         jButCompras.setBorderPainted(false);
         jButCompras.setFocusPainted(false);
@@ -155,7 +158,7 @@ public class Principal extends javax.swing.JFrame {
 
         jButProductos.setBackground(new java.awt.Color(255, 210, 28));
         jButProductos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButProductos.setForeground(new java.awt.Color(240, 240, 241));
+        jButProductos.setForeground(new java.awt.Color(51, 51, 51));
         jButProductos.setText("Productos");
         jButProductos.setBorderPainted(false);
         jButProductos.setFocusPainted(false);
@@ -284,7 +287,7 @@ public class Principal extends javax.swing.JFrame {
 
         jButInventario.setBackground(new java.awt.Color(255, 210, 28));
         jButInventario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButInventario.setForeground(new java.awt.Color(240, 240, 241));
+        jButInventario.setForeground(new java.awt.Color(51, 51, 51));
         jButInventario.setText("Inventario");
         jButInventario.setBorderPainted(false);
         jButInventario.setFocusPainted(false);
@@ -299,7 +302,7 @@ public class Principal extends javax.swing.JFrame {
 
         jButServicios.setBackground(new java.awt.Color(255, 210, 28));
         jButServicios.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButServicios.setForeground(new java.awt.Color(240, 240, 241));
+        jButServicios.setForeground(new java.awt.Color(51, 51, 51));
         jButServicios.setText("Servicios");
         jButServicios.setBorderPainted(false);
         jButServicios.setFocusPainted(false);
@@ -314,7 +317,7 @@ public class Principal extends javax.swing.JFrame {
 
         jButDashboard.setBackground(new java.awt.Color(255, 210, 28));
         jButDashboard.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButDashboard.setForeground(new java.awt.Color(240, 240, 241));
+        jButDashboard.setForeground(new java.awt.Color(51, 51, 51));
         jButDashboard.setText("Dashboard");
         jButDashboard.setBorderPainted(false);
         jButDashboard.setFocusPainted(false);
@@ -326,7 +329,7 @@ public class Principal extends javax.swing.JFrame {
 
         jButRealizarCompras.setBackground(new java.awt.Color(255, 210, 28));
         jButRealizarCompras.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButRealizarCompras.setForeground(new java.awt.Color(240, 240, 241));
+        jButRealizarCompras.setForeground(new java.awt.Color(51, 51, 51));
         jButRealizarCompras.setText("Realizar Compras");
         jButRealizarCompras.setBorderPainted(false);
         jButRealizarCompras.setFocusPainted(false);
@@ -382,7 +385,7 @@ public class Principal extends javax.swing.JFrame {
 
         jButCompra.setBackground(new java.awt.Color(255, 210, 28));
         jButCompra.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButCompra.setForeground(new java.awt.Color(240, 240, 241));
+        jButCompra.setForeground(new java.awt.Color(51, 51, 51));
         jButCompra.setText("Compras");
         jButCompra.setBorderPainted(false);
         jButCompra.setFocusPainted(false);
@@ -425,7 +428,6 @@ public class Principal extends javax.swing.JFrame {
 
         jbtVolver.setBackground(new java.awt.Color(255, 210, 28));
         jbtVolver.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jbtVolver.setForeground(new java.awt.Color(240, 240, 241));
         jbtVolver.setText("Volver");
         jbtVolver.setBorderPainted(false);
         jbtVolver.setFocusPainted(false);
@@ -498,28 +500,19 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(34, 34, 34))
         );
 
-        jLabNombreContribuyente1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabNombreContribuyente1.setForeground(new java.awt.Color(240, 240, 241));
-        jLabNombreContribuyente1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabNombreContribuyente1.setText("PROVEEDORES");
-
         javax.swing.GroupLayout jPModLayout = new javax.swing.GroupLayout(jPMod);
         jPMod.setLayout(jPModLayout);
         jPModLayout.setHorizontalGroup(
             jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPModLayout.createSequentialGroup()
                 .addGap(0, 6, Short.MAX_VALUE)
-                .addGroup(jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanOpcionesDeclaracion, javax.swing.GroupLayout.PREFERRED_SIZE, 223, Short.MAX_VALUE)
-                    .addComponent(jLabNombreContribuyente1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
+                .addComponent(jPanOpcionesDeclaracion, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 4, Short.MAX_VALUE))
         );
         jPModLayout.setVerticalGroup(
             jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPModLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabNombreContribuyente1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(97, 97, 97)
                 .addComponent(jPanOpcionesDeclaracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -536,9 +529,9 @@ public class Principal extends javax.swing.JFrame {
 
         jPaCerrarSesion.setBackground(new java.awt.Color(255, 255, 255));
 
-        jBCerrarSesion.setBackground(new java.awt.Color(0, 153, 51));
+        jBCerrarSesion.setBackground(new java.awt.Color(255, 210, 28));
         jBCerrarSesion.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jBCerrarSesion.setForeground(new java.awt.Color(240, 240, 241));
+        jBCerrarSesion.setForeground(new java.awt.Color(51, 51, 51));
         jBCerrarSesion.setText("Cerrar Sesión");
         jBCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -591,7 +584,7 @@ public class Principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPEncabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -605,7 +598,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(44, 44, 44))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPMod, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         pack();
@@ -663,7 +656,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButListarProductosActionPerformed
 
     private void jBCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCerrarSesionActionPerformed
-
+        Main_Trappi main = new Main_Trappi();
+        main.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jBCerrarSesionActionPerformed
 
     private void jButInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButInventarioActionPerformed
@@ -779,7 +774,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButVerTodNotasVenta;
     private javax.swing.JLabel jIVA;
     private javax.swing.JLabel jLSidimLogo;
-    private javax.swing.JLabel jLabNombreContribuyente1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPEncabezado;
     private javax.swing.JPanel jPMod;
