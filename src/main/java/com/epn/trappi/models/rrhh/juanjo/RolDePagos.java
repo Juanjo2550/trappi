@@ -29,6 +29,7 @@ public class RolDePagos {
     private double total;
     private double descuentos;
     private String estado;
+    private double bonos;
 
     /**
      * Este constructor no debe ser utilizado
@@ -39,13 +40,14 @@ public class RolDePagos {
      * @param descuentos
      * @param estado
      */
-    public RolDePagos(int numero, Empleado empleado, Fecha fecha, double total, double descuentos, String estado) {
+    public RolDePagos(int numero, Empleado empleado, Fecha fecha, double total, double descuentos, String estado, double bonos) {
         this.numero = numero;
         this.empleado = empleado;
         this.fecha = fecha;
         this.total = total;
         this.descuentos = descuentos;
         this.estado = estado;
+        this.bonos = bonos;
     }
 
     /**
@@ -97,8 +99,9 @@ public class RolDePagos {
             double bonoPorFaltas = this.calcularAfectacionDeFaltas(observacionesPorFaltas);
             double bonoPorHorasExtra = this.calcularAfectacionDeHorasExtra(observacionesPorHorasExtra);
             double bonoPorEntregas = this.calcularBonoPorEntregas();
-            this.descuentos = descuentosPorAtrasos + bonoPorFaltas + bonoPorHorasExtra + bonoPorEntregas;
-            this.total = Double.parseDouble(this.empleado.getSueldo()) + bonoPorHorasExtra + bonoPorFaltas - descuentosPorAtrasos + calcularBonoPorEntregas();
+            this.descuentos = descuentosPorAtrasos;
+            this.bonos = bonoPorFaltas + bonoPorHorasExtra + bonoPorEntregas;
+            this.total = Double.parseDouble(this.empleado.getSueldo()) + this.bonos - this.descuentos;
         }
         this.estado = "pendiente";
     }
@@ -200,4 +203,7 @@ public class RolDePagos {
         return numero;
     }
 
+    public double getBonos() {
+        return bonos;
+    }
 }
