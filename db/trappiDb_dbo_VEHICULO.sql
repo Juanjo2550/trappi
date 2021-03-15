@@ -1,0 +1,33 @@
+create table VEHICULO
+(
+    MATRICULA    char(10) not null
+        constraint PK_VEHICULO
+            primary key nonclustered,
+    ESTADO       char(15) not null,
+    TIPOVEHICULO char(15) not null,
+    KILOMETRAJE  int,
+    ID           int identity
+)
+go
+
+INSERT INTO trappiDb.dbo.VEHICULO (MATRICULA, ESTADO, TIPOVEHICULO, KILOMETRAJE, ID) VALUES (N'PBP-2432  ', N'Inhabilitado   ', N'Automovil      ', 5000, 1);
+INSERT INTO trappiDb.dbo.VEHICULO (MATRICULA, ESTADO, TIPOVEHICULO, KILOMETRAJE, ID) VALUES (N'PBR-3245  ', N'En Espera      ', N'Motocicleta    ', 90000, 2);
+INSERT INTO trappiDb.dbo.VEHICULO (MATRICULA, ESTADO, TIPOVEHICULO, KILOMETRAJE, ID) VALUES (N'GUR-2678  ', N'En Espera      ', N'Automovil      ', 11000, 3);
+INSERT INTO trappiDb.dbo.VEHICULO (MATRICULA, ESTADO, TIPOVEHICULO, KILOMETRAJE, ID) VALUES (N'RTY-1256  ', N'Inhabilitado   ', N'Automovil      ', 897634, 4);
+INSERT INTO trappiDb.dbo.VEHICULO (MATRICULA, ESTADO, TIPOVEHICULO, KILOMETRAJE, ID) VALUES (N'TDH-398   ', N'Inhabilitado   ', N'Automovil      ', 30000, 5);
+INSERT INTO trappiDb.dbo.VEHICULO (MATRICULA, ESTADO, TIPOVEHICULO, KILOMETRAJE, ID) VALUES (N'MCB-2534  ', N'Inhabilitado   ', N'Automovil      ', 67893, 6);
+INSERT INTO trappiDb.dbo.VEHICULO (MATRICULA, ESTADO, TIPOVEHICULO, KILOMETRAJE, ID) VALUES (N'PTX-593   ', N'Inhabilitado   ', N'Motocicleta    ', 110000, 7);
+INSERT INTO trappiDb.dbo.VEHICULO (MATRICULA, ESTADO, TIPOVEHICULO, KILOMETRAJE, ID) VALUES (N'GTC-6882  ', N'Inhabilitado   ', N'Motocicleta    ', 23400, 8);
+INSERT INTO trappiDb.dbo.VEHICULO (MATRICULA, ESTADO, TIPOVEHICULO, KILOMETRAJE, ID) VALUES (N'TDR-9876  ', N'Inhabilitado   ', N'Automovil      ', 456700, 9);
+INSERT INTO trappiDb.dbo.VEHICULO (MATRICULA, ESTADO, TIPOVEHICULO, KILOMETRAJE, ID) VALUES (N'GSK-4500  ', N'Inhabilitado   ', N'Motocicleta    ', 10000, 10);
+INSERT INTO trappiDb.dbo.VEHICULO (MATRICULA, ESTADO, TIPOVEHICULO, KILOMETRAJE, ID) VALUES (N'PCU-4997  ', N'Inhabilitado   ', N'Motocicleta    ', 70000, 11);
+INSERT INTO trappiDb.dbo.VEHICULO (MATRICULA, ESTADO, TIPOVEHICULO, KILOMETRAJE, ID) VALUES (N'DAQ-953   ', N'Inhabilitado   ', N'Automovil      ', 100000, 12);
+INSERT INTO trappiDb.dbo.VEHICULO (MATRICULA, ESTADO, TIPOVEHICULO, KILOMETRAJE, ID) VALUES (N'PBU-123   ', N'En Espera      ', N'Automovil      ', 23230, 16);
+INSERT INTO trappiDb.dbo.VEHICULO (MATRICULA, ESTADO, TIPOVEHICULO, KILOMETRAJE, ID) VALUES (N'PBT-465   ', N'Inhabilitado   ', N'Automovil      ', 656565, 17);
+INSERT INTO trappiDb.dbo.VEHICULO (MATRICULA, ESTADO, TIPOVEHICULO, KILOMETRAJE, ID) VALUES (N'PCA-170   ', N'En Espera      ', N'Motocicleta    ', 20000, 19);
+INSERT INTO trappiDb.dbo.VEHICULO (MATRICULA, ESTADO, TIPOVEHICULO, KILOMETRAJE, ID) VALUES (N'PIO-468   ', N'Habilitado     ', N'Automovil      ', 0, 21);
+INSERT INTO trappiDb.dbo.VEHICULO (MATRICULA, ESTADO, TIPOVEHICULO, KILOMETRAJE, ID) VALUES (N'HGT-567   ', N'Habilitado     ', N'Automovil      ', 123456, 13);
+INSERT INTO trappiDb.dbo.VEHICULO (MATRICULA, ESTADO, TIPOVEHICULO, KILOMETRAJE, ID) VALUES (N'PCA-555   ', N'Inhabilitado   ', N'Automovil      ', 23333, 20);
+INSERT INTO trappiDb.dbo.VEHICULO (MATRICULA, ESTADO, TIPOVEHICULO, KILOMETRAJE, ID) VALUES (N'PBC-987   ', N'Habilitado     ', N'Automovil      ', 7565, 14);
+INSERT INTO trappiDb.dbo.VEHICULO (MATRICULA, ESTADO, TIPOVEHICULO, KILOMETRAJE, ID) VALUES (N'PBC-988   ', N'Habilitado     ', N'Automovil      ', 5555, 15);
+INSERT INTO trappiDb.dbo.VEHICULO (MATRICULA, ESTADO, TIPOVEHICULO, KILOMETRAJE, ID) VALUES (N'POV-416   ', N'Habilitado     ', N'Motocicleta    ', 0, 18);

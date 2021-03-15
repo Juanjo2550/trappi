@@ -1,0 +1,15 @@
+create table BANCO
+(
+    IDBANCO            int           not null
+        constraint PK_BANCO
+            primary key nonclustered,
+    NOMBREBAN          varchar(100)  not null,
+    NUMEROAUTORIZACION varchar(1024) not null,
+    FECHAAUTORIZACION  varchar(1024) not null
+)
+go
+
+INSERT INTO trappiDb.dbo.BANCO (IDBANCO, NOMBREBAN, NUMEROAUTORIZACION, FECHAAUTORIZACION) VALUES (1, N'Banco Pichincha', N'0005', N'1997-07-03');
+INSERT INTO trappiDb.dbo.BANCO (IDBANCO, NOMBREBAN, NUMEROAUTORIZACION, FECHAAUTORIZACION) VALUES (2, N'Banco Pacifico', N'0006', N'1998-02-01');
+INSERT INTO trappiDb.dbo.BANCO (IDBANCO, NOMBREBAN, NUMEROAUTORIZACION, FECHAAUTORIZACION) VALUES (3, N'Banco Guayaquil', N'0007', N'1996-09-19');
+INSERT INTO trappiDb.dbo.BANCO (IDBANCO, NOMBREBAN, NUMEROAUTORIZACION, FECHAAUTORIZACION) VALUES (4, N'Banco Bolivariano', N'0008', N'1998-07-16');
