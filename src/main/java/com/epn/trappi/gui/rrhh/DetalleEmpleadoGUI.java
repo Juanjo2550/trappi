@@ -41,7 +41,7 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
     
     public DetalleEmpleadoGUI(String cedula, ContratacionPrincipal parentForm) {
         initComponents();
-        this.jButton1.setEnabled(parentForm.getControlAsistencias().comprobarSiPuedoRegistrarUnaAsistencia(cedula));
+        this.jButton1.setEnabled(true);
         this.jButton2.setEnabled(true);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.parentForm = parentForm;
@@ -443,7 +443,6 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.jButton2.setEnabled(parentForm.getControlAsistencias().comprobarSiPuedoRegistrarFinDeJornada(this.empleado.getCedula()));
         this.empleado.notificarEntrada(this.parentForm.getControlAsistencias());
         JOptionPane.showMessageDialog(this, "El empleado ha registrado su asistencia correctamente"); 
     }//GEN-LAST:event_jButton1ActionPerformed
