@@ -54,7 +54,7 @@ public class ListasVehiculos extends javax.swing.JPanel {
         ServicioDb servicioDB = new ServicioDbEntrega();
         ArrayList<Entrega> entregas_por_vehiculo = servicioDB.obtenerElementosPorFiltro(ServicioDbEntrega.MATRICULA, matricula).getDatos();
         if(entregas_por_vehiculo.isEmpty()){
-            JOptionPane.showMessageDialog(null,"El vehículo seleccionado aún no a sido utilizado en una entrega");
+            JOptionPane.showMessageDialog(null,"El vehículo seleccionado aún no ha sido utilizado en una entrega");
             this.panelHistorial.setVisible(false);
             this.panelHistorial.setVisible(true);
             return;

@@ -38,14 +38,12 @@ public class ListaMantenimientos {
         modelo.addColumn("Id Mantenimiento");
         modelo.addColumn("Matrícula");
         modelo.addColumn("Detalle");
-        modelo.addColumn("Gasto Total");
         for (int i=0;i<this.mantenimientos.size();i++){
             Mantenimiento elemento = this.mantenimientos.get(i);
             String[] registro = new String[num_columnas];
             registro[0]=String.valueOf(elemento.getIdMantenimiento());
             registro[1]=String.valueOf(elemento.getMatricula());
             registro[2]=String.valueOf(elemento.getDetalleMantenimiento());
-            registro[3]=String.valueOf(elemento.getValorGasto());
             modelo.addRow(registro);
         }
         return modelo;
