@@ -5,7 +5,7 @@
  */
 package com.epn.trappi;
 
-import com.epn.trappi.gui.ecommerce.Interfaces.Inicio;
+import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -20,6 +20,7 @@ public class Main_Trappi extends javax.swing.JFrame {
      */
     public Main_Trappi() {
         initComponents();
+        this.setTitle("Login Trappi");
     }
 
     /**
@@ -44,6 +45,18 @@ public class Main_Trappi extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(61, 57, 57));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logo_solotexto_resize.jpg"))); // NOI18N
+
+        txtContraseña.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtContraseñaKeyPressed(evt);
+            }
+        });
+
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyPressed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -142,6 +155,34 @@ public class Main_Trappi extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No se puede Ingresar", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButtoningresarActionPerformed
+
+    private void txtContraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraseñaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String usuario = "administrador@trappi.com";
+            String contrasena = "123456789";
+            Menu_Trappi inicio = new Menu_Trappi();
+            try {
+                if (usuario.equals(txtUsuario.getText()) && (contrasena.equals(txtContraseña.getText()))) {
+                    inicio.setExtendedState(inicio.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+                    inicio.setVisible(true);
+                    this.setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Nombre de Usuario o Contraseña Incorrecto", "Error", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "No se puede Ingresar", "Error", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+
+    }//GEN-LAST:event_txtContraseñaKeyPressed
+
+    private void txtUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (!txtUsuario.getText().equals("")) {
+                txtContraseña.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_txtUsuarioKeyPressed
 
     /**
      * @param args the command line arguments
