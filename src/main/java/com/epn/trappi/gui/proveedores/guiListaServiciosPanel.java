@@ -222,7 +222,7 @@ public class guiListaServiciosPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void jtbServiciosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbServiciosMouseClicked
-        listaS.mostrarServicio(evt, jtbServicios, modelo, txtNombre, txtPrecio, cmbProveedores, cmbCategoria);
+        listaS.mostrarBien(evt, jtbServicios, modelo, txtNombre, txtPrecio, cmbProveedores, cmbCategoria);
     }//GEN-LAST:event_jtbServiciosMouseClicked
 
     private void txtNombreServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreServicioActionPerformed

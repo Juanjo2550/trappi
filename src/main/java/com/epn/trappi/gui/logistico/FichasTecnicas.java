@@ -478,6 +478,12 @@ public class FichasTecnicas extends javax.swing.JPanel {
             case 2:
                 identificadorBien=14;
                 break;
+            case 3:
+                identificadorBien=19;
+                break;
+            case 4:
+                identificadorBien=11;
+                break;
         }
         //Registramos la solicitud
         
@@ -485,20 +491,24 @@ public class FichasTecnicas extends javax.swing.JPanel {
         seleccionados.añadirBien(bienes.getListaBienes().get(comboServicios.getSelectedIndex()));
         CompraDeServicio compra = new CompraDeServicio(seleccionados ,"Entregado");
         boolean estadoSolicitud = compra.comprar();
-        double gasto = compra.getMontoTotal();
-        
+        //double gasto = compra.getMontoTotal();
+        String estadoS ="";
+        if(estadoSolicitud)
+            estadoS="Aprobado";
+        else
+            estadoS="No aprobado";
         SolicitudMantenimiento solicitud = new SolicitudMantenimiento();
         solicitud.setId_Solicitud(numSolicitud);
         solicitud.setId_Bien(identificadorBien);
         solicitud.setId_Mantenimiento(idMantenimiento);
         //solicitud.setEstado("En espera");
-        solicitud.setEstado(estadoSolicitud+"");
+        solicitud.setEstado(estadoS);
         solicitud.setFecha(fechaSol);
         try{
             servicio.insertar(solicitud);
             JOptionPane.showMessageDialog(null, "Solicitud de mantenimiento ingresado exitosamente!");
         }catch (SQLException x){
-            
+            JOptionPane.showMessageDialog(null, "Error en la base de datos");
         }
         
     }//GEN-LAST:event_btnRegistrarSolicitudActionPerformed

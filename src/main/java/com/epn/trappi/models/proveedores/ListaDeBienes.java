@@ -23,8 +23,8 @@ public class ListaDeBienes {
     private ArrayList<Bien> listaBienes;
     private final ProveedoresDb db = new ProveedoresDb();
 
-    public ListaDeBienes(ArrayList<Bien> listaCantidadDeBienes) {
-        this.listaBienes = listaCantidadDeBienes;
+    public ListaDeBienes(ArrayList<Bien> listaDeBienes) {
+        this.listaBienes = listaDeBienes;
     }
 
     public ListaDeBienes() {
@@ -76,7 +76,7 @@ public class ListaDeBienes {
 
     public void cargarServiciosTabla(JTable jtbBien) {
         DefaultTableModel modelo = new DefaultTableModel();
-        String[] titulos = {"Nombre Producto", "Precio unitario", "Proveedor", "Categoría"};
+        String[] titulos = {"Nombre Servicio", "Precio unitario", "Proveedor", "Categoría"};
         String[] fila = new String[4];
         modelo = new DefaultTableModel(null, titulos);
         //Aquí cambie algo para que sirva, puse este iterador y luego castee la clase producto
@@ -168,22 +168,7 @@ public class ListaDeBienes {
         return retorno;
     }
 
-    public void mostrarProducto(java.awt.event.MouseEvent evt, JTable jtbProductos, DefaultTableModel modelo, JTextField txtNombre, JTextField txtPrecio, JComboBox cmbProveedores, JComboBox cmbCategoria) {
-        int row = jtbProductos.rowAtPoint(evt.getPoint());
-        int col = jtbProductos.columnAtPoint(evt.getPoint());
-        if (row >= 0 && col >= 0) {
-            String nombre = modelo.getValueAt(row, 0).toString();
-            String precio = modelo.getValueAt(row, 1).toString();
-            String proveedor = modelo.getValueAt(row, 2).toString();
-            String categoria = modelo.getValueAt(row, 3).toString();
-            txtNombre.setText(nombre);
-            txtPrecio.setText(precio);
-            cmbProveedores.setSelectedItem(proveedor);
-            cmbCategoria.setSelectedItem(categoria);
-        }
-    }
-
-    public void mostrarServicio(java.awt.event.MouseEvent evt, JTable jtbProductos, DefaultTableModel modelo, JTextField txtNombre, JTextField txtPrecio, JComboBox cmbProveedores, JComboBox cmbCategoria) {
+    public void mostrarBien(java.awt.event.MouseEvent evt, JTable jtbProductos, DefaultTableModel modelo, JTextField txtNombre, JTextField txtPrecio, JComboBox cmbProveedores, JComboBox cmbCategoria) {
         int row = jtbProductos.rowAtPoint(evt.getPoint());
         int col = jtbProductos.columnAtPoint(evt.getPoint());
         if (row >= 0 && col >= 0) {

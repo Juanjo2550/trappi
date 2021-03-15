@@ -116,6 +116,8 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jLSidimLogo.setIcon(new javax.swing.ImageIcon("C:\\Users\\T_User\\Documents\\GitHub\\trappi\\src\\main\\java\\com\\epn\\trappi\\gui\\ecommerce\\Imagenes\\logoProvInv.png")); // NOI18N
+
         javax.swing.GroupLayout jPEncabezadoLayout = new javax.swing.GroupLayout(jPEncabezado);
         jPEncabezado.setLayout(jPEncabezadoLayout);
         jPEncabezadoLayout.setHorizontalGroup(

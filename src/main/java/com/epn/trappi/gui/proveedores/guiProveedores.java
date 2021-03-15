@@ -21,20 +21,6 @@ public class guiProveedores extends javax.swing.JPanel {
         initComponents();
     }
 
-    public static boolean validarRazonSocial(String razonSocial) {
-        if (razonSocial.length() > 50 || razonSocial.trim().equals("")) {
-            return false;
-        }
-        return razonSocial.matches("[ñÑÁÉÍÓÚáéíóúA-Za-z]+[[ ][ñÑÁÉÍÓÚáéíóúA-Za-z]+]*");
-    }
-
-    public static boolean validarDireccion(String direccion) {
-        if (direccion.length() > 50 || direccion.trim().equals("")) {
-            return false;
-        }
-        return direccion.matches("[[0-9]*[ ]]*[A-Za-zñÑÁÉÍÓÚáéíóú]+[0-9]*[[ ][A-Za-zñÑÁÉÍÓÚáéíóú]+[0-9]*]*");
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -179,7 +165,7 @@ public class guiProveedores extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtRUCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRUCActionPerformed
-        // TODO add your handling code here:
+    
     }//GEN-LAST:event_txtRUCActionPerformed
 
     private void txtRUCKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRUCKeyPressed
@@ -191,7 +177,7 @@ public class guiProveedores extends javax.swing.JPanel {
     }//GEN-LAST:event_txtRUCKeyTyped
 
     private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtDireccionActionPerformed
 
     private void txtDireccionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyPressed
@@ -220,22 +206,16 @@ public class guiProveedores extends javax.swing.JPanel {
 
     private void btnRegistrarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarProveedorActionPerformed
         // Atributos
-        String ruc;
-        String razonSocial;
-        String direccion;
-        String n_Cuenta;
-
-        ruc = txtRUC.getText();
-        razonSocial = txtRazonSocial.getText();
-        direccion = txtDireccion.getText();
-        n_Cuenta = txtNCuenta.getText();
+        String ruc = txtRUC.getText();
+        String razonSocial = txtRazonSocial.getText();
+        String direccion = txtDireccion.getText();
+        String n_Cuenta = txtNCuenta.getText();
 
         // Registro
         if (validarRazonSocial(razonSocial)) {
             try {
                 if (validarDireccion(direccion)) {
-                    Proveedor nuevoP = new Proveedor(ruc, razonSocial, direccion, n_Cuenta);
-                    nuevoP.registrarProveedor();
+                    new Proveedor(ruc, razonSocial, direccion, n_Cuenta).registrarProveedor();
                     JOptionPane.showMessageDialog(null, "Proveedor registrado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                     txtRUC.setText("");
                     txtRazonSocial.setText("");
@@ -252,6 +232,19 @@ public class guiProveedores extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnRegistrarProveedorActionPerformed
 
+    public static boolean validarRazonSocial(String razonSocial) {
+        if (razonSocial.length() > 50 || razonSocial.trim().equals("")) {
+            return false;
+        }
+        return razonSocial.matches("[ñÑÁÉÍÓÚáéíóúA-Za-z]+[[ ][ñÑÁÉÍÓÚáéíóúA-Za-z]+]*");
+    }
+
+    public static boolean validarDireccion(String direccion) {
+        if (direccion.length() > 50 || direccion.trim().equals("")) {
+            return false;
+        }
+        return direccion.matches("[[0-9]*[ ]]*[A-Za-zñÑÁÉÍÓÚáéíóú]+[0-9]*[[ ][A-Za-zñÑÁÉÍÓÚáéíóú]+[0-9]*]*");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelVerTodos;

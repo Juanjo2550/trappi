@@ -66,6 +66,5 @@ public class Proveedor {
         Proveedor prov = new Proveedor(getRuc(), getRazonSocial(), getDireccion(), getCuenta());
         db.setProveedores(prov);
     }
-    
-    
+
 }

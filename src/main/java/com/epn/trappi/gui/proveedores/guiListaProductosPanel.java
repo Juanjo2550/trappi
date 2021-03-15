@@ -223,7 +223,7 @@ public class guiListaProductosPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void jtbProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbProductosMouseClicked
-        listaP.mostrarProducto(evt, jtbProductos, modelo, txtNombre, txtPrecio, cmbProveedores, cmbCategoria);
+        listaP.mostrarBien(evt, jtbProductos, modelo, txtNombre, txtPrecio, cmbProveedores, cmbCategoria);
     }//GEN-LAST:event_jtbProductosMouseClicked
 
     private void txtNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProductoKeyTyped
