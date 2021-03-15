@@ -55,7 +55,7 @@ public class ObservacionDb implements ModelDb<Observacion> {
                         resultSet.getString(4),
                         new Fecha(Integer.parseInt(formattedDate[2]), Integer.parseInt(formattedDate[1]), Integer.parseInt(formattedDate[0])),
                         new Hora(resultSet.getInt(6), 0, 0)
-                        ));
+                ));
             }
         } catch (SQLException e){
             System.out.println(e.toString());
