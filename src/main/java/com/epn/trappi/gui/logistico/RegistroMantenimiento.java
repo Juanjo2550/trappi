@@ -298,7 +298,7 @@ public class RegistroMantenimiento extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tablaMantenimientos.setGridColor(new java.awt.Color(153, 153, 153));
+        tablaMantenimientos.setGridColor(new java.awt.Color(255, 255, 255));
         tablaMantenimientos.setIntercellSpacing(new java.awt.Dimension(0, 0));
         tablaMantenimientos.setRowHeight(30);
         tablaMantenimientos.setSelectionBackground(new java.awt.Color(239, 239, 239));

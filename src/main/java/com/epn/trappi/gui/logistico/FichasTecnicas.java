@@ -72,16 +72,14 @@ public class FichasTecnicas extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jTFidSolicitud = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        txtIdBien = new javax.swing.JTextField();
         btnVerificarMantenimiento = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTVerificarMantenimiento = new javax.swing.JTable();
-        btnVerificarBien = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTVerificarBien = new javax.swing.JTable();
         jPanel8 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
+        comboServicios = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -165,7 +163,7 @@ public class FichasTecnicas extends javax.swing.JPanel {
                 btnVerificarVehiculoActionPerformed(evt);
             }
         });
-        jPanel2.add(btnVerificarVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 180, 20));
+        jPanel2.add(btnVerificarVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 180, 30));
 
         btnRegistrarMantenimiento.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         btnRegistrarMantenimiento.setForeground(new java.awt.Color(61, 57, 57));
@@ -241,7 +239,7 @@ public class FichasTecnicas extends javax.swing.JPanel {
         txtIdMantenimiento.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         txtIdMantenimiento.setForeground(new java.awt.Color(61, 57, 57));
         txtIdMantenimiento.setText("123");
-        jPanel3.add(txtIdMantenimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 150, 30));
+        jPanel3.add(txtIdMantenimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 350, 30));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(61, 57, 57));
@@ -267,27 +265,22 @@ public class FichasTecnicas extends javax.swing.JPanel {
                 btnRegistrarSolicitudActionPerformed(evt);
             }
         });
-        jPanel3.add(btnRegistrarSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 170, 170, 30));
+        jPanel3.add(btnRegistrarSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 240, 220, 30));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(61, 57, 57));
         jLabel11.setText("ID solicitud:");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 70, 100, 30));
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 180, 100, 30));
 
         jTFidSolicitud.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jTFidSolicitud.setForeground(new java.awt.Color(61, 57, 57));
         jTFidSolicitud.setText("1");
-        jPanel3.add(jTFidSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 120, 170, 30));
+        jPanel3.add(jTFidSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 180, 130, 30));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(61, 57, 57));
-        jLabel12.setText("ID Bien:");
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 80, 30));
-
-        txtIdBien.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        txtIdBien.setForeground(new java.awt.Color(61, 57, 57));
-        txtIdBien.setText("8");
-        jPanel3.add(txtIdBien, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 240, 30));
+        jLabel12.setText("Seleccione el servicio que necesita: ");
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 70, 270, 20));
 
         btnVerificarMantenimiento.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         btnVerificarMantenimiento.setForeground(new java.awt.Color(61, 57, 57));
@@ -297,7 +290,7 @@ public class FichasTecnicas extends javax.swing.JPanel {
                 btnVerificarMantenimientoActionPerformed(evt);
             }
         });
-        jPanel3.add(btnVerificarMantenimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 150, 20));
+        jPanel3.add(btnVerificarMantenimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, 210, 30));
 
         jTVerificarMantenimiento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -312,32 +305,7 @@ public class FichasTecnicas extends javax.swing.JPanel {
         ));
         jScrollPane3.setViewportView(jTVerificarMantenimiento);
 
-        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 300, 120));
-
-        btnVerificarBien.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        btnVerificarBien.setForeground(new java.awt.Color(61, 57, 57));
-        btnVerificarBien.setText("Verificar");
-        btnVerificarBien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerificarBienActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btnVerificarBien, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 240, 20));
-
-        jTVerificarBien.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Matricula"
-            }
-        ));
-        jScrollPane4.setViewportView(jTVerificarBien);
-
-        jPanel3.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, 340, 120));
+        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 510, 120));
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(219, 223, 228), 1, true));
@@ -358,8 +326,8 @@ public class FichasTecnicas extends javax.swing.JPanel {
                 return null;
             }
         }.getIcon());
-        jLabel13.setText("  Registrar solicitud");
-        jPanel8.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, 40));
+        jLabel13.setText("  Registrar solicitud de servicio");
+        jPanel8.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 260, 40));
 
         jPanel6.setBackground(new java.awt.Color(60, 141, 188));
         jPanel6.setPreferredSize(new java.awt.Dimension(970, 5));
@@ -378,6 +346,14 @@ public class FichasTecnicas extends javax.swing.JPanel {
         jPanel8.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, -1));
 
         jPanel3.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 50));
+
+        comboServicios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        comboServicios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mantenimiento de rutina", "Revisión por mecánico", "Reparación por mecánico" }));
+        jPanel3.add(comboServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 120, 270, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 10)); // NOI18N
+        jLabel2.setText("(Asocie la solicitud a un mantenimiento existente)");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -447,10 +423,6 @@ public class FichasTecnicas extends javax.swing.JPanel {
                         } 
                 }
     }//GEN-LAST:event_btnVerificarMantenimientoActionPerformed
-
-    private void btnVerificarBienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarBienActionPerformed
-
-    }//GEN-LAST:event_btnVerificarBienActionPerformed
     
     private String getFechaSistema(){
         String fechaActual="";
@@ -466,35 +438,74 @@ public class FichasTecnicas extends javax.swing.JPanel {
     }
     
     private void btnRegistrarSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarSolicitudActionPerformed
-        /*
-        servicioDB = new ServicioDbSolicitudMantenimiento();
-        //Datos de la GUI
+        strErrores+=verificarID(jTFidSolicitud.getText());
+        if(!strErrores.equals(""))
+                {
+                    strErrores="Errores existentes:\n"+strErrores;
+                    JOptionPane.showMessageDialog(null, strErrores , "Formato de ID Solicitud incorrecto" , JOptionPane.ERROR_MESSAGE);
+                    strErrores="";
+                    return;
+                }
+        strErrores+=verificarID(txtIdMantenimiento.getText());
+        if(!strErrores.equals(""))
+                {
+                    strErrores="Errores existentes:\n"+strErrores;
+                    JOptionPane.showMessageDialog(null, strErrores , "Formato de ID Mantenimiento incorrecto" , JOptionPane.ERROR_MESSAGE);
+                    strErrores="";
+                    return;
+                }
+        ServicioDbSolicitudMantenimiento servicio = new ServicioDbSolicitudMantenimiento();
         String fechaSol = getFechaSistema(); 
         int numSolicitud = Integer.parseInt(jTFidSolicitud.getText());
-        int identificadorBien = Integer.parseInt(txtIdBien.getText());
         int idMantenimiento = Integer.parseInt(txtIdMantenimiento.getText());
-        System.out.println("fecha: " + fechaSol);
-        //Instancia
-        
+        //Verificamos cual ID de Bien se usará
+        int identificadorBien=1;
+        int opcion = comboServicios.getSelectedIndex();
+        switch(opcion){
+            case 0:
+                identificadorBien=8;
+                break;
+            case 1:
+                identificadorBien=9;
+                break;
+            case 2:
+                identificadorBien=14;
+                break;
+        }
+        //Registramos la solicitud
         SolicitudMantenimiento solicitud = new SolicitudMantenimiento();
         solicitud.setId_Solicitud(numSolicitud);
         solicitud.setId_Bien(identificadorBien);
         solicitud.setId_Mantenimiento(idMantenimiento);
         solicitud.setEstado("En espera");
         solicitud.setFecha(fechaSol);
-        System.out.println("SoLICITUD: " + solicitud.toString() );
-        
-        try {
-            servicioDB.insertar(solicitud);
+        try{
+            servicio.insertar(solicitud);
             JOptionPane.showMessageDialog(null, "Solicitud de mantenimiento ingresado exitosamente!");
-        } catch (SQLException ex) {
-            Logger.getLogger(FichasTecnicas.class.getName()).log(Level.SEVERE, null, ex);
+        }catch (SQLException x){
+            
         }
-        */
+        
     }//GEN-LAST:event_btnRegistrarSolicitudActionPerformed
 
     private void btnRegistrarMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarMantenimientoActionPerformed
-
+        
+        strErrores+=verificarMatricula(txtMatriculaVehiculo.getText());
+        if(!strErrores.equals(""))
+                {
+                    strErrores="Errores existentes:\n"+strErrores;
+                    JOptionPane.showMessageDialog(null, strErrores , "Matricula erronea" , JOptionPane.ERROR_MESSAGE);
+                    strErrores="";
+                    return;
+                }
+        strErrores+=verificarID(jTFidMantenimiento.getText());
+        if(!strErrores.equals(""))
+                {
+                    strErrores="Errores existentes:\n"+strErrores;
+                    JOptionPane.showMessageDialog(null, strErrores , "Formato de ID incorrecto" , JOptionPane.ERROR_MESSAGE);
+                    strErrores="";
+                    return;
+                }
         Mantenimiento mantenimiento = new Mantenimiento(Integer.parseInt(jTFidMantenimiento.getText()),txtMatriculaVehiculo.getText(), txaDetallesMantenimiento.getText());
         try {
             servicioDB = new ServicioDbMantenimiento();
@@ -543,15 +554,16 @@ public class FichasTecnicas extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrarMantenimiento;
     private javax.swing.JButton btnRegistrarSolicitud;
-    private javax.swing.JButton btnVerificarBien;
     private javax.swing.JButton btnVerificarMantenimiento;
     private javax.swing.JButton btnVerificarVehiculo;
+    private javax.swing.JComboBox<String> comboServicios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -566,14 +578,11 @@ public class FichasTecnicas extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField jTFidMantenimiento;
     private javax.swing.JTextField jTFidSolicitud;
-    private javax.swing.JTable jTVerificarBien;
     private javax.swing.JTable jTVerificarMantenimiento;
     private javax.swing.JTable jTableVerificarVehiculo;
     private javax.swing.JTextArea txaDetallesMantenimiento;
-    private javax.swing.JTextField txtIdBien;
     private javax.swing.JTextField txtIdMantenimiento;
     private javax.swing.JTextField txtMatriculaVehiculo;
     // End of variables declaration//GEN-END:variables

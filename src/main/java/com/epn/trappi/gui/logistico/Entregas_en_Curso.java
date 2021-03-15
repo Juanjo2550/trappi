@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.epn.trappi.gui.logistico;
 
 import com.epn.trappi.models.logistico.Entrega;
@@ -22,6 +18,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -35,18 +32,20 @@ public class Entregas_en_Curso extends javax.swing.JPanel {
     Unible unible;
     MapaGeografico mapa_rutas;
     int bandera=1;
+    public JTable tabla;
     //CONSTRUCTOR
     public Entregas_en_Curso() {
         initComponents();
+        tabla = tablaEntregas;
         entregas = new ListaEntregas();
         mapa_rutas = new MapaGeografico();
         panelRutas.add(mapa_rutas.grafico());
-        graficarRuta("Av. Mariscal Sucre y America");
+        graficarRuta("La Carolina");
         tablaEntregas.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 try {
-                    //mostrarRuta(evt);
+                    mostrarRuta(evt);
                 } catch (Exception ex) {
                     Logger.getLogger(ListasVehiculos.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -56,10 +55,16 @@ public class Entregas_en_Curso extends javax.swing.JPanel {
     //METODOS
     public void setContadores() throws SQLException{
         
-        int num_entregas;
-        int num_autos=1;
+        int num_entregas=0;
+        int num_autos=0;
         int num_motos=0;
         int num_camiones=0;
+        
+        contadorEntregas.setText(String.valueOf(num_entregas));
+        contadorAutos.setText(String.valueOf(num_autos));
+        contadorMotos.setText(String.valueOf(num_motos));
+        contadorCamiones.setText(String.valueOf(num_camiones));
+        
         
         servicio = new ServicioDbEntrega();
         unible = new ServicioDbEntrega();
@@ -95,9 +100,16 @@ public class Entregas_en_Curso extends javax.swing.JPanel {
         servicio = new ServicioDbEntrega();
         entregas.setEntregas(servicio.obtenerElementosPorFiltro(ServicioDbEntrega.ESTADO,"En curso").getDatos());
         if(entregas.estaVacia()){
+            this.tablaEntregas.removeAll();
+            if (this.tablaEntregas.getRowCount() > 0) {
+                for(int i = this.tablaEntregas.getRowCount() - 1; i > -1; i--) {
+                    this.tablaEntregas.removeRowSelectionInterval(i,i);
+                }
+            }
             return;
         }
         this.tablaEntregas.setModel(entregas.mostrarLista());
+        entregas = null;
         
     }
     
@@ -108,30 +120,18 @@ public class Entregas_en_Curso extends javax.swing.JPanel {
         mapa_rutas.trazarRuta(ruta);
     }
     
-    public String mapeoDirecciones(String direccion){
-        String id_direccion;
-        direccion=direccion.trim();
-        if(direccion.equalsIgnoreCase("Quicentro Shopping Norte")){
-            id_direccion="ChIJf3SFnYOa1ZEReimBvayqhDo";
-        }
-        if(direccion.equalsIgnoreCase("Megamaxi 6 de Diciembre")){//Origen por defecto
-            id_direccion="ChIJv4XVroGa1ZERW6s47_m15Fc";
-        }
-        if(direccion.equalsIgnoreCase("Machachi")){
-            id_direccion="ChIJ8-NbUVOp1ZERQ_4RA_KCF7Q";
-        }
-        if(direccion.equalsIgnoreCase("Av. Mariscal Sucre y America")){
-            id_direccion="EiJBdi4gTWFyaXNjYWwgU3VjcmUsIFF1aXRvLCBFY3VhZG9yIi4qLAoUChIJa2cI9H-Z1ZERfoS-V7ofc74SFAoSCZ98QgJAmtWREXJV71jhkblE";
-        }
-        else{
-            id_direccion="ChIJS9QcfhCa1ZER1J6TZk8oigg";//Destino por defecto - Escuela Politecnica Nacional
-        }
-        return id_direccion;
-    }
+    
     
     private void mostrarRuta(java.awt.event.MouseEvent evt) throws SQLException, Exception {  
         int fila = tablaEntregas.getSelectedRow();
+        if(fila==-1){
+            JOptionPane.showMessageDialog(null,"Click en el registro para mostrar la ruta que tomó el vehículo.");
+            return;
+        }
         String direccion = (String)tablaEntregas.getValueAt(fila, 6);
+        if(direccion==null){
+            return;
+        }
         graficarRuta(direccion);
     }
     
@@ -614,18 +614,18 @@ public class Entregas_en_Curso extends javax.swing.JPanel {
         tablaEntregas.setForeground(new java.awt.Color(96, 97, 101));
         tablaEntregas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"", "", "", null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {"", "", "", null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID Entrega", "ID Empleado", "Matrícula", "Factura", "Estado", "Fecha", "Direccion"
             }
         ));
         tablaEntregas.setGridColor(new java.awt.Color(239, 239, 239));
@@ -837,7 +837,7 @@ public class Entregas_en_Curso extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_botonMinimizarMouseClicked
 
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PANELTABLA;
     private javax.swing.JLabel botonMinimizar;
@@ -881,4 +881,67 @@ public class Entregas_en_Curso extends javax.swing.JPanel {
     private javax.swing.JPanel panelTabla;
     private javax.swing.JTable tablaEntregas;
     // End of variables declaration//GEN-END:variables
+
+    // Método que sustituye a la API de Pago de Geolocalización de Google que mapea direcciones a identificadores ID Place
+    
+    public String mapeoDirecciones(String direccion){
+        String id_direccion;
+        direccion=direccion.trim();
+        if(direccion.equalsIgnoreCase("Quicentro Shopping Norte")){
+            id_direccion="ChIJf3SFnYOa1ZEReimBvayqhDo";
+        }
+        else if(direccion.equalsIgnoreCase("Megamaxi 6 de Diciembre")){//Origen por defecto
+            id_direccion="ChIJv4XVroGa1ZERW6s47_m15Fc";
+        }
+        else if(direccion.equalsIgnoreCase("Machachi")){
+            id_direccion="ChIJ8-NbUVOp1ZERQ_4RA_KCF7Q";
+        }
+        else if(direccion.equalsIgnoreCase("Av. Mariscal Sucre y America")){
+            id_direccion="EiJBdi4gTWFyaXNjYWwgU3VjcmUsIFF1aXRvLCBFY3VhZG9yIi4qLAoUChIJa2cI9H-Z1ZERfoS-V7ofc74SFAoSCZ98QgJAmtWREXJV71jhkblE";
+        }
+        else if(direccion.equalsIgnoreCase("Condado Shopping")){
+            id_direccion="ChIJI2LWRIyP1ZERCRxMID6_kSw";
+        }
+        else if(direccion.equalsIgnoreCase("El Triangulo")){
+            id_direccion="ChIJ4UTIWQC91ZER6_j8BJeknOY";
+        }
+        else if(direccion.equalsIgnoreCase("El Jardin")){
+            id_direccion="ChIJRxIaia6b1ZER4-H-P9Id2rY";
+        }
+        else if(direccion.equalsIgnoreCase("Pomasqui")){
+            id_direccion="ChIJp5h0q5GI1ZERKiEqfaC8iiM";
+        }
+        else if(direccion.equalsIgnoreCase("Mitad del Mundo")){
+            id_direccion="ChIJka2b-B6I1ZERuKmhAJtp4bI";
+        }
+        else if(direccion.equalsIgnoreCase("Calderon")){
+            id_direccion="ChIJdeAgQuSO1ZER-hmx6QhcBQM";
+        }
+        else if(direccion.equalsIgnoreCase("El Eden")){
+            id_direccion="ChIJ7U-v-PCP1ZERMVu21To13Eg";
+        }
+        else if(direccion.equalsIgnoreCase("La Kennedy")){
+            id_direccion="ChIJBaXUzlaF1ZER7CYp0UJhQ5Q";
+        }
+        else if(direccion.equalsIgnoreCase("La Carolina")){
+            id_direccion="ChIJod6C1nqa1ZER3Y_6o5VXk0M";
+        }
+        else if(direccion.equalsIgnoreCase("Tababela")){
+            id_direccion="ChIJFxL5MyCN1ZERk2VOOkZf7AI";
+        }
+        else if(direccion.equalsIgnoreCase("Av El Inca y Mariana de Jesus")){
+            id_direccion="EjtBdmVuaWRhIEVsIEluY2EgJiBBdmVuaWRhIE1hcmlhbmEgZGUgSmVzw7pzLCBRdWl0bywgRWN1YWRvciJmImQKFAoSCQ8KuCjXvNWRETI2jOUVDtguEhQKEgkPCrgo17zVkREyNozlFQ7YLhoUChIJXx1tjNu81ZERbNz2R57Zm0AaFAoSCTEQqtknvdWRETR4z-lkQcy1IgoNa_bM_xU29jrR";
+        }
+        else if(direccion.equalsIgnoreCase("Av. Teniente Hugo Ortiz y 5 de Junio")){
+            id_direccion="EiRBdi4gVG50ZS4gSHVnbyBPcnRpeiwgUXVpdG8sIEVjdWFkb3IiLiosChQKEgkROp1n-5jVkRGzJIigi0bJZxIUChIJn3xCAkCa1ZERclXvWOGRuUQ";
+        }
+        else if(direccion.equalsIgnoreCase("Av Gral Rumiñahui y Nela Martinez")){
+            id_direccion="EiRBdi4gR3JhbC4gUnVtacOxYWh1aSwgUXVpdG8sIEVjdWFkb3IiLiosChQKEglLXNsA9ZfVkRE1zP5x0260eRIUChIJn3xCAkCa1ZERclXvWOGRuUQ";
+        }
+        else{
+            id_direccion="ChIJv4XVroGa1ZERW6s47_m15Fc";//Destino por defecto - Machachi
+        }
+        return id_direccion;
+    }
+    
 }
