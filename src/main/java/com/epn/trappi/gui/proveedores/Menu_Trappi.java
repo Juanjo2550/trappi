@@ -50,64 +50,39 @@ public class Menu_Trappi extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        PanelVerTodos = new javax.swing.JPanel();
-        jIVA = new javax.swing.JLabel();
-        jValor = new javax.swing.JLabel();
         jPEncabezado = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLSidimLogo = new javax.swing.JLabel();
-        jPMod = new javax.swing.JPanel();
-        jPanOpcionesDeclaracion = new javax.swing.JPanel();
-        jbtProveedores = new javax.swing.JButton();
-        jPanOpcInventario = new javax.swing.JPanel();
-        jPanOpcProveedores = new javax.swing.JPanel();
-        Recursosboton = new javax.swing.JButton();
-        jPanOpcProductos = new javax.swing.JPanel();
-        jbtInventario = new javax.swing.JButton();
-        jbtLogístico = new javax.swing.JButton();
-        jPanOpcServicios = new javax.swing.JPanel();
-        jtbCerrarSesion = new javax.swing.JButton();
-        jbtCompras = new javax.swing.JButton();
-        jPanOpcCompras = new javax.swing.JPanel();
         jLabNombreContribuyente1 = new javax.swing.JLabel();
+        jPMod = new javax.swing.JPanel();
+        jtbCerrarSesion = new javax.swing.JButton();
+        jbtLogístico = new javax.swing.JButton();
+        jbtCompras = new javax.swing.JButton();
+        jbtProveedores = new javax.swing.JButton();
+        Recursosboton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        PanelVerTodos.setBackground(new java.awt.Color(255, 255, 255));
-        PanelVerTodos.setLayout(new javax.swing.BoxLayout(PanelVerTodos, javax.swing.BoxLayout.LINE_AXIS));
-
-        jIVA.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        PanelVerTodos.add(jIVA);
-
-        jValor.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        PanelVerTodos.add(jValor);
-
         jPEncabezado.setBackground(new java.awt.Color(61, 57, 57));
 
-        jLabel2.setBackground(new java.awt.Color(80, 125, 180));
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(240, 240, 241));
-        jLabel2.setText("Bienvenido: Administrador  1");
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-        });
+        jLabNombreContribuyente1.setFont(new java.awt.Font("Tahoma", 1, 25)); // NOI18N
+        jLabNombreContribuyente1.setForeground(new java.awt.Color(240, 240, 241));
+        jLabNombreContribuyente1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabNombreContribuyente1.setText("Trappi");
 
         javax.swing.GroupLayout jPEncabezadoLayout = new javax.swing.GroupLayout(jPEncabezado);
         jPEncabezado.setLayout(jPEncabezadoLayout);
         jPEncabezadoLayout.setHorizontalGroup(
             jPEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPEncabezadoLayout.createSequentialGroup()
-                .addComponent(jLSidimLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(23, 23, 23))
+            .addGroup(jPEncabezadoLayout.createSequentialGroup()
+                .addGap(530, 530, 530)
+                .addComponent(jLabNombreContribuyente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(540, 540, 540))
         );
         jPEncabezadoLayout.setVerticalGroup(
             jPEncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jLSidimLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPEncabezadoLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabNombreContribuyente1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPMod.setBackground(new java.awt.Color(51, 51, 51));
@@ -115,12 +90,49 @@ public class Menu_Trappi extends javax.swing.JFrame {
         jPMod.setMaximumSize(new java.awt.Dimension(300, 200));
         jPMod.setPreferredSize(new java.awt.Dimension(300, 280));
 
-        jPanOpcionesDeclaracion.setBackground(new java.awt.Color(51, 51, 51));
-        jPanOpcionesDeclaracion.setPreferredSize(new java.awt.Dimension(468, 700));
+        jtbCerrarSesion.setBackground(new java.awt.Color(255, 210, 28));
+        jtbCerrarSesion.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jtbCerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        jtbCerrarSesion.setText("Cerrar Sesión ");
+        jtbCerrarSesion.setBorderPainted(false);
+        jtbCerrarSesion.setFocusPainted(false);
+        jtbCerrarSesion.setMaximumSize(new java.awt.Dimension(110, 50));
+        jtbCerrarSesion.setMinimumSize(new java.awt.Dimension(110, 50));
+        jtbCerrarSesion.setPreferredSize(new java.awt.Dimension(110, 50));
+
+        jbtLogístico.setBackground(new java.awt.Color(255, 210, 28));
+        jbtLogístico.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jbtLogístico.setForeground(new java.awt.Color(51, 51, 51));
+        jbtLogístico.setText("Logístico");
+        jbtLogístico.setBorderPainted(false);
+        jbtLogístico.setFocusPainted(false);
+        jbtLogístico.setMaximumSize(new java.awt.Dimension(110, 50));
+        jbtLogístico.setMinimumSize(new java.awt.Dimension(110, 50));
+        jbtLogístico.setPreferredSize(new java.awt.Dimension(110, 50));
+        jbtLogístico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtLogísticoActionPerformed(evt);
+            }
+        });
+
+        jbtCompras.setBackground(new java.awt.Color(255, 210, 28));
+        jbtCompras.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jbtCompras.setForeground(new java.awt.Color(51, 51, 51));
+        jbtCompras.setText("Compras");
+        jbtCompras.setBorderPainted(false);
+        jbtCompras.setFocusPainted(false);
+        jbtCompras.setMaximumSize(new java.awt.Dimension(110, 50));
+        jbtCompras.setMinimumSize(new java.awt.Dimension(110, 50));
+        jbtCompras.setPreferredSize(new java.awt.Dimension(110, 50));
+        jbtCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtComprasActionPerformed(evt);
+            }
+        });
 
         jbtProveedores.setBackground(new java.awt.Color(255, 210, 28));
-        jbtProveedores.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jbtProveedores.setForeground(new java.awt.Color(240, 240, 241));
+        jbtProveedores.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jbtProveedores.setForeground(new java.awt.Color(51, 51, 51));
         jbtProveedores.setText("Proveedores");
         jbtProveedores.setBorderPainted(false);
         jbtProveedores.setFocusPainted(false);
@@ -138,24 +150,9 @@ public class Menu_Trappi extends javax.swing.JFrame {
             }
         });
 
-        jPanOpcInventario.setBackground(new java.awt.Color(51, 51, 51));
-
-        javax.swing.GroupLayout jPanOpcInventarioLayout = new javax.swing.GroupLayout(jPanOpcInventario);
-        jPanOpcInventario.setLayout(jPanOpcInventarioLayout);
-        jPanOpcInventarioLayout.setHorizontalGroup(
-            jPanOpcInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 231, Short.MAX_VALUE)
-        );
-        jPanOpcInventarioLayout.setVerticalGroup(
-            jPanOpcInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 29, Short.MAX_VALUE)
-        );
-
-        jPanOpcProveedores.setBackground(new java.awt.Color(51, 51, 51));
-
         Recursosboton.setBackground(new java.awt.Color(255, 210, 28));
-        Recursosboton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        Recursosboton.setForeground(new java.awt.Color(240, 240, 241));
+        Recursosboton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Recursosboton.setForeground(new java.awt.Color(51, 51, 51));
         Recursosboton.setText("RRHH");
         Recursosboton.setBorderPainted(false);
         Recursosboton.setFocusPainted(false);
@@ -173,204 +170,48 @@ public class Menu_Trappi extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanOpcProveedoresLayout = new javax.swing.GroupLayout(jPanOpcProveedores);
-        jPanOpcProveedores.setLayout(jPanOpcProveedoresLayout);
-        jPanOpcProveedoresLayout.setHorizontalGroup(
-            jPanOpcProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanOpcProveedoresLayout.createSequentialGroup()
-                .addComponent(Recursosboton, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 21, Short.MAX_VALUE))
-        );
-        jPanOpcProveedoresLayout.setVerticalGroup(
-            jPanOpcProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanOpcProveedoresLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Recursosboton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
-        );
-
-        jPanOpcProductos.setBackground(new java.awt.Color(51, 51, 51));
-
-        javax.swing.GroupLayout jPanOpcProductosLayout = new javax.swing.GroupLayout(jPanOpcProductos);
-        jPanOpcProductos.setLayout(jPanOpcProductosLayout);
-        jPanOpcProductosLayout.setHorizontalGroup(
-            jPanOpcProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 220, Short.MAX_VALUE)
-        );
-        jPanOpcProductosLayout.setVerticalGroup(
-            jPanOpcProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 64, Short.MAX_VALUE)
-        );
-
-        jbtInventario.setBackground(new java.awt.Color(255, 210, 28));
-        jbtInventario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jbtInventario.setForeground(new java.awt.Color(240, 240, 241));
-        jbtInventario.setText("Inventario");
-        jbtInventario.setBorderPainted(false);
-        jbtInventario.setFocusPainted(false);
-        jbtInventario.setMaximumSize(new java.awt.Dimension(110, 50));
-        jbtInventario.setMinimumSize(new java.awt.Dimension(110, 50));
-        jbtInventario.setPreferredSize(new java.awt.Dimension(110, 50));
-        jbtInventario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtInventarioActionPerformed(evt);
-            }
-        });
-
-        jbtLogístico.setBackground(new java.awt.Color(255, 210, 28));
-        jbtLogístico.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jbtLogístico.setForeground(new java.awt.Color(240, 240, 241));
-        jbtLogístico.setText("Logístico");
-        jbtLogístico.setBorderPainted(false);
-        jbtLogístico.setFocusPainted(false);
-        jbtLogístico.setMaximumSize(new java.awt.Dimension(110, 50));
-        jbtLogístico.setMinimumSize(new java.awt.Dimension(110, 50));
-        jbtLogístico.setPreferredSize(new java.awt.Dimension(110, 50));
-        jbtLogístico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtLogísticoActionPerformed(evt);
-            }
-        });
-
-        jPanOpcServicios.setBackground(new java.awt.Color(51, 51, 51));
-
-        jtbCerrarSesion.setBackground(new java.awt.Color(255, 210, 28));
-        jtbCerrarSesion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jtbCerrarSesion.setForeground(new java.awt.Color(240, 240, 241));
-        jtbCerrarSesion.setText("Cerrar Sesión ");
-        jtbCerrarSesion.setBorderPainted(false);
-        jtbCerrarSesion.setFocusPainted(false);
-        jtbCerrarSesion.setMaximumSize(new java.awt.Dimension(110, 50));
-        jtbCerrarSesion.setMinimumSize(new java.awt.Dimension(110, 50));
-        jtbCerrarSesion.setPreferredSize(new java.awt.Dimension(110, 50));
-        jtbCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtbCerrarSesionActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanOpcServiciosLayout = new javax.swing.GroupLayout(jPanOpcServicios);
-        jPanOpcServicios.setLayout(jPanOpcServiciosLayout);
-        jPanOpcServiciosLayout.setHorizontalGroup(
-            jPanOpcServiciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanOpcServiciosLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jtbCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanOpcServiciosLayout.setVerticalGroup(
-            jPanOpcServiciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanOpcServiciosLayout.createSequentialGroup()
-                .addContainerGap(41, Short.MAX_VALUE)
-                .addComponent(jtbCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        jbtCompras.setBackground(new java.awt.Color(255, 210, 28));
-        jbtCompras.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jbtCompras.setForeground(new java.awt.Color(240, 240, 241));
-        jbtCompras.setText("Compras");
-        jbtCompras.setBorderPainted(false);
-        jbtCompras.setFocusPainted(false);
-        jbtCompras.setMaximumSize(new java.awt.Dimension(110, 50));
-        jbtCompras.setMinimumSize(new java.awt.Dimension(110, 50));
-        jbtCompras.setPreferredSize(new java.awt.Dimension(110, 50));
-        jbtCompras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtComprasActionPerformed(evt);
-            }
-        });
-
-        jPanOpcCompras.setBackground(new java.awt.Color(51, 51, 51));
-
-        javax.swing.GroupLayout jPanOpcComprasLayout = new javax.swing.GroupLayout(jPanOpcCompras);
-        jPanOpcCompras.setLayout(jPanOpcComprasLayout);
-        jPanOpcComprasLayout.setHorizontalGroup(
-            jPanOpcComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 221, Short.MAX_VALUE)
-        );
-        jPanOpcComprasLayout.setVerticalGroup(
-            jPanOpcComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 45, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanOpcionesDeclaracionLayout = new javax.swing.GroupLayout(jPanOpcionesDeclaracion);
-        jPanOpcionesDeclaracion.setLayout(jPanOpcionesDeclaracionLayout);
-        jPanOpcionesDeclaracionLayout.setHorizontalGroup(
-            jPanOpcionesDeclaracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanOpcionesDeclaracionLayout.createSequentialGroup()
-                .addGroup(jPanOpcionesDeclaracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanOpcionesDeclaracionLayout.createSequentialGroup()
-                        .addComponent(jbtProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanOpcInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanOpcProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtLogístico, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanOpcServicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanOpcionesDeclaracionLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jPanOpcProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanOpcionesDeclaracionLayout.createSequentialGroup()
-                        .addGroup(jPanOpcionesDeclaracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jbtCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-                            .addComponent(jbtInventario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanOpcCompras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanOpcionesDeclaracionLayout.setVerticalGroup(
-            jPanOpcionesDeclaracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanOpcionesDeclaracionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jbtLogístico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanOpcionesDeclaracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanOpcionesDeclaracionLayout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(jPanOpcCompras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanOpcionesDeclaracionLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jbtCompras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbtInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanOpcionesDeclaracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanOpcionesDeclaracionLayout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jPanOpcInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanOpcionesDeclaracionLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jbtProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jPanOpcProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addComponent(jPanOpcProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(jPanOpcServicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
-        );
-
-        jLabNombreContribuyente1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabNombreContribuyente1.setForeground(new java.awt.Color(240, 240, 241));
-        jLabNombreContribuyente1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabNombreContribuyente1.setText("Módulos");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Autores: GR1ISW-ISWR514, Escuela Politécnica Nacional 2020-B");
 
         javax.swing.GroupLayout jPModLayout = new javax.swing.GroupLayout(jPMod);
         jPMod.setLayout(jPModLayout);
         jPModLayout.setHorizontalGroup(
             jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPModLayout.createSequentialGroup()
-                .addGap(0, 6, Short.MAX_VALUE)
-                .addGroup(jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanOpcionesDeclaracion, javax.swing.GroupLayout.PREFERRED_SIZE, 223, Short.MAX_VALUE)
-                    .addComponent(jLabNombreContribuyente1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
-                .addGap(0, 4, Short.MAX_VALUE))
+                .addGap(0, 430, Short.MAX_VALUE)
+                .addGroup(jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPModLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(236, 236, 236)
+                        .addComponent(jtbCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPModLayout.createSequentialGroup()
+                        .addGroup(jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbtCompras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Recursosboton, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(45, 45, 45)
+                        .addGroup(jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbtLogístico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbtProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(425, 425, 425))))
         );
         jPModLayout.setVerticalGroup(
             jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPModLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabNombreContribuyente1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanOpcionesDeclaracion, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(125, 125, 125)
+                .addGroup(jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbtProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtLogístico, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Recursosboton, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
+                .addGroup(jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtbCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(47, 47, 47))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -378,9 +219,7 @@ public class Menu_Trappi extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPMod, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(PanelVerTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 1050, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPMod, javax.swing.GroupLayout.PREFERRED_SIZE, 1380, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(jPEncabezado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -389,32 +228,11 @@ public class Menu_Trappi extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPEncabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPMod, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PanelVerTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 717, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPMod, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-
-    }//GEN-LAST:event_jLabel2MouseClicked
-
-    private void jbtProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtProveedoresActionPerformed
-
-    }//GEN-LAST:event_jbtProveedoresActionPerformed
-
-    private void jbtInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtInventarioActionPerformed
-
-    }//GEN-LAST:event_jbtInventarioActionPerformed
-
-    private void jtbCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtbCerrarSesionActionPerformed
-        this.setVisible(false);
-        Main_Trappi log = new Main_Trappi();
-        log.setVisible(true);
-    }//GEN-LAST:event_jtbCerrarSesionActionPerformed
 
     private void jbtLogísticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtLogísticoActionPerformed
         this.setVisible(false);
@@ -424,6 +242,19 @@ public class Menu_Trappi extends javax.swing.JFrame {
     private void jbtComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtComprasActionPerformed
 
     }//GEN-LAST:event_jbtComprasActionPerformed
+
+    private void RecursosbotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecursosbotonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RecursosbotonActionPerformed
+
+    private void RecursosbotonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RecursosbotonMouseClicked
+        this.rrhh.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_RecursosbotonMouseClicked
+
+    private void jbtProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtProveedoresActionPerformed
+
+    }//GEN-LAST:event_jbtProveedoresActionPerformed
 
     private void jbtProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtProveedoresMouseClicked
         // TODO add your handling code here:
@@ -436,15 +267,6 @@ public class Menu_Trappi extends javax.swing.JFrame {
             Logger.getLogger(Menu_Trappi.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbtProveedoresMouseClicked
-
-    private void RecursosbotonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RecursosbotonMouseClicked
-        this.rrhh.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_RecursosbotonMouseClicked
-
-    private void RecursosbotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecursosbotonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RecursosbotonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -482,23 +304,12 @@ public class Menu_Trappi extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel PanelVerTodos;
     private javax.swing.JButton Recursosboton;
-    private javax.swing.JLabel jIVA;
-    private javax.swing.JLabel jLSidimLogo;
     private javax.swing.JLabel jLabNombreContribuyente1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPEncabezado;
     private javax.swing.JPanel jPMod;
-    private javax.swing.JPanel jPanOpcCompras;
-    private javax.swing.JPanel jPanOpcInventario;
-    private javax.swing.JPanel jPanOpcProductos;
-    private javax.swing.JPanel jPanOpcProveedores;
-    private javax.swing.JPanel jPanOpcServicios;
-    private javax.swing.JPanel jPanOpcionesDeclaracion;
-    private javax.swing.JLabel jValor;
     private javax.swing.JButton jbtCompras;
-    private javax.swing.JButton jbtInventario;
     private javax.swing.JButton jbtLogístico;
     private javax.swing.JButton jbtProveedores;
     private javax.swing.JButton jtbCerrarSesion;
