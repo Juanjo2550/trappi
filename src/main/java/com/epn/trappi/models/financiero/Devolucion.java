@@ -6,7 +6,6 @@ import com.epn.trappi.gui.ecommerce.entidadBancaria.Cuenta;
 
 public class Devolucion {
     Fecha fechaDeDevolucion;
-    //SolicitudDevolucion solicitudDevolucion;
     int nroFactura;
     double valorDevolucion;
 
