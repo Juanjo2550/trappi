@@ -27,10 +27,13 @@ import javax.swing.border.Border;
 public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
     PanelPermisos panelPermisos = new PanelPermisos();
     ControlAsistencias controlAsistencias;
+    PanelEmpleado2 panelEmp;
     private javax.swing.JFrame parent;
         public void ocultarPaneles(JPanel panel){
         
         panelPermisos.setVisible(panel.getClass().equals(panelPermisos.getClass()));
+        panelEmp.setVisible(panel.getClass().equals(panelEmp.getClass()));
+        
        // panelContratar.setVisible(panel.getClass().equals(panelContratar.getClass()));
         //panelRegistroAsp.setVisible(panel.getClass().equals(panelRegistroAsp.getClass()));
     }
@@ -40,6 +43,7 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
     public PANTALLA_PRINCIPAL() {
         initComponents();
         this.controlAsistencias = new ControlAsistencias();
+        this.panelEmp = new PanelEmpleado2(this);
         configurarBotones(20);
         this.setSize(1366, 768);
         this.setLocationRelativeTo(null);
@@ -49,9 +53,14 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
         initComponents();
         this.parent = parent;
         this.controlAsistencias = control;
+        this.panelEmp = new PanelEmpleado2(this);
         configurarBotones(20);
         this.setSize(1366, 768);
         this.setLocationRelativeTo(null);
+    }
+    
+    public ControlAsistencias getControlAsistencias(){
+        return this.controlAsistencias;
     }
         public static class RoundedBorder implements Border {
 
@@ -150,6 +159,11 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
         btnRegistroAsistencia.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         btnRegistroAsistencia.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistroAsistencia.setText("Registro de Asistencia");
+        btnRegistroAsistencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistroAsistenciaActionPerformed(evt);
+            }
+        });
 
         btnPermisos.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         btnPermisos.setForeground(new java.awt.Color(255, 255, 255));
@@ -273,6 +287,14 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
         this.setVisible(false);
         this.parent.setVisible(true);
     }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void btnRegistroAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroAsistenciaActionPerformed
+          ocultarPaneles(panelEmp);
+        panelEmp.setSize(1000,800);
+        this.pnlPrincipal.add(panelEmp);
+        pnlPrincipal.revalidate();
+        pnlPrincipal.repaint();
+    }//GEN-LAST:event_btnRegistroAsistenciaActionPerformed
 
     /**
      * @param args the command line arguments

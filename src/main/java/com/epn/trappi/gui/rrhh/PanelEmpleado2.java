@@ -17,15 +17,15 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Juan Jaramillo <juanjodev02 at juan.jaramillo02@epn.edu.ec>
  */
-public class PanelEmpleado extends javax.swing.JPanel {
+public class PanelEmpleado2 extends javax.swing.JPanel {
     private EmpleadoDb empleados;
-    public ContratacionPrincipal parent;
+    public PANTALLA_PRINCIPAL parent;
     
     ControlAsistencias controlAsistencias;
     /**
      * Creates new form PanelEmpleado
      */
-    public PanelEmpleado(ContratacionPrincipal parentFrame) {
+    public PanelEmpleado2(PANTALLA_PRINCIPAL parentFrame) {
         this.controlAsistencias = new ControlAsistencias();
         initComponents();
         this.empleados = new EmpleadoDb();
@@ -134,7 +134,7 @@ public class PanelEmpleado extends javax.swing.JPanel {
         // TODO add your handling code here:
         int row = tablaEmpleados.getSelectedRow();
         String cedula = tablaEmpleados.getValueAt(row, 0).toString();
-        DetalleEmpleadoGUI detalleGUI = new DetalleEmpleadoGUI(cedula, this.parent);
+        DetalleEmpleadoGUI2 detalleGUI = new DetalleEmpleadoGUI2(cedula, this.parent);
         detalleGUI.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_tablaEmpleadosMouseClicked
