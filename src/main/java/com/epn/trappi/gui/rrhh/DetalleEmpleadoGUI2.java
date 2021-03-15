@@ -42,7 +42,6 @@ public class DetalleEmpleadoGUI2 extends javax.swing.JFrame {
     public DetalleEmpleadoGUI2(String cedula, PANTALLA_PRINCIPAL parentForm) {
         initComponents();
         this.jButton1.setEnabled(parentForm.getControlAsistencias().comprobarSiPuedoRegistrarUnaAsistencia(cedula));
-        this.jButton2.setEnabled(parentForm.getControlAsistencias().comprobarSiPuedoRegistrarFinDeJornada(cedula));
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.parentForm = parentForm;
         this.empleado = new EmpleadoDb().buscarUno(cedula);
@@ -54,7 +53,6 @@ public class DetalleEmpleadoGUI2 extends javax.swing.JFrame {
         this.bancoTextField.setText(this.empleado.getBanco());
         this.estadoTextField.setText(this.empleado.getEstado());
         this.sexoTextiField.setText(this.empleado.getSexo() + "");
-        this.jButton2.setEnabled(false);
         try {
             this.fillTable(cedula);
             fillAsistencias(cedula);
