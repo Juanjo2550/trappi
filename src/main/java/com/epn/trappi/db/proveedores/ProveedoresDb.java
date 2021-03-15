@@ -294,7 +294,7 @@ public class ProveedoresDb {
         }
         this.productos = pp;
     }
-    
+
     private void seleccionarProductosNormales() throws SQLException {
         ResultSet rs = ejecutarSP(spSelectAllProductosNormales);
         List<Producto> pp = new ArrayList<>();
@@ -303,6 +303,34 @@ public class ProveedoresDb {
             pp.add(reformarProducto(res));
         }
         this.productos = pp;
+    }
+
+    public ArrayList<String[]> obtenerCompras() throws SQLException, IOException {
+        ResultSet rs = ejecutarSP(spSelectAllCompras);
+
+        ArrayList<String[]> listaCompra = new ArrayList<>();
+        while (rs.next()) {
+            String[] compra = {rs.getString(1), rs.getString(4), rs.getString(2), rs.getString(3)};
+            listaCompra.add(compra);
+        }
+        return listaCompra;
+    }
+
+    public ArrayList<Compra> obtenerCompra(int identificador, String estado, String monto, String fecha) throws SQLException, IOException {
+        ArrayList<Compra> listaCompra = new ArrayList<>();
+        List<Producto> pp = seleccionarComprabien(identificador);
+        ArrayList<Bien> listaBienes = new ArrayList<>();
+        pp.forEach(bien -> {
+            listaBienes.add(bien);
+        });
+
+        ListaDeBienes listaBienesCompra = new ListaDeBienes();
+        listaBienesCompra.setListaBienes(listaBienes);
+        CompraDeProducto comp = new CompraDeProducto(listaBienesCompra, estado,
+                Double.parseDouble(monto), fecha, identificador);
+        listaCompra.add(comp);
+
+        return listaCompra;
     }
 
     private ListaDeCompras seleccionarCompras() throws SQLException, IOException {

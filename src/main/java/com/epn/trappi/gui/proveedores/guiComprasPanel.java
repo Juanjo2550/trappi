@@ -6,14 +6,11 @@
 package com.epn.trappi.gui.proveedores;
 
 import com.epn.trappi.db.proveedores.ProveedoresDb;
-import com.epn.trappi.models.proveedores.Bien;
-import com.epn.trappi.models.proveedores.Compra;
-import com.epn.trappi.models.proveedores.Inventario;
-import com.epn.trappi.models.proveedores.ListaDeBienes;
 import com.epn.trappi.models.proveedores.ListaDeCompras;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -30,17 +27,23 @@ public class guiComprasPanel extends javax.swing.JPanel {
      */
     DefaultTableModel modelo;
     private final ProveedoresDb db = new ProveedoresDb();
-    
-    private  ListaDeCompras compras;
-    
+
+    private ListaDeCompras compras = new ListaDeCompras();
+    ArrayList<String[]> listaCompras = new ArrayList<>();
+
     public guiComprasPanel() throws IOException {
         initComponents();
         jComboBox1.setSelectedIndex(2);
         jComboBox1.setEnabled(false);
-        compras =  db.getCompras();
-        compras.mostrarListaConDescripcion(jTable1);
+        //compras = db.getCompras();
+
+        try {
+            listaCompras = db.obtenerCompras();
+            compras.mostrarListaConDescripcion(jTable1, listaCompras);
+        } catch (SQLException ex) {
+            Logger.getLogger(guiComprasPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -270,20 +273,27 @@ public class guiComprasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButRegFactCompNotaCred1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        jComboBox1.setEnabled(true);
-        if(compras.getCompras().get(jTable1.getSelectedRow()).getEstadoCompra().getEstado().equalsIgnoreCase("Entregado")){
+        int id = Integer.parseInt(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0).toString());
+        String estado = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 2).toString();
+        String monto = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 3).toString();
+        String fecha = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 1).toString();
+
+        //int identificador, String estado, String monto, String fecha
+        compras.getCompra(id, estado, monto, fecha);
+        if (estado.equalsIgnoreCase("Entregado")) {
             jComboBox1.setSelectedIndex(0);
             jComboBox1.setEnabled(false);
-        }
-        else
+        } else {
             jComboBox1.setSelectedIndex(1);
-        compras.getCompras().get(jTable1.getSelectedRow()).getListaCantidadDeBienes().mostrarLista(jTable2);
+            jComboBox1.setEnabled(true);
+        }
+        compras.mostrarLista(jTable2);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButRegFactCompNotaCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButRegFactCompNotaCredActionPerformed
-        if (compras.obtenerCompra((int) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0)).cambiarEstado()) {
+        if (compras.obtenerCompra(Integer.parseInt(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0).toString())).cambiarEstado()) {
             JOptionPane.showMessageDialog(null, "Compra Actualizada");
-            compras.mostrarListaConDescripcion(jTable1);
+            compras.mostrarListaConDescripcion(jTable1, listaCompras);
         } else {
             JOptionPane.showMessageDialog(null, "La compra no ha podido ser actualizada");
         }
