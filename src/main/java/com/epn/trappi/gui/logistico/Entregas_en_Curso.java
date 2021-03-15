@@ -115,7 +115,7 @@ public class Entregas_en_Curso extends javax.swing.JPanel {
     
     public void graficarRuta(String destino){
         Ruta ruta = new Ruta();
-        String origen="Quicentro Shopping Norte";
+        String origen="Escuela Politécnica Nacional";
         ruta.definirRuta(new Posicion(mapeoDirecciones(origen)),new Posicion(mapeoDirecciones(destino)));
         mapa_rutas.trazarRuta(ruta);
     }
@@ -902,6 +902,9 @@ public class Entregas_en_Curso extends javax.swing.JPanel {
         else if(direccion.equalsIgnoreCase("Condado Shopping")){
             id_direccion="ChIJI2LWRIyP1ZERCRxMID6_kSw";
         }
+        else if(direccion.equalsIgnoreCase("Escuela Politécnica Nacional")){
+            id_direccion="ChIJS9QcfhCa1ZER1J6TZk8oigg";
+        }
         else if(direccion.equalsIgnoreCase("El Triangulo")){
             id_direccion="ChIJ4UTIWQC91ZER6_j8BJeknOY";
         }
@@ -939,7 +942,7 @@ public class Entregas_en_Curso extends javax.swing.JPanel {
             id_direccion="EiRBdi4gR3JhbC4gUnVtacOxYWh1aSwgUXVpdG8sIEVjdWFkb3IiLiosChQKEglLXNsA9ZfVkRE1zP5x0260eRIUChIJn3xCAkCa1ZERclXvWOGRuUQ";
         }
         else{
-            id_direccion="ChIJv4XVroGa1ZERW6s47_m15Fc";//Destino por defecto - Machachi
+            id_direccion="EiJBdi4gTWFyaXNjYWwgU3VjcmUsIFF1aXRvLCBFY3VhZG9yIi4qLAoUChIJa2cI9H-Z1ZERfoS-V7ofc74SFAoSCZ98QgJAmtWREXJV71jhkblE";//Destino por defecto - Machachi
         }
         return id_direccion;
     }

@@ -77,7 +77,7 @@ public final class ControlDisponibilidad implements EventListener {
     }
     public void simularMovimiento(int segundos){
         try{
-            Thread.sleep(segundos*1000);//ms
+            Thread.sleep(segundos*10000000);//ms
             
         } catch (InterruptedException e){
             Thread.currentThread().interrupt();

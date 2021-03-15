@@ -91,7 +91,9 @@ public class Logistico_GUI extends javax.swing.JFrame {
         jPEntregasActivasGUI = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1360, 870));
         setUndecorated(true);
+        setResizable(false);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -502,6 +504,7 @@ public class Logistico_GUI extends javax.swing.JFrame {
         jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 870));
 
         jPEntregasActivasGUI.setBackground(new java.awt.Color(255, 255, 255));
+        jPEntregasActivasGUI.setMaximumSize(new java.awt.Dimension(1050, 870));
 
         javax.swing.GroupLayout jPEntregasActivasGUILayout = new javax.swing.GroupLayout(jPEntregasActivasGUI);
         jPEntregasActivasGUI.setLayout(jPEntregasActivasGUILayout);
