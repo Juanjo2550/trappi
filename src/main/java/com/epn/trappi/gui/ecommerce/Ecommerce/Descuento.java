@@ -50,21 +50,7 @@ public class Descuento {
             return this.valor;
         return 0.0;
     }
-    public static void main(String args[]){
-        //TEST
-        //Caso en que no existe
-        double valor = new Descuento().obtenerValor("1258");
-        System.out.println("El valor que se obtuvo fue = " + valor);
-        //Terminado el contrato
-        double valor1 = new Descuento().obtenerValor("1706496880");
-        System.out.println("El valor que se obtuvo fue = " + valor1);
-        //Casos de empleados vigentes
-        double valor2 = new Descuento().obtenerValor("1755041589");
-        System.out.println("El valor que se obtuvo fue = " + valor2);
-        double valor3 = new Descuento().obtenerValor("175214895");
-        System.out.println("El valor que se obtuvo fue = " + valor3);
-        
-    }
+    
     
 }
 
