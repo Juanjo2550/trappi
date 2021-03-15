@@ -26,6 +26,7 @@ public class ContratacionPrincipal extends javax.swing.JFrame {
     PanelContratarAspirante panelContratar = new PanelContratarAspirante();
     PanelRegistroAspirante panelRegistroAsp = new PanelRegistroAspirante();
     PanelEmpleado panelEmpleado = new PanelEmpleado(this);
+    javax.swing.JFrame parent;
     public ControlAsistencias controlAsistencias;
     public void ocultarPaneles(JPanel panel){
         
@@ -68,6 +69,16 @@ public class ContratacionPrincipal extends javax.swing.JFrame {
 
     public ContratacionPrincipal(ControlAsistencias control) {
         initComponents();
+        this.controlAsistencias = control;
+        this.setSize(1366, 768);
+        this.setLocationRelativeTo(null);
+        configurarBotones(20);
+
+    }
+    
+    public ContratacionPrincipal(ControlAsistencias control, javax.swing.JFrame parent) {
+        initComponents();
+        this.parent = parent;
         this.controlAsistencias = control;
         this.setSize(1366, 768);
         this.setLocationRelativeTo(null);
@@ -348,7 +359,7 @@ public class ContratacionPrincipal extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.setVisible(false);
-        new PANTALLA_PRINCIPAL().setVisible(true);
+        this.parent.setVisible(true);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnContratarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContratarActionPerformed

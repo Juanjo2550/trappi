@@ -36,6 +36,7 @@ public class Logistico_GUI extends javax.swing.JFrame {
     RegistrarVehiculo registroVehiculo= new RegistrarVehiculo();
     ActualizacionVehiculo actualizarVehiculo = new ActualizacionVehiculo();
     ControlDisponibilidad controlD;
+    javax.swing.JFrame parent;
     
     boolean bandera = false;
 
@@ -49,9 +50,10 @@ public class Logistico_GUI extends javax.swing.JFrame {
         
     }
 
-    public Logistico_GUI(ControlDisponibilidad control) {
-        this.setSize(1366, 768);
+    public Logistico_GUI(ControlDisponibilidad control, javax.swing.JFrame parent) {
         initComponents();
+        this.parent = parent;
+        this.setSize(1366, 768);
         this.controlD=control;
         mapaDisponibilidad= new PanelControlDisponibilidad1(control);
         this.setLocationRelativeTo(null);
@@ -628,7 +630,8 @@ public class Logistico_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        this.parent.setVisible(true);
     }//GEN-LAST:event_btnVolverActionPerformed
     //BOTONES REDONDEADOS
     public static class RoundedBorder implements Border {

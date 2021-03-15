@@ -5,6 +5,7 @@
  */
 package com.epn.trappi.gui.proveedores;
 
+import com.epn.trappi.gui.logistico.Logistico_GUI;
 import com.epn.trappi.gui.rrhh.PANTALLA_PRINCIPAL;
 import com.epn.trappi.models.logistico.ControlDisponibilidad;
 import com.epn.trappi.models.rrhh.juanjo.ControlAsistencias;
@@ -21,6 +22,7 @@ public class Menu_Trappi extends javax.swing.JFrame {
     private PANTALLA_PRINCIPAL rrhh;
     private ControlAsistencias controlAsistencias;
     private ControlDisponibilidad controlDisponibilidad;
+    private Logistico_GUI logistico;
     /**
      * Creates new form Menu_Trappi
      */
@@ -29,6 +31,7 @@ public class Menu_Trappi extends javax.swing.JFrame {
             this.controlAsistencias = new ControlAsistencias();
             this.rrhh = new PANTALLA_PRINCIPAL(this.controlAsistencias, this);
             this.controlDisponibilidad = ControlDisponibilidad.getInstance();
+            this.logistico = new Logistico_GUI(controlDisponibilidad, this);
             this.controlAsistencias.events.suscribe("nuevo_empleado", controlDisponibilidad);
             this.controlAsistencias.events.suscribe("salida_empleado", controlDisponibilidad);
         } catch (SQLException e) {
@@ -414,7 +417,8 @@ public class Menu_Trappi extends javax.swing.JFrame {
     }//GEN-LAST:event_jtbCerrarSesionActionPerformed
 
     private void jbtLogísticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtLogísticoActionPerformed
-
+        this.setVisible(false);
+        this.logistico.setVisible(true);
     }//GEN-LAST:event_jbtLogísticoActionPerformed
 
     private void jbtComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtComprasActionPerformed

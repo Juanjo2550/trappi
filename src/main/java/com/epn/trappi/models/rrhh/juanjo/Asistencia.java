@@ -41,7 +41,7 @@ public class Asistencia {
     public void comprobarAtraso() {
         if(this.getHoraInicio().getHora() > this.horaLimiteEntrada.getHora()) {
             int diferencia = Math.abs(this.getHoraInicio().getHora() - this.horaLimiteEntrada.getHora());
-            if (diferencia > 8) {
+            if (diferencia > 24) { //Se cambio para hacer pruebas!
                 this.registrarFalta(diferencia);
             } else {
                 new Observacion(this.empleado, "atraso", "N/A", this.fecha, new Hora(diferencia, 0, 0))

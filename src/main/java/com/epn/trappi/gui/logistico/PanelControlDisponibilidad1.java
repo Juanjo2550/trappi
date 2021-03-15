@@ -1,6 +1,7 @@
 
 package com.epn.trappi.gui.logistico;
 import com.epn.trappi.models.logistico.ControlDisponibilidad;
+import com.epn.trappi.models.logistico.ListaConductores;
 import com.epn.trappi.models.logistico.ListaVehiculos;
 import com.epn.trappi.models.logistico.servicios.ServicioDb;
 import com.epn.trappi.models.logistico.servicios.ServicioDbVehiculo;
@@ -180,7 +181,9 @@ public class PanelControlDisponibilidad1 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        llenarTablaVehiculos();  
+        llenarTablaVehiculos();
+        DefaultTableModel modelo = this.controlDisponibilidad.lc.mostrarLista();
+        this.jTNombres.setModel(modelo);
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     

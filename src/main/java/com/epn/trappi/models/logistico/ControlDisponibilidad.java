@@ -87,7 +87,6 @@ public final class ControlDisponibilidad implements EventListener {
     
     @Override
     public void update(String eventType, Empleado empleado) {
-        /*
         Conductor con = new Conductor();
         con.setID(empleado.getId());
         con.setEstado("activo");
@@ -97,6 +96,6 @@ public final class ControlDisponibilidad implements EventListener {
         } else {
             System.out.println("Un empleado marco salida, no esta disponible!");
             lc.removerConductor(con);
-        }*/
+        }
     }
 }
