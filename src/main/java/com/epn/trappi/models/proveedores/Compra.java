@@ -119,8 +119,7 @@ abstract public class Compra {
     
     public abstract boolean comprar();
     
-    public void comprarAnalizador() {
-    }
+    public abstract Double calcularMontoPorLista(ListaDeBienes listaBienesA);
     
     public boolean cambiarEstado(){
        return estado.cambiarEstado();

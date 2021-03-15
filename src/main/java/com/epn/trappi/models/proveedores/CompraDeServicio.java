@@ -51,7 +51,7 @@ public class CompraDeServicio extends Compra {
         return flag;
 
     }
-
+    @Override
     public Double calcularMontoPorLista(ListaDeBienes listaBienesA) {
         Double monto = 0.0;
         for (Bien bien : listaBienesA.getListaBienes()) {
