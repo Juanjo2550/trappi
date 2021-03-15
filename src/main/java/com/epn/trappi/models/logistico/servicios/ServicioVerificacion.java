@@ -215,32 +215,32 @@ public class ServicioVerificacion
             return error;
         }
         
-        public static String verificarKilometraje(String telefono)
+        public static String verificarKilometraje(String klm)
            {
                    String error = "";
                    String patron = ("^[0-9]{1,6}$");
 
-                   if (telefono.equals(""))
+                   if (klm.equals(""))
                            error += "Kilometraje: Campo vacio.\n";
                    else
                    {
-                           if (!(telefono.matches(patron))){
+                           if (!(klm.matches(patron))){
                                    error += "Kilometraje: Caracteres no válidos\n";
                                    error += "Hasta un kilometraje de 999999\n";
                            }
                    }
                    return error;
            }
-        public static String verificarEstado(String telefono)
+        public static String verificarEstado(String estado)
            {
                    String error = "";
                    String patron = ("^Habilitado$|^Inhabilitado$|^En Espera$");
 
-                   if (telefono.equals(""))
+                   if (estado.equals(""))
                            error += "Estado: Campo vacio.\n";
                    else
                    {
-                           if (!(telefono.matches(patron))){
+                           if (!(estado.matches(patron))){
                                    //error += "Estado: Caracteres no válidos\n";
                                    error += "Los estados pueden ser :Habilitado, Inhabilitado, En Espera\n";
                            }
@@ -248,79 +248,79 @@ public class ServicioVerificacion
                    return error;
            }
         
-        public static String verificarTipo(String telefono)
+        public static String verificarTipo(String tipo)
            {
                    String error = "";
                    String patron = ("^Automovil$|^Motocicleta$");
 
-                   if (telefono.equals(""))
+                   if (tipo.equals(""))
                            error += "Tipo: Campo vacio.\n";
                    else
                    {
-                           if (!(telefono.matches(patron))){
+                           if (!(tipo.matches(patron))){
                                    //error += "Kilometraje: Caracteres no válidos\n";
                                    error += "Los tipos pueden ser :Automovil y Motocicleta\n";
                            }
                    }
                    return error;
            }
-        public static String verificarID(String telefono)
+        public static String verificarID(String id)
            {
                    String error = "";
                    String patron = ("^[0-9]{1,6}$");
 
-                   if (telefono.equals(""))
+                   if (id.equals(""))
                            error += "ID: Campo vacio.\n";
                    else
                    {
-                           if (!(telefono.matches(patron))){
+                           if (!(id.matches(patron))){
                                    error += "ID: Caracteres no válidos\n";
                                    //error += "Hasta un kilometraje de 999999\n";
                            }
                    }
                    return error;
            }
-        public static String verificarGasto(String telefono)
+        public static String verificarGasto(String gasto)
            {
                    String error = "";
                    String patron = ("^[0-9]{1,6}.[0-9]{1,2}$");
 
-                   if (telefono.equals(""))
+                   if (gasto.equals(""))
                            error += "ID: Campo vacio.\n";
                    else
                    {
-                           if (!(telefono.matches(patron))){
+                           if (!(gasto.matches(patron))){
                                    error += "Gasto: Caracteres no válidos\n";
                                    error += "Ejemplo 24.05\n";
                            }
                    }
                    return error;
            }
-        public static String verificarEstadoEntrega(String telefono)
+        public static String verificarEstadoEntrega(String estado)
            {
                    String error = "";
                    String patron = ("^Finalizado$|^En curso$");
 
-                   if (telefono.equals(""))
+                   if (estado.equals(""))
                            error += "Estado de Entrega: Campo vacio.\n";
                    else
                    {
-                           if (!(telefono.matches(patron))){
+                           if (!(estado.matches(patron))){
                                    error += "Los Estados pueden ser :Finalizado y En curso\n";
                            }
                    }
                    return error;
            }
-        public static String verificarFecha(String telefono)
+        public static String verificarFecha(String fecha)
            {
                    String error = "";
                    String patron = ("^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}$");
 
-                   if (telefono.equals(""))
+                   if (fecha.equals(""))
                            error += "Estado de Entrega: Campo vacio.\n";
                    else
                    {
-                           if (!(telefono.matches(patron))){
+                           if (!(fecha.matches(patron))){
                                    error += "Gasto: Caracteres no válidos\n";
                                    error += "Ejemplo 2021-03-12 (año-mes-día)\n";
                            }

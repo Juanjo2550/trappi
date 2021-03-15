@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.epn.trappi.gui.proveedores;
+package com.epn.trappi;
 
+import com.epn.trappi.gui.financiero.DashboardFinanciero;
 import com.epn.trappi.gui.logistico.Logistico_GUI;
+import com.epn.trappi.gui.proveedores.Principal;
 import com.epn.trappi.gui.rrhh.PANTALLA_PRINCIPAL;
 import com.epn.trappi.models.logistico.ControlDisponibilidad;
 import com.epn.trappi.models.rrhh.juanjo.ControlAsistencias;
@@ -44,7 +46,7 @@ public class Menu_Trappi extends javax.swing.JFrame {
         jPMod = new javax.swing.JPanel();
         jtbCerrarSesion = new javax.swing.JButton();
         jbtLogístico = new javax.swing.JButton();
-        jbtCompras = new javax.swing.JButton();
+        jbtFinanciero = new javax.swing.JButton();
         jbtProveedores = new javax.swing.JButton();
         Recursosboton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -81,13 +83,23 @@ public class Menu_Trappi extends javax.swing.JFrame {
 
         jtbCerrarSesion.setBackground(new java.awt.Color(255, 210, 28));
         jtbCerrarSesion.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jtbCerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        jtbCerrarSesion.setForeground(new java.awt.Color(51, 51, 51));
         jtbCerrarSesion.setText("Cerrar Sesión ");
         jtbCerrarSesion.setBorderPainted(false);
         jtbCerrarSesion.setFocusPainted(false);
         jtbCerrarSesion.setMaximumSize(new java.awt.Dimension(110, 50));
         jtbCerrarSesion.setMinimumSize(new java.awt.Dimension(110, 50));
         jtbCerrarSesion.setPreferredSize(new java.awt.Dimension(110, 50));
+        jtbCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtbCerrarSesionMouseClicked(evt);
+            }
+        });
+        jtbCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtbCerrarSesionActionPerformed(evt);
+            }
+        });
 
         jbtLogístico.setBackground(new java.awt.Color(255, 210, 28));
         jbtLogístico.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -104,18 +116,18 @@ public class Menu_Trappi extends javax.swing.JFrame {
             }
         });
 
-        jbtCompras.setBackground(new java.awt.Color(255, 210, 28));
-        jbtCompras.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jbtCompras.setForeground(new java.awt.Color(51, 51, 51));
-        jbtCompras.setText("Compras");
-        jbtCompras.setBorderPainted(false);
-        jbtCompras.setFocusPainted(false);
-        jbtCompras.setMaximumSize(new java.awt.Dimension(110, 50));
-        jbtCompras.setMinimumSize(new java.awt.Dimension(110, 50));
-        jbtCompras.setPreferredSize(new java.awt.Dimension(110, 50));
-        jbtCompras.addActionListener(new java.awt.event.ActionListener() {
+        jbtFinanciero.setBackground(new java.awt.Color(255, 210, 28));
+        jbtFinanciero.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jbtFinanciero.setForeground(new java.awt.Color(51, 51, 51));
+        jbtFinanciero.setText("Financiero");
+        jbtFinanciero.setBorderPainted(false);
+        jbtFinanciero.setFocusPainted(false);
+        jbtFinanciero.setMaximumSize(new java.awt.Dimension(110, 50));
+        jbtFinanciero.setMinimumSize(new java.awt.Dimension(110, 50));
+        jbtFinanciero.setPreferredSize(new java.awt.Dimension(110, 50));
+        jbtFinanciero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtComprasActionPerformed(evt);
+                jbtFinancieroActionPerformed(evt);
             }
         });
 
@@ -177,7 +189,7 @@ public class Menu_Trappi extends javax.swing.JFrame {
                         .addGap(49, 49, 49))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPModLayout.createSequentialGroup()
                         .addGroup(jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jbtCompras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbtFinanciero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Recursosboton, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(45, 45, 45)
                         .addGroup(jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -191,7 +203,7 @@ public class Menu_Trappi extends javax.swing.JFrame {
                 .addGap(125, 125, 125)
                 .addGroup(jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jbtProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbtCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbtFinanciero, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtLogístico, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -238,9 +250,12 @@ public class Menu_Trappi extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbtLogísticoActionPerformed
 
-    private void jbtComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtComprasActionPerformed
-
-    }//GEN-LAST:event_jbtComprasActionPerformed
+    private void jbtFinancieroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtFinancieroActionPerformed
+        DashboardFinanciero financiero = new DashboardFinanciero();
+        financiero.setExtendedState(financiero.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        financiero.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jbtFinancieroActionPerformed
 
     private void RecursosbotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecursosbotonActionPerformed
         // TODO add your handling code here:
@@ -248,6 +263,7 @@ public class Menu_Trappi extends javax.swing.JFrame {
 
     private void RecursosbotonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RecursosbotonMouseClicked
         PANTALLA_PRINCIPAL rrhh = new PANTALLA_PRINCIPAL(controlAsistencias, this);
+        rrhh.setExtendedState(rrhh.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         rrhh.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_RecursosbotonMouseClicked
@@ -267,6 +283,17 @@ public class Menu_Trappi extends javax.swing.JFrame {
             Logger.getLogger(Menu_Trappi.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbtProveedoresMouseClicked
+
+    private void jtbCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtbCerrarSesionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtbCerrarSesionActionPerformed
+
+    private void jtbCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbCerrarSesionMouseClicked
+        // TODO add your handling code here:
+        Main_Trappi main = new Main_Trappi();
+        main.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jtbCerrarSesionMouseClicked
 
     /**
      * @param args the command line arguments
@@ -309,7 +336,7 @@ public class Menu_Trappi extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPEncabezado;
     private javax.swing.JPanel jPMod;
-    private javax.swing.JButton jbtCompras;
+    private javax.swing.JButton jbtFinanciero;
     private javax.swing.JButton jbtLogístico;
     private javax.swing.JButton jbtProveedores;
     private javax.swing.JButton jtbCerrarSesion;

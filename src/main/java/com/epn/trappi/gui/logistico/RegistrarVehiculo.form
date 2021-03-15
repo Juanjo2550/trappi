@@ -38,7 +38,7 @@
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="85" max="32767" attributes="0"/>
+              <EmptySpace pref="123" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -75,7 +75,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="btnCancelar" min="-2" pref="110" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
                           <Component id="btnNuevo" min="-2" pref="136" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                           <Component id="btnRegistrar" min="-2" pref="133" max="-2" attributes="0"/>
@@ -129,13 +129,13 @@
                       <Component id="lvlTelefono" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                       <Component id="txtKilometraje" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="46" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnNuevo" alignment="3" min="-2" pref="58" max="-2" attributes="0"/>
                       <Component id="btnCancelar" alignment="3" min="-2" pref="58" max="-2" attributes="0"/>
+                      <Component id="btnNuevo" alignment="3" min="-2" pref="58" max="-2" attributes="0"/>
                       <Component id="btnRegistrar" alignment="3" min="-2" pref="58" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
+                  <EmptySpace pref="82" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

@@ -5,6 +5,7 @@
  */
 package com.epn.trappi.gui.proveedores;
 
+import com.epn.trappi.Menu_Trappi;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;

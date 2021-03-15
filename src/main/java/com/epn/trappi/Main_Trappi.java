@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.epn.trappi.gui.proveedores;
+package com.epn.trappi;
 
 import com.epn.trappi.gui.ecommerce.Interfaces.Inicio;
 import javax.swing.JFrame;
