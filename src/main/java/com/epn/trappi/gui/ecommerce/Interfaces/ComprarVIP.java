@@ -18,7 +18,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -175,9 +177,11 @@ public class ComprarVIP extends javax.swing.JFrame {
             Double descuento=carrito.factura.calcularTotal()-totalConDescuento;  
            
             FacturaFis factu = new FacturaFis();
-            Date fecha = new Date();
-
-            String date = fecha.getDay() + "/" + fecha.getMonth() + "/" + fecha.getYear();
+           Calendar fechaActual = new GregorianCalendar();
+            int anoActual = fechaActual.get(Calendar.YEAR);
+            int mesActual = fechaActual.get(Calendar.MONTH) + 1; 
+            int diaActual = fechaActual.get(Calendar.DAY_OF_MONTH);
+            String date=diaActual+"/"+mesActual+"/"+anoActual;
             factu.cargarDatos(000, nombre, cedula, date, detalle, subtotal, iva,descuento, totalConDescuento);
             factu.setVisible(true);
 
