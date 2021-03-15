@@ -27,27 +27,12 @@ public class ControlAsistencias {
     }
 
     public void registrarFinDeJornada(String cedula) throws Exception {
-        if (comprobarSiPuedoRegistrarFinDeJornada(cedula)) {
-            Asistencia asistencia = this.asistenciaDb.buscarUno(cedula, this.fecha);
-            asistencia.registrarSalida();
-            asistencia.comprobarHoraExtra();
+        Asistencia asistencia = this.asistenciaDb.buscarUno(cedula, this.fecha);
+        asistencia.registrarSalida();
+        asistencia.comprobarHoraExtra();
+        if (asistencia.getEmpleado() instanceof Conductores) {
             this.notificarSalidaConductor(asistencia.getEmpleado());
         }
-    }
-
-    public boolean comprobarSiPuedoRegistrarFinDeJornada (String cedula) {
-        boolean resultado = false; //No hay una asistencia registrada en la fecha del sistema
-        Asistencia asistencia = null;
-        try {
-            asistencia = new AsistenciaDb().buscarUno(cedula, new Fecha());
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
-        if(asistencia != null) {
-            System.out.println("Se encontro una asistencia");
-            resultado = asistencia.getHoraFin() == null;
-        }
-        return resultado;
     }
 
     public boolean comprobarSiPuedoRegistrarUnaAsistencia (String cedula) {

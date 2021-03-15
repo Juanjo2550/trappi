@@ -23,7 +23,11 @@ import javax.swing.JFrame;
  */
 public class Menu_Trappi extends javax.swing.JFrame {
 
+    //NO TOCAR ESTO!!!!
     private ControlAsistencias controlAsistencias = new ControlAsistencias();
+    private Logistico_GUI logistico;
+    private PANTALLA_PRINCIPAL rrhh;
+    ControlDisponibilidad controlDisponibilidad;
 
     /**
      * Creates new form Menu_Trappi
@@ -31,6 +35,16 @@ public class Menu_Trappi extends javax.swing.JFrame {
     public Menu_Trappi() {
         initComponents();
         this.setTitle("Menu Principal Trappi");
+        try {
+            this.controlDisponibilidad = ControlDisponibilidad.getInstance();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+
+        controlAsistencias.events.suscribe("nuevo_empleado", controlDisponibilidad);
+        controlAsistencias.events.suscribe("salida_empleado", controlDisponibilidad);
+        this.logistico = new Logistico_GUI(controlDisponibilidad, this);
+        this.rrhh = new PANTALLA_PRINCIPAL(controlAsistencias, this);
     }
 
     /**
@@ -237,17 +251,8 @@ public class Menu_Trappi extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtLogísticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtLogísticoActionPerformed
-        try {
-            ControlDisponibilidad controlDisponibilidad;
-            controlDisponibilidad = ControlDisponibilidad.getInstance();
-            Logistico_GUI logistico = new Logistico_GUI(controlDisponibilidad, this);
-            controlAsistencias.events.suscribe("nuevo_empleado", controlDisponibilidad);
-            controlAsistencias.events.suscribe("salida_empleado", controlDisponibilidad);
             this.setVisible(false);
             logistico.setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(Menu_Trappi.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_jbtLogísticoActionPerformed
 
     private void jbtFinancieroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtFinancieroActionPerformed
@@ -262,10 +267,10 @@ public class Menu_Trappi extends javax.swing.JFrame {
     }//GEN-LAST:event_RecursosbotonActionPerformed
 
     private void RecursosbotonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RecursosbotonMouseClicked
-        PANTALLA_PRINCIPAL rrhh = new PANTALLA_PRINCIPAL(controlAsistencias, this);
-        rrhh.setExtendedState(rrhh.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-        rrhh.setVisible(true);
+//        PANTALLA_PRINCIPAL rrhh = new PANTALLA_PRINCIPAL(controlAsistencias, this);
+//        rrhh.setExtendedState(rrhh.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         this.setVisible(false);
+        rrhh.setVisible(true);
     }//GEN-LAST:event_RecursosbotonMouseClicked
 
     private void jbtProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtProveedoresActionPerformed

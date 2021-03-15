@@ -149,7 +149,7 @@ public class PANTALLA_PRINCIPAL extends javax.swing.JFrame {
 
         jButton7.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setText("Contratacíon");
+        jButton7.setText("Contratación");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
