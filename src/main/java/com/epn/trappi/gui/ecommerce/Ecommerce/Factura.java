@@ -7,6 +7,7 @@ package com.epn.trappi.gui.ecommerce.Ecommerce;
 
 
 import com.epn.trappi.models.proveedores.Producto;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 
@@ -55,7 +56,7 @@ public Double calcularTotal(){
     return total;
 }
 
-public Double calcularTotalConDescuento(String cedula){
+public Double calcularTotalConDescuento(String cedula) throws ParseException{
     Double total = calcularTotal();
     Descuento descuento = new Descuento();
     Double valorDescuento=descuento.obtenerValor(cedula);
