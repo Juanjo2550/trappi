@@ -24,7 +24,7 @@ public class Analizador {
         double[] ingresosporIntervalo = new double[5];
         
         for(int i=0;i<5;i++){
-            int acumulador=0;
+            double acumulador=0;
             int variableaux = 1; 
             for(Ingreso ingreso: this.librodiario.obtenerIngresosRegistrados()){
                 if(this.calcularIntervaloMensualInt()[i]>calcularIntervaloMensualInt()[variableaux]){
@@ -59,7 +59,7 @@ public class Analizador {
         double[] pagosporIntervalo = new double[5];
         
         for(int i=0;i<5;i++){
-            int acumulador=0;
+            double acumulador=0;
             int variableaux = 1; 
             for(Pago pago: this.librodiario.obtenerPagosRegistrados()){
                 if(this.calcularIntervaloMensualInt()[i]>calcularIntervaloMensualInt()[variableaux]){
@@ -94,7 +94,7 @@ public class Analizador {
         double[] devoluciones = new double[5];
         
         for(int i=0;i<5;i++){
-            int acumulador=0;
+            double acumulador=0;
             int variableaux = 1; 
             for(Devolucion devolucion: this.librodiario.obtenerDevolucionesRegistradas()){
                 if(this.calcularIntervaloMensualInt()[i]>calcularIntervaloMensualInt()[variableaux]){
@@ -118,9 +118,10 @@ public class Analizador {
                 variableaux++;
             }
             devoluciones[i]=acumulador;
+            System.out.println("AcumuladorDevoluciones="+devoluciones[i]);
         }
         for(int i=0;i<5;i++){
-            System.out.println("Ingreso:"+devoluciones[i]+" Mes:"+this.calcularIntervaloMensualString()[i]);
+            System.out.println("Devolucion:"+devoluciones[i]+" Mes:"+this.calcularIntervaloMensualString()[i]);
         }
         return devoluciones;
     }
