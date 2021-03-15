@@ -44,6 +44,7 @@ public class ControlAsistencias {
             System.out.println(e.toString());
         }
         if(asistencia != null) {
+            System.out.println("Se encontro una asistencia");
             resultado = asistencia.getHoraFin() == null;
         }
         return resultado;
@@ -51,7 +52,6 @@ public class ControlAsistencias {
 
     public boolean comprobarSiPuedoRegistrarUnaAsistencia (String cedula) {
         boolean resultado = false; //No hay una asistencia registrada en la fecha del sistema
-        Asistencia asistencia = null;
         try {
             new AsistenciaDb().buscarUno(cedula, new Fecha());
         } catch (Exception e) {

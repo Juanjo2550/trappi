@@ -443,34 +443,14 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+        this.jButton2.setEnabled(parentForm.getControlAsistencias().comprobarSiPuedoRegistrarFinDeJornada(this.empleado.getCedula()));
         this.empleado.notificarEntrada(this.parentForm.getControlAsistencias());
-        JOptionPane.showMessageDialog(this, "El empleado ha registrado su asistencia correctamente");
-        //Aqui se envia el empleado a la clase control disponibilidad de logistico
-//        try {
-//            ControlDisponibilidad control = ControlDisponibilidad.getInstance();
-//            Conductor c = new Conductor();
-//            c.setID(this.empleado.getId());
-//            c.setEstado("Activo");
-//            control.lc.aniadirConductor(c);
-//        } catch (SQLException ex) {
-//            //
-//        }
-        
+        JOptionPane.showMessageDialog(this, "El empleado ha registrado su asistencia correctamente"); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.empleado.notificarSalida(this.parentForm.getControlAsistencias());
         JOptionPane.showMessageDialog(this, "El empleado ha registrado su salida correctamente");
-        //Aqui se retira el empleado a la clase control disponibilidad de logistico
-//        try {
-//            ControlDisponibilidad control = ControlDisponibilidad.getInstance();
-//            Conductor c = new Conductor();
-//            c.setID(this.empleado.getId());
-//            control.lc.removerConductor(c);
-//        } catch (SQLException ex) {
-//            //
-//        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

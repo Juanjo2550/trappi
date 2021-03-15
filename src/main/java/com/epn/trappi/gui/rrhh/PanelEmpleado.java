@@ -6,6 +6,7 @@
 package com.epn.trappi.gui.rrhh;
 
 import com.epn.trappi.db.rrhh.EmpleadoDb;
+import com.epn.trappi.models.rrhh.juanjo.Conductores;
 import com.epn.trappi.models.rrhh.juanjo.ControlAsistencias;
 import com.epn.trappi.models.rrhh.juanjo.Empleado;
 import javax.swing.JFrame;
@@ -41,7 +42,7 @@ public class PanelEmpleado extends javax.swing.JPanel {
             "Apellidos",
             "Cargo",
             "Departamento",
-            "Cuenta Bancaria",
+            "Tipo",
             "Banco",
             "Sueldo",
             "Estado",
@@ -49,13 +50,20 @@ public class PanelEmpleado extends javax.swing.JPanel {
         };
         DefaultTableModel tableModel = new DefaultTableModel(col, 0);
         for(Empleado empleado : this.empleados.obtenerTodos()) {
+            String tipo = "";
+            if (empleado instanceof Conductores) {
+                tipo = "Conductor";
+            } else {
+                tipo = "Administrativo";
+            }
+            
             Object [] row = {
                 empleado.getCedula(),
                 empleado.getNombres(),
                 empleado.getApellidos(),
                 empleado.getCargo(),
                 empleado.getDepartamento(),
-                empleado.getCuentaBancaria(),
+                tipo,
                 empleado.getBanco(),
                 empleado.getSueldo(),
                 empleado.getEstado(),
