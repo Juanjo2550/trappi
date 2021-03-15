@@ -186,7 +186,7 @@ public class Comprar extends javax.swing.JFrame {
             Double subtotal = carrito.factura.calcularSubTotal();
             Double iva = carrito.factura.calcularImpuestos();
             Double totalConDescuento = carrito.factura.calcularTotalConDescuento(Main.cliente.Cedula);
-            Double descuento=totalConDescuento-carrito.factura.calcularTotal();
+            Double descuento=carrito.factura.calcularTotal()-totalConDescuento;
             FacturaFis factu = new FacturaFis();
             Date fecha = new Date();
 
