@@ -42,7 +42,7 @@ public class DetalleEmpleadoGUI extends javax.swing.JFrame {
     public DetalleEmpleadoGUI(String cedula, ContratacionPrincipal parentForm) {
         initComponents();
         this.jButton1.setEnabled(parentForm.getControlAsistencias().comprobarSiPuedoRegistrarUnaAsistencia(cedula));
-        this.jButton2.setEnabled(parentForm.getControlAsistencias().comprobarSiPuedoRegistrarFinDeJornada(cedula));
+        this.jButton2.setEnabled(true);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.parentForm = parentForm;
         this.empleado = new EmpleadoDb().buscarUno(cedula);
