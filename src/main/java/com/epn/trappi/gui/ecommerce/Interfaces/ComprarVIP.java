@@ -178,7 +178,7 @@ public class ComprarVIP extends javax.swing.JFrame {
             Double descuento=carrito.factura.calcularTotal()-totalConDescuento;  
            
             FacturaFis factu = new FacturaFis();
-           Calendar fechaActual = new GregorianCalendar();
+            Calendar fechaActual = new GregorianCalendar();
             int anoActual = fechaActual.get(Calendar.YEAR);
             int mesActual = fechaActual.get(Calendar.MONTH) + 1; 
             int diaActual = fechaActual.get(Calendar.DAY_OF_MONTH);
