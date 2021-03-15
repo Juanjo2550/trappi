@@ -66,6 +66,7 @@ public class CompraDeProducto extends Compra {
         return flag;
     }
 
+    @Override
     public Double calcularMontoPorLista(ListaDeBienes listaBienesA) {
         Double monto = 0.0;
         for (Bien bien : listaBienesA.getListaBienes()) {
@@ -74,18 +75,6 @@ public class CompraDeProducto extends Compra {
         return monto;
     }
 
-    @Override
-    public void comprarAnalizador() {
-        /*setMontoTotal();
-        if(solicitarAutorizacion(listaBienesAComprar.getListaBienes().get(0).getProveeedor(),montoTotal)){
-            for (Bien cantidadBien : listaBienesAComprar.getListaBienes()){
-                inventario.aumentarStock(cantidadBien.getCantidad(), cantidadBien);
-                //asumimos que las compras se han entregado
-                setEstado("Entregado");
-                registrarCompra(cantidadBien.getNombre()
-                        ,cantidadBien.getProveeedor().getRuc(),cantidadBien.getCantidad(),estado,montoTotal, this.fecha);
-            }
-        }*/
-    }
+
 
 }

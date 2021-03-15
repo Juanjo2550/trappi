@@ -16,13 +16,14 @@ public class RolDePagosDb implements ModelDb<RolDePagos> {
     @Override
     public void agregar(RolDePagos newRolDePagos) {
         System.out.println(newRolDePagos.getDescuentos());
-        String sql = "INSERT INTO dbo.ROLPAGOS (ID_ROL, IDEMP, FECHAROL, TOTALROL, DESCUENTOSROL, ESTADOROL) VALUES ("
+        String sql = "INSERT INTO dbo.ROLPAGOS (ID_ROL, IDEMP, FECHAROL, TOTALROL, DESCUENTOSROL, ESTADOROL, BONOS) VALUES ("
                 + (this.obtenerTodos().length + 1) + ","
                 + newRolDePagos.getEmpleado().getId() + ","
                 + "'" + newRolDePagos.getFecha().toString() + "',"
                 + "'" + newRolDePagos.getTotal() + "',"
                 + "'" + newRolDePagos.getDescuentos() + "',"
-                + "'" + newRolDePagos.getEstado() + "');";
+                + "'" + newRolDePagos.getEstado() + "',"
+                + "'" + newRolDePagos.getBonos() + "');";
 
         try {
             PreparedStatement statement = this.connection.prepareStatement(sql);
@@ -54,7 +55,8 @@ public class RolDePagosDb implements ModelDb<RolDePagos> {
                         new Fecha(Integer.parseInt(formattedDate[2]), Integer.parseInt(formattedDate[1]), Integer.parseInt(formattedDate[0])),
                         resultSet.getBigDecimal(4).doubleValue(),
                         resultSet.getBigDecimal(5).doubleValue(),
-                        resultSet.getString(6)
+                        resultSet.getString(6),
+                        resultSet.getBigDecimal(7).doubleValue()
                 );
             }
         } catch (SQLException e) {
@@ -79,7 +81,8 @@ public class RolDePagosDb implements ModelDb<RolDePagos> {
                         new Fecha(Integer.parseInt(formattedDate[2]), Integer.parseInt(formattedDate[1]), Integer.parseInt(formattedDate[0])),
                         resultSet.getBigDecimal(4).doubleValue(),
                         resultSet.getBigDecimal(5).doubleValue(),
-                        resultSet.getString(6)
+                        resultSet.getString(6),
+                        resultSet.getBigDecimal(7).doubleValue()
                 ));
             }
         } catch (SQLException e) {
@@ -107,7 +110,8 @@ public class RolDePagosDb implements ModelDb<RolDePagos> {
                         new Fecha(Integer.parseInt(formattedDate[2]), Integer.parseInt(formattedDate[1]), Integer.parseInt(formattedDate[0])),
                         resultSet.getBigDecimal(4).doubleValue(),
                         resultSet.getBigDecimal(5).doubleValue(),
-                        resultSet.getString(6)
+                        resultSet.getString(6),
+                        resultSet.getBigDecimal(7).doubleValue()
                 ));
             }
         } catch (SQLException e) {

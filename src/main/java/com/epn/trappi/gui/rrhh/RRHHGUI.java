@@ -186,6 +186,7 @@ public class RRHHGUI extends javax.swing.JFrame {
             "Fecha",
             "Total",
             "Descuentos",
+            "Bonos",
             "Estado"
 
         };
@@ -200,6 +201,7 @@ public class RRHHGUI extends javax.swing.JFrame {
                 rol.getFecha(),
                 rol.getTotal(),
                 rol.getDescuentos(),
+                rol.getBonos(),
                 rol.getEstado()
             };
             tableModel.addRow(row);
