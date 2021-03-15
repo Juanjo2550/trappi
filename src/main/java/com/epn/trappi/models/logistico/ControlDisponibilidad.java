@@ -50,7 +50,7 @@ public final class ControlDisponibilidad implements EventListener {
     public void asignarVehiculoConductor(Entrega entrega) throws SQLException{
         
         if(lv.estaVacia() || lc.estaVacia()){
-            JOptionPane.showMessageDialog(null,"No hay vehiculos o conductores disponibles ");
+//            JOptionPane.showMessageDialog(null,"No hay vehiculos o conductores disponibles ");
             return;
         }
         //Seleccionamos un vehiculo y conductor
