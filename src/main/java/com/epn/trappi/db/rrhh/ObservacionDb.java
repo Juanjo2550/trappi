@@ -87,7 +87,7 @@ public class ObservacionDb implements ModelDb<Observacion> {
                 String[] formattedDate = unformattedDate.split("-");
                 observaciones.add(new Observacion(
                         empleado,
-                        resultSet.getString(3),
+                        resultSet.getString(3).toLowerCase(),
                         resultSet.getString(4),
                         new Fecha(Integer.parseInt(formattedDate[2]), Integer.parseInt(formattedDate[1]), Integer.parseInt(formattedDate[0])),
                         new Hora(resultSet.getInt(6), 0, 0)

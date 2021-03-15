@@ -46,8 +46,11 @@ public class Descuento {
     }
     
     public double obtenerValor(String cedulaCliente){
-        if (validarContrato(cedulaCliente))
+        if (validarContrato(cedulaCliente)){
+            System.out.println("El usuario es trabajador de la empresa");
             return this.valor;
+        }
+            
         return 0.0;
     }
     

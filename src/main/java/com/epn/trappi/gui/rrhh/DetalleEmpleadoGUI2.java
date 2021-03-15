@@ -53,7 +53,6 @@ public class DetalleEmpleadoGUI2 extends javax.swing.JFrame {
         this.bancoTextField.setText(this.empleado.getBanco());
         this.estadoTextField.setText(this.empleado.getEstado());
         this.sexoTextiField.setText(this.empleado.getSexo() + "");
-        this.jButton2.setEnabled(false);
         try {
             this.fillTable(cedula);
             fillAsistencias(cedula);

@@ -10,6 +10,7 @@ import com.epn.trappi.models.financiero.Pago;
 import com.epn.trappi.models.rrhh.juanjo.RolDePagos;
 import com.epn.trappi.db.rrhh.RolDePagosDb;
 import com.epn.trappi.db.rrhh.SolicitudPagoDB;
+import com.epn.trappi.models.rrhh.diego.RecursosHumanos;
 import com.epn.trappi.models.rrhh.diego.SolicitudDePago;
 import java.awt.Color;
 import java.awt.Component;
@@ -33,7 +34,7 @@ import javax.swing.table.DefaultTableModel;
 public class RRHHGUI extends javax.swing.JFrame {
 
     private final SolicitudPagoDB sp;
-
+    private final RecursosHumanos recursosHumanos = new RecursosHumanos();
     private final RolDePagosDb roles;
     private final SolicitudDePago pagos;
     String cuenta;
@@ -46,11 +47,12 @@ public class RRHHGUI extends javax.swing.JFrame {
      */
     public RRHHGUI() {
         initComponents();
+        fillTable();
         configurarBotones(20);
         this.roles = new RolDePagosDb();
         this.sp = new SolicitudPagoDB();
         this.pagos = new SolicitudDePago();
-        inicioTable();
+        //inicioTable();
         this.jButton6.setEnabled(false);
         this.setSize(1366, 768);
         this.setLocationRelativeTo(null);
@@ -188,7 +190,7 @@ public class RRHHGUI extends javax.swing.JFrame {
 
         };
         DefaultTableModel tableModel = new DefaultTableModel(col, 0);
-        for (RolDePagos rol : this.roles.obtenerTodos()) {
+        for (RolDePagos rol : this.recursosHumanos.obtenerRolesDePagoPendientes()) {
             Object[] row = {
                 rol.getNumero(),
                 rol.getEmpleado().getCedula(),
@@ -233,6 +235,7 @@ public class RRHHGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaEmpleados = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -426,6 +429,13 @@ public class RRHHGUI extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jLabel3.setText("Seleccione una fila antes de continuar:");
 
+        jButton1.setText("Actualizar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -435,7 +445,8 @@ public class RRHHGUI extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addContainerGap(95, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -443,7 +454,9 @@ public class RRHHGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
+                        .addGap(79, 79, 79)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -462,6 +475,7 @@ public class RRHHGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        this.recursosHumanos.generarRolesDePago();
         fillTable();
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -556,6 +570,10 @@ public class RRHHGUI extends javax.swing.JFrame {
         Color c = new Color(255, 255, 255);
         this.jButton5.setForeground(c);
     }//GEN-LAST:event_jButton5MouseExited
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        fillTable();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -721,6 +739,7 @@ public class RRHHGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVolver;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

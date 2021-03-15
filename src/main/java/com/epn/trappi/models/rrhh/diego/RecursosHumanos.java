@@ -27,21 +27,27 @@ public class RecursosHumanos {
 
 
     public void generarRolesDePago() {
+        try {
+            this.iterarEmpleados(new Fecha());
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        
     }
     public RolDePagos iteracionRoles(Empleado e,Fecha f) throws Exception{
         RolDePagos rol = new RolDePagos(e,f);
-        this.roles.agregar(rol);
+        rol.registrar();
         return rol;
     }
-    public void obtenerRolesDePagoPendientes(){
+    public RolDePagos[] obtenerRolesDePagoPendientes(){
         //comentado para solucionar problemas 
-       this.roles.obtenerTodos();
+       return this.roles.obtenerTodos();
     }
     
     public void iterarEmpleados(Fecha f) throws Exception{
         Empleado[] l1 = new EmpleadoDb().obtenerTodos();
             for(Empleado e1:l1){
-                this.roles.agregar(iteracionRoles(e1,f));
+                iteracionRoles(e1,f);
         }
     }
 }
