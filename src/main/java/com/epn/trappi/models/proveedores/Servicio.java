@@ -23,7 +23,7 @@ public class Servicio extends Bien {
         super(nombre, precio, proveeedor);
     }
      public Servicio(String nombre, double precio, Proveedor proveeedor, String categoria) {
-        super(nombre, precio, proveeedor, 0, null, categoria);
+        super(nombre, precio, proveeedor, 1, null, categoria);
     }
 
     /*public Servicio(String nombre, double precio, Proveedor proveeedor, int cantidad, String marca) {

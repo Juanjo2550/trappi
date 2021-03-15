@@ -70,6 +70,7 @@ public class RolDePagos {
         Observacion[] observaciones = new ObservacionDb().obtenerTodos(this.empleado.getCedula(), this.fecha.getMes());
         if(observaciones.length == 0) {
             //No hay novedades relacionadas con este empleado
+            System.out.println("No hay observaciones, descuentos = 0");
             this.total = Double.parseDouble(this.empleado.getSueldo());
             this.descuentos = 0;
         }
@@ -95,7 +96,8 @@ public class RolDePagos {
             double descuentosPorAtrasos = this.calcularAfectacionDeAtrasos(observacionesPorAtraso);
             double bonoPorFaltas = this.calcularAfectacionDeFaltas(observacionesPorFaltas);
             double bonoPorHorasExtra = this.calcularAfectacionDeHorasExtra(observacionesPorHorasExtra);
-
+            double bonoPorEntregas = this.calcularBonoPorEntregas();
+            this.descuentos = descuentosPorAtrasos + bonoPorFaltas + bonoPorHorasExtra + bonoPorEntregas;
             this.total = Double.parseDouble(this.empleado.getSueldo()) + bonoPorHorasExtra + bonoPorFaltas - descuentosPorAtrasos + calcularBonoPorEntregas();
         }
         this.estado = "pendiente";
@@ -165,8 +167,8 @@ public class RolDePagos {
         try {
             int viajesPorConductor = ListaEntregas.numViajesPorConductor(this.fecha.getAño(), this.fecha.getMes(), this.getEmpleado().getId());
             if (viajesPorConductor >= 20) {
-                bono = 100;
-                new Observacion(this.empleado, "bono", "Bono por más de 20 entregas", this.fecha, new Hora());
+                bono = 50;
+                new Observacion(this.empleado, "bono", "Bono por más de 20 entregas", this.fecha, new Hora()).agregar();
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
