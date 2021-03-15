@@ -16,6 +16,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -176,7 +177,7 @@ public class Comprar extends javax.swing.JFrame {
         return bandera;
     }
     
-    public void confirmarcompra(){
+    public void confirmarcompra() throws ParseException{
      String salida = "";
 
         if (carrito.confirmarContenido() == true) {
@@ -554,7 +555,11 @@ public class Comprar extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-    confirmarcompra();
+        try {
+            confirmarcompra();
+        } catch (ParseException ex) {
+            Logger.getLogger(Comprar.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
 
     }//GEN-LAST:event_jButton6ActionPerformed
