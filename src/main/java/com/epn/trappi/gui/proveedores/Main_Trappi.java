@@ -6,6 +6,7 @@
 package com.epn.trappi.gui.proveedores;
 
 import com.epn.trappi.gui.ecommerce.Interfaces.Inicio;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -129,11 +130,16 @@ public class Main_Trappi extends javax.swing.JFrame {
         String usuario = "administrador@trappi.com";
         String contrasena = "123456789";
         Menu_Trappi inicio = new Menu_Trappi();
-        if (usuario.equals(txtUsuario.getText())&&(contrasena.equals(txtContraseña.getText()))) {
-                this.setVisible(false);
+        try {
+            if (usuario.equals(txtUsuario.getText()) && (contrasena.equals(txtContraseña.getText()))) {
+                inicio.setExtendedState(inicio.getExtendedState() | JFrame.MAXIMIZED_BOTH);
                 inicio.setVisible(true);
+                this.setVisible(false);
             } else {
-                JOptionPane.showMessageDialog(null, " Contraseña Incorrectos", "Error", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Nombre de Usuario o Contraseña Incorrecto", "Error", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se puede Ingresar", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButtoningresarActionPerformed
 

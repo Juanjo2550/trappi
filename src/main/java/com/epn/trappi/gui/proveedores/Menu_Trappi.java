@@ -13,31 +13,20 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
  * @author David Morales
  */
 public class Menu_Trappi extends javax.swing.JFrame {
-    private PANTALLA_PRINCIPAL rrhh;
-    private ControlAsistencias controlAsistencias;
-    private ControlDisponibilidad controlDisponibilidad;
-    private Logistico_GUI logistico;
+
+    private ControlAsistencias controlAsistencias = new ControlAsistencias();
+
     /**
      * Creates new form Menu_Trappi
      */
     public Menu_Trappi() {
-        try {
-            this.controlAsistencias = new ControlAsistencias();
-            this.rrhh = new PANTALLA_PRINCIPAL(this.controlAsistencias, this);
-            this.controlDisponibilidad = ControlDisponibilidad.getInstance();
-            this.logistico = new Logistico_GUI(controlDisponibilidad, this);
-            this.controlAsistencias.events.suscribe("nuevo_empleado", controlDisponibilidad);
-            this.controlAsistencias.events.suscribe("salida_empleado", controlDisponibilidad);
-        } catch (SQLException e) {
-            System.out.println(e.toString());
-        }
-        
         initComponents();
     }
 
@@ -179,7 +168,7 @@ public class Menu_Trappi extends javax.swing.JFrame {
         jPModLayout.setHorizontalGroup(
             jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPModLayout.createSequentialGroup()
-                .addGap(0, 430, Short.MAX_VALUE)
+                .addGap(0, 472, Short.MAX_VALUE)
                 .addGroup(jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPModLayout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -194,7 +183,7 @@ public class Menu_Trappi extends javax.swing.JFrame {
                         .addGroup(jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jbtLogístico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jbtProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(425, 425, 425))))
+                        .addGap(383, 383, 383))))
         );
         jPModLayout.setVerticalGroup(
             jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,7 +196,7 @@ public class Menu_Trappi extends javax.swing.JFrame {
                 .addGroup(jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtLogístico, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Recursosboton, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
                 .addGroup(jPModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtbCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -218,25 +207,35 @@ public class Menu_Trappi extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPMod, javax.swing.GroupLayout.PREFERRED_SIZE, 1380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(jPEncabezado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPMod, javax.swing.GroupLayout.DEFAULT_SIZE, 1380, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPEncabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPMod, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(jPMod, javax.swing.GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtLogísticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtLogísticoActionPerformed
-        this.setVisible(false);
-        this.logistico.setVisible(true);
+        try {
+            ControlDisponibilidad controlDisponibilidad;
+            controlDisponibilidad = ControlDisponibilidad.getInstance();
+            Logistico_GUI logistico = new Logistico_GUI(controlDisponibilidad, this);
+            controlAsistencias.events.suscribe("nuevo_empleado", controlDisponibilidad);
+            controlAsistencias.events.suscribe("salida_empleado", controlDisponibilidad);
+            this.setVisible(false);
+            logistico.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Menu_Trappi.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jbtLogísticoActionPerformed
 
     private void jbtComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtComprasActionPerformed
@@ -248,7 +247,8 @@ public class Menu_Trappi extends javax.swing.JFrame {
     }//GEN-LAST:event_RecursosbotonActionPerformed
 
     private void RecursosbotonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RecursosbotonMouseClicked
-        this.rrhh.setVisible(true);
+        PANTALLA_PRINCIPAL rrhh = new PANTALLA_PRINCIPAL(controlAsistencias, this);
+        rrhh.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_RecursosbotonMouseClicked
 
@@ -258,11 +258,11 @@ public class Menu_Trappi extends javax.swing.JFrame {
 
     private void jbtProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtProveedoresMouseClicked
         // TODO add your handling code here:
-
         try {
-            this.setVisible(false);
             Principal proveedores = new Principal();
+            proveedores.setExtendedState(proveedores.getExtendedState() | JFrame.MAXIMIZED_BOTH);
             proveedores.setVisible(true);
+            this.setVisible(false);
         } catch (IOException ex) {
             Logger.getLogger(Menu_Trappi.class.getName()).log(Level.SEVERE, null, ex);
         }
