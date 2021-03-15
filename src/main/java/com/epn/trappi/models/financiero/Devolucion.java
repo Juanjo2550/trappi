@@ -28,7 +28,7 @@ public class Devolucion {
             return false;
         }
         if(valorDevolucion>0){
-            db.acutalizarEstadoFactura(idFactura);
+            db.actualizarEstadoFactura(idFactura);
             Cuenta cuentaDevolucion = new Cuenta();
             cuentaDevolucion.CedulaPropietario=db.buscarCedulaPorNroFactura(idFactura);
             cuentaDevolucion.NumeroCuenta=db.recuperarCuentaBancariaPorNroFactura(idFactura);

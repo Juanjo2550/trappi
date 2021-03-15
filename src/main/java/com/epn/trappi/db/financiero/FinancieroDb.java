@@ -218,7 +218,7 @@ public class FinancieroDb {
             System.out.println(e);
         }
     }
-    public void acutalizarEstadoFactura(int idFactura){
+    public void actualizarEstadoFactura(int idFactura){
         try{
         Statement statement = connection.createStatement();
         String sql = "update dbo.FACTURAS set ESTADODEVOLUCION='DEVOLUCION REALIZADA' WHERE NUMEROFACTURA="+idFactura;

@@ -1,6 +1,7 @@
 
 package com.epn.trappi.gui.financiero;
 
+import com.epn.trappi.Menu_Trappi;
 import com.epn.trappi.db.financiero.FinancieroDb;
 import com.epn.trappi.models.financiero.Analizador;
 import com.epn.trappi.models.financiero.Devolucion;
@@ -35,6 +36,8 @@ public class DashboardFinanciero extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         panelVerticalIzquierdo = new javax.swing.JPanel();
+        btndashboarddevoluciones = new javax.swing.JPanel();
+        labelDevoluciones = new javax.swing.JLabel();
         btndashboardingresos = new javax.swing.JPanel();
         labelIngresos = new javax.swing.JLabel();
         btnDashboardSalir = new javax.swing.JPanel();
@@ -43,23 +46,8 @@ public class DashboardFinanciero extends javax.swing.JFrame {
         labelGastos1 = new javax.swing.JLabel();
         btndashboardgeneral = new javax.swing.JPanel();
         lableGeneralDashboard = new javax.swing.JLabel();
-        btndashboarddevoluciones = new javax.swing.JPanel();
-        labelDevoluciones = new javax.swing.JLabel();
         labelLogoFinanciero = new javax.swing.JLabel();
         panelDespliegue = new javax.swing.JPanel();
-        panelIngresos = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaIngresos = new javax.swing.JTable();
-        txtDiaIngreso = new javax.swing.JTextField();
-        txtMesIngreso = new javax.swing.JTextField();
-        txtAnioIngreso = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        btnConsultarIngresosporFecha = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
         panelDevoluciones = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
@@ -88,6 +76,19 @@ public class DashboardFinanciero extends javax.swing.JFrame {
         panelBarrasDevoluciones = new javax.swing.JPanel();
         labelDevolucionesDashboard = new javax.swing.JLabel();
         labelDevolucionesTotal = new javax.swing.JLabel();
+        panelIngresos = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaIngresos = new javax.swing.JTable();
+        txtDiaIngreso = new javax.swing.JTextField();
+        txtMesIngreso = new javax.swing.JTextField();
+        txtAnioIngreso = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btnConsultarIngresosporFecha = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
         panelGastos = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaGastos = new javax.swing.JTable();
@@ -109,6 +110,31 @@ public class DashboardFinanciero extends javax.swing.JFrame {
 
         panelVerticalIzquierdo.setBackground(new java.awt.Color(61, 57, 57));
         panelVerticalIzquierdo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btndashboarddevoluciones.setBackground(new java.awt.Color(255, 210, 28));
+        btndashboarddevoluciones.setOpaque(false);
+        btndashboarddevoluciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btndashboarddevolucionesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btndashboarddevolucionesMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btndashboarddevolucionesMousePressed(evt);
+            }
+        });
+        btndashboarddevoluciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labelDevoluciones.setBackground(new java.awt.Color(255, 210, 28));
+        labelDevoluciones.setFont(new java.awt.Font("Segoe UI Semibold", 1, 16)); // NOI18N
+        labelDevoluciones.setForeground(new java.awt.Color(255, 255, 255));
+        labelDevoluciones.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelDevoluciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/epn/trappi/gui/financiero/imagenesFinanciero/icons8_cash_in_hand_32px.png"))); // NOI18N
+        labelDevoluciones.setText("Devoluciones");
+        btndashboarddevoluciones.add(labelDevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 150, 40));
+
+        panelVerticalIzquierdo.add(btndashboarddevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 150, 40));
 
         btndashboardingresos.setBackground(new java.awt.Color(255, 210, 28));
         btndashboardingresos.setOpaque(false);
@@ -142,6 +168,9 @@ public class DashboardFinanciero extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnDashboardSalirMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnDashboardSalirMousePressed(evt);
             }
         });
         btnDashboardSalir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -211,103 +240,12 @@ public class DashboardFinanciero extends javax.swing.JFrame {
 
         panelVerticalIzquierdo.add(btndashboardgeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 150, -1));
 
-        btndashboarddevoluciones.setBackground(new java.awt.Color(255, 210, 28));
-        btndashboarddevoluciones.setOpaque(false);
-        btndashboarddevoluciones.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btndashboarddevolucionesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btndashboarddevolucionesMouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btndashboarddevolucionesMousePressed(evt);
-            }
-        });
-        btndashboarddevoluciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        labelDevoluciones.setBackground(new java.awt.Color(255, 210, 28));
-        labelDevoluciones.setFont(new java.awt.Font("Segoe UI Semibold", 1, 16)); // NOI18N
-        labelDevoluciones.setForeground(new java.awt.Color(255, 255, 255));
-        labelDevoluciones.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        labelDevoluciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/epn/trappi/gui/financiero/imagenesFinanciero/icons8_cash_in_hand_32px.png"))); // NOI18N
-        labelDevoluciones.setText("Devoluciones");
-        btndashboarddevoluciones.add(labelDevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 150, 40));
-
-        panelVerticalIzquierdo.add(btndashboarddevoluciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 150, 40));
-
         labelLogoFinanciero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/epn/trappi/gui/financiero/imagenesFinanciero/log4-1fin.png"))); // NOI18N
         panelVerticalIzquierdo.add(labelLogoFinanciero, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 220, -1));
 
         jPanel1.add(panelVerticalIzquierdo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 260, 770));
 
         panelDespliegue.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelIngresos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tablaIngresos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tablaIngresos);
-
-        panelIngresos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, 740, 360));
-        panelIngresos.add(txtDiaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 40, -1));
-
-        txtMesIngreso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMesIngresoActionPerformed(evt);
-            }
-        });
-        panelIngresos.add(txtMesIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, 40, -1));
-        panelIngresos.add(txtAnioIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 140, 60, -1));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel1.setText("Día:");
-        panelIngresos.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel2.setText("Mes:");
-        panelIngresos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 140, 40, -1));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel3.setText("Año:");
-        panelIngresos.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, 30, 20));
-
-        btnConsultarIngresosporFecha.setBackground(new java.awt.Color(61, 57, 57));
-        btnConsultarIngresosporFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        btnConsultarIngresosporFecha.setForeground(new java.awt.Color(255, 255, 255));
-        btnConsultarIngresosporFecha.setText("Consultar");
-        btnConsultarIngresosporFecha.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnConsultarIngresosporFechaMousePressed(evt);
-            }
-        });
-        btnConsultarIngresosporFecha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultarIngresosporFechaActionPerformed(evt);
-            }
-        });
-        panelIngresos.add(btnConsultarIngresosporFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 130, 100, -1));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel5.setText("Ingresos del: ");
-        panelIngresos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, -1, -1));
-
-        jLabel15.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("INGRESOS DE TRAPPI");
-        panelIngresos.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1120, 48));
-        panelIngresos.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 1190, 10));
-
-        panelDespliegue.add(panelIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 690));
 
         panelDevoluciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -351,12 +289,11 @@ public class DashboardFinanciero extends javax.swing.JFrame {
 
         jLabel23.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabel23.setText("Año:");
-        panelDevoluciones.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, 30, 20));
+        panelDevoluciones.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(645, 140, 35, 20));
         panelDevoluciones.add(txtAnioDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 140, 60, -1));
 
-        btnConsultarDevolucionesporFecha.setBackground(new java.awt.Color(61, 57, 57));
+        btnConsultarDevolucionesporFecha.setBackground(new java.awt.Color(250, 250, 250));
         btnConsultarDevolucionesporFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        btnConsultarDevolucionesporFecha.setForeground(new java.awt.Color(255, 255, 255));
         btnConsultarDevolucionesporFecha.setText("Consultar");
         btnConsultarDevolucionesporFecha.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -368,7 +305,7 @@ public class DashboardFinanciero extends javax.swing.JFrame {
                 btnConsultarDevolucionesporFechaActionPerformed(evt);
             }
         });
-        panelDevoluciones.add(btnConsultarDevolucionesporFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 130, 100, -1));
+        panelDevoluciones.add(btnConsultarDevolucionesporFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 130, 100, -1));
 
         tablaDevoluciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -492,6 +429,70 @@ public class DashboardFinanciero extends javax.swing.JFrame {
 
         panelDespliegue.add(panelDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 740));
 
+        panelIngresos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tablaIngresos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaIngresos);
+
+        panelIngresos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, 740, 360));
+        panelIngresos.add(txtDiaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 40, -1));
+
+        txtMesIngreso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMesIngresoActionPerformed(evt);
+            }
+        });
+        panelIngresos.add(txtMesIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, 40, -1));
+        panelIngresos.add(txtAnioIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 140, 60, -1));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel1.setText("Día:");
+        panelIngresos.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel2.setText("Mes:");
+        panelIngresos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 140, 40, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel3.setText("Año:");
+        panelIngresos.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(645, 140, 35, 20));
+
+        btnConsultarIngresosporFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnConsultarIngresosporFecha.setText("Consultar");
+        btnConsultarIngresosporFecha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnConsultarIngresosporFechaMousePressed(evt);
+            }
+        });
+        btnConsultarIngresosporFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarIngresosporFechaActionPerformed(evt);
+            }
+        });
+        panelIngresos.add(btnConsultarIngresosporFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 130, 100, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel5.setText("Ingresos del: ");
+        panelIngresos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("INGRESOS DE TRAPPI");
+        panelIngresos.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1120, 48));
+        panelIngresos.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 1190, 10));
+
+        panelDespliegue.add(panelIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 690));
+
         panelGastos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tablaGastos.setModel(new javax.swing.table.DefaultTableModel(
@@ -523,7 +524,7 @@ public class DashboardFinanciero extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabel14.setText("Año:");
-        panelGastos.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, 30, 20));
+        panelGastos.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(645, 140, 35, 20));
         panelGastos.add(txtDiaGasto, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 40, -1));
 
         txtMesGasto.addActionListener(new java.awt.event.ActionListener() {
@@ -534,9 +535,8 @@ public class DashboardFinanciero extends javax.swing.JFrame {
         panelGastos.add(txtMesGasto, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, 40, -1));
         panelGastos.add(txtAnioGasto, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 140, 60, -1));
 
-        btnConsultarGastosporFecha.setBackground(new java.awt.Color(61, 57, 57));
+        btnConsultarGastosporFecha.setBackground(new java.awt.Color(250, 250, 250));
         btnConsultarGastosporFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        btnConsultarGastosporFecha.setForeground(new java.awt.Color(255, 255, 255));
         btnConsultarGastosporFecha.setText("Consultar");
         btnConsultarGastosporFecha.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -548,7 +548,7 @@ public class DashboardFinanciero extends javax.swing.JFrame {
                 btnConsultarGastosporFechaActionPerformed(evt);
             }
         });
-        panelGastos.add(btnConsultarGastosporFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 130, 100, -1));
+        panelGastos.add(btnConsultarGastosporFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 130, 100, -1));
 
         jLabel17.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -720,8 +720,14 @@ public class DashboardFinanciero extends javax.swing.JFrame {
         
     }//GEN-LAST:event_panelDevolucionesMousePressed
 
+    private void btnDashboardSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDashboardSalirMousePressed
+        this.setVisible(false);
+        new Menu_Trappi().setVisible(true);
+    }//GEN-LAST:event_btnDashboardSalirMousePressed
+
     public void mostrarTablaIngresos(){
         DefaultTableModel tab = null;
+        DecimalFormat formatoDecimales = new DecimalFormat("#.00");
         String [] columnastabla = {"Nro. Factura", "Total", "Fecha"};
         String [] datos = new String[3];
         tab = new DefaultTableModel(null,columnastabla);
@@ -730,7 +736,7 @@ public class DashboardFinanciero extends javax.swing.JFrame {
             for(Ingreso ingreso:ingresosDb.consultarIngresosRegistrados()){
                 System.out.println("Está entrando");
                 datos[0] = String.valueOf(ingreso.getNroFactura());
-                datos[1] = String.valueOf(ingreso.getTotal());
+                datos[1] = String.valueOf(formatoDecimales.format(ingreso.getTotal()));
                 String fecha = String.valueOf(ingreso.getFechaIngreso().devolverDia())+'/'+String.valueOf(ingreso.getFechaIngreso().devolverMes())+'/'+String.valueOf(ingreso.getFechaIngreso().devolverAnio());
                 datos[2] = fecha;
                 tab.addRow(datos);
@@ -746,14 +752,14 @@ public class DashboardFinanciero extends javax.swing.JFrame {
     }
     public void mostrarTablaIngresosporFecha(ArrayList<Ingreso> ingresosporFecha){
         DefaultTableModel tab = null;
-       
+        DecimalFormat formatoDecimales = new DecimalFormat("#.00");
             String [] columnastabla = {"Nro. Factura", "Total", "Fecha"};
             String [] datos = new String[3];
             tab = new DefaultTableModel(null,columnastabla);
             for(Ingreso ingreso: ingresosporFecha){
             System.out.println("Está entrando");
             datos[0] = String.valueOf(ingreso.getNroFactura());
-            datos[1] = String.valueOf(ingreso.getTotal());
+            datos[1] = String.valueOf(formatoDecimales.format(ingreso.getTotal()));
             String fecha = String.valueOf(ingreso.getFechaIngreso().devolverDia())+'/'+String.valueOf(ingreso.getFechaIngreso().devolverMes())+'/'+String.valueOf(ingreso.getFechaIngreso().devolverAnio());
             datos[2] = fecha;
             tab.addRow(datos);
@@ -764,6 +770,7 @@ public class DashboardFinanciero extends javax.swing.JFrame {
     
     public void mostrarTablaPagos(){
         DefaultTableModel tab = null;
+        DecimalFormat formatoDecimales = new DecimalFormat("#.00");
         try{
             String [] columnastabla = {"Nro. Cuenta", "Monto", "Fecha"};
             String [] datos = new String[3];
@@ -774,7 +781,7 @@ public class DashboardFinanciero extends javax.swing.JFrame {
             for(Pago pago : pagosRegistrados){
                 System.out.println("Está entrando");
                 datos[0] = pago.getNroCuenta();
-                datos[1] = String.valueOf(pago.getMonto());
+                datos[1] = String.valueOf(formatoDecimales.format(pago.getMonto()));
                 String fecha = String.valueOf(pago.getFechadePago().devolverDia())+'/'+String.valueOf(pago.getFechadePago().devolverMes())+'/'+String.valueOf(pago.getFechadePago().devolverAnio());
                 datos[2] = fecha;
                 tab.addRow(datos);   
@@ -787,14 +794,14 @@ public class DashboardFinanciero extends javax.swing.JFrame {
     }
     public void mostrarTablaPagosporFecha(ArrayList<Pago> pagosporFecha){
         DefaultTableModel tab = null;
-       
+        DecimalFormat formatoDecimales = new DecimalFormat("#.00");
             String [] columnastabla = {"Nro. Cuenta", "Total", "Fecha"};
             String [] datos = new String[3];
             tab = new DefaultTableModel(null,columnastabla);
             for(Pago pago: pagosporFecha){
             System.out.println("Está entrando");
             datos[0] = pago.getNroCuenta();
-            datos[1] = String.valueOf(pago.getMonto());
+            datos[1] = String.valueOf(formatoDecimales.format(pago.getMonto()));
             String fecha = String.valueOf(pago.getFechadePago().devolverDia())+'/'+String.valueOf(pago.getFechadePago().devolverMes())+'/'+String.valueOf(pago.getFechadePago().devolverAnio());
             datos[2] = fecha;
             tab.addRow(datos);
@@ -804,7 +811,7 @@ public class DashboardFinanciero extends javax.swing.JFrame {
     }
     public void mostrarTablaDevoluciones(){
         DefaultTableModel tab = null;
-        
+        DecimalFormat formatoDecimales = new DecimalFormat("#.00");
         String [] columnastabla = {"Nro. Factura", "Valor Devolucion", "Fecha"};
         String [] datos = new String[3];
         tab = new DefaultTableModel(null,columnastabla);
@@ -814,7 +821,7 @@ public class DashboardFinanciero extends javax.swing.JFrame {
         for(Devolucion devolucion: devolucionesDb.consultarDevolucionesRegistradas()){
             System.out.println("Está entrando");
             datos[0] = String.valueOf(devolucion.getNroFactura());
-            datos[1] = String.valueOf(devolucion.getValorDevolucion());
+            datos[1] = String.valueOf(formatoDecimales.format(devolucion.getValorDevolucion()));
             String fecha = String.valueOf(devolucion.getFechaDeDevolucion().devolverDia())+'/'+String.valueOf(devolucion.getFechaDeDevolucion().devolverMes())+'/'+String.valueOf(devolucion.getFechaDeDevolucion().devolverAnio());
             datos[2] = fecha;
             tab.addRow(datos);
@@ -829,14 +836,14 @@ public class DashboardFinanciero extends javax.swing.JFrame {
     }
     public void mostrarDevolucionesPorFecha(ArrayList<Devolucion> devolucionesRegistradas){
         DefaultTableModel tab = null;
-       
+        DecimalFormat formatoDecimales = new DecimalFormat("#.00");
             String [] columnastabla = {"Nro. Factura", "Valor Devolucion", "Fecha"};
             String [] datos = new String[3];
             tab = new DefaultTableModel(null,columnastabla);
             for(Devolucion devolucion: devolucionesRegistradas){
             System.out.println("Está entrando");
             datos[0] = String.valueOf(devolucion.getNroFactura());
-            datos[1] = String.valueOf(devolucion.getValorDevolucion());
+            datos[1] = String.valueOf(formatoDecimales.format(devolucion.getValorDevolucion()));
             String fecha = String.valueOf(devolucion.getFechaDeDevolucion().devolverDia())+'/'+String.valueOf(devolucion.getFechaDeDevolucion().devolverMes())+'/'+String.valueOf(devolucion.getFechaDeDevolucion().devolverAnio());
             datos[2] = fecha;
             tab.addRow(datos);
