@@ -113,7 +113,7 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jbtCompras" max="32767" attributes="0"/>
+                              <Component id="jbtFinanciero" max="32767" attributes="0"/>
                               <Component id="Recursosboton" min="-2" pref="240" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
@@ -133,7 +133,7 @@
                   <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jbtProveedores" max="32767" attributes="0"/>
-                      <Component id="jbtCompras" min="-2" pref="161" max="-2" attributes="0"/>
+                      <Component id="jbtFinanciero" min="-2" pref="161" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -160,7 +160,7 @@
               <Font name="Tahoma" size="16" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+              <Color blue="33" green="33" red="33" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Cerrar Sesi&#xf3;n "/>
             <Property name="borderPainted" type="boolean" value="false"/>
@@ -175,6 +175,10 @@
               <Dimension value="[110, 50]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jtbCerrarSesionMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtbCerrarSesionActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jbtLog&#xed;stico">
           <Properties>
@@ -204,7 +208,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtLog&#xed;sticoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jbtCompras">
+        <Component class="javax.swing.JButton" name="jbtFinanciero">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="1c" green="d2" red="ff" type="rgb"/>
@@ -229,7 +233,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtComprasActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtFinancieroActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jbtProveedores">
